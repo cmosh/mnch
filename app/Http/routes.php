@@ -12,6 +12,19 @@
 */
 
 Route::get('test','TestController@index');
+Route::get('ch','ch@index');
+Route::get('ch/survey',function () {
+	return view('ch/survey/index');
+});
+Route::get('mnh','mnh@index');
+Route::get('mnh/survey',function () {
+	return view('mnh/survey/index');
+});
+Route::get('imci','imci@index');
+Route::get('imci/survey',function () {
+	return view('imci/survey/index');
+});
+
 Route::get('admin', function () {
     return view('dashboard');
 });

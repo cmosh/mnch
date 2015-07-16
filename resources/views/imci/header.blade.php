@@ -1,11 +1,11 @@
- <header class="main-header">
+ <header class="main-header header-cont" style="position:fixed" >
 
         <!-- Logo -->
         <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini">MNCH</span>
+          <span class="logo-mini">IMCI Surveys</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">MNCH</span>
+          <span class="logo-lg">IMCI Surveys</span>
         </a>
 
         <!-- Header Navbar -->
@@ -53,7 +53,7 @@
               <li>
                 <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
               </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+              </ul>
+              </div>
+              </nav>
+              </header>

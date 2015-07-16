@@ -40,7 +40,8 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">MNCH Surveys</div>
+				<div class="title">MNCH Surveys</div>  	
+
 				<div class="quote">Something nice about MNCH 
 <a href="auth/login"><br> Click here to login</a>
 </div>
@@ -48,3 +49,4 @@
 		</div>
 	</body>
 </html>
+<?php App::environment()?>

@@ -75,7 +75,7 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                 <p>To start a survey, please click <u>begin assessment</u>below each type of survey</p> 
+                 <p>To start a survey, please click <u> 'begin assessment' </u>below each type of survey</p> 
                 </div><!-- /.box-body -->
               </div>
 </div>
