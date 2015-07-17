@@ -42,7 +42,7 @@
        
         <div class="wrapper">
             <!-- Left side column. contains the logo and sidebar -->
-            @include ('MNH/sidebar')
+            @include ('mnh/sidebar')
             <!-- Right side column. Contains the navbar and content of the page -->
             <!--paste here!!!! -->
             <!-- /.box-primary1 -->
