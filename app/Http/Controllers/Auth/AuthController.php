@@ -31,8 +31,6 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-		$page_title ="Home Page";
-		$page_description = "Success";
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
