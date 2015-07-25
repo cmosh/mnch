@@ -289,6 +289,7 @@ class form extends Controller {
                      																						
 
                      																						<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">
+                     																						<x automaticallyVisibleIfIDChecked = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
                      																						 ';
                      																		  $HtmlLines.=$fieldd->Label;
                      																		  $HtmlLines.='</label>';
