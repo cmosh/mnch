@@ -43,7 +43,7 @@ class form extends Controller {
 				
 			
 			      	$HtmlLines .='
-			      		 <section>
+			      		 <section automaticallyVisibleIfIDChecked = "';$HtmlLines.=$Sec->dependencyID;$HtmlLines.='">
                     <div class="row">
                         <!-- left column -->
                         <div class="col-md-12">
@@ -90,7 +90,7 @@ class form extends Controller {
 	           						           							
 	           						$HtmlLines.='
 
-	           						<div class="box box-primary" name ="';$HtmlLines.=$BlockIDName;$HtmlLines.='" id="';$HtmlLines.=$BlockIDName;$HtmlLines.='">
+	           						<div class="box box-primary" name ="';$HtmlLines.=$BlockIDName;$HtmlLines.='" id="';$HtmlLines.=$BlockIDName;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$Single_BlockCollection->dependencyID;$HtmlLines.='">
                                     <div class="box-header">
                                         <h3 class="box-title">';$HtmlLines.= $Single_BlockCollection->Name;$HtmlLines.= '</h3>
                                     </div>
@@ -105,7 +105,7 @@ class form extends Controller {
 
 	           									
 	           										
-	           										if ($Single_BlockRowCollection->type =='table_head') {$HtmlLines.='<tr style="font-weight:bold" ';}else{$HtmlLines.='<tr';}
+	           										if ($Single_BlockRowCollection->type =='table_head') {$HtmlLines.='<tr style="font-weight:bold" automaticallyVisibleIfIDChecked="';$HtmlLines.=$Single_BlockRowCollection->dependencyID;$HtmlLines.='" ';}else{$HtmlLines.='<tr automaticallyVisibleIfIDChecked="';$HtmlLines.=$Single_BlockRowCollection->dependencyID;$HtmlLines.='"';}
 	           										$BlockrowIDName = $Single_BlockRowCollection->block_rowID;
 
 	           											$HtmlLines.='name ="';$HtmlLines.=$BlockrowIDName;$HtmlLines.='" id="';$HtmlLines.=$BlockrowIDName;$HtmlLines.='">';
