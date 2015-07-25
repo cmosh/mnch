@@ -214,7 +214,7 @@ class form extends Controller {
                      																						  
                      																						
 
-                     																						<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" class="minimal" type="radio">
+                     																						<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">
                      																						 ';
                      																		  $HtmlLines.=$fieldd->Label;
                      																		  $HtmlLines.='</label>';
