@@ -23,11 +23,10 @@
  
 
 
-                    @foreach($HtmlLines as $HtmlLine)
+                   
                       
-                        <?php echo $HtmlLine; ?>
-                        @endforeach
-
+                        <?php echo $HtmlLines; ?>
+                       
 
 
 

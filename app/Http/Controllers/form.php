@@ -32,9 +32,8 @@ class form extends Controller {
 			
 				//Query loops
 				$SelectedSurvey ='CHV1';
+				$HtmlLines = '<!-- Main content -->';
 				
-				$HtmlLines = array();
-
 				$Survs = Survey::where('surveyID','=',$SelectedSurvey)->get();
 
 
@@ -43,7 +42,7 @@ class form extends Controller {
 			      foreach($Secs as $Sec) {
 				
 			
-			      	$HtmlLines[] ='
+			      	$HtmlLines .='
 			      		 <section>
                     <div class="row">
                         <!-- left column -->
@@ -51,18 +50,18 @@ class form extends Controller {
                         
                         <div class="box" id="';
 
-                    $HtmlLines [] = $Sec->identifier;
-                    $HtmlLines [] = '" name ="';
-                     $HtmlLines [] = $Sec->identifier;
-                      $HtmlLines [] = '">                     
+                    $HtmlLines.= $Sec->identifier;
+                    $HtmlLines.='" name ="';
+                     $HtmlLines.=$Sec->identifier;
+                      $HtmlLines.='">                     
                      <div class="box-body">
                          <br>                     
                         <center><h2><b>';
 
-                        $HtmlLines[] =  $Sec->name;
+                        $HtmlLines.=$Sec->name;
 
 
-                        $HtmlLines[] = '</b></h2></center>
+                        $HtmlLines.='</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -89,11 +88,11 @@ class form extends Controller {
 	           				
 	           				
 	           						           							
-	           						$HtmlLines[] = '
+	           						$HtmlLines.='
 
-	           						<div class="box box-primary" name ="';$HtmlLines[]=$BlockIDName;$HtmlLines[]='" id="';$HtmlLines[]=$BlockIDName;$HtmlLines[]='">
+	           						<div class="box box-primary" name ="';$HtmlLines.=$BlockIDName;$HtmlLines.='" id="';$HtmlLines.=$BlockIDName;$HtmlLines.='">
                                     <div class="box-header">
-                                        <h3 class="box-title">';$HtmlLines[] = $Single_BlockCollection->Name;$HtmlLines[] = '</h3>
+                                        <h3 class="box-title">';$HtmlLines.= $Single_BlockCollection->Name;$HtmlLines.= '</h3>
                                     </div>
                                     <table class="table">';
 
@@ -106,24 +105,24 @@ class form extends Controller {
 
 	           									
 	           										
-	           										if ($Single_BlockRowCollection->type =='table_head') {$HtmlLines[]='<tr style="font-weight:bold" ';}else{$HtmlLines[]='<tr';}
+	           										if ($Single_BlockRowCollection->type =='table_head') {$HtmlLines.='<tr style="font-weight:bold" ';}else{$HtmlLines.='<tr';}
 	           										$BlockrowIDName = $Single_BlockRowCollection->block_rowID;
 
-	           											$HtmlLines[]='name ="';$HtmlLines[]=$BlockrowIDName;$HtmlLines[]='" id="';$HtmlLines[]=$BlockrowIDName;$HtmlLines[]='">';
+	           											$HtmlLines.='name ="';$HtmlLines.=$BlockrowIDName;$HtmlLines.='" id="';$HtmlLines.=$BlockrowIDName;$HtmlLines.='">';
 	           									
 	           										$Array_of_ColumnSetCollections= Column_set::where('block_rowID','=',$Single_BlockRowCollection->block_rowID)->get(); 
 
 	           											foreach ($Array_of_ColumnSetCollections as $Single_ColumnSetCollection ) {
 
 	           												$ColumnSetIDName = $Single_ColumnSetCollection->column_setID;
-	           													$HtmlLines[]='<td   colspan="';
+	           													$HtmlLines.='<td   colspan="';
 
 
-	           													$HtmlLines[]= $Single_ColumnSetCollection->col_span;
+	           													$HtmlLines.= $Single_ColumnSetCollection->col_span;
 
 
 
-	           													$HtmlLines[]= '" name ="';$HtmlLines[]=$ColumnSetIDName;$HtmlLines[]='" id="';$HtmlLines[]=$ColumnSetIDName;$HtmlLines[]='"';
+	           													$HtmlLines.= '" name ="';$HtmlLines.=$ColumnSetIDName;$HtmlLines.='" id="';$HtmlLines.=$ColumnSetIDName;$HtmlLines.='"';
 	           													
 
 	           															$fieldsetID = $Single_ColumnSetCollection->field_setID;
@@ -144,13 +143,13 @@ class form extends Controller {
 
 	           																		foreach ($fieldValueList as $fieldd ) {
 
-	           																				$HtmlLines[]= '
+	           																				$HtmlLines.= '
 
 	           																			 style="vertical-align:middle">';
 
 	           																			
 
-	           																			 	$HtmlLines []= $fieldd->Label;
+	           																			 	$HtmlLines.= $fieldd->Label;
 
 
                                              																		
@@ -160,40 +159,40 @@ class form extends Controller {
                                           
 	           																		              
 	           																		        break;
-	           																	    case "text":$HtmlLines[]= 'style="vertical-align:middle">';
+	           																	    case "text":$HtmlLines.= 'style="vertical-align:middle">';
 
 	           																	    	 foreach ($fieldValueList as $fieldd ) {
 
 	           																	    	 							
 	           																	      	$fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
 
-	           																				$HtmlLines[]= '
+	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" type="text" name ="';$HtmlLines[]=$fieldIDName;$HtmlLines[]='" id="';$HtmlLines[]=$fieldIDName;$HtmlLines[]='">';    
+                 																		   <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='">';    
                    																			if ($fieldd->Label!="") {
-                   																			 $HtmlLines[] ='<span class="input-group-addon">';$HtmlLines[]=$fieldd->Label;$HtmlLines[]='</span>';
+                   																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
-                																			  $HtmlLines[]='</div> ';           
+                																			  $HtmlLines.='</div> ';           
 
 	           																	                        
 
                 																			}
 
 	           																	            break;
-	           																	    case "number":  $HtmlLines[]= 'style="vertical-align:middle">';
+	           																	    case "number":  $HtmlLines.= 'style="vertical-align:middle">';
 
 	           																	    	 foreach ($fieldValueList as $fieldd ) {
 
 	           																	    	 							
 	           																	      	$fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
 
-	           																				$HtmlLines[]= '
+	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines[]=$fieldIDName;$HtmlLines[]='" id="';$HtmlLines[]=$fieldIDName;$HtmlLines[]='">';    
+                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='">';    
                    																			if ($fieldd->Label!="") {
-                   																			 $HtmlLines[] ='<span class="input-group-addon">';$HtmlLines[]=$fieldd->Label;$HtmlLines[]='</span>';
+                   																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
-                																			  $HtmlLines[]='</div> ';           
+                																			  $HtmlLines.='</div> ';           
 
 	           																	                        
 
@@ -201,7 +200,7 @@ class form extends Controller {
 
 	           																	    		break;
 	           																	    case "radio": 		$fieldName = $ColumnSetIDName.$fieldsetID;
-	           																	    					$HtmlLines[]=' valign="baseline">
+	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>';
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
@@ -211,26 +210,26 @@ class form extends Controller {
 	           																	    				 	$fieldValue = $fieldd->Value;
 	           																	    				 	
 	           																	    				 				
-																							  $HtmlLines[]='<label>
+																							  $HtmlLines.='<label>
                      																						  
                      																						
 
-                     																						<input name="';$HtmlLines[]=$fieldName;$HtmlLines[]='" value ="';$HtmlLines[]=$fieldValue;$HtmlLines[]='"id ="';$HtmlLines[]=$fieldIDOnly;$HtmlLines[]='" class="minimal" type="radio">
+                     																						<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" class="minimal" type="radio">
                      																						 ';
-                     																		  $HtmlLines[]=$fieldd->Label;
-                     																		  $HtmlLines[]='</label>';
+                     																		  $HtmlLines.=$fieldd->Label;
+                     																		  $HtmlLines.='</label>';
                    																														
           
 
 	           																	    				 }
 
-	           																	    				 		$HtmlLines[]=' </div>';
+	           																	    				 		$HtmlLines.=' </div>';
 
 	           																	    		break;
 	           																	    case "combo":$fieldName = $ColumnSetIDName.$fieldsetID;
-	           																	    					$HtmlLines[]=' valign="baseline">
+	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" name="';$HtmlLines[]=$fieldName;$HtmlLines[]='" id="';$HtmlLines[]=$fieldName;$HtmlLines[]='"> ';
+                   																	 <select class="form-control select2" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> ';
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
 
@@ -239,12 +238,12 @@ class form extends Controller {
 	           																	    				 	$fieldValue = $fieldd->Value;
 	           																	    				 	
 	           																	    				 				
-																							$HtmlLines[]='<option value ="';$HtmlLines[]=$fieldValue;$HtmlLines[]='"id ="';$HtmlLines[]=$fieldIDOnly;$HtmlLines[]='" >'; $HtmlLines[]=$fieldd->Label;$HtmlLines[]='</option>
+																							$HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>
 																					                     
 																					                     ';
 
 																					                  }
-																					                 $HtmlLines[]='   </select>
+																					                 $HtmlLines.='   </select>
 																					                  </div>';
 
 
@@ -254,9 +253,9 @@ class form extends Controller {
 	           																	    		break;
 	           																	     case "multiplecombo":  
 	           																	     						$fieldName = $ColumnSetIDName.$fieldsetID;
-	           																	    					$HtmlLines[]=' valign="baseline">
+	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" multiple="multiple" data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines[]=$fieldName;$HtmlLines[]='" id="';$HtmlLines[]=$fieldName;$HtmlLines[]='"> ';
+                   																	 <select class="form-control select2" multiple="multiple" data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> ';
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
 
@@ -265,25 +264,19 @@ class form extends Controller {
 	           																	    				 	$fieldValue = $fieldd->Value;
 	           																	    				 	
 	           																	    				 				
-																							$HtmlLines[]='<option value ="';$HtmlLines[]=$fieldValue;$HtmlLines[]='"id ="';$HtmlLines[]=$fieldIDOnly;$HtmlLines[]='" >'; $HtmlLines[]=$fieldd->Label;$HtmlLines[]='</option>
+																							$HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>
 																					                     
 																					                     ';
 
 																					                  }
-																					                 $HtmlLines[]='   </select>
+																					                 $HtmlLines.='   </select>
 																					                  </div>';   
 
 	           																	    		break;
-	           																	     case "coolcombo":   $fieldName = $ColumnSetIDName.$fieldsetID;
-	           																	    					$HtmlLines[]=' valign="baseline">
-	           																	    					<div> 
-    <div><label><input type="radio" name="group1" id="rdio1" value="opt1">opt1</label></div>  
-    <div><label><input type="radio" name="group1" id="rdio2" value="opt2">opt2</label></div>  
-
-....
-<div id="opt1" automaticallyVisibleIfIdChecked="rdio1">lorem ipsum dolor</div>
-<div id="opt2" automaticallyVisibleIfIdChecked="rdio2">consectetur adipisicing</div>';
-	           																	    				 foreach ($fieldValueList as $fieldd ) {
+	           																	     case "coolradio":   $fieldName = $ColumnSetIDName.$fieldsetID;
+	           																	    					$HtmlLines.=' valign="baseline">
+	           																	    					<div> ';
+	           																	    				foreach ($fieldValueList as $fieldd ) {
 
 
 
@@ -291,22 +284,22 @@ class form extends Controller {
 	           																	    				 	$fieldValue = $fieldd->Value;
 	           																	    				 	
 	           																	    				 				
-																							  $HtmlLines[]='<label>
+																							  $HtmlLines.='<label>
                      																						  
                      																						
 
-                     																						<input name="';$HtmlLines[]=$fieldName;$HtmlLines[]='" value ="';$HtmlLines[]=$fieldValue;$HtmlLines[]='"id ="';$HtmlLines[]=$fieldIDOnly;$HtmlLines[]='" type="radio">
+                     																						<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">
                      																						 ';
-                     																		  $HtmlLines[]=$fieldd->Label;
-                     																		  $HtmlLines[]='</label>';
+                     																		  $HtmlLines.=$fieldd->Label;
+                     																		  $HtmlLines.='</label>';
                    																														
           
 
 	           																	    				 }
 
 	           																	    				 		$Other = 'other';
-	           																	    				 		$HtmlLines[]='<input class="form-control" type="text" name ="';$HtmlLines[]=$fieldIDName.$Other;$HtmlLines[]='" id="';$HtmlLines[]=$fieldIDName.$Other;$HtmlLines[]='" automaticallyVisibleIfIDChecked="';$HtmlLines[]=$fieldIDOnly;$HtmlLines[]='"> </div>';
-
+	           																	    				 		$HtmlLines.='<input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName.$Other;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
+																												
 	           																	    		break;
 
 	           																	    default: echo "dai era!";
@@ -335,19 +328,19 @@ class form extends Controller {
 	           															
 
 	           													
-	           													$HtmlLines[]='</td>';
+	           													$HtmlLines.='</td>';
 	           												
 	           											}
 
 
 	           									
 	           							
-	           										$HtmlLines[]='</tr>';
+	           										$HtmlLines.='</tr>';
 	           									
 
 	           						}
 
-	           							$HtmlLines[]='</table> </div>';
+	           							$HtmlLines.='</table> </div>';
 
   
 }
@@ -355,7 +348,7 @@ class form extends Controller {
 
 
 					
-		 $HtmlLines[] =	'</Section>';
+		 $HtmlLines.='</Section>';
 
   
 
