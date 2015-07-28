@@ -300,7 +300,7 @@ class form extends Controller {
 	           																	    				 }
 
 	           																	    				 		$Other = 'other';
-	           																	    				 		$HtmlLines.='<input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName.$Other;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
+	           																	    				 		$HtmlLines.='<input class="form-control" type="text" name ="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
 																												
 	           																	    		break;
 
