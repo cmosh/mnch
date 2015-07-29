@@ -179,6 +179,7 @@ class form extends Controller {
                 																			}
 
 	           																	            break;
+
 	           																	    case "number":  $HtmlLines.= 'style="vertical-align:middle">';
 
 	           																	    	 foreach ($fieldValueList as $fieldd ) {
@@ -274,7 +275,8 @@ class form extends Controller {
 																					                  </div>';   
 
 	           																	    		break;
-	           																	     case "coolradio":   $fieldName = $ColumnSetIDName.$fieldsetID;
+	           																	     case "coolradio":   
+	           																	     					$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div> ';
 	           																	    				foreach ($fieldValueList as $fieldd ) {
@@ -365,7 +367,7 @@ class form extends Controller {
 
 
 
-			return view('svtest')->with('HtmlLines',$HtmlLines);	
+			return view('svtest')->with('Mel',$HtmlLines);	
 }
 	/**
 	 * Show the form for creating a new resource.
