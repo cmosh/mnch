@@ -31,7 +31,7 @@ class form extends Controller {
 	{
 			
 				//Query loops
-				$SelectedSurvey ='CHV1';
+				$SelectedSurvey ='CHV2';
 				$HtmlLines = '<!-- Main content -->';
 				
 				$Survs = Survey::where('surveyID','=',$SelectedSurvey)->get();
