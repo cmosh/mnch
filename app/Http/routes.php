@@ -39,9 +39,8 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-<<<<<<< HEAD
-Route::get('survey','form@index');
+
+
 Route::get('assessment','AssessmentController@create');
 Route::post('start_assessment','AssessmentController@store');
-=======
->>>>>>> a34e6ef3ca53d55b762771a53591d8d3e7507916
+
