@@ -38,3 +38,5 @@ Route::controllers([
 ]);
 
 Route::get('survey','form@index');
+Route::get('assessment','AssessmentController@create');
+Route::post('start_assessment','AssessmentController@store');
