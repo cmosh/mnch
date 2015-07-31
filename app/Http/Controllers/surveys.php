@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Request;
 use App\Column_set;
 use App\Block_row;
 use App\Block;
@@ -12,6 +10,11 @@ use App\Survey;
 use App\Field_set;
 use App\Field;
 use App\DataRecord;
+use Request;
+
+
+
+
 
 
 class surveys extends Controller {
@@ -21,13 +24,17 @@ class surveys extends Controller {
 	 *
 	 * @return Response
 	 */
-
-	
+	private static $theid="0";
+	private static $thesv="0";
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
 
 	public function index()
 	{
-		//
+	    
 	}
 
 	/**
@@ -35,13 +42,19 @@ class surveys extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+
+	
+	public function create($id,$sv)
 	{
 
 
 
-		$Mel=$this->build('CHV2','h');
-		return view('svtest')->with('Mel',$Mel);	
+		$Mel=$this->build($sv,'h');
+		
+		
+			$iXd= 'survey/'.$id;
+
+		return view('svtest')->with('Mel',$Mel)->with('id',$iXd);	
 		
 	}
 
@@ -50,15 +63,18 @@ class surveys extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($id)
 	{	
-		$AssID= 'testAss';
+		
+		$sva = 'CHV2';
+		$AssID=  $id;
+		echo $AssID;
 		$array = Request::all();
 		
 
 		
 		$first = array_shift($array);
-		$var = $this->build('CHV2','y');
+		$var = $this->build( $sva,'y');
        
 foreach ($array as $key) {
 		$data = new DataRecord;
@@ -298,7 +314,7 @@ foreach ($array as $key) {
 
 	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='">';    
+                 																		   <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value=" ">';    
                    																			if ($fieldd->Label!="") {
                    																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
@@ -319,7 +335,7 @@ foreach ($array as $key) {
 
 	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='">';    
+                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="0">';    
                    																			if ($fieldd->Label!="") {
                    																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
@@ -332,7 +348,9 @@ foreach ($array as $key) {
 	           																	    		break;
 	           																	    case "radio": 		$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
-	           																	    					<div>';
+	           																	    					<div>
+
+	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = " " id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
 
@@ -361,7 +379,9 @@ foreach ($array as $key) {
 	           																	    case "combo":$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> ';
+                   																	 <select class="form-control select2" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
+                   																	 <option value ="  "id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='" selected="selected" style ="display:none;"></option>';
+	           																	    				
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
 
@@ -387,7 +407,12 @@ foreach ($array as $key) {
 	           																	     						$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" multiple="multiple" data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> ';
+                   																	 <select class="form-control select2" multiple="multiple" data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
+                   																	 		<option value ="  "id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='" selected="selected" style ="display:none;"></option>
+                   																	 ';
+	           																	    				
+
+
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
 
@@ -406,9 +431,14 @@ foreach ($array as $key) {
 
 	           																	    		break;
 	           																	     case "coolradio":   
+
 	           																	     					$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
-	           																	    					<div> ';
+	           																	    					<div> 
+
+
+	           																	    						           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = " " id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
+;
 	           																	    				foreach ($fieldValueList as $fieldd ) {
 
 

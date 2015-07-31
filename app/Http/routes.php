@@ -11,7 +11,12 @@
 |
 */
 
-Route::resource('survey','surveys');
+
+
+
+
+
+Route::post('survey/{id}','surveys@store');
 
 Route::get('test','TestController@index');
 Route::get('ch','ch@index');
@@ -42,5 +47,6 @@ Route::controllers([
 
 
 Route::get('assessment','AssessmentController@create');
+Route::get('assessments/create/{id}/{sv}','surveys@create');
 Route::post('start_assessment','AssessmentController@store');
 
