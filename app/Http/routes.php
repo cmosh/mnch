@@ -11,6 +11,8 @@
 |
 */
 
+Route::resource('survey','surveys');
+
 Route::get('test','TestController@index');
 Route::get('ch','ch@index');
 Route::get('ch/survey',function () {
@@ -37,4 +39,3 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('survey','form@index');
