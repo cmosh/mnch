@@ -11,8 +11,6 @@
 |
 */
 
-Route::resource('survey','surveys');
-
 Route::get('test','TestController@index');
 Route::get('ch','ch@index');
 Route::get('ch/survey',function () {
@@ -35,13 +33,12 @@ Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
+	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
 ]);
 
-<<<<<<< HEAD
 Route::get('survey','form@index');
 Route::get('assessment','AssessmentController@create');
-Route::post('start_assessment','AssessmentController@store');
-=======
->>>>>>> a34e6ef3ca53d55b762771a53591d8d3e7507916
+Route::get('view_assessment','ViewAssessmentController@index');
+
+Route::post('article','ArticlesController@store');
