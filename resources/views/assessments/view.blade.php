@@ -5,9 +5,9 @@
 
 
 
-             Assessments
+             <h2>Assessments</h2>
 
-            <small> Click on one to view</small>
+            <br>
             <div class="col-sm-12">
 <div class="box box-primary">
 <div class="box-body">
@@ -26,14 +26,14 @@
                     <tbody>
           @foreach($assessments as $assessments)
 
-          	<tr class="even clickable-row " data-href='/ch/survey' role="row">
+          	<tr class="even clickable-row "  role="row">
                         <td class=""> {{ $assessments->Assessment_ID}}</td>
                         <td class="sorting_1"> {{ $assessments->Facility_ID}}</td>
                         <td> {{ $assessments->Survey}}</td>
                         <td> {{ $assessments->Assessment_Term}}</td>
                         <td> {{ $assessments->Assessor}}</td>
                         <td> {{ $assessments->Date}}</td>
-                        <td><button class="btn btn-primary" href=""></button></td>
+                        <td><button class="btn btn-primary" href="{{$assessments->Assessment_ID}}">VIEW</button></td>
               </tr>
 
 

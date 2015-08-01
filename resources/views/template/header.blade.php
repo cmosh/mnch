@@ -9,6 +9,11 @@
           <span class="logo-mini">MNCH Surveys</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">MNCH Surveys</span>
+        @elseif($location == 'ass')
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini">{{$title}} </span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">{{$title}} </span>
 
         @else
 

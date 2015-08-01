@@ -22,49 +22,12 @@
               <div class="box box-warning">
                 <div class="box-header with-border">
                   <h4 class="text-center" >Welcome, {{ Auth::user()->name }}</h4>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                  </div><!-- /.box-tools -->
+                  
                 </div><!-- /.box-header -->
-                <div class="box-body">
-
-                            
-
-            <table class="table">
-            <thead>
-            <tr><th width="25%">
-                  <div class="callout callout-danger" >
-                    <h4 >County</h4>
-                    <p>{{ Auth::user()->county }}  </p>
-                  </div></th>
-                  <th width="25%">
-                  <div class="callout callout-info ">
-                    <h4>Phone Number</h4>
-                    <p> {{ Auth::user()->PhoneNumber }} </p>
-                  </div></th>
-                  <th width="25%">
-                  <div class="callout callout-warning ">
-                    <h4>ID Number</h4>
-                    <p> {{ Auth::user()->IDNumber }} </p>
-                  </div></th>
-                  <th width="25%">
-                  <div class="callout callout-success ">
-                    <h4>email address</h4>
-                    <p> {{ Auth::user()->email }}</p>
-                  </div>
-                  </th>
-                  </tr>
-                  </thead>
-                  </table>
                 </div>
-
-
-
-
-
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div>
+                </div>
+                </div>
+                
  <div class="row">
  <div class ="col-lg-12">
 <div class="box box-success box-solid " >
@@ -75,47 +38,37 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                 <p>To start a survey, please click <u> 'begin assessment' </u>below each type of survey</p> 
+                 <p>To start a new assessment , please click <u> 'Start' </u>below </p> 
+                 <p>To view a previous assessment, please click <u> 'View' </u>below </p> 
                 </div><!-- /.box-body -->
               </div>
 </div>
       </div>        
- <div class="row">
-                            <!-- left column -->
-             <div class="col-lg-4 col-xs-6">              
-<div class="small-box bg-green">
+
+      <br>
+ 
+              <div class="col-lg-6 col-xs-6">
+ <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>IMCI</h3>
-                  <p>Integrated Management of <br>Childhood Illness Survey</p>
+                  <h2>Start Assessment</h2>
+                  <p>IMCI | CH | MNH<br></p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-social-tux"></i>
+                  <i class="ion ion-person-add"></i>
                 </div>
-                <a href="imci" class="small-box-footer">Begin new assesment<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="start_assessment" class="small-box-footer">Start<i class="fa fa-arrow-circle-right"></i></a>
               </div>
               </div>
-              <div class="col-lg-4 col-xs-6">
+              <div class="col-lg-6 col-xs-6">
  <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>CH</h3>
-                  <p>Child Health <br>Survey</p>
+                  <h2>View Assessments</h2>
+                  <p>IMCI | CH | MNH<br></p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-social-github"></i>
+                  <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="ch" class="small-box-footer">Begin new assesment <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-              </div>
-              <div class="col-lg-4 col-xs-6">
- <div class="small-box bg-red">
-                <div class="inner">
-                  <h3>MNH</h3>
-                  <p>Maternal and Noenatal <br>Health Survey</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-android-contacts"></i>
-                </div>
-                <a href="mnh" class="small-box-footer">Begin new assesment<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="assessments/show" class="small-box-footer">View<i class="fa fa-arrow-circle-right"></i></a>
               </div>
              </div>
               </div>

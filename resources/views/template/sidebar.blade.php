@@ -26,17 +26,28 @@
 
      
         
-          <div>
+          
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="header">Options</li>
             <!-- Optionally, you can add icons to the links -->
           
             @if ($location == 'Home') 
+
            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
             <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li>
+           
+           @elseif($location == 'ass')
+
+             <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+            <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li>
+
+
+
            @else 
-             <li><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
+
+
+             <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
 
               <li class="treeview Active">
                             <a href="#">
@@ -64,7 +75,7 @@
 
             <li><a href="/auth/logout"><i class="fa fa-link"></i> <span>Log Out</span></a></li>
           </ul><!-- /.sidebar-menu -->
-          </div>
+         
 
         </section>
         <!-- /.sidebar -->

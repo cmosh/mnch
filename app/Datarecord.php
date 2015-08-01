@@ -7,4 +7,6 @@ class Datarecord extends Model {
 
 	//
 
+	protected $table='datarecords';
+
 }

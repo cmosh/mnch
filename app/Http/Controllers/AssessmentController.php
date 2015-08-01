@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\assessments;
+use App\Facilities;
 use Request;
 
 class AssessmentController extends Controller {
@@ -34,9 +35,9 @@ class AssessmentController extends Controller {
 	*/
 	public function create()
 	{
-
-		//
-	  return view('assessments');
+			$AllFacilities = Facilities::all();
+			$countID = assessments::all()->count()+1;
+	  return view('assessments.create')->with('location','ass')->with('title','Assessments')->with('countID',$countID)->with('AllFacilities',$AllFacilities);
 	}
 
 	/**
@@ -64,13 +65,13 @@ class AssessmentController extends Controller {
 
 		$assessments->Assessment_ID=$x[0];
 		$assessments->Facility_ID=$x[1];
-		$assessments->Time=$x[2];
-		$assessments->Date=$x[4];
-		$assessments->Assessor=$x[3];
+		$assessments->Assessment_Term=$x[2];
+		$assessments->Date=$x[3];
+		
 
 		$assessments->save();
 
-		$ur = 'assessments/create/'.$x[0].'/CHV2';
+		$ur = 'assessments/create/'.$x[0].'/CHV1';
 
 		return redirect($ur);
 
@@ -82,9 +83,10 @@ class AssessmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
-		//
+		$assessments=assessments::all();
+		return view('assessments.view')->with('assessments',$assessments);
 	}
 
 	/**

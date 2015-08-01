@@ -58,7 +58,7 @@ class surveys extends Controller {
 		
 			$iXd= 'survey/'.$id;
 
-		return view('surveys.svtest')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs);	
+		return view('surveys.template')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs);	
 		
 	}
 
@@ -177,7 +177,7 @@ foreach ($array as $key) {
 
 	private function build($sv,$value){
 
-		
+		$loc = substr ($sv, 0,2);
 		$ColID = array();
 		$SelectedSurvey = $sv;
 				$HtmlLines = '<!-- Main content -->';
@@ -216,7 +216,229 @@ foreach ($array as $key) {
 ';
 
 
+			if ($Sec->identifier=='Section1') {
 
+					switch ($loc) {
+						case 'CH': $HtmlLines.='
+
+						
+                <!-- Main content -->
+                <div clas="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Facility Information</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+
+
+                                    <!-- form start -->
+                                    <form role="form">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <div class="col-xs-4">
+                                                    <label>Facility Name</label>
+                                                    <input type="text" class="form-control" id="InputFacilityName"
+                                                    placeholder="Enter name">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>Facility Type</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                                    placeholder="Enter type">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>Facility Tier</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                                    placeholder="Enter tier">
+                                                </div>
+                                                <br>
+                                                <div class="col-xs-4">
+                                                    <label>Owned By</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                                    placeholder="Enter owner">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>County</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                                    placeholder="Enter county">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>District/Sub-County</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                                    placeholder="Enter district/sub-county">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        
+                                    </form>
+                                </div>
+                                <!-- /.box -->
+
+                                <!-- /.box -->
+                                <div class="box box-primary">
+                                    
+                                    <div class="box-header">
+                                        <h3 class="box-title">Assessor Information</h3>
+                                    </div>
+
+                                    <div class="box-body">
+
+                                        <div class="row">
+
+                                            <div class="col-xs-3">
+
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                            </div>
+
+
+                                            <div class="col-xs-3">
+                                                <label>Designation</label>
+                                                <input type="text" class="form-control" id="fc_mobile1"
+                                                placeholder="Enter Designation">
+                                            </div>
+
+                                            <div class="col-xs-3">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                            </div>
+
+                                            <div class="col-xs-3">
+                                                <label>Phone Number</label>
+                                                <input type="text" class="form-control" id="fc_email1"
+                                                placeholder="Enter Phone Number">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <!-- /.box-body -->
+
+
+                                    <!-- Form Element sizes -->
+                                    <div class="box box-primary">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Facility Contact Information</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>CADRE</label>
+                                                    <br>
+                                                    <label>Facility Incharge</label>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="fc_mobile1"
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>MCH-Incharge</label>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" id="fc_mobile1" placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>Maternity-Incharge</label>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" id="fc_mobile1" placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>Team-Lead</label>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="text" class="form-control" id="fc_mobile1" placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </div>
+
+
+
+
+				';
+								break;
+						case 'IM':$HtmlLines.='
+
+
+
+
+				';
+
+								break;
+						case 'MN':$HtmlLines.='
+
+
+
+
+				';
+							
+							break;
+						
+						default:
+							# code...
+							break;
+					}
+
+				
+				# code...
+			} else {
+				
+			}
+			
 
 
 
@@ -383,7 +605,7 @@ foreach ($array as $key) {
 	           																	    case "combo":$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
+                   																	 <select class="form-control select2" style="width: 250px;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
                    																	 <option value ="  "id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='" selected="selected" style ="display:none;"></option>';
 	           																	    				
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
@@ -411,7 +633,7 @@ foreach ($array as $key) {
 	           																	     						$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" multiple="multiple" data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
+                   																	 <select class="form-control select2" multiple="" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
                    																	 		<option value ="  "id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='" selected="selected" style ="display:none;"></option>
                    																	 ';
 	           																	    				

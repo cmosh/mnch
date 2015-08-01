@@ -24,8 +24,7 @@ class ViewAssessmentController extends Controller {
 	public function index()
 	{
 		//
-		$assessments=assessments::all();
-		return view('assessments.view')->with('assessments',$assessments);
+		
 	}
 
 	/**
