@@ -10,6 +10,8 @@ use App\Survey;
 use App\Field_set;
 use App\Field;
 use App\DataRecord;
+use App\Facilities;
+use App\assessments;
 use Request;
 
 
@@ -52,7 +54,7 @@ class surveys extends Controller {
 		$Secs = Section::where('surveyID','=',$sv)->get();
 		
 
-		$Mel=$this->build($sv,'h');
+		$Mel=$this->build($sv,$id);
 		$location = substr ($sv, 0,2);
 		echo $location;
 		
@@ -78,7 +80,7 @@ class surveys extends Controller {
 
 		
 		$first = array_shift($array);
-		$var = $this->build( $sva,'y');
+		$var = $this->build( $sva,null);
        
 foreach ($array as $key) {
 		$data = new DataRecord;
@@ -185,7 +187,9 @@ foreach ($array as $key) {
 				
 				$Survs = Survey::where('surveyID','=',$SelectedSurvey)->get();
 
-
+				$TheAsses = assessments::where('Assessment_ID','=',$value)->first();
+				$TheFacility = Facilities::where('FacilityCode','=',$TheAsses->Facility_ID)->first();
+				$HtmlLines .=$TheFacility->FacilityName;
 
 				$Secs = Section::where('surveyID','=',$SelectedSurvey)->get();
 			      foreach($Secs as $Sec) {
@@ -244,34 +248,34 @@ foreach ($array as $key) {
                                             <div class="form-group">
                                                 <div class="col-xs-4">
                                                     <label>Facility Name</label>
-                                                    <input type="text" class="form-control" id="InputFacilityName"
-                                                    placeholder="Enter name">
+                                                    <input value ="';$HtmlLines.=$TheFacility->FacilityName;$HtmlLines.='" type="text" class="form-control" id="InputFacilityName"
+                                                    disabled>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Facility Type</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    placeholder="Enter type">
+                                                    <input  value ="';$HtmlLines.=$TheFacility->Type;$HtmlLines.='"type="text" class="form-control" id="InputFacilityType"
+                                                    placeholder="Enter type" disabled>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Facility Tier</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    placeholder="Enter tier">
+                                                    <input value ="';$HtmlLines.=$TheFacility->Tier;$HtmlLines.='" type="text" class="form-control" id="InputFacilityTier"
+                                                    placeholder="Enter tier" disabled>
                                                 </div>
                                                 <br>
                                                 <div class="col-xs-4">
                                                     <label>Owned By</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    placeholder="Enter owner">
+                                                    <input value ="';$HtmlLines.=$TheFacility->Owner;$HtmlLines.='" type="text" class="form-control" id="InputFacilityOwner"
+                                                    placeholder="Enter owner" disabled>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>County</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    placeholder="Enter county">
+                                                    <input value ="';$HtmlLines.=$TheFacility->County;$HtmlLines.='" type="text" class="form-control" id="InputFacilityCounty"
+                                                    placeholder="Enter county" disabled>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>District/Sub-County</label>
-                                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    placeholder="Enter district/sub-county">
+                                                    <input value ="';$HtmlLines.=$TheFacility->SubCounty;$HtmlLines.='" type="text" class="form-control" id="InputFacilitySubCounty"
+                                                    placeholder="Enter district/sub-county" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -295,13 +299,13 @@ foreach ($array as $key) {
                                             <div class="col-xs-3">
 
                                                 <label>Name</label>
-                                                <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                <input type="text" class="form-control" id="AssessorName"  placeholder="Enter Name">
                                             </div>
 
 
                                             <div class="col-xs-3">
                                                 <label>Designation</label>
-                                                <input type="text" class="form-control" id="fc_mobile1"
+                                                <input type="text" class="form-control" id="AssessorDesignation 
                                                 placeholder="Enter Designation">
                                             </div>
 
@@ -751,7 +755,7 @@ foreach ($array as $key) {
 
 				//Adding requisite js
 
-			if ($value == "h") {
+			if ($value != null) {
 				return $HtmlLines;
 				# code...
 			} else {
