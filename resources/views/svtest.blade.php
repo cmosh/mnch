@@ -8,12 +8,12 @@
 
 
 
-    
+    	
+			
+			
 
 
-
-
-				{!! Form::open(['url' => 'survey']) !!}
+				{!! Form::open(['url' => $id]) !!}
 
 				<?php echo $Mel?>
 

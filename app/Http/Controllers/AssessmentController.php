@@ -17,7 +17,6 @@ class AssessmentController extends Controller {
 		$this->middleware('auth');
 	}
 	/**
-
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -70,6 +69,10 @@ class AssessmentController extends Controller {
 		$assessments->Assessor=$x[3];
 
 		$assessments->save();
+
+		$ur = 'assessments/create/'.$x[0].'/CHV2';
+
+		return redirect($ur);
 
 	}
 
