@@ -48,13 +48,17 @@ class surveys extends Controller {
 	{
 
 
+		$Survs = Survey::where('surveyID','=',$sv)->first();
+		$Secs = Section::where('surveyID','=',$sv)->get();
+		
 
 		$Mel=$this->build($sv,'h');
-		
+		$location = substr ($sv, 0,2);
+		echo $location;
 		
 			$iXd= 'survey/'.$id;
 
-		return view('svtest')->with('Mel',$Mel)->with('id',$iXd);	
+		return view('surveys.svtest')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs);	
 		
 	}
 
