@@ -49,6 +49,6 @@ Route::get('assessments/show','AssessmentController@show');
 
 Route::get('assessments','AssessmentController@create');
 Route::get('assessments/create/{id}/{sv}','surveys@create');
-Route::get('start_assessment','AssessmentController@create');
+Route::get('start_assessment','AssessmentController@list');
 Route::post('start_assessment','AssessmentController@store');
 

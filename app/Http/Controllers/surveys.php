@@ -12,6 +12,8 @@ use App\Field;
 use App\DataRecord;
 use App\Facilities;
 use App\assessments;
+use App\Assessor;
+use App\Contact;
 use Request;
 
 
@@ -71,15 +73,55 @@ class surveys extends Controller {
 	 */
 	public function store($id)
 	{	
-		
-		$sva = 'CHV2';
+
+		$surveyyy = assessments::where('Assessment_ID','=',$id)->first();
+		$sva = $surveyyy->Survey;
+		$location = substr ($sva, 0,2);
 		$AssID=  $id;
-		echo $AssID;
+		
 		$array = Request::all();
 		
-
+		$storeassessor = new Assessor;
 		
 		$first = array_shift($array);
+		
+		$storeassessor->Name = array_shift($array);
+		
+		$storeassessor->Designation = array_shift($array);
+		
+		$storeassessor->Email = array_shift($array);
+		
+		$storeassessor->Number = array_shift($array);
+
+		$storeassessor->AssID = $AssID;
+
+	  $storeassessor->save();
+
+		//echo $storeassessor;
+      if ($location=="MN") { $roop = 3;
+      	# code...
+      } else {
+      	$roop=4;
+      	# code...
+      }
+
+      
+      
+      for ($x = 0; $x < $roop; $x++) {
+      	$ContactT = new Contact;
+		$ContactT->Cadre = array_shift($array);	
+		$ContactT->Name = array_shift($array);
+		$ContactT->Mobile = array_shift($array);
+		$ContactT->Email = array_shift($array);
+		$ContactT->AssID = $AssID;
+		$ContactT->save();
+   		
+} 
+
+	
+			
+		
+
 		$var = $this->build( $sva,null);
        
 foreach ($array as $key) {
@@ -187,10 +229,11 @@ foreach ($array as $key) {
 				
 				$Survs = Survey::where('surveyID','=',$SelectedSurvey)->get();
 
+				if($value!==null){
 				$TheAsses = assessments::where('Assessment_ID','=',$value)->first();
 				$TheFacility = Facilities::where('FacilityCode','=',$TheAsses->Facility_ID)->first();
-				$HtmlLines .=$TheFacility->FacilityName;
-
+				
+}
 				$Secs = Section::where('surveyID','=',$SelectedSurvey)->get();
 			      foreach($Secs as $Sec) {
 				
@@ -220,13 +263,10 @@ foreach ($array as $key) {
 ';
 
 
-			if ($Sec->identifier=='Section1') {
+			if ($Sec->identifier=='Section1' && $value!=null) {
 
-					switch ($loc) {
-						case 'CH': $HtmlLines.='
 
-						
-                <!-- Main content -->
+				$HtmlLines.='  <!-- Main content -->
                 <div clas="content-wrapper">
                     <!-- Content Header (Page header) -->
                     <!-- Main content -->
@@ -243,7 +283,7 @@ foreach ($array as $key) {
 
 
                                     <!-- form start -->
-                                    <form role="form">
+                                    
                                         <div class="box-body">
                                             <div class="form-group">
                                                 <div class="col-xs-4">
@@ -274,14 +314,14 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>District/Sub-County</label>
-                                                    <input value ="';$HtmlLines.=$TheFacility->SubCounty;$HtmlLines.='" type="text" class="form-control" id="InputFacilitySubCounty"
+                                                    <input value ="';$HtmlLines.=$TheFacility->District;$HtmlLines.='" type="text" class="form-control" id="InputFacilitySubCounty"
                                                     placeholder="Enter district/sub-county" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
                                         
-                                    </form>
+                                    
                                 </div>
                                 <!-- /.box -->
 
@@ -299,24 +339,23 @@ foreach ($array as $key) {
                                             <div class="col-xs-3">
 
                                                 <label>Name</label>
-                                                <input type="text" class="form-control" id="AssessorName"  placeholder="Enter Name">
+                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName"  placeholder="Enter Name">
                                             </div>
 
 
                                             <div class="col-xs-3">
                                                 <label>Designation</label>
-                                                <input type="text" class="form-control" id="AssessorDesignation 
-                                                placeholder="Enter Designation">
+                                                <input type="text" class="form-control" id="AssessorDesignation"  name="AssessorDesignation"  placeholder="Enter Designation">
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                <input type="email" class="form-control" id="AssessorEmail" name="AssessorEmail" placeholder="Enter Email">
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Phone Number</label>
-                                                <input type="text" class="form-control" id="fc_email1"
+                                                <input type="text" class="form-control" id="AssessorNumber" name="AssessorNumber"
                                                 placeholder="Enter Phone Number">
                                             </div>
 
@@ -325,9 +364,11 @@ foreach ($array as $key) {
                                     </div>
                                     </div>
                                     </div>
-                                    <!-- /.box-body -->
+                                    <!-- /.box-body -->';
 
-
+					switch ($loc) {
+						case 'CH': $HtmlLines.='		
+              
                                     <!-- Form Element sizes -->
                                     <div class="box box-primary">
                                         <div class="box-header">
@@ -339,19 +380,20 @@ foreach ($array as $key) {
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Facility Incharge</label>
+                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="form-control" id="fc_mobile1"
+                                                    <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
                                                 </div>
                                             </div>
                                         </div>
@@ -359,16 +401,21 @@ foreach ($array as $key) {
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-xs-1">
-                                                    <label>MCH-Incharge</label>
+                                                    <label>MCH  Incharge</label>
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" id="fc_mobile1" placeholder="Enter Mobile">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" 
+                                                    placeholder="Enter Mobile">
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
                                                 </div>
                                             </div>
                                         </div>
@@ -377,15 +424,20 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>Maternity-Incharge</label>
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" name= "MaternityInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" id="fc_mobile1" placeholder="Enter Mobile">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" 
+                                                    placeholder="Enter Mobile">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
                                                 </div>
                                             </div>
                                         </div>
@@ -393,16 +445,21 @@ foreach ($array as $key) {
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-xs-1">
-                                                    <label>Team-Lead</label>
+                                                    <label>OPD in Charge</label>
+                                                     <input type="hidden" class="form-control" value="OPD Incharge" id="OPDIncharge" Name="OPDIncharge" placeholder="Enter Name">
+                                                </div>
+                                                 <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" id="fc_name1" placeholder="Enter Name">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" 
+                                                    placeholder="Enter Mobile">
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" id="fc_mobile1" placeholder="Enter Mobile">
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <input type="email" class="form-control" id="fc_email1" placeholder="Enter Email">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" placeholder="Enter Email">
                                                 </div>
                                             </div>
                                         </div>
@@ -415,7 +472,105 @@ foreach ($array as $key) {
 
 				';
 								break;
-						case 'IM':$HtmlLines.='
+						case 'IM': $HtmlLines.='		
+              
+                                    <!-- Form Element sizes -->
+                                    <div class="box box-primary">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Facility Contact Information</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>CADRE</label>
+                                                    <br>
+                                                    <label>Incharge</label>
+                                                     <input type="hidden" class="form-control" value="Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>MCH  Incharge</label>
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>Maternity-Incharge</label>
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" name= "MaternityInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>Team Lead</label>
+                                                     <input type="hidden" class="form-control" value="Team Lead" id="OPDIncharge" Name="OPDIncharge" placeholder="Enter Name">
+                                                </div>
+                                                 <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </div>
 
 
 
@@ -423,7 +578,83 @@ foreach ($array as $key) {
 				';
 
 								break;
-						case 'MN':$HtmlLines.='
+						case 'MN': $HtmlLines.='		
+              
+                                    <!-- Form Element sizes -->
+                                    <div class="box box-primary">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Facility Contact Information</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>CADRE</label>
+                                                    <br>
+                                                    <label>Facility Incharge</label>
+                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>MCH  Incharge</label>
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-xs-1">
+                                                    <label>Maternity-Incharge</label>
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>NAME</label>
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" name= "MaternityInchargeName" placeholder="Enter Name">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>MOBILE</label>
+                                                    <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" 
+                                                    placeholder="Enter Mobile">
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
 
 
 

@@ -25,12 +25,12 @@
 			
 
 
-				{!! Form::open(['url' => $id]) !!}
+				{!! Form::open(['url' => '/'.$id]) !!}
 
 				<?php echo $Mel?>
 
 
-				{!! Form::submit('Save',['class' => 'btn btn-primary form-control'])!!}
+				{!! Form::submit('Start',['class' => 'btn btn-primary form-control']) !!}
 
 				{!! Form::close() !!}
 

@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\assessments;
 use App\Facilities;
+use App\Survey;
 use Request;
 
 class AssessmentController extends Controller {
@@ -24,7 +25,8 @@ class AssessmentController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$Surveys = Survey::all();
+		return view('assessments.index')->with('location','ass')->with('title','Assessments')->with('Surveys',$Surveys);
 	}
 
 	
