@@ -41,7 +41,7 @@
              
                 <div class="inner">
                   <h2>{{$Survey->Name}} Survey</h2>
-                  <p>Runtime: {{$Survey->Runtime}}<br>Verion {{$Survey->Version}} </p>
+                  <p>Runtime: {{$Survey->Runtime}}<br>Version {{$Survey->Version}} </p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
