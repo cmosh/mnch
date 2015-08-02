@@ -6,7 +6,9 @@ use App\assessments;
 use App\Facilities;
 use App\Participants;
 use App\Survey;
+use App\Assessor;
 use Request;
+
 
 class AssessmentController extends Controller {
 
@@ -99,8 +101,10 @@ class AssessmentController extends Controller {
 	 */
 	public function show()
 	{
+
+		$Assessors = Assessor::all()->keyBy('AssID');
 		$assessments=assessments::all();
-		return view('assessments.view')->with('assessments',$assessments);
+		return view('assessments.view')->with('assessments',$assessments)->with('Assessors',$Assessors)->with('location','ass')->with('title','Assessments');
 	}
 
 	/**

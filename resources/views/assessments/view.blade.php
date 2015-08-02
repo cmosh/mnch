@@ -1,51 +1,104 @@
-@extends('dashboard')
+@extends('template')
 
+@section('cdns')
+ <!-- DATA TABLES -->
+    <link href="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+  @endsection
 
 @section('pageinfo')
 
-
-
-             <h2>Assessments</h2>
-
-            <br>
-            <div class="col-sm-12">
-<div class="box box-primary">
-<div class="box-body">
-
-
-                  <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped table-hover dataTable">
+  <h2>Assessments</h2>
+        <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title"> Search </h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                      <tr role="row">
-                      <th aria-label="Assessment ID: activate to sort column ascending" style="width: 184.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Asessment ID</th>
-                      <th aria-label="Facility ID: activate to sort column ascending" style="width: 227.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_desc">Facility ID</th>
-                      <th aria-label="Survey: activate to sort column ascending" style="width: 200.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Survey</th>
-                      <th aria-label="Assesment Term: activate to sort column ascending" style="width: 157.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Assessment Term</th>
-                      <th aria-label="Assessor: activate to sort column ascending" style="width: 112.333px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Assessor</th>
-                       <th aria-label="Date: activate to sort column ascending" style="width: 112.333px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Date</th></tr>                  
+                      <tr>
+                        <th style= "display:none;">Assessment ID</th>
+                        <th style= "display:none;">Facility ID </th>
+                        <th>Survey </th>
+                        <th>Assessment Term</th>
+                         <th>Assessor </th>
+                        <th>Date </th>
+                        <th>Action</th>
+                      </tr>
                     </thead>
                     <tbody>
-          @foreach($assessments as $assessments)
+                      
+                       @foreach($assessments as $assessment)
 
-          	<tr class="even clickable-row "  role="row">
-                        <td class=""> {{ $assessments->Assessment_ID}}</td>
-                        <td class="sorting_1"> {{ $assessments->Facility_ID}}</td>
-                        <td> {{ $assessments->Survey}}</td>
-                        <td> {{ $assessments->Assessment_Term}}</td>
-                        <td> {{ $assessments->Assessor}}</td>
-                        <td> {{ $assessments->Date}}</td>
-                        <td><button class="btn btn-primary" href="{{$assessments->Assessment_ID}}">VIEW</button></td>
+            <tr >
+                        <td style= "display:none;"> {{ $assessment->Assessment_ID}}</td>
+                        <td style= "display:none;"> {{ $assessment->Facility_ID}}</td>
+
+                        @if ( (substr ($assessment->Survey, 0,2)) =='CH')
+                           <td> CH Survey </td>
+                           @elseif ( (substr ($assessment->Survey, 0,2)) =='MN')
+                              <td> MNH Survey</td>
+                              @else
+                                 <td> IMCI Survey </td>
+                                 @endif
+                     
+                        <td> {{ $assessment->Assessment_Term}}</td>
+                        <td> {{ $Assessors->get($assessment->Assessment_ID)->Name }}</td>
+                        <td> {{ $assessment->Date}}</td>
+                        <td><form action="show/{{$assessment->Assessment_ID}}">
+    <input class="btn btn-primary form-control" type="submit" value="VIEW">
+     
+</form>
+
+
+
               </tr>
 
 
           @endforeach
+                      
+                     
+               
+                   
+                        
+                  
+                     
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th style= "display:none;">Assessment ID</th>
+                        <th style= "display:none;">Facility ID </th>
+                        <th>Survey </th>
+                        <th>Assessment Term</th>
+                         <th>Assessor </th>
+                        <th>Date </th>
+                         <th>Action</th>
+                       
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
 
-          </tbody>
 
-</table>
-</div>
-</div>
-</div>
+
+           
+
+           
          
+  @endsection
+
+
+  @section('javascript')
+
+   <script src="/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+ <script type="text/javascript">
+      $(function () {
+        $("#example1").DataTable();
+       
+      });
+    </script>
+
   @endsection
 
 @section('content')
