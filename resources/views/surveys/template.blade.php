@@ -30,7 +30,7 @@
 				<?php echo $Mel?>
 
 
-				{!! Form::submit('Start',['class' => 'btn btn-primary form-control']) !!}
+				{!! Form::submit('Finish and Save',['class' => 'btn btn-primary form-control']) !!}
 
 				{!! Form::close() !!}
 

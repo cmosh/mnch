@@ -94,7 +94,7 @@
                         <tr>
                         <td class="rr"> {{ $al->Name_of_Participant}}</td>
                         <td><span>{{ $al->FacilityName}}</span>  </td>
-                         <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
+                         <td class="nr"><span>{{ $al->mfl_code}}</span>  </td>
                         <td> {{ $al->training_site}}</td>
                         <td> {{ $al->id_Number}}</td>
 

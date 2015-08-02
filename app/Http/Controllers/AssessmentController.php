@@ -40,7 +40,8 @@ class AssessmentController extends Controller {
 	{
 			
 			$loc = substr ($id, 0,2);
-			if ($loc = "IM") {
+			
+			if ($loc == "IM") {
 				$All = Participants::all();
 			} else {
 				$All = Facilities::all();
