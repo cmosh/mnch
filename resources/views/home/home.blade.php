@@ -56,7 +56,7 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="start_assessment" class="small-box-footer">Start<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="assessments" class="small-box-footer">Start<i class="fa fa-arrow-circle-right"></i></a>
               </div>
               </div>
               <div class="col-lg-6 col-xs-6">

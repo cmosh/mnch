@@ -30,7 +30,7 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                 <p>Search either by name or county then <u>click the facility<u> to begin assessment</p> 
+                 <p>Search then <u>click select <u> to choose</p> 
                 </div><!-- /.box-body -->
               </div>
 </div>
@@ -39,47 +39,92 @@
 
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Facilities</h3>
+                  <h3 class="box-title">@if($loc=='IM')
+                  Participants
+                  @else
+                  Facilities
+                  @endif
+
+
+                  </h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+
+                      @if($loc=='IM')
                         <th>Name</th>
+                        <th>Facility</th>
+                         <th>Facility Code</th>
+                        <th>Training Site</th>
+                        <th>ID Number</th>
+                        <th>Action</th>
+                        
+                  @else
+                  <th>Name</th>
                         <th>Code</th>
                         <th>County</th>
                         <th>Type</th>
                         <th>Owner</th>
                         <th>Action</th>
+                  @endif
+                       
                       </tr>
                     </thead>
                     
                     <tbody>
-                        @foreach($AllFacilities as $Facilities)
-                   <tr>
-                        <td class="rr"> {{ $Facilities->FacilityName}}</td>
-                        <td class="nr"><span>{{ $Facilities->FacilityCode}}</span>
-            </td>
-                        
-                        <td> {{ $Facilities->County}}</td>
-                        <td> {{ $Facilities->Type}}</td>
-                        <td> {{ $Facilities->Owner}}</td>
-                        <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button>
-                               </td>
+                      
+                      @if($loc!='IM')
+
+                        @foreach($All as $al)
+                        <tr>
+                        <td class="rr"> {{ $al->FacilityName}}</td>
+                        <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
+                        <td> {{ $al->County}}</td>
+                        <td> {{ $al->Type}}</td>
+                        <td> {{ $al->Owner}}</td>
+                        <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
                       </tr>
 
                          @endforeach
+                  @else
+
+                           @foreach($All as $al)
+                        <tr>
+                        <td class="rr"> {{ $al->Name_of_Participant}}</td>
+                        <td><span>{{ $al->FacilityName}}</span>  </td>
+                         <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
+                        <td> {{ $al->training_site}}</td>
+                        <td> {{ $al->id_Number}}</td>
+
+                       
+                        <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
+                      </tr>
+
+                         @endforeach
+                  @endif
+
 
                      
                     </tbody>
                     <tfoot>
                       <tr>
+                         @if($loc=='IM')
                         <th>Name</th>
+                        <th>Facility</th>
+                         <th>Facility Code</th>
+                        <th>Training Site</th>
+                        <th>ID Number</th>
+                        
+                  @else
+                  <th>Name</th>
                         <th>Code</th>
                         <th>County</th>
                         <th>Type</th>
                         <th>Owner</th>
                         <th>Action</th>
+                  @endif
                       </tr>
                     </tfoot>
                   </table>
@@ -102,19 +147,19 @@
 <div class='box'>
 
 <div class='box-body'>
-{!! Form::open(['url' => 'start_assessment']) !!}
+{!! Form::open(['url' => 'assessments/'.$id]) !!}
 <div class="form-group">
 	{!! Form::text('Assessment_ID',null,['class' => 'form-control','Value'=> 'ASS'.$countID, 'style' => 'display:none;']) !!}
 	</div>
 
 	<div class="form-group">
 	{!! Form::label('Facility_ID','x',['style'=>'display:none;']) !!}
-	{!! Form::text('Facility_ID',null,['class' => 'form-control' ]) !!}
+	{!! Form::text('Facility_ID',null,['class' => 'form-control','style'=>'display:none;' ]) !!}
 	</div>
 
 	<div class="form-group">
 	{!! Form::label('Assessment_Term','Assessment Term:') !!}
-  {!! Form::select('Assessment_Term', ['Baseline' => 'Baselline','Midterm' => 'Midterm','Endterm' => 'Endterm'],null,['class' => 'form-control']) !!}
+  {!! Form::select('Assessment_Term', ['Baseline' => 'Baseline','Midterm' => 'Midterm','Endterm' => 'Endterm'],null,['class' => 'form-control']) !!}
 	
 	</div>
 	

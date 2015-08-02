@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\assessments;
 use App\Facilities;
+use App\Participants;
 use App\Survey;
 use Request;
 
@@ -35,11 +36,19 @@ class AssessmentController extends Controller {
 	 *
 	 * @return Response
 	*/
-	public function create()
+	public function create($id)
 	{
-			$AllFacilities = Facilities::all();
+			
+			$loc = substr ($id, 0,2);
+			if ($loc = "IM") {
+				$All = Participants::all();
+			} else {
+				$All = Facilities::all();
+			}
+			
+			
 			$countID = assessments::all()->count()+1;
-	  return view('assessments.create')->with('location','ass')->with('title','Assessments')->with('countID',$countID)->with('AllFacilities',$AllFacilities);
+	  return view('assessments.create')->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All);
 	}
 
 	/**
@@ -47,9 +56,10 @@ class AssessmentController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($id)
 
 	{
+		echo $id;
 
 
 		$array=Request::all();
@@ -69,13 +79,14 @@ class AssessmentController extends Controller {
 		$assessments->Facility_ID=$x[1];
 		$assessments->Assessment_Term=$x[2];
 		$assessments->Date=$x[3];
+		$assessments->Survey= $id;
 		
 
-		$assessments->save();
+	$assessments->save();
 
-		$ur = 'assessments/create/'.$x[0].'/CHV1';
+	$ur = 'assessments/create/'.$x[0].'/'.$id;
 
-		return redirect($ur);
+	return redirect($ur);
 
 	}
 

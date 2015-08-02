@@ -47,8 +47,9 @@ Route::controllers([
 Route::get('assessments/show','AssessmentController@show');
 //Route::get('assessments/show/{id}','Data@show');
 
-Route::get('assessments','AssessmentController@create');
 Route::get('assessments/create/{id}/{sv}','surveys@create');
-Route::get('start_assessment','AssessmentController@list');
-Route::post('start_assessment','AssessmentController@store');
+Route::get('assessments','AssessmentController@index');
+Route::get('assessments/{id}','AssessmentController@create');
+Route::post('assessments/{id}','AssessmentController@store');
+
 
