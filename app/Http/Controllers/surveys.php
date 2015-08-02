@@ -9,7 +9,7 @@ use App\Section;
 use App\Survey;
 use App\Field_set;
 use App\Field;
-use App\DataRecord;
+use App\Datarecord;
 use App\Facilities;
 use App\assessments;
 use App\Assessor;
@@ -125,7 +125,8 @@ class surveys extends Controller {
 		$var = $this->build( $sva,null);
        
 foreach ($array as $key) {
-		$data = new DataRecord;
+
+		$data = new Datarecord;
 		
 		echo "ID: ";
 		$x = array_shift($var);
