@@ -128,29 +128,35 @@ foreach ($array as $key) {
 
 		$data = new Datarecord;
 		
-		echo "ID: ";
+		
 		$x = array_shift($var);
-		echo $x;
+		
 		$data->ColumnSetID=$x;
 		$data->DataID = $AssID.$x;
 		$data->AssID=$AssID;
-		echo "     ";
-		echo "Value: ";
-		echo $key;
-		$data->Data=$key;
+		
+		if (gettype($key)=="array") {
+            $data->Data=implode(",",$key);
+        } else {
+            $data->Data=str_replace(array('_'),'',$key);
+        }
+        
+		
 
 		
 		
 
-		echo "    ";
-		echo "<br><br>";
+		
 
 
 		$data->save();
+
+
+
 	# code...
 }
 	
-
+        
 
 	
 
@@ -166,7 +172,7 @@ foreach ($array as $key) {
 
 
 
-		
+		return redirect('/assessments/show');
 		
 
 
@@ -764,16 +770,17 @@ foreach ($array as $key) {
                                                                             //number,text,combo,multiplecombo,coolcombo,label,radio
 
                                                                             $typededuction = $currentFieldset->type;
-                                                                            unset($currentFieldset);
-                                                                            $fieldValueList = Field::where('field_setID','=',$fieldsetID)->get();
+                                                                            
+                                                                            $fieldValueList = Field::where('field_setID','=',$currentFieldset->field_setID)->get()->keyBy('Value');
                                                                                 switch ($typededuction) {
-                                                                                    case "label":
+
+                                                                                    case "label": $HtmlLines.= '
+
+                                                                                         style="vertical-align:middle">';
 
                                                                                     foreach ($fieldValueList as $fieldd ) {
 
-                                                                                            $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
+                                                                                           
 
                                                                                         
 
@@ -787,190 +794,152 @@ foreach ($array as $key) {
                                           
                                                                                                   
                                                                                             break;
-                                                                                    case "text":$HtmlLines.= 'style="vertical-align:middle">';
 
-                                                                                         foreach ($fieldValueList as $fieldd ) {
-
-                                                                                                                    
-                                                                                        $fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
-
+                                                                                    case "text":
 
                                                                                             $HtmlLines.= '
-                                                                                            <div class="input-group">
-                                                                                           <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="'.($datass->get($ColumnSetIDName)->Data).'">';    
-                                                                                            if ($fieldd->Label!="") {
-                                                                                             $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
-                                                                                             } 
-                                                                                              $HtmlLines.='</div> ';           
 
+                                                                                         style="vertical-align:middle">';
+
+
+                                                                                  
+
+                                                                                        
+
+                                                                                          $HtmlLines.= $datass->get($ColumnSetIDName)->Data;  
+
+
+                                                                                                                    
+                                                                                    
+                                                                                                                                                                   
                                                                                                         
 
+                                                                                            
+
+                                                                                            break;
+
+                                                                                    case "number":
+                                                                                     $HtmlLines.= '
+
+                                                                                         style="vertical-align:middle">';
+  
+
+                                                                                   
+                                                                                           
+                                                                                        
+
+                                                                                        $HtmlLines.= $datass->get($ColumnSetIDName)->Data;  
+
+
+                                                                                                                    
+                                                                                    
+                                                                                
+
+                                                                                            break;
+
+
+                                                                                    case "radio":  
+                                                                                     $HtmlLines.= '
+
+                                                                                         style="vertical-align:middle">';    
+                                                                                           $H = $datass->get($ColumnSetIDName)->Data;   
+
+                                                                                            if ($H == null || $H=='Unentered' ) {
+
+                                                                                                      $HtmlLines.="Unentered";
+                                                                                               
+                                                                                           
+                                                                                            }else{
+
+                                                                                             $HtmlLines.=$fieldValueList->get($H)->Label;
                                                                                             }
+                                                                                            
+
+                                                                                                                                                                         
+
+                                                                                               
+                                                                                        
+                                                                                  
+                                                                                                           
 
                                                                                             break;
+                                                                                    case "combo":  $HtmlLines.= '
 
-                                                                                    case "number":  $HtmlLines.= 'style="vertical-align:middle">';
+                                                                                         style="vertical-align:middle">';    
+                                                                                           $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                         foreach ($fieldValueList as $fieldd ) {
+                                                                                            if ($H == null || $H=='Unentered') {
 
-                                                                                                                    
-                                                                                        $fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
-                                                                                           // echo ($datass->get($ColumnSetIDName));
-                                                                                            $HtmlLines.= '
-                                                                                            <div class="input-group">
-                                                                                           <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="'.($datass->get($ColumnSetIDName)->Data).'">';    
-                                                                                            if ($fieldd->Label!="") {
-                                                                                             $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
-                                                                                             } 
-                                                                                              $HtmlLines.='</div> ';           
+                                                                                                      $HtmlLines.="Unentered";
+                                                                                               
+                                                                                           
+                                                                                            }else{
+                                                                                                 
+                                                                                               $HtmlLines.= $fieldValueList->get($H)->Label;
+                                                                                            }
+                                                                                            
 
-                                                                                                        
+                                                                                           
+                                                                                               
 
-                                                                                            }   
-
-                                                                                            break;
-                                                                                    case "radio":       $fieldName = $ColumnSetIDName.$fieldsetID;
-                                                                                                        $HtmlLines.=' valign="baseline">
-                                                                                                        <div>
-
-                                                                                                        ';
-                                                                                                     foreach ($fieldValueList as $fieldd ) {
-
-
-
-                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
-                                                                                                        $fieldValue = $fieldd->Value;
-                                                                                                        
-
-                                                                                                                    
-                                                                                              $HtmlLines.='<label>
-                                                                                                              
-                                                                                                            
-                                                                                                            ';
-
-                                                                                                        if ($fieldValue==($datass->get($ColumnSetIDName)->Data) ) {
-                                                                                                $HtmlLines.='<input checked="" name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">';
-                                                                                                            } else {
-                                                                                                $HtmlLines.='<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">';
-                                                                                                            }
-                                                                                                            
-
-                                                                                                          $HtmlLines.='   <x automaticallyVisibleIfIDChecked = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
-                                                                                                             ';
-                                                                                              $HtmlLines.=$fieldd->Label.'&nbsp;&nbsp;';
-                                                                                              $HtmlLines.='</label>';
-                                                                                                                                        
-          
-
-                                                                                                     }
-
-                                                                                                            $HtmlLines.=' </div>';
-
-                                                                                            break;
-                                                                                    case "combo":$fieldName = $ColumnSetIDName.$fieldsetID;
-                                                                                                        $HtmlLines.=' valign="baseline">
-                                                                                                        <div>                
-                                                                                     <select class="form-control " style="width: 250px;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
-                                                                                     <option value ="  "id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;"></option>';
-                                                                                                    
-                                                                                                     foreach ($fieldValueList as $fieldd ) {
-
-
-
-                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
-                                                                                                        $fieldValue = $fieldd->Value;
-                                                                                                        
-                                                                                                         if ($fieldValue==($datass->get($ColumnSetIDName)->Data) ) {
-                                                                                                                    
-                                                                                            $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" selected>'; $HtmlLines.=$fieldd->Label;$HtmlLines.=' </option>
-                                                                                                         
-                                                                                                         ';
-
-                                                                                                          } else {
-
-                                                                                    $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>
-                                                                                                         
-                                                                                                         ';
-
-                                                                                                                    }
-
-                                                                                                      }
-                                                                                                     $HtmlLines.='   </select>
-                                                                                                      </div>';
-
-
-
-
+                                                                                               
+                                                                                        
+                                                                                  
 
                                                                                             break;
                                                                                      case "multiplecombo":  
-                                                                                                            $fieldName = $ColumnSetIDName.$fieldsetID;
-                                                                                                        $HtmlLines.=' valign="baseline">
-                                                                                                        <div>                
-                                                                                     <select class="form-control select2" multiple="" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
-                                                                                            <option value ="  "id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='" selected="selected" style ="display:none;"></option>
-                                                                                     ';
-                                                                                                    
 
+                                                                                            $HtmlLines.= '
 
-                                                                                                     foreach ($fieldValueList as $fieldd ) {
-
-
-
-                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
-                                                                                                        $fieldValue = $fieldd->Value;
+                                                                                         style="vertical-align:middle">';
                                                                                                         
-                                                                                                                    
-                                                                                            $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>
-                                                                                                         
-                                                                                                         ';
+                                                                                          $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                                      }
-                                                                                                     $HtmlLines.='   </select>
-                                                                                                      </div>';   
+                                                                                            if ($H == null || $H=='Unentered') {
+                                                                                                
+                                                                                                      $HtmlLines.="Unentered";
+                                                                                               
+                                                                                           
+                                                                                            }else{
+
+                                                                                                $vl =  explode(",",$H);
+
+                                                                                                     foreach($vl as $vll) {
+
+
+                                                                                                $HtmlLines.=$fieldValueList->get($vll)->Label;
+
+                                                                                            }
+                                                                                            }
+                                                                                  
 
                                                                                             break;
-                                                                                     case "coolradio":   
+                                                                                     case "coolradio": 
+                                                                                       $HtmlLines.= '
 
-                                                                                                        $fieldName = $ColumnSetIDName.$fieldsetID;
-                                                                                                        $HtmlLines.=' valign="baseline">
-                                                                                                        <div> 
+                                                                                         style="vertical-align:middle">';  
 
+                                                                                          
+                                                                                $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                                                                                                                                                <input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = " " id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
-;
-                                                                                                    foreach ($fieldValueList as $fieldd ) {
+                                                                                            if ($H == null || $H=='Unentered') {
+                                                                                                
+                                                                                                      $HtmlLines.=$H."Unentered";
+                                                                                               
+                                                                                           
+                                                                                            }elseif( (string)(int) $H == $H) {
+   
 
+                                                                                                $HtmlLines.=$fieldValueList->get($H)->Label;
+                                                                                            }
+                                                                                            else{
 
+                                                                                            	$HtmlLines.=$H;
+                                                                                            }
 
-                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
-                                                                                                        $fieldValue = $fieldd->Value;
-                                                                                                        
                                                                                                                     
-                                                                                  $HtmlLines.='<label>
-                                                                                                              
-                                                                                                            
-                                                                                                            ';
-
-                                                                                                            if ($fieldValue==($datass->get($ColumnSetIDName)->Data)) {
-                                                                                                $HtmlLines.='<input checked="" name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">';
-                                                                                                            } else {
-                                                                                                $HtmlLines.='<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">';
-                                                                                                            }
-                                                                                                            
-
-                                                                                                          $HtmlLines.='   <x automaticallyVisibleIfIDChecked = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
-                                                                                                             ';
-                                                                                              $HtmlLines.=$fieldd->Label.'&nbsp;&nbsp;';
-                                                                                              $HtmlLines.='</label>';
-                                                                                                                                        
-          
-
-                                                                                                     }
-
-                                                                                                            $Other = 'other';
-                                                                                                            $HtmlLines.='<input class="form-control" value="'.($datass->get($ColumnSetIDName)->Data).'" type="text" name ="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
-                                                                                                                
+                                                                                    
+                                                                                
                                                                                             break;
 
                                                                                     default: echo "dai era!";
@@ -1666,7 +1635,8 @@ return $HtmlLines;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
                    																	 <select class="form-control select2 " style="width: 250px;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
-                   																	 
+                   																	 <option value ="Unentered" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
+                                                                                     
 
                                                                                      ';
 	           																	    				
@@ -1695,8 +1665,8 @@ return $HtmlLines;
 	           																	     						$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2" multiple="" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
-                   																	 		<option value ="Unentered" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;"></option>
+                   																	 <select class="form-control select2" multiple="6" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
+                   																	 		<option value ="Unentered" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
                    																	 ';
 	           																	    				
 
@@ -1724,8 +1694,7 @@ return $HtmlLines;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div> 
 
-
-	           																	    						           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = "Unentered" id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
+	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = "Unentered" id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
 ;
 	           																	    				foreach ($fieldValueList as $fieldd ) {
 
@@ -1750,8 +1719,14 @@ return $HtmlLines;
 	           																	    				 }
 
 	           																	    				 		$Other = 'other';
-	           																	    				 		$HtmlLines.='<input class="form-control" type="text" name ="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
-																												
+	           																	    				 	$HtmlLines.='<input class="form-control" type="text" name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
+																										$HtmlLines.='<script>
+																										$(function () {
+																												    $(\'input[name='.$fieldName.']\').change(function () {
+																												    	var radioValue = $("input[name='.$fieldName.']:checked").val();
+																												        $(\'#'.$fieldName.$Other.'\').attr(\'value\',radioValue );
+
+																												    });</script>';		
 	           																	    		break;
 
 	           																	    default: echo "dai era!";

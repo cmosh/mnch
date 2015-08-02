@@ -101,4 +101,3 @@
 
   @endsection
 
-@section('content')

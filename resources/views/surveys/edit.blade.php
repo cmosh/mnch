@@ -25,14 +25,13 @@
 			
 
 
-				{!! Form::open(['url' => '/'.$id]) !!}
+			
 
 				<?php echo $Mel?>
 
 
-				{!! Form::submit('Finish and Save',['class' => 'btn btn-primary form-control']) !!}
 
-				{!! Form::close() !!}
+			
 
         
 
