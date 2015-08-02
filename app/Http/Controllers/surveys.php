@@ -908,7 +908,7 @@ foreach ($array as $key) {
 
 
                                                                                                 $HtmlLines.=$fieldValueList->get($vll)->Label;
-                                                                                                $HtmlLines.=" ";
+                                                                                                $HtmlLines.=",";
 
                                                                                             }
                                                                                             }
