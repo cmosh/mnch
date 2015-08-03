@@ -366,24 +366,24 @@ foreach ($array as $key) {
                                             <div class="col-xs-3">
 
                                                 <label>Name</label>
-                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName" value="';$HtmlLines.=$TheAssessor->Name;$HtmlLines.='" placeholder="Enter Name">
+                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName" value="';$HtmlLines.=$TheAssessor->Name;$HtmlLines.='" placeholder="Enter Name" disabled>
                                             </div>
 
 
                                             <div class="col-xs-3">
                                                 <label>Designation</label>
-                                                <input type="text" class="form-control" id="AssessorDesignation"  name="AssessorDesignation" value="';$HtmlLines.=$TheAssessor->Designation;$HtmlLines.='"  placeholder="Enter Designation">
+                                                <input type="text" class="form-control" id="AssessorDesignation"  name="AssessorDesignation" value="';$HtmlLines.=$TheAssessor->Designation;$HtmlLines.='"  placeholder="Enter Designation" disabled>
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control" id="AssessorEmail" name="AssessorEmail" value="';$HtmlLines.=$TheAssessor->Email;$HtmlLines.='" placeholder="Enter Email">
+                                                <input type="email" class="form-control" id="AssessorEmail" name="AssessorEmail" value="';$HtmlLines.=$TheAssessor->Email;$HtmlLines.='" placeholder="Enter Email" disabled>
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Phone Number</label>
                                                 <input type="text" class="form-control" id="AssessorNumber" name="AssessorNumber" value="';$HtmlLines.=$TheAssessor->Number;$HtmlLines.='"
-                                                placeholder="Enter Phone Number">
+                                                placeholder="Enter Phone Number" disabled>
                                             </div>
 
                                         </div>
@@ -411,16 +411,16 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" value="'.($Contacts->get('Facility Incharge')->Name).'"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" value="'.($Contacts->get('Facility Incharge')->Name).'"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" value="'.($Contacts->get('Facility Incharge')->Mobile).'" name="FacilityInchargeMobile" 
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail" value="'.($Contacts->get('Facility Incharge')->Email).'"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail" value="'.($Contacts->get('Facility Incharge')->Email).'"  name="FacilityInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -433,16 +433,16 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="'.($Contacts->get('MCH Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -451,20 +451,20 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>Maternity-Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'"name= "MaternityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'"name= "MaternityInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" value="'.($Contacts->get('Maternity Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -477,16 +477,16 @@ foreach ($array as $key) {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('OPD Incharge')->Name).'" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('OPD Incharge')->Name).'" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="'.($Contacts->get('OPD Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('OPD Incharge')->Email).'" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('OPD Incharge')->Email).'" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -516,16 +516,16 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="'.($Contacts->get('Number')->Name).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -534,20 +534,20 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>MCH  Incharge</label>
-                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="'.($Contacts->get('MCH Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  value="'.($Contacts->get('MCH Incharge')->Email).'"name="MCHInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  value="'.($Contacts->get('MCH Incharge')->Email).'"name="MCHInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -560,16 +560,16 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" value="'.($Contacts->get('Maternity Incharge')->Mobile).'"name="MaternityInchargeMobile" 
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -582,16 +582,16 @@ foreach ($array as $key) {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('Team Lead')->Name).'" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('Team Lead')->Name).'" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="'.($Contacts->get('Team Lead')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('Team Lead')->Email).'" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('Team Lead')->Email).'" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -622,16 +622,16 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Facility Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Facility Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="'.($Contacts->get('Facility Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Facility Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Facility Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -640,20 +640,20 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>MCH  Incharge</label>
-                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile"  value="'.($Contacts->get('MCH Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -662,20 +662,20 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>Maternity-Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" value="'.($Contacts->get('Maternity Incharge')->Mobile).'"  name="MaternityInchargeMobile" 
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'"  name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'"  name="MaternityInchargeEmail" placeholder="Enter Email" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -911,6 +911,8 @@ foreach ($array as $key) {
                                                                                                 $HtmlLines.=",";
 
                                                                                             }
+
+                                                                                            $HtmlLines = rtrim($HtmlLines, ",");
                                                                                             }
                                                                                   
 
