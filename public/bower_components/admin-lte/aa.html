@@ -3,85 +3,45 @@
    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
 
-    <select class="form-control myk" name="cb" id="cb"> 
-              <option  value ="1" id ="cb1" >opt 1</option>
-              <option  value ="2" id ="cb2" >opt 2</option>       
-
-             </select>
 
   <label> <input name="test1" value ="1"id ="id1" type="radio" >opt 1</label>
  <label>  <input name="test1" value ="1"id ="id2" type="radio">opt 2</label>
 
-<input class="form-control" type="text" name ="x1" id="text1" value="1" automaticallyVisibleIfIdChecked="cb1">   
-<input class="form-control" type="text" name ="x2" id="text2" value="2" automaticallyVisibleIfIdChecked="cb2">
+<input class="form-control" type="text"  id="text1" value="1" name="" coolradio="id1">   
+<input class="form-control" type="text" id="text2" value="2" name="" coolradio="id2">
 
 
-<script type="text/javascript">
-	
-// 	(function($) {
-//     $.fn.selected = function(fn) {
-//         return this.each(function() {
-//             var clicknum = 0;
-//             $(this).click(function() {
-//                 clicknum++;
-//                 if (clicknum == 2) {
-//                     clicknum = 0;
-//                     fn(this);
-//                 }
-//             });
-//         });
-//     }
-// })(jQuery);
 
-</script>
 
-<script type="text/javascript">
-	
-	// $('.myk').selected(function() {
-	// 	 executeAutomaticVisibility(this.id); 
- 
-});
-</script>
 
- <script type="text/javascript">
+  <script type="text/javascript">
     
 
-    function executeAutomaticVisibility(id) {
+    function executecoolness(name) {
+    $("[name="+name+"]:checked").each(function() {
     	
-    	$('#'+id).find('*').each(function(){
+        $("[coolradio=" + this.id+"]").show();
+           $("[coolradio=" + this.id+"]").attr('name','hgbjbhjbhj');
+        alert($('#text1').attr ('name'));
 
 
-    		 $("[id="+this.id+"]:selected").each(function() {
+            });
+    $("[name="+name+"]:not(:checked)").each(function() {
     	
-        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
+        $("[coolradio=" + this.id+"]").hide();
+        $("[coolradio=" + this.id+"]").removeAttr('name');
+            alert($('#text1').attr ('name'));
+          
     });
-    $("[id="+this.id+"]:not(:selected)").each(function() {
-        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").hide();
-    });
-
-
-    	});
-    
-    
-   
 }
 
 $(document).ready( function() {
-    triggers = $("[automaticallyVisibleIfIdChecked]")
-        .map(function(){ return $("#" + $(this).attr("automaticallyVisibleIfIdChecked")).get() })
+    triggers = $("[coolradio]")
+        .map(function(){ return $("#" + $(this).attr("coolradio")).get() })
     $.unique(triggers);
     triggers.each( function() {
-        executeAutomaticVisibility(this.parentNode.id);
-
-       // $(this).change( function(){ executeAutomaticVisibility(this.parentNode.id); } );
+        executecoolness(this.name);
+        $(this).change( function(){ executecoolness(this.name); } );
     });
-
-     $(function(ready){
-    $('#'+this.parentNode.id).change(function() {
-        executeAutomaticVisibility(this.parentNode.id);
-
-        }
-    });
-});
 });
 </script>

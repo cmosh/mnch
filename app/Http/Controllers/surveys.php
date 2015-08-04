@@ -130,19 +130,28 @@ foreach ($array as $key) {
 		
 		
 		$x = array_shift($var);
-		
+		if ($x == null)break;
 		$data->ColumnSetID=$x;
+		echo $data->ColumnSetID;
+		echo "  ";
 		$data->DataID = $AssID.$x;
+		echo $data->DataID;
+		echo "  ";
 		$data->AssID=$AssID;
-		
+		echo $data->AssID;
+		echo "  ";
 		if (gettype($key)=="array") {
             $data->Data=implode(",",$key);
+            echo $data->Data;
+		echo "  ";
         } else {
             $data->Data=str_replace(array('_'),'',$key);
+            echo $data->Data;
+		echo "  ";
         }
         
 		
-
+        echo  "<br>";
 		
 		
 
@@ -844,9 +853,9 @@ foreach ($array as $key) {
                                                                                          style="vertical-align:middle">';    
                                                                                            $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                            if ($H == null || $H=='Unentered' ) {
+                                                                                            if ($H == null || $H=='Unentered' || is_numeric($H)==false ) {
 
-                                                                                                      $HtmlLines.="Unentered";
+                                                                                                      $HtmlLines.=$H;
                                                                                                
                                                                                            
                                                                                             }else{
@@ -868,9 +877,9 @@ foreach ($array as $key) {
                                                                                          style="vertical-align:middle">';    
                                                                                            $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                            if ($H == null || $H=='Unentered') {
+                                                                                            if ($H == null || $H=='Unentered' || is_numeric($H)==false) {
 
-                                                                                                      $HtmlLines.="Unentered";
+                                                                                                      $HtmlLines.=$H;
                                                                                                
                                                                                            
                                                                                             }else{
@@ -895,9 +904,9 @@ foreach ($array as $key) {
                                                                                                         
                                                                                           $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                            if ($H == null || $H=='Unentered') {
+                                                                                            if ($H == null || $H=='Unentered' || is_numeric($H)==false) {
                                                                                                 
-                                                                                                      $HtmlLines.="Unentered";
+                                                                                                      $HtmlLines.=$H;
                                                                                                
                                                                                            
                                                                                             }else{
@@ -925,9 +934,9 @@ foreach ($array as $key) {
                                                                                           
                                                                                 $H = $datass->get($ColumnSetIDName)->Data;   
 
-                                                                                            if ($H == null || $H=='Unentered') {
+                                                                                            if ($H == null || $H=='Unentered'|| is_numeric($H)==false) {
                                                                                                 
-                                                                                                      $HtmlLines.=$H."Unentered";
+                                                                                                      $HtmlLines.=$H;
                                                                                                
                                                                                            
                                                                                             }elseif( (string)(int) $H == $H) {
@@ -1569,7 +1578,7 @@ return $HtmlLines;
 
 	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="Unentered">';    
+                 																		   <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value=" ">';    
                    																			if ($fieldd->Label!="") {
                    																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
@@ -1591,7 +1600,7 @@ return $HtmlLines;
 
 	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="0">';    
+                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="">';    
                    																			if ($fieldd->Label!="") {
                    																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
@@ -1607,7 +1616,7 @@ return $HtmlLines;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>
 
-	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = "Unentered" id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
+	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = " " id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
 
 
@@ -1638,7 +1647,7 @@ return $HtmlLines;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
                    																	 <select class="form-control select2 " style="width: 100%;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
-                   																	 <option value ="Unentered" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
+                   																	 <option value =" " id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
                                                                                      
 
                                                                                      ';
@@ -1669,7 +1678,7 @@ return $HtmlLines;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
                    																	 <select class="form-control select2" multiple="6" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
-                   																	 		<option value ="Unentered" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
+                   																	 		<option value =" " id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
                    																	 ';
 	           																	    				
 
@@ -1697,7 +1706,7 @@ return $HtmlLines;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div> 
 
-	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = "Unentered" id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
+	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = " " id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
 ;
 	           																	    				foreach ($fieldValueList as $fieldd ) {
 
@@ -1712,7 +1721,7 @@ return $HtmlLines;
                      																						
 
                      																						<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">
-                     																						<x automaticallyVisibleIfIDChecked = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
+                     																						<x coolradio = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
                      																						 ';
                      																		  $HtmlLines.=$fieldd->Label.'&nbsp;&nbsp;';
                      																		  $HtmlLines.='</label>';
@@ -1722,14 +1731,11 @@ return $HtmlLines;
 	           																	    				 }
 
 	           																	    				 		$Other = 'other';
-	           																	    			 	$HtmlLines.='<input class="form-control" type="text" name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
+	           																	    			 	$HtmlLines.='<input class="form-control" type="text" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" coolradio="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" > </div>';
 																										$HtmlLines.='<script>
-																										$(function () {
-																												    $(\'input[name='.$fieldName.']\').change(function () {
-																												    	var radioValue = $("input[name='.$fieldName.']:checked").val();
-																												        $(\'#'.$fieldName.$Other.'\').attr(\'value\',radioValue );
+																											
 
-																												    });</script>';		
+																												    </script>';		
 	           																	    		break;
 
 	           																	    default: echo "dai era!";

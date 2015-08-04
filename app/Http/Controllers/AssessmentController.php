@@ -40,31 +40,13 @@ class AssessmentController extends Controller {
 	*/
 	public function create($id)
 	{
-			$All = array();
-			$loc = substr ($id, 0,2);
-			$Facilities = Facilities::all();
-			$All = Participants::all();
 			
-				
-
+			$loc = substr ($id, 0,2);
 			
 			if ($loc == "IM") {
-
-				Participants::chunk(500,function($Participants)
-				{
-				foreach ($Participants as $Participant ) {
-					$All[]= $Participant;
-
-				}
-				});
-
+				$All = Participants::all();
 			} else {
-				Facilities::chunk(500,function($Facilities){
-				foreach ($Facilities as $Facility ) {
-					$All[]= $Facility;
-
-				}
-				});
+				$All = Facilities::all();
 			}
 			
 			
@@ -101,6 +83,7 @@ class AssessmentController extends Controller {
 		$assessments->Assessment_Term=$x[2];
 		$assessments->Date=$x[3];
 		$assessments->Survey= $id;
+		$assessments->UserId= $x[4];
 		
 
 	$assessments->save();

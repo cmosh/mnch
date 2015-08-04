@@ -149,8 +149,9 @@
 <div class='box-body'>
 {!! Form::open(['url' => 'assessments/'.$id]) !!}
 <div class="form-group">
-	{!! Form::text('Assessment_ID',null,['class' => 'form-control','Value'=> 'ASS'.$countID, 'style' => 'display:none;']) !!}
+	{!! Form::text('Assessment_ID',null,['class' => 'form-control','Value'=> Auth::user()->id.'ASS'.$countID, 'style' => 'display:none;']) !!}
 	</div>
+
 
 	<div class="form-group">
 	{!! Form::label('Facility_ID','x',['style'=>'display:none;']) !!}
@@ -166,6 +167,9 @@
 	<div class="form-group">
 	{!! Form::label('Date','Date') !!}
 	{!! Form::text('Date',null,['class' => 'form-control', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask'=>'' ]) !!}
+  </div>
+  <div class="form-group">
+  {!! Form::text('UserId',null,['class' => 'form-control','Value'=>Auth::user()->id , 'style' => 'display:none;']) !!}
   </div>
 	<div class="form-group">
 	
