@@ -40,13 +40,31 @@ class AssessmentController extends Controller {
 	*/
 	public function create($id)
 	{
-			
+			$All = array();
 			$loc = substr ($id, 0,2);
+			$Facilities = Facilities::all();
+			$All = Participants::all();
+			
+				
+
 			
 			if ($loc == "IM") {
-				$All = Participants::all();
+
+				Participants::chunk(500,function($Participants)
+				{
+				foreach ($Participants as $Participant ) {
+					$All[]= $Participant;
+
+				}
+				});
+
 			} else {
-				$All = Facilities::all();
+				Facilities::chunk(500,function($Facilities){
+				foreach ($Facilities as $Facility ) {
+					$All[]= $Facility;
+
+				}
+				});
 			}
 			
 			
