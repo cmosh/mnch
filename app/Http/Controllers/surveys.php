@@ -1637,7 +1637,7 @@ return $HtmlLines;
                                                                                     $fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
 	           																	    					<div>                
-                   																	 <select class="form-control select2 " style="width: 250px;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
+                   																	 <select class="form-control select2 " style="width: 100%;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
                    																	 <option value ="Unentered" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
                                                                                      
 
@@ -1722,7 +1722,7 @@ return $HtmlLines;
 	           																	    				 }
 
 	           																	    				 		$Other = 'other';
-	           																	    				 	$HtmlLines.='<input class="form-control" type="text" name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
+	           																	    			 	$HtmlLines.='<input class="form-control" type="text" name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" automaticallyVisibleIfIDChecked="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"> </div>';
 																										$HtmlLines.='<script>
 																										$(function () {
 																												    $(\'input[name='.$fieldName.']\').change(function () {
