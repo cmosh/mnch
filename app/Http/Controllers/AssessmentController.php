@@ -46,7 +46,7 @@ class AssessmentController extends Controller {
 			if ($loc == "IM") {
 				$All = Participants::all();
 			} else {
-				$All = Facilities::where('index','<',32000)->get();
+				$All = Facilities::where('index','<',36000)->get();
 			}
 			
 			
