@@ -1567,7 +1567,8 @@ return $HtmlLines;
                                           
 	           																		              
 	           																		        break;
-	           																	    case "text":$HtmlLines.= 'style="vertical-align:middle">';
+	           																	    case "text":$HtmlLines.= 'style="vertical-align:middle"  >
+	           																	    <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'" >';
                                                                                     $ColID[] = $ColumnSetIDName;
 
 	           																	    	 foreach ($fieldValueList as $fieldd ) {
@@ -1587,10 +1588,12 @@ return $HtmlLines;
 	           																	                        
 
                 																			}
+                																			$HtmlLines.='</div>';
 
 	           																	            break;
 
-	           																	    case "number":  $HtmlLines.= 'style="vertical-align:middle">';
+	           																	    case "number":  $HtmlLines.= 'style="vertical-align:middle" >
+	           																	    <div  automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'" >';
                                                                                     $ColID[] = $ColumnSetIDName;
 
 	           																	    	 foreach ($fieldValueList as $fieldd ) {
@@ -1600,7 +1603,7 @@ return $HtmlLines;
 
 	           																				$HtmlLines.= '
 	           																				<div class="input-group">
-                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="">';    
+                 																		   <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="">';    
                    																			if ($fieldd->Label!="") {
                    																			 $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
                    																			 } 
@@ -1609,12 +1612,12 @@ return $HtmlLines;
 	           																	                        
 
                 																			}   
-
+                																				$HtmlLines.='</div>';
 	           																	    		break;
 	           																	    case "radio": $ColID[] = $ColumnSetIDName;		
                                                                                      $fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
-	           																	    					<div>
+	           																	    					 <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">
 
 	           																	    					<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = " " id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="">';
 	           																	    				 foreach ($fieldValueList as $fieldd ) {
@@ -1645,7 +1648,7 @@ return $HtmlLines;
 	           																	    case "combo":$ColID[] = $ColumnSetIDName;
                                                                                     $fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
-	           																	    					<div>                
+	           																	    					 <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">             
                    																	 <select class="form-control select2 " style="width: 100%;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
                    																	 <option value =" " id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
                                                                                      
@@ -1676,7 +1679,7 @@ return $HtmlLines;
 	           																	     case "multiplecombo":  $ColID[] = $ColumnSetIDName;
 	           																	     						$fieldName = $ColumnSetIDName.$fieldsetID;
 	           																	    					$HtmlLines.=' valign="baseline">
-	           																	    					<div>                
+	           																	    					 <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">           
                    																	 <select class="form-control select2" multiple="6" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName;$HtmlLines.='"> 
                    																	 		<option value =" " id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
                    																	 ';
@@ -1700,6 +1703,64 @@ return $HtmlLines;
 																					                  </div>';   
 
 	           																	    		break;
+
+	           																	    		 case "coolmultiplecombo":  $ColID[] = $ColumnSetIDName;
+	           																	     						$fieldName = $ColumnSetIDName.$fieldsetID;
+	           																	     						$other='other';
+	           																	     						$hidden='hidden';
+	           																	    					$HtmlLines.=' valign="baseline">
+	           																	    					 <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">              
+                   																	 <select class="form-control select2 titleother " multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName;$HtmlLines.='" onChange="showDiv(\'div\',this,\''.$fieldName.'\')" > 
+                   																	 		<option value =" " id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
+                   																	 ';
+	           																	    				
+
+
+	           																	    				 foreach ($fieldValueList as $fieldd ) {
+
+
+
+	           																	    				 	$fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
+	           																	    				 	$fieldValue = $fieldd->Value;
+	           																	    				 	
+	           																	    				 				
+																							$HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>
+																					                     
+																					                     ';
+
+																					                  }
+
+																					                 $HtmlLines.='   </select>
+																					             
+																					                  </div>
+																					                  
+	
+		
+	<div id="content" style="float:right;">
+	
+		<div id="div1" style="display:none;">1</div>
+		<div id="div2" style="display:none;">2</div>
+		<div id="div3" style="display:none;">3</div>
+		<div id="div4" style="display:none;">4</div>
+	
+	</div>	
+	
+	
+
+
+
+
+
+
+
+
+
+
+																					                  ';   
+
+	           																	    		break;
+
+
 	           																	     case "coolradio":   $ColID[] = $ColumnSetIDName;
 
 	           																	     					$fieldName = $ColumnSetIDName.$fieldsetID;
