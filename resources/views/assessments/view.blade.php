@@ -42,9 +42,9 @@
                                  @endif
                      
                         <td> {{ $assessment->Assessment_Term}}</td>
-                        <td> "" </td>
+                        <td> {{$Assessors->get($assessment->Assessment_ID)->Name}} </td>
                         <td> {{ $assessment->Date}}</td>
-                        <td><form action="show/{{$assessment->Assessment_ID}}">
+                        <td><form action="/assessments/show/{{$assessment->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW">
      
 </form>

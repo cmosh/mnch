@@ -20,7 +20,7 @@
 
 @section('content')
 
- <div class="row">
+ <div id="tip" class="row">
  <div class ="col-lg-12">
 <div class="box box-success box-solid " >
                 <div class="box-header with-border">
@@ -35,6 +35,42 @@
               </div>
 </div>
       </div>  
+       <div id = "thebox"class="info-box" style='display:none;'>
+                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+                <div class="info-box-content">
+                  <span class="" id="chs" ><b>(Please select below)</b></span>
+                
+                    {!! Form::open(['url' => 'assessments/'.$id]) !!}
+<div class="form-group">
+  {!! Form::text('Assessment_ID',null,['class' => 'form-control','Value'=> Auth::user()->id.'ASS'.$countID, 'style' => 'display:none;']) !!}
+  </div>
+
+
+  <div class="form-group">
+  {!! Form::label('Facility_ID','x',['style'=>'display:none;']) !!}
+  {!! Form::text('Facility_ID',null,['class' => 'form-control','style'=>'display:none;' ]) !!}
+  </div>
+
+  <div class="form-group">
+  {!! Form::label('Assessment_Term','Assessment Term:',['style' => 'display:none;']) !!}
+ 
+   {!! Form::text('Assessment_Term',null,['class' => 'form-control','Value'=> $theterm ,'style' => 'display:none;']) !!}
+  </div>
+  
+  <div class="form-group">
+  {!! Form::label('Date','Date',['style' => 'display:none;']) !!}
+  {!! Form::text('Date',null,['class' => 'form-control', 'Value'=> $thedate ,'style' => 'display:none;']) !!}
+  </div>
+  <div class="form-group">
+  {!! Form::text('UserId',null,['class' => 'form-control','Value'=>Auth::user()->id , 'style' => 'display:none;']) !!}
+  </div>
+  <div class="form-group">
+  
+  {!! Form::submit('Start',['class' => 'btn btn-success form-control ']) !!}
+  </div>
+{!! Form::close() !!}
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
 
 
               <div class="box">
@@ -131,53 +167,19 @@
                 </div><!-- /.box-body -->
               </div><!-- /.box --> 
        
-         <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
-                <div class="info-box-content">
-                  <span class="" font ="10"><b>You Have Chosen:</b></span>
-                  <span class="info-box-number" id="chs">(Please select above)</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+        
       
                    
                                        
               
 
                      
-<div class='box'>
-
-<div class='box-body'>
-{!! Form::open(['url' => 'assessments/'.$id]) !!}
-<div class="form-group">
-	{!! Form::text('Assessment_ID',null,['class' => 'form-control','Value'=> Auth::user()->id.'ASS'.$countID, 'style' => 'display:none;']) !!}
-	</div>
 
 
-	<div class="form-group">
-	{!! Form::label('Facility_ID','x',['style'=>'display:none;']) !!}
-	{!! Form::text('Facility_ID',null,['class' => 'form-control','style'=>'display:none;' ]) !!}
-	</div>
 
-	<div class="form-group">
-	{!! Form::label('Assessment_Term','Assessment Term:') !!}
-  {!! Form::select('Assessment_Term', ['Baseline' => 'Baseline','Midterm' => 'Midterm','Endterm' => 'Endterm'],null,['class' => 'form-control']) !!}
-	
-	</div>
-	
-	<div class="form-group">
-	{!! Form::label('Date','Date') !!}
-	{!! Form::text('Date',null,['class' => 'form-control', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask'=>'' ]) !!}
-  </div>
-  <div class="form-group">
-  {!! Form::text('UserId',null,['class' => 'form-control','Value'=>Auth::user()->id , 'style' => 'display:none;']) !!}
-  </div>
-	<div class="form-group">
-	
-	{!! Form::submit('Start',['class' => 'btn btn-primary form-control']) !!}
-	</div>
-{!! Form::close() !!}
-</div>
-</div>
+
+
+
 
 @endsection
 
@@ -193,6 +195,8 @@
      // Find the text
     
     // Let's test it out
+    $('#tip').hide();
+    $('#thebox').show();
     $('#chs').text($rrr);
     $('#Facility_ID').val($text);
 

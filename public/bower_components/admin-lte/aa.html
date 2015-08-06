@@ -9,24 +9,26 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title>Show/Hide</title>
+
+
+
 <script type="text/javascript">
 // <![CDATA[
 function display(obj,id1,id2) {
 txt = obj.options[obj.selectedIndex].value;
-document.getElementById(id1).style.display = 'none';
-document.getElementById(id2).style.display = 'none';
+document.getElementById(id1).style.display = "none";
+document.getElementById(id2).style.display = "none";
 if ( txt.match(id1) ) {
-document.getElementById(id1).style.display = 'block';
+document.getElementById(id1).style.display = "block";
 }
 if ( txt.match(id2) ) {
-document.getElementById(id2).style.display = 'block';
+document.getElementById(id2).style.display = "block";
 }
 }
 // ]]>
 </script>
-</head>
 
-<body>
+
 <table width="340" cellspacing="0" cellpadding="2">
 <thead>
 <tr>

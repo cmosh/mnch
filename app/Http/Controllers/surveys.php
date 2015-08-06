@@ -58,7 +58,7 @@ class surveys extends Controller {
 
 		$Mel=$this->build($sv,$id);
 		$location = substr ($sv, 0,2);
-		echo $location;
+		
 		
 			$iXd= 'survey/'.$id;
 
@@ -132,26 +132,26 @@ foreach ($array as $key) {
 		$x = array_shift($var);
 		if ($x == null)break;
 		$data->ColumnSetID=$x;
-		echo $data->ColumnSetID;
-		echo "  ";
+		//echo $data->ColumnSetID;
+		//echo "  ";
 		$data->DataID = $AssID.$x;
-		echo $data->DataID;
-		echo "  ";
+		//echo $data->DataID;
+		//echo "  ";
 		$data->AssID=$AssID;
-		echo $data->AssID;
-		echo "  ";
+		//echo $data->AssID;
+		//echo "  ";
 		if (gettype($key)=="array") {
             $data->Data=implode(",",$key);
-            echo $data->Data;
-		echo "  ";
+           // echo $data->Data;
+		//echo "  ";
         } else {
             $data->Data=str_replace(array('_'),'',$key);
-            echo $data->Data;
-		echo "  ";
+           // echo $data->Data;
+		//echo "  ";
         }
         
 		
-        echo  "<br>";
+      //  echo  "<br>";
 		
 		
 
@@ -181,7 +181,7 @@ foreach ($array as $key) {
 
 
 
-		return redirect('/assessments/show');
+		return redirect('/assessments/show/'.$AssID);
 		
 
 
@@ -262,6 +262,7 @@ foreach ($array as $key) {
           
                 
                 $Contacts = Contact::where('AssID','=',$AssID)->get()->keyBy('Cadre');
+               
                 $datass = DataRecord::where('AssID','=',$AssID)->get()->keyBy('ColumnSetID');
 
                 $TheAssessor = Assessor::where('AssID','=',$AssID)->first();
@@ -529,7 +530,7 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="'.($Contacts->get('Number')->Name).'"
+                                                    <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="'.($Contacts->get('Incharge')->Name).'"
                                                     placeholder="Enter Mobile" disabled>
                                                 </div>
                                                 <div class="col-xs-3">
@@ -1291,16 +1292,16 @@ return $HtmlLines;
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" value=" " class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
+                                                    <input type="text" class="form-control" value=" " id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" value=" " id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
                                                 </div>
                                             </div>
                                         </div>
@@ -1799,7 +1800,9 @@ return $HtmlLines;
 																												    </script>';		
 	           																	    		break;
 
-	           																	    default: echo "dai era!";
+	           																	    default: echo $typededuction;
+
+	           																	    echo "dai era!"; 
 
 
 	           																	     	}

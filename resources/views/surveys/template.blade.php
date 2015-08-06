@@ -29,16 +29,34 @@
 
 				<?php echo $Mel?>
 
+           
 
-				{!! Form::submit('Finish and Save',['class' => 'btn btn-primary form-control']) !!}
+         
+
+				{!! Form::submit('Submit',['class' => 'btn btn-danger form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
 				{!! Form::close() !!}
+                 <a  href="#Section1">  <button  id="some_id2" class="btn btn-info form-control" >Confirm</button></a>
 
         
 
 @endsection
 
 @section('javascript')
+       <script type="text/javascript">
+$('#some_id2').click(function() {
+
+ // assessments/{id}/{date}/{term}/{county}
+  // var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County').val();
+  // //alert(linki);
+
+  //  $(location).attr('thesubmit', linki);
+    $('#thesubmit').show();
+    $('#some_id2').hide();
+});
+
+           
+      </script>   
 	 <!-- Select2 -->
     <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
     <!-- InputMask -->

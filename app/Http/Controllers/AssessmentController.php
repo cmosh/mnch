@@ -7,6 +7,7 @@ use App\Facilities;
 use App\Participants;
 use App\Survey;
 use App\Assessor;
+use App\countie;
 use Request;
 
 
@@ -26,10 +27,13 @@ class AssessmentController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($sv)
 	{
-		$Surveys = Survey::all();
-		return view('assessments.index')->with('location','ass')->with('title','Assessments')->with('Surveys',$Surveys);
+		$sv = '%'.$sv.'%';
+		//where('column', 'LIKE', '%value%')->get();
+		$Surveys = Survey::where('surveyID','like',$sv)->get();
+		$Counties = countie::all();
+		return view('assessments.index')->with('Counties',$Counties)->with('location','ass')->with('title','Assessments')->with('Surveys',$Surveys);
 	}
 
 	
@@ -38,20 +42,20 @@ class AssessmentController extends Controller {
 	 *
 	 * @return Response
 	*/
-	public function create($id)
+	public function create($id,$date,$term,$countie)
 	{
-			
+			///{date}/{term}/{county}
 			$loc = substr ($id, 0,2);
 			
 			if ($loc == "IM") {
 				$All = Participants::all();
 			} else {
-				$All = Facilities::where('index','<',25000)->get();
+				$All = Facilities::where('County','Like',$countie)->get();
 			}
 			
 			
 			$countID = assessments::all()->count()+1;
-	  return view('assessments.create')->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All);
+	  return view('assessments.create')->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All);
 	}
 
 	/**
@@ -100,11 +104,12 @@ class AssessmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function show($id,$county)
 	{
+			$sv = '%'.$id.'%';
 
 		$Assessors = Assessor::all()->keyBy('AssID');
-		$assessments=assessments::all();
+		$assessments=assessments::where('Survey','like',$sv)->get();
 		return view('assessments.view')->with('assessments',$assessments)->with('Assessors',$Assessors)->with('location','ass')->with('title','Assessments');
 	}
 
