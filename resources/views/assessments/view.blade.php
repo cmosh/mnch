@@ -40,11 +40,10 @@
                               @else
                                  <td> IMCI Survey </td>
                                  @endif
-                         <td> {{ $assessment->Assessment_Term}}</td>
-                        <td> {{$Assessors->get($assessment->Assessment_ID)->Name}} </td>
-                        <td> {{ $assessment->Date}}</td>        
                      
-                        
+                        <td> {{ $assessment->Assessment_Term}}</td>
+                        <td> {{$Assessors->get($assessment->Assessment_ID)->Name}} </td>
+                        <td> {{ $assessment->Date}}</td>
                         <td><form action="/assessments/show/{{$assessment->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW">
      
