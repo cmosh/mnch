@@ -228,8 +228,27 @@ foreach ($array as $key) {
 	 * @return Response
 	 */
 	public function edit($id)
+
 	{
-		//
+		 
+          $TheAsses = assessments::where('Assessment_ID','=',$id)->first();
+         $sv = $TheAsses->Survey;
+        $Survs = Survey::where('surveyID','=',$sv)->first();
+        $Secs = Section::where('surveyID','=',$sv)->get();
+        
+
+        $Mel=$this->buildview($id);
+        $location = substr ($sv, 0,2);
+       
+        
+            $iXd= 'survey/'.$id;
+
+
+        return view('surveys.edit')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs); 
+
+
+
+
 	}
 
 	/**
