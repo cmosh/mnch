@@ -6,7 +6,7 @@
       	word-wrap: break-word;}
 
       </style>
-      <aside class="main-sidebar" style="background-color:#778899" >
+      <aside class="main-sidebar" >
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
