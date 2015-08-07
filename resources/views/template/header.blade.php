@@ -30,9 +30,17 @@
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
+          @if ($location == 'Home')
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span>OPEN/CLOSE MENU</span>
           </a>
+           @elseif($location == 'ass')
+           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span>OPEN/CLOSE MENU</span>
+          </a>
+           @else
+           
+           @endif
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             

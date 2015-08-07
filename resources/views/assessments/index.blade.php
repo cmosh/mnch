@@ -64,12 +64,15 @@
               <input type="hidden" value ="{{$Survey->surveyID}}" id="sv">
              <!-- Horizontal Form -->
               <div class="row">
+               <?php $loc = substr ($Survey->surveyID, 0,2) ?>
+                @if($loc=='CH' or $loc=='MN')
               <div class="col-md-6">
     <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Begin New Assessment</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
+               
                 <div class="form-horizontal">
 
                   <div class="box-body">
@@ -102,9 +105,10 @@
                       </div>
                     </div>
                     <div>
-                  
-    
+                    
 </div>
+
+
                       <script src="js/jquery-ui.js"></script>
 <script>
  
@@ -112,7 +116,6 @@ $('#date').datepicker({
    dateFormat: 'yy-mm-dd'
 }); 
 </script>
-
 
                    
                   </div><!-- /.box-body -->
@@ -126,6 +129,9 @@ $('#date').datepicker({
                 </div>
                 </div>
               </div><!-- /.box -->
+              
+@else
+@endif
                <div class="col-md-6"  style="height: 100%;">
               <div class="box box-info">
                 <div class="box-header with-border">
