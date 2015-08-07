@@ -64,8 +64,7 @@
               <input type="hidden" value ="{{$Survey->surveyID}}" id="sv">
              <!-- Horizontal Form -->
               <div class="row">
-               <?php $loc = substr ($Survey->surveyID, 0,2) ?>
-                @if($loc=='CH' or $loc=='MN')
+               
               <div class="col-md-6">
     <div class="box box-danger">
                 <div class="box-header with-border">
@@ -76,6 +75,8 @@
                 <div class="form-horizontal">
 
                   <div class="box-body">
+                  <?php $loc = substr ($Survey->surveyID, 0,2) ?>
+                @if($loc=='CH' or $loc=='MN')
                     <div class="form-group">
                       <label for="County" class="col-sm-2 control-label">Select County</label>
                       <div class="col-sm-10">
@@ -104,6 +105,9 @@
                      
                       </div>
                     </div>
+                    @else
+                    <p>Click Next to select Health Workers</p>
+@endif
                     <div>
                     
 </div>
@@ -130,8 +134,7 @@ $('#date').datepicker({
                 </div>
               </div><!-- /.box -->
               
-@else
-@endif
+
                <div class="col-md-6"  style="height: 100%;">
               <div class="box box-info">
                 <div class="box-header with-border">

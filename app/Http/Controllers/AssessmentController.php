@@ -53,6 +53,12 @@ class AssessmentController extends Controller {
 				$All = Facilities::where('County','Like',$countie)->get();
 			}
 			
+			if($loc=='IM')
+			{
+				$date='';
+				$term='';
+				$countie='';
+			}
 			
 			$countID = assessments::all()->count()+1;
 	  return view('assessments.create')->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All);
