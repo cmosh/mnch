@@ -26,6 +26,8 @@
                       </tr>
                     </thead>
                     <tbody>
+
+                  
                       
                        @foreach($assessments as $assessment)
 
