@@ -2,13 +2,37 @@
 
 
 @section('pageinfo')
+<div class="box box-primary">
 
- <h1>
+@if($loc=='IM')
 
-      Start Assessment:
+<?php $surveyname = substr ($id, 0,4);?>
+@else
+<?php $surveyname = substr ($id, 0,2);?>
+@endif
 
-            <small></small>
-          </h1>
+
+
+<div class="box-header">
+<div class="box-title">
+
+
+    Start <?php echo $surveyname; ?> Assessment:
+    </div>
+    </div>
+    @if($loc!='IM')
+    <div class="box-body">
+
+          <p><b>County  :</b> {{$thecounty}} </p>
+          <p><b>Date    :</b> {{$thedate}} </p>
+      
+          <p><b>Assessment Term:</b> {{$theterm}}</p>
+
+
+</div>
+@endif
+</div>
+          
 
          
   @endsection
@@ -64,9 +88,9 @@
   <div class="form-group">
   {!! Form::text('UserId',null,['class' => 'form-control','Value'=>Auth::user()->id , 'style' => 'display:none;']) !!}
   </div>
-  <div class="form-group">
+  <div class="form-group" >
   
-  {!! Form::submit('Start',['class' => 'btn btn-success form-control ']) !!}
+  {!! Form::submit('Start Assessment',['class' => 'btn btn-success form-control btn-lg']) !!}
   </div>
 {!! Form::close() !!}
                 </div><!-- /.info-box-content -->

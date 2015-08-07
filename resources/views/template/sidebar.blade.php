@@ -35,7 +35,7 @@
             @if ($location == 'Home') 
 
            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
-            <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li>
+            <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
             <li><a href="assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="assessment/MNG" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>

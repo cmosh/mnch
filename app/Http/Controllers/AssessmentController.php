@@ -61,7 +61,7 @@ class AssessmentController extends Controller {
 			}
 			
 			$countID = assessments::all()->count()+1;
-	  return view('assessments.create')->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All);
+	  return view('assessments.create')->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All)->with('thecounty',$countie);
 	}
 
 	/**

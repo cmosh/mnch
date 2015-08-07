@@ -3,12 +3,7 @@
 
 @section('pageinfo')
 
- <h1>
-
-      Start Assessment:
-
-            <small></small>
-          </h1>
+ <h1> </h1>
 
          
   @endsection
@@ -44,11 +39,11 @@
             <?php $loc = substr ($Survey->surveyID, 0,2) ?>
              
               @if ($loc == 'CH')
-                    <div class="small-box bg-red">
+                    <div class="small-box bg-aqua">
               @elseif ($loc == 'MN')
     <div class="small-box bg-yellow">
 @else
-    <div class="small-box bg-green">
+    <div class="small-box bg-red">
 @endif
              
                 <div class="inner">
@@ -56,7 +51,7 @@
                   <p>Runtime: {{$Survey->Runtime}}<br>Version {{$Survey->Version}} </p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="ion ion-stats-bars"></i>
                 </div>
                
               </div>

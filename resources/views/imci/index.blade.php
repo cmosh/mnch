@@ -48,7 +48,7 @@
                     <thead>
                       <tr role="row">
                       <th aria-label="Name: activate to sort column ascending" style="width: 184.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Name</th>
-                      <th aria-sort="descending" aria-label="Facility: activate to sort column ascending" style="width: 227.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_desc">Facility</th>
+                      <th aria-sort="descending" aria-label="Facility: activate to sort column ascending" style="width: 227.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_desc">Facility where trained when working</th>
                       <th aria-label="Number: activate to sort column ascending" style="width: 200.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Number</th>
                       <th aria-label="email: activate to sort column ascending" style="width: 157.667px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">email</th>
                       <th aria-label="Training Site: activate to sort column ascending" style="width: 112.333px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Training Site</th></tr>

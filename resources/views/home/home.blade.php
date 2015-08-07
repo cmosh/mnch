@@ -33,9 +33,9 @@
                   <p>(CH Surveys)<br></p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="assessment/CH" class="small-box-footer">Choose<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="assessment/CH" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
               </div>
               </div>
 
@@ -48,7 +48,7 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="assessment/MNH" class="small-box-footer">Choose<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="assessment/MNH" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
               </div>
              </div>
 
@@ -62,7 +62,7 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="assessment/IMCI" class="small-box-footer">Choose<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="assessment/IMCI" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
               </div>
              </div>
                        
