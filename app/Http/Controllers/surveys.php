@@ -241,10 +241,9 @@ foreach ($array as $key) {
         $location = substr ($sv, 0,2);
        
         
-            $iXd= 'survey/'.$id;
+            
 
-
-        return view('surveys.save')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs); 
+        return view('surveys.save')->with('Mel',$Mel)->with('id',$id)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs); 
 
 
 
@@ -257,9 +256,124 @@ foreach ($array as $key) {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($AssID)
 	{
-		//
+		
+            $surveyyy = assessments::where('Assessment_ID','=',$AssID)->first();
+        $sva = $surveyyy->Survey;
+        $location = substr ($sva, 0,2);
+       
+        
+        $array = Request::all();
+        
+        $storeassessor = Assessor::where('AssID','=',$AssID)->first();
+
+        echo $storeassessor;
+        
+      $first = array_shift($array);
+        echo $first;
+ $second = array_shift($array);
+        echo $second;
+
+     $storeassessor->Name = array_shift($array);
+         
+      $storeassessor->Designation = array_shift($array);
+        
+   $storeassessor->Email = array_shift($array);
+        
+     $storeassessor->Number = array_shift($array);
+
+        $storeassessor->AssID = $AssID;
+
+ $storeassessor->save();
+
+//         //echo $storeassessor;
+//       if ($location=="MN") { $roop = 3;
+//         # code...
+//       } else {
+//         $roop=4;
+//         # code...
+//       }
+
+      
+      
+//       for ($x = 0; $x < $roop; $x++) {
+//         $ContactT = new Contact;
+//         $ContactT->Cadre = array_shift($array); 
+//         $ContactT->Name = array_shift($array);
+//         $ContactT->Mobile = array_shift($array);
+//         $ContactT->Email = array_shift($array);
+//         $ContactT->AssID = $AssID;
+//         $ContactT->save();
+        
+// } 
+
+    
+            
+        
+
+//         $var = $this->build( $sva,null);
+       
+// foreach ($array as $key) {
+
+//         $data = new Datarecord;
+        
+        
+//         $x = array_shift($var);
+//         if ($x == null)break;
+//         $data->ColumnSetID=$x;
+//         //echo $data->ColumnSetID;
+//         //echo "  ";
+//         $data->DataID = $AssID.$x;
+//         //echo $data->DataID;
+//         //echo "  ";
+//         $data->AssID=$AssID;
+//         //echo $data->AssID;
+//         //echo "  ";
+//         if (gettype($key)=="array") {
+//             $data->Data=implode(",",$key);
+//            // echo $data->Data;
+//         //echo "  ";
+//         } else {
+//             $data->Data=str_replace(array('_'),'',$key);
+//            // echo $data->Data;
+//         //echo "  ";
+//         }
+        
+        
+//       //  echo  "<br>";
+        
+        
+
+        
+
+
+//         $data->save();
+
+
+
+//     # code...
+// }
+    
+        
+
+    
+
+//     /*foreach ($var as $vari) {
+//         $data = new DataRecord;
+
+//         $data->ID=$var;
+//         $data->Data=$array;
+
+//         echo $vari;
+//         # code...
+//     }*/
+
+
+
+//         return redirect('/assessments/show/'.$AssID);
+        
+
 	}
 
 	/**

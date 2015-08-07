@@ -31,7 +31,7 @@
 
 
 
-    {!! Form::open(['url' => '/'.$id,'id'=>'demo-form','data-parsley-validate'=>'']) !!}
+    {!! Form::open(['method'=>'PUT','url'=>'/assessments/'.$id,'id'=>'demo-form','data-parsley-validate'=>'']) !!}
 
                 <?php echo $Mel?>
 

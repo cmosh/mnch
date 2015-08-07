@@ -43,7 +43,7 @@ Route::controllers([
 ]);
 
 
-
+Route::put('assessments/{id}','surveys@update');
 Route::get('assessments/edit/{id}','surveys@edit');
 
 Route::get('assessments/show/{id}','surveys@show');
