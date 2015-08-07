@@ -15,8 +15,15 @@
 
 @section('content')
    
-                 
-
+        <div id="saved" style="display:none">
+        <br>
+        <br>
+        <br>
+            <div  class="callout callout-success" >
+                <h3>Saved!</h3>
+                <p>Please check if you have fully completed the form before submitting.</p>
+            </div>
+            </div>
 
 
 
@@ -33,10 +40,10 @@
 
          
 
-				{!! Form::submit('Submit',['class' => 'btn btn-danger form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
+				{!! Form::submit('Submit',['class' => 'btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
 				{!! Form::close() !!}
-                 <a  href="#Section1">  <button  id="some_id2" class="btn btn-info form-control" >Confirm</button></a>
+                 <a  href="#saved">  <button  id="some_id2" class="btn btn-success form-control" >Confirm and Proceed to review</button></a>
 
         
 
@@ -51,7 +58,9 @@ $('#some_id2').click(function() {
   // //alert(linki);
 
   //  $(location).attr('thesubmit', linki);
+
     $('#thesubmit').show();
+    $('#saved').show();
     $('#some_id2').hide();
 });
 

@@ -6,7 +6,7 @@
       	word-wrap: break-word;}
 
       </style>
-      <aside class="main-sidebar">
+      <aside class="main-sidebar" style="background-color:#778899" >
 
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -28,7 +28,7 @@
         
           
           <!-- Sidebar Menu -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" >
             <li class="header">Options</li>
             <!-- Optionally, you can add icons to the links -->
           
@@ -36,6 +36,12 @@
 
            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
             <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li>
+            <li><a href="assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
+            <li><a href="assessment/MNG" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
+            <li><a href="assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
+
+
+
            
            @elseif($location == 'ass')
 
@@ -55,7 +61,7 @@
                                 <span>{{$title}}</span>
                                                             </a>
 
-                            <ul  class="treeview-menu">
+                            <ul  class="treeview-menu" style="overflow:auto">
 
 
                             	@foreach ($secs as $sec)
