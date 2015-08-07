@@ -14,9 +14,9 @@
 
 @section('content')
    
-<<<<<<< HEAD
+
             
-=======
+
         <div id="saved" style="display:none">
         <br>
         <br>
@@ -27,7 +27,6 @@
             </div>
             </div>
 
->>>>>>> origin/master
 
 
 
@@ -40,17 +39,17 @@
 
          
 
-<<<<<<< HEAD
+
                 {!! Form::submit('Submit',['class' => 'btn btn-danger form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
                 {!! Form::close() !!}
                  <a  href="#Section1">  <button  id="some_id2" class="btn btn-info form-control" >Confirm</button></a>
-=======
+
 				{!! Form::submit('Submit',['class' => 'btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
 				{!! Form::close() !!}
                  <a  href="#saved">  <button  id="some_id2" class="btn btn-success form-control" >Confirm and Proceed to review</button></a>
->>>>>>> origin/master
+
 
 
     	
