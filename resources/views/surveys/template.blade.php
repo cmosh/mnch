@@ -174,9 +174,13 @@ $(document).ready( function() {
 
 
                 $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").each(function(){
-   if (this.id != '' ) 
+   if (this.id != '' ) {
    $(this).attr('required','');
-     $(this).attr('data-parsley-mincheck','2');
+    if (  $(this).attr('multiple') )  $(this).attr('data-parsley-mincheck','2');
+
+}
+
+
   
 });   
     });
