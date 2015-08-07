@@ -165,37 +165,30 @@ $(document).ready( function() {
 });
 </script>
 
- <script type="text/javascript">
+<script type="text/javascript">
     
 
     function executeAutomaticVisibility(name) {
     $("[name="+name+"]:checked").each(function() {
         $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
+         var theparid = $("[automaticallyVisibleIfIdChecked=" + this.id+"]").attr('id');
+
+       
 
 
-                $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").each(function(){
-   if (this.id != '' ) {
-   $(this).attr('required','');
-    if (  $(this).attr('multiple') )  $(this).attr('data-parsley-mincheck','2');
-
-}
-
+    $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','2');
+     $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").attr('required','');
+          
+             
 
   
 });   
-    });
-
-
+   
     $("[name="+name+"]:not(:checked)").each(function() {
-       
-        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").removeAttr('required');
+       $("[automaticallyVisibleIfIdChecked=" + this.id+"]").hide();
          $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").removeAttr('required');
-         $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").each(function(){
-       
-   $(this).removeAttr('required');
-    $(this).removeAttr('data-parsley-mincheck');
-});
-            $("[automaticallyVisibleIfIdChecked=" + this.id+"]").hide();
+         $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").removeAttr('data-parsley-mincheck');
+         
 
     });
 }
