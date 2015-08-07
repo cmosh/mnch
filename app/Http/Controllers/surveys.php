@@ -203,7 +203,7 @@ foreach ($array as $key) {
         $Secs = Section::where('surveyID','=',$sv)->get();
         
 
-        $Mel=$this->buildview($id);
+        $Mel=$this->buildview($id,'show');
         $location = substr ($sv, 0,2);
        
         
@@ -237,14 +237,14 @@ foreach ($array as $key) {
         $Secs = Section::where('surveyID','=',$sv)->get();
         
 
-        $Mel=$this->buildview($id);
+        $Mel=$this->buildview($id,'edit');
         $location = substr ($sv, 0,2);
        
         
             $iXd= 'survey/'.$id;
 
 
-        return view('surveys.edit')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs); 
+        return view('surveys.save')->with('Mel',$Mel)->with('id',$iXd)->with('location',$location)->with('title',$Survs->Name)->with('secs',$Secs); 
 
 
 
@@ -274,7 +274,7 @@ foreach ($array as $key) {
 	}
 
 
-    private function buildview($AssID){
+    private function buildview($AssID,$act){
 
         $HtmlLines = '<!-- Main content -->';
 
@@ -345,7 +345,7 @@ foreach ($array as $key) {
                                                 <div class="col-xs-4">
                                                     <label>Facility Name</label>
                                                     <input value ="';$HtmlLines.=$TheFacility->FacilityName;$HtmlLines.='" type="text" class="form-control" id="InputFacilityName"
-                                                    disabled>
+                                                   disabled>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Facility Type</label>
@@ -395,24 +395,32 @@ foreach ($array as $key) {
                                             <div class="col-xs-3">
 
                                                 <label>Name</label>
-                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName" value="';$HtmlLines.=$TheAssessor->Name;$HtmlLines.='" placeholder="Enter Name" disabled>
+                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName" value="';$HtmlLines.=$TheAssessor->Name;$HtmlLines.='" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                             </div>
 
 
                                             <div class="col-xs-3">
                                                 <label>Designation</label>
-                                                <input type="text" class="form-control" id="AssessorDesignation"  name="AssessorDesignation" value="';$HtmlLines.=$TheAssessor->Designation;$HtmlLines.='"  placeholder="Enter Designation" disabled>
+                                                <input type="text" class="form-control" id="AssessorDesignation"  name="AssessorDesignation" value="';$HtmlLines.=$TheAssessor->Designation;$HtmlLines.='"  placeholder="Enter Designation"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control" id="AssessorEmail" name="AssessorEmail" value="';$HtmlLines.=$TheAssessor->Email;$HtmlLines.='" placeholder="Enter Email" disabled>
+                                                <input type="email" class="form-control" id="AssessorEmail" name="AssessorEmail" value="';$HtmlLines.=$TheAssessor->Email;$HtmlLines.='" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Phone Number</label>
                                                 <input type="text" class="form-control" id="AssessorNumber" name="AssessorNumber" value="';$HtmlLines.=$TheAssessor->Number;$HtmlLines.='"
-                                                placeholder="Enter Phone Number" disabled>
+                                                placeholder="Enter Phone Number"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                             </div>
 
                                         </div>
@@ -440,16 +448,22 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" value="'.($Contacts->get('Facility Incharge')->Name).'"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" value="'.($Contacts->get('Facility Incharge')->Name).'"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" value="'.($Contacts->get('Facility Incharge')->Mobile).'" name="FacilityInchargeMobile" 
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail" value="'.($Contacts->get('Facility Incharge')->Email).'"  name="FacilityInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail" value="'.($Contacts->get('Facility Incharge')->Email).'"  name="FacilityInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -462,16 +476,22 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="'.($Contacts->get('MCH Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -480,20 +500,28 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>Maternity-Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name" disabled>
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'"name= "MaternityInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'"name= "MaternityInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" value="'.($Contacts->get('Maternity Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -506,16 +534,22 @@ foreach ($array as $key) {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('OPD Incharge')->Name).'" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('OPD Incharge')->Name).'" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="'.($Contacts->get('OPD Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('OPD Incharge')->Email).'" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('OPD Incharge')->Email).'" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -545,16 +579,22 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="'.($Contacts->get('Incharge')->Name).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -563,20 +603,28 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>MCH  Incharge</label>
-                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name" disabled>
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" name= "MCHInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="'.($Contacts->get('MCH Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  value="'.($Contacts->get('MCH Incharge')->Email).'"name="MCHInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  value="'.($Contacts->get('MCH Incharge')->Email).'"name="MCHInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -589,16 +637,22 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" value="'.($Contacts->get('Maternity Incharge')->Mobile).'"name="MaternityInchargeMobile" 
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  value="'.($Contacts->get('Maternity Incharge')->Email).'" name="MaternityInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -611,16 +665,22 @@ foreach ($array as $key) {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('Team Lead')->Name).'" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" value="'.($Contacts->get('Team Lead')->Name).'" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="'.($Contacts->get('Team Lead')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('Team Lead')->Email).'" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'.($Contacts->get('Team Lead')->Email).'" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -651,16 +711,22 @@ foreach ($array as $key) {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Facility Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" value="'.($Contacts->get('Facility Incharge')->Name).'" name= "FacilityInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="'.($Contacts->get('Facility Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Facility Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  value="'.($Contacts->get('Facility Incharge')->Email).'" name="FacilityInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -669,20 +735,28 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>MCH  Incharge</label>
-                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name" disabled>
+                                                     <input type="hidden" class="form-control" value="MCH Incharge" id="MCHIncharge" Name="MCHIncharge" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" value="'.($Contacts->get('MCH Incharge')->Name).'" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile"  value="'.($Contacts->get('MCH Incharge')->Mobile).'"
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail" value="'.($Contacts->get('MCH Incharge')->Email).'" name="MCHInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -691,20 +765,28 @@ foreach ($array as $key) {
                                             <div class="row">
                                                 <div class="col-xs-1">
                                                     <label>Maternity-Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name" disabled>
+                                                     <input type="hidden" class="form-control" value="Maternity Incharge" id="MaternityIncharge" Name="MaternityIncharge" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name" disabled>
+                                                    <input type="text" class="form-control" id="MaternityInchargeName" value="'.($Contacts->get('Maternity Incharge')->Name).'" name= "MaternityInchargeName" placeholder="Enter Name"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" value="'.($Contacts->get('Maternity Incharge')->Mobile).'"  name="MaternityInchargeMobile" 
-                                                    placeholder="Enter Mobile" disabled>
+                                                    placeholder="Enter Mobile"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'"  name="MaternityInchargeEmail" placeholder="Enter Email" disabled>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail" value="'.($Contacts->get('Maternity Incharge')->Email).'"  name="MaternityInchargeEmail" placeholder="Enter Email"  ';if ($act=='show') { $HtmlLines.='disabled';} $HtmlLines.=
+                                                       
+                                                    '>
                                                 </div>
                                             </div>
                                         </div>
@@ -824,9 +906,10 @@ foreach ($array as $key) {
                                                                                                   
                                                                                             break;
 
-                                                                                    case "text":
-
-                                                                                            $HtmlLines.= '
+                                                                                    case "text": if ($act == 'show') {
+                                                                                        # code...
+                                                                                  
+                                                                                       $HtmlLines.= '
 
                                                                                          style="vertical-align:middle">';
 
@@ -842,7 +925,43 @@ foreach ($array as $key) {
 
                                                                                             }                   
                                                                                     
-                                                                                                                                                                   
+                                                                                                    } else{
+
+                                                                                                        //saving-text
+                                                                                      $HtmlLines.= 'style="vertical-align:middle"  >
+                                                                                    <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'" >';
+                                                                                    $ColID[] = $ColumnSetIDName;
+
+                                                                                         foreach ($fieldValueList as $fieldd ) {
+
+                                                                                                                    
+                                                                                        $fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
+
+
+                                                                                            $HtmlLines.= '
+                                                                                            <div class="input-group">
+                                                                                           <input class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="'.($datass->get($ColumnSetIDName)->Data).'" required data-parsley-error-message="Required">';    
+                                                                                            if ($fieldd->Label!="") {
+                                                                                             $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
+                                                                                             } 
+                                                                                              $HtmlLines.='</div> ';           
+
+                                                                                                        
+
+                                                                                            }
+                                                                                            $HtmlLines.='</div>';
+
+
+
+
+
+
+
+
+
+
+
+                                                                                    }                                                                 
                                                                                                         
 
                                                                                             
@@ -850,7 +969,9 @@ foreach ($array as $key) {
                                                                                             break;
 
 
-                                                                                            case "textarea":
+                                                                                            case "textarea":if ($act == 'show') {
+                                                                                        # code...
+                                                                                  
 
                                                                                             $HtmlLines.= '
 
@@ -869,13 +990,50 @@ foreach ($array as $key) {
                                                                                                                     
                                                                                     
                                                                                                                                                                    
+                                                                                                 } else {
+                                                                                      
+                                                                                                     //saving-textarea
+
+                                                                                                    $HtmlLines.= 'style="vertical-align:middle"  >
+                                                                                    <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'" >';
+                                                                                    $ColID[] = $ColumnSetIDName;
+
+                                                                                         foreach ($fieldValueList as $fieldd ) {
+
+                                                                                                                    
+                                                                                        $fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
+
+
+                                                                                            $HtmlLines.= '
+                                                                                            
+                                                                                           <textarea class="form-control" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="'.($datass->get($ColumnSetIDName)->Data).'" required data-parsley-error-message="Required"></textarea>';    
+                                                                                            
                                                                                                         
+
+                                                                                                        
+
+                                                                                            }
+                                                                                            $HtmlLines.='</div>';
+
+
+
+
+
+
+
+
+
+                                                                                      
+                                                                                    }                  
 
                                                                                             
 
                                                                                             break;
 
                                                                                     case "number":
+                                                                                    if ($act == 'show') {
+                                                                                        # code...
+                                                                                  
                                                                                      $HtmlLines.= '
 
                                                                                          style="vertical-align:middle">';
@@ -891,17 +1049,58 @@ foreach ($array as $key) {
 
                                                                                             }
                                                                                                                       
-                                                                                    
+                                                                                     } else {
+                                                                                      
+                                                                                                     //saving-number
+                                                                                         $HtmlLines.= 'style="vertical-align:middle" >
+                                                                                    <div  automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'" >';
+                                                                                    $ColID[] = $ColumnSetIDName;
+
+                                                                                         foreach ($fieldValueList as $fieldd ) {
+
+                                                                                                                    
+                                                                                        $fieldIDName = $ColumnSetIDName.$fieldd->field_ID;
+
+                                                                                            $HtmlLines.= '
+                                                                                            <div class="input-group">
+                                                                                           <input class="form-control" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';$HtmlLines.=$fieldIDName;$HtmlLines.='" id="';$HtmlLines.=$fieldIDName;$HtmlLines.='" value="'.$datass->get($ColumnSetIDName)->Data.'" required data-parsley-error-message="Required">';    
+                                                                                            if ($fieldd->Label!="") {
+                                                                                             $HtmlLines.='<span class="input-group-addon">';$HtmlLines.=$fieldd->Label;$HtmlLines.='</span>';
+                                                                                             } 
+                                                                                              $HtmlLines.='</div> ';           
+
+                                                                                                        
+
+                                                                                            }   
+                                                                                                $HtmlLines.='</div>';
+
+
+
+
+
+
+
+
+
+                                                                                      
+                                                                                    }                  
+
+                                                                                            
+
                                                                                 
 
                                                                                             break;
 
 
-                                                                                    case "radio":  
+                                                                                    case "radio": 
+
+                                                                                     $H = $datass->get($ColumnSetIDName)->Data;   
+                                                                                     if ($act == 'show') {
+                                                                                        # code... 
                                                                                      $HtmlLines.= '
 
                                                                                          style="vertical-align:middle">';    
-                                                                                           $H = $datass->get($ColumnSetIDName)->Data;   
+                                                                                          
 
                                                                                             if ($H == null || $H==' ' || is_numeric($H)==false ) {
 
@@ -916,7 +1115,58 @@ foreach ($array as $key) {
 
                                                                                             }
                                                                                             
+                                                                                             } else {
+                                                                                      
+                                                                                                    $ColID[] = $ColumnSetIDName;        
+                                                                                     $fieldName = $ColumnSetIDName.$fieldsetID;
+                                                                                                        $HtmlLines.=' valign="baseline">
+                                                                                                         <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">
 
+                                                                                                        <input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = "" id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required">';
+                                                                                                     foreach ($fieldValueList as $fieldd ) {
+
+
+
+                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
+                                                                                                        $fieldValue = $fieldd->Value;
+                                                                                                        
+                                                                                                                    
+                                                                                              $HtmlLines.='<label>';
+                                                                                                              
+                                                                                                            if ($fieldValue==$H) {
+
+                                                                                                               $HtmlLines.='<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio" checked>';
+                                                                                                            } else {
+                                                                                                                $HtmlLines.='<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio" >';
+                                                                                                            }
+                                                                                                            
+
+                                                                                                           
+                                                                                                             
+
+
+                                                                                                              $HtmlLines.=' <x automaticallyVisibleIfIDChecked = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
+                                                                                                             ';
+                                                                                              $HtmlLines.=$fieldd->Label.'&nbsp;&nbsp;';
+                                                                                              $HtmlLines.='</label>';
+                                                                                                                                        
+          
+
+                                                                                                     }
+
+                                                                                                            $HtmlLines.=' </div>';
+
+
+
+
+
+
+
+
+
+
+                                                                                      
+                                                                                    }         
                                                                                                                                                                          
 
                                                                                                
@@ -925,10 +1175,13 @@ foreach ($array as $key) {
                                                                                                            
 
                                                                                             break;
-                                                                                    case "combo":  $HtmlLines.= '
+                                                                                    case "combo":   $H = $datass->get($ColumnSetIDName)->Data;
+
+                                                                                     if ($act == 'show') {
+                                                                                    $HtmlLines.= '
 
                                                                                          style="vertical-align:middle">';    
-                                                                                           $H = $datass->get($ColumnSetIDName)->Data;   
+                                                                                             
 
                                                                                             if ($H == null || $H==' ' || is_numeric($H)==false) {
 
@@ -941,7 +1194,50 @@ foreach ($array as $key) {
                                                                                             }
                                                                                             
 
-                                                                                           
+                                                                                            } else {
+                                                                                      
+                                                                                                    $ColID[] = $ColumnSetIDName;
+                                                                                    $fieldName = $ColumnSetIDName.$fieldsetID;
+                                                                                                        $HtmlLines.=' valign="baseline">
+                                                                                                         <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">             
+                                                                                     <select class="form-control select2 " style="width: 100%;" name="';$HtmlLines.=$fieldName;$HtmlLines.='" id="';$HtmlLines.=$fieldName;$HtmlLines.='" required data-parsley-error-message="Required"> 
+                                                                                     <option value ="" id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
+                                                                                     
+
+                                                                                     ';
+                                                                                                    
+                                                                                                     foreach ($fieldValueList as $fieldd ) {
+
+
+
+                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
+                                                                                                        $fieldValue = $fieldd->Value;
+                                                                                                        
+                                                                                                     if ($fieldValue == $H) {
+                                                                                                        $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='" selected>'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>';
+                                                                                                                      
+                                                                                                                    } else {
+                                                                                                                       $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>';
+                                                                                                                    }
+                                                                                                                                   
+                                                                                            
+
+                                                                                                      }
+                                                                                                     $HtmlLines.='   </select>
+                                                                                                      </div>';
+
+
+
+
+
+
+
+
+
+
+                                                                                      
+                                                                                    }         
+                                                                                              
                                                                                                
 
                                                                                                
@@ -949,7 +1245,9 @@ foreach ($array as $key) {
                                                                                   
 
                                                                                             break;
-                                                                                     case "multiplecombo":  
+                                                                                     case "multiplecombo":
+                                                                                      $H = $datass->get($ColumnSetIDName)->Data;    
+                                                                                      if ($act == 'show') {
 
                                                                                             $HtmlLines.= '
 
@@ -980,16 +1278,89 @@ foreach ($array as $key) {
 
                                                                                             $HtmlLines = rtrim($HtmlLines, ",");
                                                                                             }
+                                                                                             } else {
+                                                                                      
+                                                                                                     //saving-multiplecombo
+                                                                                                    $ColID[] = $ColumnSetIDName;
+                                                                                                            $fieldName = $ColumnSetIDName.$fieldsetID;
+                                                                                                        $HtmlLines.=' valign="baseline">
+                                                                                                         <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">           
+                                                                                     <select  class="form-control select2" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';$HtmlLines.=$fieldName;$HtmlLines.='[]" id="';$HtmlLines.=$fieldName;$HtmlLines.='"   data-parsley-mincheck="2" data-parsley-error-message="Required" required> 
+                                                                                             <option  value =" " id ="';$HtmlLines.=$fieldName."def";$HtmlLines.='"  style ="display:none;" selected=""></option>
+                                                                                     ';
+                                                                                                    
+
+
+                                                                                                     foreach ($fieldValueList as $fieldd ) {
+
+
+
+                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
+                                                                                                        $fieldValue = $fieldd->Value;
+                                                                                                        
+                                                                                                         $vl =  explode(",",$H);
+
+                                                                                                     foreach($vl as $vll) {
+
+                                                                                                        if ($vll != ' '){
+
+
+
+                                                                                                           if ($fieldValue == $vll) {
+                                                                                                        $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='" selected>'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>';
+                                                                                                                      
+                                                                                                                    } else {
+                                                                                                                       $HtmlLines.='<option value ="';$HtmlLines.=$fieldValue;$HtmlLines.='" >'; $HtmlLines.=$fieldd->Label;$HtmlLines.='</option>';
+                                                                                                                    }
+
+
+
+                                                                                                        }
+
+                                                                                                
+
+                                                                                            }
+        
+
+
+
+                                                                                           
+
+
+
+
+
+
+
+
+
+                                                                                                      }
+                                                                                                     $HtmlLines.='   </select>
+                                                                                                      </div>';   
+
+
+
+
+
+
+
+
+                                                                                      
+                                                                                    }         
+                                                                                              
+                                                                                            
                                                                                   
 
                                                                                             break;
-                                                                                     case "coolradio": 
+                                                                                     case "coolradio":  $H = $datass->get($ColumnSetIDName)->Data;   
+                                                                                       if ($act == 'show') {
+
                                                                                        $HtmlLines.= '
 
                                                                                          style="vertical-align:middle">';  
 
                                                                                           
-                                                                                $H = $datass->get($ColumnSetIDName)->Data;   
+                                                                               
 
                                                                                             if ($H == null || $H==' '|| is_numeric($H)==false) {
                                                                                                 
@@ -1005,7 +1376,60 @@ foreach ($array as $key) {
 
                                                                                             	$HtmlLines.=$H;
                                                                                             }
+                                                                                             } else {
 
+
+                                                                                                 $ColID[] = $ColumnSetIDName;
+
+                                                                                                        $fieldName = $ColumnSetIDName.$fieldsetID;
+                                                                                                        $HtmlLines.=' valign="baseline">
+                                                                                                        <div> <p>
+
+                                                                                                        <input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value = "" id ="';$HtmlLines.=$fieldName.'other';$HtmlLines.='" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';
+;
+                                                                                                    foreach ($fieldValueList as $fieldd ) {
+
+
+
+                                                                                                        $fieldIDOnly = $ColumnSetIDName.$fieldd->field_ID;
+                                                                                                        $fieldValue = $fieldd->Value;
+                                                                                                        
+                                                                                                                    
+                                                                                              $HtmlLines.='<label>';
+                                                                                                              if ($fieldValue==$H) {
+                                                                                                                 $HtmlLines.='<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio" checked>';
+                                                                                                              } else {
+                                                                                                                  $HtmlLines.='<input name="';$HtmlLines.=$fieldName;$HtmlLines.='" value ="';$HtmlLines.=$fieldValue;$HtmlLines.='"id ="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" type="radio">';
+                                                                                                              }
+                                                                                                              
+                                                                                                            
+
+                                                                                                      
+
+
+                                                                                                           $HtmlLines.=' <x coolradio = "';$HtmlLines.=$fieldIDOnly;$HtmlLines.='"></x>
+                                                                                                             ';
+                                                                                              $HtmlLines.=$fieldd->Label.'&nbsp;&nbsp;';
+                                                                                              $HtmlLines.='</label>';
+                                                                                                                                        
+          
+
+                                                                                                     }
+
+                                                                                                            $Other = 'other';
+                                                                                                    $HtmlLines.='</p> <input class="form-control" value="'.$H.'" type="text" id="';$HtmlLines.=$fieldName.$Other;$HtmlLines.='" coolradio="';$HtmlLines.=$fieldIDOnly;$HtmlLines.='" data-parsley-error-message="Required" > </div>';
+                                                                                                        $HtmlLines.='<script>
+                                                                                                            
+
+                                                                                                                    </script>';
+                                                                                      
+                                                                                                   
+
+
+                                                                                      
+                                                                                    }         
+                                                                                              
+                                                                                        
                                                                                                                     
                                                                                     
                                                                                 
@@ -1624,7 +2048,9 @@ return $HtmlLines;
                                           
 	           																		              
 	           																		        break;
-	           																	    case "text":$HtmlLines.= 'style="vertical-align:middle"  >
+	           																	    case "text":
+
+                                                                                    $HtmlLines.= 'style="vertical-align:middle"  >
 	           																	    <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'" >';
                                                                                     $ColID[] = $ColumnSetIDName;
 
