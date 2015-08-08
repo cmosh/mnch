@@ -21,7 +21,8 @@
                         <th>Survey </th>
                         <th>Assessment Term</th>
                          <th>Assessor </th>
-                        <th>Date </th>
+                         <th>Date </th>
+                         <th>Facility</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -29,27 +30,41 @@
 
                   
                       
-                       @foreach($assessments as $assessment)
+                       @foreach($Assessments as $Assessment)
 
             <tr >
-                        <td style= "display:none;"> {{ $assessment->Assessment_ID}}</td>
-                        <td style= "display:none;"> {{ $assessment->Facility_ID}}</td>
+                        <td style= "display:none;"> {{ $Assessment->AssID}}</td>
+                        <td style= "display:none;"> {{ $Assessment->FacilityID}}</td>
 
-                        @if ( (substr ($assessment->Survey, 0,2)) =='CH')
+                        @if ( (substr ($Assessment->Survey, 0,2)) =='CH')
                            <td> CH Survey </td>
-                           @elseif ( (substr ($assessment->Survey, 0,2)) =='MN')
+                           @elseif ( (substr ($Assessment->Survey, 0,2)) =='MN')
                               <td> MNH Survey</td>
                               @else
                                  <td> IMCI Survey </td>
                                  @endif
                      
-                        <td> {{ $assessment->Assessment_Term}}</td>
-                        <td> {{$Assessors->get($assessment->Assessment_ID)->Name}} </td>
-                        <td> {{ $assessment->Date}}</td>
-                        <td><form action="/assessments/show/{{$assessment->Assessment_ID}}">
-    <input class="btn btn-primary form-control" type="submit" value="VIEW">
-     
-</form>
+                        <td> {{ $Assessment->Term}}</td>
+                        <td> {{$Assessment->AssessorName}} </td>
+                        <td> {{ $Assessment->Date}}</td>
+                        <td> {{$Assessment->FacilityName}}</td>
+
+
+
+ @if($Assessment->Status=='Submitted')
+                        <td><form action="/assessments/show/{{$Assessment->AssID}}">
+    <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>
+
+     @elseif($Assessment->Status=='Incomplete')
+
+     	 <td><form action="/assessments/edit/{{$Assessment->AssID}}">
+    <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
+
+     @else
+
+      <td> {{$Assessment->Status}}</td>
+
+     @endif
 
 
 
@@ -73,6 +88,7 @@
                         <th>Assessment Term</th>
                          <th>Assessor </th>
                         <th>Date </th>
+                        <th>Facility</th>
                          <th>Action</th>
                        
                       </tr>

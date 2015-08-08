@@ -146,14 +146,18 @@
                         <td> {{ $al->Type}}</td>
                         <td> {{ $al->Owner}}</td>
 
-                          @if($DoneAss == null || $DoneAss->get($al->FacilityCode) == null)   
+                          @if(isset($DoneAss->get($al->FacilityCode)->Status) == false)   
                         <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
                           @else
                           <td> {{($DoneAss->get($al->FacilityCode)->Status)}} </td>
                           @endif
+
                       </tr>
 
                          @endforeach
+
+
+
                   @else
 
                            @foreach($All as $al)

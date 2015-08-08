@@ -394,6 +394,8 @@ print_r($fruit);die;
      * @return Response
      */
     public function edit($id) {
+
+        assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'In progress'));
         
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
         $sv = $TheAsses->Survey;

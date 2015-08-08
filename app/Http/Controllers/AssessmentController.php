@@ -8,6 +8,7 @@ use App\Participants;
 use App\Survey;
 use App\Assessor;
 use App\countie;
+use App\Surveyview;
 use Request;
 
 
@@ -47,7 +48,7 @@ class AssessmentController extends Controller {
 			///{date}/{term}/{county}
 
 			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Date','=',$date)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
-			
+			echo $DoneAss;
 			$loc = substr ($id, 0,2);
 			
 			if ($loc == "IM") {
@@ -116,10 +117,8 @@ class AssessmentController extends Controller {
 	public function show($id,$county)
 	{
 			$sv = '%'.$id.'%';
-
-		$Assessors = Assessor::all()->keyBy('AssID');
-		$assessments=assessments::where('Survey','like',$sv)->get();
-		return view('assessments.view')->with('assessments',$assessments)->with('Assessors',$Assessors)->with('location','ass')->with('title','Assessments');
+			$Assessments = Surveyview::where('County','like',$county)->where('Survey','like',$sv)->get();
+		return view('assessments.view')->with('Assessments',$Assessments)->with('location','ass')->with('title','Assessments');
 	}
 
 	/**
