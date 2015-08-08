@@ -45,6 +45,9 @@ class AssessmentController extends Controller {
 	public function create($id,$date,$term,$countie)
 	{
 			///{date}/{term}/{county}
+
+			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Date','=',$date)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
+			
 			$loc = substr ($id, 0,2);
 			
 			if ($loc == "IM") {
@@ -61,7 +64,7 @@ class AssessmentController extends Controller {
 			}
 			
 			$countID = assessments::all()->count()+1;
-	  return view('assessments.create')->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All)->with('thecounty',$countie);
+	return view('assessments.create')->with('DoneAss',$DoneAss)->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All)->with('thecounty',$countie);
 	}
 
 	/**
@@ -147,15 +150,41 @@ class AssessmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function status($status,$AssID)
 	{
-		$rl=  assessments::where('Assessment_ID','=',$id)->first();
-		$rl = substr($rl->Survey, 0,2);
+		 switch ($status) {
+		 	case 'save':
+
+		 	assessments::createOrUpdate(
+                array('Status' => 'Incomplete',
+                  'Assessment_ID' => $AssID), 
+                array('Assessment_ID' => $AssID));
+		 	return redirect('/home');
+
+		 		break;
+		 	case 'submit':
+		 			assessments::createOrUpdate(
+                array('Status' => 'Submitted',
+                  'Assessment_ID' => $AssID), 
+                array('Assessment_ID' => $AssID));
+
+		 			$red = assessments::where('Assessment_ID','=',$AssID)->first();
+		 			$irect = substr($red->Survey,0,2);
+		 	return redirect('/assessment/'.$irect);
+
+
+		 			break;
+		 	
+		 	default:
+		 	
+		 		
+		 }
 		
-		assessments::where('Assessment_ID','=',$id)->delete();
+
 
 		return redirect('/assessment/'.$rl);
 
 			}
 
 }
+	

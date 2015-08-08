@@ -51,15 +51,16 @@
             <li><a href="/auth/register">Register</a></li>
           @else
 
-           @if($location == 'MN'||$location == 'IM'||$location == 'CH')
-          <li> <a href="/assessments/cancel/{{$anId}}"  role="button">
-              <span><button class="btn btn-block btn-warning btn-xs">Cancel</button></span>  
+           @if (isset($AssID)==true)
+               @if($location == 'MN'||$location == 'IM'||$location == 'CH')
+           
+           <li> <a href="/status/save/{{$AssID}}"  role="button">
+              <span><button id="savebt" class="send-btn btn btn-block btn-info btn-xs">Save and Resume Later</button></span>  
           </a> </li>
-           <li> 
-             <button id="savebt" class="btn btn-block btn-info btn-xs">Save and Resume Later</button>
-         </li>
-          @endif
 
+           
+               @endif
+               @endif
               <li class="dropdown user user-menu">
                 <!-- Menu Toggle Button -->
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>

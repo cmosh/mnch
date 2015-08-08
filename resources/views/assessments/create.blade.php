@@ -145,7 +145,12 @@
                         <td> {{ $al->County}}</td>
                         <td> {{ $al->Type}}</td>
                         <td> {{ $al->Owner}}</td>
+
+                          @if($DoneAss == null || $DoneAss->get($al->FacilityCode) == null)   
                         <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
+                          @else
+                          <td> {{($DoneAss->get($al->FacilityCode)->Status)}} </td>
+                          @endif
                       </tr>
 
                          @endforeach
@@ -159,8 +164,12 @@
                         <td> {{ $al->training_site}}</td>
                         <td> {{ $al->id_Number}}</td>
 
-                       
+                     
                         <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
+
+
+
+
                       </tr>
 
                          @endforeach

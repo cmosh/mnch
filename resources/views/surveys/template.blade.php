@@ -17,21 +17,13 @@
 
             
 
-        <div id="saved" style="display:none">
-        <br>
-        <br>
-        <br>
-            <div  class="callout callout-success" >
-                <h3>Saved!</h3>
-                <p>Please check if you have fully completed the form before submitting.</p>
-            </div>
-            </div>
+       
 
 
 
 
 
-    {!! Form::open(['url' => '/'.$id.'/saved','id'=>'demo-form','data-parsley-validate'=>'']) !!}
+    {!! Form::open(['url' => '/'.$id.'/Progress','id'=>'demo-form','data-parsley-validate'=>'']) !!}
 
                 <?php echo $Mel?>
 
@@ -40,19 +32,12 @@
          
 
 
-                {!! Form::submit('Submit',['class' => 'btn btn-danger form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
+                {!! Form::submit('Submit',['class' => 'submit btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
                 {!! Form::close() !!}
-                 <a  href="#Section1">  <button  id="some_id2" class="btn btn-info form-control" >Confirm</button></a>
+                 <a  href="#top">  <button  id="some_id2" class="send-btn btn btn-info form-control" >Confirm and Proceed to review</button></a>
 
-				{!! Form::submit('Submit',['class' => 'btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
-
-				{!! Form::close() !!}
-                 <a  href="#saved">  <button  id="some_id2" class="btn btn-success form-control" >Confirm and Proceed to review</button></a>
-
-
-
-    	
+				
 			
 			
 
@@ -66,11 +51,70 @@
 @section('javascript')
 
 <script type="text/javascript">
+$(document).ready(function(){
+   
+
+  $('.send-btn').click(function(){ 
+
+    var data = {'AssID':'{{$AssID}}',
+         @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
+
+
+       
+       
+                @endforeach
+         '_token': $('input[name=_token]').val()
+
+
+
+    };
+ 
+         var data2 = {
+         @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]:checked').val(),
+
+
+       
+       
+                @endforeach
+         
+
+
+
+    };
+
+
+        $.extend( data, data2 );
+
+    $.ajax({
+      url: '/survey/save',
+      type: "post",
+       data: data,
+      success: function(data){
+            $('#changeclass').attr('class','callout callout-success');
+
+             $('#changeclass').text('Saved');        
+      }
+    });      
+  
+              $('#demo-form').attr('action','/survey/{{$id}}/Progress');  }); 
+});
+     
+       
+
+        
+
+         
+         
+</script>
+
+<script type="text/javascript">
     
 
 
     var form = document.getElementById("savebt");
-
+document.getElementById("demo-form").setAttribute("action", "/{{$id}}/Saved");
 document.getElementById("demo-form").addEventListener("click", function () {
 
   form.submit();
@@ -156,7 +200,11 @@ $('#some_id2').click(function() {
         
         $("[coolradio=" + this.id+"]").show();
            $("[coolradio=" + this.id+"]").attr('name',name+'[]');
+            
+
              $("[coolradio=" + this.id+"]").attr('required','');
+
+
 
 
             });
@@ -165,6 +213,7 @@ $('#some_id2').click(function() {
         $("[coolradio=" + this.id+"]").hide();
         $("[coolradio=" + this.id+"]").removeAttr('name');
            $("[coolradio=" + this.id+"]").removeAttr('required');
+           
           
     });
 }

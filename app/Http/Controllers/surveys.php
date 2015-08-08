@@ -16,6 +16,7 @@ use App\assessments;
 use App\Assessor;
 use App\Contact;
 use Request;
+use Input;
 
 class surveys extends Controller
 {
@@ -40,18 +41,200 @@ class surveys extends Controller
      *
      * @return Response
      */
+
+
+    public function autosave(){
+
+         if(Request::ajax()) {
+      $data = Input::all();
+      print_r($data);die;
+    }
+
+
+
+    }
     
+     public function saveajax(){
+
+
+
+         if(Request::ajax()) {
+      $array = Input::all();
+      $AssID = array_shift($array);
+     $fruit = array_pop($array);
+
+    $surveyyy = assessments::where('Assessment_ID', '=', $AssID)->first();
+    $sva = $surveyyy->Survey;
+    $location = substr($sva, 0, 2);
+        
+        // $array = Request::all();
+        
+        // $first = array_shift($array);
+        
+        // //echo $first;
+        // $second = array_shift($array);
+        
+        // //echo $second;
+
+      $Name = array_shift($array);
+      $Designation = array_shift($array); 
+      $Email  = array_shift($array);
+      $Number = array_shift($array);
+     
+  if( Assessor::where('AssID','=',$AssID)->first()==null) {
+
+
+
+         $storeassessor = new Assessor;
+        
+     
+        
+        $storeassessor->Name = $Name;
+        
+        $storeassessor->Designation = $Designation;
+        
+        $storeassessor->Email = $Email;
+        
+        $storeassessor->Number = $Number;
+        
+        $storeassessor->AssID = $AssID;
+        
+        $storeassessor->save();
+
+
+
+
+
+
+
+
+    $x = 1;
+
+
+
+  } else{
+            Assessor::createOrUpdate(
+                array('Name' => $Name,
+                 'Designation' => $Designation, 
+                 'Email' => $Email, 
+                 'Number' => $Number, 
+                 'AssID' => $AssID), 
+                array('AssID' => $AssID));
+        
+
+     $x = 2;
+  }
+
+
+   if ($location == "MN") {
+            $roop = 3;
+            
+            // code...
+            
+            
+        } 
+        else {
+            $roop = 4;
+            
+            // code...
+            
+            
+        }
+        
+      
+
+ if( Contact::where('AssID','=',$AssID)->first()==null) {
+
+
+
+         for ($x = 0; $x < $roop; $x++) {
+            $ContactT = new Contact;
+            $ContactT->Cadre = array_shift($array);
+            $ContactT->Name = array_shift($array);
+            $ContactT->Mobile = array_shift($array);
+            $ContactT->Email = array_shift($array);
+            $ContactT->AssID = $AssID;
+            $ContactT->ContactID = $AssID . $ContactT->Cadre;
+            $ContactT->save();
+        }
+
+
+
+
+
+
+
+
+    $x = 1;
+
+
+
+  } else{
+           
+           for ($x = 0; $x < $roop; $x++) {
+            $cadre = array_shift($array);
+            Contact::createOrUpdate(array('Cadre' => $cadre, 'Name' => array_shift($array), 'Mobile' => array_shift($array), 'Email' => array_shift($array), 'AssID' => $AssID, 'ContactID' => $AssID . $cadre), array('ContactID' => $AssID . $cadre));
+        }
+        
+
+     $x = 2;
+  }
+     $var = $this->build($sva, null);
+    
+        foreach ($var as $x) {            
+                      
+            $datavalue = array_shift($array);
+
+            
+            $dataid = $AssID.$x;
+            $fruit = $AssID;
+
+             if( DataRecord::where('DataID','=',$dataid)->first() == null) {
+
+                 $data = new Datarecord; 
+                 $data->ColumnSetID =  $x; 
+                  $data->DataID =  $dataid;   
+                  $data->AssID = $AssID;
+                if (gettype($datavalue) == "array") { $data->Data = implode(",", $datavalue); }  
+                 else {$data->Data = str_replace( array('_'), '', $datavalue);}                                                   
+                 $data->save();                           
+                  }
+                                                          
+
+             else {
+
+                 if (gettype($datavalue) == "array") { $datas = implode(",", $datavalue);}
+                    else {$datas = str_replace(array('_'), '', $datavalue);}  
+                      
+            Datarecord::createOrUpdate(
+                array('ColumnSetID' => $x,
+                 'DataID' =>$dataid, 
+                 'AssID' => $AssID, 
+                 'Data' => $datas),
+                  array('DataID' => $dataid));
+        }
+
+    }
+
+    }
+print_r($fruit);die;
+
+}
     public function create($id, $sv) {
         
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
         
-        $Mel = $this->build($sv, $id);
+        $Melarray = $this->build($sv, $id);
+        $Mel = $Melarray['htmll'];
+        $AjaxNames = $Melarray['ajax'];
+     
+
         $location = substr($sv, 0, 2);
         
         $iXd = 'survey/' . $id;
         
-        return view('surveys.template')->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
     
     /**
@@ -59,7 +242,10 @@ class surveys extends Controller
      *
      * @return Response
      */
-    public function store($id) {
+    public function store($id,$status) {
+
+
+      // DB::table('assessments')->where('Assessment_ID', $id)->update(['Status' => 'submit']);
         
         $surveyyy = assessments::where('Assessment_ID', '=', $id)->first();
         $sva = $surveyyy->Survey;
@@ -159,17 +345,23 @@ class surveys extends Controller
             
         }
         
-        /*foreach ($var as $vari) {
-        $data = new DataRecord;
-        
-        $data->ID=$var;
-        $data->Data=$array;
-        
-        echo $vari;
-        # code...
-        }*/
-        
-        return redirect('/assessments/show/' . $AssID);
+      
+         switch ($status) {
+            case 'Progress':
+                # code...
+                break;
+              case 'Saved':
+                return redirect('/home');
+                break;
+                  case 'Submit':
+                   return redirect('/assessments/show/' . $AssID);
+               
+                break;
+            default:
+                # code...
+                break;
+        }
+       
     }
     
     /**
@@ -185,7 +377,9 @@ class surveys extends Controller
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
         
-        $Mel = $this->buildview($id, 'show');
+        $MelArray = $this->buildview($id, 'show');
+        $Mel = $MelArray['htmll'];
+
         $location = substr($sv, 0, 2);
         
         $iXd = 'survey/' . $id;
@@ -206,10 +400,12 @@ class surveys extends Controller
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
         
-        $Mel = $this->buildview($id, 'edit');
+        $Melarray = $this->buildview($id, 'edit');
+        $Mel = $Melarray['htmll'];
+         $AjaxNames = $Melarray['ajax'];
         $location = substr($sv, 0, 2);
         
-        return view('surveys.save')->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
     
     /**
@@ -229,7 +425,7 @@ class surveys extends Controller
         $first = array_shift($array);
         
         //echo $first;
-        $second = array_shift($array);
+     //   $second = array_shift($array);
         
         //echo $second;
         Assessor::createOrUpdate(array('Name' => array_shift($array), 'Designation' => array_shift($array), 'Email' => array_shift($array), 'Number' => array_shift($array), 'AssID' => $AssID), array('AssID' => $AssID));
@@ -279,35 +475,12 @@ class surveys extends Controller
             //   if ($x == null)break;
             Datarecord::createOrUpdate(array('ColumnSetID' => $x, 'DataID' => $AssID . $x, 'AssID' => $AssID, 'Data' => $data), array('DataID' => $AssID . $x));
         }
-        
-        //  $data->ColumnSetID=$x;
-        //echo $data->ColumnSetID;
-        //echo "  ";
-        //$data->DataID = $AssID.$x;
-        //echo $data->DataID;
-        //echo "  ";
-        //  $data->AssID=$AssID;
-        //echo $data->AssID;
-        //echo "  ";
-        
-        //  echo  "<br>";
-        
-        //         $data->save();
-        
-        //     # code...
-        // }
-        
-        //     /*foreach ($var as $vari) {
-        //         $data = new DataRecord;
-        
-        //         $data->ID=$var;
-        //         $data->Data=$array;
-        
+      
         //         echo $vari;
         //         # code...
         //     }*/
         
-        //         return redirect('/assessments/show/'.$AssID);
+    return redirect('/status/submit/'.$AssID);
         
         
     }
@@ -327,7 +500,14 @@ class surveys extends Controller
     
     private function buildview($AssID, $act) {
         
-        $HtmlLines = '<!-- Main content -->';
+        $HtmlLines = '<!-- Main content -->
+        <div id = "top"> </div>
+         <div id="saved" style="display:none">
+                <div  id="changeclass" class="callout callout-warning" >
+                <h3 id="changetext" >Saving Please Wait</h3>
+                <p>Please check if you have fully completed the form before submitting.</p>
+            </div>
+            </div>';
         
         $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
         
@@ -475,6 +655,11 @@ class surveys extends Controller
                                     </div>
                                     </div>
                                     <!-- /.box-body -->';
+
+                                     $AjaxNames[]= "AssessorName";
+                                    $AjaxNames[]= "AssessorDesignation";
+                                    $AjaxNames[]= "AssessorEmail";
+                                    $AjaxNames[]= "AssessorNumber";
                 
                 switch ($loc) {
                     case 'CH':
@@ -634,6 +819,17 @@ class surveys extends Controller
 
 
                 ';
+
+
+                             $AjaxNames[]="FacilityIncharge"; $AjaxNames[]="FacilityInchargeName"; $AjaxNames[]="FacilityInchargeMobile";  $AjaxNames[]="FacilityInchargeEmail"; 
+                                    
+                                    $AjaxNames[]="MCHIncharge"; $AjaxNames[]="MCHInchargeName"; $AjaxNames[]="MCHInchargeMobile"; $AjaxNames[]="MCHInchargeEmail"; 
+
+                                    $AjaxNames[]="MaternityIncharge"; $AjaxNames[]="MaternityInchargeName"; $AjaxNames[]="MaternityInchargeMobile"; $AjaxNames[]="MaternityInchargeEmail"; 
+
+                                    $AjaxNames[]="OPDIncharge"; $AjaxNames[]="OPDInchargeName"; $AjaxNames[]="OPDInchargeMobile"; $AjaxNames[]="OPDInchargeEmail"; 
+
+                        
                         break;
 
                     case 'IM':
@@ -793,6 +989,14 @@ class surveys extends Controller
 
 
                 ';
+                                      $AjaxNames[]="FacilityIncharge"; $AjaxNames[]="FacilityInchargeName"; $AjaxNames[]="FacilityInchargeMobile";  $AjaxNames[]="FacilityInchargeEmail"; 
+                                    
+                                    $AjaxNames[]="MCHIncharge"; $AjaxNames[]="MCHInchargeName"; $AjaxNames[]="MCHInchargeMobile"; $AjaxNames[]="MCHInchargeEmail"; 
+
+                                    $AjaxNames[]="MaternityIncharge"; $AjaxNames[]="MaternityInchargeName"; $AjaxNames[]="MaternityInchargeMobile"; $AjaxNames[]="MaternityInchargeEmail"; 
+
+                                    $AjaxNames[]="OPDIncharge"; $AjaxNames[]="OPDInchargeName"; $AjaxNames[]="OPDInchargeMobile"; $AjaxNames[]="OPDInchargeEmail"; 
+
                         
                         break;
 
@@ -923,7 +1127,14 @@ class surveys extends Controller
 
 
                 ';
-                        
+                                  $AjaxNames[]="FacilityIncharge"; $AjaxNames[]="FacilityInchargeName"; $AjaxNames[]="FacilityInchargeMobile";  $AjaxNames[]="FacilityInchargeEmail"; 
+                                    
+                                    $AjaxNames[]="MCHIncharge"; $AjaxNames[]="MCHInchargeName"; $AjaxNames[]="MCHInchargeMobile"; $AjaxNames[]="MCHInchargeEmail"; 
+
+                                    $AjaxNames[]="MaternityIncharge"; $AjaxNames[]="MaternityInchargeName"; $AjaxNames[]="MaternityInchargeMobile"; $AjaxNames[]="MaternityInchargeEmail"; 
+
+                                   
+
                         break;
 
                     default:
@@ -1038,7 +1249,7 @@ class surveys extends Controller
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                            
+                                             $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
                                                                                             <div class="input-group">
                                                                                            <input class="form-control thenormal" type="text" name ="';
@@ -1085,7 +1296,7 @@ class surveys extends Controller
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                            
+                                             $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
                                                                                             
                                                                                            <textarea class="form-control thenormal" type="text" name ="';
@@ -1125,7 +1336,7 @@ class surveys extends Controller
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                            
+                                             $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
                                                                                             <div class="input-group">
                                                                                            <input class="form-control thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
@@ -1147,7 +1358,7 @@ class surveys extends Controller
 
                                 case "radio":
                                     
-                                    $H = $datass->get($ColumnSetIDName)->Data;
+                                    if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
                                     if ($act == 'show') {
                                         
                                         // code...
@@ -1176,6 +1387,7 @@ class surveys extends Controller
 
                                                                                                         <input class = "thenormal" name="';
                                         $HtmlLines.= $fieldName;
+                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= '" value = "" id ="';
                                         $HtmlLines.= $fieldName . 'other';
                                         $HtmlLines.= '" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required">';
@@ -1220,7 +1432,7 @@ class surveys extends Controller
                                     break;
 
                                 case "combo":
-                                    $H = $datass->get($ColumnSetIDName)->Data;
+                                   if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
                                     
                                     if ($act == 'show') {
                                         $HtmlLines.= '
@@ -1231,15 +1443,19 @@ class surveys extends Controller
                                             
                                             $HtmlLines.= $H;
                                         } 
-                                        else {
+                                        else if(is_numeric($H) == true){
                                             
-                                            $HtmlLines.= $fieldValueList->get($H)->Label;
+                                            $HtmlLines.= 'sa';//$fieldValueList->get($H)->Label;
+                                        }
+                                        else{
+
                                         }
                                     } 
                                     else {
                                         
                                         $ColID[] = $ColumnSetIDName;
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
+                                        $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">             
                                                                                      <select class="form-control select2 thenormal" style="width: 100%;" name="';
@@ -1281,16 +1497,16 @@ class surveys extends Controller
                                     break;
 
                                 case "multiplecombo":
-                                    $H = $datass->get($ColumnSetIDName)->Data;
+                                    if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
                                     if ($act == 'show') {
                                         
                                         $HtmlLines.= '
 
                                                                                          style="vertical-align:middle">';
                                         
-                                        $H = $datass->get($ColumnSetIDName)->Data;
+                                       if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
                                         
-                                        if ($H == null || $H == ' ') {
+                                        if ($H == null || $H == ' ' ||$H =='error') {
                                             
                                             $HtmlLines.= $H;
                                         } 
@@ -1314,6 +1530,7 @@ class surveys extends Controller
                                         //saving-multiplecombo
                                         $ColID[] = $ColumnSetIDName;
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
+                                        $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
                                                                                      <select  class="form-control select2 themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
@@ -1331,13 +1548,9 @@ class surveys extends Controller
                                             $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                             $fieldValue = $fieldd->Value;
                                             
-                                            $vl = explode(",", $H);
-                                            
-                                            foreach ($vl as $vll) {
-                                                
-                                                if ($vll != ' ') {
+                                                       
                                                     
-                                                    if ($fieldValue == $vll) {
+                                                    if (     (strpos($H, $fieldValue) !== false)           ) {
                                                         $HtmlLines.= '<option value ="';
                                                         $HtmlLines.= $fieldValue;
                                                         $HtmlLines.= '" selected>';
@@ -1351,8 +1564,8 @@ class surveys extends Controller
                                                         $HtmlLines.= $fieldd->Label;
                                                         $HtmlLines.= '</option>';
                                                     }
-                                                }
-                                            }
+                                                
+                                            
                                         }
                                         $HtmlLines.= '   </select>
                                                                                                       </div>';
@@ -1361,7 +1574,7 @@ class surveys extends Controller
                                     break;
 
                                 case "coolradio":
-                                    $H = $datass->get($ColumnSetIDName)->Data;
+                                     if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
                                     if ($act == 'show') {
                                         
                                         $HtmlLines.= '
@@ -1386,6 +1599,7 @@ class surveys extends Controller
                                         $ColID[] = $ColumnSetIDName;
                                         
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
+                                        $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                         <div> <p>
 
@@ -1457,8 +1671,16 @@ class surveys extends Controller
             
             $HtmlLines.= '</Section>';
         }
-        
-        return $HtmlLines;
+       
+  $awesome = array (
+    "htmll"  => $HtmlLines,
+    "ajax" =>$AjaxNames,
+   
+);
+          
+            return $awesome;
+
+       
     }
     
     private function build($sv, $value) {
@@ -1466,7 +1688,14 @@ class surveys extends Controller
         $loc = substr($sv, 0, 2);
         $ColID = array();
         $SelectedSurvey = $sv;
-        $HtmlLines = '<!-- Main content -->';
+        $HtmlLines = '<!-- Main content -->
+          <div id = "top"> </div>
+         <div id="saved" style="display:none">
+                <div  id="changeclass" class="callout callout-warning" >
+                <h3 id="changetext" >Saving Please Wait</h3>
+                <p>Please check if you have fully completed the form before submitting.</p>
+            </div>
+            </div>';
         
         $Survs = Survey::where('surveyID', '=', $SelectedSurvey)->get();
         
@@ -1603,6 +1832,10 @@ class surveys extends Controller
                                     </div>
                                     </div>
                                     <!-- /.box-body -->';
+                                    $AjaxNames[]= "AssessorName";
+                                    $AjaxNames[]= "AssessorDesignation";
+                                    $AjaxNames[]= "AssessorEmail";
+                                    $AjaxNames[]= "AssessorNumber";
                 
                 switch ($loc) {
                     case 'CH':
@@ -1710,6 +1943,16 @@ class surveys extends Controller
 
 
                 ';
+
+                                    $AjaxNames[]="FacilityIncharge"; $AjaxNames[]="FacilityInchargeName"; $AjaxNames[]="FacilityInchargeMobile";  $AjaxNames[]="FacilityInchargeEmail"; 
+                                    
+                                    $AjaxNames[]="MCHIncharge"; $AjaxNames[]="MCHInchargeName"; $AjaxNames[]="MCHInchargeMobile"; $AjaxNames[]="MCHInchargeEmail"; 
+
+                                    $AjaxNames[]="MaternityIncharge"; $AjaxNames[]="MaternityInchargeName"; $AjaxNames[]="MaternityInchargeMobile"; $AjaxNames[]="MaternityInchargeEmail"; 
+
+                                    $AjaxNames[]="OPDIncharge"; $AjaxNames[]="OPDInchargeName"; $AjaxNames[]="OPDInchargeMobile"; $AjaxNames[]="OPDInchargeEmail"; 
+
+                                   
                         break;
 
                     case 'IM':
@@ -1817,6 +2060,15 @@ class surveys extends Controller
 
 
                 ';
+
+                                    $AjaxNames[]="FacilityIncharge"; $AjaxNames[]="FacilityInchargeName"; $AjaxNames[]="FacilityInchargeMobile";  $AjaxNames[]="FacilityInchargeEmail"; 
+                                    
+                                    $AjaxNames[]="MCHIncharge"; $AjaxNames[]="MCHInchargeName"; $AjaxNames[]="MCHInchargeMobile"; $AjaxNames[]="MCHInchargeEmail"; 
+
+                                    $AjaxNames[]="MaternityIncharge"; $AjaxNames[]="MaternityInchargeName"; $AjaxNames[]="MaternityInchargeMobile"; $AjaxNames[]="MaternityInchargeEmail"; 
+
+                                    $AjaxNames[]="OPDIncharge"; $AjaxNames[]="OPDInchargeName"; $AjaxNames[]="OPDInchargeMobile"; $AjaxNames[]="OPDInchargeEmail"; 
+
                         
                         break;
 
@@ -1903,7 +2155,14 @@ class surveys extends Controller
 
 
                 ';
-                        
+                                    $AjaxNames[]="FacilityIncharge"; $AjaxNames[]="FacilityInchargeName"; $AjaxNames[]="FacilityInchargeMobile";  $AjaxNames[]="FacilityInchargeEmail"; 
+                                    
+                                    $AjaxNames[]="MCHIncharge"; $AjaxNames[]="MCHInchargeName"; $AjaxNames[]="MCHInchargeMobile"; $AjaxNames[]="MCHInchargeEmail"; 
+
+                                    $AjaxNames[]="MaternityIncharge"; $AjaxNames[]="MaternityInchargeName"; $AjaxNames[]="MaternityInchargeMobile"; $AjaxNames[]="MaternityInchargeEmail"; 
+
+                                    
+
                         break;
 
                     default:
@@ -1998,9 +2257,11 @@ class surveys extends Controller
                                     $ColID[] = $ColumnSetIDName;
                                     
                                     foreach ($fieldValueList as $fieldd) {
+
+                                       
                                         
                                         $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                        
+                                          $AjaxNames[]= $fieldIDName;
                                         $HtmlLines.= '
                                                                                             <div class="input-group">
                                                                                            <input class="form-control thenormal" type="text" name ="';
@@ -2027,7 +2288,7 @@ class surveys extends Controller
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                        
+                                          $AjaxNames[]= $fieldIDName;
                                         $HtmlLines.= '
                                                                                             
                                                                                            <textarea class="form-control thenormal" type="text" name ="';
@@ -2048,7 +2309,7 @@ class surveys extends Controller
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                        
+                                          $AjaxNames[]= $fieldIDName;
                                         $HtmlLines.= '
                                                                                             <div class="input-group">
                                                                                            <input class="form-control thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
@@ -2069,6 +2330,7 @@ class surveys extends Controller
                                 case "radio":
                                     $ColID[] = $ColumnSetIDName;
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
+                                      $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
 
@@ -2108,6 +2370,7 @@ class surveys extends Controller
                                 case "combo":
                                     $ColID[] = $ColumnSetIDName;
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
+                                      $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">             
                                                                                      <select class="form-control select2 thenormal" style="width: 100%;" name="';
@@ -2143,6 +2406,7 @@ class surveys extends Controller
                                 case "multiplecombo":
                                     $ColID[] = $ColumnSetIDName;
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
+                                      $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
                                                                                      <select  class="form-control select2 themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
@@ -2242,6 +2506,7 @@ class surveys extends Controller
                                     $ColID[] = $ColumnSetIDName;
                                     
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
+                                      $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                         <div> <p>
 
@@ -2308,7 +2573,14 @@ class surveys extends Controller
         //Adding requisite js
         
         if ($value != null) {
-            return $HtmlLines;
+
+            $awesome = array (
+    "htmll"  => $HtmlLines,
+    "ajax" =>$AjaxNames,
+   
+);
+          
+            return $awesome;
             
             // code...
             

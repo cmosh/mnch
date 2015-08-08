@@ -13,9 +13,10 @@
 
 
 
-Route::post('survey/{id}','surveys@store');
-
-
+Route::post('survey/{id}/{status}','surveys@update');
+Route::get('status/{status}/{AssID}','AssessmentController@status');
+Route::post('survey/autosave','surveys@autosave');
+Route::post('survey/save','surveys@saveajax');
 Route::get('test','TestController@index');
 Route::get('ch','ch@index');
 Route::get('ch/survey',function () {
@@ -47,7 +48,9 @@ Route::put('assessments/{id}','surveys@update');
 Route::get('assessments/edit/{id}','surveys@edit');
 
 Route::get('assessments/show/{id}','surveys@show');
+
 Route::get('assessments/create/{id}/{sv}','surveys@create');
+
 Route::get('assessment/{sv}','AssessmentController@index');
 Route::get('assessments/{id}/{county}','AssessmentController@show');
 Route::get('assessments/{id}/{date}/{term}/{county}','AssessmentController@create');
