@@ -15,6 +15,7 @@ use App\Facilities;
 use App\assessments;
 use App\Assessor;
 use App\Contact;
+use App\Participantsview;
 use Request;
 use Input;
 
@@ -179,7 +180,7 @@ class surveys extends Controller
 
      $x = 2;
   }
-     $var = $this->build($sva, null);
+     $var = $this->build($sva, null,'');
     
         foreach ($var as $x) {            
                       
@@ -222,10 +223,13 @@ print_r($fruit);die;
 }
     public function create($id, $sv) {
         
+        $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
+       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
+       else $Participant = '';
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
         
-        $Melarray = $this->build($sv, $id);
+        $Melarray = $this->build($sv, $id,$Participant);
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
      
@@ -234,7 +238,7 @@ print_r($fruit);die;
         
         $iXd = 'survey/' . $id;
         
-        return view('surveys.template')->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
     
     /**
@@ -297,7 +301,7 @@ print_r($fruit);die;
             $ContactT->save();
         }
         
-        $var = $this->build($sva, null);
+        $var = $this->build($sva, null,'');
         
         foreach ($array as $key) {
             
@@ -377,7 +381,7 @@ print_r($fruit);die;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
         
-        $MelArray = $this->buildview($id, 'show');
+        $MelArray = $this->buildview($id, 'show','');
         $Mel = $MelArray['htmll'];
 
         $location = substr($sv, 0, 2);
@@ -394,7 +398,9 @@ print_r($fruit);die;
      * @return Response
      */
     public function edit($id) {
-
+        $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
+       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
+       else $Participant='';
         assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'In progress'));
         
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
@@ -402,12 +408,12 @@ print_r($fruit);die;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
         
-        $Melarray = $this->buildview($id, 'edit');
+        $Melarray = $this->buildview($id, 'edit',$Participant);
         $Mel = $Melarray['htmll'];
          $AjaxNames = $Melarray['ajax'];
         $location = substr($sv, 0, 2);
         
-        return view('surveys.template')->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
     
     /**
@@ -452,7 +458,7 @@ print_r($fruit);die;
             Contact::createOrUpdate(array('Cadre' => $cadre, 'Name' => array_shift($array), 'Mobile' => array_shift($array), 'Email' => array_shift($array), 'AssID' => $AssID, 'ContactID' => $AssID . $cadre), array('ContactID' => $AssID . $cadre));
         }
         
-        $var = $this->build($sva, null);
+        $var = $this->build($sva, null,'');
         
         foreach ($array as $key) {
             
@@ -500,7 +506,7 @@ print_r($fruit);die;
         
     }
     
-    private function buildview($AssID, $act) {
+    private function buildview($AssID, $act,$Participant) {
         
         $HtmlLines = '<!-- Main content -->
         <div id = "top"> </div>
@@ -619,7 +625,7 @@ print_r($fruit);die;
                 if ($act == 'show') {
                     $HtmlLines.= 'disabled';
                 }
-                $HtmlLines.= '>
+                $HtmlLines.= ' required>
                                             </div>
 
 
@@ -629,7 +635,7 @@ print_r($fruit);die;
                 if ($act == 'show') {
                     $HtmlLines.= 'disabled';
                 }
-                $HtmlLines.= '>
+                $HtmlLines.= 'required>
                                             </div>
 
                                             <div class="col-xs-3">
@@ -648,7 +654,7 @@ print_r($fruit);die;
                 if ($act == 'show') {
                     $HtmlLines.= 'disabled';
                 }
-                $HtmlLines.= '>
+                $HtmlLines.= ' required>
                                             </div>
 
                                         </div>
@@ -686,7 +692,7 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= ' required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
@@ -697,7 +703,7 @@ print_r($fruit);die;
                         }
                         $HtmlLines.= '>
                                                 </div>
-                                                <div class="col-xs-3">
+                                         required       <div class="col-xs-3">
                                                     <label>EMAIL</label>
                                                     <input type="email" class="form-control" id="FacilityInchargeEmail" value="' . ($Contacts->get('Facility Incharge')->Email) . '"  name="FacilityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
@@ -856,7 +862,7 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= ' required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
@@ -865,7 +871,7 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= ' required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
@@ -873,7 +879,7 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= ' >
                                                 </div>
                                             </div>
                                         </div>
@@ -988,6 +994,36 @@ print_r($fruit);die;
                                 </div>
 
 
+<div class="box box-primary">
+                                                <div class="box-body">
+
+                                                    <div class="box-header">
+                                                        <h3 class="box-title">HCW Profile(Existing Info)</h3>
+                                                    </div>
+
+                                                <div class="row">
+
+                                                        <div class="col-xs-4">
+                                                            <label>First Name</label>
+                                                            <input class="form-control" id="HCWName" value="'.$Participant->Name_of_Participant.'" placeholder="Enter first name" type="text" disabled>
+                                                        </div>
+                                                        
+                                                        <div class="col-xs-4">
+                                                            <label>National ID</label>
+                                                            <input class="form-control" id="HCWID" value="'.$Participant->id_Number.'" placeholder="Enter id" type="text" disabled>
+                                                        </div>
+
+                                                        <div class="col-xs-4">
+                                                            <label>Phone Number</label>
+                                                            <input class="form-control" id="HCWNumber" value="'.$Participant->mobile_number.'" placeholder="Enter number" type="text" disabled>
+                                                        </div>
+                                                       
+                                                       
+                                                    </div>
+
+                                                </div>
+                                               
+                                            </div>
 
 
                 ';
@@ -1024,7 +1060,7 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= ' required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
@@ -1033,7 +1069,7 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= ' required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
@@ -1685,7 +1721,7 @@ print_r($fruit);die;
        
     }
     
-    private function build($sv, $value) {
+    private function build($sv, $value,$Participant) {
         
         $loc = substr($sv, 0, 2);
         $ColID = array();
@@ -1808,24 +1844,24 @@ print_r($fruit);die;
                                             <div class="col-xs-3">
 
                                                 <label>Name</label>
-                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName" value="" placeholder="Enter Name">
+                                                <input type="text" class="form-control" id="AssessorName" name="AssessorName" value="" placeholder="Enter Name" required>
                                             </div>
 
 
                                             <div class="col-xs-3">
                                                 <label>Designation</label>
-                                                <input type="text" value="" class="form-control" id="AssessorDesignation"  name="AssessorDesignation"  placeholder="Enter Designation">
+                                                <input type="text" value="" class="form-control" id="AssessorDesignation"  name="AssessorDesignation"  placeholder="Enter Designation" required>
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Email</label>
-                                                <input type="email" value="" class="form-control" id="AssessorEmail" name="AssessorEmail" placeholder="Enter Email">
+                                                <input type="email" value="" class="form-control" id="AssessorEmail" name="AssessorEmail" placeholder="Enter Email" >
                                             </div>
 
                                             <div class="col-xs-3">
                                                 <label>Phone Number</label>
                                                 <input type="text" class="form-control" value="" id="AssessorNumber" name="AssessorNumber"
-                                                placeholder="Enter Phone Number">
+                                                placeholder="Enter Phone Number" required>
                                             </div>
 
                                         </div>
@@ -1854,16 +1890,16 @@ print_r($fruit);die;
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Facility Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
@@ -1971,20 +2007,20 @@ print_r($fruit);die;
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" value=" " class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" value=" " class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" value=" " id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="form-control" value=" " id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                    <input type="email" class="form-control" value=" " id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email" >
                                                 </div>
                                             </div>
                                         </div>
@@ -2057,7 +2093,36 @@ print_r($fruit);die;
                                         <!-- /.box-body -->
                                     </div>
                                 </div>
+<div class="box box-primary">
+                                                <div class="box-body">
 
+                                                    <div class="box-header">
+                                                        <h3 class="box-title">HCW Profile(Existing Info)</h3>
+                                                    </div>
+
+                                                <div class="row">
+
+                                                        <div class="col-xs-4">
+                                                            <label>First Name</label>
+                                                            <input class="form-control" id="HCWName" value="'.$Participant->Name_of_Participant.'" placeholder="Enter first name" type="text" disabled>
+                                                        </div>
+                                                        
+                                                        <div class="col-xs-4">
+                                                            <label>National ID</label>
+                                                            <input class="form-control" id="HCWID" value="'.$Participant->id_Number.'" placeholder="Enter id" type="text" disabled>
+                                                        </div>
+
+                                                        <div class="col-xs-4">
+                                                            <label>Phone Number</label>
+                                                            <input class="form-control" id="HCWNumber" value="'.$Participant->mobile_number.'" placeholder="Enter number" type="text" disabled>
+                                                        </div>
+                                                       
+                                                       
+                                                    </div>
+
+                                                </div>
+                                               
+                                            </div>
 
 
 
@@ -2088,16 +2153,16 @@ print_r($fruit);die;
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Facility Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
+                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name">
+                                                    <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
-                                                    placeholder="Enter Mobile">
+                                                    placeholder="Enter Mobile" required>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>

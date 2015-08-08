@@ -9,6 +9,8 @@ use App\Survey;
 use App\Assessor;
 use App\countie;
 use App\Surveyview;
+use App\Participantsview;
+use App\Imciview;
 use Request;
 
 
@@ -32,6 +34,7 @@ class AssessmentController extends Controller {
 	{
 		$sv = '%'.$sv.'%';
 		//where('column', 'LIKE', '%value%')->get();
+
 		$Surveys = Survey::where('surveyID','like',$sv)->get();
 		$Counties = countie::all();
 		return view('assessments.index')->with('Counties',$Counties)->with('location','ass')->with('title','Assessments')->with('Surveys',$Surveys);
@@ -46,14 +49,19 @@ class AssessmentController extends Controller {
 	public function create($id,$date,$term,$countie)
 	{
 			///{date}/{term}/{county}
+           
 
-			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Date','=',$date)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
-			echo $DoneAss;
 			$loc = substr ($id, 0,2);
 			
 			if ($loc == "IM") {
-				$All = Participants::all();
+
+			$DoneAss = assessments::where('PartID','<>','')->get()->keyBy('PartID');
+			
+				$All = Participantsview::all();
 			} else {
+
+			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Date','=',$date)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
+			
 				$All = Facilities::where('County','Like',$countie)->get();
 			}
 			
@@ -99,6 +107,7 @@ class AssessmentController extends Controller {
 		$assessments->Survey= $id;
 		$assessments->UserId= $x[4];
 		$assessments->Status= $x[5];
+		$assessments->PartID=$x[6];
 
 	$assessments->save();
 
@@ -117,8 +126,9 @@ class AssessmentController extends Controller {
 	public function show($id,$county)
 	{
 			$sv = '%'.$id.'%';
-			$Assessments = Surveyview::where('County','like',$county)->where('Survey','like',$sv)->get();
-		return view('assessments.view')->with('Assessments',$Assessments)->with('location','ass')->with('title','Assessments');
+			if ($id != 'IM') $Assessments = Surveyview::where('County','like',$county)->where('Survey','like',$sv)->get();
+			else $Assessments = Imciview::all();
+		return view('assessments.view')->with('Assessments',$Assessments)->with('location','ass')->with('title','Assessments')->with('id',$id);
 	}
 
 	/**

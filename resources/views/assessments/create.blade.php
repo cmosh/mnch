@@ -88,6 +88,7 @@
   <div class="form-group">
   {!! Form::text('UserId',null,['class' => 'form-control','Value'=>Auth::user()->id , 'style' => 'display:none;']) !!}
    {!! Form::text('Status',null,['class' => 'form-control','Value'=>'In progress', 'style' => 'display:none;']) !!}
+    {!! Form::text('PartID',null,['class' => 'form-control specialll','style' => 'display:none;' ]) !!}
   </div>
   <div class="form-group" >
   
@@ -120,6 +121,7 @@
                          <th>Facility Code</th>
                         <th>Training Site</th>
                         <th>ID Number</th>
+                         <th style="display:none;"></th>
                         <th>Action</th>
                         
                   @else
@@ -128,6 +130,7 @@
                         <th>County</th>
                         <th>Type</th>
                         <th>Owner</th>
+
                         <th>Action</th>
                   @endif
                        
@@ -164,15 +167,17 @@
                         <tr>
                         <td class="rr"> {{ $al->Name_of_Participant}}</td>
                         <td><span>{{ $al->FacilityName}}</span>  </td>
-                         <td class="nr"><span>{{ $al->mfl_code}}</span>  </td>
+                         <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
                         <td> {{ $al->training_site}}</td>
                         <td> {{ $al->id_Number}}</td>
+                        <td style="display:none;" class="vr">{{$al->PartID}}</td>
 
-                     
+
+                       @if(isset($DoneAss->get($al->PartID)->Status) == false)   
                         <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
-
-
-
+                          @else
+                          <td> {{($DoneAss->get($al->PartID)->Status)}} </td>
+                          @endif
 
                       </tr>
 
@@ -189,7 +194,9 @@
                         <th>Facility</th>
                          <th>Facility Code</th>
                         <th>Training Site</th>
-                        <th>ID Number</th>
+                         <th>ID Number</th>
+                         <th style="display:none;"></th>
+                       <th>Action</th>
                         
                   @else
                   <th>Name</th>
@@ -229,7 +236,7 @@
     var $row = $(this).closest("tr");    // Find the row
     var $text = $row.find(".nr").text();
    var $rrr = $row.find(".rr").text();
-
+   var $prtid = $row.find(".vr").text();
      // Find the text
     
     // Let's test it out
@@ -237,6 +244,7 @@
     $('#thebox').show();
     $('#chs').text($rrr);
     $('#Facility_ID').val($text);
+    $('.specialll').val($prtid);
 
 });
   </script>

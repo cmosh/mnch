@@ -14,6 +14,7 @@
 
 
 Route::post('survey/{id}/{status}','surveys@update');
+Route::post('survey/survey/{id}/{status}','surveys@update');
 Route::get('status/{status}/{AssID}','AssessmentController@status');
 Route::post('survey/autosave','surveys@autosave');
 Route::post('survey/save','surveys@saveajax');

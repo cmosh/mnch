@@ -19,10 +19,14 @@
                         <th style= "display:none;">Assessment ID</th>
                         <th style= "display:none;">Facility ID </th>
                         <th>Survey </th>
-                        <th>Assessment Term</th>
+                       @if ( $id !='IM') <th>Assessment Term</th>
+                       @endif
+                        @if ( $id =='IM') <th>Participant</th>
+                         @endif
                          <th>Assessor </th>
                          <th>Date </th>
                          <th>Facility</th>
+                        
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -43,8 +47,11 @@
                               @else
                                  <td> IMCI Survey </td>
                                  @endif
-                     
-                        <td> {{ $Assessment->Term}}</td>
+                      @if ( $id !='IM') <td> {{ $Assessment->Term}}</td>
+                       @endif
+                        @if ( $id =='IM') <td>{{ $Assessment->Participant}}</td>
+                         @endif
+                       
                         <td> {{$Assessment->AssessorName}} </td>
                         <td> {{ $Assessment->Date}}</td>
                         <td> {{$Assessment->FacilityName}}</td>
@@ -85,11 +92,15 @@
                         <th style= "display:none;">Assessment ID</th>
                         <th style= "display:none;">Facility ID </th>
                         <th>Survey </th>
-                        <th>Assessment Term</th>
+                       @if ( $id !='IM') <th>Assessment Term</th>
+                       @endif
+                        @if ( $id =='IM') <th>Participant</th>
+                         @endif
                          <th>Assessor </th>
-                        <th>Date </th>
-                        <th>Facility</th>
-                         <th>Action</th>
+                         <th>Date </th>
+                         <th>Facility</th>
+                        
+                        <th>Action</th>
                        
                       </tr>
                     </tfoot>

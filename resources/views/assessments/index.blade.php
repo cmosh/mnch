@@ -140,6 +140,8 @@ $('#date').datepicker({
    
 
                   <div class="box-body">
+
+                  @if($loc == 'CH' or $loc == 'MN')
                     <div class="form-group">
                       <label for="County2" class="col-sm-2 control-label">Select County</label>
                       <div class="col-sm-10">
@@ -152,11 +154,13 @@ $('#date').datepicker({
                       </div>
                     </div>
                   
-                   
+                   @else
                     <div>
-                  
+                   <p>Click Next to view evaluated Health Workers</p>
     
 </div>
+
+                  @endif
                       <script src="js/jquery-ui.js"></script>
 <script>
  
