@@ -42,7 +42,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-
+Route::get('assessments/cancel/{id}','AssessmentController@destroy');
 Route::put('assessments/{id}','surveys@update');
 Route::get('assessments/edit/{id}','surveys@edit');
 

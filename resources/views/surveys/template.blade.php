@@ -31,7 +31,7 @@
 
 
 
-    {!! Form::open(['url' => '/'.$id,'id'=>'demo-form','data-parsley-validate'=>'']) !!}
+    {!! Form::open(['url' => '/'.$id.'/saved','id'=>'demo-form','data-parsley-validate'=>'']) !!}
 
                 <?php echo $Mel?>
 
@@ -64,6 +64,21 @@
 @endsection
 
 @section('javascript')
+
+<script type="text/javascript">
+    
+
+
+    var form = document.getElementById("savebt");
+
+document.getElementById("demo-form").addEventListener("click", function () {
+
+  form.submit();
+});
+
+
+
+</script>
        <script type="text/javascript">
 $('#some_id2').click(function() {
 
@@ -182,11 +197,7 @@ $(document).ready( function() {
     function executeAutomaticVisibility(name) {
     $("[name="+name+"]:checked").each(function() {
         $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
-         var theparid = $("[automaticallyVisibleIfIdChecked=" + this.id+"]").attr('id');
-
-       
-
-
+        
     $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','2');
      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").attr('required','');
           
@@ -197,8 +208,8 @@ $(document).ready( function() {
    
     $("[name="+name+"]:not(:checked)").each(function() {
        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").hide();
-         $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").removeAttr('required');
-         $("*","[automaticallyVisibleIfIdChecked=" + this.id+"]").removeAttr('data-parsley-mincheck');
+          $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").removeAttr('data-parsley-mincheck');
+      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").removeAttr('required');
          
 
     });

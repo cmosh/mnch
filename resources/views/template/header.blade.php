@@ -38,7 +38,8 @@
            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span>OPEN/CLOSE MENU</span>
           </a>
-           @else
+          
+
            
            @endif
           <!-- Navbar Right Menu -->
@@ -50,6 +51,15 @@
             <li><a href="/auth/register">Register</a></li>
           @else
 
+           @if($location == 'MN'||$location == 'IM'||$location == 'CH')
+          <li> <a href="/assessments/cancel/{{$anId}}"  role="button">
+              <span><button class="btn btn-block btn-warning btn-xs">Cancel</button></span>  
+          </a> </li>
+           <li> 
+             <button id="savebt" class="btn btn-block btn-info btn-xs">Save and Resume Later</button>
+         </li>
+          @endif
+
               <li class="dropdown user user-menu">
                 <!-- Menu Toggle Button -->
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
@@ -59,7 +69,9 @@
                   <li class="user-header">
                     
                   <p>  {{ Auth::user()->email }}  </p> 
+
                   
+
 
                   </li>
                   
@@ -73,6 +85,8 @@
                     </div>
                   </li>
                 </ul>
+
+                 
               </li>
               @endif
        

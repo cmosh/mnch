@@ -51,7 +51,7 @@ class surveys extends Controller
         
         $iXd = 'survey/' . $id;
         
-        return view('surveys.template')->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
     
     /**
@@ -1320,7 +1320,7 @@ class surveys extends Controller
                                         $HtmlLines.= $fieldName;
                                         $HtmlLines.= '[]" id="';
                                         $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '"   data-parsley-mincheck="2" data-parsley-error-message="Required" required> 
+                                        $HtmlLines.= '"   data-parsley-mincheck="2" data-parsley-error-message="Required"> 
                                                                                              <option  value =" " id ="';
                                         $HtmlLines.= $fieldName . "def";
                                         $HtmlLines.= '"  style ="display:none;" selected=""></option>
@@ -2149,7 +2149,7 @@ class surveys extends Controller
                                     $HtmlLines.= $fieldName;
                                     $HtmlLines.= '[]" id="';
                                     $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '"   data-parsley-mincheck="2" data-parsley-error-message="Required" required> 
+                                    $HtmlLines.= '"   data-parsley-mincheck="2" data-parsley-error-message="Required"> 
                                                                                              <option  value =" " id ="';
                                     $HtmlLines.= $fieldName . "def";
                                     $HtmlLines.= '"  style ="display:none;" selected=""></option>

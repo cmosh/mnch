@@ -94,7 +94,7 @@ class AssessmentController extends Controller {
 		$assessments->Date=$x[3];
 		$assessments->Survey= $id;
 		$assessments->UserId= $x[4];
-		
+		$assessments->Status= $x[5];
 
 	$assessments->save();
 
@@ -149,7 +149,13 @@ class AssessmentController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
-	}
+		$rl=  assessments::where('Assessment_ID','=',$id)->first();
+		$rl = substr($rl->Survey, 0,2);
+		
+		assessments::where('Assessment_ID','=',$id)->delete();
+
+		return redirect('/assessment/'.$rl);
+
+			}
 
 }
