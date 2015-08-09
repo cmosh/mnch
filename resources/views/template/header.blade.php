@@ -58,7 +58,7 @@
                @if($location == 'MN'||$location == 'IM'||$location == 'CH')
 
             <li> <a href="/assessments/cancel/{{$AssID}}"  role="button">
-              <span><button id="savebt" class="send-btn btn btn-block btn-warning btn-xs">Cancel and Discard</button></span>  
+              <span><button id="cancelbt" class="btn btn-block btn-warning btn-xs">Cancel and Discard</button></span>  
           </a> </li>
            
            <li> <a href="/status/save/{{$AssID}}"  role="button">
