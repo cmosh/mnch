@@ -40,9 +40,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       input.parsley-error,
       select.parsley-error,
       textarea.parsley-error {
-        color: #B94A48;
+        color: #FF0000;
         background-color: #F2DEDE;
-        border: 1px solid #EED3D7;
+        border: 1px solid #FF0000;
       }
 
       .parsley-errors-list {
