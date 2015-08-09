@@ -68,7 +68,7 @@ class AssessmentController extends Controller {
 			
 			if($loc=='IM')
 			{
-				$date='';
+				$date=$date;
 				$term='';
 				$countie='';
 			}

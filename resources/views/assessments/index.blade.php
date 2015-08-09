@@ -101,6 +101,12 @@
                       </div>
                     </div>
                     @else
+                     <div class="form-group">
+                      <label for="date" class="col-sm-2 control-label">Date</label>
+                      <div class="col-sm-10">
+                       <input type="date" name="date" id="date" value="" />
+                      </div>
+                    </div>
                     <p>Click Next to select Health Workers</p>
 @endif
                     <div>
@@ -108,15 +114,7 @@
 </div>
 
 
-                      <script src="js/jquery-ui.js"></script>
-<script>
- 
-$('#date').datepicker({
-   dateFormat: 'yy-mm-dd'
-}); 
-</script>
-
-                   
+                                       
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                    
