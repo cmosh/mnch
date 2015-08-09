@@ -1516,7 +1516,7 @@ print_r($fruit);die;
                                         } 
                                         else if(is_numeric($H) == true){
                                             
-                                            $HtmlLines.= 'sa';//$fieldValueList->get($H)->Label;
+                                            $HtmlLines.= $fieldValueList->get($H)->Label;
                                         }
                                         else{
 

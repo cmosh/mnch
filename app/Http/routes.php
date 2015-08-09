@@ -13,28 +13,21 @@
 
 
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
-Route::post('survey/{id}/{status}','surveys@update');
-Route::post('survey/survey/{id}/{status}','surveys@update');
-Route::get('status/{status}/{AssID}','AssessmentController@status');
-Route::post('survey/autosave','surveys@autosave');
-Route::post('survey/save','surveys@saveajax');
-Route::get('test','TestController@index');
-Route::get('ch','ch@index');
-Route::get('ch/survey',function () {
-	return view('ch/survey/index');
-});
-Route::get('mnh','mnh@index');
-Route::get('mnh/survey',function () {
-	return view('mnh/survey/index');
-});
-Route::get('imci','imci@index');
-Route::get('imci/survey',function () {
-	return view('imci/survey/index');
-});
 
-Route::get('admin', function () {
-    return view('dashboard');
-});
+Route::post('survey/{id}/{status}','surveys@update');
+
+Route::post('survey/survey/{id}/{status}','surveys@update');
+
+Route::get('status/{status}/{AssID}','AssessmentController@status');
+
+Route::post('survey/autosave','surveys@autosave');
+
+Route::post('survey/save','surveys@saveajax');
+
+
+
+
+
 Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
