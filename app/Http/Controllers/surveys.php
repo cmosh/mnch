@@ -224,8 +224,13 @@ class surveys extends Controller
 
 
 
-        $Progress = assessments::where('Assessment_ID','=',$AssID)->first()->status();
-        if ($Progress == 'In progress'){
+        $Progress = assessments::where('Assessment_ID','=',$AssID)->first();
+        $Pg = $Progress->Status;
+
+
+        if ($Pg == 'In progress'){
+
+
               if ($stype == 'auto') {      assessments::createOrUpdate(
                 array('Status' => 'Autosaved',
                   'Assessment_ID' => $AssID), 
@@ -241,10 +246,11 @@ class surveys extends Controller
 
           }
 
-      }
+      
+}
+}
 
-
-    }
+    
 print_r($fruit);die;
 
 }
