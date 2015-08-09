@@ -57,7 +57,7 @@
            @if (isset($AssID)==true)
                @if($location == 'MN'||$location == 'IM'||$location == 'CH')
 
-            <li> <a href="assessments/cancel/{{$AssID}}"  role="button">
+            <li> <a href="/assessments/cancel/{{$AssID}}"  role="button">
               <span><button id="savebt" class="send-btn btn btn-block btn-warning btn-xs">Cancel and Discard</button></span>  
           </a> </li>
            
