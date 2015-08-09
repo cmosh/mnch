@@ -11,6 +11,7 @@ use App\countie;
 use App\Surveyview;
 use App\Participantsview;
 use App\Imciview;
+use App\Autosaving;
 use Request;
 
 
@@ -137,9 +138,12 @@ class AssessmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function destroy($id)
+
+
 	{
-		//
+		assessments::where('Assessment_ID', '=', $id)->delete();
+		return redirect('/home');
 	}
 
 	/**
@@ -152,7 +156,16 @@ class AssessmentController extends Controller {
 	{
 		//
 	}
+	public function autosaved($UserId){
 
+		$Auto = Autosaving::where('User','=',$UserId)->get();
+		return view('assessments.autosaved')->with('Auto',$Auto)->with('location','ass')->with('title','Autosaved Work');
+
+
+
+
+
+	}
 	/**
 	 * Remove the specified resource from storage.
 	 *

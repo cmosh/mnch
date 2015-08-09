@@ -65,6 +65,19 @@
                 <a href="assessment/IMCI" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
               </div>
              </div>
+
+    <div class="col-md-12">
+  <div class="small-box bg-green">
+                <div class="inner">
+                  <h2>Autosaved Incomplete Assessments</h2>
+                  <p><br></p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="Autosaved/{{Auth::user()->id}}" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+             </div>
                        
 
 </div>

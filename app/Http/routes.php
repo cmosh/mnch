@@ -12,7 +12,7 @@
 */
 
 
-
+Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 Route::post('survey/{id}/{status}','surveys@update');
 Route::post('survey/survey/{id}/{status}','surveys@update');
 Route::get('status/{status}/{AssID}','AssessmentController@status');

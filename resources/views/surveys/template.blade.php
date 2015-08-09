@@ -51,22 +51,21 @@
 @section('javascript')
 
 <script type="text/javascript">
-$(document).ready(function(){
-   
+    
+    var timeoutId;  
+$('.asave').change(function () {
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(function () {
 
-  $('.send-btn').click(function(){ 
+        var data = {
+            'type':'auto',
 
-    var data = {'AssID':'{{$AssID}}',
+            'AssID':'{{$AssID}}',
          @foreach($AjaxNames as $AjaxName)
           '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
-
-
-       
-       
+  
                 @endforeach
          '_token': $('input[name=_token]').val()
-
-
 
     };
  
@@ -74,16 +73,52 @@ $(document).ready(function(){
          @foreach($AjaxNames as $AjaxName)
           '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]:checked').val(),
 
-
-       
-       
                 @endforeach
          
-
-
-
     };
 
+
+        $.extend( data, data2 );
+
+
+    $.ajax({
+      url: '/survey/save',
+      type: "post",
+       data: data,
+      success: function(data){
+       var dt = new Date($.now())
+           $('#autosavetext').text('Autosaved '+ dt);    
+      }
+    }); 
+        
+    }, 750);
+});
+
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+     $('.send-btn').click(function(){ 
+    var data = {
+
+        'type':'trigger',
+        'AssID':'{{$AssID}}',
+         @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
+  
+                @endforeach
+         '_token': $('input[name=_token]').val()
+
+    };
+ 
+         var data2 = {
+         @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]:checked').val(),
+
+                @endforeach
+         
+    };
 
         $.extend( data, data2 );
 
@@ -100,12 +135,6 @@ $(document).ready(function(){
   
               $('#demo-form').attr('action','/survey/{{$id}}/Progress');  }); 
 });
-     
-       
-
-        
-
-         
          
 </script>
 

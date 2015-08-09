@@ -60,11 +60,15 @@ class surveys extends Controller
 
 
          if(Request::ajax()) {
+
+
       $array = Input::all();
+      $stype = array_shift($array);
       $AssID = array_shift($array);
      $fruit = array_pop($array);
 
     $surveyyy = assessments::where('Assessment_ID', '=', $AssID)->first();
+
     $sva = $surveyyy->Survey;
     $location = substr($sva, 0, 2);
         
@@ -216,6 +220,21 @@ class surveys extends Controller
         }
 
     }
+              if ($stype == 'auto') {      assessments::createOrUpdate(
+                array('Status' => 'Autosaved',
+                  'Assessment_ID' => $AssID), 
+                array('Assessment_ID' => $AssID));
+          } else{
+
+ assessments::createOrUpdate(
+                array('Status' => 'Incomplete',
+                  'Assessment_ID' => $AssID), 
+                array('Assessment_ID' => $AssID));
+
+
+
+          }
+
 
     }
 print_r($fruit);die;
@@ -701,9 +720,9 @@ print_r($fruit);die;
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
-                        $HtmlLines.= '>
+                        $HtmlLines.= 'required>
                                                 </div>
-                                         required       <div class="col-xs-3">
+                                                <div class="col-xs-3">
                                                     <label>EMAIL</label>
                                                     <input type="email" class="form-control" id="FacilityInchargeEmail" value="' . ($Contacts->get('Facility Incharge')->Email) . '"  name="FacilityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
@@ -1290,7 +1309,7 @@ print_r($fruit);die;
                                              $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
                                                                                             <div class="input-group">
-                                                                                           <input class="form-control thenormal" type="text" name ="';
+                                                                                           <input class="form-control asave thenormal" type="text" name ="';
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;
@@ -1337,7 +1356,7 @@ print_r($fruit);die;
                                              $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
                                                                                             
-                                                                                           <textarea class="form-control thenormal" type="text" name ="';
+                                                                                           <textarea class="form-control asave thenormal" type="text" name ="';
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;
@@ -1377,7 +1396,7 @@ print_r($fruit);die;
                                              $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
                                                                                             <div class="input-group">
-                                                                                           <input class="form-control thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
+                                                                                           <input class="form-control asave thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;
@@ -1423,7 +1442,7 @@ print_r($fruit);die;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
 
-                                                                                                        <input class = "thenormal" name="';
+                                                                                                        <input class = "thenormal asave" name="';
                                         $HtmlLines.= $fieldName;
                                          $AjaxNames[]= $fieldName;
                                         $HtmlLines.= '" value = "" id ="';
@@ -1444,7 +1463,7 @@ print_r($fruit);die;
                                                 $HtmlLines.= $fieldValue;
                                                 $HtmlLines.= '"id ="';
                                                 $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio" checked>';
+                                                $HtmlLines.= '" type="radio" checked class="asave">';
                                             } 
                                             else {
                                                 $HtmlLines.= '<input name="';
@@ -1453,7 +1472,7 @@ print_r($fruit);die;
                                                 $HtmlLines.= $fieldValue;
                                                 $HtmlLines.= '"id ="';
                                                 $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio" >';
+                                                $HtmlLines.= '" type="radio" class ="asave">';
                                             }
                                             
                                             $HtmlLines.= ' <x automaticallyVisibleIfIDChecked = "';
@@ -1496,7 +1515,7 @@ print_r($fruit);die;
                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">             
-                                                                                     <select class="form-control select2 thenormal" style="width: 100%;" name="';
+                                                                                     <select class="form-control select2 asave thenormal" style="width: 100%;" name="';
                                         $HtmlLines.= $fieldName;
                                         $HtmlLines.= '" id="';
                                         $HtmlLines.= $fieldName;
@@ -1571,7 +1590,7 @@ print_r($fruit);die;
                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
-                                                                                     <select  class="form-control select2 themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
+                                                                                     <select  class="form-control select2 asave themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
                                         $HtmlLines.= $fieldName;
                                         $HtmlLines.= '[]" id="';
                                         $HtmlLines.= $fieldName;
@@ -1641,7 +1660,7 @@ print_r($fruit);die;
                                         $HtmlLines.= ' valign="baseline">
                                                                                                         <div> <p>
 
-                                                                                                        <input class="thenormal" name="';
+                                                                                                        <input class="thenormal asave" name="';
                                         $HtmlLines.= $fieldName;
                                         $HtmlLines.= '" value = "" id ="';
                                         $HtmlLines.= $fieldName . 'other';
@@ -1659,7 +1678,7 @@ print_r($fruit);die;
                                                 $HtmlLines.= $fieldValue;
                                                 $HtmlLines.= '"id ="';
                                                 $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio" checked>';
+                                                $HtmlLines.= '" type="radio"  class="asave" checked>';
                                             } 
                                             else {
                                                 $HtmlLines.= '<input name="';
@@ -1668,7 +1687,7 @@ print_r($fruit);die;
                                                 $HtmlLines.= $fieldValue;
                                                 $HtmlLines.= '"id ="';
                                                 $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio">';
+                                                $HtmlLines.= '" type="radio" class="asave" >';
                                             }
                                             
                                             $HtmlLines.= ' <x coolradio = "';
@@ -1680,7 +1699,7 @@ print_r($fruit);die;
                                         }
                                         
                                         $Other = 'other';
-                                        $HtmlLines.= '</p> <input class="form-control" value="' . $H . '" type="text" id="';
+                                        $HtmlLines.= '</p> <input class="form-control asave" value="' . $H . '" type="text" id="';
                                         $HtmlLines.= $fieldName . $Other;
                                         $HtmlLines.= '" coolradio="';
                                         $HtmlLines.= $fieldIDOnly;
@@ -1890,7 +1909,7 @@ print_r($fruit);die;
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Facility Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" required>
+                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
@@ -2007,7 +2026,7 @@ print_r($fruit);die;
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" required>
+                                                     <input type="hidden" class="form-control" value="Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" >
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
@@ -2153,7 +2172,7 @@ print_r($fruit);die;
                                                     <label>CADRE</label>
                                                     <br>
                                                     <label>Facility Incharge</label>
-                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" required>
+                                                     <input type="hidden" class="form-control" value="Facility Incharge" id="FacilityIncharge" Name="FacilityIncharge" placeholder="Enter Name" >
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
@@ -2331,7 +2350,7 @@ print_r($fruit);die;
                                           $AjaxNames[]= $fieldIDName;
                                         $HtmlLines.= '
                                                                                             <div class="input-group">
-                                                                                           <input class="form-control thenormal" type="text" name ="';
+                                                                                           <input class="form-control asave thenormal" type="text" name ="';
                                         $HtmlLines.= $fieldIDName;
                                         $HtmlLines.= '" id="';
                                         $HtmlLines.= $fieldIDName;
@@ -2358,7 +2377,7 @@ print_r($fruit);die;
                                           $AjaxNames[]= $fieldIDName;
                                         $HtmlLines.= '
                                                                                             
-                                                                                           <textarea class="form-control thenormal" type="text" name ="';
+                                                                                           <textarea class="form-control asave thenormal" type="text" name ="';
                                         $HtmlLines.= $fieldIDName;
                                         $HtmlLines.= '" id="';
                                         $HtmlLines.= $fieldIDName;
@@ -2379,7 +2398,7 @@ print_r($fruit);die;
                                           $AjaxNames[]= $fieldIDName;
                                         $HtmlLines.= '
                                                                                             <div class="input-group">
-                                                                                           <input class="form-control thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
+                                                                                           <input class="form-control asave thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
                                         $HtmlLines.= $fieldIDName;
                                         $HtmlLines.= '" id="';
                                         $HtmlLines.= $fieldIDName;
@@ -2401,11 +2420,11 @@ print_r($fruit);die;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
 
-                                                                                                        <input class = "thenormal" name="';
+                                                                                                        <input class = " asave thenormal" name="';
                                     $HtmlLines.= $fieldName;
                                     $HtmlLines.= '" value = "" id ="';
                                     $HtmlLines.= $fieldName . 'other';
-                                    $HtmlLines.= '" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required">';
+                                    $HtmlLines.= '" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required" >';
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
@@ -2421,7 +2440,7 @@ print_r($fruit);die;
                                         $HtmlLines.= $fieldValue;
                                         $HtmlLines.= '"id ="';
                                         $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" type="radio" >
+                                        $HtmlLines.= '" type="radio" class="asave" >
                                                                                                              <x automaticallyVisibleIfIDChecked = "';
                                         $HtmlLines.= $fieldIDOnly;
                                         $HtmlLines.= '"></x>
@@ -2440,7 +2459,7 @@ print_r($fruit);die;
                                       $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">             
-                                                                                     <select class="form-control select2 thenormal" style="width: 100%;" name="';
+                                                                                     <select class="form-control select2 asave thenormal" style="width: 100%;" name="';
                                     $HtmlLines.= $fieldName;
                                     $HtmlLines.= '" id="';
                                     $HtmlLines.= $fieldName;
@@ -2476,7 +2495,7 @@ print_r($fruit);die;
                                       $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
-                                                                                     <select  class="form-control select2 themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
+                                                                                     <select  class="form-control select2 asave themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
                                     $HtmlLines.= $fieldName;
                                     $HtmlLines.= '[]" id="';
                                     $HtmlLines.= $fieldName;
@@ -2577,7 +2596,7 @@ print_r($fruit);die;
                                     $HtmlLines.= ' valign="baseline">
                                                                                                         <div> <p>
 
-                                                                                                        <input class ="thenormal"  name="';
+                                                                                                        <input class ="asave thenormal"  name="';
                                     $HtmlLines.= $fieldName;
                                     $HtmlLines.= '" value = "" id ="';
                                     $HtmlLines.= $fieldName . 'other';
@@ -2597,7 +2616,7 @@ print_r($fruit);die;
                                         $HtmlLines.= $fieldValue;
                                         $HtmlLines.= '"id ="';
                                         $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" type="radio">
+                                        $HtmlLines.= '" type="radio" class="asave" >
                                                                                                             <x coolradio = "';
                                         $HtmlLines.= $fieldIDOnly;
                                         $HtmlLines.= '"></x>
@@ -2607,7 +2626,7 @@ print_r($fruit);die;
                                     }
                                     
                                     $Other = 'other';
-                                    $HtmlLines.= '</p> <input class="form-control" type="text" id="';
+                                    $HtmlLines.= '</p> <input class="form-control asave" type="text" id="';
                                     $HtmlLines.= $fieldName . $Other;
                                     $HtmlLines.= '" coolradio="';
                                     $HtmlLines.= $fieldIDOnly;
