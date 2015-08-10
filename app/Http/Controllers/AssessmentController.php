@@ -127,7 +127,7 @@ class AssessmentController extends Controller {
 	public function show($id,$county)
 	{
 			$sv = '%'.$id.'%';
-			if ($id != 'IM') $Assessments = Surveyview::all();
+			if ($id != 'IM') $Assessments = Surveyview::where('County','like',$county)->where('Survey','like',$sv)->get();
 			else $Assessments = Imciview::all();
 		return view('assessments.view')->with('Assessments',$Assessments)->with('location','ass')->with('title','Assessments')->with('id',$id);
 	}
