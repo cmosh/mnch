@@ -212,7 +212,7 @@ $('#some_id').click(function() {
 $('#some_id2').click(function() {
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County').val();
+  var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County2').val();
   //alert(linki);
    $(location).attr('href', linki);
 });
