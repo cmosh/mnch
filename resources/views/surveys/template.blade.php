@@ -87,7 +87,7 @@ $('.asave').change(function () {
        data: data,
       success: function(data){
        var dt = new Date($.now())
-           $('#autosavetext').text('Autosaved '+ dt);    
+           $('#autosavetext').text('(Autosaved '+ dt +')');    
       }
     }); 
         
