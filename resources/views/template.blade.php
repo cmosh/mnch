@@ -70,6 +70,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         color: #B94A48;
         display: none;
       }
+	  
+	  .parsley-custom-error-message, .parsley-required{
+		 font-style:bold; 
+		color: #FF0000;  
+	  }
     </style>
 
     @yield('cdns')
