@@ -56,7 +56,10 @@
 
            @if (isset($AssID)==true)
                @if($location == 'MN'||$location == 'IM'||$location == 'CH')
-
+			<li><a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span>OPEN/CLOSE MENU</span>
+			</a></li>  
+				
             <li> <a href="/assessments/cancel/{{$AssID}}"  role="button">
               <span><button id="cancelbt" class="btn btn-block btn-warning btn-xs">Cancel and Discard</button></span>  
           </a> </li>
