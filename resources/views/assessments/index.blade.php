@@ -118,7 +118,7 @@
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                    
-                    <button  id="some_id" class="btn btn-danger form-control">Next</button>
+                    <button  id="some_id" class="btn btn-danger form-control">Begin</button>
 
                   </div><!-- /.box-footer -->
 
@@ -172,7 +172,7 @@ $('#date').datepicker({
                   </div><!-- /.box-body -->
                   <div class="box-footer">
                    
-                    <button  id="some_id2" class="btn btn-info form-control">Next</button>
+                    <button  id="some_id2" class="btn btn-info form-control">View</button>
 
                   </div><!-- /.box-footer -->
 
