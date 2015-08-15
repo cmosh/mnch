@@ -46,7 +46,7 @@ Route::get('assessments/show/{id}','surveys@show');
 Route::get('assessments/create/{id}/{sv}','surveys@create');
 
 Route::get('assessment/{sv}','AssessmentController@index');
-Route::get('assessments/{id}/{county}','AssessmentController@show');
+Route::get('assessments/{id}/{county}/{term}','AssessmentController@show');
 Route::get('assessments/{id}/{date}/{term}/{county}','AssessmentController@create');
 Route::post('assessments/{id}','AssessmentController@store');
 

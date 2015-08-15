@@ -7,6 +7,8 @@
 @if($loc=='IM')
 
 <?php $surveyname = substr ($id, 0,4);?>
+@elseif($loc=='MN')
+<?php $surveyname = substr ($id, 0,3);?>
 @else
 <?php $surveyname = substr ($id, 0,2);?>
 @endif
@@ -22,9 +24,15 @@
     </div>
     @if($loc!='IM')
     <div class="box-body">
+    <?php
+
+      $date= date_create($thedate);
+      $dateformated=date_format($date,'d F Y');
+
+     ?>
 
           <p><b>County  :</b> {{$thecounty}} </p>
-          <p><b>Date    :</b> {{$thedate}} </p>
+          <p><b>Date    :</b> <?php echo  $dateformated ?> </p>
       
           <p><b>Assessment Term:</b> {{$theterm}}</p>
 

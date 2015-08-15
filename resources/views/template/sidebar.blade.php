@@ -46,7 +46,7 @@
            @elseif($location == 'ass')
 
              <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
-            <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li>
+           <!--  <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li> -->
 
 
 

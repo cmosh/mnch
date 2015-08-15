@@ -151,7 +151,16 @@
                      
                       </div>
                     </div>
-                  
+                  <div class="form-group">
+                      <label for="Term" class="col-sm-2 control-label">Term</label>
+                      <div class="col-sm-10">
+                       <select class="form-control select2 " style="width: 100%;" name="Term" id="Term_2"> 
+                       <option value ="Baseline" id ="Term1" >Baseline</option>
+                        <option value ="Midterm" id ="Term2" >Midterm</option>
+                         <option value ="Endterm" id ="Term1" >Endterm</option>
+                       </select>
+                     
+                      </div>
                    @else
                     <div>
                    <p>Click Next to view evaluated Health Workers</p>
@@ -212,7 +221,7 @@ $('#some_id').click(function() {
 $('#some_id2').click(function() {
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County2').val();
+  var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
   //alert(linki);
    $(location).attr('href', linki);
 });

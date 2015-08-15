@@ -6,8 +6,40 @@
   @endsection
 
 @section('pageinfo')
+<div class="box box-primary">
+@if($id=='IM')
 
-  <h2>Assessments</h2>
+<?php $surveyname = substr ($id, 0,4);?>
+@elseif($id=='MN')
+<?php $surveyname = substr ($id, 0,3);?>
+@else
+<?php $surveyname = substr ($id, 0,2);?>
+@endif
+
+  
+
+
+
+
+<div class="box-header">
+<div class="box-title">
+
+
+    <b><?php echo $surveyname; ?> Assessments </b>
+    </div>
+    </div>
+    @if($id!='IM')
+    <div class="box-body">
+          <p><b>County  :</b> {{$thecounty}} </p>
+          <p><b>Assessment Term:</b> {{$term}}</p>
+
+
+</div>
+@endif
+</div>
+@endsection
+
+@section('content')
         <div class="box">
                 <div class="box-header">
                   <h3 class="box-title"> Search </h3>
