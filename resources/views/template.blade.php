@@ -34,7 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       textarea.parsley-success {
         color: #468847;
         background-color: #DFF0D8;
-        border: 1px solid #D6E9C6;
+        border: 3px solid #D6E9C6;
       }
 
       input.parsley-error,
@@ -42,16 +42,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
       textarea.parsley-error {
         color: #FF0000;
         background-color: #F2DEDE;
-        border: 1px solid #FF0000;
+        border: 3px solid #FF0000;
       }
 
       .parsley-errors-list {
-        margin: 2px 0 3px 0;
-        padding: 0;
+        margin: 3px 1 4px 1;
+        padding: 1;
         list-style-type: none;
         font-size: 0.9em;
         line-height: 0.9em;
-        opacity: 0;
+        opacity: 0.2;
         -moz-opacity: 0;
         -webkit-opacity: 0;
 

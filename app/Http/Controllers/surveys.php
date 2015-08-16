@@ -1602,16 +1602,8 @@ print_r($fruit);die;
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
-                                                                                     <select  class="form-control select2 asave themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '[]" id="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '"   data-parsley-mincheck="2" data-parsley-error-message="Required"> 
-                                                                                             <option  value =" " id ="';
-                                        $HtmlLines.= $fieldName . "def";
-                                        $HtmlLines.= '"  style ="display:none;" selected=""></option>
-                                                                                     ';
+                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
+                                         <select  class="form-control select2 asave thenormal themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
                                         
                                         foreach ($fieldValueList as $fieldd) {
                                             
@@ -1621,27 +1613,76 @@ print_r($fruit);die;
                                                        
                                                     
                                                     if (     (strpos($H, $fieldValue) !== false)           ) {
-                                                        $HtmlLines.= '<option value ="';
-                                                        $HtmlLines.= $fieldValue;
-                                                        $HtmlLines.= '" selected>';
-                                                        $HtmlLines.= $fieldd->Label;
-                                                        $HtmlLines.= '</option>';
+                                                        $HtmlLines.= '<option value ="'.$fieldValue.'" selected>'.$fieldd->Label.'</option>';
                                                     } 
                                                     else {
-                                                        $HtmlLines.= '<option value ="';
-                                                        $HtmlLines.= $fieldValue;
-                                                        $HtmlLines.= '" >';
-                                                        $HtmlLines.= $fieldd->Label;
-                                                        $HtmlLines.= '</option>';
+                                                        $HtmlLines.= '<option value ="'.$fieldValue.'">'.$fieldd->Label.'</option>';
                                                     }
                                                 
                                             
                                         }
-                                        $HtmlLines.= '   </select>
-                                                                                                      </div>';
+                                        $HtmlLines.= '</select></div>';
                                     }
                                     
                                     break;
+
+                                      case "coolmultiplecombo":
+
+                                    if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                    if ($act == 'show') {
+                                        
+                                        $HtmlLines.= '
+
+                                                                                         style="vertical-align:middle">';
+                                        
+                                       if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                        
+                                        if ($H == null || $H == ' ' ||$H =='error') {
+                                            
+                                            $HtmlLines.= $H;
+                                        } 
+                                        else {
+                                            
+                                            $vl = explode(",", $H);
+                                            
+                                            foreach ($vl as $vll) {
+                                                
+                                                if ($vll != ' ') {
+                                                    $HtmlLines.= $fieldValueList->get($vll)->Label;
+                                                    $HtmlLines.= ",";
+                                                }
+                                            }
+                                            
+                                            $HtmlLines = rtrim($HtmlLines, ",");
+                                        }
+                                    } 
+                                    else {
+                                    $ColID[] = $ColumnSetIDName;
+                                    
+                                    $fieldName = $ColumnSetIDName . $fieldsetID;
+                                     $AjaxNames[]= $fieldName;
+                                    $other = 'other';
+                                    $hidden = 'hidden';
+                                    $HtmlLines.= ' valign="baseline">
+                                     <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">              
+                                    <select class="form-control select2 themultiple thenormal coolmultiple asave" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
+                                    
+                                    foreach ($fieldValueList as $fieldd) {
+                                        
+                                        $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
+                                        $fieldValue = $fieldd->Value;
+                                        
+                                        $HtmlLines.= '<option value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'">'.$fieldd->Label.'</option> ';
+                                    }
+                                    
+                                    $HtmlLines.= '</select>     
+                                    <input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
+                                    
+                                    
+                                  }
+
+                                    break;
+
 
                                 case "coolradio":
                                      if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
@@ -1670,58 +1711,40 @@ print_r($fruit);die;
                                         
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
                                         $AjaxNames[]= $fieldName;
-                                        $HtmlLines.= ' valign="baseline">
-                                                                                                        <div> <p>
-
-                                                                                                        <input class="thenormal asave" name="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '" value = "" id ="';
-                                        $HtmlLines.= $fieldName . 'other';
-                                        $HtmlLines.= '" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';;
+                                        $HtmlLines.= ' valign="baseline"><div><p>
+                                        <input class="thenormal asave" name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                             $fieldValue = $fieldd->Value;
                                             
                                             $HtmlLines.= '<label>';
-                                            if ($fieldValue == $H) {
-                                                $HtmlLines.= '<input name="';
-                                                $HtmlLines.= $fieldName;
-                                                $HtmlLines.= '" value ="';
-                                                $HtmlLines.= $fieldValue;
-                                                $HtmlLines.= '"id ="';
-                                                $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio"  class="asave" checked>';
-                                            } 
-                                            else {
-                                                $HtmlLines.= '<input name="';
-                                                $HtmlLines.= $fieldName;
-                                                $HtmlLines.= '" value ="';
-                                                $HtmlLines.= $fieldValue;
-                                                $HtmlLines.= '"id ="';
-                                                $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio" class="asave" >';
-                                            }
+
+                                            if(is_numeric($H)){
+                                               $HtmlLines.= 'numeric';
+
+                                            // if ( $fieldValue == $H) {
+                                            //     $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio"  class="asave" checked>';
+                                            //   $H = '';
+                                            // } 
+                                            // elseif(  $fieldValue == -1 ) {
+                                            //     $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$H.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" checked>';
+                                            // }
+                                            // else{
+                                            //     $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" >';
+                                            //     }
                                             
-                                            $HtmlLines.= ' <x coolradio = "';
-                                            $HtmlLines.= $fieldIDOnly;
-                                            $HtmlLines.= '"></x>
-                                                                                                             ';
-                                            $HtmlLines.= $fieldd->Label . '&nbsp;&nbsp;';
-                                            $HtmlLines.= '</label>';
+                                          //  $HtmlLines.= ' <x coolradio = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
+                                        }else{
+                                                $HtmlLines.= 'not numeric';
+
+                                              }
                                         }
                                         
                                         $Other = 'other';
-                                        $HtmlLines.= '</p> <input class="form-control asave" value="' . $H . '" type="text" id="';
-                                        $HtmlLines.= $fieldName . $Other;
-                                        $HtmlLines.= '" coolradio="';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" data-parsley-error-message="Required" > </div>';
-                                        $HtmlLines.= '<script>
-                                                                                                            
-
-                                                                                                                    </script>';
-                                    }
+                                        $HtmlLines.= '</p> <input coolstore = "'.$fieldIDOnly.'" class="form-control thenormal coolhidden asave" value="' . $H . '" type="text" id="'.$fieldName . $Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="Required" > </div>';
+                                       
+                                        }
                                     
                                     break;
 
@@ -1928,15 +1951,16 @@ print_r($fruit);die;
                                                     <label>NAME</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" required>
                                                 </div>
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
                                                     placeholder="Enter Mobile" required>
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -1951,14 +1975,15 @@ print_r($fruit);die;
                                                     <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
+                                                </div>
+                                                <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
-                                                 <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                                 
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -1972,15 +1997,16 @@ print_r($fruit);die;
                                                     <label>NAME</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeName" name= "MaternityInchargeName" placeholder="Enter Name">
                                                 </div>
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -1994,15 +2020,16 @@ print_r($fruit);die;
                                                     <label>NAME</label>
                                                     <input type="text" class="form-control" id="OPDInchargeName" name= "OPDInchargeName" placeholder="Enter Name">
                                                 </div>
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" placeholder="Enter Email">
+                                                </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -2191,15 +2218,18 @@ print_r($fruit);die;
                                                     <label>NAME</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name" required>
                                                 </div>
+
+                                                <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
+                                                </div>
+
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" 
                                                     placeholder="Enter Mobile" required>
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="FacilityInchargeEmail"  name="FacilityInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -2214,14 +2244,16 @@ print_r($fruit);die;
                                                     <input type="text" class="form-control" id="MCHInchargeName" name= "MCHInchargeName" placeholder="Enter Name">
                                                 </div>
                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
+                                                </div>
+
+                                                <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
-                                                 <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MCHInchargeEmail"  name="MCHInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                                 
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -2235,15 +2267,18 @@ print_r($fruit);die;
                                                     <label>NAME</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeName" name= "MaternityInchargeName" placeholder="Enter Name">
                                                 </div>
+
+                                                 <div class="col-xs-3">
+                                                    <label>EMAIL</label>
+                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
+                                                </div>
+
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
                                                     <input type="text" class="form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" 
                                                     placeholder="Enter Mobile">
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>EMAIL</label>
-                                                    <input type="email" class="form-control" id="MaternityInchargeEmail"  name="MaternityInchargeEmail" placeholder="Enter Email">
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         
@@ -2503,7 +2538,7 @@ print_r($fruit);die;
                                     }
                                     
                                     $Other = 'other';
-                                    $HtmlLines.= '</p> <input class="form-control coolhidden thenormal asave"  coolstore="'.$fieldIDOnly.'" type="text" id="'.$fieldName.$Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="" > </div>';
+                                    $HtmlLines.= '</p> <input class="form-control coolhidden thenormal asave"  coolstore="'.$fieldIDOnly.'" type="text" id="'.$fieldName.$Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="Required" > </div>';
                          
                                     break;
 
