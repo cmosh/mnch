@@ -30,7 +30,7 @@ class builder extends Controller {
         $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
         
         // echo $Contacts;
-        $datass = DataRecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
+        $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
         
         $TheAssessor = Assessor::where('AssID', '=', $AssID)->first();
         $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
