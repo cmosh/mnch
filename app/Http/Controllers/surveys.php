@@ -1522,46 +1522,35 @@ print_r($fruit);die;
                                         }
                                     } 
                                     else {
+                                      //combothatnow
                                         
                                         $ColID[] = $ColumnSetIDName;
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">             
-                                                                                     <select class="form-control select2 asave thenormal" style="width: 100%;" name="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '" id="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '" required data-parsley-error-message="Required"> 
-                                                                                     <option value ="" id ="';
-                                        $HtmlLines.= $fieldName . "def";
-                                        $HtmlLines.= '"  style ="display:none;" selected=""></option>
-                                                                                     
-
-                                                                                     ';
-                                        
+                                        <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">   
+                                        <select class="form-control select2 asave thenormal" style="width: 100%;" name="'.$fieldName.'" id="'.$fieldName.'" required data-parsley-error-message="Required"> 
+                                        <option value ="" id ="'.$fieldName.'def"  style ="display:none;" ></option>';
+                                        if($H == '-51'){
+                                          $HtmlLines.= '<option value ="-51" selected>No information provided</option>';
+                                        }
+                                        else{
+                                          $HtmlLines.= '<option value ="-51" >No information provided</option>';}
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                             $fieldValue = $fieldd->Value;
                                             
                                             if ($fieldValue == $H) {
-                                                $HtmlLines.= '<option value ="';
-                                                $HtmlLines.= $fieldValue;
-                                                $HtmlLines.= '" selected>';
-                                                $HtmlLines.= $fieldd->Label;
-                                                $HtmlLines.= '</option>';
+                                                $HtmlLines.= '<option value ="'.$fieldValue.'" selected>'.$fieldd->Label.'</option>';
                                             } 
+
                                             else {
-                                                $HtmlLines.= '<option value ="';
-                                                $HtmlLines.= $fieldValue;
-                                                $HtmlLines.= '" >';
-                                                $HtmlLines.= $fieldd->Label;
-                                                $HtmlLines.= '</option>';
+                                                $HtmlLines.= '<option value ="'.$fieldValue.'" >'.$fieldd->Label.'</option>';
                                             }
-                                        }
-                                        $HtmlLines.= '   </select>
-                                                                                                      </div>';
+                                        
+                                      }
+                                        $HtmlLines.= '</select> </div>';
                                     }
                                     
                                     break;
