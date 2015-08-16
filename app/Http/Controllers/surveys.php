@@ -2340,11 +2340,7 @@ print_r($fruit);die;
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
-                                        
-                                        $HtmlLines.= $fieldd->Label;
+                                        $HtmlLines.= 'style="vertical-align:middle">'.$fieldd->Label;
                                     }
                                     
                                     break;
@@ -2352,26 +2348,17 @@ print_r($fruit);die;
                                 case "text":
                                     
                                     $HtmlLines.= 'style="vertical-align:middle"  >
-                                                                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
+                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID .'" >';
                                     $ColID[] = $ColumnSetIDName;
                                     
                                     foreach ($fieldValueList as $fieldd) {
 
-                                       
-                                        
                                         $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
                                           $AjaxNames[]= $fieldIDName;
-                                        $HtmlLines.= '
-                                                                                            <div class="input-group">
-                                                                                           <input class="form-control asave thenormal" type="text" name ="';
-                                        $HtmlLines.= $fieldIDName;
-                                        $HtmlLines.= '" id="';
-                                        $HtmlLines.= $fieldIDName;
-                                        $HtmlLines.= '" value="" required data-parsley-error-message="Required">';
+                                        $HtmlLines.= '<div class="input-group">
+                                       <input class="form-control asave thenormal" type="text" name ="'.$fieldIDName.'" id="'.$fieldIDName.'" value="" data-parsley-error-message="Required" required>';
                                         if ($fieldd->Label != "") {
-                                            $HtmlLines.= '<span class="input-group-addon">';
-                                            $HtmlLines.= $fieldd->Label;
-                                            $HtmlLines.= '</span>';
+                                            $HtmlLines.= '<span class="input-group-addon">'.$fieldd->Label.'</span>';
                                         }
                                         $HtmlLines.= '</div> ';
                                     }
@@ -2380,46 +2367,34 @@ print_r($fruit);die;
                                     break;
 
                                 case "textarea":
-                                    $HtmlLines.= 'style="vertical-align:middle"  >
-                                                                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
+                                    $HtmlLines.= 'style="vertical-align:middle">
+                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
                                     $ColID[] = $ColumnSetIDName;
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                          $AjaxNames[]= $fieldIDName;
-                                        $HtmlLines.= '
-                                                                                            
-                                                                                           <textarea class="form-control asave thenormal" type="text" name ="';
-                                        $HtmlLines.= $fieldIDName;
-                                        $HtmlLines.= '" id="';
-                                        $HtmlLines.= $fieldIDName;
-                                        $HtmlLines.= '" value="" required data-parsley-error-message="Required"></textarea>';
+                                        $AjaxNames[]= $fieldIDName;
+                                        $HtmlLines.= '<textarea class="form-control asave thenormal" type="text" name ="'.$fieldIDName.'" id="'.$fieldIDName.'" value="" data-parsley-error-message="Required" required></textarea>';
                                     }
                                     $HtmlLines.= '</div>';
                                     
                                     break;
 
                                 case "number":
-                                    $HtmlLines.= 'style="vertical-align:middle" >
-                                                                                    <div  automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
+                                    $HtmlLines.= 'style="vertical-align:middle">
+                                    <div  automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
                                     $ColID[] = $ColumnSetIDName;
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
-                                          $AjaxNames[]= $fieldIDName;
-                                        $HtmlLines.= '
-                                                                                            <div class="input-group">
-                                                                                           <input class="form-control asave thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="';
-                                        $HtmlLines.= $fieldIDName;
-                                        $HtmlLines.= '" id="';
-                                        $HtmlLines.= $fieldIDName;
-                                        $HtmlLines.= '" value="" required data-parsley-error-message="Required">';
+                                        $AjaxNames[]= $fieldIDName;
+                                        $HtmlLines.= '<div class="input-group">
+                                        <input class="form-control asave thenormal" data-inputmask="&quot;mask&quot;: &quot;9999&quot;" data-mask="" type="text" name ="'.$fieldIDName.'" id="'.$fieldIDName.'" value="" required data-parsley-error-message="Required">';
+                                       
                                         if ($fieldd->Label != "") {
-                                            $HtmlLines.= '<span class="input-group-addon">';
-                                            $HtmlLines.= $fieldd->Label;
-                                            $HtmlLines.= '</span>';
+                                            $HtmlLines.= '<span class="input-group-addon">'.$fieldd->Label.'</span>';
                                         }
                                         $HtmlLines.= '</div> ';
                                     }
@@ -2429,39 +2404,19 @@ print_r($fruit);die;
                                 case "radio":
                                     $ColID[] = $ColumnSetIDName;
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
-                                      $AjaxNames[]= $fieldName;
+                                    $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
-
-                                                                                                        <input class = " asave thenormal" name="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '" value = "" id ="';
-                                    $HtmlLines.= $fieldName . 'other';
-                                    $HtmlLines.= '" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required" >';
+                                    <div automaticallyVisibleIfIDChecked="'.$Single_ColumnSetCollection->dependencyID.'">
+                                    <input class = " asave thenormal" name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked=""  data-parsley-error-message="Required" required>';
+                                   
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
                                         
-                                        $HtmlLines.= '<label>
-                                                                                                              
-                                                                                                            
-
-                                                                                                            <input name="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '" value ="';
-                                        $HtmlLines.= $fieldValue;
-                                        $HtmlLines.= '"id ="';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" type="radio" class="asave" >
-                                                                                                             <x automaticallyVisibleIfIDChecked = "';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '"></x>
-                                                                                                             ';
-                                        $HtmlLines.= $fieldd->Label . '&nbsp;&nbsp;';
-                                        $HtmlLines.= '</label>';
-                                    }
-                                    
+                                        $HtmlLines.= '<label> <input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class="asave">
+                                        <x automaticallyVisibleIfIDChecked = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
+                                    }                                    
                                     $HtmlLines.= ' </div>';
                                     
                                     break;
@@ -2470,36 +2425,22 @@ print_r($fruit);die;
                                     $ColID[] = $ColumnSetIDName;
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
                                       $AjaxNames[]= $fieldName;
-                                    $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">             
-                                                                                     <select class="form-control select2 asave thenormal" style="width: 100%;" name="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '" id="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '" required data-parsley-error-message="Required"> 
-                                                                                     <option value ="" id ="';
-                                    $HtmlLines.= $fieldName . "def";
-                                    $HtmlLines.= '"  style ="display:none;" selected=""></option>
-                                                                                     
 
-                                                                                     ';
+                                    $HtmlLines.= 'valign="baseline">
+                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '"> 
+                                    <select class="form-control select2 asave thenormal" style="width: 100%;" name="'.$fieldName.'" id="'.$fieldName.'" required data-parsley-error-message="Required"> 
+                                    <option value ="" id ="'.$fieldName.'def"  style ="display:none;" selected="" hidden></option>
+                                    <option value ="-51" id ="'.$fieldName.'noinfo"  >No information Provided</option>';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
                                         
-                                        $HtmlLines.= '<option value ="';
-                                        $HtmlLines.= $fieldValue;
-                                        $HtmlLines.= '" >';
-                                        $HtmlLines.= $fieldd->Label;
-                                        $HtmlLines.= '</option>
-                                                                                                         
-                                                                                                         ';
+                                        $HtmlLines.= '<option id="'.$fieldIDOnly.'" value ="'.$fieldValue.'" >'.$fieldd->Label.'</option>';
                                     }
                                     $HtmlLines.= '   </select>
-                                                                                                      </div>';
-                                    
+                                    </div>';
                                     break;
 
                                 case "multiplecombo":
@@ -2508,7 +2449,7 @@ print_r($fruit);die;
                                       $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
                                     <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
-                                    <select  class="form-control select2 asave themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'"   data-parsley-mincheck="1" data-parsley-error-message="Required">';
+                                    <select  class="form-control select2 asave thenormal themultiple" multiple="multiple" style="width: 100%;" data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'"   data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
@@ -2530,7 +2471,7 @@ print_r($fruit);die;
                                     $hidden = 'hidden';
                                     $HtmlLines.= ' valign="baseline">
                                      <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">              
-                                    <select class="form-control select2 themultiple coolmultiple asave" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" >';
+                                    <select class="form-control select2 themultiple thenormal coolmultiple asave" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
@@ -2562,7 +2503,7 @@ print_r($fruit);die;
                                     }
                                     
                                     $Other = 'other';
-                                    $HtmlLines.= '</p> <input class="form-control  asave" type="text" id="'.$fieldName.$Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="Required" > </div>';
+                                    $HtmlLines.= '</p> <input class="form-control coolhidden thenormal asave"  coolstore="'.$fieldIDOnly.'" type="text" id="'.$fieldName.$Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="" > </div>';
                          
                                     break;
 

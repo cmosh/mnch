@@ -238,9 +238,6 @@ $('#some_id2').click(function() {
     $("[name="+name+"]:checked").each(function() {
         
         $("[coolradio=" + this.id+"]").show();
-           $("[coolradio=" + this.id+"]").attr('name',name+'[]');
-            
-
              $("[coolradio=" + this.id+"]").attr('required','');
 
 
@@ -250,8 +247,7 @@ $('#some_id2').click(function() {
     $("[name="+name+"]:not(:checked)").each(function() {
         
         $("[coolradio=" + this.id+"]").hide();
-        $("[coolradio=" + this.id+"]").removeAttr('name');
-           $("[coolradio=" + this.id+"]").removeAttr('required');
+        $("[coolradio=" + this.id+"]").removeAttr('required');
            
           
     });
@@ -286,7 +282,7 @@ $(document).ready( function() {
     $("[name="+name+"]:checked").each(function() {
         $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
         
-    $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','2');
+    $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','1');
      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").attr('required','');
           
              
@@ -335,13 +331,8 @@ $( ".coolhidden" ).change(function() {
   var replaceval =  $(this).attr('coolstore');
 
   $('#'+replaceval).val(this.value);
-  
 
-  var newvalue = $('#'+replaceval).val();
-  
-   
-   alert(newvalue);
-
+ 
 });
 
 
