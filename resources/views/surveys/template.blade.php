@@ -35,7 +35,7 @@
                 {!! Form::submit('Submit',['class' => 'submit btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
                 {!! Form::close() !!}
-                 <a  href="#top">  <button  id="some_id2" class="send-btn btn btn-info form-control" >Confirm and Proceed to review</button></a>
+                 <a>  <button  id="some_id2" class="send-btn btn btn-info form-control" >Confirm and Proceed to Review</button></a>
 
 				
 			
@@ -173,6 +173,8 @@ $('#some_id2').click(function() {
 
     $('#thesubmit').show();
     $('#saved').show();
+    window.scrollTo(0, 0);
+    
     $('#some_id2').hide();
 });
 
@@ -283,7 +285,7 @@ $(document).ready( function() {
         $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
         
     $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','1');
-    
+
      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").attr('required','');
           
              
