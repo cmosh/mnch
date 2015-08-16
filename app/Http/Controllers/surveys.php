@@ -1657,6 +1657,7 @@ print_r($fruit);die;
                                         }
                                     } 
                                     else {
+                                      //resume coolmultiplecombo
                                     $ColID[] = $ColumnSetIDName;
                                     
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
@@ -1671,13 +1672,41 @@ print_r($fruit);die;
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
+                                        $varother = substr(strrchr($H, ","), 1);
+                                        if ($varother == -1 ){}else{
+                                        if (is_numeric($varother)) {$varother='Not of this world :)';}}
                                         
-                                        $HtmlLines.= '<option value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'">'.$fieldd->Label.'</option> ';
+                                            if (     (strpos($H, $fieldValue) !== false)  ) {
+                                                        $HtmlLines.= '<option value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" selected>'.$fieldd->Label.'</option> ';
+                                                    } 
+                                                    else{
+
+                                            if (     (strpos($H, $varother) !== false) and $fieldValue == -1 ) {
+                                                        $HtmlLines.= '<option value ="'.$varother.'"id ="'.$fieldIDOnly.'" selected>'.$fieldd->Label.'</option> ';
+                                                    } 
+
+
+                                                    else {
+                                                         $HtmlLines.= '<option value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'">'.$fieldd->Label.'</option> ';
+                                                    }
+
+                                                  }
+
+                                      
+                                       
                                     }
                                     
-                                    $HtmlLines.= '</select>     
-                                    <input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
+                                    $HtmlLines.= '</select>';
+
+                                    if (  $varother == 'Not of this world :)' ) {
+                                      $HtmlLines.= '<input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
+                                    } else {
+                                      if ($varother == -1){$varother = null;}
+                                     $HtmlLines.= '<input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" style="width: 100%;" required> </div>';
+                                    }
                                     
+
+
                                     
                                   }
 

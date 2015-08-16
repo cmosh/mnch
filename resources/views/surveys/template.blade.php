@@ -283,6 +283,7 @@ $(document).ready( function() {
         $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
         
     $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','1');
+    
      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").attr('required','');
           
              
