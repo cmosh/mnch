@@ -2,16 +2,16 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\assessments;
-use App\Facilities;
-use App\Participants;
-use App\Survey;
-use App\Assessor;
-use App\countie;
-use App\Surveyview;
-use App\Participantsview;
-use App\Imciview;
-use App\Autosaving;
+use App\Tables\assessments;
+use App\Tables\Facilities;
+use App\Tables\Participants;
+use App\Tables\Survey;
+use App\Tables\Assessor;
+use App\Tables\countie;
+use App\Tables\Surveyview;
+use App\Tables\Participantsview;
+use App\Tables\Imciview;
+use App\Tables\Autosaving;
 use Request;
 
 

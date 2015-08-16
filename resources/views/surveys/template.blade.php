@@ -245,12 +245,14 @@ $('#some_id2').click(function() {
 
 
 
+
+
             });
     $("[name="+name+"]:not(:checked)").each(function() {
         
         $("[coolradio=" + this.id+"]").hide();
         $("[coolradio=" + this.id+"]").removeAttr('required');
-           
+            $("[coolradio=" + this.id+"]").val('');
           
     });
 }
@@ -297,6 +299,9 @@ $(document).ready( function() {
        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").hide();
           $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").removeAttr('data-parsley-mincheck');
       $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").removeAttr('required');
+            $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".rmselect").removeAttr('selected');
+      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").removeAttr('checked');
+        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").val('');
          
 
     });
@@ -328,6 +333,8 @@ $(document).ready( function() {
  <!-- Page script -->
     
 <script type="text/javascript">
+
+
 
 $( ".coolhidden" ).change(function() {
 

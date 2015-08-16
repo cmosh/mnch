@@ -1,15 +1,12 @@
-<?php namespace App;
+<?php namespace App\Tables;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Datarecord extends Model {
-	
+class Contact extends Model {
 
 	//
 
-	protected $table='datarecords';
-
-	public static function createOrUpdate($data, $keys) {
+	 public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();
     if (is_null($record)) {
         return self::create($data);
