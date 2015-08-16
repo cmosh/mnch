@@ -2502,7 +2502,7 @@ print_r($fruit);die;
                                     <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '"> 
                                     <select class="form-control select2 asave thenormal" style="width: 100%;" name="'.$fieldName.'" id="'.$fieldName.'" required data-parsley-error-message="Required"> 
                                     <option value ="" id ="'.$fieldName.'def"  style ="display:none;" selected="" hidden></option>
-                                    <option value ="-51" id ="'.$fieldName.'noinfo"  >No information Provided</option>';
+                                    <option value ="-51" id ="'.$fieldName.'noinfo"  >No information provided</option>';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
