@@ -1713,33 +1713,52 @@ print_r($fruit);die;
                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline"><div><p>
                                         <input class="thenormal asave" name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';
-                                        foreach ($fieldValueList as $fieldd) {
+                                       
+                                        if(is_numeric($H) ){
+                                       foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                             $fieldValue = $fieldd->Value;
                                             
                                             $HtmlLines.= '<label>';
 
-                                            if(is_numeric($H)){
-                                               $HtmlLines.= 'numeric';
-
-                                            // if ( $fieldValue == $H) {
-                                            //     $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio"  class="asave" checked>';
-                                            //   $H = '';
-                                            // } 
-                                            // elseif(  $fieldValue == -1 ) {
-                                            //     $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$H.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" checked>';
-                                            // }
-                                            // else{
-                                            //     $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" >';
-                                            //     }
+                                            if ($fieldValue == $H) {
+                                                $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio"  class="asave" checked>';
                                             
-                                          //  $HtmlLines.= ' <x coolradio = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
-                                        }else{
-                                                $HtmlLines.= 'not numeric';
+                                            } 
+                                         
+                                            else{
+                                                $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" >';
+                                                }
+                                            
+                                            $HtmlLines.= ' <x coolradio = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
 
-                                              }
                                         }
+                                         $H = '';
+                                      }
+                                      else {
+                                         foreach ($fieldValueList as $fieldd) {
+                                            
+                                            $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
+                                            $fieldValue = $fieldd->Value;
+                                            
+                                            $HtmlLines.= '<label>';
+
+                                            if ($fieldValue == -1 ) {
+                                                $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$H.'"id ="'.$fieldIDOnly.'" type="radio"  class="asave" checked>';
+                                            
+                                            } 
+                                         
+                                            else{
+                                                $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" >';
+                                                }
+                                            
+                                            $HtmlLines.= ' <x coolradio = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
+                                           
+                                        }
+                                      }
+
+
                                         
                                         $Other = 'other';
                                         $HtmlLines.= '</p> <input coolstore = "'.$fieldIDOnly.'" class="form-control thenormal coolhidden asave" value="' . $H . '" type="text" id="'.$fieldName . $Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="Required" > </div>';
