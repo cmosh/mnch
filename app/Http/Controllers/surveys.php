@@ -1515,8 +1515,11 @@ print_r($fruit);die;
                                         } 
                                         else if(is_numeric($H) == true){
                                             
-                                            $HtmlLines.= $fieldValueList->get($H)->Label;
+                                           if($H == '-51'){  $HtmlLines.= 'No information provided';
+
+                                           } else{$HtmlLines.= $fieldValueList->get($H)->Label;
                                         }
+                                      }
                                         else{
 
                                         }
@@ -1636,9 +1639,14 @@ print_r($fruit);die;
                                             
                                             foreach ($vl as $vll) {
                                                 
-                                                if ($vll != ' ') {
+                                                if (is_numeric($vll)) {
                                                     $HtmlLines.= $fieldValueList->get($vll)->Label;
                                                     $HtmlLines.= ",";
+                                                }else{
+                                                     $HtmlLines.= $vll;
+                                                    $HtmlLines.= ",";
+
+
                                                 }
                                             }
                                             
