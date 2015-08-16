@@ -59,8 +59,10 @@ $('.asave').change(function () {
 
         var data = {
             'type':'auto',
+          
 
             'AssID':'{{$AssID}}',
+              'user':{{ Auth::user()->id }},
          @foreach($AjaxNames as $AjaxName)
           '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
   
@@ -77,8 +79,15 @@ $('.asave').change(function () {
          
     };
 
+        var data3 ={
+              @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name="{{$AjaxName}}[]"]').val(),
+  
+                @endforeach
+     
 
-        $.extend( data, data2 );
+        }
+        $.extend( data, data2,data3 );
 
 
     $.ajax({
@@ -104,6 +113,7 @@ $(document).ready(function(){
 
         'type':'trigger',
         'AssID':'{{$AssID}}',
+         'user':{{ Auth::user()->id }},
          @foreach($AjaxNames as $AjaxName)
           '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
   
@@ -319,33 +329,51 @@ $(document).ready( function() {
  <!-- Page script -->
     
 <script type="text/javascript">
-function showDiv(prefix,chooser,id) 
-{
-        for(var i=0;i<chooser.options.length;i++) 
-        {
-            var div = document.getElementById(prefix+chooser.options[i].value);
-            div.style.display = 'none';
-        }
+
+$( ".coolhidden" ).change(function() {
+
+  var replaceval =  $(this).attr('coolstore');
+
+  $('#'+replaceval).val(this.value);
+  
+
+  var newvalue = $('#'+replaceval).val();
+  
+   
+   alert(newvalue);
+
+});
+
+
  
-        var selectedOption = (chooser.options[chooser.selectedIndex].value);
-        var selectedValues = $("#"+id).val();
- 
-        if(selectedValues.indexOf("4") >= 0)  
-        {
-            displayDiv(prefix,"1");
-            
-        }
-        
-        //alert(selectedOption);
-        
- 
+
+$( ".coolmultiple" ).change(function() {
+  var str = this.name;
+  var str2 =  str.slice(0,-2)
+  var thehidden = '#' +str2 + 'other';
+//arrValues.indexOf('Sam') > -1
+  
+  var size = "";
+
+  $("#"+str2+ " option:selected").each(function () {
+                size += $(this).val() + " ";
+            });
+
+
+
+  if (size.indexOf('-1') > -1) {
+  $(thehidden).show();
+  $(thehidden).attr('required','');
+}else{
+   $(thehidden).hide();
+   $(thehidden).removeAttr('required');
 }
+   
+   
+
+});
  
-function displayDiv(prefix,suffix) 
-{
-        var div = document.getElementById(prefix+suffix);
-        div.style.display = 'block';
-}
+
 
 </script>
 

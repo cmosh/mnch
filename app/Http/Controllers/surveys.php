@@ -65,6 +65,7 @@ class surveys extends Controller
       $array = Input::all();
       $stype = array_shift($array);
       $AssID = array_shift($array);
+      $UserId = array_shift($array);
      $fruit = array_pop($array);
 
     $surveyyy = assessments::where('Assessment_ID', '=', $AssID)->first();
@@ -227,6 +228,10 @@ class surveys extends Controller
         $Progress = assessments::where('Assessment_ID','=',$AssID)->first();
         $Pg = $Progress->Status;
 
+        assessments::createOrUpdate(
+                array('UserId' => $UserId,
+                  'Assessment_ID' => $AssID), 
+                array('Assessment_ID' => $AssID));
 
         if ($Pg == 'In progress'){
 
@@ -1240,20 +1245,14 @@ print_r($fruit);die;
                 foreach ($Array_of_BlockRowCollections as $Single_BlockRowCollection) {
                     
                     if ($Single_BlockRowCollection->type == 'table_head') {
-                        $HtmlLines.= '<tr style="font-weight:bold" automaticallyVisibleIfIDChecked="';
-                        $HtmlLines.= $Single_BlockRowCollection->dependencyID;
-                        $HtmlLines.= '" ';
+                        $HtmlLines.= '<tr style="font-weight:bold" automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'" ';
                     } 
                     else {
-                        $HtmlLines.= '<tr automaticallyVisibleIfIDChecked="';
-                        $HtmlLines.= $Single_BlockRowCollection->dependencyID;
-                        $HtmlLines.= '"';
+                        $HtmlLines.= '<tr automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'"';
                     }
                     $BlockrowIDName = $Single_BlockRowCollection->block_rowID;
                     
-                    $HtmlLines.= 'id="';
-                    $HtmlLines.= $BlockrowIDName;
-                    $HtmlLines.= '">';
+                    $HtmlLines.= 'id="'.$BlockrowIDName.'">';
                     
                     $Array_of_ColumnSetCollections = Column_set::where('block_rowID', '=', $Single_BlockRowCollection->block_rowID)->get();
                     
@@ -2508,97 +2507,41 @@ print_r($fruit);die;
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
                                       $AjaxNames[]= $fieldName;
                                     $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
-                                                                                     <select  class="form-control select2 asave themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '[]" id="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '"   data-parsley-mincheck="2" data-parsley-error-message="Required"> 
-                                                                                             <option  value =" " id ="';
-                                    $HtmlLines.= $fieldName . "def";
-                                    $HtmlLines.= '"  style ="display:none;" selected=""></option>
-                                                                                     ';
+                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">           
+                                    <select  class="form-control select2 asave themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'"   data-parsley-mincheck="1" data-parsley-error-message="Required">';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
                                         
-                                        $HtmlLines.= '<option value ="';
-                                        $HtmlLines.= $fieldValue;
-                                        $HtmlLines.= '"id ="';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" >';
-                                        $HtmlLines.= $fieldd->Label;
-                                        $HtmlLines.= '</option>
-                                                                                                         
-                                                                                                         ';
+                                        $HtmlLines.= '<option value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" >'.$fieldd->Label.'</option>';
                                     }
-                                    $HtmlLines.= '   </select>
-                                                                                                      </div>';
+                                    $HtmlLines.= ' </select> </div>';
                                     
                                     break;
 
                                 case "coolmultiplecombo":
                                     $ColID[] = $ColumnSetIDName;
+                                    
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
+                                     $AjaxNames[]= $fieldName;
                                     $other = 'other';
                                     $hidden = 'hidden';
                                     $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">              
-                                                                                     <select class="form-control select2 titleother " multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '[]" id="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '" onChange="showDiv(\'div\',this,\'' . $fieldName . '\')" > 
-                                                                                            <option value =" " id ="';
-                                    $HtmlLines.= $fieldName . "def";
-                                    $HtmlLines.= '"  style ="display:none;" selected=""></option>
-                                                                                     ';
+                                     <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">              
+                                    <select class="form-control select2 themultiple coolmultiple asave" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" >';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
                                         
-                                        $HtmlLines.= '<option value ="';
-                                        $HtmlLines.= $fieldValue;
-                                        $HtmlLines.= '"id ="';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" >';
-                                        $HtmlLines.= $fieldd->Label;
-                                        $HtmlLines.= '</option>
-                                                                                                         
-                                                                                                         ';
+                                        $HtmlLines.= '<option value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'">'.$fieldd->Label.'</option> ';
                                     }
                                     
-                                    $HtmlLines.= '   </select>
-                                                                                                 
-                                                                                                      </div>
-                                                                                                      
-    
-        
-    <div id="content" style="float:right;">
-    
-        <div id="div1" style="display:none;">1</div>
-        <div id="div2" style="display:none;">2</div>
-        <div id="div3" style="display:none;">3</div>
-        <div id="div4" style="display:none;">4</div>
-    
-    </div>  
-    
-    
-
-
-
-
-
-
-
-
-
-
-                                                                                                      ';
+                                    $HtmlLines.= '</select>     
+                                    <input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
                                     
                                     break;
 
@@ -2607,48 +2550,20 @@ print_r($fruit);die;
                                     
                                     $fieldName = $ColumnSetIDName . $fieldsetID;
                                       $AjaxNames[]= $fieldName;
-                                    $HtmlLines.= ' valign="baseline">
-                                                                                                        <div> <p>
-
-                                                                                                        <input class ="asave thenormal"  name="';
-                                    $HtmlLines.= $fieldName;
-                                    $HtmlLines.= '" value = "" id ="';
-                                    $HtmlLines.= $fieldName . 'other';
-                                    $HtmlLines.= '" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';;
+                                    $HtmlLines.= 'valign="baseline">
+                                                 <div> <p> <input class ="asave thenormal"  name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';
                                     foreach ($fieldValueList as $fieldd) {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
                                         
-                                        $HtmlLines.= '<label>
-                                                                                                              
-                                                                                                            
-
-                                                                                                            <input name="';
-                                        $HtmlLines.= $fieldName;
-                                        $HtmlLines.= '" value ="';
-                                        $HtmlLines.= $fieldValue;
-                                        $HtmlLines.= '"id ="';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '" type="radio" class="asave" >
-                                                                                                            <x coolradio = "';
-                                        $HtmlLines.= $fieldIDOnly;
-                                        $HtmlLines.= '"></x>
-                                                                                                             ';
-                                        $HtmlLines.= $fieldd->Label . '&nbsp;&nbsp;';
-                                        $HtmlLines.= '</label>';
+                                        $HtmlLines.= '<label> <input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class="asave" >
+                                        <x coolradio = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
                                     }
                                     
                                     $Other = 'other';
-                                    $HtmlLines.= '</p> <input class="form-control asave" type="text" id="';
-                                    $HtmlLines.= $fieldName . $Other;
-                                    $HtmlLines.= '" coolradio="';
-                                    $HtmlLines.= $fieldIDOnly;
-                                    $HtmlLines.= '" data-parsley-error-message="Required" > </div>';
-                                    $HtmlLines.= '<script>
-                                                                                                            
-
-                                                                                                                    </script>';
+                                    $HtmlLines.= '</p> <input class="form-control  asave" type="text" id="'.$fieldName.$Other.'" coolradio="'.$fieldIDOnly.'" data-parsley-error-message="Required" > </div>';
+                         
                                     break;
 
                                 default:
