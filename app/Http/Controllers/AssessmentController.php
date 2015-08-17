@@ -73,7 +73,9 @@ class AssessmentController extends Controller {
 				$countie='';
 			}
 			
-			$countID = assessments::all()->count()+1;
+			$countIDBF = assessments::orderBy('Counter', 'desc')->first();
+			$countID = $countIDBF->Counter + 1;
+
 	return view('assessments.create')->with('DoneAss',$DoneAss)->with('theterm',$term)->with('thedate',$date)->with('location','ass')->with('loc',$loc)->with('id',$id)->with('title','Assessments')->with('countID',$countID)->with('All',$All)->with('thecounty',$countie);
 	}
 
