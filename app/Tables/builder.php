@@ -1112,7 +1112,7 @@ class builder extends Controller {
                                       case "coolmultiplecombo":
 
                                     if($datass->get($ColumnSetIDName) == null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
-                                    echo $H;
+                                   // echo $H;
                                     if ($act == 'show') {
                                         
                                         $HtmlLines.= '
@@ -1165,7 +1165,7 @@ class builder extends Controller {
                                         $varother = substr(strrchr($H, ","), 1);
                                         if ($varother == '-1' ){}else{
 
-                                        if (is_numeric($varother)) {$varother= -989;}
+                                        if (is_numeric($varother)) {$varother= '-989';}
 
 }
                                         
@@ -1192,10 +1192,10 @@ class builder extends Controller {
                                     $HtmlLines.= '</select>';
 
                                     if (  $varother == -989 || $varother==null ) {
-                                      $HtmlLines.= '<input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
+                                      $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
                                     } else {
                                       if ($varother == -1){$varother = null;}
-                                     $HtmlLines.= '<input class="form-control asave coolhidden thenormal" coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" style="width: 100%;" required> </div>';
+                                     $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" style="width: 100%;" required> </div>';
                                     }
                                     
 
@@ -1219,7 +1219,7 @@ class builder extends Controller {
                                             $HtmlLines.= $H;
                                         } 
                                         elseif ((string)(int)$H == $H) {
-                                            echo $H;
+                                            //echo $H;
                                             $HtmlLines.= $fieldValueList->get($H)->Label;
                                         } 
                                         else {
