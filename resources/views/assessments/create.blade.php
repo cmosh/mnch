@@ -22,7 +22,7 @@
     Start <?php echo $surveyname; ?> Assessment:
     </div>
     </div>
-    @if($loc!='IM')
+    
     <div class="box-body">
     <?php
 
@@ -30,15 +30,20 @@
       $dateformated=date_format($date,'d F Y');
 
      ?>
-
+@if($loc!='IM')
           <p><b>County  :</b> {{$thecounty}} </p>
           <p><b>Date    :</b> <?php echo  $dateformated ?> </p>
       
           <p><b>Assessment Term:</b> {{$theterm}}</p>
 
+          @else
+
+          <p><b>Date    :</b> <?php echo  $dateformated ?> </p>
+@endif
 
 </div>
-@endif
+
+
 </div>
           
 

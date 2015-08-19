@@ -48,7 +48,11 @@
              <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
            <!--  <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li> -->
 
+           @elseif($location == 'users')
 
+            <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+            <li><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>View Users</span></a></li>
+            <li><a href="/usermanagement/addusers"><i class="fa fa-link"></i> <span>Add Users</span></a></li>
 
            @else 
 
@@ -56,6 +60,7 @@
              <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
 
               <li class="treeview Active">
+              
                             <a href="#">
                                
                                 <span>{{$title}}</span>

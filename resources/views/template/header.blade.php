@@ -81,7 +81,7 @@
                     
                   <p>  {{ Auth::user()->email }}  </p> 
 
-                  
+                    
 
 
                   </li>
@@ -94,7 +94,27 @@
                     <div class="pull-right">
                       <a href="/auth/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
+
+
+
+                   
+
                   </li>
+
+                  <li class="user-footer">
+
+
+                   @if( Auth::user()->role =='admin')
+                      <div class="pull-left">
+                      <a href="/usermanagement" class="btn btn-default btn-flat">User Management</a>
+                    </div>
+
+
+                    @endif
+                  </li>
+
+
+                
                 </ul>
 
                  
