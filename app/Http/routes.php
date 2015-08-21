@@ -33,7 +33,7 @@ Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
 Route::get('usermanagement/viewusers','UserManagement@index');
-Route::get('usermanagement/addusers','UserManagement@create');
+Route::get('usermanagement/addusers/{num}','UserManagement@create');
 Route::post('usermanagement/store','UserManagement@store');
 
 Route::controllers([

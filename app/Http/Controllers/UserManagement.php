@@ -28,10 +28,16 @@ class UserManagement extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($num)
 	{
+
+		for($i=0;$i<$num;$i++) 
+	{
+		
+		$y[$i]=$i;
+	}
 		//
-				return view('usermanagement.create')->with('location','users')->with('title','User Management');
+				return view('usermanagement.create')->with('location','users')->with('title','User Management')->with('counts',$y);
 
 	}
 
@@ -58,7 +64,8 @@ class UserManagement extends Controller {
 			$x[]=$key;
 			
 	}
-	for($i=0;$i<(count($x+1)/6);$i++) 
+
+	for($i=0;$i<sizeof($x)/6;$i++) 
 
 	{
 		$num=6*$i;
@@ -70,8 +77,13 @@ class UserManagement extends Controller {
 		'IDNumber'=> $x[4+$num],
 		'role'=> $x[5+$num]);
 		User::insert($data);
+
+
+
 		# code...
 	}
+
+	
 		
 	$users=User::all();
 				return view('usermanagement.view')->with('users',$users)->with('location','users')->with('title','User Management');
