@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Tables\Ch_owner;
 use Illuminate\Http\Request;
 
 class test extends Controller {
@@ -14,7 +14,9 @@ class test extends Controller {
 	 */
 	public function index()
 	{
-		return view('analytics.test')->with('location','Home');
+		$Ch_owners = Ch_owner::all();
+
+		return view('analytics.test')->with('location','Home')->with('Ch_owners',$Ch_owners);
 	}
 
 	/**
