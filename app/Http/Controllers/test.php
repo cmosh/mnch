@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tables\Ch_owner;
+use App\Tables\Ch_type;
 use Illuminate\Http\Request;
 
 class test extends Controller {
@@ -15,8 +16,9 @@ class test extends Controller {
 	public function index()
 	{
 		$Ch_owners = Ch_owner::all();
+		$Ch_types = Ch_type::all();
 
-		return view('analytics.test')->with('location','Home')->with('Ch_owners',$Ch_owners);
+		return view('analytics.test')->with('location','Home')->with('Ch_owners',$Ch_owners)->with('Ch_types',$Ch_types);
 	}
 
 	/**

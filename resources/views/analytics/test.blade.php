@@ -6,13 +6,8 @@
 
 
    <div class="row">
-
-
             <div class="col-md-6">
-              <!-- AREA CHART -->
-             
-              <!-- DONUT CHART -->
-              <div class="box box-danger">
+               <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Facility Ownership</h3>
                   <div class="box-tools pull-right">
@@ -21,22 +16,36 @@
                 </div>
                 <div class="box-body">
                 <div class="row">
-        <div class="col-xs-6">
-            <canvas id="pieChart" height="250"></canvas>
+               <div class="col-xs-6">
+            <canvas id="ownership" height="250"></canvas>
         </div>
         <div class="col-xs-6">
-          
-                     <div id="legendDiv"></div>
+          <div id="ownershipleg"></div>
         </div>
-    </div>
-               
-                   
-                   
+    </div>        
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
-
-            </div><!-- /.col (LEFT) -->
-             
+            </div><!-- /.col (LEFT) -->       
+             <div class="col-md-6">
+               <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Facility Type</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                <div class="row">
+               <div class="col-xs-6">
+            <canvas id="ftypes" height="250"></canvas>
+        </div>
+        <div class="col-xs-6">
+          <div id="ftypesleg"></div>
+        </div>
+    </div>        
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col (LEFT) -->           
           </div><!-- /.row -->
 
          
@@ -60,47 +69,43 @@
 
      <script>
       $(function () {
-        /* ChartJS
-         * -------
-         * Here we will create a few charts using ChartJS
-         */
-
-        //--------------
-        //- AREA CHART -
-        //--------------
-
-        // Get context with jQuery - using jQuery's .get() method.
-      
-
-      
-
-        //-------------
         //- PIE CHART -
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
-        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-        var pieChart = new Chart(pieChartCanvas);
-        var colors =  randomColor({hue: 'orange', count: 40}); 
+        var ownershipCanvas = $("#ownership").get(0).getContext("2d");
+        var ftypesCanvas = $("#ftypes").get(0).getContext("2d");
+        
+        var ftypes =new Chart(ftypesCanvas);
+        var colors =  randomColor({hue: 'green', count: 100}); 
         var i = 0;
-        var PieData = [
 
-            
-        @foreach ($Ch_owners as $Ch_owner)
-
+        var ftypesData = [
+        @foreach ($Ch_types as $Ch_type)
               {
+            value: {{$Ch_type->Count}},
+            color: colors[i++],
+            highlight: colors[i+=5],
+            label:  "{{$Ch_type->Type}}"
+          },
+          @endforeach
+        ];
+        
+        var ownership = new Chart(ownershipCanvas);
+        var colors =  randomColor({hue: 'orange', count: 100}); 
+        var i = 0;
 
+        var ownershipData = [
+        @foreach ($Ch_owners as $Ch_owner)
+              {
             value: {{$Ch_owner->Count}},
             color: colors[i++],
             highlight: colors[i+=5],
             label:  "{{$Ch_owner->Owner}}"
           },
-
           @endforeach
-
-
-
-          
         ];
+
+
         var pieOptions = {
           //Boolean - Whether we should show a stroke on each segment
           segmentShowStroke: true,
@@ -127,8 +132,10 @@
         };
         //Create pie or douhnut chart
         // You can switch between pie and douhnut using the method below.
-        pieChart.Pie(PieData, pieOptions);
-        legend(document.getElementById('legendDiv'), PieData);
+        ownership.Pie(ownershipData, pieOptions);
+        ftypes.Pie(ftypesData, pieOptions);
+         legend(document.getElementById('ftypesleg'), ftypesData);
+        legend(document.getElementById('ownershipleg'), ownershipData);
         
 
         //-------------
