@@ -14,16 +14,23 @@
               <!-- DONUT CHART -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Donut Chart</h3>
+                  <h3 class="box-title">Facility Ownership</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
+                    </div>
                 </div>
                 <div class="box-body">
-               
-                    <canvas id="pieChart" height="250"></canvas>
+                <div class="row">
+        <div class="col-xs-6">
+            <canvas id="pieChart" height="250"></canvas>
+        </div>
+        <div class="col-xs-6">
+          
                      <div id="legendDiv"></div>
+        </div>
+    </div>
+               
+                   
                    
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -73,7 +80,7 @@
         // Get context with jQuery - using jQuery's .get() method.
         var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
         var pieChart = new Chart(pieChartCanvas);
-        var colors =  randomColor({hue: 'orange', count: 18}); 
+        var colors =  randomColor({hue: 'orange', count: 40}); 
         var i = 0;
         var PieData = [
 
@@ -84,7 +91,7 @@
 
             value: {{$Ch_owner->Count}},
             color: colors[i++],
-            highlight: colors[i++],
+            highlight: colors[i+=5],
             label:  "{{$Ch_owner->Owner}}"
           },
 
