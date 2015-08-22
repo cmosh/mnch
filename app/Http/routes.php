@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::get('test','test@index');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 
 Route::post('survey/{id}/{status}','surveys@update');
