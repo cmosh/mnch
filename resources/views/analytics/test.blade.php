@@ -1,17 +1,13 @@
-@extends('analytics')
+@extends('app')
 
 @section('content')
 
  
-  <body >
+
 
    
 
-      <div class="wrapper">
-            <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-       
+         
 
         <!-- Main content -->
       
@@ -184,8 +180,8 @@
                     </div>
 
                   </form>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
+             </div>
+             </div>
             </div>
 
   

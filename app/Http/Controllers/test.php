@@ -14,7 +14,7 @@ class test extends Controller {
 	 */
 	public function index()
 	{
-		return view('analytics.test');
+		return view('analytics.test')->with('location','Home');
 	}
 
 	/**
