@@ -8,6 +8,7 @@ use App\Tables\Ch_staff_training;
 use App\Tables\Ch_healthservice;
 use App\Tables\Ch_guidline;
 use App\Tables\Ch_tavailability;
+use App\Tables\Ch_sec4_all;
 use Illuminate\Http\Request;
 
 class test extends Controller {
@@ -25,8 +26,14 @@ class test extends Controller {
 		$Ch_healthservices = Ch_healthservice::all();
 		$Ch_guidlines = Ch_guidline::all();
 		$Ch_tavailabilities = Ch_tavailability::all();
+		$Ch_sec4_alls =Ch_sec4_all::all();
 		
-		return view('analytics.test')->with('Ch_tavailabilities',$Ch_tavailabilities)->with('Ch_guidlines',$Ch_guidlines)->with('location','Home')->with('Ch_owners',$Ch_owners)->with('Ch_types',$Ch_types)->with('Ch_staff_trainings',$Ch_staff_trainings)->with('Ch_healthservices',$Ch_healthservices);
+		
+
+
+
+		
+		return view('analytics.test')->with('Ch_tavailabilities',$Ch_tavailabilities)->with('Ch_guidlines',$Ch_guidlines)->with('location','Home')->with('Ch_owners',$Ch_owners)->with('Ch_types',$Ch_types)->with('Ch_staff_trainings',$Ch_staff_trainings)->with('Ch_healthservices',$Ch_healthservices)->with('Ch_sec4_alls',$Ch_sec4_alls);
 	}
 
 	/**

@@ -25,6 +25,9 @@
 
 
            @include('analytics/CH/html/tavailability')
+           @include('analytics/CH/html/chsec4diarhoea')
+            @include('analytics/CH/html/chsec4antibiotics')
+              @include('analytics/CH/html/chsec4malaria')
 
 
 
@@ -62,6 +65,9 @@ function drawChart() {
 
             @include('analytics/CH/js/types')
   @include('analytics/CH/js/tavailability')
+  @include('analytics/CH/js/chsec4diarhoea')
+   @include('analytics/CH/js/chsec4antibiotics')
+   @include('analytics/CH/js/chsec4malaria')
 
 
        
