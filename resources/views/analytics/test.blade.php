@@ -75,7 +75,7 @@
                 </div>
                 <div class="box-body">
 
-              <!--   <div id="ftypes"></div>   -->
+                <div id="chhealthservices"></div>  
 
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -87,7 +87,45 @@
 
         
       
-    
+     <div class="row">
+
+            <div class="col-md-6">
+               <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Guidlines and jobs availability</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+
+              <div id="gjavailability"></div>     
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col (LEFT) -->       
+
+
+
+             <div class="col-md-6">
+               <div class="box box-success">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Tools Availability</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                <div id="tavailability"></div>  
+
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col (LEFT) -->        
+
+
+
+          </div><!-- /.row -->
+
 
   
 
@@ -131,11 +169,33 @@
         // Set chart options
         var options = {
                        'width':'100%',
+                        'box-sizing': 'border-box;',
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var ownership = new google.visualization.PieChart(document.getElementById('ownership'));
         ownership.draw(ownershipdata, options);
+
+
+         var chhealthservicesdata = new google.visualization.DataTable();
+        chhealthservicesdata.addColumn('string', 'Owner');
+        chhealthservicesdata.addColumn('number', 'Facilities');
+        chhealthservicesdata.addRows([
+          @foreach ($Ch_healthservices as $Ch_healthservice)
+          ['{{$Ch_healthservice->Location}}', {{$Ch_healthservice->Count}}],
+          @endforeach          
+        ]);
+
+        // Set chart options
+        var options = {
+                       'width':'100%',
+                        'box-sizing': 'border-box;',
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chhealthservices = new google.visualization.PieChart(document.getElementById('chhealthservices'));
+        chhealthservices.draw(chhealthservicesdata, options);
+
 
 
          var ftypesdata = new google.visualization.DataTable();
@@ -150,6 +210,7 @@
         // Set chart options
         var options = {
                        'width':'100%',
+                       'box-sizing': 'border-box;',
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
@@ -171,7 +232,7 @@
       var options = {
        
         chartArea: {width: '50%',
-      'height':300},
+      'height':500},
         isStacked: true,
         hAxis: {
           minValue: 0,
