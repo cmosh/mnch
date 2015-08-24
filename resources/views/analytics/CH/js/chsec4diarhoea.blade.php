@@ -18,6 +18,7 @@ var chsec4diarhoeadata = google.visualization.arrayToDataTable([
       var options = {
         width: '100%',
         height: 300,
+        title: 'Availability',
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: '75%' },
         isStacked: 'percent'
@@ -69,6 +70,7 @@ var chsec4diarhoeadata2 = google.visualization.arrayToDataTable([
       var options = {
         width: '100%',
         height: 300,
+        title: 'Reasons for Unavailability',
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: '75%' },
         isStacked: 'percent'
