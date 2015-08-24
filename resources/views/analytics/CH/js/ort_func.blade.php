@@ -24,7 +24,7 @@ var ort_funcdata = google.visualization.arrayToDataTable([
         width: '100%',
         height: 300,
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
+        bar: { groupWidth: 10 },
         isStacked: 'percent'
       };
 
