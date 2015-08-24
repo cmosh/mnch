@@ -10,6 +10,7 @@ use App\Tables\Ch_guidline;
 use App\Tables\Ch_tavailability;
 use App\Tables\Ch_sec4_all;
 use App\Tables\Ch_ort_func;
+use App\Tables\Ch_ort_funcs_comb;
 
 use Illuminate\Http\Request;
 
