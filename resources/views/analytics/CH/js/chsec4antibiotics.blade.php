@@ -20,7 +20,7 @@ var chsec4antibioticsdata = google.visualization.arrayToDataTable([
         height: 300,
         title: 'Availability',
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
+        bar: { groupWidth: 35 },
         isStacked: 'percent'
       };
 
@@ -72,7 +72,7 @@ var chsec4antibioticsdata2 = google.visualization.arrayToDataTable([
         height: 300,
         title: 'Reasons for Unavailability',
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
+        bar: { groupWidth: 35 },
         isStacked: 'percent'
       };
 
