@@ -28,6 +28,7 @@
            @include('analytics/CH/html/chsec4diarhoea')
             @include('analytics/CH/html/chsec4antibiotics')
               @include('analytics/CH/html/chsec4malaria')
+              @include('analytics/CH/html/ort_func')
 
 
 
@@ -68,6 +69,7 @@ function drawChart() {
   @include('analytics/CH/js/chsec4diarhoea')
    @include('analytics/CH/js/chsec4antibiotics')
    @include('analytics/CH/js/chsec4malaria')
+    @include('analytics/CH/js/ort_func')
 
 
        

@@ -12,9 +12,9 @@ var ort_funcdata = google.visualization.arrayToDataTable([
 
 
 
-        @foreach($Ch_ort_funcs as $Ch_ort_func) 
+        @foreach($Ch_ort_funcs_combs as $Ch_ort_funcs_comb) 
 
-         ['{{$Ch_ort_func->Label}}', {{$Ch_ort_func->Yes}}, {{$Ch_ort_func->No}}],
+         ['{{$Ch_ort_funcs_comb->Label}}', {{$Ch_ort_funcs_comb->Yes}}, {{$Ch_ort_funcs_comb->No}}],
         
         @endforeach     
 
