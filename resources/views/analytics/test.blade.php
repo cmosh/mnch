@@ -2,36 +2,37 @@
 
 @section('content')
 
-
- <div class="col-lg-3 col-xs-6">
+  <div class="row">
+ 
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>61<sup style="font-size: 20px"></sup></h3>
-                  <p>FACILITIES</p>
+                  <h3>Child Health Survey<sup style="font-size: 20px"></sup></h3>
+                  <p>Data from {{$SubmittedCHCount->X}} facilities in the counties of:<br> @foreach($SubmittedCHCounties as $SubmittedCHCountie)
+                  - {{$SubmittedCHCountie->County}} <br>
+                      @endforeach
+                  </p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              
               </div>
-            </div><!-- ./col -->
+       
 
- <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3>2<sup style="font-size: 20px"></sup></h3>
-                  <p>COUNTIES</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
- 
 
+   </div>
+
+ <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>FACILITY INFORMATION</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
          @include('analytics/CH/html/ownership')
 
 
@@ -44,16 +45,53 @@
          @include('analytics/CH/html/health_services')
 
 
-
+<div class="col-md-12">
+                        
+                        <div class="box-info" >                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS </b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
 
           @include('analytics/CH/html/gjavailability')
 
 
            @include('analytics/CH/html/tavailability')
+
+
+<div class="col-md-12">
+                        
+                        <div class="box-info" >                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>COMMODITY AVAILABILITY</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
+
            @include('analytics/CH/html/chsec4diarhoea')
             @include('analytics/CH/html/chsec4antibiotics')
               @include('analytics/CH/html/chsec4malaria')
-              @include('analytics/CH/html/ort_func')
+
+
+<!-- <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>ORAL REHYDRATION THERAPY</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
+
+
+
+            -->
 
 
 

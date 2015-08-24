@@ -41,6 +41,7 @@
             <li><a href="assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
              <li><a href="Autosaved/{{Auth::user()->id}}"><i class="fa fa-link"></i> <span>Autosaved Surveys</span></a></li>
 
+              <li><a href="/"><i class="fa fa-link"></i> <span>Analytics</span></a></li>
 
            
            @elseif($location == 'ass' or $location == 'users')

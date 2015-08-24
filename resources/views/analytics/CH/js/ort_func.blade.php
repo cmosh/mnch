@@ -12,20 +12,25 @@ var ort_funcdata = google.visualization.arrayToDataTable([
 
 
 
-        @foreach($Ch_ort_funcs_combs as $Ch_ort_funcs_comb) 
+       
 
-         ['{{$Ch_ort_funcs_comb->Label}}', {{$Ch_ort_funcs_comb->Yes}}, {{$Ch_ort_funcs_comb->No}}],
+         ['{{$Ch_ort_funcs_combs->Label}}', {{$Ch_ort_funcs_combs->Yes}}, {{$Ch_ort_funcs_combs->No}}]
         
-        @endforeach     
+           
 
       ]);
 
       var options = {
         width: '100%',
         height: 300,
+     
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: 35 },
-        isStacked: 'percent'
+      
+        isStacked: 'percent',
+        hAxis: {minValue: 0},
+        vAxis: {minValue:0}
+
+
       };
 
       var ort_func = new google.visualization.ColumnChart(document.getElementById('ort_func'));

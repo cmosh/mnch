@@ -42,15 +42,20 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">MNCH</a>
+       
 
 
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-
-
-            </div><!-- /.navbar-collapse -->
+              <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+              <ul class="nav navbar-nav">
+               
+                <li><a href="/home">Home</a></li>
+             
+              </ul>
+         
+            </div>
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                

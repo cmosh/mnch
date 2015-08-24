@@ -11,6 +11,8 @@ use App\Tables\Ch_tavailability;
 use App\Tables\Ch_sec4_all;
 use App\Tables\Ch_ort_func;
 use App\Tables\Ch_ort_funcs_comb;
+use App\Tables\SubmittedCHCount;
+use App\Tables\SubmittedCHCountie;
 
 use Illuminate\Http\Request;
 
@@ -31,13 +33,14 @@ class test extends Controller {
 		$Ch_tavailabilities = Ch_tavailability::all();
 		$Ch_sec4_alls =Ch_sec4_all::all();
 		$Ch_ort_funcs =Ch_ort_func::all();
-		$Ch_ort_funcs_combs =Ch_ort_funcs_comb::all();
-		
+		$Ch_ort_funcs_combs =Ch_ort_funcs_comb::all()->first();
+		$SubmittedCHCount = SubmittedCHCount::all()->first();
+		$SubmittedCHCounties = SubmittedCHCountie::all();
 
 
 
 		
-		return view('analytics.test')->with('Ch_ort_funcs_combs',$Ch_ort_funcs_combs)->with('Ch_ort_funcs',$Ch_ort_funcs)->with('Ch_tavailabilities',$Ch_tavailabilities)->with('Ch_guidlines',$Ch_guidlines)->with('location','Home')->with('Ch_owners',$Ch_owners)->with('Ch_types',$Ch_types)->with('Ch_staff_trainings',$Ch_staff_trainings)->with('Ch_healthservices',$Ch_healthservices)->with('Ch_sec4_alls',$Ch_sec4_alls);
+		return view('analytics.test')->with('SubmittedCHCount',$SubmittedCHCount)->with('SubmittedCHCounties',$SubmittedCHCounties)->with('Ch_ort_funcs_combs',$Ch_ort_funcs_combs)->with('Ch_ort_funcs',$Ch_ort_funcs)->with('Ch_tavailabilities',$Ch_tavailabilities)->with('Ch_guidlines',$Ch_guidlines)->with('location','Home')->with('Ch_owners',$Ch_owners)->with('Ch_types',$Ch_types)->with('Ch_staff_trainings',$Ch_staff_trainings)->with('Ch_healthservices',$Ch_healthservices)->with('Ch_sec4_alls',$Ch_sec4_alls);
 	}
 
 	/**

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('test','test@index');
+Route::get('/','test@index');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 
 Route::post('survey/{id}/{status}','surveys@update');
@@ -28,7 +28,7 @@ Route::post('survey/save','surveys@saveajax');
 
 
 
-Route::get('/', 'HomeController@index');
+
 
 Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
