@@ -7,7 +7,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3><?php echo $Ch_guidline[0]->Yes ?><sup style="font-size: 20px"></sup></h3>
+                  <h3>61<sup style="font-size: 20px"></sup></h3>
                   <p>FACILITIES</p>
                 </div>
                 <div class="icon">
