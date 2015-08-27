@@ -106,7 +106,7 @@
 
                    @if( Auth::user()->role =='admin')
                       <div class="pull-left">
-                      <a href="/usermanagement" class="btn btn-default btn-flat">User Management</a>
+                      <a href="/usermanagement/monitor" class="btn btn-default btn-flat">User Management</a>
                     </div>
 
 

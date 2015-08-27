@@ -13,65 +13,94 @@
 <div class='box-body'>
 
 
+<table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+
+                     
+                        <th>Name</th>
+                        <th>Email</th>
+                         <th>County</th>
+                         <th>Phone Number</th>
+                         <th>ID Number</th>
+                        <th>Role</th>
+                        
+                        
+                  
+                      </tr>
+                    </thead>
+
+
+                     <tbody>
 
 {!! Form::open(['url' => 'usermanagement/store']) !!}
 
 
 @foreach($counts as $count)
+<tr>
 
 
 
-
-
+<td>
   <div class='form-group'>
-  <div class='col-lg-2'>
+ 
  
   {!! Form::text('name'.$count,null,['class' => 'form-control']) !!}
   </div>
-  </div>
+  
+</td>
 
+<td>
   <div class='form-group'>
-  <div class='col-lg-2'>
+  
  
    {!! Form::text('email'.$count,null,['class' => 'form-control']) !!}
-  </div>
-  </div>
 
+  </div>
+</td>
+<td>
   <div class='form-group'>
-  <div class='col-lg-2'>
+  
  
    {!! Form::text('county'.$count,null,['class' => 'form-control']) !!}
+  
   </div>
-  </div>
-
+</td>
+<td>
 
   <div class='form-group'>
-  <div class='col-lg-2'>
+
  
    {!! Form::text('phone'.$count,null,['class' => 'form-control']) !!}
+  
   </div>
-  </div>
-
+</td>
+<td>
   <div class='form-group'>
-  <div class='col-lg-2'>
+ 
  
    {!! Form::text('idnum'.$count,null,['class' => 'form-control']) !!}
   </div>
-  </div>
+  
+ </td>
+ <td>
   <div class='form-group'>
-  <div class='col-lg-2'>
+
  
    {!! Form::text('role'.$count,null,['class' => 'form-control']) !!}
   </div>
-  </div>
-   <br>
-  <br>
+  
+  </td>
+  </tr>
+  
 
  
    
 @endforeach
+</tbody>
+</table>
   
-  {!! Form::submit('Add User',['class' => 'btn btn-success form-control btn-lg']) !!}
+  {!! Form::submit('Add Users',['class' => 'btn btn-success form-control btn-lg']) !!}
   </div>
 {!! Form::close() !!}
 </div>

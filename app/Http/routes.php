@@ -33,6 +33,7 @@ Route::post('survey/save','surveys@saveajax');
 Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
 Route::get('usermanagement/viewusers','UserManagement@index');
+Route::get('usermanagement/monitor','UserManagement@show');
 Route::get('usermanagement/addusers/{num}','UserManagement@create');
 Route::post('usermanagement/store','UserManagement@store');
 

@@ -26,7 +26,8 @@
 @endsection 
 
 @section('content')
-
+<div class="row">
+<div class="col-lg-6">
   <div class="box box-danger">
 
                 <div class="box-header with-border">
@@ -38,19 +39,13 @@
 
                   <div class="box-body">
                 
-            <p>Enter how many users you want to add.</p>
-                     <div class="form-group">
-                      <label for="date" class="col-sm-2 control-label"></label>
+            
+                    
+                      <label><p>Enter how many users you want to add.</p></label>
                       
                        <input type="number" name="num" id="num" value="1" />
-                      
-                    </div>
-
-   
-                   
-
-
-                                       
+                     
+                     
                   </div><!-- /.box-body -->
                   <div class="box-footer">
 
@@ -60,6 +55,9 @@
 
 </div>
                 </div>
+                </div>
+                </div>
+
                 
 
 

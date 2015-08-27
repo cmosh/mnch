@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Tables\User_monitor;
 
 use Request;
 
@@ -97,9 +98,16 @@ class UserManagement extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
 		//
+		$user_monitor=User_monitor::all();
+		return view('usermanagement.monitor')->with('user_monitor',$user_monitor)->with('location','users')->with('title','User Management');
+
+
+
+
+
 	}
 
 	/**
