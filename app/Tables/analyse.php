@@ -60,7 +60,7 @@ private static function makeCollection($Label){
 			if(!(isset($o[1]))) $o[1]=0;
 				if(!(isset($o[1]))) $o[2]=0;
 			$array [] = array (
-			 ( trim(self::getLabel($trim,'CHV2SEC2BLK1RW'.sprintf('%02d',$i).'COL01'),'/^ted/ ?')), 
+			 ( trim(self::getLabel($trim,'CHV2SEC2BLK1RW'.sprintf('%02d',$i).'COL01'),'/^ated/ ?')), 
 			 	$o[1],
 			 	$o[2]  );
 		}
