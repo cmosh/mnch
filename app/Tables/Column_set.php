@@ -10,4 +10,8 @@ class Column_set extends Model {
     public function field_set() {
         return $this->belongsTo('App\Field_set','field_setID','field_setID');
     }
+    public function y(){
+
+    	return $this->hasMany('App\Tables\SubmittedRecords','ColumnSetID','column_setID')->first();
+    }
 }
