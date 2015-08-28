@@ -18,7 +18,15 @@
                 </div>
               
               </div>
-       
+              {!! Form::open() !!}
+       <div> <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
+        <option value="All" selected>All Counties</option>
+                      @foreach($SubmittedCHCounties as $SubmittedCHCountie)
+
+                       <option value ="{{$SubmittedCHCountie->County}}" id ="{{$SubmittedCHCountie->County}}" >{{$SubmittedCHCountie->County}}</option>
+                        @endforeach
+                       </select></div>
+                         {!! Form::close() !!}
 
 
    </div>
@@ -115,31 +123,84 @@ function drawChart() {
 
 
   
-
-  // @include('analytics/CH/js/ownership')
-       
-  //  @include('analytics/CH/js/gjavailability')
-
-  //     @include('analytics/CH/js/staff_training')
-
-  //            @include('analytics/CH/js/health_services')
-
-         
-
-
-  //           @include('analytics/CH/js/types')
-  // @include('analytics/CH/js/tavailability')
-  // @include('analytics/CH/js/chsec4diarhoea')
-  //  @include('analytics/CH/js/chsec4antibiotics')
-  //  @include('analytics/CH/js/chsec4malaria')
-  //   @include('analytics/CH/js/ort_func')
+ @include('analytics/CH/js/gjavailability')
+ 
 
 
        
 
 }
     </script>
+   <script type="text/javascript">
 
+     $('#County').change(function(){ 
+     	// alert($('#County').val());
+    var data = {
+
+       
+       
+         'county':$('#County').val(),
+        
+         '_token': $('input[name=_token]').val()
+
+    };
+ 
+       
+
+    $.ajax({
+      url: '/analytics/ajax',
+      type: "post",
+       data: data,
+      success: function(data){
+         alert(data);
+     
+	var jsonData = JSON.parse(data);
+
+	alert(jsonData[0][0]);
+
+	var gjavailabilitydata = google.visualization.arrayToDataTable([
+
+
+
+        ['Guidelines Availability', 'Yes', 'No', { role: 'annotation' }],
+        [jsonData[0][0],jsonData[0][1],jsonData[0][2],''],
+        [jsonData[1][0],jsonData[1][1],jsonData[1][2],''],
+         [jsonData[2][0],jsonData[2][1],jsonData[2][2],''],
+          [jsonData[3][0],jsonData[3][1],jsonData[3][2],''],
+        [jsonData[4][0],jsonData[4][1],jsonData[4][2],''],
+         [jsonData[5][0],jsonData[5][1],jsonData[5][2],''],
+          [jsonData[6][0],jsonData[6][1],jsonData[6][2],''],
+           [jsonData[7][0],jsonData[7][1],jsonData[7][2],''],
+      ]);
+
+       var options = {
+        width: '100%',
+        height: 300,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: 'percent'
+      };
+
+      var gjavailability = new google.visualization.BarChart(document.getElementById('gjavailability'));
+      gjavailability.draw(gjavailabilitydata, options);
+  
+  
+ 
+
+
+       
+
+
+
+
+
+      }
+    });      
+  
+             
+});
+         
+</script>
     
    
 @endsection

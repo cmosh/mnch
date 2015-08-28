@@ -4,8 +4,8 @@
 
         ['Guidelines Availability', 'Yes', 'No', { role: 'annotation' }],
 
-         @foreach($Ch_guidlines as $Ch_guidline) 
-        ['{{$Ch_guidline->Label}}', {{$Ch_guidline->Yes}}, {{$Ch_guidline->No}},''],
+         @foreach($gjavailability as $gjavailabilit) 
+        ['{{$gjavailabilit[0]}}', {{$gjavailabilit[1]}}, {{$gjavailabilit[2]}},''],
         @endforeach       
        
       ]);

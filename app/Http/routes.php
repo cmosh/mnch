@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/','test@index');
+Route::get('/','AnalyticsController@index');
+Route::post('/analytics/ajax','AnalyticsController@ajax');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 
 Route::post('survey/{id}/{status}','surveys@update');

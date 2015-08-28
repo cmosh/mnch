@@ -6,9 +6,9 @@ use App\Tables\SubmittedCHCount;
 use App\Tables\SubmittedCHCountie;
 use App\Tables\SubmittedSurveys;
 use App\Tables\Column_set;
-
-use Illuminate\Http\Request;
-
+use App\Tables\analyse;
+use Request;
+use Input;
 class AnalyticsController extends Controller {
 
 	/**
@@ -16,14 +16,48 @@ class AnalyticsController extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	public function ajax(){
+
+
+		 if(Request::ajax()) {
+      $data = Input::all();
+
+    //  echo (array_shift($data));
+			$SubmittedSurveys = SubmittedSurveys::where('County','Like',array_shift($data))->get();
+			$gjavailability = analyse::gjavailability($SubmittedSurveys);
+
+    echo(json_encode($gjavailability));
+
+      die;
+
+
+
+	}
+}
 	public function index()
 	{
 			
+
+			$SubmittedSurveys = SubmittedSurveys::all();
+			$gjavailability = analyse::gjavailability($SubmittedSurveys);
+
+		
+			
+			
+			
 		$SubmittedCHCount = SubmittedCHCount::first();
-		$SubmittedCHCounties = SubmittedCHCounties::get();
-			return view('analytics.test')
+		$SubmittedCHCounties = SubmittedCHCountie::get();
+// 		echo $SubmittedCHCounties[1]['County'];
+// 		$X = SubmittedSurveys::where('County','=',$SubmittedCHCounties[1]['County'])->get();
+
+
+// echo $X;
+
+			return view('analytics.ch')
 			->with('SubmittedCHCount',$SubmittedCHCount)
-			->with('SubmittedCHCounties',$SubmittedCHCounties);
+			->with('SubmittedCHCounties',$SubmittedCHCounties)
+			->with('gjavailability',$gjavailability);
 
 	}
 
