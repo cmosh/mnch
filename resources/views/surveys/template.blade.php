@@ -50,6 +50,7 @@
 
 @section('javascript')
 
+
 <script type="text/javascript">
     
     var timeoutId;  

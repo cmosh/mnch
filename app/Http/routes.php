@@ -10,7 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// Route::get('/',function(){
 
+// 	$app=LRedis::connection();
+// 	$app->set("key2","value");
+// 	print_r($app->get("key2"));
+// });
 Route::get('/','AnalyticsController@index');
 Route::post('/analytics/ajax','AnalyticsController@ajax');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');

@@ -69,6 +69,26 @@
 
            @include('analytics/CH/html/tavailability')
 
+ <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>DOCUMENTED FACILITY LEVEL DATA</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
+         @include('analytics/CH/html/u5reg')
+
+
+         @include('analytics/CH/html/annualTrends')
+           
+
+
+         @include('analytics/CH/html/nondiarrhoea')
+       
+         @include('analytics/CH/html/orttrends')
 
 <div class="col-md-12">
                         
@@ -173,7 +193,10 @@ function drawChart() {
        @include('analytics/CH/js/ort_func')
        @include('analytics/CH/js/supplies_availability')
        @include('analytics/CH/js/resource_availability')
-	//
+       @include('analytics/CH/js/u5reg')
+	    
+
+
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");

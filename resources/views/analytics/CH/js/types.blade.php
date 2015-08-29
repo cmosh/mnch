@@ -8,11 +8,24 @@
         ]);
 
         // Set chart options
-        var options = {
+        var ftypesoptions = {
                        'width':'100%',
                        'box-sizing': 'border-box;',
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var ftypes = new google.visualization.PieChart(document.getElementById('ftypes'));
-        ftypes.draw(ftypesdata, options);
+        ftypes.draw(ftypesdata, ftypesoptions);
+
+         function resizeftypes () {
+      
+       
+            ftypes.draw(ftypesdata, ftypesoptions);
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizeftypes, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizeftypes);
+    }

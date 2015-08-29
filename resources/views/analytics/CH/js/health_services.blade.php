@@ -9,11 +9,25 @@
         ]);
 
         // Set chart options
-        var options = {
+        var chhealthservicesoptions = {
                        'width':'100%',
                         'box-sizing': 'border-box;',
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var chhealthservices = new google.visualization.PieChart(document.getElementById('chhealthservices'));
-        chhealthservices.draw(chhealthservicesdata, options);
+        chhealthservices.draw(chhealthservicesdata, chhealthservicesoptions);
+ 
+ function resizechhealthservices () {
+      
+       
+           chhealthservices.draw(chhealthservicesdata, chhealthservicesoptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizechhealthservices, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizechhealthservices);
+    }

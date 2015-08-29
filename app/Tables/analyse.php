@@ -68,8 +68,36 @@ private static function getLabel($trim,$col){
 		return $array;
 
 	}
+	public static function sec3Years($surveys){
+		$recset = $surveys;
+
+	$Years = Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name');
+	return $Years;
 
 
+	}
+	public static function u5Register($surveys){
+		
+
+		$recset = $surveys;
+		$Data = $recset->load(['x' => function($query)
+{
+	 
+    $query->where('ColumnSetID', 'Like','CHV2SEC3BLK96DRW02COL%' );
+}]);
+		
+		$total = 0;
+		foreach ($Data as $obj ) {
+
+		
+	$total += ( $obj->x->sum('Data'));
+	
+
+}
+
+	echo($total);
+		
+	}
 	public static function chanalytics($data){
 	//Feed in survey
 		global $surveys;
@@ -100,6 +128,8 @@ private static function getLabel($trim,$col){
 	//resources
 		$resourcesH = array('Resource Availability', 'Available', 'Not Available' );
 		$resources = self::twoOptionsFullStack( 'CHV2SEC7BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
+	//u5Register
+
 	//Json Making
 		$JsonArray = json_encode(array(
 			'Guidelines' =>$Guidelines, 

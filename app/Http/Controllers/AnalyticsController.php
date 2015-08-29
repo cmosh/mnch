@@ -7,6 +7,7 @@ use App\Tables\SubmittedCHCountie;
 use App\Tables\SubmittedSurveys;
 use App\Tables\Column_set;
 use App\Tables\analyse;
+use Illuminate\Database\Eloquent\Collection;
 use Request;
 use Input;
 class AnalyticsController extends Controller {
@@ -58,6 +59,14 @@ class AnalyticsController extends Controller {
 			
 		$SubmittedCHCount = SubmittedCHCount::first();
 		$SubmittedCHCounties = SubmittedCHCountie::get();
+		$Years = analyse::sec3Years($SubmittedSurveys);
+		$YearsCount = count($Years)-1;
+		$Years = array_reverse($Years);
+		unset($Years[0]);
+		unset($Years[1]);
+		$Years = array_reverse($Years, true);
+		//print_r( $Years);
+		//print_r($Years);
 // 		echo $SubmittedCHCounties[1]['County'];
 // 		$X = SubmittedSurveys::where('County','=',$SubmittedCHCounties[1]['County'])->get();
 
@@ -66,7 +75,9 @@ class AnalyticsController extends Controller {
 
 			return view('analytics.ch')
 			->with('SubmittedCHCount',$SubmittedCHCount)
-			->with('SubmittedCHCounties',$SubmittedCHCounties);
+			->with('SubmittedCHCounties',$SubmittedCHCounties)
+			->with('Years',$Years)
+			->with('YearsCount',$YearsCount);
 
 	}
 

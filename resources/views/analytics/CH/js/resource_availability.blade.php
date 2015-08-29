@@ -1,7 +1,7 @@
 
 var resourcesdata = google.visualization.arrayToDataTable(jsonData['resources']);
 
-       var options = {
+       var resourcesoptions = {
         width: '100%',
         height: 300,
        
@@ -11,4 +11,18 @@ var resourcesdata = google.visualization.arrayToDataTable(jsonData['resources'])
       };
 
       var resources = new google.visualization.ColumnChart(document.getElementById('resources'));
-      resources.draw(resourcesdata, options);
+      resources.draw(resourcesdata, resourcesoptions);
+
+       function resizeresources () {
+      
+       
+           resources.draw(resourcesdata, resourcesoptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizeresources, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizeresources);
+    }

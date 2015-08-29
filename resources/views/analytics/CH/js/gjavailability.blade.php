@@ -1,6 +1,6 @@
 var gjavailabilitydata = google.visualization.arrayToDataTable(jsonData['Guidelines']);
 
-       var options = {
+       var gjavailabilityoptions = {
         width: '100%',
         height: 300,
         legend: { position: 'top', maxLines: 3 },
@@ -9,4 +9,18 @@ var gjavailabilitydata = google.visualization.arrayToDataTable(jsonData['Guideli
       };
 
       var gjavailability = new google.visualization.BarChart(document.getElementById('gjavailability'));
-      gjavailability.draw(gjavailabilitydata, options);
+      gjavailability.draw(gjavailabilitydata, gjavailabilityoptions);
+
+       function resizegjavailability () {
+      
+       
+           gjavailability.draw(gjavailabilitydata, gjavailabilityoptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizegjavailability, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizegjavailability);
+    }

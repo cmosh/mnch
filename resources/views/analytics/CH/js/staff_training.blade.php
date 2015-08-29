@@ -9,7 +9,7 @@ var staff_Traineddata = google.visualization.arrayToDataTable([
         @endforeach       
       ]);
 
-      var options = {
+      var staff_Trainedoptions = {
        
         width: '100%',
         height: 300,
@@ -20,4 +20,18 @@ var staff_Traineddata = google.visualization.arrayToDataTable([
         vAxis: {minValue:0}
       };
       var staff_Trained = new google.visualization.BarChart(document.getElementById('staff_Trained'));
-      staff_Trained.draw(staff_Traineddata, options);
+      staff_Trained.draw(staff_Traineddata, staff_Trainedoptions);
+
+       function resizestaff_Trained () {
+      
+       
+           resources.draw(staff_Traineddata, staff_Trainedoptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizestaff_Trained, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizestaff_Trained);
+    }
