@@ -20,7 +20,7 @@
                 </div><!-- /.box-header -->
                 </div>
                 </div>
-                </div>
+               
                 
      <div>
 
@@ -80,6 +80,7 @@
              </div>
                        
 
+</div>
 </div>
 
 @endsection

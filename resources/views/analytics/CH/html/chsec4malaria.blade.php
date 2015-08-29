@@ -10,11 +10,17 @@
 
               <div id="chsec4malaria"></div>     
                 </div><!-- /.box-body -->
+                  <div class="wait overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
 
                  <div class="box-body">
 
               <div id="chsec4malaria2"></div>     
                 </div><!-- /.box-body -->
+                  <div class="wait overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
               </div>
 
               <!-- /.box -->

@@ -8,7 +8,10 @@
                 </div>
                 <div class="box-body">
 
-              <div id="supplies_availability"></div>     
+              <div id="supplies"></div>     
                 </div><!-- /.box-body -->
+                  <div class="wait overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
               </div><!-- /.box -->
             </div><!-- /.col (LEFT) -->    

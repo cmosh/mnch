@@ -10,5 +10,8 @@
 
               <div id="community_strategy"></div>     
                 </div><!-- /.box-body -->
+                  <div class="wait overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
               </div><!-- /.box -->
             </div><!-- /.col (LEFT) -->    

@@ -22,12 +22,22 @@ class AnalyticsController extends Controller {
 
 		 if(Request::ajax()) {
       $data = Input::all();
+      $county = $data['county'];
+      if ($county == 'All') {
+      	$SubmittedSurveys = SubmittedSurveys::all();
+			$chanalytics = analyse::chanalytics($SubmittedSurveys);
 
-    //  echo (array_shift($data));
-			$SubmittedSurveys = SubmittedSurveys::where('County','Like',array_shift($data))->get();
-			$gjavailability = analyse::gjavailability($SubmittedSurveys);
+      
+      }else{
 
-    echo(json_encode($gjavailability));
+      	$SubmittedSurveys = SubmittedSurveys::where('County','Like',$county)->get();
+			$chanalytics = analyse::chanalytics($SubmittedSurveys);
+
+      }
+
+    
+			
+    echo ($chanalytics);
 
       die;
 
@@ -40,24 +50,23 @@ class AnalyticsController extends Controller {
 			
 
 			$SubmittedSurveys = SubmittedSurveys::all();
-			$gjavailability = analyse::gjavailability($SubmittedSurveys);
+		//	$gjavailability = analyse::chanalytics($SubmittedSurveys);
 
 		
 			
-			
+		//echo(	json_encode($gjavailability));
 			
 		$SubmittedCHCount = SubmittedCHCount::first();
 		$SubmittedCHCounties = SubmittedCHCountie::get();
 // 		echo $SubmittedCHCounties[1]['County'];
 // 		$X = SubmittedSurveys::where('County','=',$SubmittedCHCounties[1]['County'])->get();
 
-
-// echo $X;
+// $chanalytics = analyse::chanalytics($SubmittedSurveys);
+// echo $chanalytics;
 
 			return view('analytics.ch')
 			->with('SubmittedCHCount',$SubmittedCHCount)
-			->with('SubmittedCHCounties',$SubmittedCHCounties)
-			->with('gjavailability',$gjavailability);
+			->with('SubmittedCHCounties',$SubmittedCHCounties);
 
 	}
 

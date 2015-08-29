@@ -1,14 +1,4 @@
- var tavailabilitydata = google.visualization.arrayToDataTable([
-
-
-
-        ['Tools Availability', 'Yes', 'No', { role: 'annotation' }],
-
-         @foreach($Ch_tavailabilities as $Ch_tavailability) 
-        ["{{$Ch_tavailability->Label}}", {{$Ch_tavailability->Yes}}, {{$Ch_tavailability->No}},''],
-        @endforeach       
-       
-      ]);
+ var tavailabilitydata = google.visualization.arrayToDataTable(jsonData['Tools']);
 
        var options = {
         width: '100%',

@@ -15,6 +15,10 @@
 
               <div id="chsec4antibiotics2"></div>     
                 </div><!-- /.box-body -->
+                  <div class="wait overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                
               </div>
 
               <!-- /.box -->

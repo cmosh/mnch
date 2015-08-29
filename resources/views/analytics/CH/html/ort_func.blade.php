@@ -10,6 +10,9 @@
 
               <div id="ort_func"></div>     
                 </div><!-- /.box-body -->
+                  <div class="wait overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
                 
               </div>
 

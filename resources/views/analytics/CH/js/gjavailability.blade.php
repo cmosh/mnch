@@ -1,20 +1,10 @@
- var gjavailabilitydata = google.visualization.arrayToDataTable([
-
-
-
-        ['Guidelines Availability', 'Yes', 'No', { role: 'annotation' }],
-
-         @foreach($gjavailability as $gjavailabilit) 
-        ['{{$gjavailabilit[0]}}', {{$gjavailabilit[1]}}, {{$gjavailabilit[2]}},''],
-        @endforeach       
-       
-      ]);
+var gjavailabilitydata = google.visualization.arrayToDataTable(jsonData['Guidelines']);
 
        var options = {
         width: '100%',
         height: 300,
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
+        bar: { groupWidth: '50%' },
         isStacked: 'percent'
       };
 
