@@ -8,10 +8,7 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3>Child Health Survey<sup style="font-size: 20px"></sup></h3>
-                  <p>Data from {{$SubmittedCHCount->X}} facilities in the counties of:<br> @foreach($SubmittedCHCounties as $SubmittedCHCountie)
-                  - {{$SubmittedCHCountie->County}} <br>
-                      @endforeach
-                  </p>
+                  <p>Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}} counties</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
