@@ -1,48 +1,19 @@
-  var u5Registerdata = google.visualization.arrayToDataTable([
-        ['City', '2010 Population', '2000 Population'],
-        ['New York City, NY', 8175000, 8008000],
-        ['Los Angeles, CA', 3792000, 3694000],
-        ['Chicago, IL', 2695000, 2896000],
-        ['Houston, TX', 2099000, 1953000],
-        ['Philadelphia, PA', 1526000, 1517000]
-      ]);
+  var u5Registerdata = google.visualization.arrayToDataTable(jsonData['uRegister']);
 
-      var options = {
-        title: 'Population of Largest U.S. Cities',
-        chartArea: {width: '50%'},
-        hAxis: {
-          title: 'Total Population',
-          minValue: 0,
-          textStyle: {
-            bold: true,
-            fontSize: 12,
-            color: '#4d4d4d'
-          },
-          titleTextStyle: {
-            bold: true,
-            fontSize: 18,
-            color: '#4d4d4d'
-          }
-        },
-        vAxis: {
-          title: 'City',
-          textStyle: {
-            fontSize: 14,
-            bold: true,
-            color: '#848484'
-          },
-          titleTextStyle: {
-            fontSize: 14,
-            bold: true,
-            color: '#848484'
-          }
-        }
-      };
-      var u5Register = new google.visualization.ColumnChart(document.getElementById('u5Register'));
-      u5Register.draw(u5Registerdata, options);
+      var u5Registeroptions = {
+       
+       width: '100%',
+        height: 300,
+       
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: 35 }
+
+             };
+      var u5Register = new google.visualization.ColumnChart(document.getElementById('uRegister'));
+      u5Register.draw(u5Registerdata, u5Registeroptions);
 
        function resizeHandler () {
-      u5Register.draw(u5Registerdata, options);
+      u5Register.draw(u5Registerdata, u5Registeroptions);
       
    
     }

@@ -12,5 +12,9 @@ class SubmittedSurveys extends Model {
     {
         return $this->hasMany('App\Tables\SubmittedRecords','AssID','Assessment_ID');
     }
+     public function y()
+    {
+        return $this->hasOne('App\Tables\SubmittedRecords','AssID','Assessment_ID');
+    }
 
 }

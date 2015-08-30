@@ -8,10 +8,16 @@
                 </div>
                 <div class="box-body">
 
+                   <select class="" style="width: 100%;" name="Year2" id="Year2"> 
+                       @foreach($AllYears as $Year)
+                       <option value ="{{$YearsCount--}}">{{$Year}}</option>
+                        @endforeach
+                       </select>
+
                 <div id="annual"></div>  
 
                 </div><!-- /.box-body -->
-                  <div class="wait overlay">
+                  <div id ="anT" class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div><!-- /.box -->

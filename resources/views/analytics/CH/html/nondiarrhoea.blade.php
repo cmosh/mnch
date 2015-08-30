@@ -7,10 +7,16 @@
                     </div>
                 </div>
                 <div class="box-body">
+                    <select class="" style="width: 100%;" name="Year3" id="Year3"> 
+                       @foreach($Years as $Year)
+                       <option value ="{{$YearsCount--}}">{{$Year}}-{{$Year-2}}</option>
+                        @endforeach
+                       </select>
 
-              <div id="staff_Trained"></div>     
+
+              <div id="NonDiarrhoea"></div>     
                 </div><!-- /.box-body -->
-                  <div class="wait overlay">
+                  <div id="u5N" class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div><!-- /.box -->

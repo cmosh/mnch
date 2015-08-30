@@ -24,15 +24,20 @@ class AnalyticsController extends Controller {
 		 if(Request::ajax()) {
       $data = Input::all();
       $county = $data['county'];
+      $Year_1 = $data['Year1'];
+       $Year_2 = $data['Year2'];
+       $Year_3 = $data['Year3'];
+        $Year_4 = $data['Year4'];
+
       if ($county == 'All') {
       	$SubmittedSurveys = SubmittedSurveys::all();
-			$chanalytics = analyse::chanalytics($SubmittedSurveys);
+			$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
 
       
       }else{
 
       	$SubmittedSurveys = SubmittedSurveys::where('County','Like',$county)->get();
-			$chanalytics = analyse::chanalytics($SubmittedSurveys);
+			$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
 
       }
 
@@ -62,22 +67,21 @@ class AnalyticsController extends Controller {
 		$Years = analyse::sec3Years($SubmittedSurveys);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
+		$AllYears = $Years;
 		unset($Years[0]);
 		unset($Years[1]);
 		$Years = array_reverse($Years, true);
-		//print_r( $Years);
-		//print_r($Years);
-// 		echo $SubmittedCHCounties[1]['County'];
-// 		$X = SubmittedSurveys::where('County','=',$SubmittedCHCounties[1]['County'])->get();
-
-// $chanalytics = analyse::chanalytics($SubmittedSurveys);
-// echo $chanalytics;
+		$AllYears = array_reverse($AllYears, true);
+		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2);
+		// echo $d;
+		
 
 			return view('analytics.ch')
 			->with('SubmittedCHCount',$SubmittedCHCount)
 			->with('SubmittedCHCounties',$SubmittedCHCounties)
 			->with('Years',$Years)
-			->with('YearsCount',$YearsCount);
+			->with('YearsCount',$YearsCount)
+			->with('AllYears',$AllYears);
 
 	}
 

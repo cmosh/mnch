@@ -171,7 +171,11 @@ function drawChart() {
       $( ".wait" ).addClass("overlay");
 	  var data = {
           'county':$('#County').val(),
-         '_token': $('input[name=_token]').val()
+         '_token': $('input[name=_token]').val(),
+         'Year1': $('#Year1').val(),
+         'Year2': $('#Year2').val(),
+         'Year3': $('#Year3').val(),
+         'Year4': $('#Year4').val()
 
     };
  
@@ -194,9 +198,9 @@ function drawChart() {
        @include('analytics/CH/js/supplies_availability')
        @include('analytics/CH/js/resource_availability')
        @include('analytics/CH/js/u5reg')
-	    
-
-
+	     @include('analytics/CH/js/annualTrends')
+       @include('analytics/CH/js/nondiarrhoea')
+       @include('analytics/CH/js/orttrends')
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
@@ -210,6 +214,21 @@ function drawChart() {
        
 
 }
+
+
+$('#Year1').change(year1);
+
+  @include('analytics/CH/js/year1change')
+$('#Year2').change(year2);
+
+  @include('analytics/CH/js/year2change')
+$('#Year3').change(year3);
+
+  @include('analytics/CH/js/year3change')
+$('#Year4').change(year4);
+
+  @include('analytics/CH/js/year4change')
+
     </script>
   
     

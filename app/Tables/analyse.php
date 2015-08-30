@@ -2,10 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 global  $col;
+global  $ycol;
+global $mcol;
 $surveys;
 
 class analyse extends Controller {
@@ -69,6 +71,7 @@ private static function getLabel($trim,$col){
 
 	}
 	public static function sec3Years($surveys){
+		global $surveys;
 		$recset = $surveys;
 
 	$Years = Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name');
@@ -76,14 +79,59 @@ private static function getLabel($trim,$col){
 
 
 	}
-	public static function u5Register($surveys){
+
+
+	public static function u5Register($Year1){
+		//$Year1 = 3;
+
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name'));
+    $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
+		for ($i=2; $i < 9; $i++) {
+
+			$index =  sprintf('%02d',$i);
+			$Label1 =  (self::getLabel(0,'CHV2SEC3BLK99DRW'.$index.'COL01'));
+			$Label = $Label1;
+			if ( strstr($Label1, '(Example', true)) $Label = strstr($Label1, '(Example', true);
+
+			$Row = self::u5RegisterRow('RW'.$index,$Year1);
+				
+			$array [] = array (
+			  $Label, 
+			 	$Row[$Year1],
+			 	$Row[$Year1-1],
+			 	$Row[$Year1-2]);
 		
 
+		}
+
+		return $array;
+
+
+	}
+
+	public static function u5RegisterRow($Row,$Year1){
+		
+		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'));
+		
+		$array = array ();
+		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
+
+			$array [$i] = self::u5RegisterVal($Years[$i].$Row);
+		//	echo $Years[$i].' '.$i.'<br>';
+
+		}
+
+		return($array);
+	}
+	public static function u5RegisterVal($cl){
+		global $ycol,$surveys;
+ $ycol = $cl;
+		//print_r ($Years);
 		$recset = $surveys;
 		$Data = $recset->load(['x' => function($query)
-{
+{		global $ycol;
 	 
-    $query->where('ColumnSetID', 'Like','CHV2SEC3BLK96DRW02COL%' );
+    $query->where('ColumnSetID', 'Like',$ycol.'COL%' );
 }]);
 		
 		$total = 0;
@@ -95,10 +143,10 @@ private static function getLabel($trim,$col){
 
 }
 
-	echo($total);
+	return $total;
 		
 	}
-	public static function chanalytics($data){
+	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4){
 	//Feed in survey
 		global $surveys;
 		$surveys = $data;
@@ -129,8 +177,15 @@ private static function getLabel($trim,$col){
 		$resourcesH = array('Resource Availability', 'Available', 'Not Available' );
 		$resources = self::twoOptionsFullStack( 'CHV2SEC7BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
 	//u5Register
-
+		$u5Register = self::u5Register($Year1);
+	//u5RegisterN
+		$u5RegisterN = self::u5RegisterN($Year3);
+	//annualtrends
+		$annualtrends = self::annualtrends($Year2);
+	//annualtrends
+		$annualtrendsN = self::annualtrendsN($Year4);
 	//Json Making
+
 		$JsonArray = json_encode(array(
 			'Guidelines' =>$Guidelines, 
 			'Tools' =>$Tools,
@@ -139,7 +194,11 @@ private static function getLabel($trim,$col){
 			'Malaria'=>$Malaria,
 			'ortf'=>$ortf,
 			'supplies' => $supplies,
-			'resources'=> $resources
+			'resources'=> $resources,
+			'uRegister'=> $u5Register,
+			'uRegisterN'=> $u5RegisterN,
+			'annualtrends'=> $annualtrends,
+			'annualtrendsN'=> $annualtrendsN
 
 			));
 
@@ -148,6 +207,196 @@ private static function getLabel($trim,$col){
 
 		return $JsonArray;
 	}
+
+	//public static function 
+
+	public static function annualtrends($Year2){
+
+		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'))[$Year2];
+
+		//print_r ($Years[3]);
+		$Array [] = array('Treatment Trends','Treatment with ORS+ Zinc','Treatment with ORS','Treatment with Zinc','Treatment with Antibiotics','Treatment with others','No Treatment')
+	;for ($i=2; $i <13 ; $i++) { 
+		$index = sprintf('%02d',$i);
+		$Data= self::annualtrendsM($Block,'COL'.$index);
+		$Array [] = array(
+			(self::getLabel(0,'CHV2SEC3BLK96DRW01COL'.$index)),
+			$Data[0],
+			$Data[1],
+			$Data[2],
+			$Data[3],
+			$Data[4],
+			$Data[5]
+			);
+		
+		
+	}
+		
+	return($Array);
+
+
+	}
+
+	public static function annualtrendsM($Block,$Col){
+
+			global $mcol,$surveys;
+
+				$recset = $surveys;
+				
+				for ($i=3; $i <9 ; $i++) { 
+					$index = sprintf('%02d',$i);
+		  $mcol = $Block.'RW'.$index.$Col;
+
+
+
+					$Data = $recset->load(['y' => function($query)
+		{		global $mcol;
+			 
+		    $query->where('ColumnSetID', '=',$mcol );
+		}])->lists('y');
+
+				$Data = collect($Data);
+				$Month [] = ($Data->sum('Data'));
+					
+				}
+				return ($Month);
+
+
+
+	}
+
+
+		public static function u5RegisterN($Year1){
+		//$Year1 = 3;
+
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name'));
+    $array [] = array('Non Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
+		for ($i=10; $i < 13; $i++) {
+
+			//$index =  sprintf('%02d',$i);
+			$Label1 =  (self::getLabel(0,'CHV2SEC3BLK99DRW'.$i.'COL01'));
+			$Label = $Label1;
+			if ( strstr($Label1, '(Example', true)) $Label = strstr($Label1, '(Example', true);
+
+			$Row = self::u5RegisterNRow('RW'.$i,$Year1);
+				
+			$array [] = array (
+			  $Label, 
+			 	$Row[$Year1],
+			 	$Row[$Year1-1],
+			 	$Row[$Year1-2]);
+		
+
+		}
+
+		return $array;
+
+
+	}
+
+	public static function u5RegisterNRow($Row,$Year1){
+		
+		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'));
+		
+		$array = array ();
+		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
+
+			$array [$i] = self::u5RegisterNVal($Years[$i].$Row);
+		//	echo $Years[$i].' '.$i.'<br>';
+
+		}
+
+		return($array);
+	}
+	public static function u5RegisterNVal($cl){
+		global $ycol,$surveys;
+ $ycol = $cl;
+		//print_r ($Years);
+		$recset = $surveys;
+		$Data = $recset->load(['x' => function($query)
+{		global $ycol;
+	 
+    $query->where('ColumnSetID', 'Like',$ycol.'COL%' );
+}]);
+		
+		$total = 0;
+		foreach ($Data as $obj ) {
+
+		
+	$total += ( $obj->x->sum('Data'));
+	
+
+}
+
+	return $total;
+		
+	}
+
+
+
+	public static function annualtrendsN($Year2){
+
+		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'))[$Year2];
+
+		//print_r ($Years[3]);
+		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases')
+	;for ($i=2; $i <13 ; $i++) { 
+		$index = sprintf('%02d',$i);
+		$Data= self::annualtrendsNM($Block,'COL'.$index);
+		$Array [] = array(
+			(self::getLabel(0,'CHV2SEC3BLK96DRW01COL'.$index)),
+			$Data
+			);
+		
+		
+	}
+		
+	return($Array);
+
+
+	}
+
+	public static function annualtrendsNM($Block,$Col){
+
+			global $mcol,$surveys;
+
+				$recset = $surveys;
+				
+				
+					$index = 13;
+		  $mcol = $Block.'RW'.$index.$Col;
+
+
+
+					$Data = $recset->load(['y' => function($query)
+		{		global $mcol;
+			 
+		    $query->where('ColumnSetID', '=',$mcol );
+		}])->lists('y');
+
+				$Data = collect($Data);
+				$Month = ($Data->sum('Data'));
+					
+				
+				return ($Month);
+
+
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 }
