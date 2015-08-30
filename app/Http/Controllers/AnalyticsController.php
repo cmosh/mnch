@@ -8,8 +8,13 @@ use App\Tables\SubmittedSurveys;
 use App\Tables\Column_set;
 use App\Tables\analyse;
 use Illuminate\Database\Eloquent\Collection;
+//use Illuminate\Support\Facades\Redis;
 use Request;
 use Input;
+use Cache;
+use LRedis;
+global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+
 class AnalyticsController extends Controller {
 
 	/**
@@ -20,7 +25,8 @@ class AnalyticsController extends Controller {
 
 	public function ajax(){
 
-
+global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+		
 		 if(Request::ajax()) {
       $data = Input::all();
       $county = $data['county'];
@@ -30,9 +36,19 @@ class AnalyticsController extends Controller {
         $Year_4 = $data['Year4'];
 
       if ($county == 'All') {
-      	$SubmittedSurveys = SubmittedSurveys::all();
-			$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
+      
+$SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
 
+      					return SubmittedSurveys::all();
+
+      	});
+      
+		$chredis = 'ChAnalytics'.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
+     	
+     	$chanalytics = Cache::remember($chredis,180,function(){
+global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+      		return analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
+     });
       
       }else{
 
@@ -74,6 +90,8 @@ class AnalyticsController extends Controller {
 		$AllYears = array_reverse($AllYears, true);
 		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2);
 		// echo $d;
+
+
 		
 
 			return view('analytics.ch')
