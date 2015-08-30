@@ -104,7 +104,7 @@
                   <li class="user-footer">
 
 
-                   @if( Auth::user()->role =='admin')
+                   @if( Auth::user()->role =='superuser')
                       <div class="pull-left">
                       <a href="/usermanagement/monitor" class="btn btn-default btn-flat">User Management</a>
                     </div>

@@ -94,8 +94,8 @@
 
                         @foreach($users as $user)
                         <tr>
-                        <td class="rr"> {{ $user->name}}</td>
-                        <td class="nr"><span>{{ $user->email}}</span>  </td>
+                        <td class="nr"> {{ $user->name}}</td>
+                        <td class="rr"><span>{{ $user->email}}</span>  </td>
                         <td> {{ $user->county}}</td>
                         <td> {{ $user->PhoneNumber}}</td>
                         <td> {{ $user->IDNumber}}</td>
@@ -140,4 +140,29 @@ $('#id_add').click(function() {
  </script>
 @endsection
 
+
+ @section('javascript')
+
+  
+
+
+
+ 
+   <script src="/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+
+     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+ <!-- DATA TABLES -->
+  <script type="text/javascript">
+      $(function () {
+        $("#example1").DataTable();
+       
+      });
+    </script>
+
+         
+  @endsection
  

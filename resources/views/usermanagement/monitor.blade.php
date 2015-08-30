@@ -22,20 +22,56 @@
                 <div class="box-header">
                   <h3 class="box-title">
 
-                  User Monitoring
+                  Progress Review
                   </h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                <table style="float:right">
+                  
+                  <tr>
+                  <td>
+
+                  <b>Filter by:</b>
+                  </td>
+                  <td>
+                   <select id="filterer" class="form-control select2 " style="width: 100%;" name="filterer" > 
+                      <option value ="All" id ="filter0" >All</option>
+                       <option value ="County" id ="filter1" >County</option>
+                        <option value ="Survey" id ="filter2" >Survey</option>
+                         <option value ="Term" id ="filter3" >Term</option>
+                       </select>
+
+                  </td>
+                  
+                  <td>
+                   <b style="padding-left:10px">Search:</b>
+            <input id="searcher" name="searcher" type="text">
+                  </td>
+                  </tr>
+                </table>
+                <br>
+                <br>
+                <table id="example1" class="table table-bordered table-striped">
+  
+
+
+                  
                     <thead>
                       <tr>
 
                      
-                        <th>User</th>
+                        
                         <th>Survey</th>
-                         <th>Facility Name</th>
+                        <th>Assessment Term</th>
+                        <th>Assessor</th>
                          <th>Date</th>
-                        <th>Status</th>
+                         <th>Facility</th>
+                         <th style="display:none">County</th>
+                         <th>Entered by</th>
+                        
+
+                        <th>Action</th>
+
                         
                         
                   
@@ -48,9 +84,20 @@
 
                         @foreach($user_monitor as $user)
                         <tr>
-                        <td class="rr"> {{ $user->name}}</td>
+
+                      
+
+                        
                         <td> {{ $user->Survey}}</td>
-                        <td class="nr"><span>{{ $user->FacilityName}}</span>  </td>
+
+                        
+
+                        <td > {{ $user->Assessment_Term}}</td>
+
+
+
+                        <td > {{ $user->assname}}</td>
+                        
                         <?php
 
                           $date= date_create($user->Date);
@@ -58,7 +105,15 @@
 
                          ?>
                         <td><span><?php echo $dateformated?> </span>  </td>
-                        <td> {{ $user->Status}}</td>
+                        <td ><span>{{ $user->FacilityName}}</span>  </td>
+                        <td  style="display:none"><span>{{$user->County}}</span></td>
+                        <td ><span>{{ $user->username}}</span>  </td>
+                        @if($user->Status=='Submitted')
+ <td><form action="/assessments/show/{{$user->Assessment_ID}}">
+    <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>                          @else
+                          <td>Incomplete</td>
+                          @endif
+                        
                         
                        
                      	 </tr>
@@ -75,12 +130,17 @@
                     <tfoot>
                       <tr>
 
-                     
-                        <th>User</th>
+                      
                         <th>Survey</th>
-                         <th>Facility Name</th>
+                        <th>Assessment Term</th>
+                        <th>Assessor</th>
                          <th>Date</th>
-                        <th>Status</th>
+                         <th>Facility</th>
+                         <th style="display:none">County</th>
+                         <th>Entered by</th>
+                        
+
+                        <th>Action</th>
                         
                         
                   
@@ -89,10 +149,118 @@
                   </table>
                 </div><!-- /.box-body -->
               </div>
-s
+
 
 
 
 @endsection
+
+
+
+ @section('javascript')
+
+  
+
+
+
+ 
+   <script src="/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+
+     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+ <!-- DATA TABLES -->
+  <script type="text/javascript">
+
+      $.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+       var searchvar=$('#searcher').val();
+
+       if($('#filterer').val()=='Survey')
+       {
+        var filter =  data[0]; 
+      }
+      else if($('#filterer').val()=='Term')
+      {
+        var filter =  data[1]; 
+      }
+      else if($('#filterer').val()=='County')
+      {
+        var filter =  data[5]; 
+      }
+      else if($('#filterer').val()=='All')
+      {
+        var filter ='';
+        $('#searcher').val('');
+       
+       
+
+
+      }
+
+
+
+
+        if ( filter==searchvar)
+
+        {
+            return true;
+        }
+        return false;
+    }
+);
+ 
+$(document).ready(function() {
+  
+ 
+    var table = $('#example1').DataTable();
+document.getElementById("example1_filter").style.display = 'none';
+
+$('#filterer').click(function()
+{
+
+
+if($('#filterer').val()=='All')
+       {
+         $('#searcher').val('');
+         table.draw();
+          document.getElementById("searcher").disabled = true;
+      }
+      else if($('#filterer').val()=='Survey')
+       {
+        table.draw();
+         document.getElementById("searcher").disabled = false;
+      }
+      else if($('#filterer').val()=='Term')
+       {
+        table.draw();
+         document.getElementById("searcher").disabled = false;
+      }
+      else if($('#filterer').val()=='County')
+       {
+        table.draw();
+         document.getElementById("searcher").disabled = false;
+      }
+
+}
+
+
+
+  );
+    
+      
+     
+    // Event listener 
+    $('#searcher').keyup( function() {
+        table.draw();
+    } );
+} );
+
+    </script>
+
+         
+  @endsection
 
  
