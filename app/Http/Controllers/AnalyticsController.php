@@ -97,10 +97,11 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
 		unset($Years[1]);
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
-		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2);
+		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2,'All');
 		// echo $d;
 
-
+		// $d = analyse::opdgen($SubmittedSurveys);
+		// echo $d;
 		
 
 			return view('analytics.ch')

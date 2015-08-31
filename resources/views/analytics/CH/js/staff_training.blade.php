@@ -1,13 +1,4 @@
-var staff_Traineddata = google.visualization.arrayToDataTable([
-
-
-
-        ['No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s'],
-
-         @foreach($Ch_staff_trainings as $Ch_staff_training) 
-        ['{{$Ch_staff_training->Label}}', {{$Ch_staff_training->Doctors}}, {{$Ch_staff_training->Nurses}},{{$Ch_staff_training->RCOs}}],
-        @endforeach       
-      ]);
+var staff_Traineddata = google.visualization.arrayToDataTable(jsonData['staff_trained']);
 
       var staff_Trainedoptions = {
        
@@ -25,7 +16,7 @@ var staff_Traineddata = google.visualization.arrayToDataTable([
        function resizestaff_Trained () {
       
        
-           resources.draw(staff_Traineddata, staff_Trainedoptions);
+           staff_Trained.draw(staff_Traineddata, staff_Trainedoptions);
 
     }
 

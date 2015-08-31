@@ -46,9 +46,7 @@
 
 
          @include('analytics/CH/html/staff_training')
-       
-         @include('analytics/CH/html/health_services')
-
+         
 
 <div class="col-md-12">
                         
@@ -198,6 +196,9 @@ function drawChart() {
 	     @include('analytics/CH/js/annualTrends')
        @include('analytics/CH/js/nondiarrhoea')
        @include('analytics/CH/js/orttrends')
+       @include('analytics/CH/js/ownership')
+       @include('analytics/CH/js/types')
+       @include('analytics/CH/js/staff_training')
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");

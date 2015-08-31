@@ -1,11 +1,7 @@
 var ownershipdata = new google.visualization.DataTable();
         ownershipdata.addColumn('string', 'Owner');
         ownershipdata.addColumn('number', 'Facilities');
-        ownershipdata.addRows([
-          @foreach ($Ch_owners as $Ch_owner)
-          ['{{$Ch_owner->Owner}}', {{$Ch_owner->Count}}],
-          @endforeach          
-        ]);
+        ownershipdata.addRows(jsonData['ownership']);
 
         // Set chart ownershipoptions
         var ownershipoptions = {

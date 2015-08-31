@@ -16,5 +16,9 @@ class SubmittedSurveys extends Model {
     {
         return $this->hasOne('App\Tables\SubmittedRecords','AssID','Assessment_ID');
     }
+    public function z()
+    {
+        return $this->hasOne('App\Tables\Facilities','FacilityCode','Facility_ID');
+    }
 
 }

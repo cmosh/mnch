@@ -232,6 +232,21 @@ private static function getLabel($trim,$col){
 		$annualtrendsN = Cache::remember('annualtrendsN'.$county.$Year4,180,function() use($Year4){
       					return self::annualtrendsN($Year4);
       	});
+    //ownership
+		$ownership = Cache::remember('ownership'.$county,180,function() {
+
+			return self::ownership();
+		});
+	//types
+		$types = Cache::remember('types'.$county,180,function() {
+
+			return self::types();
+		});
+	//staff_trained
+		$staff_trained = Cache::remember('staff_trained'.$county,180,function(){
+			return self::staff_trained();
+		});
+
 	//Json Making
 
 		$JsonArray = json_encode(array(
@@ -246,8 +261,10 @@ private static function getLabel($trim,$col){
 			'uRegister'=> $u5Register,
 			'uRegisterN'=> $u5RegisterN,
 			'annualtrends'=> $annualtrends,
-			'annualtrendsN'=> $annualtrendsN
-
+			'annualtrendsN'=> $annualtrendsN,
+			'ownership' => $ownership,
+			'types' => $types,
+			'staff_trained'=> $staff_trained
 			));
 
 
@@ -432,12 +449,162 @@ private static function getLabel($trim,$col){
 }
 	
 
+	public static function types(){
+global $surveys;
+
+		 $recset = $surveys;
+
+$Data = $recset->load(['z' => function($query)
+{
+	
+    $query->select('FacilityCode','Type');
+}])->lists('z');
+$x = collect($Data);
+
+
+$z =  $x->groupby('Type');
+
+
+	foreach ($z as $v) {
+
+		$array [] = array( $v[0]['Type'], count($v));
+		
+	}
+
+ return ($array);
+	
+			}
 
 
 
 
 
 
+	public static function ownership(){
+global $surveys;
+
+		 $recset = $surveys;
+
+$Data = $recset->load(['z' => function($query)
+{
+	
+    $query->select('FacilityCode','Owner');
+}])->lists('z');
+$x = collect($Data);
+
+
+$z =  $x->groupby('Owner');
+
+
+	foreach ($z as $v) {
+
+		$array [] = array( $v[0]['Owner'], count($v));
+		
+	}
+
+ return ($array);
+	
+			}
+
+public static function staff_trained(){
+
+	$Array [] = array('No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s');
+	for ($i=4; $i <10 ; $i++) { 
+
+		$index = sprintf('%02d',$i);
+		$col = self::staff_trained_col('COL'.$index);
+		$Label = trim(self::getLabel(0,'CHV2SEC1BLK1RW01COL'.$index)  ,'/^No umber of/');
+		$Array [] = array(
+
+			$Label,
+			$col[0],
+			$col[1],
+			$col[2]
+			);
+
+
+
+		
+	}
+	return ($Array);
+	
+
+}			
+
+public static function staff_trained_col($col){
+
+	global $surveys;
+	//CHV2SEC1BLK1RW02COL04chslabelless_number_box1
+	$recset = $surveys;
+	$DataD = $recset->load(['y' => function($query) use($col)
+{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC1BLK1RW02'.$col);
+}])->lists('y');
+
+$DataD = collect($DataD)->sum('Data');
+
+	$DataN = $recset->load(['y' => function($query) use($col)
+{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC1BLK1RW03'.$col);
+}])->lists('y');
+
+$DataN = collect($DataN)->sum('Data');
+
+	$DataR = $recset->load(['y' => function($query) use($col)
+{
+	 
+    $query->where('ColumnSetID', '=', 'CHV2SEC1BLK1RW04'.$col);
+}])->lists('y');
+
+	$DataR = collect($DataR)->sum('Data');
+
+
+	return  array($DataD,$DataN,$DataR);
+}
+
+
+// 	public static function opdgen($surveys){
+
+// 		$recset = $surveys;
+// 	$Data = $recset->load(['y' => function($query) 
+// {
+	
+//     $query->where('ColumnSetID', '=', 'CHV2SEC1BLK2RW01COL02');
+// }])->lists('y');
+
+// 	$RawData = collect($Data)->lists('Data');
+
+// 	$x = array_count_values($RawData);
+// 	print_r($x);
+// 	echo "<br><br><br>";
+
+// 	$length  = count( array_keys( $RawData, "1" ));
+// 	$y = collect(array_flip($x));
+// 	echo $y;
+// 	echo "<br><br><br>";
+// 	$x = collect($x);
+// 	echo $x;
+// 	echo "<br><br><br>";
+// 	//For 1
+// 	$ones = 0;
+// 	foreach ($y as $k) {
+// 		echo $k;
+// 		echo "	";
+// 		echo $x->'1';
+// 		echo '<br>';
+
+ 			 
+//      }
+		
+	
+// 	//echo $ones;
+	
+
+// 		//return ($length);
+// 		//return json_encode($RawData);
+// 	}
 
 
 

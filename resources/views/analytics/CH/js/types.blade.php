@@ -1,11 +1,7 @@
   var ftypesdata = new google.visualization.DataTable();
         ftypesdata.addColumn('string', 'Type');
         ftypesdata.addColumn('number', 'Facilities');
-        ftypesdata.addRows([
-          @foreach ($Ch_types as $Ch_type)
-          ['{{$Ch_type->Type}}', {{$Ch_type->Count}}],
-          @endforeach          
-        ]);
+        ftypesdata.addRows(jsonData['types']);
 
         // Set chart options
         var ftypesoptions = {
