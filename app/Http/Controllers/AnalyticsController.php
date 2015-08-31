@@ -13,7 +13,7 @@ use Request;
 use Input;
 use Cache;
 use LRedis;
-global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+//global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
 
 class AnalyticsController extends Controller {
 
@@ -25,7 +25,7 @@ class AnalyticsController extends Controller {
 
 	public function ajax(){
 
-global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+//global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
 		
 		 if(Request::ajax()) {
       $data = Input::all();
@@ -38,22 +38,31 @@ global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
       if ($county == 'All') {
       
 $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
-
       					return SubmittedSurveys::all();
-
       	});
       
 		$chredis = 'ChAnalytics'.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
      	
-     	$chanalytics = Cache::remember($chredis,180,function(){
-global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+     	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
+
       		return analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
      });
       
       }else{
 
-      	$SubmittedSurveys = SubmittedSurveys::where('County','Like',$county)->get();
-			$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
+      	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county,180,function() use($county){
+      					return 	SubmittedSurveys::where('County','Like',$county)->get();
+      	});
+      
+		$chredis = 'ChAnalytics'.$county.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
+     	
+     	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
+
+      		return analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
+     });
+
+      
+		//	$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
 
       }
 
