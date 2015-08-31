@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Cache;
+use LRedis;
 
 global  $col;
 global  $ycol;
@@ -146,44 +148,90 @@ private static function getLabel($trim,$col){
 	return $total;
 		
 	}
-	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4){
+	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4,$county){
 	//Feed in survey
 		global $surveys;
 		$surveys = $data;
 	//Guidelines Availability
 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No' );
-		$Guidelines = self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
+			$Guidelines = Cache::remember('Guidelines'.$county,180,function() use($GuidelinesHeading){
+      					return 	 self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
+      	});		
 	//Tools Availability
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No' );
-		$Tools = self::twoOptionsFullStack( 'CHV2SEC2BLK2RW',$ToolsHeading,0,2,10,'COL01','COL02','/^/');
+		$Tools = Cache::remember('Tools'.$county,180,function() use($ToolsHeading){
+      					return 	  self::twoOptionsFullStack( 'CHV2SEC2BLK2RW',$ToolsHeading,0,2,10,'COL01','COL02','/^/');
+      	});				
 	//DTreatmentCommodities
 		$DTreatmentCommoditiesExclude = array(11,12);
 		$DTreatmentCommoditiesH = array('Diarhoea Treatment Availability', 'Available', 'NotAvailable' );
-		$DTreatmentCommodities = self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentCommoditiesH,0,9,17,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
+		
+		$DTreatmentCommodities = Cache::remember('DTreatmentCommodities'.$county,180,function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
+      					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentCommoditiesH,0,9,17,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
+	});		
+		
 	//Antibiotics
+
+
 		$AntibioticsH = array('Antibiotics  Availability', 'Available', 'NotAvailable' );
-		$Antibiotics = self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsH,0,5,9,'COL01','COL03','/^/');
+		
+		$Antibiotics = Cache::remember('Antibiotics'.$county,180,function() use($AntibioticsH){
+      					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsH,0,5,9,'COL01','COL03','/^/');
+      	});				
 	//Malaria
 		$MalariaH = array('Malaria  Availability', 'Available', 'NotAvailable' );
-		$Malaria = self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/');
+
+		$Malaria = Cache::remember('Malaria'.$county,180,function() use($MalariaH){
+      					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/');
+      	});
+		
 	//ortf
 		$ortfExclude = array(5);
 		$ortfH = array('Ort Functionality', 'Yes', 'No' );
-		$ortf = self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,4,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
+
+		$ortf = Cache::remember('ortf'.$county,180,function() use($ortfExclude,$ortfH){
+      					return 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,4,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
+      	});
+		
 	//supplies
 		$suppliesH = array('Supplies Availability', 'Available', 'Not Available' );
-		$supplies = self::twoOptionsFullStack( 'CHV2SEC6BLK2RW',$suppliesH,0,2,9,'COL01','COL02','/^/');
+
+		$supplies = Cache::remember('supplies'.$county,180,function() use($suppliesH){
+      					return 	 self::twoOptionsFullStack( 'CHV2SEC6BLK2RW',$suppliesH,0,2,9,'COL01','COL02','/^/');
+      	});
+		
 	//resources
+
+
 		$resourcesH = array('Resource Availability', 'Available', 'Not Available' );
-		$resources = self::twoOptionsFullStack( 'CHV2SEC7BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
+
+		$resources = Cache::remember('resources'.$county,180,function() use($resourcesH){
+      					return 	self::twoOptionsFullStack( 'CHV2SEC7BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
+	
+      	});
+		
 	//u5Register
-		$u5Register = self::u5Register($Year1);
+		 
+		$u5Register = Cache::remember('u5Register'.$county,180,function() use($Year1){
+      					return self::u5Register($Year1);
+      	});
+
 	//u5RegisterN
-		$u5RegisterN = self::u5RegisterN($Year3);
+		
+		$u5RegisterN = Cache::remember('u5RegisterN'.$county,180,function() use($Year3){
+      					return self::u5RegisterN($Year3);
+      	});
 	//annualtrends
-		$annualtrends = self::annualtrends($Year2);
+		$annualtrends = Cache::remember('annualtrends'.$county,180,function() use($Year2){
+      					return self::annualtrends($Year2);
+      	});
+
+		
 	//annualtrends
-		$annualtrendsN = self::annualtrendsN($Year4);
+	
+		$annualtrendsN = Cache::remember('annualtrendsN'.$county,180,function() use($Year4){
+      					return self::annualtrendsN($Year4);
+      	});
 	//Json Making
 
 		$JsonArray = json_encode(array(

@@ -41,12 +41,12 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
       					return SubmittedSurveys::all();
       	});
       
-		$chredis = 'ChAnalytics'.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
+		//$chredis = 'ChAnalytics'.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
      	
-     	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
+     //	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
 
-      		return analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
-     });
+      		$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
+     // });
       
       }else{
 
@@ -54,12 +54,12 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
       					return 	SubmittedSurveys::where('County','Like',$county)->get();
       	});
       
-		$chredis = 'ChAnalytics'.$county.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
+		// $chredis = 'ChAnalytics'.$county.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
      	
-     	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
+  //    	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
 
-      		return analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
-     });
+      		$chanalytics  = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
+     // });
 
       
 		//	$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
