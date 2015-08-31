@@ -212,24 +212,24 @@ private static function getLabel($trim,$col){
 		
 	//u5Register
 		 
-		$u5Register = Cache::remember('u5Register'.$county,180,function() use($Year1){
+		$u5Register = Cache::remember('u5Register'.$county.$Year1,180,function() use($Year1){
       					return self::u5Register($Year1);
       	});
 
 	//u5RegisterN
 		
-		$u5RegisterN = Cache::remember('u5RegisterN'.$county,180,function() use($Year3){
+		$u5RegisterN = Cache::remember('u5RegisterN'.$county.$Year3,180,function() use($Year3){
       					return self::u5RegisterN($Year3);
       	});
 	//annualtrends
-		$annualtrends = Cache::remember('annualtrends'.$county,180,function() use($Year2){
+		$annualtrends = Cache::remember('annualtrends'.$county.$Year2,180,function() use($Year2){
       					return self::annualtrends($Year2);
       	});
 
 		
 	//annualtrends
 	
-		$annualtrendsN = Cache::remember('annualtrendsN'.$county,180,function() use($Year4){
+		$annualtrendsN = Cache::remember('annualtrendsN'.$county.$Year4,180,function() use($Year4){
       					return self::annualtrendsN($Year4);
       	});
 	//Json Making
