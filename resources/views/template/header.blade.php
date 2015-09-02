@@ -9,7 +9,7 @@
           <span class="logo-mini">MNCH Surveys</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">MNCH Surveys</span>
-        @elseif($location == 'ass')
+        @elseif($location == 'ass' || $location == 'umanage' || $location == 'preview')
             <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">{{$title}} </span>
           <!-- logo for regular state and mobile devices -->
@@ -101,18 +101,7 @@
 
                   </li>
 
-                  <li class="user-footer">
-
-
-                   @if( Auth::user()->role =='superuser')
-                      <div class="pull-left">
-                      <a href="/usermanagement/monitor" class="btn btn-default btn-flat">User Management</a>
-                    </div>
-
-
-                    @endif
-                  </li>
-
+                  
 
                 
                 </ul>

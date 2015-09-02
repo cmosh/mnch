@@ -4,8 +4,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Tables\User_monitor;
+use App\Tables\Counties_assessed;
+use App\Tables\Surveycompletion_daily;
+use App\Tables\Surveycompletion_total;
+use Illuminate\Http\Request;
+use App\Http\Requests\Requestuser;
 
-use Request;
+
+
+
 
 
 class UserManagement extends Controller {
@@ -23,12 +30,18 @@ class UserManagement extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		//
 		$users=User::all();
-		return view('usermanagement.view')->with('users',$users)->with('location','users')->with('title','User Management');
 
+
+
+		
+		if($request->user()->role=='systemuser')
+		{
+		return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
+}
 
 	}
 
@@ -37,7 +50,7 @@ class UserManagement extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($num)
+	public function create(Request $request,$num)
 	{
 
 		for($i=0;$i<$num;$i++) 
@@ -46,8 +59,10 @@ class UserManagement extends Controller {
 		$y[$i]=$i;
 	}
 		//
-				return view('usermanagement.create')->with('location','users')->with('title','User Management')->with('counts',$y);
-
+	if($request->user()->role=='systemuser')
+		{
+				return view('usermanagement.create')->with('location','umanage')->with('title','User Management')->with('counts',$y);
+		}
 	}
 
 	/**
@@ -60,44 +75,62 @@ class UserManagement extends Controller {
 
 
 	{
-		
-		$array=Request::all();
-		$new=array_shift($array);
-		$x = array();
+		if(Request::ajax()) {
+      $data = Input::all();
+      // $county = $data['county'];
+       $name = $data['name'];
+      //  $idnum = $data['idnum'];
+      //  $phone = $data['phone'];
+      //   $role = $data['role'];
+      //   $email = $data['email'];
+
+
+        User::createOrUpdate(
+                $data, 
+                array('name' => $name));
+		 	
+			}
+
+
+	// 	$array=Requestuser::all();
+	// 	$new=array_shift($array);
+	// 	$x = array();
 
 
 
-	$users=new User;
-	foreach ($array as $key ) {
-		# code...
-			$x[]=$key;
+	// $users=new User;
+	// foreach ($array as $key ) {
+	// 	# code...
+	// 		$x[]=$key;
 			
-	}
+	// }
 
-	for($i=0;$i<sizeof($x)/6;$i++) 
+	// for($i=0;$i<sizeof($x)/6;$i++) 
 
-	{
-		$num=6*$i;
-		$data=array(
-		'name'=>$x[0+$num],
-		'email'=>$x[1+$num],
-		'county'=>$x[2+$num],
-		'PhoneNumber'=>$x[3+$num],
-		'IDNumber'=> $x[4+$num],
-		'role'=> $x[5+$num]);
-		User::insert($data);
+	// {
+	// 	$num=6*$i;
+	// 	$data=array(
+	// 	'name'=>$x[0+$num],
+	// 	'email'=>$x[1+$num],
+	// 	'county'=>$x[2+$num],
+	// 	'PhoneNumber'=>$x[3+$num],
+	// 	'IDNumber'=> $x[4+$num],
+	// 	'role'=> $x[5+$num]);
+	// 	User::insert($data);
 
 
 
-		# code...
-	}
+	// 	# code...
+	// }
 
 	
 		
-	$users=User::all();
-				return view('usermanagement.view')->with('users',$users)->with('location','users')->with('title','User Management');
+	// $users=User::all();
+	// if($request->user()->role=='systemuser')
+	// 	{
+	// 			return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
-		
+	// 	}
 	}
 
 	/**
@@ -106,13 +139,19 @@ class UserManagement extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function show(Request $request)
 	{
 		//
 		$user_monitor=User_monitor::all();
-		return view('usermanagement.monitor')->with('user_monitor',$user_monitor)->with('location','users')->with('title','User Management');
+		$counties_assessed=Counties_assessed::all();
+		$Surveycompletion_daily=Surveycompletion_daily::all();
+		$Surveycompletion_total=Surveycompletion_total::all();
+		if($request->user()->role=='systemuser' || 'programuser')
+		{
 
+	return view('usermanagement.monitor')->with('Surveycompletion_total',$Surveycompletion_total)->with('Surveycompletion_daily',$Surveycompletion_daily)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
 
+		}	
 
 
 

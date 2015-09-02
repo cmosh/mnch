@@ -31,4 +31,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+
+	 public static function createOrUpdate($data, $keys) {
+    $record = self::where($keys)->first();
+    if (is_null($record)) {
+        return self::create($data);
+    } else {
+        return self::where($keys)->update($data);
+    }
+}
+
+
 }

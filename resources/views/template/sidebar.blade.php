@@ -43,8 +43,22 @@
 
               <li><a href="/"><i class="fa fa-link"></i> <span>Analytics</span></a></li>
 
+
+               @if( Auth::user()->role =='programuser')
+                <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+
+               @endif
+
+               @if( Auth::user()->role =='systemuser')
+                <li><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
+                <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+
+               @endif
+
+
+
            
-           @elseif($location == 'ass' or $location == 'users')
+           @elseif($location == 'ass' || $location == 'umanage' || $location == 'preview')
 
              <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
            <!--  <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li> -->
