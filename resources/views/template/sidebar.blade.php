@@ -44,12 +44,12 @@
               <li><a href="/"><i class="fa fa-link"></i> <span>Analytics</span></a></li>
 
 
-               @if( Auth::user()->role =='programuser')
+               @if( Auth::user()->role == 2)
                 <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
 
                @endif
 
-               @if( Auth::user()->role =='systemuser')
+               @if( Auth::user()->role == 3)
                 <li><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
 

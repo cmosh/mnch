@@ -43,7 +43,14 @@ Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
 Route::get('usermanagement/viewusers','UserManagement@index');
 Route::get('usermanagement/monitor','UserManagement@show');
-Route::get('usermanagement/addusers/{num}','UserManagement@create');
+Route::get('usermanagement/addusers','UserManagement@create');
+Route::get('usermanagement/addusers_multi','UserManagement@multi');
+Route::post('usermanagement/multi_upload','UserManagement@upload');
+
+
+Route::get('usermanagement/editusers/{id}','UserManagement@edit');
+Route::post('usermanagement/update','UserManagement@update');
+
 Route::post('usermanagement/store','UserManagement@store');
 
 Route::controllers([

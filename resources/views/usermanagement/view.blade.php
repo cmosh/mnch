@@ -27,39 +27,37 @@
 
 @section('content')
 <div class="row">
-<div class="col-lg-6">
-  <div class="box box-danger">
+<div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  
+                  <p>Add User</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="/usermanagement/addusers" class="small-box-footer">Add <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
 
-                <div class="box-header with-border">
-                  <h3 class="box-title">Add Users</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-               
-                <div class="form-horizontal">
 
-                  <div class="box-body">
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
                 
-            
-                    
-                      <label><p>Enter how many users you want to add.</p></label>
-                      
-                       <input type="number" name="num" id="num" value="1" />
-                     
-                     
-                  </div><!-- /.box-body -->
-                  <div class="box-footer">
-
-                    <button  id="id_add" class="btn btn-danger form-control"> Add </button>
-
-                  </div><!-- /.box-footer -->
+                  <p>Add Multiple Users</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                
+                <a href="#" class="small-box-footer">Add<i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
 
 </div>
-                </div>
-                </div>
-                </div>
-
-                
-
 
 
 
@@ -99,7 +97,37 @@
                         <td> {{ $user->county}}</td>
                         <td> {{ $user->PhoneNumber}}</td>
                         <td> {{ $user->IDNumber}}</td>
-                        <td> {{ $user->role}}</td>
+                        <td> 
+
+                      <?php 
+                      if($user->role===0)
+                      {
+                        echo "county user";
+                      }
+                       if($user->role==1)
+                      {
+                        echo "data clerk";
+                      }
+                       if($user->role==2)
+                      {
+                        echo "program user";
+                      }
+                       if($user->role==3)
+                      {
+                        echo "system user";
+                      }
+                       if($user->role=='')
+                      {
+                        echo "Unknown";
+                      }
+
+
+
+                      ?>
+
+                        </td>
+ <td><form action="/usermanagement/editusers/{{$user->id}}">
+    <input class="btn btn-primary form-control" type="submit" value="EDIT"></form></td>
                      	 </tr>
                          @endforeach
 

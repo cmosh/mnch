@@ -20,11 +20,11 @@
         <div class="panel-body">
           
    
-{!! Form::open() !!}
+{!! Form::open(['url' => 'usermanagement/store']) !!}
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
               <div class="col-md-6">
-                <input class="form-control" id="name" name="name" value="" type="text">
+                     {!! Form::text('name',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
 
@@ -33,50 +33,43 @@
             <div class="form-group">
               <label class="col-md-4 control-label">County</label>
               <div class="col-md-6">
-                <input class="form-control" id="county" name="county" type="text">
+                {!! Form::text('county',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
 
-            <div class="form-group">
+         <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-6">
-                <input class="form-control" id="phone" name="PhoneNumber" type="text">
+                {!! Form::text('phone',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
-                <input class="form-control" id="idnum" name="IDNumber" type="text">
+                {!! Form::text('idnum',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-                <input class="form-control" id = "email" name="email" value="" type="email">
+                {!! Form::email('email',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-4 control-label">Role</label>
               <div class="col-md-6">
-                <select id="role" class="form-control select2 "  name="role" > 
-                      <option value ="systemuser" id ="filter0" >System User</option>
-                       <option value ="programuser" id ="filter1" >Program User</option>
-                        <option value ="dataclerk" id ="filter2" >Data Clerk</option>
-                         <option value ="countyuser" id ="filter3" >County User</option>
-                       </select>
+                {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ],'countyuser',['countyuser','dataclerk','programuser','systemuser'],array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
-          <br>
-            <div class="box-body">
-              <div class="col-md-6 col-md-offset-4">
-                <button type="submit" id ="submit" class="btn btn-primary">
-                Add User
-                </button>
-              </div>
-            </div>
+         <div class="form-group">
          
+              <div class="col-md-6">
+            
+            {!! Form::submit('Add User',['class' => 'use-address btn btn-primary form-control']) !!}
+         </div>
+            </div>
         </div>
       </div>
     </div>
@@ -95,8 +88,8 @@
 
 
 @section('js')
-//  <script type="text/javascript">
-// $('#submit').click( function () {
+ <script type="text/javascript">
+//  $('#submit').change(function () {
 
 //     var data = {
 //           'name':$('#name').val(),
@@ -114,8 +107,7 @@
 //       type: "post",
 //        data: data,
 //            success: function(data){
-//         // alert(data);
-     
+//           alert(data);
    
 // }
 
@@ -126,6 +118,5 @@
 
        
 
-// }
-// </script>
+// }); </script>
     @endsection

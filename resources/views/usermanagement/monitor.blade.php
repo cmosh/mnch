@@ -429,34 +429,26 @@ $('#searcher').click(function()
 if($('#filterer').val()=='All')
        {
          $('#searcher').val('');
-          $('.searcher0').hide();
-        $('.searcher1').hide();
-        $('.searcher2').hide();
+          
          table.draw();
           document.getElementById("searcher").disabled = true;
       }
       else if($('#filterer').val()=='Survey')
        {
-        $('.searcher0').hide();
-        $('.searcher1').hide();
-        $('.searcher2').show();
+        
         table.draw();
          document.getElementById("searcher").disabled = false;
       }
       else if($('#filterer').val()=='Term')
        {
-        $('.searcher0').hide();
-        $('.searcher1').show();
-        $('.searcher2').hide();
+       
        
         table.draw();
          document.getElementById("searcher").disabled = false;
       }
       else if($('#filterer').val()=='County')
        {
-         $('.searcher0').show();
-        $('.searcher1').hide();
-        $('.searcher2').hide();
+         
        
         table.draw();
          document.getElementById("searcher").disabled = false;
@@ -477,23 +469,33 @@ if($('#filterer').val()=='All')
 if($('#filterer').val()=='All')
        {
          $('#searcher').val('');
+         $('.searcher0').hide();
+        $('.searcher1').hide();
+        $('.searcher2').hide();
          table.draw();
           document.getElementById("searcher").disabled = true;
       }
       else if($('#filterer').val()=='Survey')
        {
-
+$('.searcher0').hide();
+        $('.searcher1').hide();
+        $('.searcher2').show();
         table.draw();
          document.getElementById("searcher").disabled = false;
       }
       else if($('#filterer').val()=='Term')
        {
+         $('.searcher0').hide();
+        $('.searcher1').show();
+        $('.searcher2').hide();
         table.draw();
          document.getElementById("searcher").disabled = false;
       }
       else if($('#filterer').val()=='County')
        {
-   
+   $('.searcher0').show();
+        $('.searcher1').hide();
+        $('.searcher2').hide();
         table.draw();
          document.getElementById("searcher").disabled = false;
       }
