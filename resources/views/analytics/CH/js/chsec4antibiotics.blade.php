@@ -18,7 +18,7 @@ var chsec4antibioticsdata = google.visualization.arrayToDataTable(jsonData['Anti
 
       
 
-var chsec4antibioticsdata2 = google.visualization.arrayToDataTable(jsonData['Antibiotics']);
+var chsec4antibioticsdata2 = google.visualization.arrayToDataTable(jsonData['AntibioticsAvailability']);
       var chsec4antibiotics2options = {
        hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
         width: '100%',

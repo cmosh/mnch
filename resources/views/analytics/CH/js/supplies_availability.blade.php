@@ -1,7 +1,7 @@
 var suppliesdata = google.visualization.arrayToDataTable(jsonData['supplies']);
 
        var suppliesoptions = {
-        hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
+       // hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
        width: '100%',
         height: 300,
        

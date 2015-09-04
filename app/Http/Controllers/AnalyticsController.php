@@ -100,6 +100,9 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
 		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2,'All');
 		// echo $d;
 
+		// $d = analyse::commstrategy($SubmittedSurveys);
+		// echo $d;
+		
 		// $d = analyse::opdgen($SubmittedSurveys);
 		// echo $d;
 		

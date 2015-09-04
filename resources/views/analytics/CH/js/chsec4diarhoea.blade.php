@@ -12,7 +12,7 @@ var chsec4diarhoeadata = google.visualization.arrayToDataTable(jsonData['DTreatm
       var chsec4diarhoea = new google.visualization.ColumnChart(document.getElementById('chsec4diarhoea'));
       chsec4diarhoea.draw(chsec4diarhoeadata, chsec4diarhoeaoptions);
 
-var chsec4diarhoeadata2 = google.visualization.arrayToDataTable(jsonData['DTreatmentCommodities']); 
+var chsec4diarhoeadata2 = google.visualization.arrayToDataTable(jsonData['DTreatmentAvailability']); 
 
       var chsec4diarhoea2options = {
         width: '100%',

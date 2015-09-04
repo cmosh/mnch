@@ -46,6 +46,10 @@
 
 
          @include('analytics/CH/html/staff_training')
+
+           @include('analytics/CH/html/health_services')         
+
+
          
 
 <div class="col-md-12">
@@ -112,8 +116,9 @@
                         </div>
 </div>
  @include('analytics/CH/html/ort_func')
+ @include('analytics/CH/html/locationortcorner')
 
-<div class="col-md-12">
+<div class="col-md-4">
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -122,10 +127,12 @@
                         <br>
                         </div>
                         </div>
-</div>
- @include('analytics/CH/html/supplies_availability')
 
-<div class="col-md-12">
+ @include('analytics/CH/html/supplies_availability')
+</div>
+
+
+<div class="col-md-4">
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -134,11 +141,23 @@
                         <br>
                         </div>
                         </div>
-</div>
+
  @include('analytics/CH/html/resource_availability')
+</div>
+<div class="col-md-4">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>COMMUNITY STRATEGY</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+
+ @include('analytics/CH/html/community_strategy')
 
            
-
+</div>
 
 
             
@@ -199,6 +218,9 @@ function drawChart() {
        @include('analytics/CH/js/ownership')
        @include('analytics/CH/js/types')
        @include('analytics/CH/js/staff_training')
+       @include('analytics/CH/js/community_strategy')
+       @include('analytics/CH/js/locationortcorner')
+       @include('analytics/CH/js/health_services') 
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");

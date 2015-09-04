@@ -6,10 +6,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Cache;
 use LRedis;
-
-global  $col;
-global  $ycol;
-global $mcol;
 $surveys;
 
 class analyse extends Controller {
@@ -17,15 +13,15 @@ class analyse extends Controller {
   
 
 	private  static function count_YN($cl){
- global $col,$surveys;
- $col = $cl;
+ global $surveys;
+ 
 
  $recset = $surveys;
 
-		$Data = $recset->load(['x' => function($query)
+		$Data = $recset->load(['x' => function($query) use ($cl)
 {
-	 global $col;
-    $query->where('ColumnSetID', '=', $col);
+	
+    $query->where('ColumnSetID', '=', $cl);
 }]);
 
 
@@ -36,8 +32,7 @@ foreach ($Data as $obj ) {
 }
 $big0 = array_count_values($objs);
 
-if(!(isset($big0[1]))) $big0[1]=0;
-if(!(isset($big0[2]))) $big0[2]=0;
+
 
 return $big0;
 
@@ -60,11 +55,40 @@ private static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
+			if(!(isset($o[1]))) $o[1]=0;
+			if(!(isset($o[2]))) $o[2]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
 			 	$o[1],
 			 	$o[2]);
+		}
+
+		}
+		if($extrarow!==null)$array[]=$extrarow;
+		return $array;
+
+	}
+	public static function fourOptionsFullStack($Block,$headings,$trim,$b,$t,$LabelCol,$DataCol,$extratrim,$exclude=array(),$extrarow=null)
+	{
+
+			$array [] = $headings;
+
+		for ($i=$b; $i < $t; $i++) { 
+			if(!(in_array($i,$exclude))){
+			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
+			if(!(isset($o[1]))) $o[1]=0;
+			if(!(isset($o[2]))) $o[2]=0;
+			if(!(isset($o[3]))) $o[3]=0;
+			if(!(isset($o[-51]))) $o[-51]=0;
+			
+			$array [] = array (
+			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
+			 	$o[1],
+			 	$o[2],
+			 	$o[3],
+			 	$o[-51]
+			 	);
 		}
 
 		}
@@ -126,14 +150,14 @@ private static function getLabel($trim,$col){
 		return($array);
 	}
 	public static function u5RegisterVal($cl){
-		global $ycol,$surveys;
- $ycol = $cl;
+		global $surveys;
+
 		//print_r ($Years);
 		$recset = $surveys;
-		$Data = $recset->load(['x' => function($query)
-{		global $ycol;
+		$Data = $recset->load(['x' => function($query) use ($cl)
+{		
 	 
-    $query->where('ColumnSetID', 'Like',$ycol.'COL%' );
+    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
 }]);
 		
 		$total = 0;
@@ -168,7 +192,14 @@ private static function getLabel($trim,$col){
 		
 		$DTreatmentCommodities = Cache::remember('DTreatmentCommodities'.$county,180,function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentCommoditiesH,0,9,17,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
-	});		
+	});	
+	//DTreatmentAvailability
+		$DTreatmentAvailabilityExclude = array(11,12);
+		$DTreatmentAvailabilityH = array('Diarhoea Treatment Availability', 'Ordered', 'Ordered but not yet received','Expired','No information provided' );
+		
+		$DTreatmentAvailability = Cache::remember('DTreatmentAvailability'.$county,180,function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
+      					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentAvailabilityH,0,9,17,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
+	});			
 		
 	//Antibiotics
 
@@ -177,12 +208,26 @@ private static function getLabel($trim,$col){
 		
 		$Antibiotics = Cache::remember('Antibiotics'.$county,180,function() use($AntibioticsH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsH,0,5,9,'COL01','COL03','/^/');
+      	});	
+    //AntibioticsAvailability
+
+
+		$AntibioticsAvailabilityH = array('Antibiotics  Availability', 'Ordered', 'Ordered but not yet received','Expired','No information provided' );
+		
+		$AntibioticsAvailability = Cache::remember('AntibioticsAvailability'.$county,180,function() use($AntibioticsAvailabilityH){
+      					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsAvailabilityH,0,5,9,'COL01','COL04','/^/');
       	});				
 	//Malaria
 		$MalariaH = array('Malaria  Availability', 'Available', 'NotAvailable' );
 
 		$Malaria = Cache::remember('Malaria'.$county,180,function() use($MalariaH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/');
+      	});
+     //MalariaAvaialability
+		$MalariaAvaialabilityH = array('Malaria  Availability', 'Ordered', 'Ordered but not yet received','Expired','No information provided' );
+
+		$MalariaAvaialability = Cache::remember('MalariaAvaialability'.$county,180,function() use($MalariaAvaialabilityH){
+      					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaAvaialabilityH,0,2,5,'COL01','COL04','/^/');
       	});
 		
 	//ortf
@@ -246,6 +291,21 @@ private static function getLabel($trim,$col){
 		$staff_trained = Cache::remember('staff_trained'.$county,180,function(){
 			return self::staff_trained();
 		});
+	//comm_strategy
+		$comm_strategy = Cache::remember('comm_strategy'.$county,180,function(){
+			return self::commstrategy();
+		});
+
+	//lort
+		$lort = Cache::remember('lort'.$county,180,function(){
+			return self::ortloc();
+		});
+	//genopd
+		$genopd = Cache::remember('genopd'.$county,180,function(){
+			return self::opdgen();
+		});
+
+	
 
 	//Json Making
 
@@ -264,7 +324,13 @@ private static function getLabel($trim,$col){
 			'annualtrendsN'=> $annualtrendsN,
 			'ownership' => $ownership,
 			'types' => $types,
-			'staff_trained'=> $staff_trained
+			'staff_trained'=> $staff_trained,
+			'DTreatmentAvailability'=>$DTreatmentAvailability,
+			'AntibioticsAvailability'=>$AntibioticsAvailability,
+			'MalariaAvaialability'=>$MalariaAvaialability,
+			'comm_strategy'=>$comm_strategy,
+			'lort'=>$lort,
+			'genopd'=>$genopd
 			));
 
 
@@ -304,7 +370,7 @@ private static function getLabel($trim,$col){
 
 	public static function annualtrendsM($Block,$Col){
 
-			global $mcol,$surveys;
+			global $surveys;
 
 				$recset = $surveys;
 				
@@ -314,10 +380,10 @@ private static function getLabel($trim,$col){
 
 
 
-					$Data = $recset->load(['y' => function($query)
-		{		global $mcol;
+					$Data = $recset->load(['y' => function($query) use ($mcol)
+		{		
 			 
-		    $query->where('ColumnSetID', '=',$mcol );
+		    $query->where('ColumnSetID', '=',$mcol);
 		}])->lists('y');
 
 				$Data = collect($Data);
@@ -374,14 +440,14 @@ private static function getLabel($trim,$col){
 		return($array);
 	}
 	public static function u5RegisterNVal($cl){
-		global $ycol,$surveys;
- $ycol = $cl;
+		global $surveys;
+
 		//print_r ($Years);
 		$recset = $surveys;
-		$Data = $recset->load(['x' => function($query)
-{		global $ycol;
+		$Data = $recset->load(['x' => function($query) use ($cl)
+{		
 	 
-    $query->where('ColumnSetID', 'Like',$ycol.'COL%' );
+    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
 }]);
 		
 		$total = 0;
@@ -423,7 +489,7 @@ private static function getLabel($trim,$col){
 
 	public static function annualtrendsNM($Block,$Col){
 
-			global $mcol,$surveys;
+			global $surveys;
 
 				$recset = $surveys;
 				
@@ -433,9 +499,8 @@ private static function getLabel($trim,$col){
 
 
 
-					$Data = $recset->load(['y' => function($query)
-		{		global $mcol;
-			 
+					$Data = $recset->load(['y' => function($query) use ($mcol)
+		{		
 		    $query->where('ColumnSetID', '=',$mcol );
 		}])->lists('y');
 
@@ -565,51 +630,185 @@ $DataN = collect($DataN)->sum('Data');
 }
 
 
-// 	public static function opdgen($surveys){
+	public static function opdgen(){
+		global $surveys;
 
-// 		$recset = $surveys;
-// 	$Data = $recset->load(['y' => function($query) 
-// {
+		$recset = $surveys;
+	$Data = $recset->load(['y' => function($query) 
+{
 	
-//     $query->where('ColumnSetID', '=', 'CHV2SEC1BLK2RW01COL02');
-// }])->lists('y');
+    $query->where('ColumnSetID', '=', 'CHV2SEC1BLK2RW01COL02');
+}])->lists('y');
 
-// 	$RawData = collect($Data)->lists('Data');
+	$RawData = collect($Data)->lists('Data');
 
-// 	$x = array_count_values($RawData);
-// 	print_r($x);
-// 	echo "<br><br><br>";
+	$x = array_count_values($RawData);
+	
 
-// 	$length  = count( array_keys( $RawData, "1" ));
-// 	$y = collect(array_flip($x));
-// 	echo $y;
-// 	echo "<br><br><br>";
-// 	$x = collect($x);
-// 	echo $x;
-// 	echo "<br><br><br>";
-// 	//For 1
-// 	$ones = 0;
-// 	foreach ($y as $k) {
-// 		echo $k;
-// 		echo "	";
-// 		echo $x->'1';
-// 		echo '<br>';
+	$ones = 0;
+	foreach ($x as $key => $value) {
 
- 			 
-//      }
+		if (strpos($key,'1') !== false) {
+    $ones += $value;
+			}
 		
+	}
+
+
+
+	$twos = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'2') !== false) {
+    $twos += $value;
+			}
+		
+	}
+
 	
-// 	//echo $ones;
+
+	$threes = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'3') !== false) {
+    $threes += $value;
+			}
+		
+	}
+
 	
 
-// 		//return ($length);
-// 		//return json_encode($RawData);
-// 	}
+	$others = 0;
+	foreach ($x as $key => $value) {
+
+		if ( (trim($key,'123,')) !== ''   )   {
+
+			$others+=$value;
+		}
+		
+	}
+
+	
+
+
+
+	$Array [] = array('General OPD',$ones);
+	$Array [] = array('Paediatric OPD',$twos);
+	$Array [] = array('MCH',$threes);
+	$Array [] = array('Other',$others);
+
+	return ($Array);
 
 
 
 
+	
+	}
 
+	private static function commstrategy(){
+		global $surveys;
+
+		$recset = $surveys;
+
+	$Data = $recset->load(['y' => function($query) 
+		{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW02COL02');
+		}])->lists('y');
+
+	$TCU = collect($Data)->sum('Data');
+
+
+	$Data = $recset->load(['y' => function($query) 
+		{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW03COL02');
+		}])->lists('y');
+
+	$TCUt = collect($Data)->sum('Data');
+	$TCUnt = abs($TCU -$TCUt);
+
+	$Data = $recset->load(['y' => function($query) 
+		{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW05COL02');
+		}])->lists('y');
+
+	$CHEWS = collect($Data)->sum('Data');
+	
+
+	$Data = $recset->load(['y' => function($query) 
+		{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW06COL02');
+		}])->lists('y');
+
+	$CHEWSt = collect($Data)->sum('Data');
+	$CHEWSnt = abs($CHEWS -$CHEWSt);
+	$Data = $recset->load(['y' => function($query) 
+		{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW07COL02');
+		}])->lists('y');
+
+	$CHV = collect($Data)->sum('Data');
+	
+
+	$Data = $recset->load(['y' => function($query) 
+		{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW08COL02');
+		}])->lists('y');
+
+	$CHVt = collect($Data)->sum('Data');
+	$CHVnt = abs($CHV -$CHVt);
+
+
+		$Array [] = array ('Community Strategy','Trained','Not Trained');
+		$Array [] = array ('Community Units',$TCUt,$TCUnt);
+		$Array [] = array ('CHEWS',$CHEWSt,$CHEWSnt);
+		$Array [] = array ('CHVs',$CHVt,$CHVnt);
+
+		return ( $Array);
+
+
+
+	}
+
+
+	public static function ortloc(){
+		global $surveys;
+
+		$recset = $surveys;
+
+	$Data = $recset->load(['y' => function($query) 
+{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW04COL02');
+}])->lists('y');
+
+	$RawData = collect($Data)->lists('Data');
+	$all = collect($Data)->count('Data');
+	$x = array_count_values($RawData);
+	//print_r($x);
+	//echo "<br><br><br>";
+	$MCH = $x[2];
+	$U5_Clinic = $x[3];
+	$OPD = $x[1];
+	$Ward = $x[4];
+	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
+
+	//echo $Other;
+
+	$Array [] = array('MCH',$MCH);
+	$Array [] = array('U5 Clinic',$U5_Clinic);
+	$Array [] = array('OPD',$OPD);
+	$Array [] = array('Ward',$Ward);
+	$Array [] = array('Other',$Other);
+
+	return ($Array);
+	
+	}
 
 
 	
