@@ -792,9 +792,13 @@ $DataN = collect($DataN)->sum('Data');
 	$x = array_count_values($RawData);
 	//print_r($x);
 	//echo "<br><br><br>";
+	if (!(isset($x[2]))) {$x[2]=0;}
 	$MCH = $x[2];
+	if (!(isset($x[3]))) {$x[3]=0;}
 	$U5_Clinic = $x[3];
+	if (!(isset($x[1]))) {$x[1]=0;}
 	$OPD = $x[1];
+	if (!(isset($x[4]))) {$x[4]=0;}
 	$Ward = $x[4];
 	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
 

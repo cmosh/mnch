@@ -7,7 +7,8 @@ var lortdata = new google.visualization.DataTable();
         var lortoptions = {
                        'width':'100%',
                         'box-sizing': 'border-box;',
-                       'height':300};
+                       'height':300,
+                        sliceVisibilityThreshold:0};
 
        
         var lort = new google.visualization.PieChart(document.getElementById('chlocationortcorner'));

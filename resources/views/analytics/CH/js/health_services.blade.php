@@ -8,7 +8,9 @@
         var chhealthservicesoptions = {
                        'width':'100%',
                         'box-sizing': 'border-box;',
-                       'height':300};
+                       'height':300,
+                       sliceVisibilityThreshold:0
+                       };
 
        
         var chhealthservices = new google.visualization.PieChart(document.getElementById('chhealthservices'));
