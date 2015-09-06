@@ -18,19 +18,21 @@ class analyse extends Controller {
 
  $recset = $surveys;
 
-		$Data = $recset->load(['x' => function($query) use ($cl)
+		$Data = $recset->load(['y' => function($query) use ($cl)
 {
 	
     $query->where('ColumnSetID', '=', $cl);
-}]);
+}])->lists('y');
+
+		$Data = collect($Data)->lists('Data');
 
 
-foreach ($Data as $obj ) {
-	if(isset($obj->x[0]->Data))
-	$objs[] = $obj->x[0]->Data;
+// foreach ($Data as $obj ) {
+// 	if(isset($obj->x[0]->Data))
+// 	$objs[] = $obj->x[0]->Data;
 
-}
-$big0 = array_count_values($objs);
+// }
+$big0 = array_count_values($Data);
 
 
 
