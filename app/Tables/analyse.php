@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Cache;
 use LRedis;
-$surveys;
+$surveys = null;
 
 class analyse extends Controller {
  
