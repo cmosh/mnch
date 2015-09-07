@@ -580,10 +580,10 @@ public static function staff_trained(){
 
 		$index = sprintf('%02d',$i);
 		$col = self::staff_trained_col('COL'.$index);
-		$Label = trim(self::getLabel(0,'CHV2SEC1BLK1RW01COL'.$index)  ,'/^No umber of/');
+		$Label = trim(self::getLabel(0,'CHV2SEC1BLK1RW01COL'.$index)  ,'/^No umber of staf train/');
 		$Array [] = array(
 
-			$Label,
+			trim(str_replace("in ", "", $Label),'/^d/'),
 			$col[0],
 			$col[1],
 			$col[2]
