@@ -21,6 +21,7 @@
         
    
 {!! Form::open(['url' => 'usermanagement/update']) !!}
+<div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
 
@@ -28,8 +29,8 @@
                      {!! Form::text('name',$user[0]->name,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
-
-          
+</div>
+          <div class="box-body">
 
             <div class="form-group">
               <label class="col-md-4 control-label">County</label>
@@ -37,6 +38,8 @@
                 {!! Form::text('county',$user[0]->county,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
 
          <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
@@ -44,19 +47,24 @@
                 {!! Form::text('phone', $user[0]->PhoneNumber,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
-
+            </div>
+<div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
                 {!! Form::text('idnum', $user[0]->IDNumber,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
                 {!! Form::email('email',  $user[0]->email,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
 
             <div class="form-group">
               <label class="col-md-4 control-label">Role</label>
@@ -64,11 +72,14 @@
                 {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ], $user[0]->role ,['countyuser','dataclerk','programuser','systemuser'],array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
          <div class="form-group">
-              <div class="col-md-6">
+              <div class="col-md-12">
             
-            {!! Form::submit('Save',null,['class' => 'use-address btn btn-primary form-control']) !!}
+            {!! Form::submit('Save Changes',['class' => 'use-address btn btn-primary form-control']) !!}
          </div>
+            </div>
             </div>
         </div>
       </div>

@@ -21,28 +21,33 @@
           
    
 {!! Form::open(['url' => 'usermanagement/store']) !!}
+<div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
               <div class="col-md-6">
                      {!! Form::text('name',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
 
             
-
+<div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">County</label>
               <div class="col-md-6">
                 {!! Form::text('county',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
-
+            </div>
+<div class="box-body">
          <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-6">
                 {!! Form::text('phone',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
 
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
@@ -50,25 +55,31 @@
                 {!! Form::text('idnum',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
                 {!! Form::email('email',null,array('id'=>'','class'=>'form-control')) !!}
               </div>
             </div>
-
+</div>
+<div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Role</label>
               <div class="col-md-6">
-                {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ],'countyuser',['countyuser','dataclerk','programuser','systemuser'],array('id'=>'','class'=>'form-control')) !!}
+                {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ],'countyuser',['countyuser','dataclerk','programuser','systemuser'],array('id'=>'','class'=>'form-control','width'=>'100%')) !!}
               </div>
             </div>
+            </div>
+            <div class="box-body">
          <div class="form-group">
          
-              <div class="col-md-6">
+              <div class="col-md-12">
             
             {!! Form::submit('Add User',['class' => 'use-address btn btn-primary form-control']) !!}
          </div>
+            </div>
             </div>
         </div>
       </div>

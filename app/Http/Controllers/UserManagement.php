@@ -15,6 +15,7 @@ use Input;
 use Validator;
 use Redirect;
 use Session;
+use Maatwebsite\Excel\Excel;
 
 
 
@@ -233,7 +234,7 @@ public function multi()
 
 
 
-	public function upload() {
+	public function upload(Excel $excel) {
   // getting all of the post data
   $file = array('image' => Input::file('image'));
   // setting up rules
@@ -252,7 +253,41 @@ public function multi()
       $fileName = rand(11111,99999).'.'.$extension; // renameing image
       Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
       // sending back with message
-      Session::flash('success', 'Upload successfully'); 
+     
+
+      $result=$excel->load('public/uploads/'.$fileName)->get();
+      $count=0;
+		for($i=0;$i<sizeof($result[0]);$i++)
+		{
+		if($result[0][$i]->name !='')
+		{
+		$count++;	
+		$data=array(
+		'name'=>$result[0][$i]->name,
+		'county'=>$result[0][$i]->county,
+		'PhoneNumber'=>$result[0][$i]->phonenumber,
+		'IDNumber'=>$result[0][$i]->idnumber,
+		'password'=>bcrypt('123456'),
+		'email'=>$result[0][$i]->email,
+		'role'=>$result[0][$i]->role
+		);
+
+
+
+
+		User::createOrUpdate(
+                $data, 
+                array('email' => $result[0][$i]->email));
+
+		}
+		else
+		{
+			$i++;
+		}
+
+	}
+		      Session::flash('success', $count. ' Users registered successfully!'); 
+
       return Redirect::to('usermanagement/addusers_multi');
     }
     else {
@@ -261,6 +296,12 @@ public function multi()
       return Redirect::to('upload');
     }
   }
+
+
+
+
+
+
 }
 
 

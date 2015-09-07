@@ -429,6 +429,10 @@ $('#searcher').click(function()
 if($('#filterer').val()=='All')
        {
          $('#searcher').val('');
+         
+         $('.searcher0').hide();
+        $('.searcher1').hide();
+        $('.searcher2').hide();
           
          table.draw();
           document.getElementById("searcher").disabled = true;

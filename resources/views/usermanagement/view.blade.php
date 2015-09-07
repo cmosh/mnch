@@ -52,8 +52,8 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                
-                <a href="#" class="small-box-footer">Add<i class="fa fa-arrow-circle-right"></i></a>
+
+                <a href="/usermanagement/addusers_multi" class="small-box-footer">Add<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
 
@@ -81,6 +81,7 @@
                         <th>Phone Number</th>
                          <th>ID Number</th>
                         <th>Role</th>
+                        <th>Action</th>
                         
                   
                       </tr>
@@ -92,8 +93,8 @@
 
                         @foreach($users as $user)
                         <tr>
-                        <td class="nr"> {{ $user->name}}</td>
-                        <td class="rr"><span>{{ $user->email}}</span>  </td>
+                        <td > {{ $user->name}}</td>
+                        <td >{{ $user->email}}  </td>
                         <td> {{ $user->county}}</td>
                         <td> {{ $user->PhoneNumber}}</td>
                         <td> {{ $user->IDNumber}}</td>
@@ -126,8 +127,11 @@
                       ?>
 
                         </td>
- <td><form action="/usermanagement/editusers/{{$user->id}}">
-    <input class="btn btn-primary form-control" type="submit" value="EDIT"></form></td>
+ <td>
+ <form action="/usermanagement/editusers/{{$user->id}}">
+    <input class="btn btn-primary form-control" type="submit" value="EDIT">
+    </form>
+    </td>
                      	 </tr>
                          @endforeach
 
@@ -147,6 +151,7 @@
                         <th>Phone Number</th>
                          <th>ID Number</th>
                         <th>Role</th>
+                        <th>Action</th>
                         
                
                       </tr>
@@ -157,15 +162,6 @@
 
 
 
- <script type="text/javascript">
-$('#id_add').click(function() {
-
- 
-  var linki = '/usermanagement/addusers/' + $('#num').val() ;
-  //alert(linki);
-   $(location).attr('href', linki);
-});
- </script>
 @endsection
 
 
@@ -186,7 +182,7 @@ $('#id_add').click(function() {
  <!-- DATA TABLES -->
   <script type="text/javascript">
       $(function () {
-        $("#example1").DataTable();
+       $('#example1').DataTable();
        
       });
     </script>
