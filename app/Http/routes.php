@@ -10,15 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/',function(){
 
-	$app=LRedis::connection();
-	$app->put('key', 'value', $minutes);
-
-	print_r($app->get("key"));
-
-
-});
 Route::get('/','AnalyticsController@index');
 Route::post('/analytics/ajax','AnalyticsController@ajax');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
@@ -52,7 +44,13 @@ Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update','UserManagement@update');
 
 Route::post('usermanagement/store','UserManagement@store');
+Route::get('/auth/register',function(){
 
+	
+
+	print_r('Stop we know who you are!');
+
+});
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
