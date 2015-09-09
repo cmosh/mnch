@@ -41,7 +41,7 @@ Route::post('usermanagement/multi_upload','UserManagement@upload');
 
 
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');
-Route::post('usermanagement/update','UserManagement@update');
+Route::post('usermanagement/update/{id}','UserManagement@update');
 
 Route::post('usermanagement/store','UserManagement@store');
 Route::get('/auth/register',function(){

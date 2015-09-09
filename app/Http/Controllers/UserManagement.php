@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Tables\User_monitor;
+use App\Tables\countie;
 use App\Tables\Counties_assessed;
 use App\Tables\Surveycompletion_daily;
 use App\Tables\Surveycompletion_total;
@@ -61,9 +62,10 @@ class UserManagement extends Controller {
 
 	
 		//
+		$Counties = countie::all();
 	if($request->user()->role==3)
 		{
-				return view('usermanagement.create')->with('location','umanage')->with('title','User Management');
+				return view('usermanagement.create')->with('counties',$Counties)->with('location','umanage')->with('title','User Management');
 		}
 	}
 
@@ -104,6 +106,13 @@ class UserManagement extends Controller {
 	}
 
 	
+	$Counties = countie::all();
+	$x[1]=$Counties[$x[1]]->Name;	
+	$statusnum=1;
+			
+	
+
+	
 		$data=array(
 		'name'=>$x[0],
 		'county'=>$x[1],
@@ -111,7 +120,8 @@ class UserManagement extends Controller {
 		'IDNumber'=>$x[3],
 		'email'=>$x[4],
 		'password'=>bcrypt('123456'),
-		'role'=>$x[5]
+		'role'=>$x[5],
+		'status'=>$statusnum
 		);
 		
 		
@@ -121,6 +131,7 @@ class UserManagement extends Controller {
                 array('email' => $x[4]));
 		 
 	$users=User::all();
+	
 	
 				return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
@@ -163,7 +174,10 @@ class UserManagement extends Controller {
 
 
 			$user=User::where('id','=',$id)->get();
-		return view('usermanagement.edit')->with('user',$user)->with('location','umanage')->with('title','User Management');
+			$Counties = countie::all();
+			
+			
+		return view('usermanagement.edit')->with('counties',$Counties)->with('user',$user)->with('location','umanage')->with('title','User Management');
 	
 }
 	/**
@@ -172,7 +186,7 @@ class UserManagement extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Requestuser $Requestuser)
+	public function update(Requestuser $Requestuser,$id)
 	{
 		//
 
@@ -190,7 +204,8 @@ class UserManagement extends Controller {
 			$x[]=$key;
 			
 	}
-
+	$Counties = countie::all();
+	$x[1]=$Counties[$x[1]]->Name;
 	
 		$data=array(
 		'name'=>$x[0],
@@ -205,9 +220,10 @@ class UserManagement extends Controller {
 
  User::createOrUpdate(
                 $data, 
-                array('email' => $x[4]));
+                array('id' => $id));
 		 
 	$users=User::all();
+	
 	
 				return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
@@ -219,9 +235,21 @@ class UserManagement extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function status_change($id)
 	{
 		//
+
+
+		$user=User::where('id','=',$id)->get();
+		if($user->status==0)
+		{
+
+		}
+		else
+		{
+
+
+		}
 	}
 
 public function multi()
@@ -269,7 +297,8 @@ public function multi()
 		'IDNumber'=>$result[0][$i]->idnumber,
 		'password'=>bcrypt('123456'),
 		'email'=>$result[0][$i]->email,
-		'role'=>$result[0][$i]->role
+		'role'=>$result[0][$i]->role,
+		'status'=>'1'
 		);
 
 

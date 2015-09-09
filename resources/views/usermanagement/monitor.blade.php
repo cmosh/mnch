@@ -424,12 +424,11 @@ document.getElementById("example1_filter").style.display = 'none';
 
 $('#searcher').click(function()
 {
-
+$('#searcher').val('');
 
 if($('#filterer').val()=='All')
        {
-         $('#searcher').val('');
-         
+      
          $('.searcher0').hide();
         $('.searcher1').hide();
         $('.searcher2').hide();

@@ -32,7 +32,7 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   
-                  <p>Add User</p>
+                  <p style="font-size:16pt">Add User</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -47,7 +47,7 @@
               <div class="small-box bg-aqua">
                 <div class="inner">
                 
-                  <p>Add Multiple Users</p>
+                  <p style="font-size:16pt">Add Multiple Users</p> 
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -79,10 +79,11 @@
                          <th>Email</th>
                         <th>County</th>
                         <th>Phone Number</th>
-                         <th>ID Number</th>
+                  
                         <th>Role</th>
                         <th>Action</th>
-                        
+                        <th>Action</th>
+                        <th>Action</th>
                   
                       </tr>
                     </thead>
@@ -97,7 +98,7 @@
                         <td >{{ $user->email}}  </td>
                         <td> {{ $user->county}}</td>
                         <td> {{ $user->PhoneNumber}}</td>
-                        <td> {{ $user->IDNumber}}</td>
+                        
                         <td> 
 
                       <?php 
@@ -117,7 +118,7 @@
                       {
                         echo "system user";
                       }
-                       if($user->role=='')
+                       if($user->role==='')
                       {
                         echo "Unknown";
                       }
@@ -130,6 +131,22 @@
  <td>
  <form action="/usermanagement/editusers/{{$user->id}}">
     <input class="btn btn-primary form-control" type="submit" value="EDIT">
+    </form>
+    </td>
+    <td>
+ <form action="/usermanagement/status_change/{{$user->id}}">
+ @if($user->status==0)
+    <input style="color:green" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
+ @else   
+    <input  style="color:red" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
+ @endif
+    </form>
+    </td>
+
+
+    <td>
+ <form action="/usermanagement/reset/{{$user->id}}">
+    <input class="btn btn-primary form-control" type="submit" value="RESET">
     </form>
     </td>
                      	 </tr>
@@ -149,8 +166,10 @@
                          <th>Email</th>
                         <th>County</th>
                         <th>Phone Number</th>
-                         <th>ID Number</th>
+                         
                         <th>Role</th>
+                        <th>Action</th>
+                        <th>Action</th>
                         <th>Action</th>
                         
                

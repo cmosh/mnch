@@ -19,6 +19,35 @@
             </div>
             <div class="pull-left info">
               <p> {{ Auth::user()->name }}</p>
+<p>
+<small>
+
+<?php
+              if(Auth::user()->role===0)
+                      {
+                        echo "County User";
+                      }
+                       if(Auth::user()->role==1)
+                      {
+                        echo "Data Clerk";
+                      }
+                       if(Auth::user()->role==2)
+                      {
+                        echo "Program User";
+                      }
+                       if(Auth::user()->role==3)
+                      {
+                        echo "System User (Admin) ";
+                      }
+                       if(Auth::user()->role=='')
+                      {
+                        echo "Unknown";
+                      }
+
+
+          ?>
+          </p></small>
+              
               <!-- Status -->
               <a href="#"><i class="fa fa-circle text-success"></i> {{ Auth::user()->county}} County</a>
             </div>
@@ -32,7 +61,7 @@
             <li class="header">Options</li>
             <!-- Optionally, you can add icons to the links -->
           
-            @if ($location == 'Home') 
+            @if ($location == 'Home' || $location == 'umanage' || $location == 'preview') 
 
            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
             <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
@@ -58,7 +87,7 @@
 
 
            
-           @elseif($location == 'ass' || $location == 'umanage' || $location == 'preview')
+           @elseif($location == 'ass' )
 
              <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
            <!--  <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li> -->

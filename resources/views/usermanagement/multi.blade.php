@@ -55,7 +55,7 @@
           <h2>{!! Session::get('success') !!}</h2>
           </div>
         @endif
-        <div class="secure">Upload Excel File</div>
+        <div class="secure"><b style="color:red">Upload Excel File</b></div>
         {!! Form::open(array('url'=>'usermanagement/multi_upload','method'=>'POST', 'files'=>true)) !!}
          <div class="control-group">
           <div class="controls">
@@ -67,7 +67,7 @@
         </div>
         </div>
         <div id="success"> </div>
-      {!! Form::submit('Submit', array('class'=>'send-btn')) !!}
+      {!! Form::submit('Submit', array('class'=>'use-address btn btn-primary form-control')) !!}
       {!! Form::close() !!}
       </div>
    </div>
