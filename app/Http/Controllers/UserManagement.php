@@ -310,18 +310,23 @@ public function multi()
 		    			{
 		    				$role='countyuser';
 		    			}
-		    			if(User::find($i)->role===1)
+		    			if(User::find($i)->role==1)
 		    			{
 		    				$role='dataclerk';
 		    			}
-		    			if(User::find($i)->role===2)
+		    			if(User::find($i)->role==2)
 		    			{
 		    				$role='programuser';
 		    			}
-		    			if(User::find($i)->role===3)
+		    			if(User::find($i)->role==3)
 		    			{
 		    				$role='systemuser';
 		    			}
+		    			if(User::find($i)->role==='')
+		    			{
+		    				$role='Unknown';
+		    			}
+
 
 						$sheet->row($i+1, array(
 		     			User::find($i)->name, User::find($i)->county,User::find($i)->PhoneNumber,User::find($i)->IDNumber,User::find($i)->email,$role
