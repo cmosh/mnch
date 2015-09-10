@@ -307,7 +307,7 @@ public function multi()
 
 		    		{
 
-		    			if(User::find($i)->role===0)
+		    			if(User::find($i)->role==0)
 		    			{
 		    				$role='countyuser';
 		    			}
@@ -323,7 +323,7 @@ public function multi()
 		    			{
 		    				$role='systemuser';
 		    			}
-		    			if(User::find($i)->role==='')
+		    			if(User::find($i)->role=='')
 		    			{
 		    				$role='Unknown';
 		    			}
