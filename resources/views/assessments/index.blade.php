@@ -37,6 +37,8 @@
                  
                   <!--  @foreach ($Surveys as $Survey) -->
             <?php $loc = substr ($Survey->surveyID, 0,2) ?>
+
+            <!-- @endforeach -->
              
               @if ($loc == 'CH')
                     <div class="small-box bg-aqua">
@@ -204,7 +206,7 @@ $('#date').datepicker({
                 </div>
               </div><!-- /.box -->
               </div>
-              <!-- @endforeach -->
+              
                  
                  
                   
