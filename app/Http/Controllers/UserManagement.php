@@ -302,6 +302,7 @@ public function multi()
 	    		);
 	    		for($i=1;$i<sizeof(User::all());$i++)
 	    		{
+	    			$role=User::find($i)->role;
 		    		if(User::find($i)!= '')
 
 		    		{
@@ -329,7 +330,9 @@ public function multi()
 
 
 						$sheet->row($i+1, array(
+
 		     			User::find($i)->name, User::find($i)->county,User::find($i)->PhoneNumber,User::find($i)->IDNumber,User::find($i)->email,$role
+						
 						));
 					}
 				}
