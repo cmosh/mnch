@@ -35,7 +35,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  
-                   @foreach ($Surveys as $Survey)
+                  <!--  @foreach ($Surveys as $Survey) -->
             <?php $loc = substr ($Survey->surveyID, 0,2) ?>
              
               @if ($loc == 'CH')
@@ -48,7 +48,7 @@
              
                 <div class="inner">
                   <h2>{{$Survey->Name}} Survey</h2>
-                  <p>Runtime: {{$Survey->Runtime}}<br>Version {{$Survey->Version}} </p>
+                  <!-- <p>Runtime: {{$Survey->Runtime}}<br>Version {{$Survey->Version}} </p> -->
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -56,7 +56,7 @@
                
               </div>
 
-              <input type="hidden" value ="{{$Survey->surveyID}}" id="sv">
+             
              <!-- Horizontal Form -->
               <div class="row">
                
@@ -81,6 +81,14 @@
                         @endforeach
                        </select>
                      
+                      </div>
+                      <label for="Version1" class="col-sm-2 control-label">Select Version</label>
+                      <div class="col-sm-10">
+                      <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                       @foreach($Surveys as $Survey)
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                        @endforeach
+                       </select>
                       </div>
                     </div>
                     <div class="form-group">
@@ -148,7 +156,14 @@
                        <option value ="{{$County->Name}}" id ="{{$County->Name}}" >{{$County->Name}}</option>
                         @endforeach
                        </select>
-                     
+						</div>
+                       <label for="Version2" class="col-sm-2 control-label">Select Version</label>
+                      <div class="col-sm-10">
+                      <select class="form-control select2 " style="width: 100%;" name="Version2" id="Version2"> 
+                       @foreach($Surveys as $Survey)
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                        @endforeach
+                       </select>
                       </div>
                     </div>
                   <div class="form-group">
@@ -189,7 +204,7 @@ $('#date').datepicker({
                 </div>
               </div><!-- /.box -->
               </div>
-              @endforeach
+              <!-- @endforeach -->
                  
                  
                   
@@ -209,7 +224,7 @@ $('#date').datepicker({
 $('#some_id').click(function() {
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + $('#sv').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val();
+  var linki = '/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val();
   //alert(linki);
    $(location).attr('href', linki);
 });
@@ -221,7 +236,7 @@ $('#some_id').click(function() {
 $('#some_id2').click(function() {
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
+  var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
   //alert(linki);
    $(location).attr('href', linki);
 });
