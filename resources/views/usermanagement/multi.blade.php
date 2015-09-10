@@ -41,8 +41,8 @@
 
 
               <center>
-              <div>
-                <img src="/img/excelformat.JPG">
+              <div class="col-xs-12">
+                <img src="/img/excelformat.jpg">
               </div> 
               </center>   
               <br>

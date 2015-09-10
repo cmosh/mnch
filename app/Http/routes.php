@@ -37,6 +37,11 @@ Route::get('usermanagement/viewusers','UserManagement@index');
 Route::get('usermanagement/monitor','UserManagement@show');
 Route::get('usermanagement/addusers','UserManagement@create');
 Route::get('usermanagement/addusers_multi','UserManagement@multi');
+Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
+Route::get('usermanagement/reset/{id}','UserManagement@reset');
+Route::get('usermanagement/export','UserManagement@export');
+
+
 Route::post('usermanagement/multi_upload','UserManagement@upload');
 
 

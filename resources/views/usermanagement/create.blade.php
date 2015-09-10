@@ -26,6 +26,7 @@
          </div>
    </div>
  {!! Form::open(['url' => 'usermanagement/store']) !!}
+
 <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
@@ -95,7 +96,6 @@
          <div class="form-group">
          
               <div class="col-md-12">
-            
             {!! Form::submit('Add User',['class' => 'use-address btn btn-primary form-control']) !!}
          </div>
             </div>

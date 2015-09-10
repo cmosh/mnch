@@ -80,15 +80,7 @@ class UserManagement extends Controller {
 
 
 	{
-		// if(Request::ajax()) {
-  //     $data = Input::all();
-  //     // $county = $data['county'];
-  //      $name = $data['name'];
-  //     //  $idnum = $data['idnum'];
-  //     //  $phone = $data['phone'];
-  //     //   $role = $data['role'];
-  //     //   $email = $data['email'];
-
+	
 
        
 
@@ -108,7 +100,7 @@ class UserManagement extends Controller {
 	
 	$Counties = countie::all();
 	$x[1]=$Counties[$x[1]]->Name;	
-	$statusnum=1;
+	//$statusnum=1;
 			
 	
 
@@ -121,7 +113,7 @@ class UserManagement extends Controller {
 		'email'=>$x[4],
 		'password'=>bcrypt('123456'),
 		'role'=>$x[5],
-		'status'=>$statusnum
+		'status'=>'1'
 		);
 		
 		
@@ -133,7 +125,7 @@ class UserManagement extends Controller {
 	$users=User::all();
 	
 	
-				return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
+			return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
 		
 	}
@@ -225,7 +217,7 @@ class UserManagement extends Controller {
 	$users=User::all();
 	
 	
-				return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
+				return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
 	}
 
@@ -240,22 +232,109 @@ class UserManagement extends Controller {
 		//
 
 
-		$user=User::where('id','=',$id)->get();
-		if($user->status==0)
+		//$user=User::where('id','=',$id)->get();
+		$user =User::find($id);
+		
+		if($user->status===0)
 		{
+				$user->status='1';
+				$user->password=bcrypt('123456');
+				 
+		 
 
 		}
 		else
 		{
+				$user->status='0';
+				$user->password=bcrypt('!!##9ax$kbyx*%');
 
 
 		}
+
+
+		$user->update();
+		$users=User::all();
+
+		return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
+
+
+	}
+
+
+
+	public function reset($id)
+
+	{
+
+		$user =User::find($id);
+		$user->password=bcrypt('123456');
+		$user->update();
+		$users=User::all();
+		return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
+
+
 	}
 
 public function multi()
 	{
 		//
 						return view('usermanagement.multi')->with('location','umanage')->with('title','User Management');
+
+	}
+
+
+
+
+	public function export(Excel $excel)
+	{
+		
+
+
+				$excel->create('ALL_USERS', function($ex) {
+
+	    $ex->sheet('Sheetname', function($sheet) {
+	    	
+	    		$sheet->row(1, array(
+     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
+
+			)
+	    		
+	    		);
+	    		for($i=1;$i<sizeof(User::all());$i++)
+	    		{
+		    		if(User::find($i)!= '')
+
+		    		{
+
+		    			if(User::find($i)->role===0)
+		    			{
+		    				$role='countyuser';
+		    			}
+		    			if(User::find($i)->role===1)
+		    			{
+		    				$role='dataclerk';
+		    			}
+		    			if(User::find($i)->role===2)
+		    			{
+		    				$role='programuser';
+		    			}
+		    			if(User::find($i)->role===3)
+		    			{
+		    				$role='systemuser';
+		    			}
+
+						$sheet->row($i+1, array(
+		     			User::find($i)->name, User::find($i)->county,User::find($i)->PhoneNumber,User::find($i)->IDNumber,User::find($i)->email,$role
+						));
+					}
+				}
+
+
+	       
+
+	    });
+
+	})->download('xls');
 
 	}
 

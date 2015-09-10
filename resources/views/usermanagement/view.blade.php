@@ -63,6 +63,7 @@
 
 <div class="box box-primary">
                 <div class="box-header">
+                <a style="float:right" href="/usermanagement/export">Download excel</a>
                   <h3 class="box-title">
 
                   Users
