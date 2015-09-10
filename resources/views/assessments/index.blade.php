@@ -113,6 +113,17 @@
                       </div>
                     </div>
                     @else
+                    <div class="form-group">
+                      <label for="Version1" class="col-sm-2 control-label">Select Version</label>
+                      <div class="col-sm-10">
+                      <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                       @foreach($Surveys as $Survey)
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                        @endforeach
+                       </select>
+                      </div>
+                    </div>
+
                      <div class="form-group">
                       <label for="date" class="col-sm-2 control-label">Date</label>
                       <div class="col-sm-10">
@@ -183,6 +194,17 @@
                      
                       </div>
                    @else
+                   <div class="form-group">
+                      <label for="Version1" class="col-sm-2 control-label">Select Version</label>
+                      <div class="col-sm-10">
+                      <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                       @foreach($Surveys as $Survey)
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                        @endforeach
+                       </select>
+                      </div>
+                    </div>
+                    
                     <div>
                    <p>Click Next to view evaluated Health Workers</p>
     
