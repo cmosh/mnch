@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+Route::get('/test','AnalyticsController@blah');
 Route::get('/','AnalyticsController@index');
 Route::post('/analytics/ajax','AnalyticsController@ajax');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
