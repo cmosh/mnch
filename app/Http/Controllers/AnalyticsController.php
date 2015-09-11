@@ -34,39 +34,48 @@ class AnalyticsController extends Controller {
        $Year_2 = $data['Year2'];
        $Year_3 = $data['Year3'];
         $Year_4 = $data['Year4'];
+        $Term = $data['Term'];
 
-      if ($county == 'All') {
+
+
+
+      if ($county == 'All' && $Term =='All') {
       
 $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
       					return SubmittedSurveys::all();
+      	});     
+		
+      		      
+      }
+      elseif ($county == 'All' && $Term !=='All') {
+      	
+      	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county.$Term,180,function() use($Term){
+      					return 	SubmittedSurveys::where('Assessment_Term','Like',$Term)->get();
       	});
-      
-		//$chredis = 'ChAnalytics'.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
-     	
-     //	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
 
-      		$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
-     // });
-      
-      }else{
+
+      }
+
+
+        elseif ($county !== 'All' && $Term =='All') {
 
       	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county,180,function() use($county){
       					return 	SubmittedSurveys::where('County','Like',$county)->get();
       	});
       
-		// $chredis = 'ChAnalytics'.$county.(string)$Year_1.(string)$Year_2.(string)$Year_3.(string)$Year_4;
-     	
-  //    	$chanalytics = Cache::remember($chredis,180,function() use  ($Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys) {
-
-      		$chanalytics  = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
-     // });
-
-      
-		//	$chanalytics = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4);
-
+	
+      		
+   
       }
+      elseif ($county !== 'All' && $Term !=='All') {
+       	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county.$Term,180,function() use($county,$Term){
+      					return 	SubmittedSurveys::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
+      	});
+      
+      }
+      else{}
 
-    
+    $chanalytics  = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
 			
     echo ($chanalytics);
 
@@ -121,9 +130,9 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function blah()
 	{
-		//
+		return view('analytics.test');
 	}
 
 	/**

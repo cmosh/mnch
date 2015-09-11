@@ -16,17 +16,15 @@
               
               </div>
               {!! Form::open() !!}
-       <div> <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
-        <option value="All" selected>All Counties</option>
-                      @foreach($SubmittedCHCounties as $SubmittedCHCountie)
+       
 
-                       <option value ="{{$SubmittedCHCountie->County}}" id ="{{$SubmittedCHCountie->County}}" >{{$SubmittedCHCountie->County}}</option>
-                        @endforeach
-                       </select></div>
+
+
                          {!! Form::close() !!}
 
 
    </div>
+   @include('analytics/CH/html/county')
 
  <div class="col-md-12">
                         
@@ -172,7 +170,20 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.js" type="text/javascript"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+ <script type="text/javascript">
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+
+               
+      });
+
+    </script>
+
   <script type="text/javascript">
+ 
+
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawChart);
 
@@ -189,7 +200,8 @@ function drawChart() {
          'Year1': $('#Year1').val(),
          'Year2': $('#Year2').val(),
          'Year3': $('#Year3').val(),
-         'Year4': $('#Year4').val()
+         'Year4': $('#Year4').val(),
+         'Term':$('#Term').val()
 
     };
  
@@ -248,7 +260,17 @@ $('#Year3').change(year3);
 $('#Year4').change(year4);
 
   @include('analytics/CH/js/year4change')
+$('.county').click(function() {
+var cts = this.id;
+$(document).ready(function() {
+$('#County').val(cts);
+});
 
+drawChart();
+
+var x = 'Selected ' + this.id + ' county';
+alert(x);
+});
     </script>
   
     
