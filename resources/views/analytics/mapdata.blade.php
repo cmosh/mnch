@@ -1,25 +1,25 @@
- var  MidtermAttempt = x['Midterm'+county]['All_Attempted']+0;
-    var MidtermSubmitt = x['Midterm'+county]['Submitted']+0;
-  var   MidtermNotSubmitt = x['Midterm'+county]['Not_Submitted']+0;
-  var   MidtermTotal = x['Midterm'+county]['Total Facilities']+0;
+ var  MidtermAttempt = x['Midterm'+county]['All_Attempted'];
+    var MidtermSubmitt = x['Midterm'+county]['Submitted'];
+  var   MidtermNotSubmitt = x['Midterm'+county]['Not_Submitted'];
+  var   MidtermTotal = x['Midterm'+county]['Total Facilities'];
    var  MidtermNotAttempt = MidtermTotal - MidtermAttempt;
 
-var  EndtermAttempt = x['Endterm'+county]['All_Attempted']+0;
-    var EndtermSubmitt = x['Endterm'+county]['Submitted']+0;
-  var   EndtermNotSubmitt = x['Endterm'+county]['Not_Submitted']+0;
-  var   EndtermTotal = x['Endterm'+county]['Total Facilities']+0;
+var  EndtermAttempt = x['Endterm'+county]['All_Attempted'];
+    var EndtermSubmitt = x['Endterm'+county]['Submitted'];
+  var   EndtermNotSubmitt = x['Endterm'+county]['Not_Submitted'];
+  var   EndtermTotal = x['Endterm'+county]['Total Facilities'];
    var  EndtermNotAttempt = EndtermTotal - EndtermAttempt;
 
-var  BaselineAttempt = x['Baseline'+county]['All_Attempted']+0;
-    var BaselineSubmitt = x['Baseline'+county]['Submitted']+0;
-  var   BaselineNotSubmitt = x['Baseline'+county]['Not_Submitted']+0;
-  var   BaselineTotal = x['Baseline'+county]['Total Facilities']+0;
+var  BaselineAttempt = x['Baseline'+county]['All_Attempted'];
+    var BaselineSubmitt = x['Baseline'+county]['Submitted'];
+  var   BaselineNotSubmitt = x['Baseline'+county]['Not_Submitted'];
+  var   BaselineTotal = x['Baseline'+county]['Total Facilities'];
    var  BaselineNotAttempt = BaselineTotal - BaselineAttempt;
 
    var  TotalAttempt = MidtermAttempt+EndtermAttempt+BaselineAttempt;
     var TotalSubmitt = MidtermSubmitt + EndtermSubmitt +BaselineSubmitt;
   var   TotalNotSubmitt = MidtermNotSubmitt + EndtermNotSubmitt + BaselineNotSubmitt;
-  var   TotalTotal = BaselineTotal;
+  var   TotalTotal = MidtermTotal;
    var  TotalNotAttempt = TotalTotal - TotalAttempt;
 
 
