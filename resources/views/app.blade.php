@@ -52,7 +52,7 @@
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
                
-                <li><a href="/home">Home</a></li>
+                <li><a href="/home">Dashboard</a></li>
              
               </ul>
          
