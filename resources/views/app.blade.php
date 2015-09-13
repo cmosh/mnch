@@ -15,9 +15,10 @@
     <link href="/bower_components/admin-lte/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
+     <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="/bower_components/admin-lte/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
       <link href="/bower_components/legend/css/demo.css" rel="stylesheet" type="text/css" />
-
+      <link rel="stylesheet" type="text/css" href="/app/page.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,7 +27,7 @@
     <![endif]-->
   </head>
   <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-  <body class="skin-blue layout-top-nav">
+  <body class="skin-blue fixed layout-top-nav">
     <div class="wrapper">
 
       <header class="main-header">
@@ -51,7 +52,7 @@
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
                
-                <li><a href="/home">Home</a></li>
+                <li><a href="/home">Dashboard</a></li>
              
               </ul>
          
@@ -113,6 +114,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/bower_components/admin-lte/dist/js/demo.js" type="text/javascript"></script>
 
+ <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+ 
 
     @yield('js')
 
