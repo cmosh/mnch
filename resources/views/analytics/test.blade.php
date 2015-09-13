@@ -1,9 +1,8 @@
 @extends('app')
 
 @section('content')
-
-
-     <?php include( public_path() . '/img/map.svg');?>
+	<script type="text/javascript" src="/raphael/kenya.js"></script>
+	<div id="Kenya"></div>
  
             
 

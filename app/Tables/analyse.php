@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Cache;
 use LRedis;
+use Excel;
 $surveys = null;
 
 class analyse extends Controller {
@@ -108,9 +109,14 @@ private static function getLabel($trim,$col){
 
 	}
 
-
+	
 	public static function u5Register($Year1){
 		//$Year1 = 3;
+		global $surveys;
+
+		
+
+
 
     $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name'));
     $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
@@ -131,7 +137,7 @@ private static function getLabel($trim,$col){
 		
 
 		}
-
+		//echo collect($array);
 		return $array;
 
 
@@ -156,21 +162,34 @@ private static function getLabel($trim,$col){
 
 		//print_r ($Years);
 		$recset = $surveys;
+
 		$Data = $recset->load(['x' => function($query) use ($cl)
 {		
 	 
     $query->where('ColumnSetID', 'Like',$cl.'COL%' );
 }]);
 		
+		//echo $Data;
 		$total = 0;
+
+
+
+
 		foreach ($Data as $obj ) {
 
 		
-	$total += ( $obj->x->sum('Data'));
-	
+	$tt= ( $obj->x->sum('Data'));
+	//echo $tt.'	';
+	$total += $tt;
+	$thearrray [] = $tt;
+
 
 }
 
+		
+
+
+	//echo '<br>'.$total.'<br>';
 	return $total;
 		
 	}
@@ -178,6 +197,9 @@ private static function getLabel($trim,$col){
 	//Feed in survey
 		global $surveys;
 		$surveys = $data;
+
+		
+
 	//Guidelines Availability
 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No' );
 			$Guidelines = Cache::remember('Guidelines'.$county,180,function() use($GuidelinesHeading){
@@ -259,9 +281,9 @@ private static function getLabel($trim,$col){
 		
 	//u5Register
 		 
-		$u5Register = Cache::remember('u5Register'.$county.$Year1,180,function() use($Year1){
-      					return self::u5Register($Year1);
-      	});
+		$u5Register = /*Cache::remember('u5Register'.$county.$Year1,180,function() use($Year1){
+      					return*/ self::u5Register($Year1);
+      	//});
 
 	//u5RegisterN
 		
@@ -311,7 +333,7 @@ private static function getLabel($trim,$col){
 
 	//Json Making
 
-		$JsonArray = json_encode(array(
+		$JsonArray = (array(
 			'Guidelines' =>$Guidelines, 
 			'Tools' =>$Tools,
 			'DTreatmentCommodities' => $DTreatmentCommodities,

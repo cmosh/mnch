@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
   <div class="row">
  
               <!-- small box -->
@@ -35,7 +37,7 @@
                         <br>
                         </div>
                         </div>
-</div>
+
          @include('analytics/CH/html/ownership')
 
 
@@ -43,13 +45,14 @@
            
 
 
-         @include('analytics/CH/html/staff_training')
+       
 
            @include('analytics/CH/html/health_services')         
-
-
+</div>
+<div class="col-md-12">
          
-
+  @include('analytics/CH/html/staff_training')
+  </div>
 <div class="col-md-12">
                         
                         <div class="box-info" >                     
@@ -166,12 +169,14 @@
 @section('js')
 
 
-  <!-- ChartJS 1.0.1 -->
+  
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.js" type="text/javascript"></script>
+ 
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-   <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+  
  <script type="text/javascript">
+
+
       $(function () {
         //Initialize Select2 Elements
         $(".select2").select2();
@@ -190,6 +195,18 @@ google.setOnLoadCallback(drawChart);
   $('#County').change(drawChart);
 
 	
+function mapRequest (county) {
+   document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
+     x = window.mapdata;
+
+  @include('analytics/mapdata')
+
+   document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>/'+TotalTotal;
+   x2 = 100*(TotalSubmitt/TotalTotal);
+  $('#svFaBar').attr('style','width: '+x2+'%');
+  
+}
+
 function drawChart() {
 
 	  $( ".wait" ).children().addClass("fa fa-refresh fa-spin");
@@ -210,11 +227,15 @@ function drawChart() {
       type: "post",
        data: data,
            success: function(data){
-        // alert(data);
-     
-		var jsonData = JSON.parse(data);
+     mapdata = JSON.parse(data)['map'];
+		var jsonData = JSON.parse(data)['analytics'];
+
+    // var jsonData = jsonData1['analytics'];
+    // alert(jsonData['Guidelines']);
+
 
 	//include js
+    
 	     @include('analytics/CH/js/gjavailability')
        @include('analytics/CH/js/tavailability')
        @include('analytics/CH/js/chsec4diarhoea')
@@ -260,17 +281,49 @@ $('#Year3').change(year3);
 $('#Year4').change(year4);
 
   @include('analytics/CH/js/year4change')
-$('.county').click(function() {
-var cts = this.id;
-$(document).ready(function() {
+
+
+var inside = $('#thesvg').contents();
+
+inside.find('.county').click(function() {
+  var cts = this.getAttribute("cname");
+   $(document).ready(function() {
+
 $('#County').val(cts);
+ document.getElementById("select2-County-container").innerHTML = cts;
+
 });
 
 drawChart();
 
-var x = 'Selected ' + this.id + ' county';
+var x = 'Selected ' + cts + ' county';
 alert(x);
+
 });
+
+$(function() {
+  var moveLeft = 25;
+  var moveDown = 173;
+
+  inside.find('.county').hover(function(e) {
+      var cts = this.getAttribute("cname");
+      mapRequest(cts);
+
+    $('div#pop-up').show();
+
+      
+  }, function() {
+    $('div#pop-up').hide();
+  });
+
+  inside.find('.county').mousemove(function(e) {
+    $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+
+
+
     </script>
   
     

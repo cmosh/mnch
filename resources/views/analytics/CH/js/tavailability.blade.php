@@ -5,7 +5,8 @@
         height: 300,
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: '75%' },
-        isStacked: 'percent'
+        isStacked: 'percent',
+        chartArea:{left:250,top:0,width:'50%',height:'75%'}
       };
 
       var tavailability = new google.visualization.BarChart(document.getElementById('tavailability'));

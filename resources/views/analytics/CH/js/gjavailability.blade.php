@@ -5,7 +5,8 @@ var gjavailabilitydata = google.visualization.arrayToDataTable(jsonData['Guideli
         height: 300,
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: '50%' },
-        isStacked: 'percent'
+        isStacked: 'percent',
+        chartArea:{left:250,top:0,width:'50%',height:'75%'}
       };
 
       var gjavailability = new google.visualization.BarChart(document.getElementById('gjavailability'));

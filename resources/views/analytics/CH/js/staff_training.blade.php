@@ -5,10 +5,11 @@ var staff_Traineddata = google.visualization.arrayToDataTable(jsonData['staff_tr
         width: '100%',
         height: 300,
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
+        bar: { groupWidth: '50%' },
         isStacked: true,
        hAxis: {minValue: 0},
-        vAxis: {minValue:0}
+        vAxis: {minValue:0},
+        chartArea:{left:400,top:0,width:'50%',height:'75%'}
       };
       var staff_Trained = new google.visualization.BarChart(document.getElementById('staff_Trained'));
       staff_Trained.draw(staff_Traineddata, staff_Trainedoptions);
