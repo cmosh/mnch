@@ -6,5 +6,5 @@
           Ministry of Health
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015</strong> All rights reserved.
       </footer>
