@@ -42,7 +42,7 @@
 
               <center>
               <div class="col-xs-12">
-                <img src="/img/excelformat.jpg">
+                <img src="/img/editformat.jpg">
               </div> 
               </center>   
               <br>

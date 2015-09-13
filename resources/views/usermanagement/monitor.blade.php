@@ -23,15 +23,27 @@
 <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a aria-expanded="true" href="#tab_1" data-toggle="tab">General</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Today's User Completion</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_3" data-toggle="tab">Total User Completiion</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Today's Data Entry</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_3" data-toggle="tab">Total Data Entry</a></li>
                   
                   <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane active" id="tab_1">
                     <!-- /.box-header -->
-                <div class="box-body">
+
+
+                   @foreach($surveys as $survey)
+                    <div class="panel box box-primary">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$survey->surveyID}}">
+                            {{$survey->surveyID}} Data Entry
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse in">
+                        <div class="box-body">
                 <table style="float:right">
                   
                   <tr>
@@ -40,24 +52,24 @@
                   <b>Filter by:</b>
                   </td>
                   <td>
-                   <select id="filterer" class="form-control select2 " style="width: 100%;" name="filterer" > 
+                   <select id="filterer{{$survey->surveyID}}" class="form-control select2 " style="width: 100%;" name="filterer" > 
                       <option value ="All" id ="filter0" >All</option>
                        <option value ="County" id ="filter1" >County</option>
-                        <option value ="Survey" id ="filter2" >Survey</option>
+                      <!--   <option value ="Survey" id ="filter2" >Survey</option> -->
                          <option value ="Term" id ="filter3" >Term</option>
                        </select>
 
                   </td>
                   
                   <td>
-                   <b  "padding-left:20px" >Search:</b>
+                   <b  "padding-left:20px" >Please Select:</b>
                    </td>
                    <td>
-            <select style="padding-left:20px" id="searcher" class="form-control select2 " style="width: 100%;" name="filterer" >
+            <select style="padding-left:20px" id="searcher{{$survey->surveyID}}" class="form-control select2 " style="width: 100%;" name="filterer" >
            
 
                      @foreach($counties_assessed as $ca)
-                        <option value = <?php echo $ca->Name ?> class="searcher0" id ="searcherallcounty" >{{$ca->Name}}</option> 
+                        <option value = <?php echo $ca->Name ?> class="searcher0{{$survey->surveyID}}" id ="searcherallcounty" >{{$ca->Name}}</option> 
 
 
                      @endforeach
@@ -65,15 +77,13 @@
                      
 
                          
-                      <option value ="Baseline" class="searcher1" id ="searcher2" >Baseline</option>
-                      <option value ="Midterm" class="searcher1" id ="searcher2" >Midterm</option>
-                      <option value ="Endterm" class="searcher1" id ="searcher2" >Endterm</option>
+                      <option value ="Baseline" class="searcher1{{$survey->surveyID}}" id ="searcher2" >Baseline</option>
+                      <option value ="Midterm" class="searcher1{{$survey->surveyID}}" id ="searcher2" >Midterm</option>
+                      <option value ="Endterm" class="searcher1{{$survey->surveyID}}" id ="searcher2" >Endterm</option>
                      
-                      <option value ="CHV2"  class="searcher2" id ="searcher3" >CHV2-2014 to Present</option>
                       
-                      <option value ="MNHV2"  class="searcher2" id ="searcher3" >MNHV2-2014 to Present</option>
                       
-                      <option value ="IMCI"  class="searcher2" id ="searcher3" >IMCI</option>
+                     
                       
                       
                        </select>
@@ -83,7 +93,7 @@
                 </table>
                 <br>
                 <br>
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1{{$survey->surveyID}}" class="table table-bordered table-striped">
   
 
 
@@ -93,7 +103,7 @@
 
                      
                         
-                        <th>Survey</th>
+                        
                         <th>Assessment Term</th>
                         <th>Assessor</th>
                          <th>Date</th>
@@ -115,13 +125,10 @@
                       
 
                         @foreach($user_monitor as $user)
+                         @if($user->Survey==$survey->surveyID)
                         <tr>
-
-                      
-
-                        
-                        <td> {{ $user->Survey}}</td>
-
+                       
+                     
                         
 
                         <td > {{ $user->Assessment_Term}}</td>
@@ -149,6 +156,7 @@
                         
                        
                        </tr>
+                       @endif
                          @endforeach
 
 
@@ -163,7 +171,7 @@
                       <tr>
 
                       
-                        <th>Survey</th>
+                       
                         <th>Assessment Term</th>
                         <th>Assessor</th>
                          <th>Date</th>
@@ -180,7 +188,11 @@
                     </tfoot>
                   </table>
                 </div><!-- /.box-body -->
-              
+                      </div>
+                    </div>
+
+                
+              @endforeach
                   </div><!-- /.tab-pane -->
 
 
@@ -188,7 +200,18 @@
 
 
                   <div class="tab-pane" id="tab_2">
-                    <table id="example1" class="table table-bordered table-striped">
+                      @foreach($surveys as $survey)
+                    <div class="panel box box-primary">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2{{$survey->surveyID}}">
+                            {{$survey->surveyID}} Data Entry
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapse2{{$survey->surveyID}}" class="panel-collapse collapse in">
+                        <div class="box-body">
+                         <table id="example2{{$survey->surveyID}}" class="table table-bordered table-striped">
   
 
 
@@ -199,6 +222,7 @@
                      
                         
                         <th>User Name</th>
+                        <th>Role</th>
                         <th>Submited Surveys </th>
                         <th>Incomplete Surveys </th>
                     
@@ -221,31 +245,81 @@
                       
                       
 
-                        @foreach($Surveycompletion_daily as $daily)
+                        @foreach($users as $user)
                         <tr>
 
                       
 
                         
-                        <td> {{ $daily->name}}</td>
-<?php
-$comp=$daily->Completted_Surveys;
-$inco=$daily->Incomplete_Surveys;
-if($comp=='')
-{
-  $comp=0;
-}
-if($inco=='')
-{
-  $inco=0;
-}
-?>
+                        <td> {{ $user->name}}</td>
 
-                        <td > <?php echo $comp ?></td>
+                        <td> 
+
+                      <?php 
+                      if($user->role===0)
+                      {
+                        echo "county user";
+                      }
+                       if($user->role==1)
+                      {
+                        echo "data clerk";
+                      }
+                       if($user->role==2)
+                      {
+                        echo "program user";
+                      }
+                       if($user->role==3)
+                      {
+                        echo "system user";
+                      }
+                       if($user->role==='')
+                      {
+                        echo "Unknown";
+                      }
 
 
 
-                        <td > <?php echo $inco ?></td>
+                      ?>
+
+                      </td>
+
+
+
+
+                        <td > 
+
+                        @foreach($cperday as $cday)
+
+                            @if($cday->id==$user->id && $cday->Survey==$survey->surveyID)
+
+                              {{$cday->Completted_Surveys}}
+
+                            
+
+                            @endif
+
+
+                        @endforeach
+
+
+                      
+                        </td>
+
+
+
+                        <td >  
+                        @foreach($pperday as $pday)
+
+                            @if($pday->id==$user->id && $pday->Survey==$survey->surveyID)
+                              {{$pday->Incomplete_Surveys}}
+
+                            
+                           
+                            @endif
+
+
+                        @endforeach
+                        </td>
                         
                        
                         
@@ -268,6 +342,7 @@ if($inco=='')
                      
                         
                         <th>User Name</th>
+                        <th>Role</th>
                         <th>Submited Surveys </th>
                         <th>Incomplete Surveys </th>
                     
@@ -276,9 +351,30 @@ if($inco=='')
                       </tr>
                     </tfoot>
                   </table>
+                        </div>
+                      </div>
+                    </div>
+                    @endforeach
+
+
+
+                    
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_3">
-                   <table id="example1" class="table table-bordered table-striped">
+
+
+                  @foreach($surveys as $survey)
+                  <div class="panel box box-primary">
+                      <div class="box-header with-border">
+                        <h4 class="box-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3{{$survey->surveyID}}">
+                            {{$survey->surveyID}} Data Entry
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapse3{{$survey->surveyID}}" class="panel-collapse collapse in">
+                        <div class="box-body">
+ <table id="example3{{$survey->surveyID}}" class="table table-bordered table-striped">
   
 
 
@@ -289,6 +385,7 @@ if($inco=='')
                      
                         
                         <th>User Name</th>
+                         <th>Role</th>
                         <th>Submited Surveys </th>
                         <th>Incomplete Surveys </th>
                     
@@ -298,36 +395,79 @@ if($inco=='')
                     </thead>
                     
                     <tbody>
-                      <tr>
-                      From August-26-2015
-                      </tr>
-                      
-
-                        @foreach($Surveycompletion_total as $total)
+                        @foreach($users as $user)
                         <tr>
 
                       
 
                         
-                        <td> {{ $total->name}}</td>
-<?php
-$comp=$total->Completted_Surveys;
-$inco=$total->Incomplete_Surveys;
-if($comp=='')
-{
-  $comp=0;
-}
-if($inco=='')
-{
-  $inco=0;
-}
-?>
+                        <td> {{ $user->name}}</td>
 
-                        <td > <?php echo $comp ?></td>
+                        <td> 
+
+                      <?php 
+                      if($user->role===0)
+                      {
+                        echo "county user";
+                      }
+                       if($user->role==1)
+                      {
+                        echo "data clerk";
+                      }
+                       if($user->role==2)
+                      {
+                        echo "program user";
+                      }
+                       if($user->role==3)
+                      {
+                        echo "system user";
+                      }
+                       if($user->role==='')
+                      {
+                        echo "Unknown";
+                      }
 
 
 
-                        <td > <?php echo $inco ?></td>
+                      ?>
+
+                      </td>
+
+
+
+
+                        <td > 
+
+                        @foreach($cperuser as $cuser)
+
+                            @if($cuser->id==$user->id && $cuser->Survey==$survey->surveyID)
+
+                              {{$cuser->Completted_Surveys}}
+
+                           
+
+                            @endif
+
+
+                        @endforeach
+
+
+                      
+                        </td>
+
+
+
+                        <td >  
+                        @foreach($pperuser as $puser)
+
+                            @if($puser->id==$user->id && $puser->Survey==$survey->surveyID)
+                              {{$puser->Incomplete_Surveys}}
+
+                            @endif
+
+
+                        @endforeach
+                        </td>
                         
                        
                         
@@ -335,14 +475,6 @@ if($inco=='')
                        
                        </tr>
                          @endforeach
-
-
-
-   
-
-                    
-
-                     
                     </tbody>
                     <tfoot>
                       <tr>
@@ -350,6 +482,7 @@ if($inco=='')
                      
                         
                         <th>User Name</th>
+                         <th>Role</th>
                         <th>Submited Surveys </th>
                         <th>Incomplete Surveys </th>
                     
@@ -357,7 +490,10 @@ if($inco=='')
                   
                       </tr>
                     </tfoot>
-                  </table>
+                  </table>                        </div>
+                      </div>
+                    </div>
+                  @endforeach
                   </div><!-- /.tab-pane -->
                 </div><!-- /.tab-content -->
               </div>
@@ -387,25 +523,22 @@ if($inco=='')
     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
 
  <!-- DATA TABLES -->
+ @foreach($surveys as $survey)
   <script type="text/javascript">
-
+      
       $.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-       var searchvar=$('#searcher').val();
+    function( settings, data{{$survey->surveyID}}, dataIndex ) {
+       var searchvar{{$survey->surveyID}}=$('#searcher{{$survey->surveyID}}').val();
 
-       if($('#filterer').val()=='Survey')
-       {
-        var filter =  data[0]; 
-      }
-      else if($('#filterer').val()=='Term')
+     if($('#filterer{{$survey->surveyID}}').val()=='Term')
       {
-        var filter =  data[1]; 
+        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[0]; 
       }
-      else if($('#filterer').val()=='County')
+      else if($('#filterer{{$survey->surveyID}}').val()=='County')
       {
-        var filter =  data[5]; 
+        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[4]; 
       }
-      else if($('#filterer').val()=='All')
+      else if($('#filterer{{$survey->surveyID}}').val()=='All')
       {
         return true;
        
@@ -417,7 +550,7 @@ if($inco=='')
 
 
 
-        if ( filter==searchvar)
+        if ( filter{{$survey->surveyID}}==searchvar{{$survey->surveyID}})
 
         {
             return true;
@@ -428,43 +561,39 @@ if($inco=='')
  
 $(document).ready(function() {
   
-    $('#searcher').val('');
-    var table = $('#example1').DataTable();
-document.getElementById("example1_filter").style.display = 'none';
+    $('#searcher{{$survey->surveyID}}').val('');
+    
+    var table{{$survey->surveyID}} = $('#example1{{$survey->surveyID}}').DataTable();
+document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
 
-$('#searcher').click(function()
+$('#searcher{{$survey->surveyID}}').click(function()
+
 {
-$('#searcher').val('');
 
-if($('#filterer').val()=='All')
+if($('#filterer{{$survey->surveyID}}').val()=='All')
        {
       
-         $('.searcher0').hide();
-        $('.searcher1').hide();
-        $('.searcher2').hide();
+         $('.searcher0{{$survey->surveyID}}').hide();
+        $('.searcher1{{$survey->surveyID}}').hide();
+      
           
-         table.draw();
-          document.getElementById("searcher").disabled = true;
+         table{{$survey->surveyID}}.draw();
+          document.getElementById("searcher{{$survey->surveyID}}").disabled = true;
       }
-      else if($('#filterer').val()=='Survey')
-       {
-        
-        table.draw();
-         document.getElementById("searcher").disabled = false;
-      }
-      else if($('#filterer').val()=='Term')
+     
+      else if($('#filterer{{$survey->surveyID}}').val()=='Term')
        {
        
        
-        table.draw();
-         document.getElementById("searcher").disabled = false;
+        table{{$survey->surveyID}}.draw();
+         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
       }
-      else if($('#filterer').val()=='County')
+      else if($('#filterer{{$survey->surveyID}}').val()=='County')
        {
          
        
-        table.draw();
-         document.getElementById("searcher").disabled = false;
+        table{{$survey->surveyID}}.draw();
+         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
       }
 
 }
@@ -475,42 +604,36 @@ if($('#filterer').val()=='All')
     
     
 
-    $('#filterer').click(function()
+    $('#filterer{{$survey->surveyID}}').click(function()
 {
+  $('#searcher{{$survey->surveyID}}').val('');
 
 
-if($('#filterer').val()=='All')
+if($('#filterer{{$survey->surveyID}}').val()=='All')
        {
-         $('#searcher').val('');
-         $('.searcher0').hide();
-        $('.searcher1').hide();
-        $('.searcher2').hide();
-         table.draw();
-          document.getElementById("searcher").disabled = true;
+         $('#searcher{{$survey->surveyID}}').val('');
+         $('.searcher0{{$survey->surveyID}}').hide();
+        $('.searcher1{{$survey->surveyID}}').hide();
+        
+         table{{$survey->surveyID}}.draw();
+          document.getElementById("searcher{{$survey->surveyID}}").disabled = true;
       }
-      else if($('#filterer').val()=='Survey')
+     
+      else if($('#filterer{{$survey->surveyID}}').val()=='Term')
        {
-$('.searcher0').hide();
-        $('.searcher1').hide();
-        $('.searcher2').show();
-        table.draw();
-         document.getElementById("searcher").disabled = false;
+         $('.searcher0{{$survey->surveyID}}').hide();
+        $('.searcher1{{$survey->surveyID}}').show();
+        
+        table{{$survey->surveyID}}.draw();
+         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
       }
-      else if($('#filterer').val()=='Term')
+      else if($('#filterer{{$survey->surveyID}}').val()=='County')
        {
-         $('.searcher0').hide();
-        $('.searcher1').show();
-        $('.searcher2').hide();
-        table.draw();
-         document.getElementById("searcher").disabled = false;
-      }
-      else if($('#filterer').val()=='County')
-       {
-   $('.searcher0').show();
-        $('.searcher1').hide();
-        $('.searcher2').hide();
-        table.draw();
-         document.getElementById("searcher").disabled = false;
+   $('.searcher0{{$survey->surveyID}}').show();
+        $('.searcher1{{$survey->surveyID}}').hide();
+      
+        table{{$survey->surveyID}}.draw();
+         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
       }
 
 }
@@ -520,14 +643,20 @@ $('.searcher0').hide();
   );  
      
     // Event listener 
-    $('#searcher').keyup( function() {
-        table.draw();
+    $('#searcher{{$survey->surveyID}}').keyup( function() {
+        table{{$survey->surveyID}}.draw();
     } );
 } );
 
+
+
+
+
+
     </script>
 
-         
+ @endforeach
+        
   @endsection
 
  

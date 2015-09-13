@@ -26,7 +26,7 @@
 @endsection 
 
 @section('content')
-<div class="row">
+<div id="row_addusers" class="row">
 <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
@@ -47,7 +47,7 @@
               <div class="small-box bg-aqua">
                 <div class="inner">
                 
-                  <p style="font-size:16pt">Add Multiple Users</p> 
+                  <p id="tester" style="font-size:16pt">Add Multiple Users</p> 
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -64,27 +64,41 @@
 <div class="box box-primary">
                 <div class="box-header">
                 <a style="float:right" href="/usermanagement/export">Download excel</a>
+                <br>
+               <a style="float:right" id="copy-button" data-clipboard-text="{{$users}}">Copy to Clipboard</a>
+
+               <br>
+               <button style="float:right" id="print-button" >Print</button>
+           
+
+
+
+
+
+              
                   <h3 class="box-title">
 
                   Users
                   </h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
+               
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
 
                      
                         
-                        <th>Name</th>
+                        <th >Name</th>
                          <th>Email</th>
                         <th>County</th>
                         <th>Phone Number</th>
                   
                         <th>Role</th>
-                        <th>Action</th>
-                        <th>Action</th>
-                        <th>Action</th>
+                        <th style="display:none">created at</th>
+                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint">Action</th>
                   
                       </tr>
                     </thead>
@@ -128,13 +142,19 @@
 
                       ?>
 
+
                         </td>
- <td>
+                      <td  style="display:none">
+                        
+                        {{ $user->created_at}}  
+
+                      </td>
+ <td class="hideprint">
  <form action="/usermanagement/editusers/{{$user->id}}">
-    <input class="btn btn-primary form-control" type="submit" value="EDIT">
+    <input class="btn btn-primary form-control " type="submit" value="EDIT">
     </form>
     </td>
-    <td>
+    <td class= "hideprint">
  <form action="/usermanagement/status_change/{{$user->id}}">
  @if($user->status==0)
     <input style="color:green" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
@@ -145,7 +165,7 @@
     </td>
 
 
-    <td>
+    <td class="hideprint">
  <form action="/usermanagement/reset/{{$user->id}}">
     <input class="btn btn-primary form-control" type="submit" value="RESET">
     </form>
@@ -169,9 +189,10 @@
                         <th>Phone Number</th>
                          
                         <th>Role</th>
-                        <th>Action</th>
-                        <th>Action</th>
-                        <th>Action</th>
+                        <th style="display:none">created at</th>
+                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint">Action</th>
                         
                
                       </tr>
@@ -179,6 +200,19 @@
                   </table>
                 </div><!-- /.box-body -->
               </div>
+              <!-- test -->
+
+
+
+             
+       
+
+    
+    
+
+
+
+    <!-- test-end -->
 
 
 
@@ -198,13 +232,44 @@
      <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-
+      <script src="/bower_components/zeroclipboard/dist/ZeroClipboard.min.js" type="text/javascript"></script>
+   
  <!-- DATA TABLES -->
   <script type="text/javascript">
       $(function () {
-       $('#example1').DataTable();
+       $('#example1').DataTable(
+
+        {"aaSorting": [[ 5, "desc" ]]});
        
+      
       });
+
+
+
+
+
+      $(document).ready(function() {
+
+            // Zero Clipboard initialization
+            var client = new ZeroClipboard($('#copy-button'));
+
+         
+        });
+      $('#print-button').click(function()
+
+      {
+        $('#row_addusers').hide();
+        $('.hideprint').hide();
+
+          window.print();
+
+      $('#row_addusers').show();
+      $('.hideprint').show();          
+
+      });
+
+
+      
     </script>
 
          

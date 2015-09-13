@@ -8,8 +8,13 @@ use App\User;
 use App\Tables\User_monitor;
 use App\Tables\countie;
 use App\Tables\Counties_assessed;
-use App\Tables\Surveycompletion_daily;
-use App\Tables\Surveycompletion_total;
+use App\Tables\partial_peruser;
+use App\Tables\completed_peruser;
+use App\Tables\partial_peruser_perday;
+use App\Tables\completed_peruser_perday;
+// use App\Tables\Surveycompletion_daily;
+// use App\Tables\Surveycompletion_total;
+use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use Input;
@@ -130,6 +135,83 @@ class UserManagement extends Controller {
 		
 	}
 
+
+
+
+	public function store_multi(Request $Request)
+	{
+
+
+		$array=$Request->all();
+		$new=array_shift($array);
+		$x = array();
+
+
+
+	$users=new User;
+	foreach ($array as $key ) {
+		# code...
+			$x[]=$key;
+			
+	}
+
+	
+	
+			
+	
+
+	for($i=0;$i<sizeof($x)/6;$i++)
+	{
+		$num=6*$i;
+		$role=0;
+		if($x[5+$num]=='countyuser')
+		{
+			$role=0;
+		}
+		if($x[5+$num]=='dataclerk')
+		{
+			$role=1;
+		}
+		if($x[5+$num]=='programuser')
+		{
+			$role=2;
+		}
+		if($x[5+$num]=='systemuser')
+		{
+			$role=3;
+		}
+		$data=array(
+		'name'=>$x[0+$num],
+		'county'=>$x[1+$num],
+		'PhoneNumber'=>$x[2+$num],
+		'IDNumber'=>$x[3+$num],
+		'email'=>$x[4+$num],
+		'password'=>bcrypt('123456'),
+		'role'=>$role,
+		'status'=>'1'
+		);
+	
+		
+		
+
+ User::createOrUpdate(
+                $data, 
+                array('email' => $x[4+$num]));
+		 }
+	$users=User::all();
+	
+	
+	
+		return redirect('usermanagement/viewusers')->with('x',$x)->with('users',$users)->with('location','umanage')->with('title','User Management');
+
+		
+
+
+
+
+
+	}
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -138,15 +220,20 @@ class UserManagement extends Controller {
 	 */
 	public function show(Request $request)
 	{
-		//
+		$surveys=Survey::all();
 		$user_monitor=User_monitor::all();
 		$counties_assessed=Counties_assessed::all();
-		$Surveycompletion_daily=Surveycompletion_daily::all();
-		$Surveycompletion_total=Surveycompletion_total::all();
+		// $Surveycompletion_daily=Surveycompletion_daily::all();
+		// $Surveycompletion_total=Surveycompletion_total::all();
+		$pperuser=partial_peruser::all();
+		$cperuser=completed_peruser::all();
+		$pperday=partial_peruser_perday::all();
+		$cperday=completed_peruser_perday::all();
+		$users=User::all();
 		if($request->user()->role==3 || 2)
 		{
 
-	return view('usermanagement.monitor')->with('Surveycompletion_total',$Surveycompletion_total)->with('Surveycompletion_daily',$Surveycompletion_daily)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
+	return view('usermanagement.monitor')->with('users',$users)->with('cperday',$cperday)->with('pperday',$pperday)->with('cperuser',$cperuser)->with('pperuser',$pperuser)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
 
 		}	
 
@@ -358,7 +445,7 @@ public function multi()
   $validator = Validator::make($file, $rules);
   if ($validator->fails()) {
     // send back to the page with the input data and errors
-    return Redirect::to('upload')->withInput()->withErrors($validator);
+    return Redirect::to('/usermanagement/addusers_multi')->withInput()->withErrors($validator);
   }
   else {
     // checking file is valid.
@@ -372,12 +459,13 @@ public function multi()
 
       $result=$excel->load('public/uploads/'.$fileName)->get();
       $count=0;
+      $x=array();
 		for($i=0;$i<sizeof($result[0]);$i++)
 		{
 		if($result[0][$i]->name !='')
 		{
 		$count++;	
-		$data=array(
+		$x[$i]=array(
 		'name'=>$result[0][$i]->name,
 		'county'=>$result[0][$i]->county,
 		'PhoneNumber'=>$result[0][$i]->phonenumber,
@@ -391,9 +479,9 @@ public function multi()
 
 
 
-		User::createOrUpdate(
-                $data, 
-                array('email' => $result[0][$i]->email));
+		// User::createOrUpdate(
+  //               $data, 
+  //               array('email' => $result[0][$i]->email));
 
 		}
 		else
@@ -402,14 +490,14 @@ public function multi()
 		}
 
 	}
-		      Session::flash('success', $count. ' Users registered successfully!'); 
+		      // Session::flash('success', $count. ' Users registered successfully!'); 
 
-      return Redirect::to('usermanagement/addusers_multi');
+      return view('usermanagement.multiedit')->with('users',$x)->with('location','umanage')->with('title','User Management');
     }
     else {
       // sending back with error message.
       Session::flash('error', 'uploaded file is not valid');
-      return Redirect::to('upload');
+      return Redirect::to('/usermanagement/addusers_multi');
     }
   }
 

@@ -28,23 +28,17 @@ Route::post('survey/save','surveys@saveajax');
 
 
 
-
-
-
 Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
 Route::get('usermanagement/viewusers','UserManagement@index');
 Route::get('usermanagement/monitor','UserManagement@show');
 Route::get('usermanagement/addusers','UserManagement@create');
 Route::get('usermanagement/addusers_multi','UserManagement@multi');
+Route::post('usermanagement/addusers_multi/store','UserManagement@store_multi');
 Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
 Route::get('usermanagement/reset/{id}','UserManagement@reset');
 Route::get('usermanagement/export','UserManagement@export');
-
-
 Route::post('usermanagement/multi_upload','UserManagement@upload');
-
-
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update/{id}','UserManagement@update');
 
