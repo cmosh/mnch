@@ -90,7 +90,7 @@
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                        @foreach($Surveys as $Survey)
-                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}} </option>
                         @endforeach
                        </select>
                       </div>
@@ -118,7 +118,7 @@
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                        @foreach($Surveys as $Survey)
-                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         @endforeach
                        </select>
                       </div>
@@ -178,7 +178,7 @@
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version2" id="Version2"> 
                        @foreach($Surveys as $Survey)
-                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         @endforeach
                        </select>
                       </div>
@@ -199,7 +199,7 @@
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                        @foreach($Surveys as $Survey)
-                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}}</option>
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         @endforeach
                        </select>
                       </div>
