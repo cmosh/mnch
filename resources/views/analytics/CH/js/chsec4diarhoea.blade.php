@@ -15,6 +15,7 @@ var chsec4diarhoeadata = google.visualization.arrayToDataTable(jsonData['DTreatm
 var chsec4diarhoeadata2 = google.visualization.arrayToDataTable(jsonData['DTreatmentAvailability']); 
 
       var chsec4diarhoea2options = {
+      colors: ['#3366CC', '#DC3912', '#FF9900','#C6C6C6'],
         width: '100%',
         height: 300,
         title: 'Reasons for Unavailability',
