@@ -32,7 +32,8 @@
                   <div class="tab-pane active" id="tab_1">
                     <!-- /.box-header -->
 
-
+                  <span style="color:red">* Click on label to close panels</span>
+                  <br>
                    @foreach($surveys as $survey)
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
@@ -200,6 +201,7 @@
 
 
                   <div class="tab-pane" id="tab_2">
+                  <span style="color:red">* Click on label to close panels</span>
                       @foreach($surveys as $survey)
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
@@ -361,6 +363,7 @@
                     
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_3">
+                  <span style="color:red">* Click on label to close panels</span>
 
 
                   @foreach($surveys as $survey)

@@ -82,8 +82,18 @@
                   </h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-               
-                  <table id="example1" class="table table-bordered table-striped">
+
+
+                <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a aria-expanded="true" href="#tab_1" data-toggle="tab">Active Users</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Deactivated Users</a></li>
+                  
+                  <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1">
+                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
 
@@ -97,8 +107,8 @@
                         <th>Role</th>
                         <th style="display:none">created at</th>
                         <th  class= "hideprint">Action</th>
-                        <th  class= "hideprint">Action</th>
-                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint"></th>
+                        <th  class= "hideprint"></th>
                   
                       </tr>
                     </thead>
@@ -108,6 +118,7 @@
                       
 
                         @foreach($users as $user)
+                        @if($user->status==1)
                         <tr>
                         <td > {{ $user->name}}</td>
                         <td >{{ $user->email}}  </td>
@@ -157,9 +168,9 @@
     <td class= "hideprint">
  <form action="/usermanagement/status_change/{{$user->id}}">
  @if($user->status==0)
-    <input style="color:green" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
+    <input style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
  @else   
-    <input  style="color:red" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
+    <input  style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
  @endif
     </form>
     </td>
@@ -167,10 +178,11 @@
 
     <td class="hideprint">
  <form action="/usermanagement/reset/{{$user->id}}">
-    <input class="btn btn-primary form-control" type="submit" value="RESET">
+    <input class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
     </form>
     </td>
-                     	 </tr>
+                       </tr>
+                       @endif
                          @endforeach
 
 
@@ -191,13 +203,153 @@
                         <th>Role</th>
                         <th style="display:none">created at</th>
                         <th  class= "hideprint">Action</th>
-                        <th  class= "hideprint">Action</th>
-                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint"></th>
+                        <th  class= "hideprint"></th>
                         
                
                       </tr>
                     </tfoot>
                   </table>
+
+
+
+
+
+
+                  </div>
+
+
+
+                   <div class="tab-pane active" id="tab_2">
+
+                    <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+
+                     
+                        
+                        <th >Name</th>
+                         <th>Email</th>
+                        <th>County</th>
+                        <th>Phone Number</th>
+                  
+                        <th>Role</th>
+                        <th style="display:none">created at</th>
+                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint"></th>
+                        <th  class= "hideprint"></th>
+                  
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      
+                      
+
+                        @foreach($users as $user)
+                        @if($user->status==0)
+                        <tr>
+                        <td > {{ $user->name}}</td>
+                        <td >{{ $user->email}}  </td>
+                        <td> {{ $user->county}}</td>
+                        <td> {{ $user->PhoneNumber}}</td>
+                        
+                        <td> 
+
+                      <?php 
+                      if($user->role===0)
+                      {
+                        echo "county user";
+                      }
+                       if($user->role==1)
+                      {
+                        echo "data clerk";
+                      }
+                       if($user->role==2)
+                      {
+                        echo "program user";
+                      }
+                       if($user->role==3)
+                      {
+                        echo "system user";
+                      }
+                       if($user->role==='')
+                      {
+                        echo "Unknown";
+                      }
+
+
+
+                      ?>
+
+
+                        </td>
+                      <td  style="display:none">
+                        
+                        {{ $user->created_at}}  
+
+                      </td>
+ <td class="hideprint">
+ <form action="/usermanagement/editusers/{{$user->id}}">
+    <input class="btn btn-primary form-control " type="submit" value="EDIT">
+    </form>
+    </td>
+    <td class= "hideprint">
+ <form action="/usermanagement/status_change/{{$user->id}}">
+ @if($user->status==0)
+    <input style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
+ @else   
+    <input  style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
+ @endif
+    </form>
+    </td>
+
+
+    <td class="hideprint">
+ <form action="/usermanagement/reset/{{$user->id}}">
+    <input class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
+    </form>
+    </td>
+                       </tr>
+                       @endif
+                         @endforeach
+
+
+
+   
+
+                    
+
+                     
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Name</th>
+                         <th>Email</th>
+                        <th>County</th>
+                        <th>Phone Number</th>
+                         
+                        <th>Role</th>
+                        <th style="display:none">created at</th>
+                        <th  class= "hideprint">Action</th>
+                        <th  class= "hideprint"></th>
+                        <th  class= "hideprint"></th>
+                        
+               
+                      </tr>
+                    </tfoot>
+                  </table>
+
+
+
+                  
+                  </div>
+
+
+                  </div>
+                  </div>
+               
+                 
                 </div><!-- /.box-body -->
               </div>
               <!-- test -->
@@ -238,6 +390,13 @@
   <script type="text/javascript">
       $(function () {
        $('#example1').DataTable(
+
+        {"aaSorting": [[ 5, "desc" ]]});
+       
+    
+
+
+      $('#example2').DataTable(
 
         {"aaSorting": [[ 5, "desc" ]]});
        

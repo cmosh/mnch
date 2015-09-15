@@ -365,7 +365,7 @@ class UserManagement extends Controller {
 public function multi()
 	{
 		//
-						return view('usermanagement.multi')->with('location','umanage')->with('title','User Management');
+						return view('usermanagement.multi')->with('location','umanage')->with('title','User Management')->with('error_msg','');
 
 	}
 
@@ -445,7 +445,7 @@ public function multi()
   $validator = Validator::make($file, $rules);
   if ($validator->fails()) {
     // send back to the page with the input data and errors
-    return Redirect::to('/usermanagement/addusers_multi')->withInput()->withErrors($validator);
+    return Redirect::to('/usermanagement/addusers_multi')->withInput()->with('error_msg','Please select a file before clicking Submit');
   }
   else {
     // checking file is valid.

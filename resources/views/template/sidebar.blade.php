@@ -46,12 +46,13 @@
 
 
           ?>
-          </p></small>
-              
-              <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> {{ Auth::user()->county}} County</a>
-            </div>
-          </div>
+          
+            
+<!--              <p> <a href="#"><i class="fa fa-circle text-success"></i> {{ Auth::user()->county}} County</a></p>
+ -->          </small></p>
+           </div>
+           </div>
+
 
      
         

@@ -34,7 +34,8 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                 <p>Upload an Excel file with the user details, using the format below:</p> 
+                 <p>Upload an Excel file with the user details, using the format below.</p> 
+                 <p>Download an  excel template <u><a href='public/downloads/example.xlsx'>here</a></u></p> 
 
                 </div><!-- /.box-body -->
               </div>
@@ -42,7 +43,89 @@
 
               <center>
               <div class="col-xs-12">
-                <img src="/img/editformat.jpg">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+
+                     
+                        
+                        <th >Name</th>
+                        <th>County</th>
+                         <th>Phone Number</th>
+                         <th>ID Number</th>
+                         <th>Email</th>
+                         <th>Role</th>
+                    
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      
+                      
+
+                        
+                       
+
+                        <tr>
+                        <td >Username 1</td>
+                        <td >Nairobi</td>
+                        <td>700100101</td>
+                        <td>34342121</td>
+                        <td>email1@site.com</td>
+                        <td>countyuser</td>
+
+                      
+                       </tr>
+
+                       <tr>
+                        <td >Username 2</td>
+                        <td >Machakos</td>
+                        <td>700100102</td>
+                        <td>34342122</td>
+                        <td>email2@site.com</td>
+                        <td>dataclerk</td>
+
+                      
+                       </tr>
+
+                       <tr>
+                        <td >Username 3</td>
+                        <td >Nakuru</td>
+                        <td>700100103</td>
+                        <td>34342123</td>
+                        <td>email3@site.com</td>
+                        <td>programuser</td>
+
+                      
+                       </tr>
+
+
+                       <tr>
+                        <td >Username 4</td>
+                        <td >Samburu</td>
+                        <td>700100104</td>
+                        <td>34342124</td>
+                        <td>email4@site.com</td>
+                        <td>systemuser</td>
+
+                      
+                       </tr>
+
+                     
+                         
+
+
+
+
+
+   
+
+                    
+
+                     
+                    </tbody>
+                    
+                  </table>
               </div> 
               </center>   
               <br>
@@ -62,11 +145,12 @@
           {!! Form::file('image') !!}
     <p class="errors">{!!$errors->first('image')!!}</p>
   @if(Session::has('error'))
-  <p class="errors">{!! Session::get('error') !!}</p>
+  <p class="errors">{{$error_msg}}</p>
   @endif
         </div>
         </div>
         <div id="success"> </div>
+        <p class="errors">{{$error_msg}}</p>
       {!! Form::submit('Submit', array('class'=>'use-address btn btn-primary form-control')) !!}
       {!! Form::close() !!}
       </div>
