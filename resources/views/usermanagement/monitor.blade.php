@@ -35,11 +35,42 @@
                   <span style="color:red">* Click on label to close panels</span>
                   <br>
                    @foreach($surveys as $survey)
+                    @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$survey->surveyID}}">
-                            {{$survey->surveyID}} Data Entry
+                            @if($survey->surveyID=='CHV2')
+
+                            Child Health
+
+
+
+
+                            @endif
+                            @if($survey->surveyID=='MNHV2')
+
+                            Maternal and Neonatal Health
+
+
+
+
+                            @endif
+                            @if($survey->surveyID=='IMCIV1')
+
+                            Integrated Management of Childhood Illness
+
+
+
+
+                            @endif
+
+
+
+
+
+
+                            Data Entry
                           </a>
                         </h4>
                       </div>
@@ -104,7 +135,7 @@
 
                      
                         
-                        
+                        <th>Version</th>
                         <th>Assessment Term</th>
                         <th>Assessor</th>
                          <th>Date</th>
@@ -126,12 +157,28 @@
                       
 
                         @foreach($user_monitor as $user)
-                         @if($user->Survey==$survey->surveyID)
+                         @if(substr($user->Survey,0,2)==substr($survey->surveyID,0,2))
                         <tr>
                        
                      
                         
+                         <td>
+                         @if(substr($user->Survey,-1,1)=='1')
 
+                               1
+
+
+                         @endif
+                         @if(substr($user->Survey,-1,1)=='2')
+
+                              2
+
+
+                         @endif
+
+
+
+                         </td>
                         <td > {{ $user->Assessment_Term}}</td>
 
 
@@ -172,7 +219,7 @@
                       <tr>
 
                       
-                       
+                       <th>Version</th>
                         <th>Assessment Term</th>
                         <th>Assessor</th>
                          <th>Date</th>
@@ -192,7 +239,7 @@
                       </div>
                     </div>
 
-                
+                @endif
               @endforeach
                   </div><!-- /.tab-pane -->
 
@@ -203,11 +250,35 @@
                   <div class="tab-pane" id="tab_2">
                   <span style="color:red">* Click on label to close panels</span>
                       @foreach($surveys as $survey)
+                      @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2{{$survey->surveyID}}">
-                            {{$survey->surveyID}} Data Entry
+                             @if($survey->surveyID=='CHV2')
+
+                            Child Health
+
+
+
+
+                            @endif
+                            @if($survey->surveyID=='MNHV2')
+
+                            Maternal and Neonatal Health
+
+
+
+
+                            @endif
+                            @if($survey->surveyID=='IMCIV1')
+
+                            Integrated Management of Childhood Illness
+
+
+
+
+                            @endif
                           </a>
                         </h4>
                       </div>
@@ -356,6 +427,11 @@
                         </div>
                       </div>
                     </div>
+                                  <script type="text/javascript">
+                                
+   </script>
+                    @endif
+
                     @endforeach
 
 
@@ -367,14 +443,39 @@
 
 
                   @foreach($surveys as $survey)
+                  @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
                   <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3{{$survey->surveyID}}">
-                            {{$survey->surveyID}} Data Entry
+                            @if($survey->surveyID=='CHV2')
+
+                            Child Health
+
+
+
+
+                            @endif
+                            @if($survey->surveyID=='MNHV2')
+
+                            Maternal and Neonatal Health
+
+
+
+
+                            @endif
+                            @if($survey->surveyID=='IMCIV1')
+
+                            Integrated Management of Childhood Illness
+
+
+
+
+                            @endif
                           </a>
                         </h4>
                       </div>
+
                       <div id="collapse3{{$survey->surveyID}}" class="panel-collapse collapse in">
                         <div class="box-body">
  <table id="example3{{$survey->surveyID}}" class="table table-bordered table-striped">
@@ -496,12 +597,22 @@
                   </table>                        </div>
                       </div>
                     </div>
+                    @endif
                   @endforeach
                   </div><!-- /.tab-pane -->
                 </div><!-- /.tab-content -->
               </div>
 
 </div>
+
+
+ @foreach($surveys as $survey)
+ @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
+  <script type="text/javascript">
+
+</script>
+@endif
+@endforeach
 
 
 
@@ -526,8 +637,15 @@
     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
 
  <!-- DATA TABLES -->
+
+
  @foreach($surveys as $survey)
-  <script type="text/javascript">
+ @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
+
+       
+        <script type="text/javascript">
+ 
+
       
       $.fn.dataTable.ext.search.push(
     function( settings, data{{$survey->surveyID}}, dataIndex ) {
@@ -535,11 +653,11 @@
 
      if($('#filterer{{$survey->surveyID}}').val()=='Term')
       {
-        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[0]; 
+        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[1]; 
       }
       else if($('#filterer{{$survey->surveyID}}').val()=='County')
       {
-        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[4]; 
+        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[5]; 
       }
       else if($('#filterer{{$survey->surveyID}}').val()=='All')
       {
@@ -561,8 +679,18 @@
         return false;
     }
 );
+
+
+$(function (){
+      
+     });
+
  
 $(document).ready(function() {
+
+
+
+
   
     $('#searcher{{$survey->surveyID}}').val('');
     
@@ -657,8 +785,11 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
 
 
     </script>
-
+@endif
  @endforeach
+
+
+
         
   @endsection
 

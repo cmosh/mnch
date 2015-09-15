@@ -35,9 +35,9 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  <p>Upload an Excel file with the user details, using the format below.</p> 
-                 <p>Download an  excel template <u><a href='public/downloads/example.xlsx'>here</a></u></p> 
+                 <p>Download an  excel template <u><a href="download/example.xlsx">here</a></u></p> 
 
-                </div><!-- /.box-body -->
+            </div><!-- /.box-body -->
               </div>
 
 

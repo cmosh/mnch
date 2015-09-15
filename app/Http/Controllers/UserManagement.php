@@ -22,6 +22,7 @@ use Validator;
 use Redirect;
 use Session;
 use Maatwebsite\Excel\Excel;
+use Response;
 
 
 
@@ -368,6 +369,17 @@ public function multi()
 						return view('usermanagement.multi')->with('location','umanage')->with('title','User Management')->with('error_msg','');
 
 	}
+
+
+
+	// public function getDownload(){
+ //        //PDF file is stored under project/public/download/info.pdf
+ //        $file= public_path(). "/downloads/example.xlsx";
+ //        $headers = array(
+ //              'Content-Type: application/xlsx',
+ //            );
+ //        return Response::download($file, 'example.xlsx', $headers);
+	// 	}
 
 
 
