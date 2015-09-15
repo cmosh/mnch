@@ -123,7 +123,9 @@ private static function getLabel($trim,$col){
 		for ($i=2; $i < 9; $i++) {
 
 			$index =  sprintf('%02d',$i);
-			$Label1 =  (self::getLabel(0,'CHV2SEC3BLK99DRW'.$index.'COL01'));
+			//echo ("world","Peter","Hello world!");
+
+			$Label1 =  str_replace('Treatment with ','',(self::getLabel(0,'CHV2SEC3BLK99DRW'.$index.'COL01')));
 			$Label = $Label1;
 			if ( strstr($Label1, '(Example', true)) $Label = strstr($Label1, '(Example', true);
 
@@ -137,6 +139,9 @@ private static function getLabel($trim,$col){
 		
 
 		}
+
+
+		$array[4][0] = 'Zinc';
 		//echo collect($array);
 		return $array;
 
@@ -259,7 +264,14 @@ private static function getLabel($trim,$col){
 		$ortfH = array('Ort Functionality', 'Yes', 'No' );
 
 		$ortf = Cache::remember('ortf'.$county,180,function() use($ortfExclude,$ortfH){
-      					return 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,4,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
+      					$temp = 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,4,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
+      						
+      					$temp[1][0] = 'Does the facility have an ORT corner?';
+      					$temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
+      					$temp[3][0] = 'Is the ORT register upto date (Including zero-reporting)?';
+
+      					return $temp;
+
       	});
 		
 	//supplies
@@ -281,9 +293,9 @@ private static function getLabel($trim,$col){
 		
 	//u5Register
 		 
-		$u5Register = /*Cache::remember('u5Register'.$county.$Year1,180,function() use($Year1){
-      					return*/ self::u5Register($Year1);
-      	//});
+		$u5Register = Cache::remember('u5Register'.$county.$Year1,180,function() use($Year1){
+      					return self::u5Register($Year1);
+      	});
 
 	//u5RegisterN
 		
@@ -370,8 +382,8 @@ private static function getLabel($trim,$col){
 		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'))[$Year2];
 
 		//print_r ($Years[3]);
-		$Array [] = array('Treatment Trends','Treatment with ORS+ Zinc','Treatment with ORS','Treatment with Zinc','Treatment with Antibiotics','Treatment with others','No Treatment')
-	;for ($i=2; $i <13 ; $i++) { 
+		$Array [] = array('Treatment Trends','ORS+ Zinc','ORS','Zinc','Antibiotics','Others','No Treatment')
+	;for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsM($Block,'COL'.$index);
 		$Array [] = array(
@@ -495,7 +507,7 @@ private static function getLabel($trim,$col){
 
 		//print_r ($Years[3]);
 		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases')
-	;for ($i=2; $i <13 ; $i++) { 
+	;for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsNM($Block,'COL'.$index);
 		$Array [] = array(

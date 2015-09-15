@@ -42,6 +42,7 @@
 
               <center>
               <div class="col-xs-12">
+
                         <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -129,6 +130,7 @@
                     </tbody>
                     
                   </table>
+
               </div> 
               </center>   
               <br>

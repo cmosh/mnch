@@ -4,6 +4,8 @@ var chsec4antibioticsdata = google.visualization.arrayToDataTable(jsonData['Anti
 
        
       var chsec4antibioticsoptions = {
+      
+
        hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
         width: '100%',
         height: 300,
@@ -20,6 +22,7 @@ var chsec4antibioticsdata = google.visualization.arrayToDataTable(jsonData['Anti
 
 var chsec4antibioticsdata2 = google.visualization.arrayToDataTable(jsonData['AntibioticsAvailability']);
       var chsec4antibiotics2options = {
+        colors: ['#3366CC', '#DC3912', '#FF9900','#C6C6C6'],
        hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
         width: '100%',
         height: 300,

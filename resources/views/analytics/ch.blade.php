@@ -37,6 +37,7 @@
                         <br>
                         </div>
                         </div>
+</div>
 
          @include('analytics/CH/html/ownership')
 
@@ -48,11 +49,9 @@
        
 
            @include('analytics/CH/html/health_services')         
-</div>
-<div class="col-md-12">
-         
+
   @include('analytics/CH/html/staff_training')
-  </div>
+  
 <div class="col-md-12">
                         
                         <div class="box-info" >                     
@@ -302,8 +301,8 @@ alert(x);
 });
 
 $(function() {
-  var moveLeft = 25;
-  var moveDown = 173;
+  var moveLeft = 0;
+  var moveDown = 0;
 
   inside.find('.county').hover(function(e) {
       var cts = this.getAttribute("cname");

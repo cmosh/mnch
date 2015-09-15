@@ -15,6 +15,7 @@ var chsec4malariadata = google.visualization.arrayToDataTable(jsonData['Malaria'
 var chsec4malariadata2 = google.visualization.arrayToDataTable(jsonData['MalariaAvaialability']); 
 
       var chsec4malaria2options = {
+      colors: ['#3366CC', '#DC3912', '#FF9900','#C6C6C6'],
         width: '100%',
         height: 300,
         title: 'Reasons for Unavailability',
