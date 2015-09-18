@@ -15,6 +15,8 @@
   
      <div class="box box-primary">
                 <div class="box-header">
+
+                <button style="float:right" id="print-button" >Print</button>
                   <h3 class="box-title">
 
                   Progress Review
@@ -71,12 +73,18 @@
 
 
                             Data Entry
+
+
                           </a>
+
                         </h4>
                       </div>
                       <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse in">
                         <div class="box-body">
-                <table style="float:right">
+                <table style="float:left">
+                                                    <tr>       
+         <a style="float:right" href="/usermanagement/export/{{$survey->surveyID}}">Download excel</a>
+</tr>
                   
                   <tr>
                   <td>
@@ -91,6 +99,17 @@
                          <option value ="Term" id ="filter3" >Term</option>
                        </select>
 
+                  </td>
+
+
+
+            <!--       <td>
+                   <select id="filterer2{{$survey->surveyID}}" class="form-control select2 " style="width: 100%;" name="filterer" > 
+                      <option value ="." id ="filter0">Name2</option>
+                      <option value ="Clive Makamara" id ="filter0">NameC</option>
+                        
+                       </select>
+ -->
                   </td>
                   
                   <td>
@@ -121,6 +140,8 @@
                        </select>
                        
                   </td>
+
+
                   </tr>
                 </table>
                 <br>
@@ -144,7 +165,7 @@
                          <th>Entered by</th>
                         
 
-                        <th>Action</th>
+                        <th class="hideprint">Action</th>
 
                         
                         
@@ -196,9 +217,11 @@
                         <td  ><span>{{$user->County}}</span></td>
                         <td ><span>{{ $user->username}}</span>  </td>
                         @if($user->Status=='Submitted')
- <td><form action="/assessments/show/{{$user->Assessment_ID}}">
-    <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>                          @else
-                          <td>Incomplete</td>
+ <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
+    <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
+                           @else
+                          <td  class="hideprint"><form action="/assessments/edit/{{$user->Assessment_ID}}">
+    <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
                           @endif
                         
                         
@@ -228,7 +251,7 @@
                          <th>Entered by</th>
                         
 
-                        <th>Action</th>
+                        <th class="hideprint">Action</th>
                         
                         
                   
@@ -290,6 +313,14 @@
 
                   
                     <thead>
+                    <tr>
+                    <?php
+                      echo date('Y-m-d');
+
+                    ?>
+
+
+                    </tr>
                       <tr>
 
                      
@@ -305,18 +336,7 @@
                     </thead>
                     
                     <tbody>
-                    <tr>
-                      <?php 
-
-                     echo date('d-F-Y');
-
-
-
-
-                      ?>
-                      </tr>
-                      
-                      
+                   <!--  -->
 
                         @foreach($users as $user)
                         <tr>
@@ -484,6 +504,12 @@
 
                   
                     <thead>
+
+                    <tr>
+                    From 26-08-2015
+
+
+                    </tr>
                       <tr>
 
                      
@@ -644,12 +670,15 @@
 
        
         <script type="text/javascript">
+       
  
 
       
       $.fn.dataTable.ext.search.push(
     function( settings, data{{$survey->surveyID}}, dataIndex ) {
        var searchvar{{$survey->surveyID}}=$('#searcher{{$survey->surveyID}}').val();
+        var searchvar2{{$survey->surveyID}}=$('#filterer2{{$survey->surveyID}}').val();
+
 
      if($('#filterer{{$survey->surveyID}}').val()=='Term')
       {
@@ -668,14 +697,23 @@
 
       }
 
+      if($('#filterer2{{$survey->surveyID}}').val()=='Clive Makamara')
+      {
+        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[6]; 
+      }
 
+if ( filter{{$survey->surveyID}}==searchvar2{{$survey->surveyID}})
 
+        {
+            return true;
+        }
 
         if ( filter{{$survey->surveyID}}==searchvar{{$survey->surveyID}})
 
         {
             return true;
         }
+
         return false;
     }
 );
@@ -693,8 +731,11 @@ $(document).ready(function() {
 
   
     $('#searcher{{$survey->surveyID}}').val('');
+       document.getElementById("searcher{{$survey->surveyID}}").disabled = true;
+
     
     var table{{$survey->surveyID}} = $('#example1{{$survey->surveyID}}').DataTable();
+   
 document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
 
 $('#searcher{{$survey->surveyID}}').click(function()
@@ -704,7 +745,7 @@ $('#searcher{{$survey->surveyID}}').click(function()
 if($('#filterer{{$survey->surveyID}}').val()=='All')
        {
       
-         $('.searcher0{{$survey->surveyID}}').hide();
+        $('.searcher0{{$survey->surveyID}}').hide();
         $('.searcher1{{$survey->surveyID}}').hide();
       
           
@@ -718,6 +759,9 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
        
         table{{$survey->surveyID}}.draw();
          document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
+         
+         
+
       }
       else if($('#filterer{{$survey->surveyID}}').val()=='County')
        {
@@ -735,7 +779,7 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
     
     
 
-    $('#filterer{{$survey->surveyID}}').click(function()
+$('#filterer{{$survey->surveyID}}').click(function()
 {
   $('#searcher{{$survey->surveyID}}').val('');
 
@@ -760,10 +804,11 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
       }
       else if($('#filterer{{$survey->surveyID}}').val()=='County')
        {
-   $('.searcher0{{$survey->surveyID}}').show();
+        $('.searcher0{{$survey->surveyID}}').show();
         $('.searcher1{{$survey->surveyID}}').hide();
       
         table{{$survey->surveyID}}.draw();
+
          document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
       }
 
@@ -785,8 +830,36 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
 
 
     </script>
+
+    <script type="text/javascript">
+
+ $(function () {
+       $('#example2{{$survey->surveyID}}').DataTable();
+       $('#example3{{$survey->surveyID}}').DataTable();
+     });
+    </script>
 @endif
  @endforeach
+
+
+
+ <script type="text/javascript">
+
+
+      $('#print-button').click(function()
+
+      {
+        
+        $('.hideprint').hide();
+
+          window.print();
+
+      $('.hideprint').show();
+               
+
+      });
+
+ </script>
 
 
 

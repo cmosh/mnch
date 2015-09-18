@@ -63,7 +63,7 @@
 
 <div class="box box-primary">
                 <div class="box-header">
-                <a style="float:right" href="/usermanagement/export">Download excel</a>
+                <a style="float:right" href="/usermanagement/export/users">Download excel</a>
                 <br>
                <a style="float:right" id="copy-button" data-clipboard-text="{{$users}}">Copy to Clipboard</a>
 
@@ -220,7 +220,7 @@
 
 
 
-                   <div class="tab-pane active" id="tab_2">
+                   <div class="tab-pane" id="tab_2">
 
                     <table id="example2" class="table table-bordered table-striped">
                     <thead>

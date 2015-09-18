@@ -12,8 +12,7 @@ use App\Tables\partial_peruser;
 use App\Tables\completed_peruser;
 use App\Tables\partial_peruser_perday;
 use App\Tables\completed_peruser_perday;
-// use App\Tables\Surveycompletion_daily;
-// use App\Tables\Surveycompletion_total;
+
 use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
@@ -383,11 +382,11 @@ public function multi()
 
 
 
-
-	public function export(Excel $excel)
+ 
+	public function export(Excel $excel,$type)
 	{
-		
-
+		if($type=='users')
+		{
 
 				$excel->create('ALL_USERS', function($ex) {
 
@@ -399,41 +398,80 @@ public function multi()
 			)
 	    		
 	    		);
-	    		for($i=1;$i<sizeof(User::all());$i++)
-	    		{
-	    			$role=User::find($i)->role;
-		    		if(User::find($i)!= '')
-
-		    		{
-
-		    			if(User::find($i)->role==0)
+	    		$users=User::all();
+	    		$counter=0;
+	    		foreach ($users as $user) {
+	    			# code...
+	    		
+	    			$counter++;
+		    			if($user->role==0)
 		    			{
 		    				$role='countyuser';
 		    			}
-		    			if(User::find($i)->role==1)
+		    			if($user->role==1)
 		    			{
 		    				$role='dataclerk';
 		    			}
-		    			if(User::find($i)->role==2)
+		    			if($user->role==2)
 		    			{
 		    				$role='programuser';
 		    			}
-		    			if(User::find($i)->role==3)
+		    			if($user->role==3)
 		    			{
 		    				$role='systemuser';
 		    			}
-		    			if(User::find($i)->role=='')
+		    			if($user->role=='')
 		    			{
 		    				$role='Unknown';
 		    			}
 
 
-						$sheet->row($i+1, array(
+						$sheet->row($counter+1, array(
 
-		     			User::find($i)->name, User::find($i)->county,User::find($i)->PhoneNumber,User::find($i)->IDNumber,User::find($i)->email,$role
+		     			$user->name, $user->county,$user->PhoneNumber,$user->IDNumber,$user->email,$role
 						
 						));
-					}
+					
+				}
+
+
+	       
+
+	    });
+
+	})->download('xls');
+			}
+
+
+			else if(substr($type,0,2)=='CH'|| 'IM'||'MN')
+			{
+
+				$survey_name=$type;
+				$excel->create('general'.$survey_name, function($ex) use($survey_name) {
+
+	    $ex->sheet('Sheetname', function($sheet) use($survey_name) {
+	    	
+	    		$sheet->row(1, array(
+     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County',	'Entered by'		
+
+			)
+	    		
+	    		);
+
+	    		
+	    		$counter2=0;
+	    		
+				$usermonitor=User_monitor::where('Survey','Like',substr($survey_name,0,2).'%')->get();
+
+	    		foreach ($usermonitor as $user_m) {
+	
+	    				$counter2++;
+						$sheet->row($counter2+1, array(
+
+		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->username
+						
+						));
+					
 				}
 
 
@@ -443,7 +481,18 @@ public function multi()
 
 	})->download('xls');
 
-	}
+
+
+
+
+
+
+
+
+			}
+}
+
+	
 
 
 

@@ -45,7 +45,7 @@ Route::get('usermanagement/download/{filename}', function ($filename)
 });
 Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
 Route::get('usermanagement/reset/{id}','UserManagement@reset');
-Route::get('usermanagement/export','UserManagement@export');
+Route::get('usermanagement/export/{type}','UserManagement@export');
 Route::post('usermanagement/multi_upload','UserManagement@upload');
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update/{id}','UserManagement@update');
