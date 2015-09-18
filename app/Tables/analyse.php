@@ -375,6 +375,60 @@ private static function getLabel($trim,$col){
 		return $JsonArray;
 	}
 
+
+
+	public static function mnhanalytics($data,$county){
+	//Feed in survey
+		global $surveys;
+		$surveys = $data;
+
+		
+
+	//Guidelines Availability
+		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No' );
+			$Guidelines = Cache::remember('Guidelines'.$county,180,function() use($GuidelinesHeading){
+      					return 	 self::twoOptionsFullStack( 'MNHV2SEC3BLK1RW',$GuidelinesHeading,33,3,9,'COL01','COL02','/^ated/ ?');
+      	});		
+	//Tools Availability
+		$ToolsHeading = array('Tools Availability', 'Yes', 'No' );
+		$Tools = Cache::remember('Tools'.$county,180,function() use($ToolsHeading){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK3RW',$ToolsHeading,0,3,13,'COL01','COL02','/^/');
+      	});				
+
+
+		
+
+    //ownership
+		$ownership = Cache::remember('ownership'.$county,180,function() {
+
+			return self::ownership();
+		});
+	//types
+		$types = Cache::remember('types'.$county,180,function() {
+
+			return self::types();
+		});
+	
+
+	
+
+	//Json Making
+
+		$JsonArray = (array(
+			 'Guidelines' =>$Guidelines, 
+			 'Tools' =>$Tools,
+			
+			'ownership' => $ownership,
+			'types' => $types
+
+			
+			));
+
+
+
+
+		return $JsonArray;
+	}
 	//public static function 
 
 	public static function annualtrends($Year2){
