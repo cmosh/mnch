@@ -401,7 +401,7 @@ private static function getLabel($trim,$col){
 		//Job aids Availability
 		$jheading = array('Job Aids Availability', 'Yes', 'No' );
 		$jjavailability = Cache::remember('JaidsMNH'.$county,180,function() use($jheading){
-      					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,0,3,13,'COL01','COL02','/^/');
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,0,3,11,'COL01','COL02','/^/');
       	});				
 
 
