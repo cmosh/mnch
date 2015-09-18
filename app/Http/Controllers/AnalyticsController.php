@@ -226,7 +226,7 @@ $Map = (Cache::remember('Map',180,function() {
 			
 		//echo(	json_encode($gjavailability));
 			 $mnhanalytics  = analyse::mnhanalytics($SubmittedSurveys,'All');
-			 echo json_encode($mnhanalytics);
+			// echo json_encode($mnhanalytics);
 		$SubmittedCHCount = SubmittedMNHCount::first();
 		$SubmittedCHCounties = SubmittedMNHCountie::get();
 		//$Years = analyse::sec3Years($SubmittedSurveys);

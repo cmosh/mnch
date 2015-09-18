@@ -18,7 +18,7 @@ class analyse extends Controller {
  
 
  $recset = $surveys;
-
+// echo $recset;
 		$Data = $recset->load(['y' => function($query) use ($cl)
 {
 	
@@ -381,6 +381,8 @@ private static function getLabel($trim,$col){
 	//Feed in survey
 		global $surveys;
 		$surveys = $data;
+		
+
 
 		
 
