@@ -388,25 +388,30 @@ private static function getLabel($trim,$col){
 
 	//Guidelines Availability
 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No' );
-			$Guidelines = Cache::remember('Guidelines'.$county,180,function() use($GuidelinesHeading){
+			$Guidelines = Cache::remember('GuidelinesMNH'.$county,180,function() use($GuidelinesHeading){
       					return 	 self::twoOptionsFullStack( 'MNHV2SEC3BLK1RW',$GuidelinesHeading,33,3,9,'COL01','COL02','/^ated/ ?');
       	});		
 	//Tools Availability
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No' );
-		$Tools = Cache::remember('Tools'.$county,180,function() use($ToolsHeading){
+		$Tools = Cache::remember('ToolsMNH'.$county,180,function() use($ToolsHeading){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK3RW',$ToolsHeading,0,3,13,'COL01','COL02','/^/');
       	});				
 
 
-		
+		//Job aids Availability
+		$jheading = array('Job Aids Availability', 'Yes', 'No' );
+		$jjavailability = Cache::remember('ToolsMNH'.$county,180,function() use($jheading){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,0,3,13,'COL01','COL02','/^/');
+      	});				
+
 
     //ownership
-		$ownership = Cache::remember('ownership'.$county,180,function() {
+		$ownership = Cache::remember('ownershipMNH'.$county,180,function() {
 
 			return self::ownership();
 		});
 	//types
-		$types = Cache::remember('types'.$county,180,function() {
+		$types = Cache::remember('typesMNH'.$county,180,function() {
 
 			return self::types();
 		});
@@ -421,8 +426,8 @@ private static function getLabel($trim,$col){
 			 'Tools' =>$Tools,
 			
 			'ownership' => $ownership,
-			'types' => $types
-
+			'types' => $types,
+			'jaids' => $jjavailability
 			
 			));
 

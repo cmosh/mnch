@@ -66,7 +66,7 @@
 
            @include('analytics/CH/html/tavailability')
 
- 
+   @include('analytics/MNH/html/jjavailability') 
 
      
 
@@ -153,7 +153,7 @@ function drawChart() {
     
 	     @include('analytics/CH/js/gjavailability')
        @include('analytics/CH/js/tavailability')
-      
+       @include('analytics/MNH/js/jjavailability')
       
        
        @include('analytics/CH/js/ownership')
