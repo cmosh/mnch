@@ -216,12 +216,28 @@ $Map = (Cache::remember('Map',180,function() {
 	}
 
 	public function tester(){
-		$SubmittedSurveys = SubmittedSurveys::all();
+		//$SubmittedSurveys = SubmittedSurveys::all();
 		$MNHSubSurvey = MNHSubSurvey::all();
 
 		$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
-		$chanalytics = analyse::chanalytics($SubmittedSurveys,2,2,2,3,'All');
-	//	return $mnhanalytics;
+		//$chanalytics = analyse::chanalytics($SubmittedSurveys,2,2,2,3,'All');
+
+		//f
+// 		$arrayName = array(1,2,3,4,5,6,7,8,9);
+
+// 			Excel::create('Filename', function($excel) use($MNHSubSurvey){
+
+//     $excel->sheet('Sheetname', function($sheet)use($MNHSubSurvey) {
+
+//        $sheet->fromModel($MNHSubSurvey);
+
+//     });
+
+// })->export('xls');
+
+
+
+		return json_encode($mnhanalytics);
 	//	return $chanalytics;
 
 	}
