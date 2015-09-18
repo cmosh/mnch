@@ -39,10 +39,10 @@
                         </div>
 </div>
 
-         @include('analytics/CH/html/ownership')
+         @include('analytics/MNH/html/ownership')
 
 
-         @include('analytics/CH/html/types')
+         @include('analytics/MNH/html/types')
            
 
 
@@ -61,10 +61,10 @@
                         </div>
 </div>
 
-          @include('analytics/CH/html/gjavailability')
+          @include('analytics/MNH/html/gjavailability')
 
 
-           @include('analytics/CH/html/tavailability')
+           @include('analytics/MNH/html/tavailability')
 
    @include('analytics/MNH/html/jjavailability') 
 
@@ -151,13 +151,13 @@ function drawChart() {
 
 	//include js
     
-	     @include('analytics/CH/js/gjavailability')
-       @include('analytics/CH/js/tavailability')
+	     @include('analytics/MNH/js/gjavailability')
+       @include('analytics/MNH/js/tavailability')
        @include('analytics/MNH/js/jjavailability')
       
        
-       @include('analytics/CH/js/ownership')
-       @include('analytics/CH/js/types')
+       @include('analytics/MNH/js/ownership')
+       @include('analytics/MNH/js/types')
 
      
 

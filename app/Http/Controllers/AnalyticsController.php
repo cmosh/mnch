@@ -211,6 +211,19 @@ $Map = (Cache::remember('Map',180,function() {
 			->with('AllYears',$AllYears)
 			->with('SurveysDone',$SurveysDone);
 
+
+				
+	}
+
+	public function tester(){
+		$SubmittedSurveys = SubmittedSurveys::all();
+		$MNHSubSurvey = MNHSubSurvey::all();
+
+		$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
+		$chanalytics = analyse::chanalytics($SubmittedSurveys,2,2,2,3,'All');
+	//	return $mnhanalytics;
+	//	return $chanalytics;
+
 	}
 
 	public function mnh()
