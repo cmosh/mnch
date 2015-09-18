@@ -446,13 +446,13 @@ public function multi()
 			else if(substr($type,0,2)=='CH'|| 'IM'||'MN')
 			{
 
-				$survey_name=$type;
+				$survey_name=substr($type,0,2);
 				$excel->create('general'.$survey_name, function($ex) use($survey_name) {
 
 	    $ex->sheet('Sheetname', function($sheet) use($survey_name) {
 	    	
 	    		$sheet->row(1, array(
-     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County',	'Entered by'		
+     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County',	'Entered by'	,'Status'	
 
 			)
 	    		
@@ -461,14 +461,14 @@ public function multi()
 	    		
 	    		$counter2=0;
 	    		
-				$usermonitor=User_monitor::where('Survey','Like',substr($survey_name,0,2).'%')->get();
+				$usermonitor=User_monitor::where('Survey','Like',$survey_name.'%')->get();
 
 	    		foreach ($usermonitor as $user_m) {
 	
 	    				$counter2++;
 						$sheet->row($counter2+1, array(
 
-		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->username
+		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->username,$user_m->Status
 						
 						));
 					
