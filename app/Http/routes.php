@@ -19,7 +19,13 @@ Route::get('/mnh','AnalyticsController@mnh');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 Route::get('/tester','AnalyticsController@tester');
 Route::post('survey/{id}/{status}','surveys@update');
+Route::get('/redis/{test}',function($test){
 
+	$app = LRedis::connection();
+	$app->set('key',$test);
+	print_r($app->get('key'));  
+
+});
 Route::post('survey/survey/{id}/{status}','surveys@update');
 
 Route::get('status/{status}/{AssID}','AssessmentController@status');
