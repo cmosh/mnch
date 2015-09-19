@@ -15,7 +15,8 @@ function year3() {
       type: "post",
        data: data,
            success: function(data){
-       var jsonData = JSON.parse(data);
+       // mapdata = JSON.parse(data)['map'];
+    var jsonData = JSON.parse(data)['analytics'];
        @include('analytics/CH/js/nondiarrhoea')
       $(  "#u5N"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#u5N"  ).removeClass("overlay");
