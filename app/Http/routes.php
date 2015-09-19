@@ -10,6 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/phpversion',function(){
+
+
+	 phpinfo();
+});
 Route::get('/test','AnalyticsController@blah');
 Route::get('/','AnalyticsController@index');
 Route::post('/map','AnalyticsController@mapRequest');
