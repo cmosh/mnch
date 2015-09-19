@@ -26,9 +26,9 @@ Route::get('/tester','AnalyticsController@tester');
 Route::post('survey/{id}/{status}','surveys@update');
 Route::get('/redis/{test}',function($test){
 
-	$redis = app()->make('redis');
-	$redis->set('key1',$test);
-	return($redis->get('key1'));  
+	$app = LRedis::connection();
+	$app->set('key',$test);
+	print_r($app->get('key'));  
 
 });
 Route::post('survey/survey/{id}/{status}','surveys@update');
