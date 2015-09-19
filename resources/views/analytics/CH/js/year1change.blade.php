@@ -7,7 +7,8 @@ function year1() {
          'Year1': $('#Year1').val(),
          'Year2': $('#Year2').val(),
          'Year3': $('#Year3').val(),
-         'Year4': $('#Year4').val()
+         'Year4': $('#Year4').val(),
+          'Term':$('#Term').val()
              }; 
    $.ajax({
       url: '/analytics/ajax',
