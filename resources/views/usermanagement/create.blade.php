@@ -27,6 +27,18 @@
    </div>
  {!! Form::open(['url' => 'usermanagement/store']) !!}
 
+
+
+ <div class="box-body">
+@foreach($errors->all() as $errors)
+
+<li style="color:red">{{$errors}}</li>
+
+@endforeach
+</div>
+
+
+
 <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
@@ -100,7 +112,7 @@
          </div>
             </div>
             </div>
-            
+           
             {!! Form::close() !!}
 
 

@@ -66,6 +66,8 @@ Route::get('usermanagement/export/{type}','UserManagement@export');
 Route::post('usermanagement/multi_upload','UserManagement@upload');
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update/{id}','UserManagement@update');
+Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
+
 
 Route::post('usermanagement/store','UserManagement@store');
 Route::get('/auth/register',function(){

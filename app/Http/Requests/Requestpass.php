@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class Requestuser extends Request {
+class Requestpass extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class Requestuser extends Request {
 	public function rules()
 	{
 		return [
-
-		'name'=>'required',
-		'email'=>'required',
-		'phone'=>'required',
-		'idnum'=>'required',
+		'oldpass'=>'required',
+		'newpass'=>'required|min:3',
+		'newpasscon'=>'required'
 		
 			//
 		];

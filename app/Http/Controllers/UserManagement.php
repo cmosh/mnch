@@ -16,6 +16,7 @@ use App\Tables\completed_peruser_perday;
 use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
+use App\Http\Requests\Requestpass;
 use Input;
 use Validator;
 use Redirect;
@@ -87,6 +88,15 @@ class UserManagement extends Controller {
 	{
 	
 
+	 $v = Validator::make(Input::all(), $rules);
+   
+
+    if ($v->fails())
+    {
+        return redirect()->back()->withErrors($v->errors());
+    }
+    else
+    {
        
 
 		$array=$Requestuser->all();
@@ -131,7 +141,7 @@ class UserManagement extends Controller {
 	
 	
 			return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
-
+}
 		
 	}
 
@@ -268,8 +278,15 @@ class UserManagement extends Controller {
 	public function update(Requestuser $Requestuser,$id)
 	{
 		//
+$v = Validator::make(Input::all(), $rules);
+   
 
-
+    if ($v->fails())
+    {
+        return redirect()->back()->withErrors($v->errors());
+    }
+    else
+    {
 
 		$array=$Requestuser->all();
 		$new=array_shift($array);
@@ -307,6 +324,48 @@ class UserManagement extends Controller {
 				return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
 	}
+}
+
+
+
+	public function updatepass()
+	{
+
+$array=$Requestuser->all();
+	
+		$x = array();
+
+
+
+	$users=new User;
+	foreach ($array as $key ) {
+		# code...
+			$x[]=$key;
+			
+			}
+	
+		
+		$data=array(
+		'password'=>bcrypt($x[2])
+		);
+		
+		
+
+ User::createOrUpdate(
+                $data, 
+                array('id' => $id));
+		 
+	$users=User::all();
+	
+	
+				return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
+
+
+
+
+		
+	}
+
 
 	/**
 	 * Remove the specified resource from storage.
@@ -346,6 +405,9 @@ class UserManagement extends Controller {
 
 
 	}
+
+
+
 
 
 
