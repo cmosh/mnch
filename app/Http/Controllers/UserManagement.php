@@ -4,6 +4,7 @@ use App\Http\Requests;
 
 
 use App\Http\Controllers\Controller;
+
 use App\User;
 use App\Tables\User_monitor;
 use App\Tables\countie;
@@ -12,6 +13,8 @@ use App\Tables\partial_peruser;
 use App\Tables\completed_peruser;
 use App\Tables\partial_peruser_perday;
 use App\Tables\completed_peruser_perday;
+
+use App\Tables\assessments;
 
 use App\Tables\Survey;
 use Illuminate\Http\Request;
@@ -23,6 +26,7 @@ use Redirect;
 use Session;
 use Maatwebsite\Excel\Excel;
 use Response;
+use Hash;
 
 
 
@@ -58,6 +62,31 @@ class UserManagement extends Controller {
 
 	}
 
+
+
+
+	public function ajax()
+
+	{
+		
+		 if(Request::ajax()) {
+      $data = Input::all();
+      $value= $data['test'];
+
+
+      
+
+      }
+      else
+      {
+      	return view('analytics.test');
+      }
+      
+
+
+
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -88,7 +117,7 @@ class UserManagement extends Controller {
 	{
 	
 
-	 $v = Validator::make(Input::all(), $rules);
+	 $v = Validator::make(Input::all(), $Requestuser->rules());
    
 
     if ($v->fails())
@@ -237,13 +266,14 @@ class UserManagement extends Controller {
 		// $Surveycompletion_total=Surveycompletion_total::all();
 		$pperuser=partial_peruser::all();
 		$cperuser=completed_peruser::all();
-		$pperday=partial_peruser_perday::all();
-		$cperday=completed_peruser_perday::all();
+		// $pperday=partial_peruser_perday::all();
+		// $cperday=completed_peruser_perday::all();
 		$users=User::all();
-		if($request->user()->role==3 || 2)
+		$assessments=assessments::all();
+		if($request->user()->role>=2)
 		{
 
-	return view('usermanagement.monitor')->with('users',$users)->with('cperday',$cperday)->with('pperday',$pperday)->with('cperuser',$cperuser)->with('pperuser',$pperuser)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
+	return view('usermanagement.monitor')->with('users',$users)->with('assessments',$assessments)->with('cperuser',$cperuser)->with('pperuser',$pperuser)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
 
 		}	
 
@@ -328,10 +358,35 @@ $v = Validator::make(Input::all(), $rules);
 
 
 
-	public function updatepass()
-	{
+public function redirecter()
+{
+		return redirect()->back();
+}
 
-$array=$Requestuser->all();
+
+public function changepass()
+{
+	$error_message='';
+
+				return view('usermanagement.change')->with('location','Home')->with('title','Profile')->with('error_message',$error_message);
+
+
+}
+
+
+	public function updatepass(Requestpass $Requestpass,$id)
+	{
+		$users=User::all();
+		$v = Validator::make(Input::all(),$Requestpass->rules());
+   
+
+    if ($v->fails())
+    {
+        return redirect()->back()->withErrors($v->errors());
+    }
+    else
+    {
+$array=$Requestpass->all();
 	
 		$x = array();
 
@@ -343,26 +398,52 @@ $array=$Requestuser->all();
 			$x[]=$key;
 			
 			}
-	
-		
-		$data=array(
-		'password'=>bcrypt($x[2])
-		);
-		
-		
 
- User::createOrUpdate(
-                $data, 
-                array('id' => $id));
+			$oldpass=User::where('id','=',$id)->first();
+
+		if(Hash::check($x[1], $oldpass->password))
+		{	
+			if($x[1]!=$x[2])
+			{
+				if($x[2]==$x[3])
+				{
+				
+				$data=array(
+				'password'=>bcrypt($x[2])
+				);
+			
+
+		 User::createOrUpdate(
+		                $data, 
+		                array('id' => $id));
+		 $error_message="ok";
+
+					}
+
+					else
+					{
+						$error_message="Error:Passwords do not much!";
+					}
+			}
+			else
+			{
+				$error_message="Error:New Password matches previous password!";
+			}
+		}
+		else
+
+		{
+				$error_message="Error:Incorrect Old Password!";
+		}
 		 
-	$users=User::all();
 	
 	
-				return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
+	
+				return view('usermanagement.change')->with('users',$users)->with('location','Home')->with('title','Profile')->with('error_message',$error_message);
 
 
 
-
+}
 		
 	}
 

@@ -19,21 +19,27 @@
         <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Change Password</font></div>
         <div class="panel-body">
         
-   <div class="box-body">
-           <div class="col-md-3" style="float:right">
-            
-            <button  id="cancel" class="btn btn-primary form-control">Cancel Changes</button>
-         </div>
-   </div>
-{!! Form::open(['url' => 'usermanagement/update/pass/'.$user[0]->id]) !!}
+   @if($error_message!='ok')
+
+
+{!! Form::open(['url' => 'usermanagement/update/pass/'.Auth::user()->id]) !!}
+
+<div class="box-body">
+<center><span style="color:red">{{$error_message}}</span></center>
+@foreach($errors->all() as $errors)
+
+<li style="color:red">{{$errors}}</li>
+
+@endforeach
+</div>
 <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Old Password</label>
 
               <div class="col-md-6">
                    
-                     {!! Form::password('oldpass',null,array('id'=>'oldpass','class'=>'form-control')) !!}
-                      {!! Form::password('oldpasshide',null,array('id'=>'oldpass','class'=>'form-control','style' => 'display:none;')) !!}
+                     
+                     {!! Form::password('old_password',null,array('id'=>'oldpass','class'=>'form-control')) !!}
 
               </div>
             </div>
@@ -44,7 +50,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label">New Password</label>
               <div class="col-md-6">
-                {!! Form::password('newpass', null,array('id'=>'newpass','class'=>'form-control')) !!}
+                {!! Form::password('new_password', null,array('id'=>'newpass','class'=>'form-control')) !!}
+
               </div>
             </div>
             </div>
@@ -52,12 +59,43 @@
             <div class="form-group">
               <label class="col-md-4 control-label">Confrirm New Password</label>
               <div class="col-md-6">
-                {!! Form::password('newpasscon',null,array('id'=>'newpasscon','class'=>'form-control')) !!}
+                {!! Form::password('new_password_confirmation',null,array('id'=>'newpasscon','class'=>'form-control')) !!}
               </div>
+            </div>
+            </div>
+            <div class="box-body">
+         <div class="form-group">
+         
+              <div class="col-md-12">
+            {!! Form::submit('Change Password',['class' => 'use-address btn btn-primary form-control']) !!}
+         </div>
             </div>
             </div>
             
              {!! Form::close() !!}
+
+
+             @else
+
+
+
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><sup style="font-size: 20px"></sup></h3>
+                  <p>Password Changed Successfully!</p>
+                </div>
+                <div class="icon">
+                 
+                </div>
+              
+              </div>
+
+
+
+
+
+
+             @endif
         </div>
       </div>
     </div>

@@ -94,6 +94,11 @@
                     <div class="pull-right">
                       <a href="/auth/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
+</li>
+                    <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="/usermanagement/changepass" class="btn btn-default btn-flat">Change Password</a>
+                    </div>
 
 
 

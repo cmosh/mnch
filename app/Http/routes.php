@@ -72,6 +72,8 @@ Route::post('usermanagement/multi_upload','UserManagement@upload');
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
+Route::get('usermanagement/changepass','UserManagement@changepass');
+Route::post('usermanagement/ajax','UserManagement@ajax');
 
 
 Route::post('usermanagement/store','UserManagement@store');

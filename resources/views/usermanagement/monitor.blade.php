@@ -318,9 +318,22 @@
                       echo date('Y-m-d');
 
                     ?>
+<!--  {!! Form::close() !!}
+              <button  id="tester{{$survey->surveyID}}">Click</button>
+           
+              <input type="text" id="testerval{{$survey->surveyID}}">
+              {!! Form::close() !!} -->
+                       
+                     
+
+                         
+                     
 
 
                     </tr>
+
+
+
                       <tr>
 
                      
@@ -380,20 +393,14 @@
 
 
                         <td > 
-
-                        @foreach($cperday as $cday)
-
-                            @if($cday->id==$user->id && $cday->Survey==$survey->surveyID)
-
-                              {{$cday->Completted_Surveys}}
-
-                            
-
-                            @endif
+        
 
 
-                        @endforeach
 
+
+
+
+                       
 
                       
                         </td>
@@ -401,17 +408,7 @@
 
 
                         <td >  
-                        @foreach($pperday as $pday)
-
-                            @if($pday->id==$user->id && $pday->Survey==$survey->surveyID)
-                              {{$pday->Incomplete_Surveys}}
-
-                            
-                           
-                            @endif
-
-
-                        @endforeach
+             
                         </td>
                         
                        
@@ -833,10 +830,41 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
 
     <script type="text/javascript">
 
- $(function () {
+ $(function () 
+ {
        $('#example2{{$survey->surveyID}}').DataTable();
+
+
+
+
        $('#example3{{$survey->surveyID}}').DataTable();
      });
+
+
+
+
+
+$('#tester{{$survey->surveyID}}').click(function()
+{
+  $('#testerval{{$survey->surveyID}}').val($('input[name=_token]').val());
+ var data = {
+          'test':'hello',
+          '_token': $('input[name=_token]').val()
+            };
+
+
+ $.ajax({
+      url: 'usermanagement/ajax',
+
+      type: "post",
+       data: data,
+           success: function(data){
+
+            $('#testerval{{$survey->surveyID}}').val('yeeey');
+    }
+
+  });
+});
     </script>
 @endif
  @endforeach
