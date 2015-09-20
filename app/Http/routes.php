@@ -26,9 +26,15 @@ Route::get('/tester','AnalyticsController@tester');
 Route::post('survey/{id}/{status}','surveys@update');
 Route::get('/redis/{test}',function($test){
 
-	$app = LRedis::connection();
-	$app->set('key',$test);
-	print_r($app->get('key'));  
+	// $app = LRedis::connection();
+	// $app->set('key',$test);
+	// print_r($app->get('key'));  
+	$X = Cache::remember('XTRA',1,function() use ($test){
+		return $test;
+      				
+      	});     
+		
+		return $X;
 
 });
 Route::post('survey/survey/{id}/{status}','surveys@update');
