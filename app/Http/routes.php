@@ -27,14 +27,18 @@ Route::post('survey/{id}/{status}','surveys@update');
 Route::get('/redis/{test}',function($test){
 
 	// $app = LRedis::connection();
-	// $app->set('key',$test);
-	// print_r($app->get('key'));  
-	$X = Cache::remember('XTRA',1,function() use ($test){
-		return $test;
+	// $app->set('XTRA','a');
+	// print_r($app->get('XTRA'));  
+Cache::add($test, 'value', 1);
+
+	//return (String)Cache::get('theone');
+// return Cache::get('key');
+	// $X = Cache::remember('XTRA',1,function(){
+	// 	return 'x';
       				
-      	});     
+ //      	});     
 		
-		return $X;
+	// 	return $X;
 
 });
 Route::post('survey/survey/{id}/{status}','surveys@update');

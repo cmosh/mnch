@@ -4,8 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
-use Cache;
-use LRedis;
+ use App\Http\Controllers\ArrayRedis as Cache;
+//use Cache;
 use Excel;
 $surveys = null;
 

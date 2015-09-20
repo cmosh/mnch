@@ -17,10 +17,10 @@ use Illuminate\Database\Eloquent\Collection;
 use Request;
 use Input;
 use Cache;
-use LRedis;
+//use App\Tables\ModelRedis as Cache;
 use Excel;
 //global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
-
+	
 class AnalyticsController extends Controller {
 
 	/**
@@ -31,7 +31,7 @@ class AnalyticsController extends Controller {
 
 	public function __construct()
 	{
-		$redis = LRedis::connection();
+	
 
 		
 	}
@@ -198,7 +198,7 @@ $Map = (Cache::remember('Map',180,function() {
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
 		$SurveysDone = SurveysDone::where('Name','=','Child Health')->get();
-		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2,'All');
+		//$d = analyse::chanalytics($SubmittedSurveys,3,2,2,2,'All');
 		// echo $d;
 
 		// $d = analyse::commstrategy($SubmittedSurveys);
@@ -220,38 +220,16 @@ $Map = (Cache::remember('Map',180,function() {
 				
 	}
 
+	
 	public function tester(){
-		//$SubmittedSurveys = SubmittedSurveys::all();
-	//	$MNHSubSurvey = MNHSubSurvey::all()->toArray();
-		$test = 1;
-$X = Cache::remember('XTRA',1,function() use ($test){
-		return $test;
-      				
+		      
+$MNHSubSurvey = Cache::remember('MNHSubSurvey',180,function(){
+      					return MNHSubSurvey::all();
       	});     
-		
-		return $X;
-		//$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
-		//$chanalytics = analyse::chanalytics($SubmittedSurveys,2,2,2,3,'All');
 
-		//f
-// 		$arrayName = array('Numbers'=> [ 1,2,3,4,5,6,7,8]);
-
-// 		$newarray = array_merge($MNHSubSurvey,$arrayName);
-
-// 			Excel::create('Filename', function($excel) use($newarray){
-
-//     $excel->sheet('Sheetname', function($sheet)use($newarray) {
-
-//        $sheet->fromArray($newarray);
-
-//     });
-
-// })->export('xls');
+echo $MNHSubSurvey->load('x');
 
 
-
-		//return ($newarray);
-	//	return $chanalytics;
 
 	}
 
@@ -267,8 +245,9 @@ $X = Cache::remember('XTRA',1,function() use ($test){
 			//$SurveySummary = 
 			
 		//echo(	json_encode($gjavailability));
-			 $mnhanalytics  = analyse::mnhanalytics($SubmittedSurveys,'All');
-			// echo json_encode($mnhanalytics);
+			//$mnhanalytics  = analyse::mnhanalytics($SubmittedSurveys,'All');
+
+			// print_r($mnhanalytics);
 		$SubmittedCHCount = SubmittedMNHCount::first();
 		$SubmittedCHCounties = SubmittedMNHCountie::get();
 		//$Years = analyse::sec3Years($SubmittedSurveys);
