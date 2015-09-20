@@ -29,16 +29,17 @@ Route::get('/redis/{test}',function($test){
 	// $app = LRedis::connection();
 	// $app->set('XTRA','a');
 	// print_r($app->get('XTRA'));  
-Cache::add($test, 'value', 1);
+//Cache::add($test, 'value', 1);
 
 	//return (String)Cache::get('theone');
 // return Cache::get('key');
-	// $X = Cache::remember('XTRA',1,function(){
-	// 	return 'x';
+	
+	$X = Cache::remember($test,1,function()use ($test){
+		return $test;
       				
- //      	});     
+      	});     
 		
-	// 	return $X;
+		return $X;
 
 });
 Route::post('survey/survey/{id}/{status}','surveys@update');

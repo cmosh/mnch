@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 //use Cache;
 use Excel;
 $surveys = null;
-
+$thevar = 'dev';
 class analyse extends Controller {
  
   
@@ -200,33 +200,33 @@ private static function getLabel($trim,$col){
 	}
 	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4,$county){
 	//Feed in survey
-		global $surveys;
+		global $surveys,$thevar;
 		$surveys = $data;
 
 		
 
 	//Guidelines Availability
 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No' );
-			$Guidelines = Cache::remember('Guidelines'.$county,180,function() use($GuidelinesHeading){
+			$Guidelines = Cache::remember($thevar.'Guidelines'.$county,180,function() use($GuidelinesHeading){
       					return 	 self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
       	});		
 	//Tools Availability
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No' );
-		$Tools = Cache::remember('Tools'.$county,180,function() use($ToolsHeading){
+		$Tools = Cache::remember($thevar.'Tools'.$county,180,function() use($ToolsHeading){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC2BLK2RW',$ToolsHeading,0,2,10,'COL01','COL02','/^/');
       	});				
 	//DTreatmentCommodities
 		$DTreatmentCommoditiesExclude = array(11,12);
 		$DTreatmentCommoditiesH = array('Diarhoea Treatment Availability', 'Available', 'NotAvailable' );
 		
-		$DTreatmentCommodities = Cache::remember('DTreatmentCommodities'.$county,180,function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
+		$DTreatmentCommodities = Cache::remember($thevar.'DTreatmentCommodities'.$county,180,function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentCommoditiesH,0,9,17,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
 	});	
 	//DTreatmentAvailability
 		$DTreatmentAvailabilityExclude = array(11,12);
 		$DTreatmentAvailabilityH = array('Diarhoea Treatment Availability', 'Ordered', 'Ordered but not yet received','Expired','No information provided' );
 		
-		$DTreatmentAvailability = Cache::remember('DTreatmentAvailability'.$county,180,function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
+		$DTreatmentAvailability = Cache::remember($thevar.'DTreatmentAvailability'.$county,180,function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentAvailabilityH,0,9,17,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
 	});			
 		
@@ -235,7 +235,7 @@ private static function getLabel($trim,$col){
 
 		$AntibioticsH = array('Antibiotics  Availability', 'Available', 'NotAvailable' );
 		
-		$Antibiotics = Cache::remember('Antibiotics'.$county,180,function() use($AntibioticsH){
+		$Antibiotics = Cache::remember($thevar.'Antibiotics'.$county,180,function() use($AntibioticsH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsH,0,5,9,'COL01','COL03','/^/');
       	});	
     //AntibioticsAvailability
@@ -243,19 +243,19 @@ private static function getLabel($trim,$col){
 
 		$AntibioticsAvailabilityH = array('Antibiotics  Availability', 'Ordered', 'Ordered but not yet received','Expired','No information provided' );
 		
-		$AntibioticsAvailability = Cache::remember('AntibioticsAvailability'.$county,180,function() use($AntibioticsAvailabilityH){
+		$AntibioticsAvailability = Cache::remember($thevar.'AntibioticsAvailability'.$county,180,function() use($AntibioticsAvailabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsAvailabilityH,0,5,9,'COL01','COL04','/^/');
       	});				
 	//Malaria
 		$MalariaH = array('Malaria  Availability', 'Available', 'NotAvailable' );
 
-		$Malaria = Cache::remember('Malaria'.$county,180,function() use($MalariaH){
+		$Malaria = Cache::remember($thevar.'Malaria'.$county,180,function() use($MalariaH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/');
       	});
      //MalariaAvaialability
 		$MalariaAvaialabilityH = array('Malaria  Availability', 'Ordered', 'Ordered but not yet received','Expired','No information provided' );
 
-		$MalariaAvaialability = Cache::remember('MalariaAvaialability'.$county,180,function() use($MalariaAvaialabilityH){
+		$MalariaAvaialability = Cache::remember($thevar.'MalariaAvaialability'.$county,180,function() use($MalariaAvaialabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaAvaialabilityH,0,2,5,'COL01','COL04','/^/');
       	});
 		
@@ -263,7 +263,7 @@ private static function getLabel($trim,$col){
 		$ortfExclude = array(5);
 		$ortfH = array('Ort Functionality', 'Yes', 'No' );
 
-		$ortf = Cache::remember('ortf'.$county,180,function() use($ortfExclude,$ortfH){
+		$ortf = Cache::remember($thevar.'ortf'.$county,180,function() use($ortfExclude,$ortfH){
       					$temp = 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,4,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
       						
       					$temp[1][0] = 'Does the facility have an ORT corner?';
@@ -277,7 +277,7 @@ private static function getLabel($trim,$col){
 	//supplies
 		$suppliesH = array('Supplies Availability', 'Available', 'Not Available' );
 
-		$supplies = Cache::remember('supplies'.$county,180,function() use($suppliesH){
+		$supplies = Cache::remember($thevar.'supplies'.$county,180,function() use($suppliesH){
       					return 	 self::twoOptionsFullStack( 'CHV2SEC6BLK2RW',$suppliesH,0,2,9,'COL01','COL02','/^/');
       	});
 		
@@ -286,58 +286,58 @@ private static function getLabel($trim,$col){
 
 		$resourcesH = array('Resource Availability', 'Available', 'Not Available' );
 
-		$resources = Cache::remember('resources'.$county,180,function() use($resourcesH){
+		$resources = Cache::remember($thevar.'resources'.$county,180,function() use($resourcesH){
       					return 	self::twoOptionsFullStack( 'CHV2SEC7BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
 	
       	});
 		
 	//u5Register
 		 
-		$u5Register = Cache::remember('u5Register'.$county.$Year1,180,function() use($Year1){
+		$u5Register = Cache::remember($thevar.'u5Register'.$county.$Year1,180,function() use($Year1){
       					return self::u5Register($Year1);
       	});
 
 	//u5RegisterN
 		
-		$u5RegisterN = Cache::remember('u5RegisterN'.$county.$Year3,180,function() use($Year3){
+		$u5RegisterN = Cache::remember($thevar.'u5RegisterN'.$county.$Year3,180,function() use($Year3){
       					return self::u5RegisterN($Year3);
       	});
 	//annualtrends
-		$annualtrends = Cache::remember('annualtrends'.$county.$Year2,180,function() use($Year2){
+		$annualtrends = Cache::remember($thevar.'annualtrends'.$county.$Year2,180,function() use($Year2){
       					return self::annualtrends($Year2);
       	});
 
 		
 	//annualtrends
 	
-		$annualtrendsN = Cache::remember('annualtrendsN'.$county.$Year4,180,function() use($Year4){
+		$annualtrendsN = Cache::remember($thevar.'annualtrendsN'.$county.$Year4,180,function() use($Year4){
       					return self::annualtrendsN($Year4);
       	});
     //ownership
-		$ownership = Cache::remember('ownership'.$county,180,function() {
+		$ownership = Cache::remember($thevar.'ownership'.$county,180,function() {
 
 			return self::ownership();
 		});
 	//types
-		$types = Cache::remember('types'.$county,180,function() {
+		$types = Cache::remember($thevar.'types'.$county,180,function() {
 
 			return self::types();
 		});
 	//staff_trained
-		$staff_trained = Cache::remember('staff_trained'.$county,180,function(){
+		$staff_trained = Cache::remember($thevar.'staff_trained'.$county,180,function(){
 			return self::staff_trained();
 		});
 	//comm_strategy
-		$comm_strategy = Cache::remember('comm_strategy'.$county,180,function(){
+		$comm_strategy = Cache::remember($thevar.'comm_strategy'.$county,180,function(){
 			return self::commstrategy();
 		});
 
 	//lort
-		$lort = Cache::remember('lort'.$county,180,function(){
+		$lort = Cache::remember($thevar.'lort'.$county,180,function(){
 			return self::ortloc();
 		});
 	//genopd
-		$genopd = Cache::remember('genopd'.$county,180,function(){
+		$genopd = Cache::remember($thevar.'genopd'.$county,180,function(){
 			return self::opdgen();
 		});
 
@@ -379,7 +379,7 @@ private static function getLabel($trim,$col){
 
 	public static function mnhanalytics($data,$county){
 	//Feed in survey
-		global $surveys;
+		global $surveys,$thevar;
 		$surveys = $data;
 		
 
@@ -388,30 +388,30 @@ private static function getLabel($trim,$col){
 
 	//Guidelines Availability
 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No' );
-			$Guidelines = Cache::remember('GuidelinesMNH'.$county,180,function() use($GuidelinesHeading){
+			$Guidelines = Cache::remember($thevar.'GuidelinesMNH'.$county,180,function() use($GuidelinesHeading){
       					return 	 self::twoOptionsFullStack( 'MNHV2SEC3BLK1RW',$GuidelinesHeading,33,3,9,'COL01','COL02','/^ated/ ?');
       	});		
 	//Tools Availability
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No' );
-		$Tools = Cache::remember('ToolsMNH'.$county,180,function() use($ToolsHeading){
+		$Tools = Cache::remember($thevar.'ToolsMNH'.$county,180,function() use($ToolsHeading){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK3RW',$ToolsHeading,0,3,13,'COL01','COL02','/^/');
       	});				
 
 
 		//Job aids Availability
 		$jheading = array('Job Aids Availability', 'Yes', 'No' );
-		$jjavailability = Cache::remember('JaidsMNH'.$county,180,function() use($jheading){
+		$jjavailability = Cache::remember($thevar.'JaidsMNH'.$county,180,function() use($jheading){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,0,3,11,'COL01','COL02','/^/');
       	});				
 
 
     //ownership
-		$ownership = Cache::remember('ownershipMNH'.$county,180,function() {
+		$ownership = Cache::remember($thevar.'ownershipMNH'.$county,180,function() {
 
 			return self::ownership();
 		});
 	//types
-		$types = Cache::remember('typesMNH'.$county,180,function() {
+		$types = Cache::remember($thevar.'typesMNH'.$county,180,function() {
 
 			return self::types();
 		});
