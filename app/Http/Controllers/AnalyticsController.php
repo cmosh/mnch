@@ -29,7 +29,12 @@ class AnalyticsController extends Controller {
 	 * @return Response
 	 */
 
+	public function __construct()
+	{
+		$redis = LRedis::connection();
 
+		
+	}
 	public function mapRequest(){
 
 
@@ -217,19 +222,26 @@ $Map = (Cache::remember('Map',180,function() {
 
 	public function tester(){
 		//$SubmittedSurveys = SubmittedSurveys::all();
-		$MNHSubSurvey = MNHSubSurvey::all();
-
-		$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
+	//	$MNHSubSurvey = MNHSubSurvey::all()->toArray();
+$X = Cache::remember('XTRA',1,function() use ($test){
+		return $test;
+      				
+      	});     
+		
+		return $X;
+		//$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
 		//$chanalytics = analyse::chanalytics($SubmittedSurveys,2,2,2,3,'All');
 
 		//f
-// 		$arrayName = array(1,2,3,4,5,6,7,8,9);
+// 		$arrayName = array('Numbers'=> [ 1,2,3,4,5,6,7,8]);
 
-// 			Excel::create('Filename', function($excel) use($MNHSubSurvey){
+// 		$newarray = array_merge($MNHSubSurvey,$arrayName);
 
-//     $excel->sheet('Sheetname', function($sheet)use($MNHSubSurvey) {
+// 			Excel::create('Filename', function($excel) use($newarray){
 
-//        $sheet->fromModel($MNHSubSurvey);
+//     $excel->sheet('Sheetname', function($sheet)use($newarray) {
+
+//        $sheet->fromArray($newarray);
 
 //     });
 
@@ -237,7 +249,7 @@ $Map = (Cache::remember('Map',180,function() {
 
 
 
-		return json_encode($mnhanalytics);
+		//return ($newarray);
 	//	return $chanalytics;
 
 	}
