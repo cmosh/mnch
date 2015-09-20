@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 //use Cache;
 use Excel;
 $surveys = null;
-$thevar = 'dev';
+
 class analyse extends Controller {
  
   
@@ -200,7 +200,8 @@ private static function getLabel($trim,$col){
 	}
 	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4,$county){
 	//Feed in survey
-		global $surveys,$thevar;
+		global $surveys;
+		$thevar = 'dev';
 		$surveys = $data;
 
 		
@@ -379,7 +380,8 @@ private static function getLabel($trim,$col){
 
 	public static function mnhanalytics($data,$county){
 	//Feed in survey
-		global $surveys,$thevar;
+		global $surveys;
+		$thevar = 'dev';
 		$surveys = $data;
 		
 
