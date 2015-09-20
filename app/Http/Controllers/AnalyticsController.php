@@ -223,6 +223,7 @@ $Map = (Cache::remember('Map',180,function() {
 	public function tester(){
 		//$SubmittedSurveys = SubmittedSurveys::all();
 	//	$MNHSubSurvey = MNHSubSurvey::all()->toArray();
+		$test = 1;
 $X = Cache::remember('XTRA',1,function() use ($test){
 		return $test;
       				
