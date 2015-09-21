@@ -15,7 +15,7 @@ function year2() {
       type: "post",
        data: data,
            success: function(data){
-       mapdata = JSON.parse(data)['map'];
+      // mapdata = JSON.parse(data)['map'];
     var jsonData = JSON.parse(data)['analytics'];
 
        @include('analytics/CH/js/annualTrends')

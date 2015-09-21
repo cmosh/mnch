@@ -397,7 +397,13 @@ private static function getLabel($trim,$col){
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No' );
 		$Tools = Cache::remember($thevar.'ToolsMNH'.$county,180,function() use($ToolsHeading){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK3RW',$ToolsHeading,0,3,13,'COL01','COL02','/^/');
+      	});	
+      	//DService
+		$DSheading = array('Provsion of Delivery Services', 'Yes', 'No' );
+		$DService = Cache::remember($thevar.'DService'.$county,180,function() use($DSheading){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC1BLK3RW',$DSheading,0,3,4,'COL01','COL02','/^/');
       	});				
+			
 
 
 		//Job aids Availability
@@ -406,6 +412,32 @@ private static function getLabel($trim,$col){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,0,3,11,'COL01','COL02','/^/');
       	});				
 
+		// 	//S24
+		// $S24H = array('Job Aids Availability', 'Yes', 'No' );
+		// $S24 = Cache::remember($thevar.'S24'.$county,180,function() use($S24H){
+  //     					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$S24H,0,3,11,'COL01','COL02','/^/');
+  //     	});				
+
+		// Health Facilitty Management
+$HManH = array('Health Facilitty Management', 'Yes', 'No' );
+		$HMan = Cache::remember($thevar.'HMan'.$county,180,function() use($HManH){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC1BLK4RW',$HManH,0,3,9,'COL01','COL02','/^/');
+      	});		
+
+// Bemonc
+$BemoncH = array('BEmONC SIGNAL FUNCTIONS', 'Yes', 'No' );
+		$Bemonc = Cache::remember($thevar.'Bemonc'.$county,180,function() use($BemoncH){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC2BLK2RW',$BemoncH,0,3,11,'COL01','COL02','/^/');
+      	});		
+      	//Cemonc
+
+      	$CemoncExclude = array(4,10,11);
+
+$CemoncH = array('CEmONC SIGNAL FUNCTIONS', 'Yes', 'No' );
+		$Cemonc = Cache::remember($thevar.'CemonC'.$county,180,function() use($CemoncH,$CemoncExclude){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC2BLK3RW',$CemoncH,0,3,9,'COL01','COL02','/^/',$CemoncExclude);
+      	});		
+array_splice($Cemonc,2, 1);
 
     //ownership
 		$ownership = Cache::remember($thevar.'ownershipMNH'.$county,180,function() {
@@ -426,7 +458,10 @@ private static function getLabel($trim,$col){
 		$JsonArray = (array(
 			 'Guidelines' =>$Guidelines, 
 			 'Tools' =>$Tools,
-			
+			'DService' => $DService,
+			'HMan' => $HMan,
+			'Bemonc'=>$Bemonc,
+			'Cemonc'=>$Cemonc,
 			'ownership' => $ownership,
 			'types' => $types,
 			'jaids' => $jjavailability

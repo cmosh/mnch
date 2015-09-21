@@ -46,10 +46,28 @@
            
 
 
-       
-
      
+                 @include('analytics/MNH/html/dservice')
+
+        @include('analytics/MNH/html/hman')
+
+        <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>FACILITY DATA AND MATERNAL AND NEONATAL SERVICE DELIVERY</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
   
+ @include('analytics/MNH/html/bemonc')
+@include('analytics/MNH/html/cemonc')
+
+
+
+
 <div class="col-md-12">
                         
                         <div class="box-info" >                     
@@ -154,13 +172,12 @@ function drawChart() {
 	     @include('analytics/MNH/js/gjavailability')
        @include('analytics/MNH/js/tavailability')
        @include('analytics/MNH/js/jjavailability')
-      
-       
+       @include('analytics/MNH/js/dservice')
+        @include('analytics/MNH/js/hman')
        @include('analytics/MNH/js/ownership')
        @include('analytics/MNH/js/types')
-
-     
-
+   @include('analytics/MNH/js/bemonc')
+     @include('analytics/MNH/js/cemonc')
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
       $( ".wait" ).removeClass("overlay");
