@@ -79,7 +79,10 @@
                       <div class="col-sm-10">
                        <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
                        @foreach($Counties as $County)
+                        <!-- change if later -->
+                         @if($Survey->surveyID!='CHV1')
                        <option value ="{{$County->Name}}" id ="{{$County->Name}}" >{{$County->Name}}</option>
+                        @endif
                         @endforeach
                        </select>
                      
@@ -90,7 +93,10 @@
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                        @foreach($Surveys as $Survey)
+                       <!-- change if later -->
+                         @if($Survey->surveyID!='CHV1')
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}} </option>
+                        @endif
                         @endforeach
                        </select>
                       </div>
@@ -177,8 +183,12 @@
                        <label for="Version2" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version2" id="Version2"> 
+                       
                        @foreach($Surveys as $Survey)
+                       <!-- change if later -->
+                         @if($Survey->surveyID!='CHV1')
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
+                        @endif
                         @endforeach
                        </select>
                       </div>
@@ -198,8 +208,12 @@
                       <label for="Version1" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                       
                        @foreach($Surveys as $Survey)
+                       <!-- change if later -->
+                         @if($Survey->surveyID!='CHV1')
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
+                        @endif
                         @endforeach
                        </select>
                       </div>
