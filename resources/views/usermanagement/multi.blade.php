@@ -34,8 +34,8 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                 <p style="color:red">Upload an Excel file with the user details, using the format below.</p> 
-                 <p>Download the excel template <u><a href="/usermanagement/export_template">here</a></u></p> 
+                 <p>Upload an Excel file with the user details, using the format below.</p> 
+                 <p>Download an  excel template <u><a href="download/example.xlsx">here</a></u></p> 
 
             </div><!-- /.box-body -->
               </div>
@@ -153,7 +153,7 @@
         </div>
         <div id="success"> </div>
         <p class="errors">{{$error_msg}}</p>
-      {!! Form::submit('Next', array('class'=>'use-address btn btn-primary form-control')) !!}
+      {!! Form::submit('Submit', array('class'=>'use-address btn btn-primary form-control')) !!}
       {!! Form::close() !!}
       </div>
    </div>

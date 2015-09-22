@@ -34,26 +34,17 @@
                   <div class="tab-pane active" id="tab_1">
                     <!-- /.box-header -->
 
-                  <span style="color:red">>> Click on the labels to open/close panels</span>
+                  <span style="color:red">* Click on label to close panels</span>
                   <br>
                    @foreach($surveys as $survey)
-                    @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
+                    @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$survey->surveyID}}">
                             @if($survey->surveyID=='CHV2')
 
-                            Child Health 
-                              <small>
-                            ( <?php   
-                              echo sizeof($ch);
-
-                             ?> 
-
-                             Records )
-                             </small>
-
+                            Child Health
 
 
 
@@ -63,15 +54,6 @@
 
                             Maternal and Neonatal Health
 
-                                   <small>
-                            ( <?php   
-                              echo sizeof($mnh);
-
-                             ?> 
-
-                             Records )
-                             </small>
-
 
 
 
@@ -80,15 +62,6 @@
 
                             Integrated Management of Childhood Illness
 
-                                   <small>
-                            ( <?php   
-                              echo sizeof($imci);
-
-                             ?> 
-
-                             Records )
-                             </small>
-
 
 
 
@@ -99,7 +72,7 @@
 
 
 
-                           
+                            Data Entry
 
 
                           </a>
@@ -211,19 +184,18 @@
                      
                         
                          <td>
+                         @if(substr($user->Survey,-1,1)=='1')
 
-                        @foreach($surveys as $survey)
-
-                            @if($survey->surveyID==$user->Survey)
-
-                                {{$survey->Version}} :{{$survey->Runtime}}
-
-                            @endif
+                               1
 
 
+                         @endif
+                         @if(substr($user->Survey,-1,1)=='2')
+
+                              2
 
 
-                        @endforeach
+                         @endif
 
 
 
@@ -299,10 +271,9 @@
 
 
                   <div class="tab-pane" id="tab_2">
-                  <span style="color:red"> >> Click on the labels to open/close panels</span>
+                  <span style="color:red">* Click on label to close panels</span>
                       @foreach($surveys as $survey)
-                                         @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
-
+                      @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
@@ -342,15 +313,11 @@
 
                   
                     <thead>
-                    <tr >
+                    <tr>
                     <?php
-                      echo date('d F Y');
-                     
+                      echo date('Y-m-d');
 
-      
-     ?>
-
-                   
+                    ?>
 <!--  {!! Form::close() !!}
               <button  id="tester{{$survey->surveyID}}">Click</button>
            
@@ -426,20 +393,14 @@
 
 
                         <td > 
-
-                        @foreach($cperday as $cday)
-
-                            @if($cday->id==$user->id && $cday->Survey==$survey->surveyID)
-
-                              {{$cday->Completted_Surveys}}
-
-                           
-
-                            @endif
+        
 
 
-                        @endforeach
 
+
+
+
+                       
 
                       
                         </td>
@@ -447,16 +408,6 @@
 
 
                         <td >  
-                        @foreach($pperday as $pday)
-
-                            @if($pday->id==$user->id && $pday->Survey==$survey->surveyID)
-                              {{$pday->Incomplete_Surveys}}
-
-                            @endif
-
-
-                        @endforeach
-                        </td>
              
                         </td>
                         
@@ -505,13 +456,11 @@
                     
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_3">
-                  <span style="color:red">>> Click on the labels to open/close panels</span>
+                  <span style="color:red">* Click on label to close panels</span>
 
 
                   @foreach($surveys as $survey)
-
-
-                                         @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
+                  @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
                   <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
@@ -554,7 +503,8 @@
                     <thead>
 
                     <tr>
-                    From 26 August 2015
+                    From 26-08-2015
+
 
                     </tr>
                       <tr>
@@ -713,8 +663,7 @@
 
 
  @foreach($surveys as $survey)
-                     @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
-
+ @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
 
        
         <script type="text/javascript">

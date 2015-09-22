@@ -168,9 +168,9 @@
     <td class= "hideprint">
  <form action="/usermanagement/status_change/{{$user->id}}">
  @if($user->status==0)
-    <input id="activate{{$user->id}}" style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
+    <input style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
  @else   
-    <input id="deactivate{{$user->id}}" style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
+    <input  style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
  @endif
     </form>
     </td>
@@ -178,7 +178,7 @@
 
     <td class="hideprint">
  <form action="/usermanagement/reset/{{$user->id}}">
-    <input id="reset{{$user->id}}" class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
+    <input class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
     </form>
     </td>
                        </tr>
@@ -297,9 +297,9 @@
     <td class= "hideprint">
  <form action="/usermanagement/status_change/{{$user->id}}">
  @if($user->status==0)
-    <input id="activate{{$user->id}}" style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
+    <input style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
  @else   
-    <input id="deactivate{{$user->id}}" style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
+    <input  style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
  @endif
     </form>
     </td>
@@ -307,7 +307,7 @@
 
     <td class="hideprint">
  <form action="/usermanagement/reset/{{$user->id}}">
-    <input id="reset{{$user->id}}" class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
+    <input class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
     </form>
     </td>
                        </tr>
@@ -426,29 +426,6 @@
       $('.hideprint').show();          
 
       });
-
-
-
-
-       @foreach($users as $user)
-
- $('#activate{{$user->id}}').click(function()
- {
-  window.alert("{{$user->name}} has been activated");
-});
-
-  $('#deactivate{{$user->id}}').click(function()
- {
-  window.alert("{{$user->name}} has been deactivated");
-});
-
-   $('#reset{{$user->id}}').click(function()
- {
-  window.alert("Password for {{$user->name}} has been reset to the default ");
-});
-
-
-       @endforeach
 
 
       

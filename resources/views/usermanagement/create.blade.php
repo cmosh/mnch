@@ -19,7 +19,12 @@
         <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Add Single User</font></div>
         <div class="panel-body">
           
-      
+      <div class="box-body">
+           <div class="col-md-3" style="float:right">
+            
+            <button  id="clear" class="btn btn-primary form-control">Clear Form</button>
+         </div>
+   </div>
  {!! Form::open(['url' => 'usermanagement/store']) !!}
 
 
@@ -109,14 +114,6 @@
             </div>
            
             {!! Form::close() !!}
-
-
-            <div class="box-body">
-           <div class="col-md-12" >
-            
-<form action="/usermanagement/viewusers">
-    <input class="btn btn-primary form-control" type="submit" value="Cancel"></form>         </div>
-   </div>
 
 
             

@@ -74,7 +74,6 @@ Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
 Route::post('usermanagement/ajax','UserManagement@ajax');
-Route::get('usermanagement/export_template','UserManagement@export_template');
 
 
 Route::post('usermanagement/store','UserManagement@store');
