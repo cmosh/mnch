@@ -15,6 +15,8 @@ Route::get('/phpversion',function(){
 
 	 phpinfo();
 });
+Route::get('/redmin','CacheController@redmin');
+Route::get('/memcached','CacheController@memcached');
 Route::get('/test','AnalyticsController@blah');
 Route::get('/','AnalyticsController@index');
 Route::post('/map','AnalyticsController@mapRequest');
