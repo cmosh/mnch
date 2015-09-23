@@ -22,7 +22,7 @@
    <div class="box-body">
            <div class="col-md-3" style="float:right">
             
-            <button  id="cancel" class="btn btn-primary form-control">Cancel Changes</button>
+            <button  id="cancel" class="btn btn-primary form-control">Discard Changes</button>
          </div>
    </div>
 {!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id]) !!}
@@ -112,6 +112,14 @@
             </div>
             </div>
              {!! Form::close() !!}
+
+
+             <div class="box-body">
+           <div class="col-md-12" >
+            
+<form action="/usermanagement/viewusers">
+    <input class="btn btn-primary form-control" type="submit" value="Cancel"></form>         </div>
+   </div>
         </div>
       </div>
     </div>

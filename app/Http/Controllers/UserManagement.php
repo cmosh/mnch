@@ -266,14 +266,18 @@ class UserManagement extends Controller {
 		// $Surveycompletion_total=Surveycompletion_total::all();
 		$pperuser=partial_peruser::all();
 		$cperuser=completed_peruser::all();
-		// $pperday=partial_peruser_perday::all();
-		// $cperday=completed_peruser_perday::all();
+		$pperday=partial_peruser_perday::all();
+		$cperday=completed_peruser_perday::all();
 		$users=User::all();
 		$assessments=assessments::all();
+		$ch=User_monitor::where('Survey','like','CH%')->get();
+		$mnh=User_monitor::where('Survey','like','MNH%')->get();
+		$imci=User_monitor::where('Survey','like','IMCI%')->get();
+
 		if($request->user()->role>=2)
 		{
 
-	return view('usermanagement.monitor')->with('users',$users)->with('assessments',$assessments)->with('cperuser',$cperuser)->with('pperuser',$pperuser)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
+	return view('usermanagement.monitor')->with('mnh',$mnh)->with('imci',$imci)->with('ch',$ch)->with('cperday',$cperday)->with('pperday',$pperday)->with('users',$users)->with('assessments',$assessments)->with('cperuser',$cperuser)->with('pperuser',$pperuser)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
 
 		}	
 
@@ -466,6 +470,9 @@ $array=$Requestpass->all();
 		{
 				$user->status='1';
 				$user->password=bcrypt('123456');
+
+
+				
 				 
 		 
 
@@ -522,6 +529,41 @@ public function multi()
  //            );
  //        return Response::download($file, 'example.xlsx', $headers);
 	// 	}
+
+
+	public function export_template(Excel $excel)
+	{
+
+		$excel->create('EXCEL TEMPLATE', function($ex) {
+
+	    $ex->sheet('Sheetname', function($sheet) {
+	    	
+	    		$sheet->row(1, array(
+     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
+
+			)
+	    		
+	    		);
+	    			$sheet->row(2, array(
+     'Username1',	'Nairobi'	,'715909090',	'123123'	,'email@site.com'	,'programuser'		
+
+			)
+	    		
+	    		);
+	    		
+					
+				});
+
+
+	       
+
+	  
+
+	})->download('xls');
+
+
+
+	}
 
 
 
