@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Request;
 use Input;
 use Cache;
+
 //use App\Tables\ModelRedis as Cache;
 use Excel;
 //global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
@@ -32,7 +33,7 @@ class AnalyticsController extends Controller {
 	public function __construct()
 	{
 	
-		$this->thevar = "dev";
+		
 		
 	}
 	public function mapRequest(){
@@ -58,7 +59,7 @@ class AnalyticsController extends Controller {
 
       if ($county == 'All' && $Term =='All') {
       
-$SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys',180,function(){
+$SubmittedSurveys = Cache::remember'SubmittedSurveys',180,function(){
       					return SubmittedSurveys::all();
       	});     
 		
@@ -66,7 +67,7 @@ $SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys',180,functio
       }
       elseif ($county == 'All' && $Term !=='All') {
       	
-      	$SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys'.$county.$Term,180,function() use($Term){
+      	$SubmittedSurveys = Cache::remember'SubmittedSurveys'.$county.$Term,180,function() use($Term){
       					return 	SubmittedSurveys::where('Assessment_Term','Like',$Term)->get();
       	});
 
@@ -76,7 +77,7 @@ $SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys',180,functio
 
         elseif ($county !== 'All' && $Term =='All') {
 
-      	$SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys'.$county,180,function() use($county){
+      	$SubmittedSurveys = Cache::remember'SubmittedSurveys'.$county,180,function() use($county){
       					return 	SubmittedSurveys::where('County','Like',$county)->get();
       	});
       
@@ -85,7 +86,7 @@ $SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys',180,functio
    
       }
       elseif ($county !== 'All' && $Term !=='All') {
-       	$SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys'.$county.$Term,180,function() use($county,$Term){
+       	$SubmittedSurveys = Cache::remember'SubmittedSurveys'.$county.$Term,180,function() use($county,$Term){
       					return 	SubmittedSurveys::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
       	});
       
@@ -94,7 +95,7 @@ $SubmittedSurveys = Cache::remember($this->thevar.'SubmittedSurveys',180,functio
 
     $chanalytics  = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
 		
-$Map = (Cache::remember($this->thevar.'Map',180,function() {
+$Map = (Cache::remember'Map',180,function() {
       					return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
       	}));
 
@@ -125,7 +126,7 @@ public function mnhajax(){
 
       if ($county == 'All' && $Term =='All') {
       
-$MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey',180,function(){
+$MNHSubSurvey = Cache::remember'MNHSubSurvey',180,function(){
       					return MNHSubSurvey::all();
       	});     
 		
@@ -134,7 +135,7 @@ $MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey',180,function(){
 
       elseif ($county == 'All' && $Term !=='All') {
       	
-      	$MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey'.$county.$Term,180,function() use($Term){
+      	$MNHSubSurvey = Cache::remember'MNHSubSurvey'.$county.$Term,180,function() use($Term){
       					return 	MNHSubSurvey::where('Assessment_Term','Like',$Term)->get();
       	});
 
@@ -144,7 +145,7 @@ $MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey',180,function(){
 
         elseif ($county !== 'All' && $Term =='All') {
 
-      	$MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey'.$county,180,function() use($county){
+      	$MNHSubSurvey = Cache::remember'MNHSubSurvey'.$county,180,function() use($county){
       					return 	MNHSubSurvey::where('County','Like',$county)->get();
       	});   
 	
@@ -152,7 +153,7 @@ $MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey',180,function(){
 
 
       elseif ($county !== 'All' && $Term !=='All') {
-       	$MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey'.$county.$Term,180,function() use($county,$Term){
+       	$MNHSubSurvey = Cache::remember'MNHSubSurvey'.$county.$Term,180,function() use($county,$Term){
       					return 	MNHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
       	});
       
@@ -161,7 +162,7 @@ $MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey',180,function(){
 
     $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county);
 		
-$Map = (Cache::remember($this->thevar.'Map',180,function() {
+$Map = (Cache::remember'Map',180,function() {
       					return 	Map::where('Survey','=','Maternal Neonatal Healthcare')->get()->keyBy('Concat')->toArray();
       	}));
 
@@ -225,12 +226,14 @@ $Map = (Cache::remember($this->thevar.'Map',180,function() {
 	
 	public function tester(){
 		      
-$MNHSubSurvey = Cache::remember($this->thevar.'MNHSubSurvey',180,function(){
-      					return MNHSubSurvey::all();
-      	});     
+// $MNHSubSurvey = Cache::remember'MNHSubSurvey',180,function(){
+//       					return MNHSubSurvey::all();
+//       	});     
 
-echo $MNHSubSurvey->load('x');
-
+// echo $MNHSubSurvey->load('x');
+	// 	$app = LRedis::connection();
+	// //$app->set('XTRA','a');
+	// print_r($app->get("CemonCNakuru"));  
 
 
 	}
