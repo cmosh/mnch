@@ -21,13 +21,13 @@ public static function remember($key,$minutes,$closure){
 
 		$redis = LRedis::connection();
 
-		if($redis->exists($key)){
-			$result = ($redis->get($key));
+		if($redis->exists('laravel:'.$key)){
+			$result = ($redis->get('laravel:'.$key));
 		}else{
 		
       		$result = json_encode($closure());
 
-      		$redis->set($key, $result,$minutes*60);
+      		$redis->set('laravel:'.$key, $result,$minutes*60);
 
 
 
