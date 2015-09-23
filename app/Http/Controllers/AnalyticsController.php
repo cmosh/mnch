@@ -225,7 +225,7 @@ $Map = (Cache::remember('Map',180,function() {
 
 	
 	public function tester(){
-		      
+		      echo base_url();
 // $MNHSubSurvey = Cache::remember('MNHSubSurvey',180,function(){
 //       					return MNHSubSurvey::all();
 //       	});     
