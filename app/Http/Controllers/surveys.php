@@ -49,6 +49,10 @@ class surveys extends Controller
 
 
     }
+
+
+
+
     
      public function saveajax(){
 
@@ -68,87 +72,36 @@ class surveys extends Controller
     $sva = $surveyyy->Survey;
     $location = substr($sva, 0, 2);
         
-        // $array = Request::all();
-        
-        // $first = array_shift($array);
-        
-        // //echo $first;
-        // $second = array_shift($array);
-        
-        // //echo $second;
-
       $Name = array_shift($array);
       $Designation = array_shift($array); 
       $Email  = array_shift($array);
       $Number = array_shift($array);
-     
-  if( Assessor::where('AssID','=',$AssID)->first()==null) {
 
-
-
+       if( Assessor::where('AssID','=',$AssID)->first()==null) {
          $storeassessor = new Assessor;
-        
-     
-        
-        $storeassessor->Name = $Name;
-        
-        $storeassessor->Designation = $Designation;
-        
-        $storeassessor->Email = $Email;
-        
-        $storeassessor->Number = $Number;
-        
-        $storeassessor->AssID = $AssID;
-        
-        $storeassessor->save();
-
-
-
-
-
-
-
-
-    $x = 1;
-
-
-
-  } else{
+         $storeassessor->Name = $Name;        
+        $storeassessor->Designation = $Designation;        
+        $storeassessor->Email = $Email;        
+        $storeassessor->Number = $Number;        
+        $storeassessor->AssID = $AssID;        
+        $storeassessor->save();} 
+        else{
             Assessor::createOrUpdate(
                 array('Name' => $Name,
                  'Designation' => $Designation, 
                  'Email' => $Email, 
                  'Number' => $Number, 
                  'AssID' => $AssID), 
-                array('AssID' => $AssID));
-        
-
-     $x = 2;
+                array('AssID' => $AssID));  
   }
 
 
-   if ($location == "MN") {
-            $roop = 3;
-            
-            // code...
-            
-            
-        } 
-        else {
-            $roop = 4;
-            
-            // code...
-            
-            
-        }
+   if ($location == "MN") {$roop = 3;} else {$roop = 4;}
         
       
 
  if( Contact::where('AssID','=',$AssID)->first()==null) {
-
-
-
-         for ($x = 0; $x < $roop; $x++) {
+    for ($x = 0; $x < $roop; $x++) {
             $ContactT = new Contact;
             $ContactT->Cadre = array_shift($array);
             $ContactT->Name = array_shift($array);
@@ -159,17 +112,6 @@ class surveys extends Controller
             $ContactT->save();
         }
 
-
-
-
-
-
-
-
-    $x = 1;
-
-
-
   } else{
            
            for ($x = 0; $x < $roop; $x++) {
@@ -177,28 +119,27 @@ class surveys extends Controller
             Contact::createOrUpdate(array('Cadre' => $cadre, 'Name' => array_shift($array), 'Mobile' => array_shift($array), 'Email' => array_shift($array), 'AssID' => $AssID, 'ContactID' => $AssID . $cadre), array('ContactID' => $AssID . $cadre));
         }
         
-
-     $x = 2;
   }
+  
      $var = builder::build($sva, null,'');
-    
-        foreach ($var as $x) {            
-                      
-            $datavalue = array_shift($array);
 
-            
+        foreach ($var as $x) {     
+            $datavalue = array_shift($array);
             $dataid = $AssID.$x;
             $fruit = $AssID;
 
-             if( DataRecord::where('DataID','=',$dataid)->first() == null) {
+            if( DataRecord::where('DataID','=',$dataid)->first() == null) {
 
                  $data = new Datarecord; 
                  $data->ColumnSetID =  $x; 
                   $data->DataID =  $dataid;   
                   $data->AssID = $AssID;
-                if (gettype($datavalue) == "array") { $data->Data = implode(",", $datavalue); }  
-                 else {$data->Data = str_replace( array('_'), '', $datavalue);}                                                   
-                 $data->save();                           
+
+            if (gettype($datavalue) == "array") { $data->Data = implode(",", $datavalue); }  
+            else {$data->Data = str_replace( array('_'), '', $datavalue);}                                                   
+                 $data->save();      
+
+
                   }
                                                           
 
@@ -231,7 +172,9 @@ class surveys extends Controller
         if ($Pg == 'Autosaved'){
 
 
-              if ($stype == 'auto') {      assessments::createOrUpdate(
+              if ($stype == 'auto') { 
+
+                   assessments::createOrUpdate(
                 array('Status' => 'Autosaved',
                   'Assessment_ID' => $AssID), 
                 array('Assessment_ID' => $AssID));
@@ -248,12 +191,44 @@ class surveys extends Controller
 
       
 }
+ if($stype == 'Submitted') {
+             assessments::createOrUpdate(
+                array('Status' => 'Submitted',
+                  'Assessment_ID' => $AssID), 
+                array('Assessment_ID' => $AssID));
+                  }     
+
+
 }
 
     
 print_r($fruit);die;
 
 }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function create($id, $sv) {
         
         $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
