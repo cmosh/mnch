@@ -18,9 +18,9 @@ Route::get('/phpversion',function(){
 Route::get('/redmin','CacheController@redmin');
 Route::get('/memcached','CacheController@memcached');
 Route::get('/test','AnalyticsController@blah');
-Route::get('/','AnalyticsController@index');
+Route::get('/','AnalyticsController@ch');
 Route::post('/map','AnalyticsController@mapRequest');
-Route::post('/analytics/ajax','AnalyticsController@ajax');
+Route::post('/analytics/chajax','AnalyticsController@chajax');
 Route::post('/analytics/mnhajax','AnalyticsController@mnhajax');
 Route::get('/mnh','AnalyticsController@mnh');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');

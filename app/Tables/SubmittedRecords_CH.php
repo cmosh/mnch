@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubmittedRecords extends Model {
-	protected $table = 'SubmittedRecords';
+class SubmittedRecords_CH extends Model {
+	protected $table = 'SubmittedRecords_CH';
 
 	//
 	// public function  c() {

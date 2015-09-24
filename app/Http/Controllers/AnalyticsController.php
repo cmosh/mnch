@@ -6,21 +6,21 @@ use App\Tables\SubmittedCHCount;
 use App\Tables\SubmittedCHCountie;
 use App\Tables\SubmittedMNHCount;
 use App\Tables\SubmittedMNHCountie;
-use App\Tables\SubmittedSurveys;
+use App\Tables\CHSubSurvey;
 use App\Tables\Column_set;
 use App\Tables\analyse;
 use App\Tables\Map;
 use App\Tables\SurveysDone;
 use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
-//use Illuminate\Support\Facades\Redis;
+
 use Request;
 use Input;
 use Cache;
 
-//use App\Tables\ModelRedis as Cache;
+
 use Excel;
-//global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+
 	
 class AnalyticsController extends Controller {
 
@@ -41,9 +41,8 @@ class AnalyticsController extends Controller {
 
 
 	}
-	public function ajax(){
+	public function chajax(){
 
-//global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
 		
 		 if(Request::ajax()) {
       $data = Input::all();
@@ -59,16 +58,16 @@ class AnalyticsController extends Controller {
 
       if ($county == 'All' && $Term =='All') {
       
-$SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
-      					return SubmittedSurveys::all();
+$CHSubSurvey = Cache::remember('CHSubSurvey',180,function(){
+      					return CHSubSurvey::all();
       	});     
 		
       		      
       }
       elseif ($county == 'All' && $Term !=='All') {
       	
-      	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county.$Term,180,function() use($Term){
-      					return 	SubmittedSurveys::where('Assessment_Term','Like',$Term)->get();
+      	$CHSubSurvey = Cache::remember('CHSubSurvey'.$county.$Term,180,function() use($Term){
+      					return 	CHSubSurvey::where('Assessment_Term','Like',$Term)->get();
       	});
 
 
@@ -77,8 +76,8 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
 
         elseif ($county !== 'All' && $Term =='All') {
 
-      	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county,180,function() use($county){
-      					return 	SubmittedSurveys::where('County','Like',$county)->get();
+      	$CHSubSurvey = Cache::remember('CHSubSurvey'.$county,180,function() use($county){
+      					return 	CHSubSurvey::where('County','Like',$county)->get();
       	});
       
 	
@@ -86,14 +85,14 @@ $SubmittedSurveys = Cache::remember('SubmittedSurveys',180,function(){
    
       }
       elseif ($county !== 'All' && $Term !=='All') {
-       	$SubmittedSurveys = Cache::remember('SubmittedSurveys'.$county.$Term,180,function() use($county,$Term){
-      					return 	SubmittedSurveys::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
+       	$CHSubSurvey = Cache::remember('CHSubSurvey'.$county.$Term,180,function() use($county,$Term){
+      					return 	CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
       	});
       
       }
       else{}
 
-    $chanalytics  = analyse::chanalytics($SubmittedSurveys,$Year_1,$Year_2,$Year_3,$Year_4,$county);
+    $chanalytics  = analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county);
 		
 $Map = (Cache::remember('Map',180,function() {
       					return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
@@ -114,7 +113,7 @@ $Map = (Cache::remember('Map',180,function() {
 
 public function mnhajax(){
 
-//global  $Year_1,$Year_2,$Year_3,$Year_4,$SubmittedSurveys;
+
 		
 		 if(Request::ajax()) {
       $data = Input::all();
@@ -175,24 +174,23 @@ $Map = (Cache::remember('Map',180,function() {
 
 
 	}}
-	public function index()
+	public function ch()
 	{
 				
 	//	echo json_encode( Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray());
 	
 		
+$CHSubSurvey = Cache::remember('CHSubSurvey',180,function(){
+      					return CHSubSurvey::all();
+      	});  
 
-
-			$SubmittedSurveys = SubmittedSurveys::all();
-		//	$gjavailability = analyse::chanalytics($SubmittedSurveys);
-
-			//$SurveySummary = 
-			
-		//echo(	json_encode($gjavailability));
+      	 // $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'All');
+		
+   
 			
 		$SubmittedCHCount = SubmittedCHCount::first();
 		$SubmittedCHCounties = SubmittedCHCountie::get();
-		$Years = analyse::sec3Years($SubmittedSurveys);
+		$Years = analyse::sec3Years($CHSubSurvey);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
 		$AllYears = $Years;
@@ -201,17 +199,10 @@ $Map = (Cache::remember('Map',180,function() {
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
 		$SurveysDone = SurveysDone::where('Name','=','Child Health')->get();
-		//$d = analyse::chanalytics($SubmittedSurveys,3,2,2,2,'All');
-		// echo $d;
-
-		// $d = analyse::commstrategy($SubmittedSurveys);
-		// echo $d;
 		
-		// $d = analyse::opdgen($SubmittedSurveys);
-		// echo $d;
 	
 
-			return view('analytics.ch')
+			return view('analytics.CH.index')
 			->with('SubmittedCHCount',$SubmittedCHCount)
 			->with('SubmittedCHCounties',$SubmittedCHCounties)
 			->with('Years',$Years)
@@ -225,7 +216,7 @@ $Map = (Cache::remember('Map',180,function() {
 
 	
 	public function tester(){
-		      echo base_url();
+		      
 // $MNHSubSurvey = Cache::remember('MNHSubSurvey',180,function(){
 //       					return MNHSubSurvey::all();
 //       	});     
@@ -241,40 +232,23 @@ $Map = (Cache::remember('Map',180,function() {
 	public function mnh()
 	{
 				
-	//	echo json_encode( Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray());
 	
- 
-			$SubmittedSurveys = MNHSubSurvey::all();
-		//	$gjavailability = analyse::chanalytics($SubmittedSurveys);
+$MNHSubSurvey = Cache::remember('MNHSubSurvey',180,function(){
+      					return MNHSubSurvey::all();
+      	});     
 
-			//$SurveySummary = 
-			
-		//echo(	json_encode($gjavailability));
-			$mnhanalytics  = analyse::mnhanalytics($SubmittedSurveys,'All');
 
-			// print_r($mnhanalytics);
+			$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
+
+		
 		$SubmittedCHCount = SubmittedMNHCount::first();
 		$SubmittedCHCounties = SubmittedMNHCountie::get();
-		//$Years = analyse::sec3Years($SubmittedSurveys);
-		// $YearsCount = count($Years)-1;
-		// $Years = array_reverse($Years);
-		// $AllYears = $Years;
-		// unset($Years[0]);
-		// unset($Years[1]);
-		// $Years = array_reverse($Years, true);
-		// $AllYears = array_reverse($AllYears, true);
+	
 		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
-		// $d = analyse::chanalytics($SubmittedSurveys,3,2,2,2,'All');
-		// echo $d;
-
-		// $d = analyse::commstrategy($SubmittedSurveys);
-		// echo $d;
-		
-		// $d = analyse::opdgen($SubmittedSurveys);
-		// echo $d;
+	
 	
 
-			return view('analytics.mnh')
+			return view('analytics.MNH.index')
 			->with('SubmittedCHCount',$SubmittedCHCount)
 			->with('SubmittedCHCounties',$SubmittedCHCounties)
 			
