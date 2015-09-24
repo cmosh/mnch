@@ -87,7 +87,7 @@
                 <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a aria-expanded="true" href="#tab_1" data-toggle="tab">Active Users</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Deactivated Users</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Inactive Users</a></li>
                   
                   <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>

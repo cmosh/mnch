@@ -459,7 +459,17 @@
                         </td>
              
                         </td>
+                    
+
+<td class="hideprint"><form action="/usermanagement/entryprofile/{{$user->id}}">
+    <input class="btn btn-primary form-control" type="submit" value="ENTRY PROFILE"></form></td>   
+
+                       
+                       
                         
+                        
+                       
+                       </tr>
                        
                         
                         
@@ -565,6 +575,7 @@
                          <th>Role</th>
                         <th>Submited Surveys </th>
                         <th>Incomplete Surveys </th>
+                        <th>Action</th>
                     
                         
                   
@@ -645,7 +656,12 @@
 
                         @endforeach
                         </td>
-                        
+                    
+
+<td class="hideprint"><form action="/usermanagement/entryprofile/{{$user->id}}">
+    <input class="btn btn-primary form-control" type="submit" value="ENTRY PROFILE"></form></td>   
+
+                       
                        
                         
                         
@@ -662,7 +678,7 @@
                          <th>Role</th>
                         <th>Submited Surveys </th>
                         <th>Incomplete Surveys </th>
-                    
+                    <th>Action</th>
                         
                   
                       </tr>

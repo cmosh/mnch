@@ -285,6 +285,26 @@ class UserManagement extends Controller {
 
 	}
 
+		public function entryprofile($id)
+
+	{
+
+			$user_complete=User_monitor::where('id','=',$id)->where('Status','=','Submitted')->get();
+			$user_incomplete=User_monitor::where('id','=',$id)->where('Status','<>','Submitted')->get();
+			$user_details=User::where('id','=',$id)->get();
+			$surveys=Survey::all();
+
+
+
+	return view('usermanagement.entryprofile')->with('user_details',$user_details)->with('surveys',$surveys)->with('complete',$user_complete)->with('incomplete',$user_incomplete)->with('location','preview')->with('title','Progress Review');
+
+		
+
+	}
+
+
+
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -636,6 +656,9 @@ public function multi()
 
 	    $ex->sheet('Sheetname', function($sheet) use($survey_name) {
 	    	
+	    	$sheet->setColumnFormat(array(
+    					'D' => 'yyyy-dd-mm'
+					));
 	    		$sheet->row(1, array(
      'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County',	'Entered by'	,'Status'	
 
@@ -653,11 +676,13 @@ public function multi()
 	    				$counter2++;
 						$sheet->row($counter2+1, array(
 
-		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->username,$user_m->Status
+		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,date_create($user_m->Date),$user_m->FacilityName,$user_m->County,$user_m->username,$user_m->Status
 						
 						));
 					
 				}
+
+				
 
 
 	       

@@ -124,8 +124,9 @@
            @endif
 
 
-
+           <li><a href="/auth/logout"><i class="fa fa-link"></i> <span>Change Password</span></a></li>
             <li><a href="/auth/logout"><i class="fa fa-link"></i> <span>Log Out</span></a></li>
+
           </ul><!-- /.sidebar-menu -->
          
 

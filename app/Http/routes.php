@@ -62,11 +62,11 @@ Route::get('usermanagement/monitor','UserManagement@show');
 Route::get('usermanagement/addusers','UserManagement@create');
 Route::get('usermanagement/addusers_multi','UserManagement@multi');
 Route::post('usermanagement/addusers_multi/store','UserManagement@store_multi');
-Route::get('usermanagement/download/{filename}', function ($filename)
-{
-    $file = storage_path('app') . '/' . $filename; // or wherever you have stored your PDF files
-    return response()->download($file);
-});
+// Route::get('usermanagement/download/{filename}', function ($filename)
+// {
+//     $file = storage_path('app') . '/' . $filename; // or wherever you have stored your PDF files
+//     return response()->download($file);
+// });
 Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
 Route::get('usermanagement/reset/{id}','UserManagement@reset');
 Route::get('usermanagement/export/{type}','UserManagement@export');
@@ -77,7 +77,7 @@ Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
 Route::post('usermanagement/ajax','UserManagement@ajax');
 Route::get('usermanagement/export_template','UserManagement@export_template');
-
+Route::get('usermanagement/entryprofile/{id}','UserManagement@entryprofile');
 
 Route::post('usermanagement/store','UserManagement@store');
 Route::get('/auth/register',function(){
