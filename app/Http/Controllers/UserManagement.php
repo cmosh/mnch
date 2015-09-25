@@ -65,22 +65,21 @@ class UserManagement extends Controller {
 
 
 
-	public function ajax()
+	public function ajax(Request $Request)
 
 	{
-		
-		 if(Request::ajax()) {
+
+         if($Request->ajax()) {
       $data = Input::all();
-      $value= $data['test'];
+      print_r($data);die;
+    }
+     
+
 
 
       
 
-      }
-      else
-      {
-      	return view('analytics.test');
-      }
+    
       
 
 
@@ -401,15 +400,7 @@ public function changepass()
 	public function updatepass(Requestpass $Requestpass,$id)
 	{
 		$users=User::all();
-		$v = Validator::make(Input::all(),$Requestpass->rules());
-   
 
-    if ($v->fails())
-    {
-        return redirect()->back()->withErrors($v->errors());
-    }
-    else
-    {
 $array=$Requestpass->all();
 	
 		$x = array();
@@ -429,8 +420,6 @@ $array=$Requestpass->all();
 		{	
 			if($x[1]!=$x[2])
 			{
-				if($x[2]==$x[3])
-				{
 				
 				$data=array(
 				'password'=>bcrypt($x[2])
@@ -444,11 +433,8 @@ $array=$Requestpass->all();
 
 					}
 
-					else
-					{
-						$error_message="Error:Passwords do not much!";
-					}
-			}
+					
+			
 			else
 			{
 				$error_message="Error:New Password matches previous password!";
@@ -467,7 +453,6 @@ $array=$Requestpass->all();
 
 
 
-}
 		
 	}
 
@@ -674,9 +659,10 @@ public function multi()
 	    		foreach ($usermonitor as $user_m) {
 	
 	    				$counter2++;
+	    				
 						$sheet->row($counter2+1, array(
 
-		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,date_create($user_m->Date),$user_m->FacilityName,$user_m->County,$user_m->username,$user_m->Status
+		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->username,$user_m->Status
 						
 						));
 					

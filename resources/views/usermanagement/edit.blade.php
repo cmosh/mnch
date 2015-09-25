@@ -21,8 +21,7 @@
         
    <div class="box-body">
            <div class="col-md-3" style="float:right">
-            
-            <button  id="cancel" class="btn btn-primary form-control">Discard Changes</button>
+
          </div>
    </div>
 {!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id]) !!}
@@ -72,7 +71,7 @@
          <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-6">
-                {!! Form::text('phone', $user[0]->PhoneNumber,array('id'=>'phone','class'=>'form-control')) !!} <span style="color:red"> e.g 0700100100</span>
+                {!! Form::text('phone', $user[0]->PhoneNumber,array('id'=>'phone','class'=>'form-control')) !!} <span style="color:blue"> ( 0700100100 )</span>
               </div>
             </div>
             </div>
@@ -89,7 +88,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-                {!! Form::email('email',  $user[0]->email,array('id'=>'email','class'=>'form-control')) !!}
+                {!! Form::email('email',  $user[0]->email,array('id'=>'email','class'=>'form-control')) !!}<span style="color:blue"> ( example@site.com )</span>
               </div>
             </div>
             </div>
@@ -105,21 +104,21 @@
         
             <div class="box-body">
          <div class="form-group">
-              <div class="col-md-12">
+              <div class="col-md-6">
             
             {!! Form::submit('Save Changes',['class' => 'use-address btn btn-primary form-control']) !!}
          </div>
-            </div>
-            </div>
+            
              {!! Form::close() !!}
 
 
-             <div class="box-body">
-           <div class="col-md-12" >
+           <div class="col-md-6" >
             
 <form action="/usermanagement/viewusers">
-    <input class="btn btn-primary form-control" type="submit" value="Cancel"></form>         </div>
+    <input class="btn btn-primary form-control" type="submit" value="Cancel and go back"></form>         </div>
    </div>
+   </div>
+            </div>
         </div>
       </div>
     </div>
@@ -135,23 +134,6 @@
 @section('javascript')
 
 
-
-<script type="text/javascript">
-
-  $('#cancel').click(function()
-  {
-      $('#name').val('{{$user[0]->name}}');
-      $('#county').val(<?php echo $county_index ?>);
-      $('#phone').val('{{$user[0]->PhoneNumber}}');
-      $('#idnum').val('{{$user[0]->IDNumber}}');
-      $('#email').val('{{$user[0]->email}}');
-      $('#role').val('{{$user[0]->role}}');
-    
-  }
-  );
-
-
- </script>
 
 
 

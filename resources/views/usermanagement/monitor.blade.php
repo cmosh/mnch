@@ -12,6 +12,11 @@
 
 @section('content')
 
+
+
+<button style="float:right" id="tester" >send</button>          
+              <input type="text" id="testerval">'
+              <input type="text" id="testerval2">
   
      <div class="box box-primary">
                 <div class="box-header">
@@ -106,7 +111,7 @@
 
                         </h4>
                       </div>
-                      <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse in">
+                      <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse">
                         <div class="box-body">
                 <table style="float:left">
                                                     <tr>       
@@ -128,15 +133,6 @@
 
                   </td>
 
-
-
-            <!--       <td>
-                   <select id="filterer2{{$survey->surveyID}}" class="form-control select2 " style="width: 100%;" name="filterer" > 
-                      <option value ="." id ="filter0">Name2</option>
-                      <option value ="Clive Makamara" id ="filter0">NameC</option>
-                        
-                       </select>
- -->
                   </td>
                   
                   <td>
@@ -351,11 +347,9 @@
      ?>
 
                    
-<!--  {!! Form::close() !!}
-              <button  id="tester{{$survey->surveyID}}">Click</button>
-           
-              <input type="text" id="testerval{{$survey->surveyID}}">
-              {!! Form::close() !!} -->
+
+              
+              
                        
                      
 
@@ -911,27 +905,7 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
 
 
 
-$('#tester{{$survey->surveyID}}').click(function()
-{
-  $('#testerval{{$survey->surveyID}}').val($('input[name=_token]').val());
- var data = {
-          'test':'hello',
-          '_token': $('input[name=_token]').val()
-            };
 
-
- $.ajax({
-      url: 'usermanagement/ajax',
-
-      type: "post",
-       data: data,
-           success: function(data){
-
-            $('#testerval{{$survey->surveyID}}').val('yeeey');
-    }
-
-  });
-});
     </script>
 @endif
  @endforeach
@@ -954,7 +928,38 @@ $('#tester{{$survey->surveyID}}').click(function()
 
       });
 
+
+       $('#tester').click(function()
+{
+   
+  
+ var data = {
+          'test':$('#testerval').val(),
+          '_token': $('input[name=_token]').val()
+            };
+
+ $.ajax({
+      url: '/usermanagement/ajax',
+
+      type: "post",
+       data: data,
+           success: function(data){
+              alert('x');
+            // $('#testerval2').val(data);
+    }
+
+  });
+});
+
+
+
+
+
+
+     
+
  </script>
+
 
 
 

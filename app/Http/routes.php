@@ -75,18 +75,12 @@ Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
-Route::post('usermanagement/ajax','UserManagement@ajax');
+Route::post('/usermanagement/ajax','UserManagement@ajax');
 Route::get('usermanagement/export_template','UserManagement@export_template');
 Route::get('usermanagement/entryprofile/{id}','UserManagement@entryprofile');
 
 Route::post('usermanagement/store','UserManagement@store');
-Route::get('/auth/register',function(){
 
-	
-
-	print_r('Stop we know who you are!');
-
-});
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',

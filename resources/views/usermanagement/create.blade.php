@@ -38,7 +38,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
               <div class="col-md-6">
-                     {!! Form::text('name',null,array('id'=>'name','class'=>'form-control')) !!}
+                     {!! Form::text('name',null,array('placeholder'=>'Enter  Name','id'=>'name','class'=>'form-control')) !!}
               </div>
             </div>
             </div>
@@ -59,17 +59,25 @@
 
               ?>
 
+ <?php $counter=0;  ?>
+              <select class="form-control select2 " style="width: 100%;" name="county" id="county"> 
+               <option value="" disabled selected>Select County</option>
+                       @foreach($counties as $county)
+                        
+                       <option value =<?php echo $counter?> id ="{{$county->Name}}" >{{$county->Name}}</option>
+                     <?php $counter++;  ?>
+                        @endforeach
 
 
-                {!! Form::select('county',$x, null ,array('id'=>'county','class'=>'form-control')) !!}
+                        </select>
               </div>
             </div>
             </div>
 <div class="box-body">
          <div class="form-group">
-              <label class="col-md-4 control-label">Phone Number</label>
+              <label class="col-md-4 control-label">Mobile Number</label>
               <div class="col-md-6">
-                {!! Form::text('phone',null,array('id'=>'phone','class'=>'form-control')) !!}<span style="color:red"> e.g 0700100100</span>
+                {!! Form::text('phone',null,array('placeholder'=>'Enter Mobile Number','id'=>'phone','class'=>'form-control')) !!}<span style="color:blue"> ( 0700100100 )</span>
               </div>
             </div>
             </div>
@@ -78,7 +86,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
-                {!! Form::text('idnum',null,array('id'=>'idnum','class'=>'form-control')) !!}
+                {!! Form::text('idnum',null,array('placeholder'=>'Enter ID Number','id'=>'idnum','class'=>'form-control')) !!}
               </div>
             </div>
             </div>
@@ -86,7 +94,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-                {!! Form::email('email',null,array('id'=>'email','class'=>'form-control')) !!}
+                {!! Form::email('email',null,array('placeholder'=>'Enter Email Address','id'=>'email','class'=>'form-control')) !!}<span style="color:blue"> ( example@site.com )</span>
               </div>
             </div>
 </div>
@@ -94,7 +102,15 @@
             <div class="form-group">
               <label class="col-md-4 control-label">Role</label>
               <div class="col-md-6">
-                {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ],0,array('id'=>'role','class'=>'form-control','width'=>'100%')) !!}
+                  <select class="form-control select2 " style="width: 100%;" name="role" id="role">
+                       <option value="3" disabled selected>Select Role</option> 
+               <option value="0" >County User</option>
+               <option value="1" >Data Clerk</option>
+               <option value="2" >Program User</option>
+               <option value="3">System User</option>
+               </select>
+
+
               </div>
             </div>
             </div>
@@ -102,21 +118,23 @@
             <div class="box-body">
          <div class="form-group">
          
-              <div class="col-md-12">
+              <div class="col-lg-6">
             {!! Form::submit('Add User',['class' => 'use-address btn btn-primary form-control']) !!}
          </div>
-            </div>
-            </div>
+            
+          
+
            
             {!! Form::close() !!}
-
-
-            <div class="box-body">
-           <div class="col-md-12" >
+                     <div class="col-lg-6" >
             
 <form action="/usermanagement/viewusers">
-    <input class="btn btn-primary form-control" type="submit" value="Cancel"></form>         </div>
+    <input class="btn btn-primary form-control" type="submit" value="Cancel and go back"></form>         </div>
    </div>
+   </div>
+
+
+            
 
 
             
@@ -140,15 +158,10 @@
 
 
 <script type="text/javascript">
+$(document).ready(function() {
 
-  $('#clear').click(function()
-  {
-      $('#name').val('');
-      $('#county').val('');
-      $('#phone').val('');
-      $('#idnum').val('');
-      $('#email').val('');
-      $('#role').val('');
+
+      
     
   }
   );
