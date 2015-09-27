@@ -13,7 +13,11 @@
 @section('content')
 
 
+ {!! Form::open() !!}     
 
+
+
+                         {!! Form::close() !!}
 <button style="float:right" id="tester" >send</button>          
               <input type="text" id="testerval">'
               <input type="text" id="testerval2">
@@ -931,27 +935,45 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
 
        $('#tester').click(function()
 {
-   
-  
- var data = {
-          'test':$('#testerval').val(),
-          '_token': $('input[name=_token]').val()
-            };
+    
 
- $.ajax({
-      url: '/usermanagement/ajax',
+  ajax();
+           
+  });
 
+
+function ajax() {
+ 
+    var data = {
+          'testval':$('#testerval').val(),
+         '_token': $('input[name=_token]').val()
+        
+    };
+
+
+ 
+   $.ajax({
+       url: '/usermanagement/ajax',
       type: "post",
        data: data,
            success: function(data){
-              alert('x');
-            // $('#testerval2').val(data);
-    }
 
-  });
-});
+          var  testval = JSON.parse(data)['testval'];
+          
+    $('#testerval2').val(testval);
+  
+  
+
+      }
+ 
+   }); 
 
 
+
+
+       
+
+}
 
 
 

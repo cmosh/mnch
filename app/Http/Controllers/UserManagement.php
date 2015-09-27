@@ -27,6 +27,7 @@ use Session;
 use Maatwebsite\Excel\Excel;
 use Response;
 use Hash;
+use Request As Rq;
 
 
 
@@ -65,13 +66,16 @@ class UserManagement extends Controller {
 
 
 
-	public function ajax(Request $Request)
+	public function ajax()
 
 	{
 
-         if($Request->ajax()) {
+         if(Rq::ajax()) {
+
       $data = Input::all();
-      print_r($data);die;
+
+      print_r(json_encode($data));
+      die;
     }
      
 
