@@ -9,7 +9,7 @@ var staff_Traineddata = google.visualization.arrayToDataTable(jsonData['staff_tr
         isStacked: true,
        hAxis: {minValue: 0},
         vAxis: {minValue:0},
-        chartArea:{left:400,top:0,width:'50%',height:'75%'}
+        chartArea:{left:400,top:25,width:'50%',height:'75%'}
       };
       var staff_Trained = new google.visualization.BarChart(document.getElementById('staff_Trained'));
       staff_Trained.draw(staff_Traineddata, staff_Trainedoptions);

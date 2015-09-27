@@ -567,8 +567,8 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW02COL02');
 		}])->lists('y');
 
-	$TCU = collect($Data)->sum('Data');
-
+	$TCU = collect($Data)->count('Data');
+echo $TCU;
 
 	$Data = $recset->load(['y' => function($query) 
 		{
@@ -576,16 +576,24 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW03COL02');
 		}])->lists('y');
 
-	$TCUt = collect($Data)->sum('Data');
-	$TCUnt = abs($TCU -$TCUt);
-
-	$Data = $recset->load(['y' => function($query) 
-		{
 	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW05COL02');
-		}])->lists('y');
+		$Data=collect($Data);
+	$Data = $Data->groupby('Data');
+	 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	 
+	$TCUnt =$count1 + $count2 + $count3 +$count4;
+	$TCUt = $TCU-$TCUnt;
 
-	$CHEWS = collect($Data)->sum('Data');
+	// $Data = $recset->load(['y' => function($query) 
+	// 	{
+	
+ //    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW05COL02');
+	// 	}])->lists('y');
+
+	// $CHEWS = collect($Data)->sum('Data');
 	
 
 	$Data = $recset->load(['y' => function($query) 
@@ -594,15 +602,24 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW06COL02');
 		}])->lists('y');
 
-	$CHEWSt = collect($Data)->sum('Data');
-	$CHEWSnt = abs($CHEWS -$CHEWSt);
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW07COL02');
-		}])->lists('y');
+		$Data=collect($Data);
+	$Data = $Data->groupby('Data');
+		 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	 
+	$CHEWSnt =$count1 + $count2 + $count3 +$count4;
+	//	$CHEWSnt =  count($Data['0'])+count($Data['00'])+count($Data['000'])+count($Data['0000']);
+		$CHEWSt = $TCU-$CHEWSnt;
 
-	$CHV = collect($Data)->sum('Data');
+	// $Data = $recset->load(['y' => function($query) 
+	// 	{
+	
+ //    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW07COL02');
+	// 	}])->lists('y');
+
+	// $CHV = collect($Data)->sum('Data');
 	
 
 	$Data = $recset->load(['y' => function($query) 
@@ -611,11 +628,19 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW08COL02');
 		}])->lists('y');
 
-	$CHVt = collect($Data)->sum('Data');
-	$CHVnt = abs($CHV -$CHVt);
+	$Data=collect($Data);
+	$Data = $Data->groupby('Data');
+ if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	 
+	$CHVnt =$count1 + $count2 + $count3 +$count4;
+	//$CHVnt =  count($Data['0'])+count($Data['00'])+count($Data['000'])+count($Data['0000']);
+	
+	$CHVt = $TCU-$CHVnt;
 
-
-		$Array [] = array ('Community Strategy','Trained','Not Trained');
+		$Array [] = array ('Community Strategy','Trained (>0)','Not Trained (0)');
 		$Array [] = array ('Community Units',$TCUt,$TCUnt);
 		$Array [] = array ('CHEWS',$CHEWSt,$CHEWSnt);
 		$Array [] = array ('CHVs',$CHVt,$CHVnt);
@@ -666,6 +691,6 @@ $DataN = collect($DataN)->sum('Data');
 	}
 
 
-	
+
 
 }

@@ -4,7 +4,7 @@ var suppliesdata = google.visualization.arrayToDataTable(jsonData['supplies']);
        // hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
        width: '100%',
         height: 300,
-       
+       colors: ['green', 'red','#C6C6C6'],
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: 35 },
         isStacked: 'percent'

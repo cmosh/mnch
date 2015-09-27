@@ -4,7 +4,7 @@ var commdata = google.visualization.arrayToDataTable(jsonData['comm_strategy']);
        var commoptions = {
         width: '100%',
         height: 300,
-       
+       colors: ['green', 'red'],
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: 35 },
         isStacked: 'percent'

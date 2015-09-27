@@ -3,7 +3,7 @@ var ort_funcdata = google.visualization.arrayToDataTable(jsonData['ortf']);
       var ort_funcoptions = {
         width: '100%',
         height: 300,
-        
+        colors: ['green', 'red','#C6C6C6'],
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: 35 },
         isStacked: 'percent'

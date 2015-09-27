@@ -1,10 +1,10 @@
 
 
-<div class="col-md-12">
+<div class="col-md-4">
                <div class="box box-danger">
                 <div class="box-header with-border">
 
-                  <h3 class="box-title">Counties</h3>
+                  <h3 class="box-title">Choose</h3>
                   <div class="box-tools pull-right">
                 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -17,17 +17,14 @@
 
                  <div class="box-body" >
 
-                 <div class="col-md-4">
-                 <object  width="100%" id="thesvg" data="/img/map.svg">
-                 </object>
-
+               
+           
 
      
 
 
-                 </div>
 
-             <div class="col-md-8">     
+           
 
 <div class="form-group" > <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
         <option value="All" selected>All Counties</option>
@@ -48,9 +45,11 @@
                      
                        </select></div>
 
+      <object  width="100%" id="thesvg" data="/img/map.svg">
+                 </object>
 
 
-                  <table class="table table-striped">
+                <!--   <table class="table table-striped">
                     <tbody><tr>
                     
                       <th>County</th>
@@ -72,8 +71,8 @@
                    
                    
                    
-                  </tbody></table>
-              </div>
+                  </tbody></table> -->
+      
               <!-- /.box -->
             </div><!-- /.col (LEFT) --> 
 

@@ -3,6 +3,7 @@ var chsec4diarhoeadata = google.visualization.arrayToDataTable(jsonData['DTreatm
       var chsec4diarhoeaoptions = {
         width: '100%',
         height: 300,
+        colors: ['green', 'red','#C6C6C6'],
         title: 'Availability',
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: 35 },

@@ -4,7 +4,7 @@ var resourcesdata = google.visualization.arrayToDataTable(jsonData['resources'])
        var resourcesoptions = {
         width: '100%',
         height: 300,
-       
+       colors: ['green', 'red','#C6C6C6'],
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: 35 },
         isStacked: 'percent'

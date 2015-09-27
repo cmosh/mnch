@@ -28,7 +28,7 @@
    </div>
    @include('analytics/CH/html/county')
 
- <div class="col-md-12">
+ <div class="col-md-8">
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -43,21 +43,22 @@
 
 
          @include('analytics/CH/html/types')
-           
+  <div class="col-md-12">
+         
 
-
+ @include('analytics/CH/html/staff_training')
        
 
            @include('analytics/CH/html/health_services')         
 
-  @include('analytics/CH/html/staff_training')
+ </div>
   
 <div class="col-md-12">
                         
                         <div class="box-info" >                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS </b></h2></center>
+                        <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY</b></h2></center>
                         <br>
                         </div>
                         </div>

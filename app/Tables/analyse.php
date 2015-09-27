@@ -24,12 +24,19 @@ class analyse extends analysisfunctions {
 	//Guidelines Availability
 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No','No information provided' );
 			$Guidelines = Cache::remember('Guidelines'.$county,180,function() use($GuidelinesHeading){
-      					return 	 self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
+      					$temp =	 self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
+      				$temp[8][0] = 'EID Algorithim 2009/2012/2014';
+      				return $temp;
+
       	});		
 	//Tools Availability
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No','No information provided' );
 		$Tools = Cache::remember('Tools'.$county,180,function() use($ToolsHeading){
-      					return 	  self::twoOptionsFullStack( 'CHV2SEC2BLK2RW',$ToolsHeading,0,2,10,'COL01','COL02','/^/');
+      					$temp =	  self::twoOptionsFullStack( 'CHV2SEC2BLK2RW',$ToolsHeading,0,2,10,'COL01','COL02','/^/');
+      						$temp[2][0] = 'EID Register';
+      						$temp[2][0] = 'Under 5 Register';
+      						return $temp;
+
       	});				
 	//DTreatmentCommodities
 		$DTreatmentCommoditiesExclude = array(11,12);

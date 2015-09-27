@@ -8,6 +8,7 @@ var chsec4antibioticsdata = google.visualization.arrayToDataTable(jsonData['Anti
 
        hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
         width: '100%',
+        colors: ['green', 'red','#C6C6C6'],
         height: 300,
         title: 'Availability',
         legend: { position: 'top', maxLines: 3 },
