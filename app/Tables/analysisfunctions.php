@@ -55,11 +55,13 @@ protected static function getLabel($trim,$col){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
 			if(!(isset($o[1]))) $o[1]=0;
 			if(!(isset($o[2]))) $o[2]=0;
+			if(!(isset($o[-51]))) $o[-51]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
 			 	$o[1],
-			 	$o[2]);
+			 	$o[2],
+			 	$o[-51]);
 		}
 
 		}
