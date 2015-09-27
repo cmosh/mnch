@@ -69,15 +69,15 @@ Route::post('usermanagement/addusers_multi/store','UserManagement@store_multi');
 // });
 Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
 Route::get('usermanagement/reset/{id}','UserManagement@reset');
-Route::get('usermanagement/export/{type}','UserManagement@export');
+Route::get('usermanagement/export/{loc}/{type1}/{type2}/{type3}','UserManagement@export');
 Route::post('usermanagement/multi_upload','UserManagement@upload');
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');
 Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
 Route::post('/usermanagement/ajax','UserManagement@ajax');
-Route::get('usermanagement/export_template','UserManagement@export_template');
-Route::get('usermanagement/entryprofile/{id}','UserManagement@entryprofile');
+
+
 
 Route::post('usermanagement/store','UserManagement@store');
 

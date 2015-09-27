@@ -20,7 +20,7 @@
         <div class="panel-body">
           
       
- {!! Form::open(['url' => 'usermanagement/store']) !!}
+ {!! Form::open(['url' => 'usermanagement/store','id'=>'form-add']) !!}
 
 
 
@@ -38,7 +38,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
               <div class="col-md-6">
-                     {!! Form::text('name',null,array('placeholder'=>'Enter  Name','id'=>'name','class'=>'form-control')) !!}
+              <input placeholder="Enter Name" id="name" class="form-control" name="name" type="text" required/>
               </div>
             </div>
             </div>
@@ -60,7 +60,7 @@
               ?>
 
  <?php $counter=0;  ?>
-              <select class="form-control select2 " style="width: 100%;" name="county" id="county"> 
+              <select class="form-control select2 " style="width: 100%;" name="county" id="county" required> 
                <option value="" disabled selected>Select County</option>
                        @foreach($counties as $county)
                         
@@ -77,24 +77,28 @@
          <div class="form-group">
               <label class="col-md-4 control-label">Mobile Number</label>
               <div class="col-md-6">
-                {!! Form::text('phone',null,array('placeholder'=>'Enter Mobile Number','id'=>'phone','class'=>'form-control')) !!}<span style="color:blue"> ( 0700100100 )</span>
+<input placeholder="Enter Mobile Number" data-parsley-type="digits" id="phone" data-parsley-length="[10, 10]"  class="form-control" name="phone" type="text"  required/>
+<span style="color:blue"> ( 0700100100 )</span>
               </div>
             </div>
             </div>
+         
+            
             <div class="box-body">
 
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
-                {!! Form::text('idnum',null,array('placeholder'=>'Enter ID Number','id'=>'idnum','class'=>'form-control')) !!}
-              </div>
+<input placeholder="Enter ID Number" data-parsley-type="digits" data-parsley-minlength="4" id="idnum" class="form-control" name="idnum" type="text" required/> 
+             </div>
             </div>
             </div>
             <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-                {!! Form::email('email',null,array('placeholder'=>'Enter Email Address','id'=>'email','class'=>'form-control')) !!}<span style="color:blue"> ( example@site.com )</span>
+<input placeholder="Enter Email address"  id="email" parsley-type="email" class="form-control" name="email" type="email" required />
+<span style="color:blue"> ( example@site.com )</span>
               </div>
             </div>
 </div>
@@ -102,8 +106,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label">Role</label>
               <div class="col-md-6">
-                  <select class="form-control select2 " style="width: 100%;" name="role" id="role">
-                       <option value="3" disabled selected>Select Role</option> 
+                  <select class="form-control select2 " style="width: 100%;" name="role" id="role" required>
+                       <option value="" disabled selected>Select Role</option> 
                <option value="0" >County User</option>
                <option value="1" >Data Clerk</option>
                <option value="2" >Program User</option>
@@ -156,16 +160,15 @@
 @section('javascript')
 
 
+<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
-$(document).ready(function() {
 
+  $('#form-add').parsley();
 
-      
-    
-  }
-  );
 
 
  </script>
+
     @endsection

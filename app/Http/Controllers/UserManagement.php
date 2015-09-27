@@ -9,11 +9,12 @@ use App\User;
 use App\Tables\User_monitor;
 use App\Tables\countie;
 use App\Tables\Counties_assessed;
-use App\Tables\partial_peruser;
-use App\Tables\completed_peruser;
-use App\Tables\partial_peruser_perday;
-use App\Tables\completed_peruser_perday;
-
+// use App\Tables\partial_peruser;
+// use App\Tables\completed_peruser;
+use App\Tables\Counties_submitted_today;
+use App\Tables\Counties_incomplete_today;
+use App\Tables\Counties_submitted;
+use App\Tables\Counties_incomplete;
 use App\Tables\assessments;
 
 use App\Tables\Survey;
@@ -28,6 +29,7 @@ use Maatwebsite\Excel\Excel;
 use Response;
 use Hash;
 use Request As Rq;
+use Carbon\Carbon;
 
 
 
@@ -113,6 +115,10 @@ class UserManagement extends Controller {
 	 * @return Response
 	 */
 
+
+
+
+
 	public function store(Requestuser $Requestuser)
 
 
@@ -180,11 +186,19 @@ class UserManagement extends Controller {
 
 
 
-	public function store_multi(Request $Request)
+	public function store_multi(Requestuser $Requestuser)
 	{
 
+ $v = Validator::make(Input::all(), $Requestuser->rules());
+   
 
-		$array=$Request->all();
+    if ($v->fails())
+    {
+        return redirect()->back()->withErrors($v->errors());
+    }
+    else
+    {
+		$array=$Requestuser->all();
 		$new=array_shift($array);
 		$x = array();
 
@@ -240,13 +254,14 @@ class UserManagement extends Controller {
                 $data, 
                 array('email' => $x[4+$num]));
 		 }
+
 	$users=User::all();
 	
 	
 	
 		return redirect('usermanagement/viewusers')->with('x',$x)->with('users',$users)->with('location','umanage')->with('title','User Management');
 
-		
+		}
 
 
 
@@ -263,14 +278,19 @@ class UserManagement extends Controller {
 	public function show(Request $request)
 	{
 		$surveys=Survey::all();
+		$counties=countie::all();
 		$user_monitor=User_monitor::all();
 		$counties_assessed=Counties_assessed::all();
 		// $Surveycompletion_daily=Surveycompletion_daily::all();
 		// $Surveycompletion_total=Surveycompletion_total::all();
-		$pperuser=partial_peruser::all();
-		$cperuser=completed_peruser::all();
-		$pperday=partial_peruser_perday::all();
-		$cperday=completed_peruser_perday::all();
+		// $pperuser=partial_peruser::all();
+		// $cperuser=completed_peruser::all();
+		// $pperday=partial_peruser_perday::all();
+		// $cperday=completed_peruser_perday::all();
+		$submitted=Counties_submitted::all();
+		$incomplete=Counties_incomplete::all();
+		$submittedt=Counties_submitted_today::all();
+		$incompletet=Counties_incomplete_today::all();
 		$users=User::all();
 		$assessments=assessments::all();
 		$ch=User_monitor::where('Survey','like','CH%')->get();
@@ -280,7 +300,7 @@ class UserManagement extends Controller {
 		if($request->user()->role>=2)
 		{
 
-	return view('usermanagement.monitor')->with('mnh',$mnh)->with('imci',$imci)->with('ch',$ch)->with('cperday',$cperday)->with('pperday',$pperday)->with('users',$users)->with('assessments',$assessments)->with('cperuser',$cperuser)->with('pperuser',$pperuser)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
+	return view('usermanagement.monitor')->with('counties',$counties)->with('submittedt',$submittedt)->with('incompletet',$incompletet)->with('mnh',$mnh)->with('imci',$imci)->with('ch',$ch)->with('submitted',$submitted)->with('incomplete',$incomplete)->with('users',$users)->with('assessments',$assessments)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
 
 		}	
 
@@ -288,22 +308,22 @@ class UserManagement extends Controller {
 
 	}
 
-		public function entryprofile($id)
+	// 	public function entryprofile($id)
 
-	{
+	// {
 
-			$user_complete=User_monitor::where('id','=',$id)->where('Status','=','Submitted')->get();
-			$user_incomplete=User_monitor::where('id','=',$id)->where('Status','<>','Submitted')->get();
-			$user_details=User::where('id','=',$id)->get();
-			$surveys=Survey::all();
+	// 		$user_complete=User_monitor::where('id','=',$id)->where('Status','=','Submitted')->get();
+	// 		$user_incomplete=User_monitor::where('id','=',$id)->where('Status','<>','Submitted')->get();
+	// 		$user_details=User::where('id','=',$id)->get();
+	// 		$surveys=Survey::all();
 
 
 
-	return view('usermanagement.entryprofile')->with('user_details',$user_details)->with('surveys',$surveys)->with('complete',$user_complete)->with('incomplete',$user_incomplete)->with('location','preview')->with('title','Progress Review');
+	// return view('usermanagement.entryprofile')->with('user_details',$user_details)->with('surveys',$surveys)->with('complete',$user_complete)->with('incomplete',$user_incomplete)->with('location','preview')->with('title','Progress Review');
 
 		
 
-	}
+	// }
 
 
 
@@ -335,7 +355,7 @@ class UserManagement extends Controller {
 	public function update(Requestuser $Requestuser,$id)
 	{
 		//
-$v = Validator::make(Input::all(), $rules);
+$v = Validator::make(Input::all(), $Requestuser->rules());
    
 
     if ($v->fails())
@@ -385,10 +405,10 @@ $v = Validator::make(Input::all(), $rules);
 
 
 
-public function redirecter()
-{
-		return redirect()->back();
-}
+// public function redirecter()
+// {
+// 		return redirect()->back();
+// }
 
 
 public function changepass()
@@ -530,56 +550,12 @@ public function multi()
 
 
 
-	// public function getDownload(){
- //        //PDF file is stored under project/public/download/info.pdf
- //        $file= public_path(). "/downloads/example.xlsx";
- //        $headers = array(
- //              'Content-Type: application/xlsx',
- //            );
- //        return Response::download($file, 'example.xlsx', $headers);
-	// 	}
-
-
-	public function export_template(Excel $excel)
-	{
-
-		$excel->create('EXCEL TEMPLATE', function($ex) {
-
-	    $ex->sheet('Sheetname', function($sheet) {
-	    	
-	    		$sheet->row(1, array(
-     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
-
-			)
-	    		
-	    		);
-	    			$sheet->row(2, array(
-     'Username1',	'Nairobi'	,'715909090',	'123123'	,'email@site.com'	,'programuser'		
-
-			)
-	    		
-	    		);
-	    		
-					
-				});
-
-
-	       
-
-	  
-
-	})->download('xls');
-
-
-
-	}
-
 
 
  
-	public function export(Excel $excel,$type)
+	public function export(Excel $excel,$loc,$type1,$type2,$type3)
 	{
-		if($type=='users')
+		if($loc=='umanage' && $type1=='users' && $type2=='all')
 		{
 
 				$excel->create('ALL_USERS', function($ex) {
@@ -637,10 +613,12 @@ public function multi()
 			}
 
 
-			else if(substr($type,0,2)=='CH'|| 'IM'||'MN')
+			else if((substr($type2,0,2)=='CH'|| 'IM'||'MN') && ($loc=='preview' && $type1=='general'))
+		{
+
 			{
 
-				$survey_name=substr($type,0,2);
+				$survey_name=substr($type2,0,2);
 				$excel->create('general'.$survey_name, function($ex) use($survey_name) {
 
 	    $ex->sheet('Sheetname', function($sheet) use($survey_name) {
@@ -690,7 +668,150 @@ public function multi()
 
 
 			}
+
+
+		
 }
+
+else if($loc=='umanage' && $type1=='multi' && $type2=='template')
+{
+
+
+$excel->create('EXCEL TEMPLATE', function($ex) {
+
+	    $ex->sheet('Sheetname', function($sheet) {
+	    	
+	    		$sheet->row(1, array(
+     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
+
+			)
+	    		
+	    		);
+	    			$sheet->row(2, array(
+     'Username1',	'Nairobi'	,'715909090',	'123123'	,'email@site.com'	,'programuser'		
+
+			)
+	    		
+	    		);
+	    		
+					
+				});
+
+
+	       
+
+	  
+
+	})->download('xls');
+
+
+
+
+}
+
+
+else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
+
+
+
+{
+
+	$survey_name=substr($type3,0,2);
+	$county_name=$type2;
+	$data=array(
+			'survey'=>$survey_name,
+			'county'=>$county_name,
+			'time'=>$type1
+
+		);
+
+
+
+
+				$excel->create($type1.$data['survey'].$data['county'], function($ex) use($data) {
+
+	    $ex->sheet('Sheetname', function($sheet) use($data) {
+
+	    				if($data['time']=='totalentry')
+	    				{
+
+	    					$usermonitor=User_monitor::where('Survey','Like',$data['survey'].'%')->where('County','Like',$data['county'])->get();
+
+	    				}
+	    				else
+	    				{
+	    						    					$usermonitor=User_monitor::where('Survey','Like',$data['survey'].'%')->where('County','Like',$data['county'])->where('updated_at','>=',Carbon::today())->get();
+
+	    				}
+
+
+	    	
+	    		$sheet->row(1, array(
+     'Tool Name','Versionvar'.Carbon::today(),	'Assessment Term'	,'Assessor'	,'Date'	,'Facility Name','Facility Code',	'County',	'Entered by'	,'User role','Status'	
+
+			)
+	    		
+	    		);
+
+	    		
+	    		$counter2=0;
+	    		
+
+	    		foreach ($usermonitor as $user_m) {
+
+	
+	    				$counter2++;
+
+	    				if($user_m->role==0)
+		    			{
+		    				$role='countyuser';
+		    			}
+		    			if($user_m->role==1)
+		    			{
+		    				$role='dataclerk';
+		    			}
+		    			if($user_m->role==2)
+		    			{
+		    				$role='programuser';
+		    			}
+		    			if($user_m->role==3)
+		    			{
+		    				$role='systemuser';
+		    			}
+		    			if($user_m->role=='')
+		    			{
+		    				$role='Unknown';
+		    			}
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->FacilityCode,$user_m->County,$user_m->username,$role,$user_m->Status
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+	})->download('xls');
+
+
+
+
+
+
+
+
+
+
+	}
+}
+
 
 	
 
@@ -752,8 +873,8 @@ public function multi()
 
 	}
 		      // Session::flash('success', $count. ' Users registered successfully!'); 
-
-      return view('usermanagement.multiedit')->with('users',$x)->with('location','umanage')->with('title','User Management');
+		$counties=countie::all();
+      return view('usermanagement.multiedit')->with('counties',$counties)->with('users',$x)->with('location','umanage')->with('title','User Management');
     }
     else {
       // sending back with error message.

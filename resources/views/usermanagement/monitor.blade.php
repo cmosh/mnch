@@ -18,9 +18,9 @@
 
 
                          {!! Form::close() !!}
-<button style="float:right" id="tester" >send</button>          
+<!-- <button style="float:right" id="tester" >send</button>          
               <input type="text" id="testerval">'
-              <input type="text" id="testerval2">
+              <input type="text" id="testerval2"> -->
   
      <div class="box box-primary">
                 <div class="box-header">
@@ -34,8 +34,8 @@
 <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a aria-expanded="true" href="#tab_1" data-toggle="tab">General</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Today's Data Entry</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_3" data-toggle="tab">Total Data Entry</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Today's Data Entry( by County )</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_3" data-toggle="tab">Total Data Entry ( by County )</a></li>
                   
                   <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>
@@ -119,7 +119,7 @@
                         <div class="box-body">
                 <table style="float:left">
                                                     <tr>       
-         <a style="float:right" href="/usermanagement/export/{{$survey->surveyID}}">Download excel</a>
+         <a style="float:right" href="/usermanagement/export/{{$location}}/general/{{$survey->surveyID}}/general">Download excel</a>
 </tr>
                   
                   <tr>
@@ -334,7 +334,7 @@
                           </a>
                         </h4>
                       </div>
-                      <div id="collapse2{{$survey->surveyID}}" class="panel-collapse collapse in">
+                      <div id="collapse2{{$survey->surveyID}}" class="panel-collapse collapse">
                         <div class="box-body">
                          <table id="example2{{$survey->surveyID}}" class="table table-bordered table-striped">
   
@@ -369,11 +369,11 @@
 
                      
                         
-                        <th>User Name</th>
-                        <th>Role</th>
-                        <th>Submited Surveys </th>
+                        <th>County</th>
+                        
+                        <th>Submitted Surveys </th>
                         <th>Incomplete Surveys </th>
-                    
+                        <th>Action</th>
                         
                   
                       </tr>
@@ -382,42 +382,24 @@
                     <tbody>
                    <!--  -->
 
-                        @foreach($users as $user)
+                        @foreach($counties as $county)
                         <tr>
 
                       
 
                         
-                        <td> {{ $user->name}}</td>
+                        <td> {{$county->Name}}</td>
 
                         <td> 
+                        @foreach($submittedt as $subt)
+                            @if($county->Name==$subt->County && substr($subt->Survey,0,2)==substr($survey->surveyID,0,2) )
+                                {{$subt->submitted}}
 
-                      <?php 
-                      if($user->role===0)
-                      {
-                        echo "county user";
-                      }
-                       if($user->role==1)
-                      {
-                        echo "data clerk";
-                      }
-                       if($user->role==2)
-                      {
-                        echo "program user";
-                      }
-                       if($user->role==3)
-                      {
-                        echo "system user";
-                      }
-                       if($user->role==='')
-                      {
-                        echo "Unknown";
-                      }
+                            @endif
 
 
-
-                      ?>
-
+                        @endforeach
+                  
                       </td>
 
 
@@ -425,16 +407,11 @@
 
                         <td > 
 
-                        @foreach($cperday as $cday)
-
-                            @if($cday->id==$user->id && $cday->Survey==$survey->surveyID)
-
-                              {{$cday->Completted_Surveys}}
-
-                           
+                         @foreach($incompletet as $inct)
+                            @if($county->Name==$inct->County && substr($inct->Survey,0,2)==substr($survey->surveyID,0,2) )
+                                {{$inct->incomplete}}
 
                             @endif
-
 
                         @endforeach
 
@@ -444,23 +421,14 @@
 
 
 
-                        <td >  
-                        @foreach($pperday as $pday)
-
-                            @if($pday->id==$user->id && $pday->Survey==$survey->surveyID)
-                              {{$pday->Incomplete_Surveys}}
-
-                            @endif
 
 
-                        @endforeach
-                        </td>
-             
-                        </td>
+                        
+        
                     
 
-<td class="hideprint"><form action="/usermanagement/entryprofile/{{$user->id}}">
-    <input class="btn btn-primary form-control" type="submit" value="ENTRY PROFILE"></form></td>   
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county->Name}}/{{$survey->surveyID}}">
+    <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
                        
@@ -488,10 +456,11 @@
 
                      
                         
-                        <th>User Name</th>
-                        <th>Role</th>
-                        <th>Submited Surveys </th>
+                         <th>County</th>
+                        
+                        <th>Submitted Surveys </th>
                         <th>Incomplete Surveys </th>
+                        <th>Action</th>
                     
                         
                   
@@ -552,7 +521,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse3{{$survey->surveyID}}" class="panel-collapse collapse in">
+                      <div id="collapse3{{$survey->surveyID}}" class="panel-collapse collapse">
                         <div class="box-body">
  <table id="example3{{$survey->surveyID}}" class="table table-bordered table-striped">
   
@@ -560,63 +529,45 @@
 
                   
                     <thead>
+              
 
-                    <tr>
-                    From 26 August 2015
 
-                    </tr>
+
                       <tr>
 
                      
                         
-                        <th>User Name</th>
-                         <th>Role</th>
-                        <th>Submited Surveys </th>
+                        <th>County</th>
+                        
+                        <th>Submitted Surveys </th>
                         <th>Incomplete Surveys </th>
                         <th>Action</th>
-                    
                         
                   
                       </tr>
                     </thead>
                     
                     <tbody>
-                        @foreach($users as $user)
+                   <!--  -->
+
+                        @foreach($counties as $county)
                         <tr>
 
                       
 
                         
-                        <td> {{ $user->name}}</td>
+                        <td> {{$county->Name}}</td>
 
                         <td> 
+                        @foreach($submitted as $sub)
+                            @if($county->Name==$sub->County && substr($sub->Survey,0,2)==substr($survey->surveyID,0,2) )
+                                {{$sub->submitted}}
 
-                      <?php 
-                      if($user->role===0)
-                      {
-                        echo "county user";
-                      }
-                       if($user->role==1)
-                      {
-                        echo "data clerk";
-                      }
-                       if($user->role==2)
-                      {
-                        echo "program user";
-                      }
-                       if($user->role==3)
-                      {
-                        echo "system user";
-                      }
-                       if($user->role==='')
-                      {
-                        echo "Unknown";
-                      }
+                            @endif
 
-
-
-                      ?>
-
+                        
+                        @endforeach
+                  
                       </td>
 
 
@@ -624,17 +575,13 @@
 
                         <td > 
 
-                        @foreach($cperuser as $cuser)
-
-                            @if($cuser->id==$user->id && $cuser->Survey==$survey->surveyID)
-
-                              {{$cuser->Completted_Surveys}}
-
-                           
+                         @foreach($incomplete as $inc)
+                            @if($county->Name==$inc->County && substr($inc->Survey,0,2)==substr($survey->surveyID,0,2) )
+                                {{$inc->incomplete}}
 
                             @endif
 
-
+                        
                         @endforeach
 
 
@@ -643,21 +590,12 @@
 
 
 
-                        <td >  
-                        @foreach($pperuser as $puser)
-
-                            @if($puser->id==$user->id && $puser->Survey==$survey->surveyID)
-                              {{$puser->Incomplete_Surveys}}
-
-                            @endif
-
-
-                        @endforeach
-                        </td>
+                        
+        
                     
 
-<td class="hideprint"><form action="/usermanagement/entryprofile/{{$user->id}}">
-    <input class="btn btn-primary form-control" type="submit" value="ENTRY PROFILE"></form></td>   
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county->Name}}/{{$survey->surveyID}}">
+    <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
                        
@@ -665,23 +603,38 @@
                         
                        
                        </tr>
+                       
+                        
+                        
+                       
+                       </tr>
                          @endforeach
+
+
+
+   
+
+                    
+
+                     
                     </tbody>
                     <tfoot>
                       <tr>
 
                      
                         
-                        <th>User Name</th>
-                         <th>Role</th>
-                        <th>Submited Surveys </th>
+                         <th>County</th>
+                        
+                        <th>Submitted Surveys </th>
                         <th>Incomplete Surveys </th>
-                    <th>Action</th>
+                        <th>Action</th>
+                    
                         
                   
                       </tr>
                     </tfoot>
-                  </table>                        </div>
+                  </table>                      
+                    </div>
                       </div>
                     </div>
                     @endif
@@ -897,13 +850,25 @@ if($('#filterer{{$survey->surveyID}}').val()=='All')
 
  $(function () 
  {
-       $('#example2{{$survey->surveyID}}').DataTable();
+       $('#example2{{$survey->surveyID}}').DataTable(
+
+        {
+           "aaSorting": [[ 1, "desc" ]]
+         });
+       
 
 
 
 
-       $('#example3{{$survey->surveyID}}').DataTable();
+       $('#example3{{$survey->surveyID}}').DataTable(
+       {
+           "aaSorting": [[ 1, "desc" ]]
+
+         });
+
      });
+    
+     
 
 
 

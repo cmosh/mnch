@@ -24,13 +24,13 @@
 
          </div>
    </div>
-{!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id]) !!}
+{!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id,'id'=>'form-edit']) !!}
 <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
 
               <div class="col-md-6">
-                     {!! Form::text('name',$user[0]->name,array('id'=>'name','class'=>'form-control')) !!}
+              <input placeholder="Enter Name" id="name" class="form-control" value="{{$user[0]->name}}" name="name" type="text" required/>
               </div>
             </div>
 </div>
@@ -71,7 +71,8 @@
          <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-6">
-                {!! Form::text('phone', $user[0]->PhoneNumber,array('id'=>'phone','class'=>'form-control')) !!} <span style="color:blue"> ( 0700100100 )</span>
+<input placeholder="Enter Mobile Number" data-parsley-type="digits" id="phone" value="{{$user[0]->PhoneNumber}}" data-parsley-length="[10, 10]"  class="form-control" name="phone" type="text"  required/>
+<span style="color:blue"> ( 0700100100 )</span>
               </div>
             </div>
             </div>
@@ -80,7 +81,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
-                {!! Form::text('idnum', $user[0]->IDNumber,array('id'=>'idnum','class'=>'form-control')) !!}
+<input placeholder="Enter ID Number" data-parsley-type="digits" value="{{$user[0]->IDNumber}}" data-parsley-minlength="4" id="idnum" class="form-control" name="idnum" type="text" required/> 
               </div>
             </div>
             </div>
@@ -88,7 +89,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-                {!! Form::email('email',  $user[0]->email,array('id'=>'email','class'=>'form-control')) !!}<span style="color:blue"> ( example@site.com )</span>
+<input placeholder="Enter Email address"  id="email" parsley-type="email" value="{{$user[0]->email}}" class="form-control" name="email" type="email" required />
+<span style="color:blue"> ( example@site.com )</span>
               </div>
             </div>
             </div>
@@ -132,6 +134,17 @@
 
 
 @section('javascript')
+
+<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+
+  $('#form-edit').parsley();
+
+
+
+ </script>
 
 
 

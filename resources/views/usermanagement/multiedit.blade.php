@@ -39,8 +39,7 @@
                 </div><!-- /.box-body -->
               </div>
 
-o
-           
+
 
 
               <div class="box-body">
@@ -76,22 +75,52 @@ o
                         for($i=0;$i<sizeof($users);$i++)
                         {
 
+echo "<tr><td>".Form::text('name'.$i,$users[$i]['name'],array('id'=>'','class'=>'form-control'))."</td>";
+$counter=0; 
+?>
+  <td>            <select class="form-control" style="width: 100%;" name=<?php echo "county".$i?>  required> 
+               
+                       @foreach($counties as $county)
+                        @if($county->Name==$users[$i]['county'])
+                       <option value =<?php echo $counter?> id ="{{$county->Name}}" selected>{{$county->Name}}</option>
+                     <?php $counter++;  ?>
+
+                        @else
+                                                 <option value =<?php echo $counter?> id ="{{$county->Name}}" >{{$county->Name}}</option>
 
 
-                        echo "<tr>
-                        <td >  ".Form::text('name'.$i,$users[$i]['name'],array('id'=>'','class'=>'form-control'))."</td>
-                        <td >".Form::text('county'.$i,$users[$i]['county'],array('id'=>'','class'=>'form-control'))." </td>
+                        @endif
+                        @endforeach
+
+
+                        </select>
+                        </td>
+<?php
+                        
+                       echo" 
                        <td>".Form::text('phone'.$i,$users[$i]['PhoneNumber'],array('id'=>'','class'=>'form-control'))."</td>
                         <td>".Form::text('idnum'.$i,$users[$i]['IDNumber'],array('id'=>'','class'=>'form-control'))."</td>
                         <td>".Form::email('email'.$i,$users[$i]['email'],array('id'=>'','class'=>'form-control'))."</td>
-                        <td>". Form::text('role'.$i,$users[$i]['role'],array('id'=>'','class'=>'form-control'))."</td>
+                        <td>
+                        
+
+
+                        <select class='form-control select2'  style='width: 100%; name='role'";echo$i;echo" id='role' required>";
+               
+
+               echo "<option value='programuser' "; if($users[$i]['role']=='countyuser'){echo 'selected';} echo">County User</option>
+ <option value='dataclerk' "; if($users[$i]['role']=='dataclerk'){echo 'selected'; }  echo "Data Clerk</option>
+<option value='programuser' "; if($users[$i]['role']=='programuser'){echo 'selected'; }  echo "Program User</option>               
+<option value='countyuser' "; if($users[$i]['role']=='countyuser'){echo 'selected'; }  echo "System User</option>
+                        </td>
 
                       
                        </tr>";
 
                      }
-                         ?>
 
+                        
+?>
 
 
 
