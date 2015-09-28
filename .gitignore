@@ -2,6 +2,3 @@
 /node_modules
 .env
 .env.example
-config/database.php
-config/database.php
-config/database.php
