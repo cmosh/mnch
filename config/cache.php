@@ -70,12 +70,7 @@ return [
             'connection' => 'default',
         ],
 
-         'redis2' => [
-            'driver' => 'redis2',
-            'connection' => 'default',
-        ],
-
-
+        
     ],
 
     /*

@@ -120,25 +120,6 @@ return [
 			'database' => 0,
 		],
 
-		
-	],
-
-
-
-	'redis2' => [
-
-		'cluster' => false,
-
-		'default' => [
-			'host'     => '127.0.0.1',
-			'port'     => 6380,
-			'database' => 0,
-		],
-
-		
-	],
-
-
-
+			],
 
 ];
