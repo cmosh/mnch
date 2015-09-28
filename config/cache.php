@@ -71,8 +71,8 @@ return [
         ],
 
          'redis2' => [
-            'driver' => 'redis',
-            'connection' => 'test',
+            'driver' => 'redis2',
+            'connection' => 'default',
         ],
 
 
