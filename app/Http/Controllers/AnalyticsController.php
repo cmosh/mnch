@@ -184,7 +184,7 @@ $CHSubSurvey = Cache::remember('CHSubSurvey',180,function(){
       					return CHSubSurvey::all();
       	});  
 
-      	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'Samburu');
+      	// $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'Samburu');
 		
    
 			
