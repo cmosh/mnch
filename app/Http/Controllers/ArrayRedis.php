@@ -28,8 +28,8 @@ public static function remember($key,$minutes,$closure){
       		$result = json_encode($closure());
 
       		$redis->set('laravel:'.$key, $result,$minutes*60);
-
-
+      		
+      		$result = ($redis->get('laravel:'.$key));
 
       	}
       	
