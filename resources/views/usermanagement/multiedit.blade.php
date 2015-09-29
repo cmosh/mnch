@@ -45,6 +45,8 @@
               <div class="box-body">
               <br>
               <br>
+                            {!! Form::open(['url' => '/usermanagement/addusers_multi/store','id'=>'form-multiedit']) !!}
+
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -66,27 +68,28 @@
                     </thead>
                     
                     <tbody>
-                      
-                      
 
-                        
-                        <?php
+@foreach($users as $key => $user)
 
-                        for($i=0;$i<sizeof($users);$i++)
-                        {
 
-echo "<tr><td>".Form::text('name'.$i,$users[$i]['name'],array('id'=>'','class'=>'form-control'))."</td>";
-$counter=0; 
-?>
-  <td>            <select class="form-control" style="width: 100%;" name=<?php echo "county".$i?>  required> 
-               
+
+<tr>
+<td>
+              <input  class="form-control" data-parsley-trigger="keyup" value="{{$user['name']}}" name="name{{$key}}" type="text" required/>
+
+</td>
+<td>            <select class="form-control" data-parsley-trigger="keyup" style="width: 100%;" name="county{{$key}}"  required> 
+               <?php
+
+               $counter=0;
+               ?>
                        @foreach($counties as $county)
-                        @if($county->Name==$users[$i]['county'])
-                       <option value =<?php echo $counter?> id ="{{$county->Name}}" selected>{{$county->Name}}</option>
-                     <?php $counter++;  ?>
+                        @if($county->Name==$user['county'])
+                       <option value ="{{$county->Name}}" id ="{{$county->Name}}" selected>{{$county->Name}}</option>
+                     $counter++;
 
                         @else
-                                                 <option value =<?php echo $counter?> id ="{{$county->Name}}" >{{$county->Name}}</option>
+                                                 <option value ="{{$county->Name}}"" id ="{{$county->Name}}" >{{$county->Name}}</option>
 
 
                         @endif
@@ -94,33 +97,58 @@ $counter=0;
 
 
                         </select>
-                        </td>
-<?php
-                        
-                       echo" 
-                       <td>".Form::text('phone'.$i,$users[$i]['PhoneNumber'],array('id'=>'','class'=>'form-control'))."</td>
-                        <td>".Form::text('idnum'.$i,$users[$i]['IDNumber'],array('id'=>'','class'=>'form-control'))."</td>
-                        <td>".Form::email('email'.$i,$users[$i]['email'],array('id'=>'','class'=>'form-control'))."</td>
-                        <td>
-                        
+         </td>
 
 
-                        <select class='form-control select2'  style='width: 100%; name='role'";echo$i;echo" id='role' required>";
-               
+         <td>
+         <input data-parsley-type="digits" data-parsley-trigger="keyup" value="{{$user['PhoneNumber']}}" data-parsley-length="[9, 9]"  class="form-control" name="PhoneNumber{{$key}}" type="text"  required/>
 
-               echo "<option value='programuser' "; if($users[$i]['role']=='countyuser'){echo 'selected';} echo">County User</option>
- <option value='dataclerk' "; if($users[$i]['role']=='dataclerk'){echo 'selected'; }  echo "Data Clerk</option>
-<option value='programuser' "; if($users[$i]['role']=='programuser'){echo 'selected'; }  echo "Program User</option>               
-<option value='countyuser' "; if($users[$i]['role']=='countyuser'){echo 'selected'; }  echo "System User</option>
-                        </td>
+         </td>
+        <td>
+        <input data-parsley-type="digits" data-parsley-trigger="keyup" value="{{$user['IDNumber']}}" data-parsley-minlength="4" class="form-control" name="IDNumber{{$key}}" type="text" required/> 
 
-                      
-                       </tr>";
+        </td>
+        <td>
+        <input parsley-type="email" data-parsley-trigger="keyup" value="{{$user['email']}}" class="form-control" name="email{{$key}}" type="email" required />
 
-                     }
+        </td>
+        <td>
+        <?php $role=0;
+          if($user['role']=='countyuser')
+          {
+            $role=0;
+          }
+          if($user['role']=='dataclerk')
+          {
+            $role=1;
+          }
+          if($user['role']=='programuser')
+          {
+            $role=2;
+          }
+          if($user['role']=='systemuser')
+          {
+            $role=3;
+          }
 
-                        
-?>
+        ?>
+       
+                {!! Form::select('role'.$key,['County User','Data Clerk','Program User', 'System User' ],$role,array('class'=>'form-control' ,'data-parsley-trigger'=>'keyup')) !!}
+
+        </td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+@endforeach
 
 
 
@@ -145,10 +173,9 @@ $counter=0;
                     </tfoot>
                   </table>
                   {!! Form::submit('Submit',['class' => 'use-address btn btn-primary form-control']) !!}
-              {!! Form::open(['url' => '/usermanagement/addusers_multi/store']) !!}
 
 {!! Form::close() !!}
-                </div><!--
+                </div>
 
 
             
@@ -161,4 +188,25 @@ $counter=0;
 
 
   @endsection
+
+
+  @section('javascript')
+
+<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+
+  $('#form-multiedit').parsley();
+
+
+
+ </script>
+
+
+
+
+
+
+@endsection
  

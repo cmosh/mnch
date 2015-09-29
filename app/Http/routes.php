@@ -62,13 +62,8 @@ Route::get('usermanagement/monitor','UserManagement@show');
 Route::get('usermanagement/addusers','UserManagement@create');
 Route::get('usermanagement/addusers_multi','UserManagement@multi');
 Route::post('usermanagement/addusers_multi/store','UserManagement@store_multi');
-// Route::get('usermanagement/download/{filename}', function ($filename)
-// {
-//     $file = storage_path('app') . '/' . $filename; // or wherever you have stored your PDF files
-//     return response()->download($file);
-// });
 Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
-Route::get('usermanagement/reset/{id}','UserManagement@reset');
+Route::post('usermanagement/reset','UserManagement@reset');
 Route::get('usermanagement/export/{loc}/{type1}/{type2}/{type3}','UserManagement@export');
 Route::post('usermanagement/multi_upload','UserManagement@upload');
 Route::get('usermanagement/editusers/{id}','UserManagement@edit');

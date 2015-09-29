@@ -186,25 +186,16 @@ class UserManagement extends Controller {
 
 
 
-	public function store_multi(Requestuser $Requestuser)
+	public function store_multi(Request $Request)
 	{
 
- $v = Validator::make(Input::all(), $Requestuser->rules());
-   
-
-    if ($v->fails())
-    {
-        return redirect()->back()->withErrors($v->errors());
-    }
-    else
-    {
-		$array=$Requestuser->all();
-		$new=array_shift($array);
+		$array=$Request->all();
+		
 		$x = array();
 
 
 
-	$users=new User;
+
 	foreach ($array as $key ) {
 		# code...
 			$x[]=$key;
@@ -216,34 +207,17 @@ class UserManagement extends Controller {
 			
 	
 
-	for($i=0;$i<sizeof($x)/6;$i++)
+	for($i=0;$i<(sizeof($x)-1)/6;$i++)
 	{
-		$num=6*$i;
-		$role=0;
-		if($x[5+$num]=='countyuser')
-		{
-			$role=0;
-		}
-		if($x[5+$num]=='dataclerk')
-		{
-			$role=1;
-		}
-		if($x[5+$num]=='programuser')
-		{
-			$role=2;
-		}
-		if($x[5+$num]=='systemuser')
-		{
-			$role=3;
-		}
+		$num=6*$i;	
 		$data=array(
-		'name'=>$x[0+$num],
-		'county'=>$x[1+$num],
-		'PhoneNumber'=>$x[2+$num],
-		'IDNumber'=>$x[3+$num],
-		'email'=>$x[4+$num],
+		'name'=>$x[1+$num],
+		'county'=>$x[2+$num],
+		'PhoneNumber'=>'0'.$x[3+$num],
+		'IDNumber'=>$x[4+$num],
+		'email'=>$x[5+$num],
 		'password'=>bcrypt('123456'),
-		'role'=>$role,
+		'role'=>$x[6+$num],
 		'status'=>'1'
 		);
 	
@@ -263,11 +237,6 @@ class UserManagement extends Controller {
 
 		}
 
-
-
-
-
-	}
 
 	/**
 	 * Display the specified resource.
@@ -308,22 +277,7 @@ class UserManagement extends Controller {
 
 	}
 
-	// 	public function entryprofile($id)
 
-	// {
-
-	// 		$user_complete=User_monitor::where('id','=',$id)->where('Status','=','Submitted')->get();
-	// 		$user_incomplete=User_monitor::where('id','=',$id)->where('Status','<>','Submitted')->get();
-	// 		$user_details=User::where('id','=',$id)->get();
-	// 		$surveys=Survey::all();
-
-
-
-	// return view('usermanagement.entryprofile')->with('user_details',$user_details)->with('surveys',$surveys)->with('complete',$user_complete)->with('incomplete',$user_incomplete)->with('location','preview')->with('title','Progress Review');
-
-		
-
-	// }
 
 
 
@@ -528,15 +482,25 @@ $array=$Requestpass->all();
 
 
 
-	public function reset($id)
+	public function reset()
 
 	{
 
-		$user =User::find($id);
+		 if(Rq::ajax()) {
+
+       	$data = Input::all();
+		$user =User::find($data['id']);
 		$user->password=bcrypt('123456');
 		$user->update();
 		$users=User::all();
-		return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
+
+
+      
+      print_r(json_encode($data));
+      die;
+    }
+
+		// return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
 
 	}
@@ -861,10 +825,6 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 
 
 
-		// User::createOrUpdate(
-  //               $data, 
-  //               array('email' => $result[0][$i]->email));
-
 		}
 		else
 		{
@@ -872,7 +832,6 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 		}
 
 	}
-		      // Session::flash('success', $count. ' Users registered successfully!'); 
 		$counties=countie::all();
       return view('usermanagement.multiedit')->with('counties',$counties)->with('users',$x)->with('location','umanage')->with('title','User Management');
     }

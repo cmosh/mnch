@@ -26,6 +26,12 @@
 @endsection 
 
 @section('content')
+
+ {!! Form::open() !!}     
+
+
+
+                         {!! Form::close() !!}
 <div id="row_addusers" class="row">
 <div class="col-lg-3 col-xs-6">
               <!-- small box -->
@@ -77,6 +83,13 @@
 
               
                   <h3 class="box-title">
+ 
+<div style="text-align:center"  id="notification" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>  <i class="icon fa fa-check"></i> Reset</h4>
+                   <p id="notificationtext" ></p>
+                  </div>
+                 
 
                   Users
                   </h3>
@@ -177,9 +190,9 @@
 
 
     <td class="hideprint">
- <form action="/usermanagement/reset/{{$user->id}}">
-    <input id="reset{{$user->id}}" class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
-    </form>
+ 
+    <input id="reset{{$user->id}}" type="button" class="btn btn-primary form-control" value="RESET PASSWORD">
+   
     </td>
                        </tr>
                        @endif
@@ -306,9 +319,9 @@
 
 
     <td class="hideprint">
- <form action="/usermanagement/reset/{{$user->id}}">
-    <input id="reset{{$user->id}}" class="btn btn-primary form-control" type="submit" value="RESET PASSWORD">
-    </form>
+ 
+    <input id="reset{{$user->id}}" type="button" class="btn btn-primary form-control"  value="RESET PASSWORD">
+  
     </td>
                        </tr>
                        @endif
@@ -388,6 +401,8 @@
    
  <!-- DATA TABLES -->
   <script type="text/javascript">
+  $("#notification").hide();
+
       $(function () {
        $('#example1').DataTable(
 
@@ -409,6 +424,7 @@
 
 
       $(document).ready(function() {
+       
 
             // Zero Clipboard initialization
             var client = new ZeroClipboard($('#copy-button'));
@@ -443,10 +459,49 @@
   window.alert("{{$user->name}} has been deactivated");
 });
 
-   $('#reset{{$user->id}}').click(function()
- {
-  window.alert("Password for {{$user->name}} has been reset to the default ");
+   $('#reset{{$user->id}}').click(function check()
+{
+  if (confirm('Are you sure you want to reset password for {{$user->name}} ?')) {
+  
+
+   function ajax() {
+ var data = {
+          'id':"{{$user->id}}",
+         '_token': $('input[name=_token]').val()
+        
+    };
+
+
+ 
+   $.ajax({
+       url: '/usermanagement/reset',
+      type: "post",
+       data: data,
+           success: function(data){
+
+         
+      $("#notification").show();
+document.getElementById("notificationtext").innerHTML = "paswword has been reset for {{$user->name}} ";
+$('html,body').scrollTop(0);
+$("#notification").delay(1000).show(0, function() {
+    $("#notification").hide();
 });
+}
+ });
+ }
+
+
+ ajax();
+ } else {
+    // Do nothing!
+}
+}
+
+
+ ); 
+  
+
+
 
 
        @endforeach
