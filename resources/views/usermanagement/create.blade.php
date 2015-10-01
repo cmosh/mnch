@@ -77,7 +77,7 @@
          <div class="form-group">
               <label class="col-md-4 control-label">Mobile Number</label>
               <div class="col-md-6">
-<input placeholder="Enter Mobile Number" data-parsley-type="digits" id="phone" data-parsley-length="[10, 10]"  class="form-control" name="phone" type="text"  required/>
+<input placeholder="Enter Mobile Number" data-parsley-type="digits" id="phone" data-parsley-length="[10, 10]"  class="form-control" name="PhoneNumber" type="text"  required/>
 <span style="color:blue"> ( 0700100100 )</span>
               </div>
             </div>
@@ -89,7 +89,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
-<input placeholder="Enter ID Number" data-parsley-type="digits" data-parsley-minlength="4" id="idnum" class="form-control" name="idnum" type="text" required/> 
+<input placeholder="Enter ID Number" data-parsley-type="digits" data-parsley-minlength="4" id="idnum" class="form-control" name="IDNumber" type="text" required/> 
              </div>
             </div>
             </div>

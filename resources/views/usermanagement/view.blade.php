@@ -86,7 +86,7 @@
  
 <div style="text-align:center"  id="notification" class="alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4>  <i class="icon fa fa-check"></i> Reset</h4>
+                    <h4>  <i class="icon fa fa-check"></i> </h4>
                    <p id="notificationtext" ></p>
                   </div>
                  
@@ -179,13 +179,13 @@
     </form>
     </td>
     <td class= "hideprint">
- <form action="/usermanagement/status_change/{{$user->id}}">
+ 
  @if($user->status==0)
     <input id="activate{{$user->id}}" style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
  @else   
     <input id="deactivate{{$user->id}}" style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
  @endif
-    </form>
+   
     </td>
 
 
@@ -308,13 +308,13 @@
     </form>
     </td>
     <td class= "hideprint">
- <form action="/usermanagement/status_change/{{$user->id}}">
+ 
  @if($user->status==0)
     <input id="activate{{$user->id}}" style="color:green;background-color:white" class="btn btn-primary form-control" type="submit" value="ACTIVATE">
  @else   
     <input id="deactivate{{$user->id}}" style="color:red;background-color:white" class="btn btn-primary form-control" type="submit" value="DEACTIVATE">
  @endif
-    </form>
+  
     </td>
 
 
@@ -404,17 +404,18 @@
   $("#notification").hide();
 
       $(function () {
-       $('#example1').DataTable(
+               var table=$('#example1').DataTable(
 
         {"aaSorting": [[ 5, "desc" ]]});
        
     
 
 
-      $('#example2').DataTable(
+     var table2= $('#example2').DataTable(
 
         {"aaSorting": [[ 5, "desc" ]]
       });
+      
        
       
       });
@@ -451,12 +452,87 @@
 
  $('#activate{{$user->id}}').click(function()
  {
-  window.alert("{{$user->name}} has been activated");
+  if (confirm('Are you sure you want to activate {{$user->name}} ?')) {
+  
+
+   function ajax3() {
+ var data = {
+          'id':"{{$user->id}}",
+         '_token': $('input[name=_token]').val()
+        
+    };
+
+
+ 
+   $.ajax({
+       url: '/usermanagement/status_change',
+      type: "post",
+       data: data,
+           success: function(data){   
+             location.reload();
+      $("#notification").show();
+document.getElementById("notificationtext").innerHTML = "{{$user->name}} has been activated ";
+$('html,body').scrollTop(0);
+ 
+$("#notification").delay(2000).show(0, function() {
+    $("#notification").hide();
+    
+
+});
+}
+ });
+ }
+
+
+ ajax3();
+ } else {
+    // Do nothing!
+}
 });
 
   $('#deactivate{{$user->id}}').click(function()
  {
-  window.alert("{{$user->name}} has been deactivated");
+
+  if (confirm('Are you sure you want to Deactivate {{$user->name}} ?')) {
+  
+
+   function ajax2() {
+ var data = {
+          'id':"{{$user->id}}",
+         '_token': $('input[name=_token]').val()
+        
+    };
+
+
+ 
+   $.ajax({
+       url: '/usermanagement/status_change',
+      type: "post",
+       data: data,
+           success: function(data){
+         location.reload();
+      $("#notification").show();
+document.getElementById("notificationtext").innerHTML = "{{$user->name}} has been deactivated ";
+$('html,body').scrollTop(0);
+ 
+$("#notification").delay(2000).show(0, function() {
+    $("#notification").hide();
+
+});
+}
+ });
+ }
+
+
+ ajax2();
+ } else {
+    // Do nothing!
+}
+
+
+
+
+
 });
 
    $('#reset{{$user->id}}').click(function check()
@@ -483,7 +559,7 @@
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "paswword has been reset for {{$user->name}} ";
 $('html,body').scrollTop(0);
-$("#notification").delay(1000).show(0, function() {
+$("#notification").delay(3000).show(0, function() {
     $("#notification").hide();
 });
 }
@@ -495,6 +571,7 @@ $("#notification").delay(1000).show(0, function() {
  } else {
     // Do nothing!
 }
+location.reload();
 }
 
 

@@ -62,7 +62,7 @@ Route::get('usermanagement/monitor','UserManagement@show');
 Route::get('usermanagement/addusers','UserManagement@create');
 Route::get('usermanagement/addusers_multi','UserManagement@multi');
 Route::post('usermanagement/addusers_multi/store','UserManagement@store_multi');
-Route::get('usermanagement/status_change/{id}','UserManagement@status_change');
+Route::post('usermanagement/status_change','UserManagement@status_change');
 Route::post('usermanagement/reset','UserManagement@reset');
 Route::get('usermanagement/export/{loc}/{type1}/{type2}/{type3}','UserManagement@export');
 Route::post('usermanagement/multi_upload','UserManagement@upload');
@@ -71,7 +71,8 @@ Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
 Route::post('/usermanagement/ajax','UserManagement@ajax');
-
+Route::get('usermanagement/test','UserManagement@test');
+Route::get('usermanagement/mail','UserManagement@mail');
 
 
 Route::post('usermanagement/store','UserManagement@store');

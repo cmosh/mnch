@@ -30,6 +30,7 @@ use Response;
 use Hash;
 use Request As Rq;
 use Carbon\Carbon;
+use Mail;
 
 
 
@@ -65,6 +66,28 @@ class UserManagement extends Controller {
 
 	}
 
+
+
+public function test()
+{
+
+	return view('usermanagement.test')->with('location','umanage')->with('title','User Management');
+}
+
+
+
+public function mail()
+{
+
+
+	Mail::send('usermanagement.email', ['text' => 'hello!!!'], function($message)
+{
+    $message->to('pchegenjenga@gmail.com', 'Paul Chege')->subject('Welcome!');
+});
+	return view('usermanagement.test')->with('location','umanage')->with('title','User Management');
+
+
+}
 
 
 
@@ -126,15 +149,7 @@ class UserManagement extends Controller {
 	{
 	
 
-	 $v = Validator::make(Input::all(), $Requestuser->rules());
-   
-
-    if ($v->fails())
-    {
-        return redirect()->back()->withErrors($v->errors());
-    }
-    else
-    {
+	
        
 
 		$array=$Requestuser->all();
@@ -174,12 +189,17 @@ class UserManagement extends Controller {
  User::createOrUpdate(
                 $data, 
                 array('email' => $x[4]));
-		 
+
+ Mail::send('usermanagement.email',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+{
+    $message->to($data['email'], 'Paul Chege')->subject('Accout Creation');
+});
+	
 	$users=User::all();
 	
 	
 			return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
-}
+
 		
 	}
 
@@ -227,6 +247,11 @@ class UserManagement extends Controller {
  User::createOrUpdate(
                 $data, 
                 array('email' => $x[4+$num]));
+
+  Mail::send('usermanagement.email',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+{
+    $message->to($data['email'], 'Paul Chege')->subject('Accout Creation');
+});
 		 }
 
 	$users=User::all();
@@ -441,23 +466,18 @@ $array=$Requestpass->all();
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function status_change($id)
+	public function status_change()
 	{
 		//
+if(Rq::ajax()) {
 
-
-		//$user=User::where('id','=',$id)->get();
-		$user =User::find($id);
+       	$data = Input::all();
+		$user =User::find($data['id']);
 		
 		if($user->status===0)
 		{
 				$user->status='1';
-				$user->password=bcrypt('123456');
-
-
-				
-				 
-		 
+				$user->password=bcrypt('123456'); 
 
 		}
 		else
@@ -470,10 +490,13 @@ $array=$Requestpass->all();
 
 
 		$user->update();
-		$users=User::all();
-
-		return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
-
+      
+      print_r(json_encode($data));
+     
+      die;
+    }
+		//$user=User::where('id','=',$id)->get();
+		
 
 	}
 
