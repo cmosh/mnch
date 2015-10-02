@@ -9,6 +9,7 @@
 
 
   @section('cdns')
+      <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
 
 
 @endsection 
@@ -78,7 +79,7 @@
               <input  class="form-control" data-parsley-trigger="keyup" value="{{$user['name']}}" name="name{{$key}}" type="text" required/>
 
 </td>
-<td>            <select class="form-control" data-parsley-trigger="keyup" style="width: 100%;" name="county{{$key}}"  required> 
+<td>            <select class="form-control select2" data-parsley-trigger="keyup" style="width: 100%;" name="county{{$key}}"  required> 
                <?php
 
                $counter=0;
@@ -192,8 +193,27 @@
 
   @section('javascript')
 
-<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
+ <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
 
+       
+             
+        
+
+      
+
+        
+      });
+
+
+
+          
+    </script>
+
+    <script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
