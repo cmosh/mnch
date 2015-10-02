@@ -533,6 +533,7 @@ $("#notification").delay(2000).show(0, function() {
 
 
 
+
 });
 
    $('#reset{{$user->id}}').click(function check()
@@ -557,7 +558,7 @@ $("#notification").delay(2000).show(0, function() {
 
          
       $("#notification").show();
-document.getElementById("notificationtext").innerHTML = "paswword has been reset for {{$user->name}} ";
+document.getElementById("notificationtext").innerHTML = "Paswword has been reset for {{$user->name}} ";
 $('html,body').scrollTop(0);
 $("#notification").delay(3000).show(0, function() {
     $("#notification").hide();
@@ -571,7 +572,7 @@ $("#notification").delay(3000).show(0, function() {
  } else {
     // Do nothing!
 }
-location.reload();
+
 }
 
 
