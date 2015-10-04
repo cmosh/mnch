@@ -134,7 +134,7 @@
 
         ?>
        
-                {!! Form::select('role'.$key,['County User','Data Clerk','Program User', 'System User' ],$role,array('class'=>'form-control' ,'data-parsley-trigger'=>'keyup')) !!}
+                {!! Form::select('role'.$key,['County User','Data Clerk','Program User', 'System User' ],$role,array('class'=>'form-control select2' ,'data-parsley-trigger'=>'keyup')) !!}
 
         </td>
 

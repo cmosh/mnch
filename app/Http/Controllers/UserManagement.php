@@ -80,7 +80,7 @@ public function mail()
 {
 
 
-	Mail::send('usermanagement.email', ['text' => 'hello!!!'], function($message)
+	Mail::send('emails.add', ['name'=>'you','email'=>'email'], function($message)
 {
     $message->to('pchegenjenga@gmail.com', 'Paul Chege')->subject('Welcome!');
 });
@@ -190,9 +190,9 @@ public function mail()
                 $data, 
                 array('email' => $x[4]));
 
- Mail::send('usermanagement.email',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+ Mail::send('email.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
 {
-    $message->to($data['email'], 'Paul Chege')->subject('Accout Creation');
+    $message->to($data['email'], 'MNCH')->subject('Accout Creation');
 });
 	
 	$users=User::all();
@@ -248,9 +248,9 @@ public function mail()
                 $data, 
                 array('email' => $x[4+$num]));
 
-  Mail::send('usermanagement.email',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+  Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
 {
-    $message->to($data['email'], 'Paul Chege')->subject('Accout Creation');
+    $message->to($data['email'], 'MNCH')->subject('Accout Creation');
 });
 		 }
 
@@ -384,17 +384,11 @@ $v = Validator::make(Input::all(), $Requestuser->rules());
 
 
 
-// public function redirecter()
-// {
-// 		return redirect()->back();
-// }
-
 
 public function changepass()
 {
 	$error_message='';
-
-				return view('usermanagement.change')->with('location','Home')->with('title','Profile')->with('error_message',$error_message);
+	return view('usermanagement.change')->with('location','Home')->with('title','Profile')->with('error_message',$error_message);
 
 
 }
@@ -478,24 +472,28 @@ if(Rq::ajax()) {
 		{
 				$user->status='1';
 				$user->password=bcrypt('123456'); 
+				$string = "activated";
 
 		}
 		else
 		{
 				$user->status='0';
-				$user->password=bcrypt('!!##9ax$kbyx*%');
-
+				$user->password=bcrypt('!!##9342ax!!##9ax$kb787y$kb!!##9ax$kbyyx*!!##9ax$k243by%');
+				$string = "deactivated";
 
 		}
 
 
 		$user->update();
-      
+		Mail::send('emails.status',['name'=>$user->name,'email'=>$user->email,'status' => $string], function($message) use($user) 
+		{
+		    $message->to($user->email, 'MNCH')->subject('Account Status');
+		});
+
       print_r(json_encode($data));
      
       die;
     }
-		//$user=User::where('id','=',$id)->get();
 		
 
 	}
@@ -516,6 +514,13 @@ if(Rq::ajax()) {
 		$user->password=bcrypt('123456');
 		$user->update();
 		$users=User::all();
+
+		Mail::send('emails.reset',['name'=>$user->name], function($message) use($user)
+		{
+		    $message->to($user->email, 'MNCH')->subject('Password Reset');
+		});
+
+
 
 
       

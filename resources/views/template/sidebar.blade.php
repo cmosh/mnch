@@ -27,19 +27,19 @@
                       {
                         echo "County User";
                       }
-                       if(Auth::user()->role==1)
+                       else if(Auth::user()->role==1)
                       {
                         echo "Data Clerk";
                       }
-                       if(Auth::user()->role==2)
+                      else if(Auth::user()->role==2)
                       {
                         echo "Program User";
                       }
-                       if(Auth::user()->role==3)
+                       else if(Auth::user()->role==3)
                       {
                         echo "System User (Admin) ";
                       }
-                       if(Auth::user()->role=='')
+                        else if(Auth::user()->role=='')
                       {
                         echo "Unknown";
                       }

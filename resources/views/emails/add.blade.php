@@ -4,5 +4,5 @@
 <p>email: {{$email}} </p>
 <p>password: 123456  </p>
 
-Regards,
-MNCH
+<p>Regards,</p>
+<p>MNCH</p>
