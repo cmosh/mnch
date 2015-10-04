@@ -375,6 +375,8 @@ $Data = $recset->load(['z' => function($query)
 	
     $query->select('FacilityCode','Type');
 }])->lists('z');
+
+
 $x = collect($Data);
 
 
@@ -692,5 +694,70 @@ echo $TCU;
 
 
 
+
+
+
+protected static function FacilityTypeYesNO($col,$Headings){
+
+	$FacilityGroups = FacilityGroup::all();
+$Fgs = array_keys($FacilityGroups->groupBy('FacilityGroup')->toArray()); 
+
+$F [] = $Headings;
+//$F = $FacilityGroups->load('x.p.y')/*->groupBy('FacilityGroup')*/;
+
+//echo $FacilityGroups;
+		foreach ($Fgs as $Fg ) {
+			$FacilityGroup = FacilityGroup::where('FacilityGroup','=',$Fg)->get();
+				
+
+				$temp = $FacilityGroup->load(['x.p.y' => function($query) use ($col)
+{
+	
+    $query->where('ColumnSetID', '=', $col);
+}]);
+
+
+
+				$temp = collect($temp->lists('x')[0]);
+
+				$temp = $temp->lists('p');
+
+			
+					
+				$temp = collect($temp);
+				
+				$temp = collect($temp)->filter(function ($temp)  {
+    return sizeof($temp) > 0;
+});
+
+				$temp = collect($temp->lists('y'));
+				$temp = $temp->lists('Data');
+
+				$o = array_count_values($temp);
+
+
+				if(!(isset($o[1]))) $o[1]=0;
+			if(!(isset($o[2]))) $o[2]=0;
+			if(!(isset($o[-51]))) $o[-51]=0;
+
+				// $temp = $temp->values()->toArray();
+				// $temp = collect($temp)->lists('y');
+			
+
+
+			//echo collect(array_diff($temp,[]));
+
+				//$temp = $temp->lists('Facility_ID');
+							
+				$F[] = array($Fg,$o[1],$o[2],$o[-51]);
+		}
+
+
+
+
+
+		return $F;
+
+}
 
 }

@@ -8,5 +8,10 @@ class Facilities extends Model {
 
 	protected $fillable = ['Index','FacilityName', 'FacilityCode','County','Type','Owner'];
 	
-	
+	 public function p()
+    {
+        return $this->hasOne('App\Tables\MNHSubSurvey','Facility_ID','FacilityCode');
+    }
+
+
 }

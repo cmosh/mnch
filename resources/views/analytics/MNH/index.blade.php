@@ -64,6 +64,9 @@
   
  @include('analytics/MNH/html/bemonc')
 @include('analytics/MNH/html/cemonc')
+   @include('analytics/MNH/html/kangaroo')
+   @include('analytics/MNH/html/newborn')
+     @include('analytics/MNH/html/devpep')
 
 
 
@@ -178,6 +181,10 @@ function drawChart() {
        @include('analytics/MNH/js/types')
    @include('analytics/MNH/js/bemonc')
      @include('analytics/MNH/js/cemonc')
+     @include('analytics/MNH/js/newborn')
+     @include('analytics/MNH/js/kangaroo')
+     @include('analytics/MNH/js/devpep')
+   
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
       $( ".wait" ).removeClass("overlay");

@@ -284,7 +284,35 @@ array_splice($Cemonc,2, 1);
 		});
 	
 
-	
+	//NewBornCare
+		$NewBornCareHeadings = array('New Born Care','Yes','No','No information provided');
+		$NewBornCare = Cache::remember('NewBornCare'.$county,180,function() use ($NewBornCareHeadings){
+
+			return self::FacilityTypeYesNO('MNHV2SEC2BLK5RW03COL02',$NewBornCareHeadings);
+		});
+
+//Kangaroo1
+		$Kangaroo1Headings = array('Kangaroo Awarness','Yes','No','No information provided');
+		$Kangaroo1 = Cache::remember('Kangaroo1'.$county,180,function() use ($Kangaroo1Headings){
+
+			return self::FacilityTypeYesNO('MNHV2SEC2BLK6RW03COL02',$Kangaroo1Headings);
+		});
+
+		//Kangaroo1
+		$Kangaroo2Headings = array('Kangaroo Corner','Yes','No','No information provided');
+		$Kangaroo2 = Cache::remember('Kangaroo2'.$county,180,function() use ($Kangaroo2Headings){
+
+			return self::FacilityTypeYesNO('MNHV2SEC2BLK6RW04COL02',$Kangaroo2Headings);
+		});
+
+		//devpep
+		$devpepHeadings = array('Preparedness for Delivery','Yes','No','No information provided');
+		$devpep = Cache::remember('devpep'.$county,180,function() use ($devpepHeadings){
+
+			return self::FacilityTypeYesNO('MNHV2SEC2BLK7RW04COL02',$devpepHeadings);
+		});
+
+
 
 	//Json Making
 
@@ -297,7 +325,11 @@ array_splice($Cemonc,2, 1);
 			'Cemonc'=>$Cemonc,
 			'ownership' => $ownership,
 			'types' => $types,
-			'jaids' => $jjavailability
+			'jaids' => $jjavailability,
+			'NewBornCare' => $NewBornCare,
+			'Kangaroo1' => $Kangaroo1,
+			'Kangaroo2' => $Kangaroo2,
+			'devpep' => $devpep
 			
 			));
 
