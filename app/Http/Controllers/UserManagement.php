@@ -190,7 +190,7 @@ public function mail()
                 $data, 
                 array('email' => $x[4]));
 
- Mail::send('email.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+ Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
 {
     $message->to($data['email'], 'MNCH')->subject('Accout Creation');
 });
