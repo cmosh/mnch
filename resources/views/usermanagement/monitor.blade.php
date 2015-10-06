@@ -34,8 +34,8 @@
 <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a aria-expanded="true" href="#tab_1" data-toggle="tab">General</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Today's Data Entry( by County )</a></li>
-                  <li class=""><a aria-expanded="false" href="#tab_3" data-toggle="tab">Total Data Entry ( by County )</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_2" data-toggle="tab">Today's Data Entry</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab_3" data-toggle="tab">Total Data Entry</a></li>
                   
                   <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>
@@ -382,23 +382,34 @@
                     <tbody>
                    <!--  -->
 
-                        @foreach($counties as $county)
+                        @foreach($counties_assessed as $county)
                         <tr>
 
                       
 
                         
-                        <td> {{$county->Name}}</td>
+                        <td>
+                          
+                         {{$county->Name}}
+                        </td>
 
                         <td> 
+                       
                         @foreach($submittedt as $subt)
-                            @if($county->Name==$subt->County && substr($subt->Survey,0,2)==substr($survey->surveyID,0,2) )
-                                {{$subt->submitted}}
+                            @if($county->Name==$subt->County && $subt->Description==$survey->Description)
+                                
+{{$subt->submitted}}
+                                
+
+                                
 
                             @endif
 
 
                         @endforeach
+                                                     
+
+                              
                   
                       </td>
 
@@ -408,14 +419,18 @@
                         <td > 
 
                          @foreach($incompletet as $inct)
-                            @if($county->Name==$inct->County && substr($inct->Survey,0,2)==substr($survey->surveyID,0,2) )
-                                {{$inct->incomplete}}
+                            @if($county->Name==$subt->County && $inct->Description==$survey->Description)
+                                
+{{$inct->incomplete}}
+                                
+
+                                
 
                             @endif
 
                         @endforeach
 
-
+                                
                       
                         </td>
 
@@ -550,7 +565,7 @@
                     <tbody>
                    <!--  -->
 
-                        @foreach($counties as $county)
+                        @foreach($counties_assessed as $county)
                         <tr>
 
                       
@@ -559,14 +574,16 @@
                         <td> {{$county->Name}}</td>
 
                         <td> 
+                               
                         @foreach($submitted as $sub)
-                            @if($county->Name==$sub->County && substr($sub->Survey,0,2)==substr($survey->surveyID,0,2) )
-                                {{$sub->submitted}}
-
+                              @if($county->Name==$sub->County && $sub->Description==$survey->Description)
+                                
+                                  {{$sub->submitted}}
+                           
                             @endif
 
-                        
                         @endforeach
+                                                   
                   
                       </td>
 
@@ -575,14 +592,19 @@
 
                         <td > 
 
-                         @foreach($incomplete as $inc)
-                            @if($county->Name==$inc->County && substr($inc->Survey,0,2)==substr($survey->surveyID,0,2) )
-                                {{$inc->incomplete}}
+                           @foreach($incomplete as $inc)
+                              @if($county->Name==$inc->County && $inc->Description==$survey->Description)
+                                
+{{$inc->incomplete}}
+                                
+
+                                
 
                             @endif
 
-                        
                         @endforeach
+
+                               
 
 
                       
