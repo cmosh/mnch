@@ -16,11 +16,12 @@ var  BaselineAttempt = x['Baseline'+county]['All_Attempted'];
   var   BaselineTotal = x['Baseline'+county]['Total Facilities'];
    var  BaselineNotAttempt = BaselineTotal - BaselineAttempt;
 
-   var  TotalAttempt = MidtermAttempt+EndtermAttempt+BaselineAttempt;
+ var  TotalAttempt = MidtermAttempt+EndtermAttempt+BaselineAttempt;
     var TotalSubmitt = MidtermSubmitt + EndtermSubmitt +BaselineSubmitt;
   var   TotalNotSubmitt = MidtermNotSubmitt + EndtermNotSubmitt + BaselineNotSubmitt;
   var   TotalTotal = MidtermTotal;
    var  TotalNotAttempt = TotalTotal - TotalAttempt;
+
 
 
 

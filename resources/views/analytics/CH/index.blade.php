@@ -6,17 +6,7 @@
 
   <div class="row">
  
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3>Child Health Survey<sup style="font-size: 20px"></sup></h3>
-                  <p>Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}} counties</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-              
-              </div>
+             
               {!! Form::open() !!}
        
 
@@ -29,6 +19,18 @@
    @include('analytics/CH/html/county')
 
  <div class="col-md-8">
+
+  <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>Child Health Survey<sup style="font-size: 20px"></sup></h3>
+                  <p id="X">Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}} counties</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              
+              </div>
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -229,7 +231,11 @@ function drawChart() {
            success: function(data){
      mapdata = JSON.parse(data)['map'];
 		var jsonData = JSON.parse(data)['analytics'];
+     var x = window.mapdata;
 
+    var county = $('#County').val();
+    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
+    @include('analytics/mapdata')
     // var jsonData = jsonData1['analytics'];
     // alert(jsonData['Guidelines']);
 
@@ -254,6 +260,9 @@ function drawChart() {
        @include('analytics/CH/js/community_strategy')
        @include('analytics/CH/js/locationortcorner')
        @include('analytics/CH/js/health_services') 
+
+        $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}}');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
@@ -291,8 +300,10 @@ inside.find('.county').click(function() {
 
 $('#County').val(cts);
  document.getElementById("select2-County-container").innerHTML = cts;
-
+$('#X').html('Data from '+TotalSubmitt+ 'facilities in '+$('#County').val());
 });
+
+
 
 drawChart();
 
@@ -302,8 +313,8 @@ alert(x);
 });
 
 $(function() {
-  var moveLeft = 0;
-  var moveDown = 0;
+  var moveLeft = 20;
+  var moveDown = 30;
 
   inside.find('.county').hover(function(e) {
       var cts = this.getAttribute("cname");
