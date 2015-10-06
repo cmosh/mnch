@@ -64,9 +64,11 @@
   
  @include('analytics/MNH/html/bemonc')
 @include('analytics/MNH/html/cemonc')
+  @include('analytics/MNH/html/newborn')
+  @include('analytics/MNH/html/devpep')
    @include('analytics/MNH/html/kangaroo')
-   @include('analytics/MNH/html/newborn')
-     @include('analytics/MNH/html/devpep')
+ 
+   
 
 
 
