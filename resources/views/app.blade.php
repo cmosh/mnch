@@ -54,8 +54,9 @@
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
                
-                <li><a href="/home">Dashboard</a></li>
-             
+                <!--  <li><a href="/home">Dashboard</a></li> -->
+             <li><a href="/">Child Health Survey</a></li>
+             <li><a href="/mnh">Maternal Health Survey</a></li>
               </ul>
          
             </div>
