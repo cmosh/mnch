@@ -10,6 +10,9 @@
 
 
 
+
+
+
 @section('content')
 
 
@@ -18,9 +21,11 @@
 
 
                          {!! Form::close() !!}
-<!-- <button style="float:right" id="tester" >send</button>          
-              <input type="text" id="testerval">'
-              <input type="text" id="testerval2"> -->
+
+
+
+                        
+
   
      <div class="box box-primary">
                 <div class="box-header">
@@ -117,67 +122,35 @@
                       </div>
                       <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse">
                         <div class="box-body">
-                <table style="float:left">
-                                                    <tr>       
-         <a style="float:right" href="/usermanagement/export/{{$location}}/general/{{$survey->surveyID}}/general">Download excel</a>
-</tr>
-                  
-                  <tr>
-                  <td>
-
-                  <b>Filter by:</b>
-                  </td>
-                  <td>
-                   <select id="filterer{{$survey->surveyID}}" class="form-control select2 " style="width: 100%;" name="filterer" > 
-                      <option value ="All" id ="filter0" >All</option>
-                       <option value ="County" id ="filter1" >County</option>
-                      <!--   <option value ="Survey" id ="filter2" >Survey</option> -->
-                         <option value ="Term" id ="filter3" >Term</option>
-                       </select>
-
-                  </td>
-
-                  </td>
-                  
-                  <td>
-                   <b  "padding-left:20px" >Please Select:</b>
-                   </td>
-                   <td>
-            <select style="padding-left:20px" id="searcher{{$survey->surveyID}}" class="form-control select2 " style="width: 100%;" name="filterer" >
-           
-
-                     @foreach($counties_assessed as $ca)
-                        <option value = <?php echo $ca->Name ?> class="searcher0{{$survey->surveyID}}" id ="searcherallcounty" >{{$ca->Name}}</option> 
-
-
-                     @endforeach
-                       
-                     
-
-                         
-                      <option value ="Baseline" class="searcher1{{$survey->surveyID}}" id ="searcher2" >Baseline</option>
-                      <option value ="Midterm" class="searcher1{{$survey->surveyID}}" id ="searcher2" >Midterm</option>
-                      <option value ="Endterm" class="searcher1{{$survey->surveyID}}" id ="searcher2" >Endterm</option>
-                     
-                      
-                      
-                     
-                      
-                      
-                       </select>
-                       
-                  </td>
-
-
-                  </tr>
-                </table>
+                
                 <br>
                 <br>
-                <table id="example1{{$survey->surveyID}}" class="table table-bordered table-striped">
+                <table id="example1{{$survey->surveyID}}" cellspacing="0"  class="table table-bordered table-striped">
   
 
 
                   
+                    <thead>
+                      <tr>
+
+                     
+                        
+                        <th>Version</th>
+                        <th>Assessment Term</th>
+                        <th>Assessor</th>
+                         <th>Date</th>
+                         <th>Facility</th>
+                         <th >County</th>
+                         <th>Entered by</th>
+                        
+
+                        <th class="hideprint">Action</th>
+
+                        
+                        
+                  
+                      </tr>
+                    </thead>
                     <thead>
                       <tr>
 
@@ -240,10 +213,10 @@
                           $dateformated=date_format($date,'d F Y');
 
                          ?>
-                        <td><span><?php echo $dateformated?> </span>  </td>
-                        <td ><span>{{ $user->FacilityName}}</span>  </td>
-                        <td  ><span>{{$user->County}}</span></td>
-                        <td ><span>{{ $user->username}}</span>  </td>
+                        <td><?php echo $dateformated?>  </td>
+                        <td >{{ $user->FacilityName}}  </td>
+                        <td  >{{$user->County}}</td>
+                        <td >{{ $user->username}} </td>
                         @if($user->Status=='Submitted')
  <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
@@ -709,162 +682,45 @@
         <script type="text/javascript">
        
  
-
-      
-      $.fn.dataTable.ext.search.push(
-    function( settings, data{{$survey->surveyID}}, dataIndex ) {
-       var searchvar{{$survey->surveyID}}=$('#searcher{{$survey->surveyID}}').val();
-        var searchvar2{{$survey->surveyID}}=$('#filterer2{{$survey->surveyID}}').val();
-
-
-     if($('#filterer{{$survey->surveyID}}').val()=='Term')
-      {
-        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[1]; 
-      }
-      else if($('#filterer{{$survey->surveyID}}').val()=='County')
-      {
-        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[5]; 
-      }
-      else if($('#filterer{{$survey->surveyID}}').val()=='All')
-      {
-        return true;
-       
-       
-
-
-      }
-
-      if($('#filterer2{{$survey->surveyID}}').val()=='Clive Makamara')
-      {
-        var filter{{$survey->surveyID}} =  data{{$survey->surveyID}}[6]; 
-      }
-
-if ( filter{{$survey->surveyID}}==searchvar2{{$survey->surveyID}})
-
-        {
-            return true;
-        }
-
-        if ( filter{{$survey->surveyID}}==searchvar{{$survey->surveyID}})
-
-        {
-            return true;
-        }
-
-        return false;
-    }
-);
-
-
-$(function (){
-      
-     });
-
  
 $(document).ready(function() {
 
 
 
-
-  
-    $('#searcher{{$survey->surveyID}}').val('');
-       document.getElementById("searcher{{$survey->surveyID}}").disabled = true;
-
-    
-    var table{{$survey->surveyID}} = $('#example1{{$survey->surveyID}}').DataTable();
+ $('#example1{{$survey->surveyID}}').DataTable( {
    
-document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select style="width:100%"  ><option style="width:100%" value=""></option></select>')
+                    .appendTo( $(column.header()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option style="width:100%" value="'+d+'">'+d+'</option>' )
+                } );
+            } );
 
-$('#searcher{{$survey->surveyID}}').click(function()
-
-{
-
-if($('#filterer{{$survey->surveyID}}').val()=='All')
-       {
-      
-        $('.searcher0{{$survey->surveyID}}').hide();
-        $('.searcher1{{$survey->surveyID}}').hide();
-      
-          
-         table{{$survey->surveyID}}.draw();
-          document.getElementById("searcher{{$survey->surveyID}}").disabled = true;
-      }
-     
-      else if($('#filterer{{$survey->surveyID}}').val()=='Term')
-       {
-       
-       
-        table{{$survey->surveyID}}.draw();
-         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
-         
-         
-
-      }
-      else if($('#filterer{{$survey->surveyID}}').val()=='County')
-       {
-         
-       
-        table{{$survey->surveyID}}.draw();
-         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
-      }
-
-}
+        }
 
 
 
-  );
-    
-    
-
-$('#filterer{{$survey->surveyID}}').click(function()
-{
-  $('#searcher{{$survey->surveyID}}').val('');
-
-
-if($('#filterer{{$survey->surveyID}}').val()=='All')
-       {
-         $('#searcher{{$survey->surveyID}}').val('');
-         $('.searcher0{{$survey->surveyID}}').hide();
-        $('.searcher1{{$survey->surveyID}}').hide();
-        
-         table{{$survey->surveyID}}.draw();
-          document.getElementById("searcher{{$survey->surveyID}}").disabled = true;
-      }
-     
-      else if($('#filterer{{$survey->surveyID}}').val()=='Term')
-       {
-         $('.searcher0{{$survey->surveyID}}').hide();
-        $('.searcher1{{$survey->surveyID}}').show();
-        
-        table{{$survey->surveyID}}.draw();
-         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
-      }
-      else if($('#filterer{{$survey->surveyID}}').val()=='County')
-       {
-        $('.searcher0{{$survey->surveyID}}').show();
-        $('.searcher1{{$survey->surveyID}}').hide();
-      
-        table{{$survey->surveyID}}.draw();
-
-         document.getElementById("searcher{{$survey->surveyID}}").disabled = false;
-      }
-
-}
-
-
-
-  );  
-     
-    // Event listener 
-    $('#searcher{{$survey->surveyID}}').keyup( function() {
-        table{{$survey->surveyID}}.draw();
     } );
-} );
+ document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
 
 
 
+  });
 
-
+   
 
     </script>
 

@@ -275,12 +275,6 @@ public function mail()
 		$counties=countie::all();
 		$user_monitor=User_monitor::all();
 		$counties_assessed=Counties_assessed::all();
-		// $Surveycompletion_daily=Surveycompletion_daily::all();
-		// $Surveycompletion_total=Surveycompletion_total::all();
-		// $pperuser=partial_peruser::all();
-		// $cperuser=completed_peruser::all();
-		// $pperday=partial_peruser_perday::all();
-		// $cperday=completed_peruser_perday::all();
 		$submitted=Counties_submitted::all();
 		$incomplete=Counties_incomplete::all();
 		$submittedt=Counties_submitted_today::all();

@@ -38,7 +38,7 @@
            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span>OPEN/CLOSE MENU</span>
           </a>
-           @elseif($location == 'MN'||$location == 'IM'||$location == 'CH')
+           @elseif($location == 'MN'||$location == 'IM'||$location == 'CH'||$location == 'umanage'||$location == 'preview')
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span>OPEN/CLOSE MENU</span>   <span id = "autosavetext" class="logo-lg"></span>
           </a>
