@@ -140,6 +140,11 @@
                     <i class="fa fa-money"></i> Redmin
                   </a>
                  </td>
+                 <td>
+                  <a command="{{env('APP_ENV')}}cron" class="btn btn-app">
+                    <i class="fa fa-genderless"></i>Cron
+                  </a>
+                 </td>
                 
                   </tr>
 
