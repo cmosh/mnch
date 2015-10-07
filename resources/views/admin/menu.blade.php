@@ -35,7 +35,7 @@
                   <div class="menu-info">
                       
                     <h4 class="control-sidebar-subheading">Command Center</h4>
-                    <p>The {{env("APP_ENV")}} site's Php Artisan Control Panel</p>
+                    <p>The {{env("APP_ENV")}} site's Command Control Panel</p>
                   </div>
                 </a>
               </li>
