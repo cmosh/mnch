@@ -106,7 +106,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-   <body class="skin-blue fixed">
+   
+    <body class="skin-blue fixed">
+   
     <div class="wrapper">
 
       <!-- Main Header -->
@@ -137,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
    @include('template/footer')
 
       <!-- Control Sidebar -->
-     @include('template/controlsidebar')
+     @include('admin/menu')
     </div><!-- ./wrapper -->
 
     <!-- REQUIRED JS SCRIPTS -->
