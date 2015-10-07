@@ -60,39 +60,34 @@ class administration extends Controller {
 	}
 
 	public function docmd(){
-
-
          if(Request::ajax()) {
       $data = Input::all();
-
-
-      	$cmd=$data['cmd'];
-      	
-     
-
-      		
-     
- $command=$this->clist[$cmd];
- $command=command::environment($command);
-
-
-
-  SSH::into($this->ssh_connection)->run($command, function($line)
-{
-	
-
-    echo $line.PHP_EOL;
-    
-});
-
-
-		die;
-    }
-
-
-
+      	$cmd=$data['cmd']; 
+      	$command=$this->clist[$cmd];
+      	$command=command::environment($command);
+      	  SSH::into($this->ssh_connection)->run($command, function($line)
+      	  	{
+      	  		echo $line.PHP_EOL;
+      	  	});
+      	  die;
+      	}
 
 	}
 
+	public function globcmd(){
+         if(Request::ajax()) {
+      $data = Input::all();
+      	$cmd=str_replace(env('APP_ENV'), $data['appenv'],$data['cmd']); 
+
+      	$command=$this->clist[$cmd];
+      	$command=command::environmentG($command,$data['appenv']);
+      	  SSH::into($data['connection'])->run($command, function($line)
+      	  	{
+      	  		echo $line.PHP_EOL;
+      	  	});
+      	  die;
+      	}
+      	
+	}
 
 }

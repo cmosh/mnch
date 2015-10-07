@@ -26,7 +26,7 @@
              <div id="locationres"class="checkbox">
                         <label>
                         Choose Site: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <input type="checkbox">
+                          <input id="thecheker" type="checkbox">
                           Internal IP?
                         </label>
                       </div>
@@ -65,17 +65,7 @@
                     <i class="menu-icon fa fa-adn fa-4x" style="color:orange"></i>
                   Artisan
                   </td>
-                  	<td>
-                      <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-pause"></i> Shutdown
-                  </a>
-                  	</td>
-                  	<td>
-                      <a command="shutup" class="btn btn-app">
-                    <i class="fa fa-bolt"></i> Bring Up
-                  </a>
-                  	</td>
-
+                  	
 
                   <td>
                   <a command="optimise" class="btn btn-app">
@@ -186,11 +176,46 @@
                   </a>
                  </td>
 </tr>
+
+				<tr>
+                 <td  style="vertical-align:middle">
+                    <i class="fa fa-music fa-4x"  style="color:magenta"></i>
+                  Composer &amp; <br>
+                  Maintenance
+                  </td>
+                    <td>
+                      <a command="composerinstall" class="btn btn-app">
+                    <i class="fa fa-volume-off"></i> Install
+                  </a>
+                    </td>
+                <td>
+                      <a command="composerupdate" class="btn btn-app">
+                    <i class="fa fa-volume-up"></i> Update
+                  </a>
+                    </td>
+
+                    <td>
+                      <a command="shutdown" class="btn btn-app">
+                    <i class="fa fa-pause"></i> Shutdown
+                  </a>
+                  	</td>
+                  	<td>
+                      <a command="shutup" class="btn btn-app">
+                    <i class="fa fa-bolt"></i> Bring Up
+                  </a>
+                  	</td>
+
+
+                  </tr>
+
                    <tr>
                  <td  style="vertical-align:middle">
                     <i class="fa fa-database fa-4x"  style="color:yellow"></i>
                   My SQL
                   </td>
+
+                   
+
                   	<td>
                       <a command="{{env('APP_ENV')}}mysqldump" class="btn btn-app">
                     <i class="fa fa-arrow-down"></i> Dump Mysql
@@ -240,10 +265,15 @@
 
 function sendcommand(cmd) {
 
+	 if(window.checked) var a ='local_GubanSchool';
+	 else var a = 'local_Guban';
 	 
+
 	  var data = {
+	  	  'connection':a,
           'cmd':cmd,
-         '_token': $('input[name=_token]').val(),
+          'appenv':$('#siteresolver').val(),
+         '_token': $('input[name=_token]').val()
        
 
     };
@@ -265,6 +295,11 @@ function sendcommand(cmd) {
 
 }
 
+$("#thecheker").change(function(){
+
+	 checked = $(this).is(":checked");
+	
+});
 
  $('.btn').click(function(){
 
