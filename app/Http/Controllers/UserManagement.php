@@ -59,7 +59,7 @@ class UserManagement extends Controller {
 
 
 		
-		if($request->user()->role==3)
+		if($request->user()->role>=3)
 		{
 		return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
 }
