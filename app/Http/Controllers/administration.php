@@ -25,9 +25,9 @@ class administration extends Controller {
 		$this->ssh_connection = command::ssh_connection();
 	}
 
-	public function index()
+	public function globe()
 	{
-		return view('admin.index')->with('location','Admin')
+		return view('admin.global')->with('location','Admin')
 								->with('title','Administration');
 	}
 

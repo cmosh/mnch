@@ -15,11 +15,12 @@ Route::get('/phpversion',function(){
 
 	 phpinfo();
 });
-Route::get('/admin', 'administration@index');
+Route::get('/admin/global', 'administration@globe');
 Route::get('/admin/redmin', 'administration@localredis');
 Route::get('/admin/memcached', 'administration@localmem');
 Route::get('/admin/commandcenter', 'administration@commandcenter');
 Route::post('/admin/docmd', 'administration@docmd');
+Route::post('/admin/globcmd', 'administration@globcmd');
 Route::get('/redmin','CacheController@redmin');
 Route::get('/memcached','CacheController@memcached');
 Route::get('/test','AnalyticsController@blah');

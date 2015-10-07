@@ -17,7 +17,7 @@
 
    <link href="/bower_components/jq/jquery-ui.css" rel="stylesheet" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+  
 <script src="/bower_components/jq/jquery-ui.js"></script>
  
 

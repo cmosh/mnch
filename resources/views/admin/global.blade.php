@@ -1,5 +1,10 @@
 @extends('template')
+@section('cdns')
 
+  <!-- Select2 -->
+    <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+   
+@endsection 
 @section('content')
 
 <section class="invoice">
@@ -9,7 +14,7 @@
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-                <i class="fa fa-globe"></i> Command Control Panel
+                <i class="fa fa-globe"></i> Global Command Control Panel
                 <small class="pull-right">Date: {{Carbon\Carbon::now()}}</small>
               </h2>
             </div><!-- /.col -->
@@ -18,9 +23,26 @@
           <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
              
-              <address>
-                <strong>{{env('APP_ENV')}} site</strong><br>
-                SSH Connection<br>
+             <div id="locationres"class="checkbox">
+                        <label>
+                        Choose Site: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="checkbox">
+                          Internal IP?
+                        </label>
+                      </div>
+              <select id="siteresolver" class="form-control select2">
+              	<option>live</option>
+              	<option>test</option>
+              </select>
+              
+           
+             	   
+           
+      
+               <address>
+              
+              
+                
                 Authentication: private key<br>
                 
               </address>
@@ -48,6 +70,13 @@
                     <i class="fa fa-pause"></i> Shutdown
                   </a>
                   	</td>
+                  	<td>
+                      <a command="shutup" class="btn btn-app">
+                    <i class="fa fa-bolt"></i> Bring Up
+                  </a>
+                  	</td>
+
+
                   <td>
                   <a command="optimise" class="btn btn-app">
                     
@@ -157,25 +186,6 @@
                   </a>
                  </td>
 </tr>
-
-             <tr>
-                 <td  style="vertical-align:middle">
-                    <i class="fa fa-music fa-4x"  style="color:magenta"></i>
-                  Composer
-                  </td>
-                    <td>
-                      <a command="composerinstall" class="btn btn-app">
-                    <i class="fa fa-volume-off"></i> Install
-                  </a>
-                    </td>
-                <td>
-                      <a command="composerupdate" class="btn btn-app">
-                    <i class="fa fa-volume-up"></i> Update
-                  </a>
-                    </td>
-                  </tr>
-
-
                    <tr>
                  <td  style="vertical-align:middle">
                     <i class="fa fa-database fa-4x"  style="color:yellow"></i>
@@ -215,6 +225,14 @@
 
 @section('javascript')
 
+  <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();});
+</script>
+
    
    <script type="text/javascript">
 
@@ -231,11 +249,11 @@ function sendcommand(cmd) {
     };
  
    $.ajax({
-      url: '/admin/docmd',
+      url: '/admin/globcmd',
       type: "post",
        data: data,
            success: function(data){
-   	  
+   	
  			$('#output').html(data);
 
       }
