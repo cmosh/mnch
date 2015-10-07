@@ -8,7 +8,7 @@
         <div class="tab-content">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">This Site({{env("APP_ENV")}})</h3>
+            <h3 class="control-sidebar-heading">{{env("APP_ENV")}} site</h3>
             <ul class="control-sidebar-menu">
               <li>
                 <a href="/admin/redmin">
