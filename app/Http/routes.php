@@ -32,20 +32,21 @@ Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 Route::get('/tester','AnalyticsController@tester');
 Route::post('survey/{id}/{status}','surveys@update');
 Route::get('/redis/{test}',function($test){
- global $x;
+
+
+ 
 	$test = array('php artisan cache:clear','php artisan cache:clear');
 
-	SSH::into('local_homestead')->run($test, function($line)
+	SSH::into('SiteGuban')->run($test, function($line)
 {
-	global $x;
-    $x =  ($line.PHP_EOL);
+	
+   echo   ($line.PHP_EOL);
 
    
 });
 
 
 
-echo $x;
 
 
 });
