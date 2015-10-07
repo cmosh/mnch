@@ -22,30 +22,29 @@
 <p>
 <small>
 
-<?php
-              if(Auth::user()->role===0)
-                      {
-                        echo "County User";
-                      }
-                       else if(Auth::user()->role==1)
-                      {
-                        echo "Data Clerk";
-                      }
-                      else if(Auth::user()->role==2)
-                      {
-                        echo "Program User";
-                      }
-                       else if(Auth::user()->role==3)
-                      {
-                        echo "System User (Admin) ";
-                      }
-                        else if(Auth::user()->role=='')
-                      {
-                        echo "Unknown";
-                      }
+
+              @if(Auth::user()->role==0)
+                      County User
+                      
+              @elseif(Auth::user()->role==1)
+                      
+                      Data Clerk
+                      
+                      @elseif(Auth::user()->role==2)
+                      
+                       Program User
+                      
+                       @elseif(Auth::user()->role>=3)
+                      
+                        System User (Admin)
+                      
+                        @elseif(Auth::user()->role=='')
+                      
+                        "Unknown"
+                      
 
 
-          ?>
+        @endif
           
             
 <!--              <p> <a href="#"><i class="fa fa-circle text-success"></i> {{ Auth::user()->county}} County</a></p>
@@ -61,10 +60,14 @@
           <ul class="sidebar-menu" >
             <li class="header">Options</li>
             <!-- Optionally, you can add icons to the links -->
-          
-            @if ($location == 'Home' ) 
+          @if($location == 'Admin')
+           <li class=""><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
 
-           <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Home</span></a></li>
+
+          @else
+          @if ($location == 'Home' ) 
+
+           <li class="active"><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
             <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
 
             <li><a href="/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
@@ -79,7 +82,7 @@
 
                @endif
 
-               @if( Auth::user()->role == 3)
+               @if( Auth::user()->role >= 3)
                 <li><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
 
@@ -112,7 +115,7 @@
 
                @endif
 
-               @if( Auth::user()->role == 3)
+               @if( Auth::user()->role >= 3)
                 <li class="active"><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
 
@@ -140,7 +143,7 @@
 
                @endif
 
-               @if( Auth::user()->role == 3)
+               @if( Auth::user()->role >= 3)
                 <li ><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li class="active"><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
 
@@ -182,6 +185,8 @@
                             </ul>
                         </li>
 
+
+           @endif
 
            @endif
            

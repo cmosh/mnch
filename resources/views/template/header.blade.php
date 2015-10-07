@@ -9,7 +9,7 @@
           <span class="logo-mini">MNCH Surveys</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">MNCH Surveys</span>
-        @elseif($location == 'ass' || $location == 'umanage' || $location == 'preview')
+        @elseif($location == 'ass' || $location == 'Admin'|| $location == 'umanage' || $location == 'preview')
             <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">{{$title}} </span>
           <!-- logo for regular state and mobile devices -->
@@ -30,7 +30,7 @@
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          @if ($location == 'Home')
+          @if ($location == 'Home' || $location == 'Admin')
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span>OPEN/CLOSE MENU</span>
           </a>
@@ -106,8 +106,14 @@
               @endif
        
               <!-- Control Sidebar Toggle Button -->
+
               <li>
-                <a href="#" data-toggle="control-sidebar" style="display:none"><i class="fa fa-gears"></i></a>
+              @if(Auth::user()->role>3)
+                <a href="#" data-toggle="control-sidebar" style=""><i class="fa fa-gears"></i></a>
+              @else
+              <a href="#" data-toggle="control-sidebar" style="display:none;"><i class="fa fa-gears"></i></a>
+              @endif
+
               </li>
             </ul>
           </div>

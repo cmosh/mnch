@@ -13,7 +13,7 @@ use App\Tables\Map;
 use App\Tables\SurveysDone;
 use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
-
+use Illuminate\Contracts\Foundation\Application As App;
 use Request;
 use Input;
 use Cache;
@@ -216,6 +216,11 @@ $CHSubSurvey = Cache::remember('CHSubSurvey',180,function(){
 
 	
 	public function tester(){
+
+
+		$environment = env('APP_REDISPORT');
+
+		echo $environment;
 		      
 // $MNHSubSurvey = Cache::remember('MNHSubSurvey',180,function(){
 //       					return MNHSubSurvey::all();

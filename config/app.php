@@ -138,6 +138,7 @@ return [
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
+		'Collective\Remote\RemoteServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -198,6 +199,7 @@ return [
 		'Form'		=> 'Illuminate\Html\FormFacade',
 		'Html'		=> 'Illuminate\Html\HtmlFacade',
 		'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
+		'SSH' 		=> 'Collective\Remote\RemoteFacade'
 
 	],
 

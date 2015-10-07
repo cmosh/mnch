@@ -15,6 +15,11 @@ Route::get('/phpversion',function(){
 
 	 phpinfo();
 });
+Route::get('/admin', 'administration@index');
+Route::get('/admin/redmin', 'administration@localredis');
+Route::get('/admin/memcached', 'administration@localmem');
+Route::get('/admin/commandcenter', 'administration@commandcenter');
+Route::post('/admin/docmd', 'administration@docmd');
 Route::get('/redmin','CacheController@redmin');
 Route::get('/memcached','CacheController@memcached');
 Route::get('/test','AnalyticsController@blah');
@@ -27,21 +32,21 @@ Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
 Route::get('/tester','AnalyticsController@tester');
 Route::post('survey/{id}/{status}','surveys@update');
 Route::get('/redis/{test}',function($test){
+ global $x;
+	$test = array('php artisan cache:clear','php artisan cache:clear');
 
-	// $app = LRedis::connection();
-	// $app->set('XTRA','a');
-	// print_r($app->get('XTRA'));  
-//Cache::add($test, 'value', 1);
+	SSH::into('local_homestead')->run($test, function($line)
+{
+	global $x;
+    $x =  ($line.PHP_EOL);
 
-	//return (String)Cache::get('theone');
-// return Cache::get('key');
-	
-	$X = Cache::remember($test,1,function()use ($test){
-		return $test;
-      				
-      	});     
-		
-		return $X;
+   
+});
+
+
+
+echo $x;
+
 
 });
 Route::post('survey/survey/{id}/{status}','surveys@update');

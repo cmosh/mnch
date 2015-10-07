@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PHPRedmin</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" media="all" type="text/css" href="<?=$this->router->baseUrl?>/bootstrap/css/bootstrap.min.css" />
@@ -14,9 +14,11 @@
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/redmin/main.js"></script>
     <script type="text/javascript" src="<?=$this->router->baseUrl?>/js/redmin/modal.js"></script>
+     <script type="text/javascript" src="<?=$this->router->baseUrl?>/iframe/js/iframeResizer.contentWindow.min.js"></script>
     <?php foreach ($this->getHeaders() as $header) {
     echo $header."\n";
 } ?>
+
     <script type="text/javascript">
         baseurl = "<?=$this->router->url?>";
         currentHost = "<?= $this->app->current['host'] ?>";
@@ -25,23 +27,26 @@
         currentServerDb = "<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>";
     </script>
 </head>
+
+
+</style>
 <body>
-    <div class="container">
+    <div class="">
         <div class="row">
-            <div class="navbar span12 navbar-inverse">
+            <div class="navbar  navbar-inverse">
                 <div class="navbar-inner">
-                    <div class="container">
+                    <div class="">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="<?=$this->router->url?>">PHPRedmin</a>
+                        <a class="brand" href="<?=$this->router->url?>"></a>
                         <div class="nav-collapse collapse navbar-responsive-collapse">
                             <ul class="nav">
                                 <li<?= (strstr($this->router->request, "/welcome/index/") ? ' class="active"' :null)?>>
                                     <a href="<?=$this->router->url?>/welcome/index/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>">
-                                        <i class="icon-white icon-home"></i> Home
+                                        <i class="icon-white icon-cogs"></i> Basic View
                                     </a>
                                 </li>
                                 <li<?= (strstr($this->router->request, "/welcome/info/") ? ' class="active"' :null)?>>
@@ -71,11 +76,7 @@
                                         </a>
                                     </li>
                                 <?php endif; ?>
-                                <li>
-                                    <a href="https://github.com/sasanrose/phpredmin" target="_blank">
-                                        <i class="icon-white icon-github"></i> GitHub
-                                    </a>
-                                </li>
+                                
                             </ul>
                             <ul class="nav pull-right">
                                 <li class="divider-vertical"></li>
