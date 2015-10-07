@@ -124,7 +124,7 @@
                 
                   </tr>
 
-
+                  @if(env('APP_ENV')!='local')
                    <tr>
                   <td  style="vertical-align:middle">
                    <i class="menu-icon fa fa-github fa-4x "  style="color:purple"></i>
@@ -157,7 +157,7 @@
                   </a>
                  </td>
 </tr>
-
+@endif
              <tr>
                  <td  style="vertical-align:middle">
                     <i class="fa fa-music fa-4x"  style="color:magenta"></i>
