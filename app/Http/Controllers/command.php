@@ -94,7 +94,7 @@ class command  {
 							'testreset'=>array('git reset --hard origin/test'),
 							'testbranch'=>array('git rev-parse --abbrev-ref HEAD'),
 							'testpush'=>array('git push -u origin test'),
-							'testgit'=>array('ssh -T git@github.com'),
+							'testtestgit'=>array('ssh -T git@github.com'),
 							'testmysqldump'=>array(''),
 							'liverootfolder'=>array('sudo chown -R :www-data /var/www/mnch','ls -ld /var/www/mnch'),
 							'livestorage'=>array('sudo chmod -R 775 /var/www/mnch/storage','ls -ld /var/www/mnch/storage'),
