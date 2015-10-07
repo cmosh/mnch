@@ -126,7 +126,7 @@ public function mail()
 	
 		//
 		$Counties = countie::all();
-	if($request->user()->role==3)
+	if($request->user()->role>=3)
 		{
 				return view('usermanagement.create')->with('counties',$Counties)->with('location','umanage')->with('title','User Management');
 		}
@@ -578,7 +578,7 @@ public function multi()
 		    			{
 		    				$role='programuser';
 		    			}
-		    			if($user->role==3)
+		    			if($user->role>=3)
 		    			{
 		    				$role='systemuser';
 		    			}
@@ -766,7 +766,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 		    			{
 		    				$role='programuser';
 		    			}
-		    			if($user_m->role==3)
+		    			if($user_m->role>=3)
 		    			{
 		    				$role='systemuser';
 		    			}
