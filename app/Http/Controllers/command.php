@@ -56,17 +56,44 @@ class command  {
 		}
 
 
+		return $clist;
+	}
+
+		public static function environmentG($clist,$envs){
+
+		switch ($envs) {
+			
+			case 'test':
+				array_unshift($clist,'cd ~/mnch_bak');
+
+				break;
+
+			case 'live':
+				array_unshift($clist,'cd ~/mnch');
+				# code...
+				break;
+
+			default:
+				# code...
+				break;
+		}
+
+
+
 		
 
 		return $clist;
 
 	}
+
+
+
 	public static function thelist()
 	{
 
 
 
-				 $thelist=array('shutdown'=>array('php artisan down'),
+				 $thelist=array('shutdown'=>array('sudo php artisan down'),
 							'optimise'=>array('php artisan optimize'),
 							'clearcache'=>array('php artisan cache:clear'),
 							'clearresets'=>array('php artisan auth:clear-resets'),
@@ -74,6 +101,9 @@ class command  {
 							'clearconfig'=>array('php artisan config:clear'),
 							'routecache'=>array('php artisan route:cache'),
 							'routeclear'=>array('php artisan route:clear'),
+							'shutup'=>array('sudo php artisan up'),
+							'composerupdate'=>array('sudo composer update'),
+							'composerinstall'=>array('sudo composer install'),
 							'localrootfolder'=>array('sudo chown -R :www-data /home/vagrant/php/mnch','ls -ld /home/vagrant/php/mnch'),
 							'localstorage'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/storage','ls -ld /home/vagrant/php/mnch/storage'),
 							'localuploads'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/public/uploads','ls -ld /home/vagrant/php/mnch/public/uploads'),
@@ -84,7 +114,7 @@ class command  {
 							'localbranch'=>array(''),
 							'localpush'=>array(''),
 							'localtestgit'=>array(''),
-							'localmysqldump'=>array(''),
+							'localmysqldump'=>array('mysqldump db_name > backup-file.sql'),
 							'testrootfolder'=>array('sudo chown -R :www-data /var/www/mnch_bak','ls -ld /var/www/mnch_bak'),
 							'teststorage'=>array('sudo chmod -R 775 /var/www/mnch_bak/storage','ls -ld /var/www/mnch_bak/storage'),
 							'testuploads'=>array('sudo chmod -R 775 /var/www/mnch_bak/public/uploads','ls -ld /var/www/mnch_bak/public/uploads'),

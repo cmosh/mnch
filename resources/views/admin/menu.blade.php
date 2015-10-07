@@ -60,44 +60,14 @@
             
                <ul class="control-sidebar-menu">
               <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-cubes bg-red"></i>
+                <a href="/admin/global">
+                  <i class="menu-icon fa fa-beer bg-maroon"></i>
                   <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Redis</h4>
-                    <p>The {{env("APP_ENV")}} site's Redis Control Panel</p>
+                    <h4 class="control-sidebar-subheading">Command Panel</h4>
+                    <p>The Global Command Panel</p>
                   </div>
                 </a>
-              </li>
-               <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-medium bg-green"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">MemcahceD</h4>
-                    <p>The {{env("APP_ENV")}} site's MemcahceD Control Panel</p>
-                  </div>
-                </a>
-              </li>
-
-              <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-adn bg-orange"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Artisan</h4>
-                    <p>The {{env("APP_ENV")}} site's Php Artisan Control Panel</p>
-                  </div>
-                </a>
-              </li>
-
-               <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-github bg-purple"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Github</h4>
-                    <p>The {{env("APP_ENV")}} site's Github Control Panel</p>
-                  </div>
-                </a>
-              </li>
-
+              </li>    
 
 
             </ul><!-- /.control-sidebar-menu -->
