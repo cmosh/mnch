@@ -265,8 +265,16 @@
 
 function sendcommand(cmd) {
 
+	var env = "{{env('APP_ENV')}}";
+
+		if(env=='local'){
 	 if(window.checked) var a ='local_GubanSchool';
 	 else var a = 'local_Guban';
+	}
+	else{
+
+		var a = 'SiteGuban';
+	}
 	 
 
 	  var data = {
