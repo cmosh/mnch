@@ -56,22 +56,22 @@
                   </td>
                   <td>
                   <a command="clearcache" class="btn btn-app">
-                    <i class="fa fa-edit"></i> Clear Cache
+                    <i class="fa fa-bomb"></i> Clear Cache
                   </a>
                   </td>
                   <td>
                   <a command="clearresets" class="btn btn-app">
-                    <i class="fa fa-play"></i> Clear Resets
+                    <i class="fa fa-bug"></i> Clear Resets
                   </a>
                   </td>
                   <td>
                   <a command="cacheconfig" class="btn btn-app">
-                    <i class="fa fa-repeat"></i> Cache Config
+                    <i class="fa fa-coffee"></i> Cache Config
                   </a>
                  </td>
                  <td>
                   <a command="clearconfig" class="btn btn-app">
-                    <i class="fa fa-save"></i> Clear Config
+                    <i class="fa fa-futbol-o"></i> Clear Config
                   </a>
                   </td>
                   <td>
@@ -84,7 +84,7 @@
 
                   <a command="routeclear" class="btn btn-app">
                   
-                    <i class="fa fa-barcode"></i> Route Clear
+                    <i class="fa fa-cog"></i> Route Clear
                   </a>
                   </td>
                   <td>
@@ -96,29 +96,29 @@
                   Set Permissions
                   </td>
                   	<td>
-                      <a command="rootfolder" class="btn btn-app">
-                    <i class="fa fa-pause"></i> Root Folder
+                      <a command="{{env('APP_ENV')}}rootfolder" class="btn btn-app">
+                    <i class="fa fa-folder"></i> Root Folder
                   </a>
                   	</td>
                   <td>
-                  <a command="storage" class="btn btn-app">
+                  <a command="{{env('APP_ENV')}}storage" class="btn btn-app">
                     
-                    <i class="fa fa-heart-o"></i> Storage 
+                    <i class="fa fa-fire"></i> Storage 
                   </a>
                   </td>
                   <td>
-                  <a command="uploads" class="btn btn-app">
-                    <i class="fa fa-edit"></i> Uploads
+                  <a command="{{env('APP_ENV')}}uploads" class="btn btn-app">
+                    <i class="fa fa-magnet"></i> Uploads
                   </a>
                   </td>
                   <td>
-                  <a command="memcache" class="btn btn-app">
-                    <i class="fa fa-play"></i> Memcached
+                  <a command="{{env('APP_ENV')}}memcache" class="btn btn-app">
+                    <i class="fa fa-life-ring"></i> Memcached
                   </a>
                   </td>
                   <td>
-                  <a command="redmin" class="btn btn-app">
-                    <i class="fa fa-repeat"></i> Redmin
+                  <a command="{{env('APP_ENV')}}redmin" class="btn btn-app">
+                    <i class="fa fa-money"></i> Redmin
                   </a>
                  </td>
                 
@@ -131,28 +131,28 @@
                   Github
                   </td>
                   	<td>
-                      <a command="update" class="btn btn-app">
-                    <i class="fa fa-pause"></i> Update Site
+                      <a command="{{env('APP_ENV')}}update" class="btn btn-app">
+                    <i class="fa fa-upload"></i> Update Site
                   </a>
                   	</td>
                   <td>
-                  <a command="reset" class="btn btn-app">
+                  <a command="{{env('APP_ENV')}}reset" class="btn btn-app">
                     
-                    <i class="fa fa-heart-o"></i> Git Reset
+                    <i class="fa fa-recycle"></i> Git Reset
                   </a>
                   </td>
                   <td>
-                  <a command="branch" class="btn btn-app">
-                    <i class="fa fa-edit"></i> Check Branch
+                  <a command="{{env('APP_ENV')}}branch" class="btn btn-app">
+                    <i class="fa fa-chain-broken"></i> Check Branch
                   </a>
                   </td>
                   <td>
-                  <a command="push" class="btn btn-app">
+                  <a command="{{env('APP_ENV')}}push" class="btn btn-app">
                     <i class="fa fa-play"></i> Git Push
                   </a>
                   </td>
                   <td>
-                  <a command="testgit" class="btn btn-app">
+                  <a command="{{env('APP_ENV')}}testgit" class="btn btn-app">
                     <i class="fa fa-repeat"></i> Test SSH
                   </a>
                  </td>
@@ -163,8 +163,8 @@
                   My SQL
                   </td>
                   	<td>
-                      <a command="mysqldump" class="btn btn-app">
-                    <i class="fa fa-pause"></i> Dump Mysql
+                      <a command="{{env('APP_ENV')}}mysqldump" class="btn btn-app">
+                    <i class="fa fa-arrow-down"></i> Dump Mysql
                   </a>
                   	</td>
                 
