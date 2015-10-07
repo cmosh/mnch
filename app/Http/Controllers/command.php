@@ -109,12 +109,8 @@ class command  {
 							'localuploads'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/public/uploads','ls -ld /home/vagrant/php/mnch/public/uploads'),
 							'localmemcache'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/public/cache','ls -ld /home/vagrant/php/mnch/public/cache'),
 							'localredmin'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/public/phpredmin','ls -ld /home/vagrant/php/mnch/public/phpredmin'),
-							'localupdate'=>array(''),
-							'localreset'=>array(''),
-							'localbranch'=>array(''),
-							'localpush'=>array(''),
-							'localtestgit'=>array(''),
-							'localmysqldump'=>array('mysqldump db_name > backup-file.sql'),
+							'localmysqldump'=>array(''),
+							'localcron'=>array('cd /home/vagrant/php/mnch/public/phpredmin/public && sudo php index.php cron/index'),
 							'testrootfolder'=>array('sudo chown -R :www-data /var/www/mnch_bak','ls -ld /var/www/mnch_bak'),
 							'teststorage'=>array('sudo chmod -R 775 /var/www/mnch_bak/storage','ls -ld /var/www/mnch_bak/storage'),
 							'testuploads'=>array('sudo chmod -R 775 /var/www/mnch_bak/public/uploads','ls -ld /var/www/mnch_bak/public/uploads'),
@@ -126,6 +122,7 @@ class command  {
 							'testpush'=>array('git push -u origin test'),
 							'testtestgit'=>array('ssh -T git@github.com'),
 							'testmysqldump'=>array(''),
+							'testcron'=>array('cd /var/www/mnch_bak/public/phpredmin/public','sudo php index.php cron/index'),
 							'liverootfolder'=>array('sudo chown -R :www-data /var/www/mnch','ls -ld /var/www/mnch'),
 							'livestorage'=>array('sudo chmod -R 775 /var/www/mnch/storage','ls -ld /var/www/mnch/storage'),
 							'liveuploads'=>array('sudo chmod -R 775 /var/www/mnch/public/uploads','ls -ld /var/www/mnch/public/uploads'),
@@ -136,7 +133,8 @@ class command  {
 							'livebranch'=>array('git rev-parse --abbrev-ref HEAD'),
 							'livepush'=>array('git push -u origin live'),
 							'livetestgit'=>array('ssh -T git@github.com'),
-							'livemysqldump'=>array('')
+							'livemysqldump'=>array(''),
+							'livecron'=>array('cd /var/www/mnch/public/phpredmin/public','sudo php index.php cron/index')
 
 							
 			);

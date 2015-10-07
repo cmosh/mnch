@@ -121,10 +121,16 @@
                     <i class="fa fa-money"></i> Redmin
                   </a>
                  </td>
+                  <td>
+                  <a command="{{env('APP_ENV')}}cron" class="btn btn-app">
+                    <i class="fa fa-genderless"></i>Cron
+                  </a>
+                 </td>
                 
                   </tr>
 
                   @if(env('APP_ENV')!='local')
+
                    <tr>
                   <td  style="vertical-align:middle">
                    <i class="menu-icon fa fa-github fa-4x "  style="color:purple"></i>
