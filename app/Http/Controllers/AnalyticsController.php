@@ -218,18 +218,7 @@ $CHSubSurvey = Cache::remember('CHSubSurvey',180,function(){
 	public function tester(){
 
 
-		$environment = env('APP_REDISPORT');
-
-		echo $environment;
-		      
-// $MNHSubSurvey = Cache::remember('MNHSubSurvey',180,function(){
-//       					return MNHSubSurvey::all();
-//       	});     
-
-// echo $MNHSubSurvey->load('x');
-	// 	$app = LRedis::connection();
-	// //$app->set('XTRA','a');
-	// print_r($app->get("CemonCNakuru"));  
+		
 
 
 	}
