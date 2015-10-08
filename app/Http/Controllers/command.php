@@ -39,7 +39,7 @@ class command  {
 
 		switch (env('APP_ENV')) {
 			case 'local':
-				array_unshift($clist,'cd ~/php/mnch');
+				array_unshift($clist,'cd ~/'.env("LOCAL_FOLDER").'/mnch');
 
 				break;
 			case 'test':
@@ -104,13 +104,13 @@ class command  {
 							'shutup'=>array('sudo php artisan up'),
 							'composerupdate'=>array('sudo composer update'),
 							'composerinstall'=>array('sudo composer install'),
-							'localrootfolder'=>array('sudo chown -R :www-data /home/vagrant/php/mnch','ls -ld /home/vagrant/php/mnch'),
-							'localstorage'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/storage','ls -ld /home/vagrant/php/mnch/storage'),
-							'localuploads'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/public/uploads','ls -ld /home/vagrant/php/mnch/public/uploads'),
-							'localmemcache'=>array('cd /home/vagrant/php/mnch/public/cache','sudo chmod +rx *','sudo chmod 0777 Config/Memcache.php','sudo chmod 0777 Temp/','ls -ld /var/www/mnch_bak/public/cache'),
-							'localredmin'=>array('sudo chmod -R 775 /home/vagrant/php/mnch/public/phpredmin','ls -ld /home/vagrant/php/mnch/public/phpredmin'),
+							'localrootfolder'=>array('sudo chown -R :www-data /home/vagrant/'.env("LOCAL_FOLDER").'/mnch','ls -ld /home/vagrant/'.env("LOCAL_FOLDER").'/mnch'),
+							'localstorage'=>array('sudo chmod -R 775 /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/storage','ls -ld /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/storage'),
+							'localuploads'=>array('sudo chmod -R 775 /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/uploads','ls -ld /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/uploads'),
+							'localmemcache'=>array('cd /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/cache','sudo chmod +rx *','sudo chmod 0777 Config/Memcache.php','sudo chmod 0777 Temp/','ls -ld /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/cache'),
+							'localredmin'=>array('sudo chmod -R 775 /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/phpredmin','ls -ld /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/phpredmin'),
 							'localmysqldump'=>array(''),
-							'localcron'=>array('cd /home/vagrant/php/mnch/public/phpredmin/public && sudo php index.php cron/index'),
+							'localcron'=>array('cd /home/vagrant/'.env("LOCAL_FOLDER").'/mnch/public/phpredmin/public && sudo php index.php cron/index'),
 							'testrootfolder'=>array('sudo chown -R :www-data /var/www/mnch_bak','ls -ld /var/www/mnch_bak'),
 							'teststorage'=>array('sudo chmod -R 775 /var/www/mnch_bak/storage','ls -ld /var/www/mnch_bak/storage'),
 							'testuploads'=>array('sudo chmod -R 775 /var/www/mnch_bak/public/uploads','ls -ld /var/www/mnch_bak/public/uploads'),
