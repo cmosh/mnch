@@ -164,7 +164,47 @@
                  </td>
 </tr>
 @endif
-             <tr>
+           
+
+
+                   <tr>
+                 <td  style="vertical-align:middle">
+                    <i class="fa fa-xing fa-4x"  style="color:green"></i>
+                  Nginx
+
+                  </td>
+
+                    <td>
+                      <a command="nginxrestart" class="btn btn-app">
+                    <i class="fa fa-refresh"></i> Restart
+                  </a>
+                    </td>
+
+                    <td>
+                      <a command="nginxreload" class="btn btn-app">
+                    <i class="fa fa-retweet"></i> Reload
+                  </a>
+                    </td>
+
+                    
+
+              
+                  	<td>
+                      <a command="{{env('APP_ENV')}}redis" class="btn btn-app">
+                    <i class="fa fa-cubes"></i> Redis Setup
+                  </a>
+                  	</td>
+
+                      <td>
+                      <a command="{{env('APP_ENV')}}redisremove" class="btn btn-app">
+                    <i class="fa fa-cubes" style="color:red"></i> Redis Remove
+                  </a>
+                    </td>
+                 
+                
+                  </tr>
+
+                    <tr>
                  <td  style="vertical-align:middle">
                     <i class="fa fa-music fa-4x"  style="color:magenta"></i>
                   Composer
@@ -179,20 +219,6 @@
                     <i class="fa fa-volume-up"></i> Update
                   </a>
                     </td>
-                  </tr>
-
-
-                   <tr>
-                 <td  style="vertical-align:middle">
-                    <i class="fa fa-database fa-4x"  style="color:yellow"></i>
-                  My SQL
-                  </td>
-                  	<td>
-                      <a command="{{env('APP_ENV')}}mysqldump" class="btn btn-app">
-                    <i class="fa fa-arrow-down"></i> Dump Mysql
-                  </a>
-                  	</td>
-                
                   </tr>
 
                 </tbody>
