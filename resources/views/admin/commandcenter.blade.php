@@ -45,7 +45,7 @@
                   </td>
                   	<td>
                       <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-pause"></i> Shutdown
+                    <i class="fa fa-pause"></i> Pause
                   </a>
                   	</td>
                   <td>
@@ -180,30 +180,58 @@
                   </a>
                     </td>
 
+
+
                     <td>
                       <a command="nginxrestart" class="btn btn-app">
                     <i class="fa fa-refresh"></i> Restart
                   </a>
                     </td>
-
+                   
+        
                     <td>
                       <a command="nginxreload" class="btn btn-app">
                     <i class="fa fa-retweet"></i> Reload
                   </a>
                     </td>
 
-                    
+                     <td>
+                      <a command="{{env('APP_ENV')}}ndown" class="btn btn-app">
+                    <i class="fa fa-retweet"></i> Shutdown Site
+                  </a>
+                    </td>
+
+                      <td>
+                      <a command="{{env('APP_ENV')}}nup" class="btn btn-app">
+                    <i class="fa fa-retweet"></i> Serve Site
+                  </a>
+                    </td>
+
+                    </tr>
+
+                           <tr>
+                 <td  style="vertical-align:middle">
+                    <i class="fa fa-cubes fa-4x"  style="color:red"></i>
+                  Redis Monitor
+
+                  </td>
 
               
                   	<td>
                       <a command="{{env('APP_ENV')}}redis" class="btn btn-app">
-                    <i class="fa fa-cubes"></i> Redis Setup
+                    <i class="fa fa-cubes" style="color:blue"></i> Setup &amp; Start
                   </a>
                   	</td>
 
                       <td>
                       <a command="{{env('APP_ENV')}}redisremove" class="btn btn-app">
-                    <i class="fa fa-cubes" style="color:red"></i> Redis Remove
+                    <i class="fa fa-cubes" style="color:orange"></i> Pause 
+                  </a>
+                    </td>
+
+                      <td>
+                      <a command="{{env('APP_ENV')}}redisreset" class="btn btn-app">
+                    <i class="fa fa-cubes" style="color:green"></i> Resume
                   </a>
                     </td>
                  
