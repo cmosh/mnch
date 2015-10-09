@@ -145,7 +145,8 @@ class command  {
 							'liveredis'=>array('sudo cp redisU /etc/nginx/sites-available/redis',"sudo sed -i 's/listenporthhh/".$theport."/g' /etc/nginx/sites-available/redis","sudo sed -i 's/livetestr/mnch/g' /etc/nginx/sites-available/redis",'sudo mv /etc/nginx/sites-available/redis /etc/nginx/sites-available/redislive'),
 							'liveredisremove'=>array('sudo rm -rf /etc/nginx/sites-available/redislive'),
 							'nginxreload'=>array('sudo service nginx reload'),
-							'nginxrestart'=>array('sudo service nginx restart')
+							'nginxrestart'=>array('sudo service nginx restart'),
+							'nginxtools'=>array('cd ~/','git clone https://github.com/perusio/nginx_ensite.git','cd nginx_ensite','sudo make install')
 
 							
 			);

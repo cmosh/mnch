@@ -175,6 +175,12 @@
                   </td>
 
                     <td>
+                      <a command="nginxtools" class="btn btn-app">
+                    <i class="fa fa-cutlery"></i> Tools Setup
+                  </a>
+                    </td>
+
+                    <td>
                       <a command="nginxrestart" class="btn btn-app">
                     <i class="fa fa-refresh"></i> Restart
                   </a>
