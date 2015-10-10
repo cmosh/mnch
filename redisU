@@ -1,0 +1,26 @@
+
+server {
+        listen listenporthhh default_server;
+        listen [::]:listenporthhh default_server ipv6only=on;
+
+        
+
+        root /var/www/livetestr/public/phpredmin/public/;
+
+      
+        index index.html index.htm index.php;
+
+        server_name 41.89.6.233;
+        include hhvm.conf;
+
+        location / {
+               
+                try_files $uri $uri/ /index.php?$query_string;
+               
+        }     
+
+       
+}
+
+
+

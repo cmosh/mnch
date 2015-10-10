@@ -218,7 +218,13 @@ $CHSubSurvey = Cache::remember('CHSubSurvey',180,function(){
 	public function tester(){
 
 
-		
+	echo	$theport = env('APP_REDISMANAGE');
+	echo "<br>"; 
+		echo $theurl = str_replace("http://",'',url(''));
+		echo "<br>"; 
+	echo	 $thefile = $theurl.':'.$theport;
+
+
 
 
 	}
