@@ -1,15 +1,16 @@
 @extends('app')
 
+
+
+<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
+
 @section('content')
-
-
-
-          
-          
+@if($info!='ok')
+    
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
-        <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Add Single User</font></div>
+        <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Register</font></div>
         <div class="panel-body">
           
       
@@ -131,6 +132,26 @@
    </div>
 
 
+
+   @else
+    <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><sup style="font-size: 20px"></sup></h3>
+                  <p>Your account has been created!</p>
+                  <p>You will be notified when your acount is activated.</p>
+                </div>
+                <div class="icon">
+                 
+                </div>
+              
+              </div>
+
+
+
+  @endif
+
+
+
             
 
 
@@ -153,15 +174,11 @@
 @section('javascript')
 
 
-<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
 
 
 <script type="text/javascript">
 
   $('#form-add').parsley();
-
-
-
  </script>
 
     @endsection

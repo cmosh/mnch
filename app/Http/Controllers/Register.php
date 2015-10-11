@@ -45,7 +45,7 @@ class Register extends Controller {
 
 
 				$Counties = countie::all();
-				return view('usermanagement.register')->with('counties',$Counties);
+				return view('usermanagement.register')->with('counties',$Counties)->with('info','');
 		
 	}
 
@@ -93,15 +93,40 @@ $array=$Requestuser->all();
                 $data, 
                 array('email' => $x[4]));
 
+
+ if($data['role']==0)
+		    			{
+		    				$role='county user';
+		    			}
+		    			if($data['role']==1)
+		    			{
+		    				$role='data clerk';
+		    			}
+		    			if($data['role']==2)
+		    			{
+		    				$role='program user';
+		    			}
+		    			if($data['role']>=3)
+		    			{
+		    				$role='system user';
+		    			}
+		    			if($data['role']=='')
+		    			{
+		    				$role='Unknown';
+		    			}
+
  Mail::send('emails.register',['name'=>$data['name']], function($message) use($data)
 {
-    $message->to($data['email'], 'MNCH')->subject('Accout Creation');
+    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
 });
-	
+	 Mail::send('emails.admin',['name'=>$data['name'],'county'=>$data['county'],'phone'=>$data['PhoneNumber'],'idnum'=>$data['IDNumber'],'email'=>$data['email'],'role'=>$role], function($message) use($data)
+{
+    $message->to('pchegenjenga@gmail.com', 'MNCH_noreply')->subject('Accout Creation');
+});
 	$users=User::all();
 	
 	
-			return redirect('/')->with('users',$users)->with('location','umanage')->with('title','User Management');
+				return view('usermanagement.register')->with('counties',$Counties)->with('info','ok');
 
 		
 	}

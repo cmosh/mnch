@@ -187,7 +187,7 @@ public function mail()
 
  Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
 {
-    $message->to($data['email'], 'MNCH')->subject('Accout Creation');
+    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
 });
 	
 	$users=User::all();
@@ -245,7 +245,7 @@ public function mail()
 
   Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
 {
-    $message->to($data['email'], 'MNCH')->subject('Accout Creation');
+    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
 });
 		 }
 
