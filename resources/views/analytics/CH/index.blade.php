@@ -24,7 +24,7 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3>Child Health Survey<sup style="font-size: 20px"></sup></h3>
-                  <p id="X">Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}} counties</p>
+                  <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -194,6 +194,7 @@
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawChart);
 
+
   $('#County').change(drawChart);
 
 	
@@ -262,7 +263,7 @@ function drawChart() {
        @include('analytics/CH/js/health_services') 
 
         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}}');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}}');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
