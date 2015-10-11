@@ -23,10 +23,7 @@ class Requestuser extends Request {
 	{
 		return [
 
-		'name'=>'required',
-		'email'=>'required|unique:users',
-		'PhoneNumber'=>'required',
-		'IDNumber'=>'required|unique:users',
+		
 		
 			//
 		];

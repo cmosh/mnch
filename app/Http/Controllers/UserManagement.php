@@ -9,8 +9,6 @@ use App\User;
 use App\Tables\User_monitor;
 use App\Tables\countie;
 use App\Tables\Counties_assessed;
-// use App\Tables\partial_peruser;
-// use App\Tables\completed_peruser;
 use App\Tables\Counties_submitted_today;
 use App\Tables\Counties_incomplete_today;
 use App\Tables\Counties_submitted;
@@ -54,10 +52,7 @@ class UserManagement extends Controller {
 	public function index(Request $request)
 	{
 		//
-		$users=User::all();
-
-
-
+		$users=User::where('role','<','4')->get();
 		
 		if($request->user()->role>=3)
 		{
@@ -328,22 +323,9 @@ public function mail()
 	public function update(Requestuser $Requestuser,$id)
 	{
 		//
-$v = Validator::make(Input::all(), $Requestuser->rules());
-   
-
-    if ($v->fails())
-    {
-        return redirect()->back()->withErrors($v->errors());
-    }
-    else
-    {
-
 		$array=$Requestuser->all();
 		$new=array_shift($array);
 		$x = array();
-
-
-
 	$users=new User;
 	foreach ($array as $key ) {
 		# code...
@@ -363,7 +345,7 @@ $v = Validator::make(Input::all(), $Requestuser->rules());
 		);
 		
 		
-
+var_dump($data);
  User::createOrUpdate(
                 $data, 
                 array('id' => $id));
@@ -374,7 +356,7 @@ $v = Validator::make(Input::all(), $Requestuser->rules());
 				return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
 	}
-}
+
 
 
 
@@ -481,7 +463,7 @@ if(Rq::ajax()) {
 		$user->update();
 		Mail::send('emails.status',['name'=>$user->name,'email'=>$user->email,'status' => $string], function($message) use($user) 
 		{
-		    $message->to($user->email, 'MNCH')->subject('Account Status');
+		    $message->to($user->email, 'MNCH_noreply')->subject('Account Status');
 		});
 
       print_r(json_encode($data));
@@ -511,7 +493,7 @@ if(Rq::ajax()) {
 
 		Mail::send('emails.reset',['name'=>$user->name], function($message) use($user)
 		{
-		    $message->to($user->email, 'MNCH')->subject('Password Reset');
+		    $message->to($user->email, 'MNCH_noreply')->subject('Password Reset');
 		});
 
 

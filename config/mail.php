@@ -56,7 +56,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'noreply.mnch@gmail.com', 'name' => 'MNCH'],
+	'from' => ['address' => 'kenyamnch@gmail.com', 'name' => 'MNCH'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
 	|
 	*/
 
-	'username' => 'noreply.mnch@gmail.com',
+	'username' => 'kenyamnch@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------

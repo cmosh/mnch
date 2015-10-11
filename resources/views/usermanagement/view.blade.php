@@ -112,24 +112,7 @@
 
                    <table id="example1" class="table table-bordered">
                    
-                    <thead>
-                      <tr>
-
-                     
-                        
-                        <th >Name</th>
-                         <th>Email</th>
-                        <th>County</th>
-                        <th>Phone Number</th>
-                  
-                        <th>Role</th>
-                        <th style="display:none">created at</th>
-                        <th  class= "hideprint">Action</th>
-                        <th  class= "hideprint"></th>
-                        <th  class= "hideprint"></th>
-                  
-                      </tr>
-                    </thead>
+         
  <thead>
                       <tr>
 
@@ -431,34 +414,10 @@
   $("#notification").hide();
 
       $(function () {
-              // var table=$('#example1').DataTable(
+              var table=$('#example1').DataTable(
 
-       // {"aaSorting": [[ 5, "desc" ]]});
+       {"aaSorting": [[ 5, "desc" ]]});
 
-
-
-            $('#example1').DataTable( {
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select style="width:100%"><option style="width:100%" value=""></option></select>')
-                    .appendTo( $(column.header()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option style="width:100%" value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
 
      var table2= $('#example2').DataTable(
 

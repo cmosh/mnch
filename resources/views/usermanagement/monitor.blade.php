@@ -356,10 +356,8 @@
                    <!--  -->
 
                         @foreach($counties_assessed as $county)
+
                         <tr>
-
-                      
-
                         
                         <td>
                           
@@ -392,7 +390,7 @@
                         <td > 
 
                          @foreach($incompletet as $inct)
-                            @if($county->Name==$subt->County && $inct->Description==$survey->Description)
+                            @if($county->Name==$inct->County && $inct->Description==$survey->Description)
                                 
 {{$inct->incomplete}}
                                 
