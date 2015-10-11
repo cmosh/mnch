@@ -108,12 +108,7 @@
 </script>
 <div id='mainContainer'>
     <h3>Redis Stats</h3>
-    <div class="alert alert-info">
-        <a class="close" data-dismiss="alert" href="#">×</a>
-        In order to view stats, you have to setup cron located in controllers directory
-    </div>
-
-
+    
     <form class="form-inline">
         <input type="text" id="from" placeholder="From">
         <input type="text" id="to" placeholder="To">
