@@ -83,13 +83,20 @@
 
               
                   <h3 class="box-title">
- 
+
+ <div id="loader" class="box box-default" >
+
+ <div  class="overlay">
+  <i class="fa fa-refresh fa-spin"></i>
+</div>
+ </div>
+                 
 <div style="text-align:center"  id="notification" class="alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4>  <i class="icon fa fa-check"></i> </h4>
                    <p id="notificationtext" ></p>
                   </div>
-                 
+                   
 
                   Users
                   </h3>
@@ -412,6 +419,8 @@
  <!-- DATA TABLES -->
   <script type="text/javascript">
   $("#notification").hide();
+   $('#loader').hide();
+
 
       $(function () {
               var table=$('#example1').DataTable(
@@ -461,7 +470,8 @@
  $('#activate{{$user->id}}').click(function()
  {
   if (confirm('Are you sure you want to activate {{$user->name}} ?')) {
-  
+  $('html,body').scrollTop(0);
+  $('#loader').show();
 
    function ajax3() {
  var data = {
@@ -478,12 +488,15 @@
        data: data,
            success: function(data){   
              location.reload();
+              $('#loader').hide();
+
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "{{$user->name}} has been activated ";
-$('html,body').scrollTop(0);
+
  
 $("#notification").delay(2000).show(0, function() {
     $("#notification").hide();
+
     
 
 });
@@ -502,6 +515,7 @@ $("#notification").delay(2000).show(0, function() {
  {
 
   if (confirm('Are you sure you want to Deactivate {{$user->name}} ?')) {
+     $('#loader').show();
   
 
    function ajax2() {
@@ -518,7 +532,9 @@ $("#notification").delay(2000).show(0, function() {
       type: "post",
        data: data,
            success: function(data){
+
          location.reload();
+          $('#loader').hide();
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "{{$user->name}} has been deactivated ";
 $('html,body').scrollTop(0);
@@ -547,6 +563,7 @@ $("#notification").delay(2000).show(0, function() {
    $('#reset{{$user->id}}').click(function check()
 {
   if (confirm('Are you sure you want to reset password for {{$user->name}} ?')) {
+     $('#loader').show();
   
 
    function ajax() {
@@ -564,7 +581,7 @@ $("#notification").delay(2000).show(0, function() {
        data: data,
            success: function(data){
 
-         
+          $('#loader').hide();
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "Paswword has been reset for {{$user->name}} ";
 $('html,body').scrollTop(0);

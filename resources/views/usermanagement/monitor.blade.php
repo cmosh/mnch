@@ -67,11 +67,6 @@
 
                              Records )
                              </small>
-
-
-
-
-
                             @endif
                             @if($survey->surveyID=='MNHV2')
 
@@ -122,6 +117,11 @@
                       </div>
                       <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse">
                         <div class="box-body">
+<table style="float:right">
+                         <tr>
+                                  <td><a  href="/usermanagement/export/{{$location}}/general/{{$survey->surveyID}}/all">Download Excel</a></td>                   
+                           </tr>
+                      </table>
                 
                 <br>
                 <br>
@@ -129,7 +129,7 @@
   
 
 
-                  
+
                     <thead>
                       <tr>
 
