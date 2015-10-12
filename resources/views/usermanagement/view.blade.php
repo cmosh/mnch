@@ -83,13 +83,20 @@
 
               
                   <h3 class="box-title">
- 
+
+ <div id="loader" class="box box-default" >
+
+ <div  class="overlay">
+  <i class="fa fa-refresh fa-spin"></i>
+</div>
+ </div>
+                 
 <div style="text-align:center"  id="notification" class="alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4>  <i class="icon fa fa-check"></i> </h4>
                    <p id="notificationtext" ></p>
                   </div>
-                 
+                   
 
                   Users
                   </h3>
@@ -112,24 +119,7 @@
 
                    <table id="example1" class="table table-bordered">
                    
-                    <thead>
-                      <tr>
-
-                     
-                        
-                        <th >Name</th>
-                         <th>Email</th>
-                        <th>County</th>
-                        <th>Phone Number</th>
-                  
-                        <th>Role</th>
-                        <th style="display:none">created at</th>
-                        <th  class= "hideprint">Action</th>
-                        <th  class= "hideprint"></th>
-                        <th  class= "hideprint"></th>
-                  
-                      </tr>
-                    </thead>
+         
  <thead>
                       <tr>
 
@@ -429,36 +419,14 @@
  <!-- DATA TABLES -->
   <script type="text/javascript">
   $("#notification").hide();
+   $('#loader').hide();
+
 
       $(function () {
-              // var table=$('#example1').DataTable(
+              var table=$('#example1').DataTable(
 
-       // {"aaSorting": [[ 5, "desc" ]]});
+       {"aaSorting": [[ 5, "desc" ]]});
 
-
-
-            $('#example1').DataTable( {
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select style="width:100%"><option style="width:100%" value=""></option></select>')
-                    .appendTo( $(column.header()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option style="width:100%" value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
 
      var table2= $('#example2').DataTable(
 
@@ -502,7 +470,8 @@
  $('#activate{{$user->id}}').click(function()
  {
   if (confirm('Are you sure you want to activate {{$user->name}} ?')) {
-  
+  $('html,body').scrollTop(0);
+  $('#loader').show();
 
    function ajax3() {
  var data = {
@@ -519,12 +488,15 @@
        data: data,
            success: function(data){   
              location.reload();
+              $('#loader').hide();
+
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "{{$user->name}} has been activated ";
-$('html,body').scrollTop(0);
+
  
 $("#notification").delay(2000).show(0, function() {
     $("#notification").hide();
+
     
 
 });
@@ -543,6 +515,7 @@ $("#notification").delay(2000).show(0, function() {
  {
 
   if (confirm('Are you sure you want to Deactivate {{$user->name}} ?')) {
+     $('#loader').show();
   
 
    function ajax2() {
@@ -559,7 +532,9 @@ $("#notification").delay(2000).show(0, function() {
       type: "post",
        data: data,
            success: function(data){
+
          location.reload();
+          $('#loader').hide();
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "{{$user->name}} has been deactivated ";
 $('html,body').scrollTop(0);
@@ -588,6 +563,7 @@ $("#notification").delay(2000).show(0, function() {
    $('#reset{{$user->id}}').click(function check()
 {
   if (confirm('Are you sure you want to reset password for {{$user->name}} ?')) {
+     $('#loader').show();
   
 
    function ajax() {
@@ -605,7 +581,7 @@ $("#notification").delay(2000).show(0, function() {
        data: data,
            success: function(data){
 
-         
+          $('#loader').hide();
       $("#notification").show();
 document.getElementById("notificationtext").innerHTML = "Paswword has been reset for {{$user->name}} ";
 $('html,body').scrollTop(0);
