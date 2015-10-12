@@ -58,10 +58,6 @@ Route::get('status/{status}/{AssID}','AssessmentController@status');
 Route::post('survey/autosave','surveys@autosave');
 
 Route::post('survey/save','surveys@saveajax');
-
-
-
-
 Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
 Route::get('usermanagement/viewusers','UserManagement@index');
@@ -83,11 +79,12 @@ Route::get('usermanagement/mail','UserManagement@mail');
 
 
 Route::post('usermanagement/store','UserManagement@store');
-
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
 ]);
+Route::get('self/register','Register@index');
+Route::post('self/store','Register@store');
 
 Route::get('assessments/cancel/{id}','AssessmentController@destroy');
 Route::put('assessments/{id}','surveys@update');

@@ -80,9 +80,9 @@
                        <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
                        @foreach($Counties as $County)
                         <!-- change if later -->
-                         @if($Survey->surveyID!='CHV1')
+                        
                        <option value ="{{$County->Name}}" id ="{{$County->Name}}" >{{$County->Name}}</option>
-                        @endif
+                       
                         @endforeach
                        </select>
                      
@@ -94,9 +94,9 @@
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                        @foreach($Surveys as $Survey)
                        <!-- change if later -->
-                         @if($Survey->surveyID!='CHV1')
+                         
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}} </option>
-                        @endif
+                      
                         @endforeach
                        </select>
                       </div>
@@ -186,9 +186,9 @@
                        
                        @foreach($Surveys as $Survey)
                        <!-- change if later -->
-                         @if($Survey->surveyID!='CHV1')
+                         
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
-                        @endif
+                        
                         @endforeach
                        </select>
                       </div>
@@ -211,9 +211,9 @@
                        
                        @foreach($Surveys as $Survey)
                        <!-- change if later -->
-                         @if($Survey->surveyID!='CHV1')
+                         
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
-                        @endif
+                     
                         @endforeach
                        </select>
                       </div>

@@ -108,10 +108,7 @@
     <div class="tab-content">
         <div class="tab-pane fade active in" id="keys">
             <legend>Search keys</legend>
-            <div class="alert alert-warning">
-                <a class="close" data-dismiss="alert" href="#">×</a>
-                Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
-            </div>
+           
             <form class="form-search" action="<?=$this->router->url?>/keys/search/<?= $this->app->current['serverId'] . '/' . $this->app->current['database'] ?>" method="get">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-key"></i></span>

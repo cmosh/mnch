@@ -2,10 +2,7 @@
 <div id='mainContainer'>
     <h3>Search Results <small><?=count($this->keys)?> result(s) found</small></h3>
 
-    <div class="alert alert-warning">
-        <a class="close" data-dismiss="alert" href="#">×</a>
-        Since this doesn't support pagination yet, try to limit your search. Otherwise your browser might crash
-    </div>
+
     <?php if ($this->search && !count($this->keys)): ?>
     <div class="alert alert-warning">
         <a class="close" data-dismiss="alert" href="#">×</a>
