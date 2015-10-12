@@ -93,7 +93,7 @@ class analyse extends analysisfunctions {
       					$temp[1][0] = 'Does the facility have an ORT corner?';
       					$temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
       					$temp[3][0] = 'Is the ORT register upto date (Including zero-reporting)?';
-      					//$temp[]=self::ortfunction();
+      					$temp[]=self::ortfunction();
 
       					return $temp;
 

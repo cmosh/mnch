@@ -12,7 +12,35 @@ class analysisfunctions extends Controller {
 	
 
 
+	protected static function ortfunction(){
+		global $surveys;
 
+			$recset = $surveys;
+$countB = count($recset);
+      	 $Data = $recset->load(['x' => function($query)
+{
+	
+    $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW03COL02')
+    	  ->where('Data','=','1')
+    	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW06COL02')
+    	   ->where('Data','=','1')
+    	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW07COL02')
+    	   ->where('Data','=','1');
+}])->lists('x');
+      	 $countF = 0;
+      foreach ($Data as $data) {
+
+      	if(count($data) == 3){
+
+      		$countF++;
+      	}
+
+      
+      }
+     
+
+ return array('Functionality',$countF,$countB-$countF,0);
+	}
 
 	private  static function count_YN($cl){
  global $surveys;
