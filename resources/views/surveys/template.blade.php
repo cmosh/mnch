@@ -9,7 +9,7 @@
 
   <!-- Select2 -->
     <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
-    <link href ="{{ URL::asset('bower_components/parsleyjs/src/parsley2.css') }}"  rel="stylesheet" type="text/css" />  
+    <link href ="{{ URL::asset('bower_components/parsleyjs/src/parsley.css') }}"  rel="stylesheet" type="text/css" />  
 @endsection 
 
 @section('content')

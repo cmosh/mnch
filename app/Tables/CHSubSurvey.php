@@ -8,7 +8,9 @@ class CHSubSurvey extends Model {
 	protected $table = 'CHSubSurveys';
 	//
 
-	 public function x()
+
+
+	 public function x()    
     {
         return $this->hasMany('App\Tables\SubmittedRecords_CH','AssID','Assessment_ID');
     }

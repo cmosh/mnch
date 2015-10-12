@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 class analysisfunctions extends Controller {
 
 
+
+	
+
+
+
+
 	private  static function count_YN($cl){
  global $surveys;
  
@@ -87,6 +93,42 @@ protected static function getLabel($trim,$col){
 			 	$o[1],
 			 	$o[2],
 			 	$o[3],
+			 	$o[-51]
+			 	);
+		}
+
+		}
+		if($extrarow!==null)$array[]=$extrarow;
+		return $array;
+
+	}
+
+	protected static function SevenOptionsFullStack($Block,$headings,$trim,$b,$t,$LabelCol,$DataCol,$extratrim,$exclude=array(),$extrarow=null)
+	{
+
+			$array [] = $headings;
+
+		for ($i=$b; $i < $t; $i++) { 
+			if(!(in_array($i,$exclude))){
+			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
+			if(!(isset($o[1]))) $o[1]=0;
+			if(!(isset($o[2]))) $o[2]=0;
+			if(!(isset($o[3]))) $o[3]=0;
+			if(!(isset($o[4]))) $o[4]=0;
+			if(!(isset($o[5]))) $o[5]=0;
+			if(!(isset($o[6]))) $o[6]=0;
+			if(!(isset($o[7]))) $o[7]=0;
+			if(!(isset($o[-51]))) $o[-51]=0;
+			
+			$array [] = array (
+			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
+			 	$o[1],
+			 	$o[2],
+			 	$o[3],
+			 	$o[4],
+			 	$o[5],
+			 	$o[6],
+			 	$o[7],
 			 	$o[-51]
 			 	);
 		}
@@ -370,26 +412,41 @@ global $surveys;
 
 		 $recset = $surveys;
 
-$Data = $recset->load(['z' => function($query)
-{
 	
-    $query->select('FacilityCode','Type');
-}])->lists('z');
+		 	$Data = $recset->groupby('Type');
+      	
 
-
-$x = collect($Data);
-
-
-$z =  $x->groupby('Type');
-
-
-	foreach ($z as $v) {
+      		foreach ($Data as $v) {
 
 		$array [] = array( $v[0]['Type'], count($v));
 		
 	}
 
- return ($array);
+
+		
+ return $array;
+
+
+// $Data = $recset->load(['z' => function($query)
+// {
+	
+//     $query->select('FacilityCode','Type');
+// }])->lists('z');
+
+
+// $x = collect($Data);
+
+
+// $z =  $x->groupby('Type');
+
+
+// 	foreach ($z as $v) {
+
+// 		$array [] = array( $v[0]['Type'], count($v));
+		
+// 	}
+
+//  return ($array);
 	
 			}
 
@@ -448,6 +505,68 @@ protected static function staff_trained(){
 	
 
 }			
+
+
+protected static function staff_trained_MNH(){
+
+	$Array [] = array('No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s');
+	for ($i=4; $i <13 ; $i++) { 
+
+		$index = sprintf('%02d',$i);
+		$col = self::staff_trained_col_MNH('COL'.$index);
+		$Label = trim(self::getLabel(0,'MNHV2SEC4BLK1RW02COL'.$index)  ,'/^# of staf trained in/');
+		$Array [] = array(
+
+			trim(str_replace("in ", "", $Label),'/^d/'),
+			$col[0],
+			$col[1],
+			$col[2]
+			);
+
+
+
+		
+	}
+	return ($Array);
+	
+
+}	
+
+protected static function staff_trained_col_MNH($col){
+
+	global $surveys;
+	//CHV2SEC1BLK1RW02COL04chslabelless_number_box1
+	//MNHV2SEC4BLK1RW03COL04
+	$recset = $surveys;
+	$DataD = $recset->load(['y' => function($query) use($col)
+{
+	
+    $query->where('ColumnSetID', '=', 'MNHV2SEC4BLK1RW03'.$col);
+}])->lists('y');
+
+$DataD = collect($DataD)->sum('Data');
+
+	$DataN = $recset->load(['y' => function($query) use($col)
+{
+	
+    $query->where('ColumnSetID', '=', 'MNHV2SEC4BLK1RW04'.$col);
+}])->lists('y');
+
+$DataN = collect($DataN)->sum('Data');
+
+	$DataR = $recset->load(['y' => function($query) use($col)
+{
+	 
+    $query->where('ColumnSetID', '=', 'MNHV2SEC4BLK1RW05'.$col);
+}])->lists('y');
+
+	$DataR = collect($DataR)->sum('Data');
+
+
+	return  array($DataD,$DataN,$DataR);
+}
+
+
 
 protected static function staff_trained_col($col){
 
@@ -697,67 +816,349 @@ echo $TCU;
 
 
 
-protected static function FacilityTypeYesNO($col,$Headings){
 
-	$FacilityGroups = FacilityGroup::all();
-$Fgs = array_keys($FacilityGroups->groupBy('FacilityGroup')->toArray()); 
 
-$F [] = $Headings;
-//$F = $FacilityGroups->load('x.p.y')/*->groupBy('FacilityGroup')*/;
+		protected static function dserviceconduct()
+		{
 
-//echo $FacilityGroups;
-		foreach ($Fgs as $Fg ) {
-			$FacilityGroup = FacilityGroup::where('FacilityGroup','=',$Fg)->get();
-				
 
-				$temp = $FacilityGroup->load(['x.p.y' => function($query) use ($col)
+			global $surveys;
+
+							$recset = $surveys;
+	$Data = $recset->load(['y' => function($query) 
 {
 	
-    $query->where('ColumnSetID', '=', $col);
-}]);
+    $query->where('ColumnSetID', '=', 'MNHV2SEC1BLK1RW03COL02');
+}])->lists('y');
+
+	$RawData = collect($Data)->lists('Data');
+
+	$x = array_count_values($RawData);
+	
+
+	$ones = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'1') !== false) {
+    $ones += $value;
+			}
+		
+	}
 
 
 
-				$temp = collect($temp->lists('x')[0]);
+	$twos = 0;
+	foreach ($x as $key => $value) {
 
-				$temp = $temp->lists('p');
+		if (strpos($key,'2') !== false) {
+    $twos += $value;
+			}
+		
+	}
 
-			
-					
-				$temp = collect($temp);
-				
-				$temp = collect($temp)->filter(function ($temp)  {
-    return sizeof($temp) > 0;
-});
+	
 
-				$temp = collect($temp->lists('y'));
-				$temp = $temp->lists('Data');
+	$threes = 0;
+	foreach ($x as $key => $value) {
 
-				$o = array_count_values($temp);
+		if (strpos($key,'3') !== false) {
+    $threes += $value;
+			}
+		
+	}
+
+	$fours = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'4') !== false) {
+    $threes += $value;
+			}
+		
+	}
+	$fives = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'5') !== false) {
+    $threes += $value;
+			}
+		
+	}
+
+	
+
+	$others = 0;
+	foreach ($x as $key => $value) {
+
+		if ( (trim($key,'12345,')) !== ''   )   {
+
+			$others+=$value;
+		}
+		
+	}
+
+	
 
 
-				if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
-
-				// $temp = $temp->values()->toArray();
-				// $temp = collect($temp)->lists('y');
-			
 
 
-			//echo collect(array_diff($temp,[]));
 
-				//$temp = $temp->lists('Facility_ID');
-							
-				$F[] = array($Fg,$o[1],$o[2],$o[-51]);
+
+
+
+	$Array [] = array('Inadequate skill',$ones);
+	$Array [] = array('Inadequate staff',$twos);
+	$Array [] = array('Inadequate infrastructure',$threes);
+	$Array [] = array('Inadequate Equipment',$fours);
+	$Array [] = array('Inadequate Commodities and Suppliers',$fives);
+	$Array [] = array('Others',$others);
+
+	return ($Array);
+
+
+
+		}
+
+		protected static function bedcapacity(){
+			global $surveys;
+
+			$array [] = array('Bed Capacity','New Born','Maternal','Total');
+	$recset = $surveys;
+
+				$Rec = $recset->groupby('Type');
+      	
+
+      		foreach ($Rec as $v) {
+
+      			$type = $v[0]['Type'];
+
+
+
+
+	$Data = $recset->load(['y' => function($query) use ($type)
+		{
+	
+    $query->where('Type','=',$type)
+    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW06COL02');
+		}])->lists('y');
+
+	$Total = collect($Data)->sum('Data');
+
+	$Data = $recset->load(['y' => function($query) use ($type)
+		{
+	
+    $query->where('Type','=',$type)
+    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW07COL02');
+		}])->lists('y');
+
+	$Maternity = collect($Data)->sum('Data');
+
+	$Data = $recset->load(['y' => function($query) use ($type)
+		{
+	
+    $query->where('Type','=',$type)
+    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW08COL02');
+		}])->lists('y');
+
+	$NewBorn = collect($Data)->sum('Data');
+
+
+
+		
+		$array[]=array($type,$NewBorn,$Maternity,$Total);
+		
+		
+	}
+
+	
+
+	return $array;
+
+
+
+		}
+
+	protected static function skillbirth(){
+
+		global $surveys;
+
+		$array [] = array('Skilled birth attendants','0','1-5','6-10','>10');
+	$recset = $surveys;
+
+				$Rec = $recset->groupby('Type');
+      	
+
+      		foreach ($Rec as $v) {
+
+      			$type = $v[0]['Type'];
+
+
+
+
+	$Data = $recset->load(['y' => function($query) use ($type)
+		{
+	
+    $query->where('Type','=',$type)
+    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW03COL02');
+		}])->lists('y');
+
+	
+		$Data=collect($Data);
+	$Data = $Data->groupby('Data')->toArray();
+
+	$keys = array_keys($Data);
+
+	$count0 = 0;
+	$count5 = 0;
+	$countBeyond = 0;
+	$count10 = 0;
+
+	
+	foreach ($keys as $key ) {
+
+	
+
+		if ($key > 0 && $key < 6  && $key!= "") {
+			$count5 += count($Data[$key]);
+		}
+		elseif ($key >= 6 && $key<=10 && $key!="") {
+			$count10 += count($Data[$key]);
+		}
+		elseif($key >10 && $key!=""){
+			$countBeyond += count($Data[$key]);
+		}
+
+		else{
+			$count0 = count($Data[0]);
+		}
+
 		}
 
 
+		$array [] = array($type,$count0,$count5,$count10,$countBeyond);
+		
+		
+	}
+
+	
+
+	return $array;
+	}
+
+
+	protected static function FacilityTypes2Stack($col,$headings){
+
+		global $surveys;
+
+		$array [] = $headings;
+
+
+	$recset = $surveys;
+
+				$Rec = $recset->groupby('Type');
+      	
+
+      		foreach ($Rec as $v) {
+
+      			$type = $v[0]['Type'];
 
 
 
-		return $F;
 
-}
+	$Data = $recset->load(['y' => function($query) use ($type,$col)
+		{
+	
+    $query->where('Type','=',$type)
+    ->where('ColumnSetID', '=', $col);
+		}])->lists('y');
+
+		 $Data = collect($Data)->groupby('Data')->toArray();
+
+		 if(!isset($Data[1])) $Data[1] = array();
+		 if(!isset($Data[2])) $Data[2] = array();
+		 if(!isset($Data[-51])) $Data[-51] = array();
+		
+		 $array [] = array($type,count($Data[1]),count($Data[2]),count($Data[-51]));
+
+	}
+
+
+	return $array;
+
+
+
+	}
+
+
+	protected static function MNHPies($slices,$col){
+
+global $surveys;
+
+				// $slices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other (Specify)','No information provided');
+
+
+		 $recset = $surveys;
+
+$Data = $recset->load(['y' => function($query) use ($col)
+{
+	
+    $query->where('ColumnSetID','=',$col);
+}])->lists('y');
+
+	$Data=array_filter(collect($Data)->lists('Data'));
+
+	$x =  array_count_values($Data);
+
+	 $otherval = count($slices)-1;
+	 $noinfoval = count($slices);
+
+
+
+	
+	foreach ($x as $key => $value) {
+
+		if (is_numeric($key)) {
+
+			if(!isset($vl[$key])) $vl[$key] = 0;
+
+			$vl[$key] += $value; 
+   			
+			}
+			elseif ($key==-51) {
+if(!isset($vl[$noinfoval])) $vl[$noinfoval] = 0;
+				$vl[$noinfoval] += $value; 
+				
+			}else{
+
+if(!isset($vl[$otherval])) $vl[$otherval] = 0;
+				$vl[$otherval] += $value; 
+			}
+
+
+
+		
+	}
+
+	// return $vl;
+
+	foreach ($slices as $key => $slice ) {
+
+		if(!isset($vl[($key+1)])) $vl[($key+1)] = 0;
+		$array [] =  array($slice,$vl[($key+1)]);
+
+	}
+
+		
+	
+	return $array;
+
+	}
+
+
+
+
+
+
+
+
 
 }

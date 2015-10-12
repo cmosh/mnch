@@ -6,17 +6,7 @@
 
   <div class="row">
  
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3>Maternal Neonatal Healthcare Survey<sup style="font-size: 20px"></sup></h3>
-                  <p>Data from {{$SubmittedCHCount->X}} facilities in {{count($SubmittedCHCounties)}} counties</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-              
-              </div>
+             
               {!! Form::open() !!}
        
 
@@ -28,7 +18,19 @@
    </div>
    @include('analytics/CH/html/county')
 
- <div class="col-md-12">
+ <div class="col-md-8">
+
+  <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>Maternal Neonatal Healthcare Survey<sup style="font-size: 20px"></sup></h3>
+                  <p>Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              
+              </div>
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -47,9 +49,22 @@
 
 
      
-                 @include('analytics/MNH/html/dservice')
+            <div class="col-md-12">
+                   @include('analytics/MNH/html/dservice')
+
+                    @include('analytics/MNH/html/dserviceconduct')
+
 
         @include('analytics/MNH/html/hman')
+
+        @include('analytics/MNH/html/skillbirth')
+        @include('analytics/MNH/html/bedcapacity')
+          @include('analytics/MNH/html/hours24')
+
+
+            </div>
+
+
 
         <div class="col-md-12">
                         
@@ -63,7 +78,11 @@
 </div>
   
  @include('analytics/MNH/html/bemonc')
+  @include('analytics/MNH/html/BemoncChallenge')
 @include('analytics/MNH/html/cemonc')
+ @include('analytics/MNH/html/MainBlood')
+ @include('analytics/MNH/html/ReasonBlood')
+ @include('analytics/MNH/html/Reasoncs')
   @include('analytics/MNH/html/newborn')
   @include('analytics/MNH/html/devpep')
    @include('analytics/MNH/html/kangaroo')
@@ -186,7 +205,14 @@ function drawChart() {
      @include('analytics/MNH/js/newborn')
      @include('analytics/MNH/js/kangaroo')
      @include('analytics/MNH/js/devpep')
-   
+         @include('analytics/MNH/js/dserviceconduct')
+         @include('analytics/MNH/js/skillbirth')
+           @include('analytics/MNH/js/bedcapacity')
+          @include('analytics/MNH/js/hours24')
+            @include('analytics/MNH/js/BemoncChallenge')
+             @include('analytics/MNH/js/MainBlood')
+             @include('analytics/MNH/js/ReasonBlood')
+              @include('analytics/MNH/js/Reasoncs')
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
       $( ".wait" ).removeClass("overlay");
