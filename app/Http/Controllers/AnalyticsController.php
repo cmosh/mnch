@@ -184,7 +184,7 @@ $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
       					return CHSubSurvey::all();
       	});  
 
-      	$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'All');
+      //	$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'All');
 		
    
 			
@@ -320,7 +320,7 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey',180,function(){
       	});     
 
 
-			$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
+			//$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
 
 		
 		$SubmittedMNHCount = SubmittedMNHCount::first();
