@@ -10,6 +10,8 @@
   <!-- Select2 -->
     <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
     <link href ="{{ URL::asset('bower_components/parsleyjs/src/parsley.css') }}"  rel="stylesheet" type="text/css" />  
+
+
 @endsection 
 
 @section('content')
@@ -34,8 +36,12 @@
 
                 {!! Form::submit('Submit',['class' => 'submit btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
 
+
                 {!! Form::close() !!}
                  <a>  <button  id="some_id2" class="send-btn btn btn-info form-control" >Confirm and Proceed to Review</button></a>
+
+                  <a>  <button  id="loader" style="display:none;" class="send-btn btn btn-warning form-control" disabled> Submitting <img src="/pace/loader.gif"  id="imgProgress" /> </button></a>
+                  
 
 				
 			
@@ -50,6 +56,8 @@
 
 @section('javascript')
 
+ <script src="/pace/pace.min.js"></script>
+  <link href="/pace/pace.css" rel="stylesheet" />
 
 <script type="text/javascript">
     
@@ -101,7 +109,7 @@ $('.asave').change(function () {
       }
     }); 
         
-    }, 180000);
+    }, 20000);
 });
 
 
@@ -112,7 +120,69 @@ $(document).ready(function(){
      $('.send-btn').click(function(){ 
     var data = {
 
-        'type':'trigger',
+        'type':'auto',
+        'AssID':'{{$AssID}}',
+         'user':{{ Auth::user()->id }},
+         @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
+  
+                @endforeach
+         '_token': $('input[name=_token]').val()
+
+    };
+ 
+         var data2 = {
+         @foreach($AjaxNames as $AjaxName)
+          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]:checked').val(),
+
+                @endforeach
+         
+    };
+
+        $.extend( data, data2 );
+
+    $.ajax({
+      url: '/survey/save',
+      type: "post",
+       data: data,
+         beforeSend: function() {                    
+                      
+                },
+
+      success: function(data){
+            $('#changeclass').attr('class','callout callout-success');
+
+             $('#changeclass').text('Saved');    
+              $('#thesubmit').show();    
+      },
+      error: function(){
+
+        alert('error');
+      }
+
+
+    });      
+  
+              $('#demo-form').attr('action','/survey/{{$id}}/Progress');  }); 
+});
+         
+</script>
+
+
+<script type="text/javascript">
+
+
+
+
+
+$("#demo-form").submit(function() {
+
+   $('#thesubmit').hide();   
+ $('#loader').show();   
+
+    var data = {
+
+        'type':'Submitted',
         'AssID':'{{$AssID}}',
          'user':{{ Auth::user()->id }},
          @foreach($AjaxNames as $AjaxName)
@@ -138,16 +208,35 @@ $(document).ready(function(){
       type: "post",
        data: data,
       success: function(data){
-            $('#changeclass').attr('class','callout callout-success');
+            $('#changeclass').attr('class','callout callout-danger');
 
-             $('#changeclass').text('Saved');        
+             $('#changeclass').text('Saved');  
+             
+             @if($location=="CH")
+             var u = 'CH'; 
+             @elseif($location=="MN")
+              var u = 'MNH'; 
+             @else 
+              var u = 'IMCI'; 
+             @endif
+
+              window.location = ('{{URL::asset("/assessment")}}/'+u);
+
+
+
+
       }
-    });      
+    });  
+
   
-              $('#demo-form').attr('action','/survey/{{$id}}/Progress');  }); 
-});
+
+   return false;
+
+            }); 
+
          
 </script>
+
 
 <script type="text/javascript">
     
@@ -172,12 +261,14 @@ $('#some_id2').click(function() {
 
   //  $(location).attr('thesubmit', linki);
 
-    $('#thesubmit').show();
+   
     $('#saved').show();
     window.scrollTo(0, 0);
     
     $('#some_id2').hide();
 });
+
+
 
            
       </script>   
