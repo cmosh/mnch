@@ -22,7 +22,7 @@ class builder extends Controller {
         <div id = "top"> </div>
          <div id="saved" style="display:none">
                 <div  id="changeclass" class="callout callout-warning" >
-                <h3 id="changetext" >Saving Please Wait</h3>
+                <h3 id="changetext" >Saving Please Wait <img src="/pace/bloader.gif"  id="imgProg" /> </h3>
                 <p>Please check if you have fully completed the form before submitting.</p>
             </div>
             </div>';
@@ -808,6 +808,8 @@ class builder extends Controller {
                                         $ColID[] = $ColumnSetIDName;
                                         
                                         foreach ($fieldValueList as $fieldd) {
+                                              if(isset($datass->get($ColumnSetIDName)->Data))$dts=$datass->get($ColumnSetIDName)->Data;
+                                            else $dts = "";
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
                                              $AjaxNames[]= $fieldIDName;
@@ -817,7 +819,7 @@ class builder extends Controller {
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;
-                                            $HtmlLines.= '" value="' . ($datass->get($ColumnSetIDName)->Data) . '" required data-parsley-error-message="Required">';
+                                            $HtmlLines.= '" value="' .$dts. '" required data-parsley-error-message="Required">';
                                             if ($fieldd->Label != "") {
                                                 $HtmlLines.= '<span class="input-group-addon">';
                                                 $HtmlLines.= $fieldd->Label;
@@ -853,7 +855,9 @@ class builder extends Controller {
                                         $HtmlLines.= 'style="vertical-align:middle"  >
                                                                                     <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
                                         $ColID[] = $ColumnSetIDName;
-                                        
+                                          if(isset($datass->get($ColumnSetIDName)->Data))$dts=$datass->get($ColumnSetIDName)->Data;
+                                            else $dts = "";
+
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
@@ -864,7 +868,7 @@ class builder extends Controller {
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;
-                                            $HtmlLines.= '" value="' . ($datass->get($ColumnSetIDName)->Data) . '" required data-parsley-error-message="Required"></textarea>';
+                                            $HtmlLines.= '" value="' . $dts. '" required data-parsley-error-message="Required"></textarea>';
                                         }
                                         $HtmlLines.= '</div>';
                                     }
@@ -887,6 +891,8 @@ class builder extends Controller {
                                             $HtmlLines.= $datass->get($ColumnSetIDName)->Data;
                                         }
                                     } 
+
+
                                     else {
                                         
                                         //saving-number
@@ -895,7 +901,8 @@ class builder extends Controller {
                                         $ColID[] = $ColumnSetIDName;
                                         
                                         foreach ($fieldValueList as $fieldd) {
-                                            
+                                            if(isset($datass->get($ColumnSetIDName)->Data))$dts=$datass->get($ColumnSetIDName)->Data;
+                                            else $dts = "";
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
                                              $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
@@ -904,7 +911,7 @@ class builder extends Controller {
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;
-                                            $HtmlLines.= '" value="' . $datass->get($ColumnSetIDName)->Data . '" required data-parsley-error-message="Required">';
+                                            $HtmlLines.= '" value="' . $dts . '" required data-parsley-error-message="Required">';
                                             if ($fieldd->Label != "") {
                                                 $HtmlLines.= '<span class="input-group-addon">';
                                                 $HtmlLines.= $fieldd->Label;
@@ -1328,8 +1335,9 @@ class builder extends Controller {
           <div id = "top"> </div>
          <div id="saved" style="display:none">
                 <div  id="changeclass" class="callout callout-warning" >
-                <h3 id="changetext" >Saving Please Wait</h3>
+                <h3 id="changetext" >Saving Please Wait  <img src="/pace/bloader.gif" id="imgProg" /> </h3>
                 <p>Please check if you have fully completed the form before submitting.</p>
+
             </div>
             </div>';
         
