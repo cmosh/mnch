@@ -788,17 +788,20 @@ class builder   {
                         $fieldsetID = $Single_ColumnSetCollection->field_setID;
                         
                         $currentFieldset = $Single_ColumnSetCollection->field_set;
-
+                            // echo  $Single_ColumnSetCollection->column_setID;
+                            // echo $Single_ColumnSetCollection->field_setID;
                       //  foreach ($currentFieldsets as $currentFieldset) {
                             
                             // code...
                             
                             //number,text,combo,multiplecombo,coolcombo,label,radio
                             
-                            $typededuction = $currentFieldset->type;
+                           if(!isset( $currentFieldset->type)) $typededuction = "error";
+                           else{ $typededuction = $currentFieldset->type;
+                              $fieldValueList = collect($currentFieldset->fields)->keyBy('Value');}
                             
                             // $fieldValueList = Field::where('field_setID', '=', $currentFieldset->field_setID)->get()->keyBy('Value');
-                            $fieldValueList = collect($currentFieldset->fields)->keyBy('Value');
+                          
 
                             switch ($typededuction) {
                                 case "label":
@@ -1328,7 +1331,8 @@ class builder   {
                                     break;
 
                                 default:
-                                    echo "dai era!";
+                                $HtmlLines.="error";
+                                    // echo "dai era!";
                             
                         }
                         
