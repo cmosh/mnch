@@ -23,34 +23,19 @@ Route::post('/admin/docmd', 'administration@docmd');
 Route::post('/admin/globcmd', 'administration@globcmd');
 Route::get('/redmin','CacheController@redmin');
 Route::get('/memcached','CacheController@memcached');
-Route::get('/test','AnalyticsController@blah');
+
 Route::get('/','AnalyticsController@ch');
 Route::post('/map','AnalyticsController@mapRequest');
 Route::post('/analytics/chajax','AnalyticsController@chajax');
 Route::post('/analytics/mnhajax','AnalyticsController@mnhajax');
 Route::get('/mnh','AnalyticsController@mnh');
 Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
+
 Route::get('/tester','AnalyticsController@tester');
+Route::get('/test','AnalyticsController@blah');
+
 Route::post('survey/{id}/{status}','surveys@update');
-Route::get('/redis/{test}',function($test){
 
-
- 
-	$test = array('php artisan cache:clear','php artisan cache:clear');
-
-	SSH::into('SiteGuban')->run($test, function($line)
-{
-	
-   echo   ($line.PHP_EOL);
-
-   
-});
-
-
-
-
-
-});
 Route::post('survey/survey/{id}/{status}','surveys@update');
 
 Route::get('status/{status}/{AssID}','AssessmentController@status');
@@ -74,6 +59,7 @@ Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
 Route::post('/usermanagement/ajax','UserManagement@ajax');
+
 Route::get('usermanagement/test','UserManagement@test');
 Route::get('usermanagement/mail','UserManagement@mail');
 
