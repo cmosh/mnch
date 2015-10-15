@@ -6,7 +6,7 @@ class Survey extends Model {
 
 	// each Survey has many sections
     public function sections() {
-        return $this->hasMany('App\Section','surveyID','surveyID');
+        return $this->hasMany('App\Tables\Section','surveyID','surveyID');
     }
 
 }

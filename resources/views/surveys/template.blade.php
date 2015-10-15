@@ -103,6 +103,9 @@ $('.asave').change(function () {
       url: '/survey/save',
       type: "post",
        data: data,
+       error:function(){
+        alert('Unable to autosave');
+       },
       success: function(data){
        var dt = new Date($.now())
            $('#autosavetext').text('(Autosaved '+ dt +')');    
@@ -175,7 +178,11 @@ $(document).ready(function(){
 
 
 
-$("#demo-form").submit(function() {
+$("#demo-form").submit(function(e) { 
+
+        e.preventDefault();
+
+        if ( $(this).parsley().isValid() ) {
 
    $('#thesubmit').hide();   
  $('#loader').show();   
@@ -204,6 +211,8 @@ $("#demo-form").submit(function() {
         $.extend( data, data2 );
 
     $.ajax({
+
+    
       url: '/survey/save',
       type: "post",
        data: data,
@@ -226,7 +235,10 @@ $("#demo-form").submit(function() {
 
 
       }
-    });  
+    });
+
+
+    }  
 
   
 
@@ -246,7 +258,7 @@ $("#demo-form").submit(function() {
 document.getElementById("demo-form").setAttribute("action", "/{{$id}}/Saved");
 document.getElementById("demo-form").addEventListener("click", function () {
 
-  form.submit();
+//  form.submit();
 });
 
 

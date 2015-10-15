@@ -40,4 +40,29 @@ public static function remember($key,$minutes,$closure){
       	// return (collect(json_decode($x))->toArray());
 	}
 
+
+	public static function forever($key,$closure){
+
+
+		$redis = LRedis::connection();
+
+		if($redis->exists('laravel:'.$key)){
+			$result = ($redis->get('laravel:'.$key));
+		}else{
+		
+      		$result = json_encode($closure());
+
+      		$redis->setnx('laravel:'.$key, $result);
+      		
+      		$result = ($redis->get('laravel:'.$key));
+
+      	}
+      	
+      	$result = json_decode($result);
+
+      // $result = ($result);
+      	return $result;
+      	// return (collect(json_decode($x))->toArray());
+	}
+
 }

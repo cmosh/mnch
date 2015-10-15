@@ -1,22 +1,21 @@
 <?php namespace App\Tables;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-
-class builder extends Controller {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+use App\Http\Controllers\ArrayRedis as Rache;
 
 
+
+
+class builder   {
+
+	
 
 
   public static function buildview($AssID, $act,$Participant) {
+
+  if ($Participant == null){
+           $Participant=  new Participantsview;
+         //  $TheAssessor->Name = '';
+        }
         
         $HtmlLines = '<!-- Main content -->
         <div id = "top"> </div>
@@ -28,17 +27,40 @@ class builder extends Controller {
             </div>';
         
         $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
-        
+
+
         // echo $Contacts;
         $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
         
+
+
         $TheAssessor = Assessor::where('AssID', '=', $AssID)->first();
-        $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
-        
+        if ($TheAssessor == null){
+           $TheAssessor=  new Assessor;
+         //  $TheAssessor->Name = '';
+        }
+         $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
+    
         $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
         
         $loc = substr($TheAsses->Survey, 0, 2);
-        $Secs = Section::where('surveyID', '=', $TheAsses->Survey)->get();
+
+        $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
+
+      
+
+        $entire = Rache::forever('builded_'.$TheAsses->Survey,function()use($Survey){
+
+               return $Survey->load('sections.blocks.block_rows.column_sets.field_set.fields');
+            });
+
+
+          //  echo $entire->sections;
+
+
+        //$Secs = Section::where('surveyID', '=', $TheAsses->Survey)->get();
+            $Secs = $entire->sections;
+
         foreach ($Secs as $Sec) {
             
             $HtmlLines.= ' 
@@ -198,7 +220,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" value="' . ($Contacts->get('Facility Incharge')->Name) . '"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" value="';if ($act != 'open') ($Contacts->get('Facility Incharge')->Name); $HtmlLines.='"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -206,7 +228,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail" value="' . ($Contacts->get('Facility Incharge')->Email) . '"  name="FacilityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail" value="' ;if ($act != 'open') ($Contacts->get('Facility Incharge')->Email) ;  $HtmlLines.='"  name="FacilityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -215,7 +237,7 @@ class builder extends Controller {
 
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" value="' . ($Contacts->get('Facility Incharge')->Mobile) . '" name="FacilityInchargeMobile" 
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" value="' ;if ($act != 'open')($Contacts->get('Facility Incharge')->Mobile) ;  $HtmlLines.='" name="FacilityInchargeMobile" 
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -234,7 +256,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeName" value="' . ($Contacts->get('MCH Incharge')->Name) . '" name= "MCHInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MCHInchargeName" value="' ;if ($act != 'open') ($Contacts->get('MCH Incharge')->Name) ; $HtmlLines.= '" name= "MCHInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -243,7 +265,7 @@ class builder extends Controller {
 
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail" value="' . ($Contacts->get('MCH Incharge')->Email) . '" name="MCHInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail" value="' ;if ($act != 'open') ($Contacts->get('MCH Incharge')->Email) ;  $HtmlLines.= '" name="MCHInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -252,7 +274,7 @@ class builder extends Controller {
 
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="' . ($Contacts->get('MCH Incharge')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="' ;if ($act != 'open')($Contacts->get('MCH Incharge')->Mobile);  $HtmlLines.='"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -275,7 +297,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' . ($Contacts->get('Maternity Incharge')->Name) . '"name= "MaternityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' ;if ($act != 'open') ($Contacts->get('Maternity Incharge')->Name) ;  $HtmlLines.= '"name= "MaternityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -284,7 +306,7 @@ class builder extends Controller {
 
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail" value="' . ($Contacts->get('Maternity Incharge')->Email) . '" name="MaternityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail" value="' ;if ($act != 'open')($Contacts->get('Maternity Incharge')->Email) ;  $HtmlLines.='" name="MaternityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -293,7 +315,7 @@ class builder extends Controller {
 
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" value="' . ($Contacts->get('Maternity Incharge')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" name="MaternityInchargeMobile" value="' ;if ($act != 'open') ($Contacts->get('Maternity Incharge')->Mobile) ;  $HtmlLines.='"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -312,7 +334,7 @@ class builder extends Controller {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="OPDInchargeName" name= "OPDInchargeName" value="' . ($Contacts->get('OPD Incharge')->Name) . '" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="OPDInchargeName" name= "OPDInchargeName" value="' ;if ($act != 'open')($Contacts->get('OPD Incharge')->Name) ;  $HtmlLines.='" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -320,7 +342,7 @@ class builder extends Controller {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="' . ($Contacts->get('OPD Incharge')->Email) . '" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="' ;if ($act != 'open') ($Contacts->get('OPD Incharge')->Email) ;  $HtmlLines.='" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -328,7 +350,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="' . ($Contacts->get('OPD Incharge')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="' ;if ($act != 'open') ($Contacts->get('OPD Incharge')->Mobile) ; $HtmlLines.= '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -377,7 +399,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeName" value="' . ($Contacts->get('Incharge')->Name) . '" name= "FacilityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeName" value="' ;if ($act != 'open') ($Contacts->get('Incharge')->Name) ; $HtmlLines.= '" name= "FacilityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -385,7 +407,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="' . ($Contacts->get('Incharge')->Name) . '"
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="' ;if ($act != 'open')($Contacts->get('Incharge')->Name) ;  $HtmlLines.= '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -394,7 +416,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail"  value="' . ($Contacts->get('Incharge')->Email) . '" name="FacilityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail"  value="' ;if ($act != 'open') ($Contacts->get('Incharge')->Email) ;  $HtmlLines.= '" name="FacilityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -415,7 +437,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeName" value="' . ($Contacts->get('MCH Incharge')->Name) . '" name= "MCHInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MCHInchargeName" value="' ;if ($act != 'open') ($Contacts->get('MCH Incharge')->Name) ; $HtmlLines.= '" name= "MCHInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -423,7 +445,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="' . ($Contacts->get('MCH Incharge')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="' ;if ($act != 'open') ($Contacts->get('MCH Incharge')->Mobile) ;  $HtmlLines.='"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -432,7 +454,7 @@ class builder extends Controller {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail"  value="' . ($Contacts->get('MCH Incharge')->Email) . '"name="MCHInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail"  value="' ;if ($act != 'open') ($Contacts->get('MCH Incharge')->Email) ;  $HtmlLines.= '"name="MCHInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -449,7 +471,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' . ($Contacts->get('Maternity Incharge')->Name) . '" name= "MaternityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' ;if ($act != 'open') ($Contacts->get('Maternity Incharge')->Name) ;  $HtmlLines.='" name= "MaternityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -457,7 +479,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" value="' . ($Contacts->get('Maternity Incharge')->Mobile) . '"name="MaternityInchargeMobile" 
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" value="' ;if ($act != 'open') ($Contacts->get('Maternity Incharge')->Mobile) ;  $HtmlLines.= '"name="MaternityInchargeMobile" 
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -466,7 +488,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail"  value="' . ($Contacts->get('Maternity Incharge')->Email) . '" name="MaternityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail"  value="' ;if ($act != 'open') ($Contacts->get('Maternity Incharge')->Email) ;  $HtmlLines.= '" name="MaternityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -483,7 +505,7 @@ class builder extends Controller {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="OPDInchargeName" name= "OPDInchargeName" value="' . ($Contacts->get('Team Lead')->Name) . '" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="OPDInchargeName" name= "OPDInchargeName" value="' ;if ($act != 'open') ($Contacts->get('Team Lead')->Name) ;  $HtmlLines.= '" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -491,7 +513,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="' . ($Contacts->get('Team Lead')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="' ;if ($act != 'open') ($Contacts->get('Team Lead')->Mobile) ;  $HtmlLines.= '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -500,7 +522,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="' . ($Contacts->get('Team Lead')->Email) . '" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'  ;if ($act != 'open') ($Contacts->get('Team Lead')->Email) ;  $HtmlLines.= '" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -575,7 +597,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeName" value="' . ($Contacts->get('Facility Incharge')->Name) . '" name= "FacilityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeName" value="' ;if($act!='open') ($Contacts->get('Facility Incharge')->Name) ;  $HtmlLines.= '" name= "FacilityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -584,7 +606,7 @@ class builder extends Controller {
 
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail"  value="' . ($Contacts->get('Facility Incharge')->Email) . '" name="FacilityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail"  value="' ;if($act!='open') ($Contacts->get('Facility Incharge')->Email) ;  $HtmlLines.= '" name="FacilityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -593,7 +615,7 @@ class builder extends Controller {
 
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="' . ($Contacts->get('Facility Incharge')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="' ;if($act!='open') ($Contacts->get('Facility Incharge')->Mobile) ;  $HtmlLines.= '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -616,7 +638,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeName" name= "MCHInchargeName" value="' . ($Contacts->get('MCH Incharge')->Name) . '" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MCHInchargeName" name= "MCHInchargeName" value="' ;if($act!='open') ($Contacts->get('MCH Incharge')->Name) ;  $HtmlLines.= '" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -625,7 +647,7 @@ class builder extends Controller {
 
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail" value="' . ($Contacts->get('MCH Incharge')->Email) . '" name="MCHInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail" value="' ;if($act!='open') ($Contacts->get('MCH Incharge')->Email) ;  $HtmlLines.= '" name="MCHInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -634,7 +656,7 @@ class builder extends Controller {
 
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile"  value="' . ($Contacts->get('MCH Incharge')->Mobile) . '"
+                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile"  value="' ;if($act!='open') ($Contacts->get('MCH Incharge')->Mobile);  $HtmlLines.=  '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -657,7 +679,7 @@ class builder extends Controller {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' . ($Contacts->get('Maternity Incharge')->Name) . '" name= "MaternityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' ;if($act!='open') ($Contacts->get('Maternity Incharge')->Name) ;$HtmlLines.=  '" name= "MaternityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -667,7 +689,7 @@ class builder extends Controller {
 
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail" value="' . ($Contacts->get('Maternity Incharge')->Email) . '"  name="MaternityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail" value="' ;if($act!='open') ($Contacts->get('Maternity Incharge')->Email) ;$HtmlLines.=  '"  name="MaternityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -676,7 +698,7 @@ class builder extends Controller {
 
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" value="' . ($Contacts->get('Maternity Incharge')->Mobile) . '"  name="MaternityInchargeMobile" 
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" value="' ;if($act!='open') ($Contacts->get('Maternity Incharge')->Mobile); $HtmlLines.=  '"  name="MaternityInchargeMobile" 
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -717,8 +739,9 @@ class builder extends Controller {
             else {
             }
             
-            $Array_of_BlockCollections = Block::where('sectionID', '=', $Sec->sectionID)->get();
-            
+           // $Array_of_BlockCollections = Block::where('sectionID', '=', $Sec->sectionID)->get();
+            $Array_of_BlockCollections = $Sec->blocks;
+
             foreach ($Array_of_BlockCollections as $Single_BlockCollection) {
                 
                 $BlockIDName = $Single_BlockCollection->blockID;
@@ -731,8 +754,10 @@ class builder extends Controller {
                                     </div>
                                     <table class="table">';
                 
-                $Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
+                //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
                 
+                $Array_of_BlockRowCollections = $Single_BlockCollection->block_rows;
+
                 foreach ($Array_of_BlockRowCollections as $Single_BlockRowCollection) {
                     
                     if ($Single_BlockRowCollection->type == 'table_head') {
@@ -745,8 +770,9 @@ class builder extends Controller {
                     
                     $HtmlLines.= 'id="'.$BlockrowIDName.'">';
                     
-                    $Array_of_ColumnSetCollections = Column_set::where('block_rowID', '=', $Single_BlockRowCollection->block_rowID)->get();
-                    
+                    // $Array_of_ColumnSetCollections = Column_set::where('block_rowID', '=', $Single_BlockRowCollection->block_rowID)->get();
+                    $Array_of_ColumnSetCollections = $Single_BlockRowCollection->column_sets;
+
                     foreach ($Array_of_ColumnSetCollections as $Single_ColumnSetCollection) {
                         
                         $ColumnSetIDName = $Single_ColumnSetCollection->column_setID;
@@ -761,8 +787,9 @@ class builder extends Controller {
                         
                         $fieldsetID = $Single_ColumnSetCollection->field_setID;
                         
-                        $currentFieldsets = Field_set::where('field_setID', '=', $fieldsetID)->get();
-                        foreach ($currentFieldsets as $currentFieldset) {
+                        $currentFieldset = $Single_ColumnSetCollection->field_set;
+
+                      //  foreach ($currentFieldsets as $currentFieldset) {
                             
                             // code...
                             
@@ -770,7 +797,9 @@ class builder extends Controller {
                             
                             $typededuction = $currentFieldset->type;
                             
-                            $fieldValueList = Field::where('field_setID', '=', $currentFieldset->field_setID)->get()->keyBy('Value');
+                            // $fieldValueList = Field::where('field_setID', '=', $currentFieldset->field_setID)->get()->keyBy('Value');
+                            $fieldValueList = collect($currentFieldset->fields)->keyBy('Value');
+
                             switch ($typededuction) {
                                 case "label":
                                     $HtmlLines.= '
@@ -1214,7 +1243,8 @@ class builder extends Controller {
 
 
                                 case "coolradio":
-                                     if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                     if($datass->get($ColumnSetIDName) ==null) $H =-78;else $H =$datass->get($ColumnSetIDName)->Data;
+
                                     if ($act == 'show') {
                                         
                                         $HtmlLines.= '
@@ -1265,6 +1295,7 @@ class builder extends Controller {
                                         }
                                          $H = '';
                                       }
+
                                       else {
                                          foreach ($fieldValueList as $fieldd) {
                                             
@@ -1298,7 +1329,7 @@ class builder extends Controller {
 
                                 default:
                                     echo "dai era!";
-                            }
+                            
                         }
                         
                         $HtmlLines.= '</td>';
@@ -1316,6 +1347,7 @@ class builder extends Controller {
   $awesome = array (
     "htmll"  => $HtmlLines,
     "ajax" =>$AjaxNames,
+    "ColIDs" => $ColID
    
 );
           
