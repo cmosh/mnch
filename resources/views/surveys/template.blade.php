@@ -60,10 +60,49 @@
   <link href="/pace/pace.css" rel="stylesheet" />
 
 <script type="text/javascript">
+
+
+window.setInterval(sonline,120000);
+
+function sonline() {
+
+
+
+     var data = {
+                     
+             'action':'set',        
+
+            'AssID':'{{$AssID}}',
+             
+         '_token': $('input[name=_token]').val()
+
+    };
+ 
+         
+
+
+    $.ajax({
+      url: '/survey/session',
+      type: "post",
+       data: data,
+     
+      success: function(data){
+     
+
+      }
+    }); 
+
+
+
+}
+
+
+
     
     var timeoutId;  
 $('.asave').change(function () {
     if (timeoutId) clearTimeout(timeoutId);
+
     timeoutId = setTimeout(function () {
 
         var data = {
@@ -166,7 +205,9 @@ $(document).ready(function(){
 
     });      
   
-              $('#demo-form').attr('action','/survey/{{$id}}/Progress');  }); 
+            
+});
+
 });
          
 </script>
@@ -229,7 +270,9 @@ $("#demo-form").submit(function(e) {
               var u = 'IMCI'; 
              @endif
 
-              window.location = ('{{URL::asset("/assessment")}}/'+u);
+           
+
+              window.location = ('{{URL::asset("/status/submit")}}/{{$AssID}}');
 
 
 
@@ -290,6 +333,8 @@ $('#some_id2').click(function() {
 
       <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+
       $(function () {
         //Initialize Select2 Elements
         $(".select2").select2();

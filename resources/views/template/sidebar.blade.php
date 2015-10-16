@@ -73,9 +73,7 @@
             <li><a href="/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
-             <li><a href="/Autosaved/{{Auth::user()->id}}"><i class="fa fa-link"></i> <span>Autosaved Surveys</span></a></li>
-    
-
+           
 
                @if( Auth::user()->role == 2)
                 <li><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>

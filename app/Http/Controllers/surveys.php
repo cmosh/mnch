@@ -31,6 +31,57 @@ class surveys extends Controller
     
   
 
+    public function session(){
+
+               if(Request::ajax()) {
+
+                   $array = Input::all();
+
+                   $AssID = $array['AssID'];
+
+                   $action = $array['action'];
+
+
+                   switch ($action) {
+                       case 'check':
+
+                            $bol = true;
+                         $bol=  Rache::areyouyoung($AssID);
+
+                          echo $bol;
+                        
+                           break;
+
+                         case 'set':
+
+                            $bol=  Rache::foreveryoung($AssID,function(){
+
+                            return "I Exist!";
+
+                                    });
+                             echo $bol;
+
+                           break;      
+                       
+                       default:
+                        $bol = "error";
+                         echo $bol;
+                           break;
+                   }
+
+     
+
+
+         
+    }
+
+
+    die;
+
+}
+
+
+       
     
      public function saveajax(){
 
@@ -39,11 +90,16 @@ class surveys extends Controller
          if(Request::ajax()) {
 
 
+
       $array = Input::all();
       $stype = array_shift($array);
       $AssID = array_shift($array);
       $UserId = array_shift($array);
      $fruit = array_pop($array);
+
+
+    
+
 
     $surveyyy = assessments::where('Assessment_ID', '=', $AssID)->first();
 
@@ -142,37 +198,23 @@ class surveys extends Controller
 
 
 
-        $Progress = assessments::where('Assessment_ID','=',$AssID)->first();
-        $Pg = $Progress->Status;
-
         assessments::createOrUpdate(
                 array('UserId' => $UserId,
                   'Assessment_ID' => $AssID), 
                 array('Assessment_ID' => $AssID));
 
-        if ($Pg == 'Autosaved'){
+     
 
 
               if ($stype == 'auto') { 
-
-                   assessments::createOrUpdate(
-                array('Status' => 'Autosaved',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
-          } else{
-
- assessments::createOrUpdate(
+               assessments::createOrUpdate(
                 array('Status' => 'Incomplete',
                   'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
+                array('Assessment_ID' => $AssID));   
+                }
 
 
-
-          }
-
-      
-}
- if($stype == 'Submitted') {
+                elseif($stype == 'Submitted') {
              assessments::createOrUpdate(
                 array('Status' => 'Submitted',
                   'Assessment_ID' => $AssID), 
@@ -188,12 +230,14 @@ print_r($fruit);die;
 }
     
 
- public function create($id,$svx) {
+ public function create($id) {
+
 
         $assess = assessments::where('Assessment_ID','=',$id)->first();
         
         $PartID = $assess->PartID;
         $sv = $assess->Survey;
+        $status = $assess->Status;
 
        if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
        else $Participant = '';
@@ -206,8 +250,28 @@ print_r($fruit);die;
             return Section::where('surveyID', '=', $sv)->get();
         });
         
-        $Melarray =  builder::buildview($id,'open',$Participant);
 
+        if($status == 'New' ){ 
+
+        $Melarray = /*Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
+
+
+        return*/ builder::buildview($id,'open',$Participant);
+
+    // });
+
+    //    $Melarray = collect($Melarray);
+
+             assessments::createOrUpdate(
+                array('Status' => 'Incomplete',
+                  'Assessment_ID' => $id), 
+                array('Assessment_ID' => $id));   
+                
+
+
+    }
+
+    else   $Melarray = builder::buildview($id,'edit',$Participant);
 
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
@@ -216,6 +280,10 @@ print_r($fruit);die;
         $location = substr($sv, 0, 2);
         
         $iXd = 'survey/' . $id;
+
+
+       Rache::foreveryoung($id,function(){return "I Exist!";});
+
         
         return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
@@ -235,15 +303,17 @@ print_r($fruit);die;
         $location = substr($sv, 0, 2);
         
         $iXd = 'survey/' . $id;
+
+
         
-        return view('surveys.edit')->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.show')->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
   
     public function edit($id) {
         $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
        if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
        else $Participant='';
-        assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'Autosaved'));
+        assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'Incomplete'));
         
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
         $sv = $TheAsses->Survey;
@@ -254,6 +324,31 @@ print_r($fruit);die;
         $Mel = $Melarray['htmll'];
          $AjaxNames = $Melarray['ajax'];
         $location = substr($sv, 0, 2);
+
+          Rache::foreveryoung($id,function(){return "I Exist!";});
+        
+        return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+    }
+
+    public function badedit($id) {
+        $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
+       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
+       else $Participant='';
+        assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'Incomplete'));
+        
+        $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
+        $sv = $TheAsses->Survey;
+        $Survs = Survey::where('surveyID', '=', $sv)->first();
+        $Secs = Section::where('surveyID', '=', $sv)->get();
+        if(Rache::areyouyoung($id)){  $Melarray = builder::buildview($id, 'edit',$Participant);}else{
+        $Melarray = builder::buildview($id, 'open',$Participant);}
+
+
+        $Mel = $Melarray['htmll'];
+         $AjaxNames = $Melarray['ajax'];
+        $location = substr($sv, 0, 2);
+
+          Rache::foreveryoung($id,function(){return "I Exist!";});
         
         return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
     }
