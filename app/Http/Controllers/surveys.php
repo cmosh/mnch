@@ -111,7 +111,7 @@ class surveys extends Controller
       $Email  = array_shift($array);
       $Number = array_shift($array);
 
-       if( Assessor::where('AssID','=',$AssID)->first()==null) {
+       if( !isset(Assessor::where('AssID','=',$AssID)->first()->AssID)) {
          $storeassessor = new Assessor;
          $storeassessor->Name = $Name;        
         $storeassessor->Designation = $Designation;        
@@ -134,7 +134,7 @@ class surveys extends Controller
         
       
 
- if( Contact::where('AssID','=',$AssID)->first()==null) {
+ if( !isset(Contact::where('AssID','=',$AssID)->first()->AssID)) {
     for ($x = 0; $x < $roop; $x++) {
             $ContactT = new Contact;
             $ContactT->Cadre = array_shift($array);
@@ -165,7 +165,7 @@ class surveys extends Controller
             $dataid = $AssID.$x;
             $fruit = $AssID;
 
-            if( DataRecord::where('DataID','=',$dataid)->first() == null) {
+            if( !isset(DataRecord::where('DataID','=',$dataid)->first()->AssID)) {
 
                  $data = new Datarecord; 
                  $data->ColumnSetID =  $x; 
