@@ -64,8 +64,8 @@
               <span><button id="cancelbt" class="btn btn-block btn-warning btn-xs">Cancel and Discard</button></span>  
           </a> </li>
            
-           <li> <a href="/status/save/{{$AssID}}"  role="button">
-              <span><button id="savebt" class="send-btn btn btn-block btn-info btn-xs">Save and Resume Later</button></span>  
+           <li> <a   role="button">
+              <span><button id="savebt" w="head" class="send-btn btn btn-block btn-info btn-xs">Save and Resume Later</button></span>  
           </a> </li>
 
            

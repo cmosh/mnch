@@ -40,7 +40,7 @@
                 {!! Form::close() !!}
                  <a>  <button  id="some_id2" class="send-btn btn btn-info form-control" >Confirm and Proceed to Review</button></a>
 
-                  <a>  <button  id="loader" style="display:none;" class="send-btn btn btn-warning form-control" disabled> Submitting <img src="/pace/loader.gif"  id="imgProgress" /> </button></a>
+                  <a>  <button  id="loader" style="display:none;" w="body" class="send-btn btn btn-warning form-control" disabled> Submitting <img src="/pace/loader.gif"  id="imgProgress" /> </button></a>
                   
 
 				
@@ -160,6 +160,9 @@ $('.asave').change(function () {
 <script type="text/javascript">
 $(document).ready(function(){
      $('.send-btn').click(function(){ 
+
+      var btn = $(this).attr('w');
+
     var data = {
 
         'type':'auto',
@@ -187,21 +190,22 @@ $(document).ready(function(){
       url: '/survey/save',
       type: "post",
        data: data,
-         beforeSend: function() {                    
-                      
-                },
-
+        
       success: function(data){
             $('#changeclass').attr('class','callout callout-success');
 
              $('#changeclass').text('Saved');    
               $('#thesubmit').show();    
-      },
-      error: function(){
+              setTimeout(function(){
+    if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');
+  }, 20000);
 
-        alert('error');
+             
+
+
+
       }
-
+   
 
     });      
   
