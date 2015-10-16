@@ -294,7 +294,7 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey',180,function(){
       	});     
 
 
-			$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
+			//$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All');
 
 		
 		$SubmittedMNHCount = SubmittedMNHCount::first();

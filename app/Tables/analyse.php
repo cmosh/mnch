@@ -258,12 +258,7 @@ class analyse extends analysisfunctions {
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,21,3,11,'COL01','COL02','/^have/');
       	});				
 
-		// 	//S24
-		// $S24H = array('Job Aids Availability', 'Yes', 'No','No information provided' );
-		// $S24 = Cache::remember('MNHV2_S24'.$county,180,function() use($S24H){
-  //     					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$S24H,0,3,11,'COL01','COL02','/^/');
-  //     	});				
-
+	
 		// Health Facilitty Management
 $HManH = array('Health Facilitty Management', 'Yes', 'No','No information provided' );
 		$HMan = Cache::remember('MNHV2_HMan'.$county,180,function() use($HManH){
@@ -401,16 +396,7 @@ $HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No informati
 			return self::MNHPies($ReasoncsSLices,'MNHV2SEC2BLK3RW09COL02');
 		});
 
-		// // Ravility
-		// $RavilityH = array('Resource Availability', 'Available', 'Not Available','No information provided' );
-		// $Ravility = Cache::remember('MNHV2_Ravility'.$county,180,function() use($RavilityH){
-  //     					return 	  self::twoOptionsFullStack( 'name="MNHV2SEC7BLK1RW',$RavilityH,0,3,13,'COL01','COL02','/^/');
-  //     	});	
-
-
-
-
-
+		
 	//Json Making
 
 		$JsonArray = (array(
@@ -436,15 +422,10 @@ $HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No informati
 			'MainBlood'=>$MainBlood,
 			'ReasonBlood'=>$ReasonBlood,
 			'Reasoncs'=>$Reasoncs,
-<<<<<<< HEAD
 			'EquipAvail'=>$EquipAvail,
 			'testing'=>$testing,
-			'devkit'=>$devkit/*,
-			'Ravility'=>$Ravility
-*/
-=======
+			'devkit'=>$devkit,
 			'HIVTest'=>$HIVTest
->>>>>>> 5fb7632e0a5eb662f2d48f3b58e6293dabd696b7
 			));
 
 
