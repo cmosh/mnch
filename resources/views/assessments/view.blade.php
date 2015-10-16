@@ -6,6 +6,12 @@
   @endsection
 
 @section('pageinfo')
+
+
+   {!! Form::open() !!}
+  {!! Form::close() !!}
+
+
 <div class="box box-primary">
 @if($id=='IM')
 
@@ -84,7 +90,9 @@
                         @if ( $id =='IM') <td>{{ $Assessment->Participant}}</td>
                          @endif
                        
-                        <td> {{$Assessment->AssessorName}} </td>
+                        <td> @if(isset($Assessment->AssessorName))
+                        {{$Assessment->AssessorName}} 
+                        @endif &nbsp; </td>
                         <td> {{ $Assessment->Date}}</td>
                         <td> {{$Assessment->FacilityName}}</td>
 
@@ -96,7 +104,7 @@
 
      @elseif($Assessment->Status=='Incomplete')
 
-     	 <td><form action="/assessments/edit/{{$Assessment->AssID}}">
+     	 <td><form class="theresume" AssID="{{$Assessment->AssID}}" bad="{{isset($Assessment->AssessorName)}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
 
      @else
@@ -113,7 +121,7 @@
           @endforeach
                       
                      
-               
+
                    
                         
                   
@@ -158,6 +166,81 @@
         $("#example1").DataTable();
        
       });
+
+
+      $(".theresume").submit(function(e) { 
+
+        var AssID = $(this).attr('AssID');
+        var Bad = $(this).attr('Bad');
+
+      
+
+        var token = $('input[name=_token]').val();
+          e.preventDefault();
+
+
+            var data = {
+
+        'action':'check',
+        'AssID':AssID,
+       '_token': $('input[name=_token]').val()
+
+    };
+
+   
+
+
+     $.ajax({
+
+    
+      url: '/survey/session',
+      type: "post",
+       data: data,
+       error: function(){
+
+        alert('Unable to perform request');
+
+       },
+      success: function(data){
+
+      
+
+       
+
+              if(!data){
+
+             
+
+             if(Bad) window.location = ('{{URL::asset("/assessments/resume/")}}/'+AssID);
+           else window.location = ('{{URL::asset("/assessments/badresume/")}}/'+AssID);
+
+           }else if(data){
+
+
+            alert('This survey is currrently being filled, please try again a few minutes later');
+
+
+           }
+
+
+
+
+      }
+    });
+
+
+
+
+     
+
+        
+
+
+          return false;
+
+
+
+});
     </script>
 
   @endsection

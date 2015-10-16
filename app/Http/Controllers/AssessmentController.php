@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ArrayRedis As Rache;
 use App\Tables\assessments;
 use App\Tables\Facilities;
 use App\Tables\Participants;
@@ -117,7 +118,7 @@ class AssessmentController extends Controller {
 
 	$assessments->save();
 
-	$ur = 'assessments/create/'.$x[0].'/'.$id;
+	$ur = 'assessments/start/'.$x[0];
 
 	return redirect($ur);
 
@@ -147,6 +148,8 @@ class AssessmentController extends Controller {
 
 
 	{
+
+			Rache::murdersession($id);
 		assessments::where('Assessment_ID', '=', $id)->delete();
 		return redirect('/home');
 	}
@@ -161,17 +164,8 @@ class AssessmentController extends Controller {
 	{
 		//
 	}
-	public function autosaved($UserId){
 
-		$Auto = Autosaving::where('User','=',$UserId)->get();
-		return view('assessments.autosaved')->with('Auto',$Auto)->with('location','ass')->with('title','Autosaved Work');
-
-
-
-
-
-	}
-	/**
+		/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -179,22 +173,20 @@ class AssessmentController extends Controller {
 	 */
 	public function status($status,$AssID)
 	{
+
+
+		//kilswitch
+		Rache::murdersession($AssID);
+
 		 switch ($status) {
 		 	case 'save':
 
-		 	assessments::createOrUpdate(
-                array('Status' => 'Incomplete',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
+		
 		 	return redirect('/home');
 
 		 		break;
 		 	case 'submit':
-		 			assessments::createOrUpdate(
-                array('Status' => 'Submitted',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
-
+		 			
 		 			$red = assessments::where('Assessment_ID','=',$AssID)->first();
 		 			$irect = substr($red->Survey,0,2);
 		 	return redirect('/assessment/'.$irect);
@@ -209,8 +201,7 @@ class AssessmentController extends Controller {
 		
 
 
-		return redirect('/assessment/'.$rl);
-
+		
 			}
 
 }

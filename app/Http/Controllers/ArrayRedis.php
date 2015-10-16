@@ -65,4 +65,54 @@ public static function remember($key,$minutes,$closure){
       	// return (collect(json_decode($x))->toArray());
 	}
 
+
+	public static function foreveryoung($key,$closure){
+
+
+		$redis = LRedis::connection();
+
+		if($redis->exists('laravel:'.$key)){
+
+			$redis->setTimeout('laravel:'.$key, 300);
+			$result = ($redis->get('laravel:'.$key));
+
+
+		}else{
+		
+      		$result = ($closure());
+
+      		$redis->set('laravel:'.$key, $result,300);
+      		
+      		$result = ($redis->get('laravel:'.$key));
+
+      	}      	
+      
+
+      // $result = ($result);
+      	return $result;
+      	// return (collect(json_decode($x))->toArray());
+	}
+
+
+	public static function areyouyoung($key){
+
+
+		$redis = LRedis::connection();
+
+		return $redis->exists('laravel:'.$key);
+   
+	}
+
+
+	public static function murdersession($key){
+		$redis = LRedis::connection();
+
+			if($redis->exists('laravel:'.$key)){
+
+			$redis->setTimeout('laravel:'.$key,10);
+
+	}
+
+		}
+
 }

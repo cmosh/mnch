@@ -100,7 +100,7 @@
   </div>
   <div class="form-group">
   {!! Form::text('UserId',null,['class' => 'form-control','Value'=>Auth::user()->id , 'style' => 'display:none;']) !!}
-   {!! Form::text('Status',null,['class' => 'form-control','Value'=>'Autosaved', 'style' => 'display:none;']) !!}
+   {!! Form::text('Status',null,['class' => 'form-control','Value'=>'New', 'style' => 'display:none;']) !!}
     {!! Form::text('PartID',null,['class' => 'form-control specialll','style' => 'display:none;' ]) !!}
   </div>
   <div class="form-group" >

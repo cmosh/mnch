@@ -29,18 +29,19 @@ Route::post('/map','AnalyticsController@mapRequest');
 Route::post('/analytics/chajax','AnalyticsController@chajax');
 Route::post('/analytics/mnhajax','AnalyticsController@mnhajax');
 Route::get('/mnh','AnalyticsController@mnh');
-Route::get ('Autosaved/{UserId}','AssessmentController@autosaved');
+
 
 Route::get('/tester','AnalyticsController@tester');
 Route::get('/test','AnalyticsController@blah');
 
 Route::post('survey/{id}/{status}','surveys@update');
 
-Route::post('survey/survey/{id}/{status}','surveys@update');
+
 
 Route::get('status/{status}/{AssID}','AssessmentController@status');
 
-Route::post('survey/autosave','surveys@autosave');
+Route::post('survey/session','surveys@session');
+Route::post('survey/set','surveys@set');
 
 Route::post('survey/save','surveys@saveajax');
 Route::get('home', 'HomeController@index');
@@ -74,12 +75,12 @@ Route::post('self/store','Register@store');
 
 Route::get('assessments/cancel/{id}','AssessmentController@destroy');
 Route::put('assessments/{id}','surveys@update');
-Route::get('assessments/edit/{id}','surveys@edit');
-
+Route::get('assessments/resume/{id}','surveys@edit');
+Route::get('assessments/badresume/{id}','surveys@badedit');
 
 Route::get('assessments/show/{id}','surveys@show');
 
-Route::get('assessments/create/{id}/{sv}','surveys@create');
+Route::get('assessments/start/{id}','surveys@create');
 
 Route::get('assessment/{sv}','AssessmentController@index');
 Route::get('assessments/{id}/{county}/{term}','AssessmentController@show');
