@@ -24,8 +24,7 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3>Maternal Neonatal Healthcare Survey<sup style="font-size: 20px"></sup></h3>
-                  <p>Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p>
-                </div>
+                   <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p></div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
@@ -111,10 +110,20 @@
    @include('analytics/MNH/html/jjavailability') 
 
      
+<div class="col-md-12">
+                        
+                        <div class="box-info" >                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>EQUIPMENT AVAILABILITY AND FUNCTIONALITY</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
 
-
-
-
+      @include('analytics/MNH/html/EquipAvail')
+    @include('analytics/MNH/html/testing')
+  @include('analytics/MNH/html/devkit')
 
 
 
@@ -186,7 +195,11 @@ function drawChart() {
           
      mapdata = JSON.parse(data)['map'];
 		var jsonData = JSON.parse(data)['analytics'];
+ /*var x = window.mapdata;
 
+    var county = $('#County').val();
+    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
+    @include('analytics/mapdata')*/
     // var jsonData = jsonData1['analytics'];
     // alert(jsonData['Guidelines']);
 
@@ -213,6 +226,14 @@ function drawChart() {
              @include('analytics/MNH/js/MainBlood')
              @include('analytics/MNH/js/ReasonBlood')
               @include('analytics/MNH/js/Reasoncs')
+
+      @include('analytics/MNH/js/EquipAvail')
+    @include('analytics/MNH/js/testing')
+  @include('analytics/MNH/js/devkit')
+
+
+        //         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+        // if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}}');
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
       $( ".wait" ).removeClass("overlay");

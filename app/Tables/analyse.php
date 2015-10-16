@@ -243,6 +243,14 @@ class analyse extends analysisfunctions {
 			
 
 
+
+		//EquipAvail
+		$EquipAvailheading = array('Equipment Availability', 'Available', 'Not Available','No information provided' );
+		$EquipAvail = Cache::remember('MNHV2_EquipAvail'.$county,180,function() use($EquipAvailheading){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC6BLK1RW',$EquipAvailheading,0,3,20,'COL01','COL02','/^/');
+      	});				
+
+
 		//Job aids Availability
 		$jheading = array('Job Aids Availability', 'Yes', 'No','No information provided' );
 		$jjavailability = Cache::remember('MNHV2_JaidsMNH'.$county,180,function() use($jheading){
@@ -348,6 +356,22 @@ array_splice($Cemonc,2, 1);
 
 			return self::FacilityTypes2Stack('MNHV2SEC1BLK3RW03COL02',$hours24headings);
 		});
+
+		//testing
+		$testingheadings = array('Testing Supplies', 'Available', 'Not Available','No information provided' );
+		$testing = Cache::remember('MNHV2_testing'.$county,180,function()use($testingheadings){
+
+			return self::FacilityTypes2Stack('MNHV2SEC6BLK2RW02COL02',$testingheadings);
+		});
+
+		//devkit
+		$devkitheadings = array('Delivery kit components', 'Available', 'Not Available','No information provided' );
+		$devkit = Cache::remember('MNHV2_devkit'.$county,180,function()use($devkitheadings){
+
+			return self::FacilityTypes2Stack('MNHV2SEC6BLK3RW03COL02',$devkitheadings);
+		});
+
+
 		//staff_trained_18
 		$staff_trained = Cache::remember('MNHV2_staff_trained'.$county,180,function(){
 			return self::staff_trained_MNH();
@@ -368,8 +392,13 @@ array_splice($Cemonc,2, 1);
 			return self::MNHPies($ReasoncsSLices,'MNHV2SEC2BLK3RW09COL02');
 		});
 
+		// // Ravility
+		// $RavilityH = array('Resource Availability', 'Available', 'Not Available','No information provided' );
+		// $Ravility = Cache::remember('MNHV2_Ravility'.$county,180,function() use($RavilityH){
+  //     					return 	  self::twoOptionsFullStack( 'name="MNHV2SEC7BLK1RW',$RavilityH,0,3,13,'COL01','COL02','/^/');
+  //     	});	
 
-		
+
 
 
 
@@ -397,7 +426,12 @@ array_splice($Cemonc,2, 1);
 			'staff_trained'=>$staff_trained,
 			'MainBlood'=>$MainBlood,
 			'ReasonBlood'=>$ReasonBlood,
-			'Reasoncs'=>$Reasoncs
+			'Reasoncs'=>$Reasoncs,
+			'EquipAvail'=>$EquipAvail,
+			'testing'=>$testing,
+			'devkit'=>$devkit/*,
+			'Ravility'=>$Ravility
+*/
 			));
 
 
