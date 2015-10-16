@@ -21,8 +21,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
  <script src="/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
 
       <script src="/bower_components/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-   
 
+      <script src="/offline/offline.min.js" type="text/javascript"></script>
+    
+       <link href="/offline/offline.css" rel="stylesheet" type="text/css" />
 
 
 

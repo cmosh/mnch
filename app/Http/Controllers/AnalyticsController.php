@@ -18,6 +18,9 @@ use Request;
 use Input;
 use Cache;
 use LRedis;
+use App\Http\Controllers\ArrayRedis as Rache;
+
+use App\Tables\Survey;
 
 use Excel;
 
@@ -184,7 +187,7 @@ $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
       					return CHSubSurvey::all();
       	});  
 
-      //	$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'All');
+      	//$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'All');
 		
    
 			
@@ -240,76 +243,47 @@ $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
 	
 	public function tester(){
 
-		$surveys = Cache::remember('MNHV2SubSurvey',180,function(){
-      					return MNHSubSurvey::all();
-      	});  
-		$slices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other (Specify)','No information provided');
-
-	//	$array [] = $headings;
-
-
-	$recset = $surveys;
-
-		 $recset = $surveys;
-
-$Data = $recset->load(['y' => function($query)
-{
-	
-    $query->where('ColumnSetID','=','MNHV2SEC2BLK3RW04COL02');
-}])->lists('y');
-
-	$Data=array_filter(collect($Data)->lists('Data'));
-
-	$x =  array_count_values($Data);
-
-	 $otherval = count($slices)-1;
-	 $noinfoval = count($slices);
-
-
-
-	
-	foreach ($x as $key => $value) {
-
-		if (is_numeric($key)) {
-
-			if(!isset($vl[$key])) $vl[$key] = 0;
-
-			$vl[$key] += $value; 
-   			
-			}
-			elseif ($key==-51) {
-if(!isset($vl[$noinfoval])) $vl[$noinfoval] = 0;
-				$vl[$noinfoval] += $value; 
-				
-			}else{
-
-if(!isset($vl[$otherval])) $vl[$otherval] = 0;
-				$vl[$otherval] += $value; 
-			}
-
-
-
-		
-	}
-
-	// return $vl;
-
-	foreach ($slices as $key => $slice ) {
-
-		if(!isset($vl[($key+1)])) $vl[($key+1)] = 0;
-		$array [] =  array($slice,$vl[($key+1)]);
-
-	}
-
 		
 	
-	return $array;
+
+
+
+return view('analytics.test')->with('blah','test');
 
 
 
 
 
 	}
+
+
+	public function blah()
+	{
+		
+
+
+
+
+			$x = Survey::where('surveyID', '=', 'IMCIV1')->first();
+
+			$y= Rache::forever('y',function() use ($x){
+
+				return $x->load('sections.blocks.block_rows.column_sets.field_set.fields');
+
+
+			});
+
+
+			//$x->load('sections.blocks.block_rows.column_sets.field_set.fields');
+
+			 return $y->Name;
+
+
+
+		return $x;
+	}
+
+
 
 	public function mnh()
 	{
@@ -338,12 +312,6 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey',180,function(){
 
 	}
 
-	public function blah()
-	{
-		
-
-		return view('analytics.test');
-	}
 
 	
 	

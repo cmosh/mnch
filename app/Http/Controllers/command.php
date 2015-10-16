@@ -104,6 +104,7 @@ class command  {
 							'clearconfig'=>array('php artisan config:clear'),
 							'routecache'=>array('php artisan route:cache'),
 							'routeclear'=>array('php artisan route:clear'),
+							'MemcachedFlush'=>array('sudo service memcached restart'),
 							'shutup'=>array('sudo php artisan up'),
 							'composerupdate'=>array('sudo composer update'),
 							'composerinstall'=>array('sudo composer install'),

@@ -244,18 +244,21 @@ class analyse extends analysisfunctions {
 			
 
 
+
+		//EquipAvail
+		$EquipAvailheading = array('Equipment Availability', 'Available', 'Not Available','No information provided' );
+		$EquipAvail = Cache::remember('MNHV2_EquipAvail'.$county,180,function() use($EquipAvailheading){
+      					return 	  self::twoOptionsFullStack( 'MNHV2SEC6BLK1RW',$EquipAvailheading,0,3,20,'COL01','COL02','/^/');
+      	});				
+
+
 		//Job aids Availability
 		$jheading = array('Job Aids Availability', 'Yes', 'No','No information provided' );
 		$jjavailability = Cache::remember('MNHV2_JaidsMNH'.$county,180,function() use($jheading){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$jheading,21,3,11,'COL01','COL02','/^have/');
       	});				
 
-		// 	//S24
-		// $S24H = array('Job Aids Availability', 'Yes', 'No','No information provided' );
-		// $S24 = Cache::remember('MNHV2_S24'.$county,180,function() use($S24H){
-  //     					return 	  self::twoOptionsFullStack( 'MNHV2SEC3BLK2RW',$S24H,0,3,11,'COL01','COL02','/^/');
-  //     	});				
-
+	
 		// Health Facilitty Management
 $HManH = array('Health Facilitty Management', 'Yes', 'No','No information provided' );
 		$HMan = Cache::remember('MNHV2_HMan'.$county,180,function() use($HManH){
@@ -357,6 +360,22 @@ $HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No informati
 
 			return self::FacilityTypes2Stack('MNHV2SEC1BLK3RW03COL02',$hours24headings);
 		});
+
+		//testing
+		$testingheadings = array('Testing Supplies', 'Available', 'Not Available','No information provided' );
+		$testing = Cache::remember('MNHV2_testing'.$county,180,function()use($testingheadings){
+
+			return self::FacilityTypes2Stack('MNHV2SEC6BLK2RW02COL02',$testingheadings);
+		});
+
+		//devkit
+		$devkitheadings = array('Delivery kit components', 'Available', 'Not Available','No information provided' );
+		$devkit = Cache::remember('MNHV2_devkit'.$county,180,function()use($devkitheadings){
+
+			return self::FacilityTypes2Stack('MNHV2SEC6BLK3RW03COL02',$devkitheadings);
+		});
+
+
 		//staff_trained_18
 		$staff_trained = Cache::remember('MNHV2_staff_trained'.$county,180,function(){
 			return self::staff_trained_MNH();
@@ -377,11 +396,7 @@ $HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No informati
 			return self::MNHPies($ReasoncsSLices,'MNHV2SEC2BLK3RW09COL02');
 		});
 
-
 		
-
-
-
 	//Json Making
 
 		$JsonArray = (array(
@@ -407,6 +422,9 @@ $HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No informati
 			'MainBlood'=>$MainBlood,
 			'ReasonBlood'=>$ReasonBlood,
 			'Reasoncs'=>$Reasoncs,
+			'EquipAvail'=>$EquipAvail,
+			'testing'=>$testing,
+			'devkit'=>$devkit,
 			'HIVTest'=>$HIVTest
 			));
 

@@ -284,6 +284,22 @@
                 
                   </tr>
 
+                   <tr>
+                 <td  style="vertical-align:middle">
+                    <i class="fa fa-medium fa-4x"  style="color:grey"></i>
+                  emcached
+                  </td>
+                    <td>
+                      <a command="MemcachedFlush" class="btn btn-app">
+                    <i class="fa fa-eye-slash"></i>(Force Flush)
+                  </a>
+                    </td>
+               
+                  </tr>
+
+
+
+
                 </tbody>
               </table>
             </div><!-- /.col -->
