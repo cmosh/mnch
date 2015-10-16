@@ -82,6 +82,7 @@
  @include('analytics/MNH/html/MainBlood')
  @include('analytics/MNH/html/ReasonBlood')
  @include('analytics/MNH/html/Reasoncs')
+ @include('analytics/MNH/html/HIVTest')
   @include('analytics/MNH/html/newborn')
   @include('analytics/MNH/html/devpep')
    @include('analytics/MNH/html/kangaroo')
@@ -96,7 +97,7 @@
                         <div class="box-info" >                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS </b></h2></center>
+                        <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY </b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -216,6 +217,7 @@ function drawChart() {
    @include('analytics/MNH/js/bemonc')
      @include('analytics/MNH/js/cemonc')
      @include('analytics/MNH/js/newborn')
+     @include('analytics/MNH/js/HIVTest')
      @include('analytics/MNH/js/kangaroo')
      @include('analytics/MNH/js/devpep')
          @include('analytics/MNH/js/dserviceconduct')

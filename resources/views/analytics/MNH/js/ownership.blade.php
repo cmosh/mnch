@@ -16,7 +16,7 @@ var ownershipdata = new google.visualization.DataTable();
           function resizeownership () {
       
        
-           ownership.draw(ort_funcdata, ownershipoptions);
+           ownership.draw(ownershipdata, ownershipoptions);
 
     }
 
