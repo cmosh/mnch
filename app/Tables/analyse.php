@@ -94,6 +94,7 @@ class analyse extends analysisfunctions {
       					$temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
       					$temp[3][0] = 'Is the ORT register upto date (Including zero-reporting)?';
       					$temp[]=self::ortfunction();
+      					$temp[4][0] = 'ORT Corner Functionality';
 
       					return $temp;
 
@@ -283,7 +284,15 @@ $CemoncH = array('CEmONC SIGNAL FUNCTIONS', 'Yes', 'No','No information provided
 		$Cemonc = Cache::remember('MNHV2_CemonC'.$county,180,function() use($CemoncH,$CemoncExclude){
       					return 	  self::twoOptionsFullStack( 'MNHV2SEC2BLK3RW',$CemoncH,0,3,9,'COL01','COL02','/^(1)(2)(3)(4)Does this facility/',$CemoncExclude);
       	});		
-array_splice($Cemonc,2, 1);
+
+      	//HIVTest
+
+$HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No information provided' );
+		$HIVTest = Cache::remember('MNHV2_HIVTest'.$county,180,function() use($HIVTestheadings){
+      					$temp =  self::twoOptionsFullStack( 'MNHV2SEC2BLK4RW',$HIVTestheadings,4,3,12,'COL01','COL02','/^/');
+      					$temp[2][0] = 'A'.$temp[2][0];
+      					return $temp;
+      	});		
 
 
 
@@ -397,7 +406,8 @@ array_splice($Cemonc,2, 1);
 			'staff_trained'=>$staff_trained,
 			'MainBlood'=>$MainBlood,
 			'ReasonBlood'=>$ReasonBlood,
-			'Reasoncs'=>$Reasoncs
+			'Reasoncs'=>$Reasoncs,
+			'HIVTest'=>$HIVTest
 			));
 
 
