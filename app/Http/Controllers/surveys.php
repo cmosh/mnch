@@ -10,6 +10,8 @@ use App\Tables\Contact;
 use App\Tables\Assessor;
 use App\Tables\assessments;
 use App\Tables\Datarecord;
+use App\Tables\Facilities;
+use App\Tables\Surveyview;
 use App\Http\Controllers\ArrayRedis As Rache;
 use Request;
 use Input;
@@ -232,60 +234,45 @@ print_r($fruit);die;
 
  public function create($id) {
 
-
         $assess = assessments::where('Assessment_ID','=',$id)->first();
-        
+        $TheFacility = Facilities::where('FacilityCode', '=', $assess->Facility_ID)->first();
         $PartID = $assess->PartID;
         $sv = $assess->Survey;
         $status = $assess->Status;
 
        if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
        else $Participant = '';
-
-        $assess->Survey;
-
-            $Survs = Survey::where('surveyID', '=', $sv)->first();
-
+        $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Rache::forever('build_secs'.$sv,function()use($sv){
             return Section::where('surveyID', '=', $sv)->get();
-        });
+                             });
         
-
-        if($status == 'New' ){ 
-
-        $Melarray = /*Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
-
-
-        return*/ builder::buildview($id,'open',$Participant);
-
-    // });
-
-    //    $Melarray = collect($Melarray);
-
-             assessments::createOrUpdate(
-                array('Status' => 'Incomplete',
-                  'Assessment_ID' => $id), 
-                array('Assessment_ID' => $id));   
-                
-
-
-    }
-
-    else   $Melarray = builder::buildview($id,'edit',$Participant);
+       if($status == 'New' ){ 
+        $Melarray = Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
+            return builder::buildview($id,'open',$Participant);
+                            });
+        $Melarray = collect($Melarray);
+                            }
+       else $Melarray = builder::buildview($id,'edit',$Participant);
 
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
-     
-
         $location = substr($sv, 0, 2);
-        
         $iXd = 'survey/' . $id;
 
-
-       Rache::foreveryoung($id,function(){return "I Exist!";});
+        Rache::foreveryoung($id,function(){return "I Exist!";});
 
         
-        return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('anId',$id)->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('TheFacility',$TheFacility)
+                                       ->with('Participant',$Participant)
+                                       ->with('AssID',$id)
+                                       ->with('AjaxNames',$AjaxNames)
+                                       ->with('anId',$id)
+                                       ->with('Mel', $Mel)
+                                       ->with('id', $iXd)
+                                       ->with('location', $location)
+                                       ->with('title', $Survs->Name)
+                                       ->with('secs', $Secs);
     }
     
  
@@ -293,69 +280,83 @@ print_r($fruit);die;
     public function show($id) {
         
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
         $sv = $TheAsses->Survey;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
-        $Secs = Section::where('surveyID', '=', $sv)->get();
-        
+        $Secs = Section::where('surveyID', '=', $sv)->get();        
         $MelArray = builder::buildview($id, 'show','');
         $Mel = $MelArray['htmll'];
-
-        $location = substr($sv, 0, 2);
-        
+        $location = substr($sv, 0, 2);        
         $iXd = 'survey/' . $id;
-
-
         
-        return view('surveys.show')->with('Mel', $Mel)->with('id', $iXd)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.show')->with('Mel', $Mel)
+                                   ->with('id', $iXd)
+                                   ->with('location', $location)
+                                   ->with('title', $Survs->Name)
+                                   ->with('secs', $Secs)
+                                   ->with('TheFacility',$TheFacility);
+
     }
   
     public function edit($id) {
-        $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
-       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
-       else $Participant='';
-        assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'Incomplete'));
-        
-        $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
-        $sv = $TheAsses->Survey;
-        $Survs = Survey::where('surveyID', '=', $sv)->first();
-        $Secs = Section::where('surveyID', '=', $sv)->get();
-        
-        $Melarray = builder::buildview($id, 'edit',$Participant);
-        $Mel = $Melarray['htmll'];
-         $AjaxNames = $Melarray['ajax'];
-        $location = substr($sv, 0, 2);
 
-          Rache::foreveryoung($id,function(){return "I Exist!";});
+       $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
+       $PartID = $TheAsses->PartID;
+       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();else $Participant='';
+       $sv = $TheAsses->Survey;
+       $Survs = Survey::where('surveyID', '=', $sv)->first();
+       $Secs = Section::where('surveyID', '=', $sv)->get();
+       $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+       $Melarray = builder::buildview($id, 'edit',$Participant);
+       $Mel = $Melarray['htmll'];
+       $AjaxNames = $Melarray['ajax'];
+       $location = substr($sv, 0, 2);
+
+       Rache::foreveryoung($id,function(){return "I Exist!";});
         
-        return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('TheFacility',$TheFacility)
+                                       ->with('Participant',$Participant)
+                                       ->with('AssID',$id)
+                                       ->with('AjaxNames',$AjaxNames)
+                                       ->with('Mel', $Mel)
+                                       ->with('id', $id)
+                                       ->with('location', $location)
+                                       ->with('title', $Survs->Name)
+                                       ->with('secs', $Secs);
     }
 
     public function badedit($id) {
-        $PartID = assessments::where('Assessment_ID','=',$id)->first()->PartID;
-       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
-       else $Participant='';
-        assessments::where('Assessment_ID','=',$id)->update(array('Status'=>'Incomplete'));
-        
+
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
+        $Assessment = Surveyview::where('AssID','=',$id)->first();
+        $PartID = $TheAsses->PartID;
+       if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();else $Participant='';
         $sv = $TheAsses->Survey;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
-        if(Rache::areyouyoung($id)){  $Melarray = builder::buildview($id, 'edit',$Participant);}else{
-        $Melarray = builder::buildview($id, 'open',$Participant);}
-
-
+       if( !isset($Assessment->AssessorName) ){ 
+        $Melarray = collect(Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
+                                 return builder::buildview($id,'open',$Participant);
+                            }));}
+       else $Melarray = builder::buildview($id, 'edit',$Participant);      
+        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
         $Mel = $Melarray['htmll'];
-         $AjaxNames = $Melarray['ajax'];
+        $AjaxNames = $Melarray['ajax'];
         $location = substr($sv, 0, 2);
 
           Rache::foreveryoung($id,function(){return "I Exist!";});
         
-        return view('surveys.template')->with('Participant',$Participant)->with('AssID',$id)->with('AjaxNames',$AjaxNames)->with('Mel', $Mel)->with('id', $id)->with('location', $location)->with('title', $Survs->Name)->with('secs', $Secs);
+        return view('surveys.template')->with('TheFacility',$TheFacility)
+                                       ->with('Participant',$Participant)
+                                       ->with('AssID',$id)
+                                       ->with('AjaxNames',$AjaxNames)
+                                       ->with('Mel', $Mel)
+                                       ->with('id', $id)
+                                       ->with('location', $location)
+                                       ->with('title', $Survs->Name)
+                                       ->with('secs', $Secs);
     }
     
    
-    
-  
-    
 
 }
