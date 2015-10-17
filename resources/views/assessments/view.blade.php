@@ -102,7 +102,7 @@
                         <td><form action="/assessments/show/{{$Assessment->AssID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>
 
-     @elseif($Assessment->Status=='Incomplete')
+     @elseif($Assessment->Status=='Incomplete' || $Assessment->Status=='New')
 
      	 <td><form class="theresume" AssID="{{$Assessment->AssID}}" bad="{{isset($Assessment->AssessorName)}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>

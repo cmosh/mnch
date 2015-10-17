@@ -18,14 +18,14 @@
    
 
             
-
+      
        
 
 
 
 
 
-    {!! Form::open(['url' => '/'.$id.'/Progress','id'=>'demo-form','data-parsley-validate'=>'']) !!}
+    {!! Form::open(['id'=>'demo-form','data-parsley-validate'=>'']) !!}
 
                 <?php echo $Mel?>
 
@@ -34,15 +34,17 @@
          
 
 
-                {!! Form::submit('Submit',['class' => 'submit btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;']) !!}
+                {!! Form::submit('Submit',['class' => 'submit btn btn-success form-control','id'=>'thesubmit','style'=>'display:none;','w'=>'not']) !!}
 
 
                 {!! Form::close() !!}
-                 <a>  <button  id="some_id2" class="send-btn btn btn-info form-control" >Confirm and Proceed to Review</button></a>
 
-                  <a>  <button  id="loader" style="display:none;" w="body" class="send-btn btn btn-warning form-control" disabled> Submitting <img src="/pace/loader.gif"  id="imgProgress" /> </button></a>
+
+
+                
                   
 
+       <a>  <button  id="some_id2" w="body" class="send-btn btn btn-info form-control" >Confirm and Proceed to Review</button></a>
 				
 			
 			
@@ -106,35 +108,27 @@ $('.asave').change(function () {
     timeoutId = setTimeout(function () {
 
         var data = {
-            'type':'auto',
-          
-
+            'type':'auto',  
             'AssID':'{{$AssID}}',
-              'user':{{ Auth::user()->id }},
-         @foreach($AjaxNames as $AjaxName)
-          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
-  
-                @endforeach
-         '_token': $('input[name=_token]').val()
-
-    };
+            'user':{{ Auth::user()->id }},
+                    @foreach($AjaxNames as $AjaxName)
+            '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
+                    @endforeach
+            '_token': $('input[name=_token]').val()
+          };
  
          var data2 = {
-         @foreach($AjaxNames as $AjaxName)
-          '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]:checked').val(),
-
-                @endforeach
-         
-    };
+                  @foreach($AjaxNames as $AjaxName)
+            '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]:checked').val(),
+                  @endforeach
+                };
 
         var data3 ={
-              @foreach($AjaxNames as $AjaxName)
-          '{{$AjaxName}}': $('[name="{{$AjaxName}}[]"]').val(),
-  
-                @endforeach
-     
+                  @foreach($AjaxNames as $AjaxName)
+            '{{$AjaxName}}': $('[name="{{$AjaxName}}[]"]').val(),
+                  @endforeach  
+                }
 
-        }
         $.extend( data, data2,data3 );
 
 
@@ -158,10 +152,16 @@ $('.asave').change(function () {
 </script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-     $('.send-btn').click(function(){ 
 
+$(document).ready(function(){
+     $('.send-btn').click(function(e){ 
+
+      e.preventDefault();
       var btn = $(this).attr('w');
+       $('#saving').show();
+       $('#some_id2').hide();
+
+    window.scrollTo(0, 0);
 
     var data = {
 
@@ -190,20 +190,35 @@ $(document).ready(function(){
       url: '/survey/save',
       type: "post",
        data: data,
+       error:function(){
+        alert('error');
+         $('#saving').hide();
+         scroll(0,0);
+         $('#notsaved').show();
+
+           setTimeout(function(){
+   $('#notsaved').hide();
+   $('#some_id2').show();
+}, 5000);
+
+       },
         
       success: function(data){
-            $('#changeclass').attr('class','callout callout-success');
+           $('#saving').hide();
+         scroll(0,0);
+         $('#saved').show();
+          
+           setTimeout(function(){
+             if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');
+   $('#saved').hide();
+     $('#thesubmit').show();
+      $('#thesubmit').enable();  
+    
+}, 1000);
 
-             $('#changeclass').text('Saved');    
-              $('#thesubmit').show();    
-              setTimeout(function(){
-    if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');
-  }, 20000);
-
-             
 
 
-
+     
       }
    
 
@@ -212,6 +227,8 @@ $(document).ready(function(){
             
 });
 
+
+  return false;
 });
          
 </script>
@@ -220,16 +237,24 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 
-
+$('#thesubmit').click(function(){
+  $(this).attr('w','surrender');
+});
 
 
 $("#demo-form").submit(function(e) { 
+
+    if( $('#thesubmit').attr('w')=='not') return ;
+
 
         e.preventDefault();
 
         if ( $(this).parsley().isValid() ) {
 
+        
+
    $('#thesubmit').hide();   
+   window.scroll(0,0);
  $('#loader').show();   
 
     var data = {
@@ -261,10 +286,25 @@ $("#demo-form").submit(function(e) {
       url: '/survey/save',
       type: "post",
        data: data,
-      success: function(data){
-            $('#changeclass').attr('class','callout callout-danger');
+        error:function(){
 
-             $('#changeclass').text('Saved');  
+       $('#thesubmit').show();   
+ $('#loader').hide(); 
+ $('#notloaded').show(); 
+
+     setTimeout(function(){
+  $('#notloaded').hide(); 
+  $('thesubmit').show();
+}, 5000);
+
+    
+       },
+
+      success: function(data){
+        $('#loader').hide(); 
+            $('#loaded').show();
+
+           
              
              @if($location=="CH")
              var u = 'CH'; 
@@ -274,9 +314,11 @@ $("#demo-form").submit(function(e) {
               var u = 'IMCI'; 
              @endif
 
-           
+              setTimeout(function(){
+   window.location = ('{{URL::asset("/status/submit")}}/{{$AssID}}');
+}, 1000);
 
-              window.location = ('{{URL::asset("/status/submit")}}/{{$AssID}}');
+             
 
 
 
@@ -297,40 +339,7 @@ $("#demo-form").submit(function(e) {
 </script>
 
 
-<script type="text/javascript">
-    
-
-
-    var form = document.getElementById("savebt");
-document.getElementById("demo-form").setAttribute("action", "/{{$id}}/Saved");
-document.getElementById("demo-form").addEventListener("click", function () {
-
-//  form.submit();
-});
-
-
-
-</script>
-       <script type="text/javascript">
-$('#some_id2').click(function() {
-
- // assessments/{id}/{date}/{term}/{county}
-  // var linki = '/assessments/' + ($('#sv').val()).substring(0,2) + '/'+ $('#County').val();
-  // //alert(linki);
-
-  //  $(location).attr('thesubmit', linki);
-
-   
-    $('#saved').show();
-    window.scrollTo(0, 0);
-    
-    $('#some_id2').hide();
-});
-
-
-
-           
-      </script>   
+      
 	 <!-- Select2 -->
 
 
@@ -340,21 +349,13 @@ $('#some_id2').click(function() {
 
 
       $(function () {
-        //Initialize Select2 Elements
+        var Facility = '<div class="box-header"><h3 class="box-title">Facility Information</h3></div><table class="table"><thead><tr><td colspan="1" style="vertical-align:middle"><b>Facility Name</b></td><td colspan="1" style="vertical-align:middle"><b>Facility Type</b></td><td colspan="1" style="vertical-align:middle"><b>Facility Tier</b> </td></tr></thead><tbody><tr><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->FacilityName}}" class="form-control" id="InputFacilityName" disabled="" type="text"></td><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->Type}}" class="form-control" id="InputFacilityType"  disabled="" type="text"> </td><td colspan="1" style="vertical-align:middle"> <input  value="{{$TheFacility->Tier}}" class="form-control" id="InputFacilityTier"  disabled="" type="text"></td></tr></tbody><thead><tr><td colspan="1" style="vertical-align:middle"><b>Owned By</b></td><td colspan="1" style="vertical-align:middle"><b>County</b> </td><td colspan="1" style="vertical-align:middle"><b>District/Sub-County</b> </td> </tr> </thead> <tbody><tr><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->Owner}}" class="form-control" id="InputFacilityOwner"  disabled="" type="text"></td>  <td colspan="1" style="vertical-align:middle"><input value="{{$TheFacility->County}}" class="form-control" id="InputFacilityCounty" placeholder="Enter county" disabled="" type="text"> </td><td colspan="1" style="vertical-align:middle">  <input  value="{{$TheFacility->District}}" class="form-control" id="InputFacilitySubCounty" placeholder="Enter district/sub-county" disabled="" type="text"> </td> </tr></tbody></table>';
+        $('#thefacility').html(Facility);
+         //Initialize Select2 Elements
         $(".select2").select2();
-
-       
         //Money Euro
         $("[data-mask]").inputmask();
-   
-
-        
-        
-
-      
-
-        
-      });
+         });
 
 
 
@@ -437,11 +438,11 @@ $(document).ready( function() {
 
     function executeAutomaticVisibility(name) {
     $("[name="+name+"]:checked").each(function() {
-        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").show();
+        $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").show();
         
-    $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','1');
+    $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','1');
 
-     $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").attr('required','');
+     $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").attr('required','');
           
              
 
@@ -449,12 +450,12 @@ $(document).ready( function() {
 });   
    
     $("[name="+name+"]:not(:checked)").each(function() {
-       $("[automaticallyVisibleIfIdChecked=" + this.id+"]").hide();
-          $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".themultiple").removeAttr('data-parsley-mincheck');
-      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").removeAttr('required');
-            $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".rmselect").removeAttr('selected');
-      $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").removeAttr('checked');
-        $("[automaticallyVisibleIfIdChecked=" + this.id+"]").find(".thenormal").val('');
+       $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").hide();
+          $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".themultiple").removeAttr('data-parsley-mincheck');
+      $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").removeAttr('required');
+            $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".rmselect").removeAttr('selected');
+      $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").removeAttr('checked');
+        $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").val('');
          
 
     });

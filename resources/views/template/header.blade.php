@@ -40,7 +40,7 @@
           </a>
            @elseif($location == 'MN'||$location == 'IM'||$location == 'CH'||$location == 'umanage'||$location == 'preview')
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span>OPEN/CLOSE MENU</span>   <span id = "autosavetext" class="logo-lg"></span>
+            <span>OPEN/CLOSE MENU</span>   <span id = "autosavetext" width="70%" class="logo-lg"></span>
           </a>
     
            
@@ -89,7 +89,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="Profile" class="btn btn-default btn-flat">Profile</a>
+                      <a href="/usermanagement/changepass" class="btn btn-default btn-flat">Change Password</a>
                     </div>
                     <div class="pull-right">
                       <a href="/auth/logout" class="btn btn-default btn-flat">Sign out</a>
