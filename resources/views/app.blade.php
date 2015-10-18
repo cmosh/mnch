@@ -17,7 +17,7 @@
          folder instead of downloading all of them to reduce the load. -->
      <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="/bower_components/admin-lte/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-      <link href="/bower_components/legend/css/demo.css" rel="stylesheet" type="text/css" />
+    
       <link rel="stylesheet" type="text/css" href="/app/page.css">
        
    
