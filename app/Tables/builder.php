@@ -1031,6 +1031,10 @@ class builder   {
                                         elseif ($H == 0) {
                                             
                                             $HtmlLines.= $H;
+                                        }
+                                        elseif ($H == -51) {
+                                            
+                                            $HtmlLines.= 'No information provided';
                                         } 
                                         else {
                                             $HtmlLines.= $fieldValueList->get($H)->Label;
@@ -1040,15 +1044,10 @@ class builder   {
                                         
                                         $ColID[] = $ColumnSetIDName;
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
-                                        $HtmlLines.= ' valign="baseline">
-                                                                                                         <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
-
-                                                                                                        <input class = "thenormal asave" name="';
-                                        $HtmlLines.= $fieldName;
-                                         $AjaxNames[]= $fieldName;
-                                        $HtmlLines.= '" value = "" id ="';
-                                        $HtmlLines.= $fieldName . 'other';
-                                        $HtmlLines.= '" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required">';
+                                        $AjaxNames[]= $fieldName;
+                                        $HtmlLines.= ' valign="baseline"><div automaticallyVisibleIfIDChecked="'. $Single_ColumnSetCollection->dependencyID .'">
+                                        <input class = "thenormal asave" name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked=""required data-parsley-error-message="Required">';
+                                        
                                         foreach ($fieldValueList as $fieldd) {
                                             
                                             $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
@@ -1058,31 +1057,25 @@ class builder   {
                                             
                                             if ($fieldValue == $H) {
                                                 
-                                                $HtmlLines.= '<input name="';
-                                                $HtmlLines.= $fieldName;
-                                                $HtmlLines.= '" value ="';
-                                                $HtmlLines.= $fieldValue;
-                                                $HtmlLines.= '"id ="';
-                                                $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio" checked class="asave">';
+                                                $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" checked class="asave">';
                                             } 
                                             else {
-                                                $HtmlLines.= '<input name="';
-                                                $HtmlLines.= $fieldName;
-                                                $HtmlLines.= '" value ="';
-                                                $HtmlLines.= $fieldValue;
-                                                $HtmlLines.= '"id ="';
-                                                $HtmlLines.= $fieldIDOnly;
-                                                $HtmlLines.= '" type="radio" class ="asave">';
+                                                $HtmlLines.= '<input name="'.$fieldName.'" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" type="radio" class ="asave">';
                                             }
                                             
-                                            $HtmlLines.= ' <x automaticallyVisibleIfIDChecked = "';
-                                            $HtmlLines.= $fieldIDOnly;
-                                            $HtmlLines.= '"></x>
-                                                                                                             ';
-                                            $HtmlLines.= $fieldd->Label . '&nbsp;&nbsp;';
-                                            $HtmlLines.= '</label>';
+                                            $HtmlLines.= ' <x automaticallyVisibleIfIDChecked = "'.$fieldIDOnly.'"></x>'.$fieldd->Label .'&nbsp;&nbsp;'.'</label>';
                                         }
+
+                                        $HtmlLines.='<label>';
+                                        if($H == '-51'){
+                                          
+                                           $HtmlLines.= '<input name="'.$fieldName.'" value ="-51"id ="'.$fieldName.'noinfo" type="radio" checked class="asave">';
+                                        }
+                                        else{
+                                          $HtmlLines.= '<input name="'.$fieldName.'" value ="-51"id ="'.$fieldName.'noinfo" type="radio" class="asave">';}
+
+                                          $HtmlLines.= ' <x automaticallyVisibleIfIDChecked = "'.$fieldName.'noinfo"></x>No information provided</label>';
+
                                         
                                         $HtmlLines.= ' </div>';
                                     }
@@ -1183,7 +1176,7 @@ class builder   {
                                         $AjaxNames[]= $fieldName;
                                         $HtmlLines.= ' valign="baseline">
                                          <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">
-                                         <select  class="form-control select2 asave thenormal themultiple" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
+                                         <select  class="form-control select2 asave thenormal themultiple" multiple="multiple" style="width: 50%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
                                         
                                         foreach ($fieldValueList as $fieldd) {
                                             
@@ -1308,9 +1301,7 @@ class builder   {
 
                                     if ($act == 'show') {
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
+                                        $HtmlLines.= 'style="vertical-align:middle">';
                                         
                                         if ($H == null || $H == ' ' || is_numeric($H) == false) {
                                             
@@ -1318,6 +1309,10 @@ class builder   {
                                         } 
                                         elseif ((string)(int)$H == $H) {
                                             //echo $H;
+                                          if($H==-51) $HtmlLines .= 'No information provided'; 
+
+                                          else
+
                                             $HtmlLines.= $fieldValueList->get($H)->Label;
                                         } 
                                         else {
@@ -1331,8 +1326,7 @@ class builder   {
                                         
                                         $fieldName = $ColumnSetIDName . $fieldsetID;
                                         $AjaxNames[]= $fieldName;
-                                        $HtmlLines.= ' valign="baseline"><div><p>
-                                        <input class="thenormal asave" name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';
+                                        $HtmlLines.= ' valign="baseline"><div><p><input class="thenormal asave" name="'.$fieldName.'" value = "" id ="'.$fieldName.'other" type="radio" style="display: none;" checked="" data-parsley-error-message="Required" required>';
                                        
                                         if(is_numeric($H) ){
                                        foreach ($fieldValueList as $fieldd) {
@@ -1354,6 +1348,11 @@ class builder   {
                                             $HtmlLines.= ' <x coolradio = "'.$fieldIDOnly.'"></x>'.$fieldd->Label.'&nbsp;&nbsp;</label>';
 
                                         }
+
+
+                                    
+
+
                                          $H = '';
                                       }
 
@@ -1378,6 +1377,21 @@ class builder   {
                                            
                                         }
                                       }
+
+
+                                       $HtmlLines.='<label>';
+                                         
+                                        if($H == '-51'){
+                                          
+                                           $HtmlLines.= '<input name="'.$fieldName.'" value ="-51"id ="'.$fieldName.'noinfo" type="radio" checked class="asave">';
+                                        }
+                                        else{
+                                          $HtmlLines.= '<input name="'.$fieldName.'" value ="-51"id ="'.$fieldName.'noinfo" type="radio" class="asave">';}
+
+                                          $HtmlLines.= ' <x coolradio = "'.$fieldName.'noinfo"></x>No information provided</label>';
+
+                                        
+                                        $HtmlLines.= ' </div>';
 
 
                                         
