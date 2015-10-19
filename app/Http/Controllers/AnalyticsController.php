@@ -8,6 +8,7 @@ use App\Tables\SubmittedMNHCount;
 use App\Tables\SubmittedMNHCountie;
 use App\Tables\CHSubSurvey;
 use App\Tables\Column_set;
+use App\Tables\Survey;
 use App\Tables\analyse;
 use App\Tables\Map;
 use App\Tables\SurveysDone;
@@ -17,33 +18,13 @@ use Illuminate\Contracts\Foundation\Application As App;
 use Request;
 use Input;
 use Cache;
-use LRedis;
-use App\Http\Controllers\ArrayRedis as Rache;
-
-use App\Tables\Survey;
-
 use Excel;
 
 	
 class AnalyticsController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-
-	public function __construct()
-	{
-	
-		
-		
-	}
-	public function mapRequest(){
 
 
-
-	}
 	public function chajax(){
 
 		
@@ -180,14 +161,12 @@ $Map = (Cache::remember('MapMNH',180,function() {
 	public function ch()
 	{
 				
-	//	echo json_encode( Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray());
-	
 		
 $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
       					return CHSubSurvey::all();
       	});  
 
-      	//$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,2,2,'All');
+      	//$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All');
 		
    
 			
@@ -240,49 +219,54 @@ $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
 
 
 
-	
-	public function tester(){
+	public function comparison($survey,$lambda,$chart){
 
-		
-	
+		if($survey=='CHV2'){
 
-
-
-return view('analytics.test')->with('blah','test');
+		$SubmittedCHCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
+							return SubmittedCHCountie::get();
+							 	});
 
 
-
-
+		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCHCounties)
+										   ->with('funct',$lambda)
+										   ->with('chart',$chart);
 
 	}
 
 
-	public function blah()
-	{
-		
 
+}
 
+	public function compare(){
 
+		 if(Request::ajax()) {
+      $data = Input::all();
+      $county = $data['county'];
+      $fi = $data['fi'];
+     
+     if($county =='All'){
+     	 $sdata = Cache::remember('CHV2SubSurvey'.$county,180,function(){
+      					return CHSubSurvey::all();
+      	});  
 
-			$x = Survey::where('surveyID', '=', 'IMCIV1')->first();
+     }
+     	else{
 
-			$y= Rache::forever('y',function() use ($x){
+     		 $sdata = Cache::remember('CHV2SubSurvey'.$county,180,function() use ($county){
+      					return CHSubSurvey::where('County','Like',$county)->get();
+      	});  
 
-				return $x->load('sections.blocks.block_rows.column_sets.field_set.fields');
+     	}
 
+     	
 
-			});
+       echo json_encode(analyse::getindividual($fi,$sdata,$county));
+  }
 
+  die;
 
-			//$x->load('sections.blocks.block_rows.column_sets.field_set.fields');
-
-			 return $y->Name;
-
-
-
-		return $x;
 	}
-
 
 
 	public function mnh()
@@ -309,6 +293,21 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey',180,function(){
 			->with('SubmittedCounties',$SubmittedMNHCounties)
 			
 			->with('SurveysDone',$SurveysDone);
+
+	}
+
+
+
+		public function tester(){
+
+		
+	}
+
+
+	public function blah()
+	{
+
+		
 
 	}
 

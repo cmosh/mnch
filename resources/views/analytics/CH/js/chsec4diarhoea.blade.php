@@ -1,4 +1,4 @@
-var chsec4diarhoeadata = google.visualization.arrayToDataTable(jsonData['DTreatmentCommodities']);
+var chsec4diarhoeadata = google.visualization.arrayToDataTable(jsonData['CHV2_DTreatmentCommodities']);
 
       var chsec4diarhoeaoptions = {
         width: '100%',
@@ -13,7 +13,7 @@ var chsec4diarhoeadata = google.visualization.arrayToDataTable(jsonData['DTreatm
       var chsec4diarhoea = new google.visualization.ColumnChart(document.getElementById('chsec4diarhoea'));
       chsec4diarhoea.draw(chsec4diarhoeadata, chsec4diarhoeaoptions);
 
-var chsec4diarhoeadata2 = google.visualization.arrayToDataTable(jsonData['DTreatmentAvailability']); 
+var chsec4diarhoeadata2 = google.visualization.arrayToDataTable(jsonData['CHV2_DTreatmentAvailability']); 
 
       var chsec4diarhoea2options = {
       colors: ['#3366CC', '#DC3912', '#FF9900','#C6C6C6'],

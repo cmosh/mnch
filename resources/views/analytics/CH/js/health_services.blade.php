@@ -2,7 +2,7 @@
          var chhealthservicesdata = new google.visualization.DataTable();
         chhealthservicesdata.addColumn('string', 'Location');
         chhealthservicesdata.addColumn('number', 'Number');
-        chhealthservicesdata.addRows(jsonData['genopd']);
+        chhealthservicesdata.addRows(jsonData['CHV2_genopd']);
 
        
         var chhealthservicesoptions = {

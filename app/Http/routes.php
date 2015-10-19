@@ -15,6 +15,7 @@ Route::get('/phpversion',function(){
 
 	 phpinfo();
 });
+Route::get('/comparison/{survey}/{lambda}/{chart}','AnalyticsController@comparison');
 Route::get('/admin/global', 'administration@globe');
 Route::get('/admin/redmin', 'administration@localredis');
 Route::get('/admin/memcached', 'administration@localmem');
@@ -23,7 +24,7 @@ Route::post('/admin/docmd', 'administration@docmd');
 Route::post('/admin/globcmd', 'administration@globcmd');
 Route::get('/redmin','CacheController@redmin');
 Route::get('/memcached','CacheController@memcached');
-
+Route::post('/analytics/comparison','AnalyticsController@compare');
 Route::get('/','AnalyticsController@ch');
 Route::post('/map','AnalyticsController@mapRequest');
 Route::post('/analytics/chajax','AnalyticsController@chajax');

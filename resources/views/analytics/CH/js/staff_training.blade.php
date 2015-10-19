@@ -1,4 +1,4 @@
-var staff_Traineddata = google.visualization.arrayToDataTable(jsonData['staff_trained']);
+var staff_Traineddata = google.visualization.arrayToDataTable(jsonData['CHV2_staff_trained']);
 
       var staff_Trainedoptions = {
        

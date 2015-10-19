@@ -1,7 +1,7 @@
   var ftypesdata = new google.visualization.DataTable();
         ftypesdata.addColumn('string', 'Type');
         ftypesdata.addColumn('number', 'Facilities');
-        ftypesdata.addRows(jsonData['types']);
+        ftypesdata.addRows(jsonData['CHV2_types']);
 
         // Set chart options
         var ftypesoptions = {

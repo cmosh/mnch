@@ -1,4 +1,4 @@
-var chsec4malariadata = google.visualization.arrayToDataTable(jsonData['Malaria']);
+var chsec4malariadata = google.visualization.arrayToDataTable(jsonData['CHV2_Malaria']);
 
       var chsec4malariaoptions = {
         width: '100%',
@@ -13,7 +13,7 @@ var chsec4malariadata = google.visualization.arrayToDataTable(jsonData['Malaria'
       var chsec4malaria = new google.visualization.ColumnChart(document.getElementById('chsec4malaria'));
       chsec4malaria.draw(chsec4malariadata, chsec4malariaoptions);
 
-var chsec4malariadata2 = google.visualization.arrayToDataTable(jsonData['MalariaAvaialability']); 
+var chsec4malariadata2 = google.visualization.arrayToDataTable(jsonData['CHV2_MalariaAvaialability']); 
 
       var chsec4malaria2options = {
       colors: ['#3366CC', '#DC3912', '#FF9900','#C6C6C6'],

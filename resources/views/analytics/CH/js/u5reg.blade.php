@@ -1,4 +1,4 @@
-  var u5Registerdata = google.visualization.arrayToDataTable(jsonData['uRegister']);
+  var u5Registerdata = google.visualization.arrayToDataTable(jsonData['CHV2_u5Register']);
 
       var u5Registeroptions = {
        

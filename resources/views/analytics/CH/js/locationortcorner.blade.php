@@ -1,7 +1,7 @@
 var lortdata = new google.visualization.DataTable();
         lortdata.addColumn('string', 'Location');
         lortdata.addColumn('number', 'Number');
-        lortdata.addRows(jsonData['lort']);
+        lortdata.addRows(jsonData['CHV2_lort']);
 
         
         var lortoptions = {

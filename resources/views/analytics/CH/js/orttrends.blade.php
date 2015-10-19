@@ -1,4 +1,4 @@
-  var orttrendsData = google.visualization.arrayToDataTable(jsonData['annualtrendsN']);
+  var orttrendsData = google.visualization.arrayToDataTable(jsonData['CHV2_annualtrendsN']);
 
       var orttrendsOptions = {
        

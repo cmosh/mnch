@@ -1,4 +1,4 @@
-  var annualTrendsData = google.visualization.arrayToDataTable(jsonData['annualtrends']);
+  var annualTrendsData = google.visualization.arrayToDataTable(jsonData['CHV2_annualtrends']);
 
       var annualTrendsOptions = {
        
