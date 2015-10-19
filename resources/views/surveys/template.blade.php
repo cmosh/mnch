@@ -191,7 +191,7 @@ $(document).ready(function(){
       type: "post",
        data: data,
        error:function(){
-        alert('error');
+       
          $('#saving').hide();
          scroll(0,0);
          $('#notsaved').show();
