@@ -1419,7 +1419,7 @@ class builder   {
             
             $HtmlLines.= '</Section>';
         }
-       
+       if(!isset($ColID))$ColID = 0;
   $awesome = array (
     "htmll"  => $HtmlLines,
     "ajax" =>$AjaxNames,
