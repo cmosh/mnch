@@ -13,9 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <script src="/offline/offline.min.js" type="text/javascript"></script>
     
-     
-         <link href="/offline/offline-theme-chrome-indicator.css" rel="stylesheet" type="text/css" />
-        
+       <link href="/offline/offline-theme-chrome.css" rel="stylesheet" type="text/css" />
+         
 
     <link href="/bower_components/admin-lte/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
