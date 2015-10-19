@@ -1,5 +1,5 @@
 
-var commdata = google.visualization.arrayToDataTable(jsonData['comm_strategy']);
+var commdata = google.visualization.arrayToDataTable(jsonData['CHV2_comm_strategy']);
 
        var commoptions = {
         width: '100%',

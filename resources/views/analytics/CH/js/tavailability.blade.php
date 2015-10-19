@@ -1,4 +1,4 @@
- var tavailabilitydata = google.visualization.arrayToDataTable(jsonData['Tools']);
+ var tavailabilitydata = google.visualization.arrayToDataTable(jsonData['CHV2_Tools']);
 
        var tavailabilityoptions = {
         colors: ['green', 'red','#C6C6C6'],

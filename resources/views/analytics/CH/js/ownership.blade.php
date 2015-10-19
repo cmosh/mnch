@@ -1,7 +1,7 @@
 var ownershipdata = new google.visualization.DataTable();
         ownershipdata.addColumn('string', 'Owner');
         ownershipdata.addColumn('number', 'Facilities');
-        ownershipdata.addRows(jsonData['ownership']);
+        ownershipdata.addRows(jsonData['CHV2_ownership']);
 
         // Set chart ownershipoptions
         var ownershipoptions = {

@@ -1,5 +1,5 @@
 
-var resourcesdata = google.visualization.arrayToDataTable(jsonData['resources']);
+var resourcesdata = google.visualization.arrayToDataTable(jsonData['CHV2_resources']);
 
        var resourcesoptions = {
         width: '100%',

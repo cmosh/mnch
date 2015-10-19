@@ -1,4 +1,4 @@
-  var NonDiarrhoeaData = google.visualization.arrayToDataTable(jsonData['uRegisterN']);
+  var NonDiarrhoeaData = google.visualization.arrayToDataTable(jsonData['CHV2_u5RegisterN']);
 
       var NonDiarrhoeaOPtions = {
        

@@ -1,4 +1,4 @@
-var ort_funcdata = google.visualization.arrayToDataTable(jsonData['ortf']);
+var ort_funcdata = google.visualization.arrayToDataTable(jsonData['CHV2_ortf']);
 
       var ort_funcoptions = {
         width: '100%',

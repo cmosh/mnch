@@ -1,4 +1,4 @@
-var gjavailabilitydata = google.visualization.arrayToDataTable(jsonData['Guidelines']);
+var gjavailabilitydata = google.visualization.arrayToDataTable(jsonData['CHV2_Guidelines']);
 
        var gjavailabilityoptions = {
        colors: ['green', 'red','#C6C6C6'],

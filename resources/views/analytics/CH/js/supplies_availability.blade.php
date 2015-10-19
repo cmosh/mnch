@@ -1,4 +1,4 @@
-var suppliesdata = google.visualization.arrayToDataTable(jsonData['supplies']);
+var suppliesdata = google.visualization.arrayToDataTable(jsonData['CHV2_supplies']);
 
        var suppliesoptions = {
        // hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
