@@ -1246,7 +1246,7 @@ class builder   {
                                     $hidden = 'hidden';
                                     $HtmlLines.= ' valign="baseline">
                                      <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '">              
-                                    <select class="form-control select2 themultiple thenormal coolmultiple asave" multiple="multiple" style="width: 100%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
+                                    <select class="form-control select2 themultiple thenormal coolmultiple asave" multiple="multiple" style="width: 50%;"data-placeholder="Multiple Selection Allowed"  name="'.$fieldName.'[]" id="'.$fieldName.'" data-parsley-mincheck="1" data-parsley-error-message="Required" required>';
                                     
                                     foreach ($fieldValueList as $fieldd) {
                                         
@@ -1282,10 +1282,10 @@ class builder   {
                                     $HtmlLines.= '</select>';
 
                                     if (  $varother == -989 || $varother==null ) {
-                                      $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" style="width: 100%;" > </div>';
+                                      $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" placeholder="Specify" style="width: 100%;" > </div>';
                                     } else {
                                       if ($varother == -1){$varother = null;}
-                                     $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" style="width: 100%;" required> </div>';
+                                     $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" placeholder="Specify" style="width: 100%;" required> </div>';
                                     }
                                     
 
@@ -1396,7 +1396,7 @@ class builder   {
 
                                         
                                         $Other = 'other';
-                                        $HtmlLines.= '</p> <input coolstore = "'.$fieldIDOnly.'" class="form-control thenormal coolhidden asave" value="' . $H . '" type="text" id="'.$fieldName . $Other.'" coolradio="'.$fieldIDOnly.'"> </div>';
+                                        $HtmlLines.= '</p> <input coolstore = "'.$fieldIDOnly.'" class="form-control thenormal coolhidden asave" value="' . $H . '" placeholder="Specify" type="text" id="'.$fieldName . $Other.'" coolradio="'.$fieldIDOnly.'"> </div>';
                                        
                                         }
                                     
