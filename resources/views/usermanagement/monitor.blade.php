@@ -126,10 +126,7 @@
                          <tr>
                                   <td><a id="excel{{$survey->surveyID}}">Download Excel</a></td>                   
                            </tr>
-                           <tr>
-                           <form>
-    <input id="refresh{{$survey->surveyID}}" class="btn btn-primary form-control"  value="Refresh"></form>
-                           </tr>
+                           
                       </table>
                 
                 <br>
@@ -207,7 +204,7 @@
  <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
                            @else
-                          <td  class="hideprint"><form action="/assessments/edit/{{$user->Assessment_ID}}">
+                          <td  class="hideprint"><form action="/assessments/resume/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
                           @endif
                         
@@ -670,6 +667,9 @@
 $(document).ready(function() {
 
 
+      
+
+
 
   
 
@@ -680,7 +680,9 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
-                var select = $('<select class="colms" style="width:100%"  ><option style="width:100%" value=""></option></select>')
+                var select='<select id="{{$survey->surveyID}}' + column.index()+ '"class="colms" style="width:100%"  ><option style="width:100%" value=""></option></select>';
+
+                var select = $(select)
                     .appendTo( $(column.header()).empty() )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
@@ -712,6 +714,7 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
 
   //       });
  document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
+  $('#{{$survey->surveyID}}Action').hide();
 
 
 
@@ -731,9 +734,6 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
            "aaSorting": [[ 1, "desc" ]]
          });
        
-
-
-
 
        $('#example3{{$survey->surveyID}}').DataTable(
        {
@@ -755,10 +755,17 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
   });
 
 
-function ajax() {
+function ajax2() {
  
     var data = {
-          'testval':$('#testerval').val(),
+          'version':$('#{{$survey->surveyID}}Version').val(),
+          'term':$('#{{$survey->surveyID}}Assessment Term').val(),
+          'assessor':$('#{{$survey->surveyID}}Assessor').val(),
+          'date':$('#{{$survey->surveyID}}Date').val(),
+          'facility':$('#{{$survey->surveyID}}Facility').val(),
+          'county':$('#{{$survey->surveyID}}County').val(),
+          'user':$('#{{$survey->surveyID}}Entered by').val(),
+
          '_token': $('input[name=_token]').val()
         
     };
