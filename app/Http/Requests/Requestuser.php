@@ -25,6 +25,9 @@ class Requestuser extends Request {
 
 		
 		
+		'email'=>'required|unique:users'
+		
+		
 			//
 		];
 	}
