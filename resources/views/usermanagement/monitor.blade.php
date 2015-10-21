@@ -67,8 +67,8 @@
 
                              Records )
                              </small>
-                            @endif
-                            @if($survey->surveyID=='MNHV2')
+                            
+                            @elseif($survey->surveyID=='MNHV2')
 
                             Maternal and Neonatal Health
 
@@ -84,8 +84,7 @@
 
 
 
-                            @endif
-                            @if($survey->surveyID=='IMCIV1')
+                            @elseif($survey->surveyID=='IMCIV1')
 
                             Integrated Management of Childhood Illness
 
@@ -106,6 +105,12 @@
 
 
 
+                             <small id="{{$survey->surveyID}}status_info">
+                             </small>
+
+
+
+
 
 
                            
@@ -119,7 +124,11 @@
                         <div class="box-body">
 <table style="float:right">
                          <tr>
-                                  <td><a  href="/usermanagement/export/{{$location}}/general/{{$survey->surveyID}}/all">Download Excel</a></td>                   
+                                  <td><a id="excel{{$survey->surveyID}}">Download Excel</a></td>                   
+                           </tr>
+                           <tr>
+                           <form>
+    <input id="refresh{{$survey->surveyID}}" class="btn btn-primary form-control"  value="Refresh"></form>
                            </tr>
                       </table>
                 
@@ -131,6 +140,7 @@
 
 
                     <thead>
+
                       <tr>
 
                      
@@ -174,44 +184,20 @@
                     </thead>
                     
                     <tbody>
-                      
-                      
-
+                    
                         @foreach($user_monitor as $user)
                          @if(substr($user->Survey,0,2)==substr($survey->surveyID,0,2))
                         <tr>
-                       
-                     
-                        
-                         <td>
+                     <td>
 
-                        @foreach($surveys as $survey)
-
-                            @if($survey->surveyID==$user->Survey)
-
-                                {{$survey->Version}} :{{$survey->Runtime}}
-
-                            @endif
-
-
-
-
-                        @endforeach
-
-
+                                {{$user->Version}} :{{$user->Runtime}}
 
                          </td>
                         <td > {{ $user->Assessment_Term}}</td>
-
-
-
                         <td > {{ $user->assname}}</td>
-                        
                         <?php
-
                           $date= date_create($user->Date);
                           $dateformated=date_format($date,'d F Y');
-
                          ?>
                         <td><?php echo $dateformated?>  </td>
                         <td >{{ $user->FacilityName}}  </td>
@@ -685,12 +671,16 @@ $(document).ready(function() {
 
 
 
- $('#example1{{$survey->surveyID}}').DataTable( {
+  
+
+
+var table=$('#example1{{$survey->surveyID}}').DataTable( 
+ {
    
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
-                var select = $('<select style="width:100%"  ><option style="width:100%" value=""></option></select>')
+                var select = $('<select class="colms" style="width:100%"  ><option style="width:100%" value=""></option></select>')
                     .appendTo( $(column.header()).empty() )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
@@ -701,6 +691,7 @@ $(document).ready(function() {
                             .search( val ? '^'+val+'$' : '', true, false )
                             .draw();
                     } );
+
  
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option style="width:100%" value="'+d+'">'+d+'</option>' )
@@ -712,6 +703,14 @@ $(document).ready(function() {
 
 
     } );
+
+
+  //   $('#refresh{{$survey->surveyID}}').click(function()
+  //     {
+  // $('.colms').val("");
+  // table.draw();
+
+  //       });
  document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
 
 
@@ -743,6 +742,47 @@ $(document).ready(function() {
          });
 
      });
+
+
+
+
+ $('#excel{{$survey->surveyID}}').click(function()
+{
+    
+
+  ajax();
+           
+  });
+
+
+function ajax() {
+ 
+    var data = {
+          'testval':$('#testerval').val(),
+         '_token': $('input[name=_token]').val()
+        
+    };
+
+   $.ajax({
+       url: '/usermanagement/ajax',
+      type: "post",
+       data: data,
+           success: function(data){
+
+          var  testval = JSON.parse(data)['testval'];
+          
+    $('#testerval2').val(testval);
+  }
+ 
+   }); 
+
+
+
+
+       
+
+}
+
     
      
 
@@ -791,8 +831,6 @@ function ajax() {
         
     };
 
-
- 
    $.ajax({
        url: '/usermanagement/ajax',
       type: "post",
@@ -802,10 +840,7 @@ function ajax() {
           var  testval = JSON.parse(data)['testval'];
           
     $('#testerval2').val(testval);
-  
-  
-
-      }
+  }
  
    }); 
 
