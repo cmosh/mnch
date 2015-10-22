@@ -19,6 +19,8 @@ use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use App\Http\Requests\Requestpass;
+use App\Http\Requests\Requestedit;
+
 use Input;
 use Validator;
 use Redirect;
@@ -320,10 +322,10 @@ public function mail()
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Requestuser $Requestuser,$id)
+	public function update(Requestedit $Requestedit,$id)
 	{
-		//
-		$array=$Requestuser->all();
+		
+		$array=$Requestedit->all();
 		$new=array_shift($array);
 		$x = array();
 	$users=new User;
@@ -345,7 +347,7 @@ public function mail()
 		);
 		
 		
-var_dump($data);
+
  User::createOrUpdate(
                 $data, 
                 array('id' => $id));
