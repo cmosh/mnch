@@ -273,7 +273,7 @@
                       
 
                         @foreach($users as $user)
-                        @if($user->status===0)
+                        @if($user->status==0)
                         <tr>
                         <td > {{ $user->name}}</td>
                         <td >{{ $user->email}}  </td>
