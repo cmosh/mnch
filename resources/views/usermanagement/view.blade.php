@@ -157,24 +157,24 @@
                         
                         <td> 
 
-                      <?php 
+                           <?php 
                       if($user->role===0)
                       {
                         echo "county user";
                       }
-                       if($user->role==1)
+                       elseif($user->role==1)
                       {
                         echo "data clerk";
                       }
-                       if($user->role==2)
+                       elseif($user->role==2)
                       {
                         echo "program user";
                       }
-                       if($user->role==3)
+                       elseif($user->role==3)
                       {
                         echo "system user";
                       }
-                       if($user->role==='')
+                       elseif($user->role==='')
                       {
                         echo "Unknown";
                       }
@@ -286,24 +286,25 @@
                         
                         <td> 
 
-                      <?php 
+                     
+                           <?php 
                       if($user->role===0)
                       {
                         echo "county user";
                       }
-                       if($user->role==1)
+                       elseif($user->role==1)
                       {
                         echo "data clerk";
                       }
-                       if($user->role==2)
+                       elseif($user->role==2)
                       {
                         echo "program user";
                       }
-                       if($user->role==3)
+                       elseif($user->role==3)
                       {
                         echo "system user";
                       }
-                       if($user->role==='')
+                       elseif($user->role==='')
                       {
                         echo "Unknown";
                       }
@@ -311,6 +312,9 @@
 
 
                       ?>
+
+
+
 
 
                         </td>
