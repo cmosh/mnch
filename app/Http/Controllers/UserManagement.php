@@ -444,7 +444,7 @@ if(Rq::ajax()) {
        	$data = Input::all();
 		$user =User::find($data['id']);
 		
-		if($user->status===0)
+		if($user->status==0)
 		{
 				$user->status='1';
 				$user->password=bcrypt('123456'); 
