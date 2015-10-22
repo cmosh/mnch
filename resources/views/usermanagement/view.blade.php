@@ -281,7 +281,7 @@
                         <td> {{ $user->PhoneNumber}}</td>
                         
                         <td> 
-                      @if($user->role===0)
+                      @if($user->role==0)
                       
                         County User
                       
