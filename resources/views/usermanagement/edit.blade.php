@@ -19,14 +19,11 @@
         <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Edit User</font></div>
         <div class="panel-body">
         
-   <div class="box-body">
-           <div class="col-md-3" style="float:right">
 
-         </div>
-   </div>
 
    {!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id,'id'=>'form-edit']) !!}
 
+ 
 <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
@@ -118,7 +115,7 @@
            <div class="col-md-6" >
             
 <form action="/usermanagement/viewusers">
-    <input class="btn btn-primary form-control"  value="Cancel and go back"></form>         </div>
+    <input class="btn btn-primary form-control" type="submit"  value="Cancel and go back"></form>         </div>
    </div>
    </div>
             </div>
