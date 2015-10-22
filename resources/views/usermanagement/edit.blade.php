@@ -36,7 +36,7 @@
           <div class="box-body">
 
             <div class="form-group">
-              <label class="col-md-4 control-label">County</label>
+              <label class="col-md-4 control-label">County{{$county_index}}</label>
               <div class="col-md-6">
 
               <?php 
@@ -45,15 +45,7 @@
                  $x[]=$county->Name;
                   
                 }
-   foreach ($x as $county)
-   {
-      if($county==$user[0]->county)
-                  {
-                      $county_index=key($x)-1;
-
-                  }
-}
-          
+   
                   
 
 

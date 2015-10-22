@@ -311,9 +311,22 @@ public function mail()
 
 			$user=User::where('id','=',$id)->get();
 			$Counties = countie::all();
+			$counter=0;
+			$county_index=0;
+			foreach ($Counties as $County) {
+				$counter++;
+				if($County->Name==$user[0]->county)
+				{
+					$county_index=$counter-1;
+
+				}
+				# code...
+			}
+
+
 			
 			
-		return view('usermanagement.edit')->with('counties',$Counties)->with('user',$user)->with('location','umanage')->with('title','User Management');
+		return view('usermanagement.edit')->with('county_index',$county_index)->with('counties',$Counties)->with('user',$user)->with('location','umanage')->with('title','User Management');
 	
 }
 	/**
