@@ -205,9 +205,9 @@
                       </div>
                    @else
                    <div class="form-group">
-                      <label for="Version1" class="col-sm-2 control-label">Select Version</label>
+                      <label for="Version2" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
-                      <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                      <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version2"> 
                        
                        @foreach($Surveys as $Survey)
                        <!-- change if later -->
