@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class Requestuser extends Request {
+class Requestedit extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class Requestuser extends Request {
 
 		
 		
-		'email'=>'required|unique:users'
+		
 		
 		
 			//

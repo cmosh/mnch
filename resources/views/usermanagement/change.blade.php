@@ -23,7 +23,7 @@
 
           
 <div class="row">
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Change Password</font></div>
         <div class="panel-body">
@@ -50,35 +50,48 @@
 @endforeach
 
 
-<center>
+
    {!! Form::open(['url' => 'usermanagement/update/pass/'.Auth::user()->id,'id'=>'demo-form']) !!}     
 
  <div class="box-body">
          <div class="form-group">
-         
-              <div class="col-md-12">
-<label for="password">Old Password :</label>
-<br>
-<input type="password" id="password"  name="old_password" data-parsley-trigger="keyup" data-parsley-minlength="6" required/>
-</div></div></div>
+         <label class="col-md-4 control-label">Old Password :</label>
 
- <div class="box-body">
-         <div class="form-group">
-         
-              <div class="col-md-12">
-<label for="new_password">New Password :</label>
-<br>
-<input type="password" id="new_password" name="new_password" data-parsley-trigger="keyup" data-parsley-minlength="6" required/>
-  </div></div></div>  
-
- <div class="box-body">
-         <div class="form-group">
-         
-              <div class="col-md-12">
-<label for="new_password_confirmation">Confirm New Password :</label>
-<br>
-<input type="password" id="new_password_confirmation" name="new_password_confirmation" data-parsley-equalto="#new_password"  data-parsley-trigger="keyup" data-parsley-minlength="6" required/>
+              <div class="col-md-4">
+<input type="password" id="password" data-parsley-errors-container="#message1" name="old_password" data-parsley-trigger="keyup" data-parsley-minlength="6" required/>
 </div>
+<div id="message1" class="col-md-4">
+  
+</div>
+
+</div></div>
+
+ <div class="box-body">
+         <div class="form-group">
+         <label class="col-md-4 control-label">New Password :</label>
+
+              <div class="col-md-4">
+<input type="password" id="new_password" data-parsley-errors-container="#message2" name="new_password" data-parsley-trigger="keyup" data-parsley-minlength="6" required/>
+  </div>
+<div id="message2" class="col-md-4">
+  
+</div>
+
+  </div></div>  
+
+ <div class="box-body">
+         <div class="form-group">
+ <label class="col-md-4 control-label">Confirm New Password :</label>
+        
+              <div class="col-md-4">
+
+<input type="password" id="new_password_confirmation" data-parsley-errors-container="#message3" name="new_password_confirmation" data-parsley-equalto="#new_password"  data-parsley-trigger="keyup" data-parsley-minlength="6" required/>
+</div>
+<div id="message3" class="col-md-4">
+  
+</div>
+
+
 </div>
 </div>
 
@@ -93,11 +106,10 @@
          </div>
             </div>
             </div>
+         
             
              {!! Form::close() !!}
 
-
-</center>
 
            
 

@@ -19,6 +19,8 @@ use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use App\Http\Requests\Requestpass;
+use App\Http\Requests\Requestedit;
+
 use Input;
 use Validator;
 use Redirect;
@@ -309,9 +311,22 @@ public function mail()
 
 			$user=User::where('id','=',$id)->get();
 			$Counties = countie::all();
+			$counter=0;
+			$county_index=0;
+			foreach ($Counties as $County) {
+				$counter++;
+				if($County->Name==$user[0]->county)
+				{
+					$county_index=$counter-1;
+
+				}
+				# code...
+			}
+
+
 			
 			
-		return view('usermanagement.edit')->with('counties',$Counties)->with('user',$user)->with('location','umanage')->with('title','User Management');
+		return view('usermanagement.edit')->with('county_index',$county_index)->with('counties',$Counties)->with('user',$user)->with('location','umanage')->with('title','User Management');
 	
 }
 	/**
@@ -320,10 +335,10 @@ public function mail()
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Requestuser $Requestuser,$id)
+	public function update(Requestedit $Requestedit,$id)
 	{
-		//
-		$array=$Requestuser->all();
+		
+		$array=$Requestedit->all();
 		$new=array_shift($array);
 		$x = array();
 	$users=new User;
@@ -345,7 +360,7 @@ public function mail()
 		);
 		
 		
-var_dump($data);
+
  User::createOrUpdate(
                 $data, 
                 array('id' => $id));
@@ -444,7 +459,7 @@ if(Rq::ajax()) {
        	$data = Input::all();
 		$user =User::find($data['id']);
 		
-		if($user->status===0)
+		if($user->status==0)
 		{
 				$user->status='1';
 				$user->password=bcrypt('123456'); 

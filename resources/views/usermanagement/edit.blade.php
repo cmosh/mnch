@@ -19,14 +19,11 @@
         <div class="panel-heading" style="background-color: #3C8DBC;"> <font color="#FFFFFF">Edit User</font></div>
         <div class="panel-body">
         
-   <div class="box-body">
-           <div class="col-md-3" style="float:right">
 
-         </div>
-   </div>
 
    {!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id,'id'=>'form-edit']) !!}
 
+ 
 <div class="box-body">
             <div class="form-group">
               <label class="col-md-4 control-label">Name</label>
@@ -39,7 +36,7 @@
           <div class="box-body">
 
             <div class="form-group">
-              <label class="col-md-4 control-label">County</label>
+              <label class="col-md-4 control-label">County{{$county_index}}</label>
               <div class="col-md-6">
 
               <?php 
@@ -48,15 +45,7 @@
                  $x[]=$county->Name;
                   
                 }
-   foreach ($x as $county)
-   {
-      if($county==$user[0]->county)
-                  {
-                      $county_index=key($x)-1;
-
-                  }
-}
-          
+   
                   
 
 
@@ -73,8 +62,8 @@
          <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-6">
-<input placeholder="Enter Mobile Number" data-parsley-type="digits" id="phone" value="{{$user[0]->PhoneNumber}}" data-parsley-length="[10, 10]"  class="form-control" name="PhoneNumber" type="text"  required/>
-<span style="color:blue"> ( 0700100100 )</span>
+<input placeholder="Enter Mobile Number ( 07xxxxxxxx )" data-parsley-type="digits" id="phone" value="{{$user[0]->PhoneNumber}}" data-parsley-length="[10, 10]"  class="form-control" name="PhoneNumber" type="text"  required/>
+
               </div>
             </div>
             </div>
@@ -91,8 +80,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-<input placeholder="Enter Email address"  id="email" parsley-type="email" value="{{$user[0]->email}}" class="form-control" name="email" type="email" required />
-<span style="color:blue"> ( example@site.com )</span>
+<input placeholder="Enter Email address ( example@site.com )"  id="email" parsley-type="email" value="{{$user[0]->email}}" class="form-control" name="email" type="email" required />
               </div>
             </div>
             </div>
@@ -119,7 +107,7 @@
            <div class="col-md-6" >
             
 <form action="/usermanagement/viewusers">
-    <input class="btn btn-primary form-control"  value="Cancel and go back"></form>         </div>
+    <input class="btn btn-primary form-control" type="submit"  value="Cancel and go back"></form>         </div>
    </div>
    </div>
             </div>

@@ -157,31 +157,27 @@
                         
                         <td> 
 
-                      <?php 
-                      if($user->role===0)
-                      {
-                        echo "county user";
-                      }
-                       if($user->role==1)
-                      {
-                        echo "data clerk";
-                      }
-                       if($user->role==2)
-                      {
-                        echo "program user";
-                      }
-                       if($user->role==3)
-                      {
-                        echo "system user";
-                      }
-                       if($user->role==='')
-                      {
-                        echo "Unknown";
-                      }
+    
 
 
+                      @if($user->role==0)
+                      
+                        County User
+                      
+                      @elseif($user->role==1)
 
-                      ?>
+                        Data Clerk
+                      @elseif($user->role==2)
+
+                      Program User
+
+                      @elseif($user->role==3)
+
+                      System User
+
+                      @elseif($user->role=='')
+                      Unknown
+                      @endif
 
 
                         </td>
@@ -285,32 +281,28 @@
                         <td> {{ $user->PhoneNumber}}</td>
                         
                         <td> 
+                      @if($user->role==0)
+                      
+                        County User
+                      
+                      @elseif($user->role==1)
 
-                      <?php 
-                      if($user->role===0)
-                      {
-                        echo "county user";
-                      }
-                       if($user->role==1)
-                      {
-                        echo "data clerk";
-                      }
-                       if($user->role==2)
-                      {
-                        echo "program user";
-                      }
-                       if($user->role==3)
-                      {
-                        echo "system user";
-                      }
-                       if($user->role==='')
-                      {
-                        echo "Unknown";
-                      }
+                        Data Clerk
+                      @elseif($user->role==2)
+
+                      Program User
+
+                      @elseif($user->role==3)
+
+                      System User
+
+                      @elseif($user->role=='')
+                      Unknown
+                      @endif
 
 
 
-                      ?>
+
 
 
                         </td>
