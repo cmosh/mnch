@@ -203,11 +203,16 @@
                         @if($user->Status=='Submitted')
  <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
-                           @else
-                          <td  class="hideprint"><form action="/assessments/resume/{{$user->Assessment_ID}}">
+               @elseif($user->Status=='Incomplete' || $user->Status=='New')
+
+       <td><form class="theresume" AssID="{{$user->Assessment_ID}}" bad="{{isset($user->assname)}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
-                          @endif
-                        
+
+     @else
+
+      <td> {{$user->Status}}</td>
+
+     @endif
                         
                        
                        </tr>
@@ -661,6 +666,82 @@
 
        
         <script type="text/javascript">
+
+
+
+         $(".theresume").submit(function(e) { 
+
+        var AssID = $(this).attr('AssID');
+        var Bad = $(this).attr('Bad');
+
+      
+
+        var token = $('input[name=_token]').val();
+          e.preventDefault();
+
+
+            var data = {
+
+        'action':'check',
+        'AssID':AssID,
+       '_token': $('input[name=_token]').val()
+
+    };
+
+   
+
+
+     $.ajax({
+
+    
+      url: '/survey/session',
+      type: "post",
+       data: data,
+       error: function(){
+
+        alert('Unable to perform request');
+
+       },
+      success: function(data){
+
+      
+
+       
+
+              if(!data){
+
+             
+
+             if(Bad) window.location = ('{{URL::asset("/assessments/resume/")}}/'+AssID);
+           else window.location = ('{{URL::asset("/assessments/badresume/")}}/'+AssID);
+
+           }else if(data){
+
+
+            alert('This survey is currrently being filled, please try again a few minutes later');
+
+
+           }
+
+
+
+
+      }
+    });
+
+
+
+
+     
+
+        
+
+
+          return false;
+
+
+
+});
        
  
  
