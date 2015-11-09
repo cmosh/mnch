@@ -45,15 +45,29 @@ class analyse extends analysisfunctions {
 		return $JsonArray;
 	}
 
-	public static function getindividual($funct,$data,$county){
+	public static function getindividual($funct,$data,$county,$yr){
 
 		global $surveys;		
 		$surveys = $data;
+
 		$ch = new analyse();
 
-		$val = '$x = $ch->'.$funct.'->__invoke("'.$county.'");';
+		switch ($yr) {
+			case 'not':
+				$val = '$x = $ch->'.$funct.'->__invoke("'.$county.'","'.$yr.'");';
 
+				break;
+			
+			default:
+				$val = '$x = $ch->'.$funct.'->__invoke("'.$county.'");';
+				break;
+		}
+
+	
 		 eval($val);
+
+
+
 		return $x;
 
 		

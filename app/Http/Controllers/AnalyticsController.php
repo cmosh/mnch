@@ -25,6 +25,7 @@ class AnalyticsController extends Controller {
 
 
 
+
 	public function chajax(){
 
 		
@@ -36,45 +37,25 @@ class AnalyticsController extends Controller {
        $Year_3 = $data['Year3'];
         $Year_4 = $data['Year4'];
         $Term = $data['Term'];
-
-
-
-
-      if ($county == 'All' && $Term =='All') {
-      
-$CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
-      					return CHSubSurvey::all();
-      	});     
+     
 		
       		      
-      }
-      elseif ($county == 'All' && $Term !=='All') {
+      if ($county == 'All' ) 
       	
       	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($Term){
       					return 	CHSubSurvey::where('Assessment_Term','Like',$Term)->get();
       	});
 
 
-      }
-
-
-        elseif ($county !== 'All' && $Term =='All') {
-
-      	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county,180,function() use($county){
-      					return 	CHSubSurvey::where('County','Like',$county)->get();
-      	});
       
-	
-      		
-   
-      }
-      elseif ($county !== 'All' && $Term !=='All') {
+
+      else
        	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
       					return 	CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
       	});
       
-      }
-      else{}
+      
+     
 
     $chanalytics  = analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county);
 		
@@ -219,18 +200,22 @@ $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
 
 
 
-	public function comparison($survey,$lambda,$chart){
+	public function comparison($survey,$lambda,$chart,$yr='not'){
+
+		
 
 		if($survey=='CHV2'){
 
-		$SubmittedCHCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
+		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
 							return SubmittedCHCountie::get();
 							 	});
 
 
-		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCHCounties)
+		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
 										   ->with('funct',$lambda)
-										   ->with('chart',$chart);
+										   ->with('chart',$chart)
+										   ->with('yr',$yr)
+										   ->with('sv',$survey);
 
 	}
 
@@ -238,35 +223,7 @@ $CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
 
 }
 
-	public function compare(){
-
-		 if(Request::ajax()) {
-      $data = Input::all();
-      $county = $data['county'];
-      $fi = $data['fi'];
-     
-     if($county =='All'){
-     	 $sdata = Cache::remember('CHV2SubSurvey'.$county,180,function(){
-      					return CHSubSurvey::all();
-      	});  
-
-     }
-     	else{
-
-     		 $sdata = Cache::remember('CHV2SubSurvey'.$county,180,function() use ($county){
-      					return CHSubSurvey::where('County','Like',$county)->get();
-      	});  
-
-     	}
-
-     	
-
-       echo json_encode(analyse::getindividual($fi,$sdata,$county));
-  }
-
-  die;
-
-	}
+	
 
 
 	public function mnh()
@@ -298,7 +255,11 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey',180,function(){
 
 
 
-		public function tester(){
+		public function tester($key){
+
+			 $value = Cache::get($key);
+
+        return count($value);
 
 		
 	}

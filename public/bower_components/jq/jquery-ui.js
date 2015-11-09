@@ -1,7 +1,7 @@
-/*! jQuery UI - v1.11.4 - 2015-08-02
+/*! jQuery UI - v1.11.4 - 2015-11-09
 * http://jqueryui.com
-* Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, menu.js, progressbar.js, selectmenu.js, slider.js, spinner.js, tabs.js, tooltip.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js
-* Copyright 2015 jQuery Foundation and other contributors; Licensed MIT */
+* Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, menu.js, progressbar.js, selectmenu.js, slider.js, spinner.js, tabs.js, tooltip.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js
+* Copyright jQuery Foundation and other contributors; Licensed MIT */
 
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -16566,50 +16566,6 @@ var effectSlide = $.effects.effect.slide = function( o, done ) {
 			done();
 		}
 	});
-};
-
-
-/*!
- * jQuery UI Effects Transfer 1.11.4
- * http://jqueryui.com
- *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- *
- * http://api.jqueryui.com/transfer-effect/
- */
-
-
-var effectTransfer = $.effects.effect.transfer = function( o, done ) {
-	var elem = $( this ),
-		target = $( o.to ),
-		targetFixed = target.css( "position" ) === "fixed",
-		body = $("body"),
-		fixTop = targetFixed ? body.scrollTop() : 0,
-		fixLeft = targetFixed ? body.scrollLeft() : 0,
-		endPosition = target.offset(),
-		animation = {
-			top: endPosition.top - fixTop,
-			left: endPosition.left - fixLeft,
-			height: target.innerHeight(),
-			width: target.innerWidth()
-		},
-		startPosition = elem.offset(),
-		transfer = $( "<div class='ui-effects-transfer'></div>" )
-			.appendTo( document.body )
-			.addClass( o.className )
-			.css({
-				top: startPosition.top - fixTop,
-				left: startPosition.left - fixLeft,
-				height: elem.innerHeight(),
-				width: elem.innerWidth(),
-				position: targetFixed ? "fixed" : "absolute"
-			})
-			.animate( animation, o.duration, o.easing, function() {
-				transfer.remove();
-				done();
-			});
 };
 
 

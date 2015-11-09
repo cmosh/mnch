@@ -78,6 +78,7 @@
                       <label for="County" class="col-sm-2 control-label">Select County</label>
                       <div class="col-sm-10">
                        <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
+                       <option value ="" >Select County</option>
                        @foreach($Counties as $County)
                         <!-- change if later -->
                         
@@ -92,6 +93,7 @@
                       <label for="Version1" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                      <option value ="" >Select Version</option>
                        @foreach($Surveys as $Survey)
                        <!-- change if later -->
                          
@@ -104,13 +106,14 @@
                     <div class="form-group">
                       <label for="date" class="col-sm-2 control-label">Date</label>
                       <div class="col-sm-10">
-                       <input type="date" name="date" id="date" value="" />
+                       <input  placeholder="Select Date" name="date" id="date" value="" />
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="Term" class="col-sm-2 control-label">Term</label>
                       <div class="col-sm-10">
                        <select class="form-control select2 " style="width: 100%;" name="Term" id="Term"> 
+                        <option value ="" >Select Term</option>
                        <option value ="Baseline" id ="Term1" >Baseline</option>
                         <option value ="Midterm" id ="Term2" >Midterm</option>
                          <option value ="Endterm" id ="Term1" >Endterm</option>
@@ -123,6 +126,7 @@
                       <label for="Version1" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
+                       <option value ="" >Select Version</option>
                        @foreach($Surveys as $Survey)
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         @endforeach
@@ -133,7 +137,7 @@
                      <div class="form-group">
                       <label for="date" class="col-sm-2 control-label">Date</label>
                       <div class="col-sm-10">
-                       <input type="date" name="date" id="date" value="" />
+                       <input  name="date" id="date" placeholder="Select Date" value="" />
                       </div>
                     </div>
                     <p>Click Next to select Health Workers</p>
@@ -173,9 +177,12 @@
                       <label for="County2" class="col-sm-2 control-label">Select County</label>
                       <div class="col-sm-10">
                        <select class="form-control select2 " style="width: 100%;" name="County2" id="County2"> 
+                       <option value ="">Select County</option>
+
                        @foreach($Counties as $County)
                        <option value ="{{$County->Name}}" id ="{{$County->Name}}" >{{$County->Name}}</option>
                         @endforeach
+
                        </select>
 						</div>
 						</div>
@@ -183,10 +190,10 @@
                        <label for="Version2" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version2" id="Version2"> 
-                       
+                        <option value ="" >Select Version</option>
+                      
                        @foreach($Surveys as $Survey)
-                       <!-- change if later -->
-                         
+                     
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         
                         @endforeach
@@ -197,6 +204,7 @@
                       <label for="Term" class="col-sm-2 control-label">Term</label>
                       <div class="col-sm-10">
                        <select class="form-control select2 " style="width: 100%;" name="Term" id="Term_2"> 
+                       <option value ="" >Select Term</option>
                        <option value ="Baseline" id ="Term1" >Baseline</option>
                         <option value ="Midterm" id ="Term2" >Midterm</option>
                          <option value ="Endterm" id ="Term1" >Endterm</option>
@@ -208,7 +216,7 @@
                       <label for="Version2" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version2"> 
-                       
+                        <option value ="" >Select Version</option>
                        @foreach($Surveys as $Survey)
                        <!-- change if later -->
                          
@@ -225,13 +233,7 @@
 </div>
 
                   @endif
-                      <script src="/bower_components/jq/jquery-ui.js"></script>
-<script>
- 
-$('#date').datepicker({
-   dateFormat: 'yy-mm-dd'
-}); 
-</script>
+                   
 
 
                    
@@ -260,7 +262,13 @@ $('#date').datepicker({
 
 </div>
 
-          
+  
+<script>
+ 
+$('#date').datepicker({
+   dateFormat: 'yy-mm-dd'
+}); 
+</script>
 
 <script type="text/javascript">
 $('#some_id').click(function() {
