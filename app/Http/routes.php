@@ -10,12 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/phpversion',function(){
-
-
-	 phpinfo();
-});
-Route::get('/comparison/{survey}/{lambda}/{chart}','AnalyticsController@comparison');
+Route::controller('compare', 'Compare');
+Route::get('admin/surveys','FormController@index');
+Route::get('admin/surveys/{SurveyID}','FormController@edit');
+Route::get('/comparison/{survey}/{lambda}/{chart}/','AnalyticsController@comparison');
+Route::get('/comparison/{survey}/{lambda}/{chart}/{yr}/','AnalyticsController@comparison');
 Route::get('/admin/global', 'administration@globe');
 Route::get('/admin/redmin', 'administration@localredis');
 Route::get('/admin/memcached', 'administration@localmem');
@@ -32,7 +31,7 @@ Route::post('/analytics/mnhajax','AnalyticsController@mnhajax');
 Route::get('/mnh','AnalyticsController@mnh');
 
 
-Route::get('/tester','AnalyticsController@tester');
+Route::get('/tester/{key}','AnalyticsController@tester');
 Route::get('/test','AnalyticsController@blah');
 
 Route::post('survey/{id}/{status}','surveys@update');

@@ -1,12 +1,15 @@
 @extends('app')
 
 @section('content')
- 
-              {!! Form::open() !!}
-              {!! Form::close() !!}
+ <link href="/css/dragging.css" rel="stylesheet" type="text/css" />
 
-<div class="col-md-12">
-              <div class="box box-warning box-solid">
+  
+              {!! Form::open() !!}{!! Form::close() !!}
+
+<fieldset id="container">
+
+ <div class="col-md-6">
+              <div class="box box-warning">
                 <div class="box-header with-border">
                   <h3 class="box-title">Counties</h3>
                   <div class="box-tools pull-right">
@@ -14,170 +17,242 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
-               
-                 <div class="form-group">
-                    <table>
-                     <tr>
-                  <td>
-                    <label>
-                      <input type="checkbox" value="All" ch="0" class="idle county flat-red"/>
-                    All Counties
-                    </label>
-                    </td>
-                   
-                  @foreach($SubmittedCounties as $SubmittedCounty)
-                  
-                  <td>
-                    <label>
-                      <input type="checkbox" value="{{$SubmittedCounty->County}}" ch="0" class="idle county flat-red"/>
-                     {{$SubmittedCounty->County}}
-                    </label>
-                    </td>
-                   
-                  @endforeach
-                   </tr>
-                  
-                  </table>
-                  </div>
-
-
-                </div><!-- /.box-body -->
-            </div>
+        <div class="bucket" >
+           
+            <div  class="droppable ">
+               <ul id="main_list" class="source sortable">
+               <li data-value="All">All Counties</li>
+               @foreach ($SubmittedCounties as $SubmittedCounty ) 
+                <li data-value="{{$SubmittedCounty->County}}"> {{$SubmittedCounty->County}}</li>
+               @endforeach
+   
+</ul>
+                 </div><!-- /.box-body -->
+                 </div>
+              </div><!-- /.box -->
             </div>
 
+         
+        
+    </div>
 
-             <div class="col-md-4" id="box1" style="display: none;">
-               <div class="box box-success">
+
+  <div class="col-md-6">
+              <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title" id="title1"></h3>
+                  <h3 class="box-title">Counties</h3>
+                 <table id="checks">
+                 <tr>
+                 <td>
+                  <div class="checkbox">
+                        <label for="base">
+                          <input id="base" value="Baseline" class="cbox" type="checkbox">
+                          Baseline
+                        </label>
+                      </div>
+                      </td>
+                      <td> &nbsp; </td>
+                      <td>
+                      <div class="checkbox">
+                        <label for="mid">
+                          <input id="mid" class="cbox" value="Midterm" type="checkbox">
+                          Midterm
+                        </label>
+                      </div>
+                      </td>
+                       <td> &nbsp; </td>
+                      <td>
+                      <div class="checkbox">
+                        <label for="end">
+                          <input id="end" class="cbox" value="Endterm" type="checkbox">
+                          Endterm
+                        </label>
+                      </div>
+                      </td>
+                      </tr>
+                     </table>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-
-                <div id="canvas1"></div>  
-
-                </div><!-- /.box-body -->
                  
-              </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->        
-
-             <div class="col-md-4" id="box2" style="display: none;">
-               <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title" id="title2"></h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
-                </div>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
                 <div class="box-body">
-
-                <div id="canvas2"></div>  
-
-                </div><!-- /.box-body -->
-                 
+        <div class="choosen">
+          
+       
+                <ul id="selt_count" class="target sortable">
+                  
+                </ul>
+                 </div>
+                  </div><!-- /.box-body -->
               </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->      
+            </div>
+
+           
+       
+   
 
 
-             <div class="col-md-4" id="box3" style="display: none;">
-               <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title" id="title3"></h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
 
-                <div id="canvas3"></div>  
+    
+</fieldset>
+<div class="col-md-12">
+  
+  <div id='partbase'></div>
+   <div id='partmid'></div>
 
-                </div><!-- /.box-body -->
-                 
-              </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->          
+ <div id='partend'></div>
+
+</div>
 
 
+   
 
 
 @endsection
 
 
 @section('js')
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <link href="/bower_components/jq/jquery-ui.css" rel="stylesheet" /> 
+    <script src="/bower_components/jq/jquery-ui.js"></script>    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+
+  $('.sortable').sortable({
+    connectWith: '.sortable',
+    tolerance: 'pointer'
+});
+$('.sortable li').mousedown(function() {
+    $('.sortable').not($(this).parent()).each(function() {
+        if ($(this).find('li').length >= 3) {
+            if ($(this).attr('id') != "main_list" ) {
+                $(this).sortable('disable');
+            }
+        }
+    });
+});
+$('.sortable li').mouseup(function() {
+    $('.sortable').each(function() {
+        $(this).sortable('enable');
+    });
+});
+</script>
+    <script type="text/javascript">
+  window.cols=0;
+  resetpart('base');
+   resetpart('mid');
+   resetpart('end');
+
+
+$('#checks').on('click', '.cbox', function (e) {
+                    if(this.checked){
+
+                      window.cols++;
+                      setcolwidth();
+
+                       var values = $('#selt_count li').map(function() {
+                return $(this).attr('data-value');
+            });
+                      perfomance(this.id,values,true);
+
+                    }
+                      else{
+                         window.cols--;
+                       resetpart(this.id);
+
+                      };
+                });
+
+
+
+function resetpart(term){
+var theterm = $('#'+term).val();
+  
+    $('#part'+term).html('<div class="opt" id="box'+term+'" style="display: none;"><div class="box box-danger"><div class="box-header with-border"><h3 class="box-title">'+theterm+'</h3><div class="box-tools pull-right"><button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-header with-border"><h3 class="box-title" id="title'+term+'1"></h3></div><div class="box-body"><div id="'+term+'1"></div></div><div class="box-header with-border"><h3 class="box-title" id="title'+term+'2"></h3></div><div class="box-body"><div id="'+term+'2"></div></div><div class="box-body"><div class="box-header with-border"><h3 class="box-title" id="title'+term+'3"></h3></div><div id="'+term+'3"></div></div><div class="wait'+term+' overlay"><i class="fa fa-refresh fa-spin"></i></div></div></div></div>');
+
+
+
+}
+function setcolwidth(){
+
+  switch(window.cols){
+
+    case 1:  $( ".opt").addClass("col-md-12");
+            $( ".opt").removeClass("col-md-4");
+            $( ".opt").removeClass("col-md-6");
     
 
-	<script type="text/javascript">
-	google.load('visualization', '1', {packages: ['corechart', 'bar']});
+    break;
 
-	max = 0;
-	conty = "";
-	bx ="";
-	$('.county').parent().click(function(e){
+    case 2:
+     $( ".opt").addClass("col-md-6");
+            $( ".opt").removeClass("col-md-4");
+            $( ".opt").removeClass("col-md-12");
+
+    break;
+    case 3:
+     $( ".opt").addClass("col-md-4");
+            $( ".opt").removeClass("col-md-6");
+            $( ".opt").removeClass("col-md-12");
+
+    break;
+
+    default:
+     $( ".opt").addClass("col-md-4");
+            $( ".opt").removeClass("col-md-6");
+            $( ".opt").removeClass("col-md-12");
+
+    break;
+  }
+  resizec();
+
+}
+function perfomance(term,values,ov){
+
+     $('#box'+term).show();
+     theterm = $('#'+term).val();
+     
+    for (var i = 0; i <values.length; i++) {
+      if(ov){
+        $( ".wait"+term ).children().addClass("fa fa-refresh fa-spin");
+       $( ".wait"+term ).addClass("overlay"); 
+     }
+            county=values[i];
+            box = term + [i+1];
+               
+            drawChart(box, county,theterm);
+             
+
+           };       
+    
 
 
 
 
-		var sel = $(this).find('.county').attr('ch');
-		sel++;
-		$(this).find('.county').attr('ch',sel);
-		
 
-		var sw = sel%2;
+}
+   
+  function rtrim(str, length) {
+  return str.substr(0, str.length - length);
+}
 
-		if(sw==1){
-			var county = $(this).find('.county').val();
-			max++;
-			$(this).find('.county').removeClass('idle');
-			if(max==3){$('.idle').parent().hide();}	
-			make(max, county);
-
-		}
-
-		else{
-			unmake(max);
-			max--;
-			$('.idle').parent().show();
-			$(this).find('.county').addClass('idle');
-
-		}
-		
-		
-		
-	});
-
-	function make(box,county){
-		 
-		window.conty = county;
-		window.bx = box;
-		
-		drawChart();
-		$('#title'+box).html(county);
-		$('#box'+box).show();
-
-	}
-
-	function unmake(box){
-		$('#title'+box).html('');
-		$('#box'+box).hide();
-
-	}
-
-	function drawChart() {
+	function drawChart(box,county,theterm) {
 
 	 
 	  var data = {
-          'county':window.conty,
+          'county':county,
          '_token': $('input[name=_token]').val(),
-         'fi': '{{$funct}}'
+         'fi': '{{$funct}}',
+         'yr':'{{$yr}}',
+         'term':theterm
         
 
     };
-    alert(window.conty);
+  
  
    $.ajax({
-      url: '/analytics/comparison',
+      url: '/compare/{{strtolower($sv)}}',
       type: "post",
        data: data,
            success: function(data){
@@ -185,14 +260,17 @@
 		var jsonData = JSON.parse(data);
      
 
-   
-  	alert(jsonData);
+ 
+  	//alert(jsonData);
   
   
     
 	  @include('/analytics/comparison/'.$chart)	  
 	
-     
+     $('#title'+box).html(county);
+
+    $( ".wait"+rtrim(box,1) ).children().removeClass("fa fa-refresh fa-spin");
+    $( ".wait"+rtrim(box,1) ).removeClass("overlay");
 
        
       }
@@ -203,44 +281,46 @@
        
 
 }
+  
+  function thebegin(id){
+   
+
+      var chk =  $('#'+id).prop('checked');
+   
+       if(chk){
+                       var values = $('#selt_count li').map(function() {
+                return $(this).attr('data-value');
+            });
+                      perfomance(id,values,false);
+
+                    }
+                      
+              
+
+
+
+  }
+
+ function resizec () {
+     
+     thebegin('base');
+      thebegin('mid');
+       thebegin('end');
+
+           
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizec, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizec);
+    }
+
+   
+
 
 	</script>
-   <link href="/bower_components/admin-lte/plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
-   <script src="/bower_components/admin-lte/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-
-     <script type="text/javascript">
-      $(function () {
-       
-        
-
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass: 'iradio_minimal-blue'
-        });
-        //Red color scheme for iCheck
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-          checkboxClass: 'icheckbox_minimal-red',
-          radioClass: 'iradio_minimal-red'
-        });
-        //Flat red color scheme for iCheck
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-          checkboxClass: 'icheckbox_flat-green',
-          radioClass: 'iradio_flat-green'
-        });
-
-
-        	    		
-        
-      });
-    </script>
-    <script type="text/javascript">
-
-    	
-
-
-
-
-    </script>
+  
    
 @endsection
