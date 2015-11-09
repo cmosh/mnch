@@ -40,24 +40,24 @@ class AnalyticsController extends Controller {
      
 		
       		      
-      if ($county == 'All' ) 
+      if ($county == 'All' ) {
       	
       	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($Term){
       					return 	CHSubSurvey::where('Assessment_Term','Like',$Term)->get();
       	});
 
 
-      
+      }
 
-      else
+      else{
        	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
       					return 	CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
       	});
       
-      
+      }
      
 
-    $chanalytics  = analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county);
+    $chanalytics  = analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county,$Term);
 		
 $Map = (Cache::remember('MapCH',180,function() {
       					return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
@@ -141,13 +141,14 @@ $Map = (Cache::remember('MapMNH',180,function() {
 	}}
 	public function ch()
 	{
-				
+				$Term = 'Midterm';
 		
-$CHSubSurvey = Cache::remember('CHV2SubSurvey',180,function(){
-      					return CHSubSurvey::all();
-      	});  
+	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.'All'.$Term,180,function() use($Term){
+      					return 	CHSubSurvey::where('Assessment_Term','Like',$Term)->get();
+      	});
 
-      	//$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All');
+
+      	$chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All',$Term);
 		
    
 			

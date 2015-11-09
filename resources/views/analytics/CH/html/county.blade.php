@@ -37,7 +37,7 @@
 
 
                         <div class="form-group" > <select class="form-control select2 " style="width:100%;" name="Term" id="Term"> 
-                       <option value="All" selected>All Terms</option>
+                      
                      <option value="Baseline">Baseline</option>
                      <option value="Midterm">Midterm</option>
                      <option value="Endterm">Endterm</option>

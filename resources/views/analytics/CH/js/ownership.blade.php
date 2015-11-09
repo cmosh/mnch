@@ -6,6 +6,7 @@ var ownershipdata = new google.visualization.DataTable();
         // Set chart ownershipoptions
         var ownershipoptions = {
                        'width':'100%',
+                       sliceVisibilityThreshold:0,
                         'box-sizing': 'border-box;',
                        'height':300};
 

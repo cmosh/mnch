@@ -205,7 +205,7 @@ function setcolwidth(){
 
     break;
   }
-  resizec();
+  resizecd();
 
 }
 function perfomance(term,values,ov){
@@ -252,7 +252,7 @@ function perfomance(term,values,ov){
   
  
    $.ajax({
-      url: '/compare/{{strtolower($sv)}}',
+      url: '/compare/chv2',
       type: "post",
        data: data,
            success: function(data){
@@ -261,7 +261,6 @@ function perfomance(term,values,ov){
      
 
  
-  	//alert(jsonData);
   
   
     
@@ -301,7 +300,7 @@ function perfomance(term,values,ov){
 
   }
 
- function resizec () {
+ function resizecd () {
      
      thebegin('base');
       thebegin('mid');
@@ -311,10 +310,10 @@ function perfomance(term,values,ov){
     }
 
     if (window.addEventListener) {
-        window.addEventListener('resize', resizec, false);
+        window.addEventListener('resize', resizecd, false);
     }
     else if (window.attachEvent) {
-        window.attachEvent('onresize', resizec);
+        window.attachEvent('onresize', resizecd);
     }
 
    

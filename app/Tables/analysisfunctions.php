@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
  use App\Http\Controllers\ArrayRedis as Cache;
 use Illuminate\Http\Request;
-
+global $term;
 class analysisfunctions extends Controller {
 
 	
@@ -13,10 +13,11 @@ class analysisfunctions extends Controller {
 	
 	 public function __construct() {
 
-	 		$this->CHV2_Tools = function($county){
+	 		$this->CHV2_Tools = function($county){ global $term;
 	 	//Tools Availability_2
+
 		$ToolsHeading = array('Tools Availability', 'Yes', 'No','No information provided' );
-		return $CHV2_Tools = Cache::remember('CHV2_Tools'.$county,180,function() use($ToolsHeading){
+		return $CHV2_Tools = Cache::remember('CHV2_Tools'.$county.$term,180,function() use($ToolsHeading){
       					$temp =	  self::twoOptionsFullStack( 'CHV2SEC2BLK2RW',$ToolsHeading,0,2,10,'COL01','COL02','/^/');
       						$temp[2][0] = 'EID Register';
       						$temp[2][0] = 'Under 5 Register';
@@ -25,10 +26,10 @@ class analysisfunctions extends Controller {
       	});
 	};
 	 	
-	 	$this->CHV2_Guidelines = function($county){
+	 	$this->CHV2_Guidelines = function($county){ global $term;
 
 	 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No','No information provided' );
-			return $CHV2_Guidelines = Cache::remember('CHV2_Guidelines'.$county,180,function() use($GuidelinesHeading){
+			return $CHV2_Guidelines = Cache::remember('CHV2_Guidelines'.$county.$term,180,function() use($GuidelinesHeading){
       					$temp =	 self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
       				$temp[8][0] = 'EID Algorithim 2009/2012/2014';
       				return $temp;
@@ -38,71 +39,71 @@ class analysisfunctions extends Controller {
 
 	 
 
-		$this->CHV2_DTreatmentCommodities= function($county){
+		$this->CHV2_DTreatmentCommodities= function($county){ global $term;
 		//DTreatmentCommodities_3
 		$DTreatmentCommoditiesExclude = array(11,12);
 		$DTreatmentCommoditiesH = array('Diarhoea Treatment Availability', 'Available', 'Not Available','No information provided' );
 		
-		return $CHV2_DTreatmentCommodities = Cache::remember('CHV2_DTreatmentCommodities'.$county,180,function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
+		return $CHV2_DTreatmentCommodities = Cache::remember('CHV2_DTreatmentCommodities'.$county.$term,180,function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentCommoditiesH,0,9,17,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
 	});	
 	};
 
-	$this->CHV2_DTreatmentAvailability= function($county){
+	$this->CHV2_DTreatmentAvailability= function($county){ global $term;
 	//DTreatmentAvailability_4
 		$DTreatmentAvailabilityExclude = array(11,12);
 		$DTreatmentAvailabilityH = array('Diarhoea Treatment Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
 		
-		return $CHV2_DTreatmentAvailability = Cache::remember('CHV2_DTreatmentAvailability'.$county,180,function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
+		return $CHV2_DTreatmentAvailability = Cache::remember('CHV2_DTreatmentAvailability'.$county.$term,180,function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentAvailabilityH,0,9,17,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
 	});		
 	};	
 		
 	//Antibiotics_5
 
-	$this->CHV2_Antibiotics= function($county){
+	$this->CHV2_Antibiotics= function($county){ global $term;
 		$AntibioticsH = array('Antibiotics  Availability', 'Available', 'Not Available','No information provided' );
 		
-		return $CHV2_Antibiotics = Cache::remember('CHV2_Antibiotics'.$county,180,function() use($AntibioticsH){
+		return $CHV2_Antibiotics = Cache::remember('CHV2_Antibiotics'.$county.$term,180,function() use($AntibioticsH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsH,0,5,9,'COL01','COL03','/^/');
       	});	
 	};
     //AntibioticsAvailability_6
 
-	$this->CHV2_AntibioticsAvailability= function($county){
+	$this->CHV2_AntibioticsAvailability= function($county){ global $term;
 		$AntibioticsAvailabilityH = array('Antibiotics  Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
 		
-		return $CHV2_AntibioticsAvailability = Cache::remember('CHV2_AntibioticsAvailability'.$county,180,function() use($AntibioticsAvailabilityH){
+		return $CHV2_AntibioticsAvailability = Cache::remember('CHV2_AntibioticsAvailability'.$county.$term,180,function() use($AntibioticsAvailabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsAvailabilityH,0,5,9,'COL01','COL04','/^/');
       	});	
 
       	};	
 
-      	$this->CHV2_Malaria= function($county){
+      	$this->CHV2_Malaria= function($county){ global $term;
 	//Malaria_7
 		$MalariaH = array('Malaria  Availability', 'Available', 'Not Available','No information provided' );
 
-		return $CHV2_Malaria = Cache::remember('CHV2_Malaria'.$county,180,function() use($MalariaH){
+		return $CHV2_Malaria = Cache::remember('CHV2_Malaria'.$county.$term,180,function() use($MalariaH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/');
       	});
 	};
 
-		$this->CHV2_MalariaAvaialability= function($county){
+		$this->CHV2_MalariaAvaialability= function($county){ global $term;
      //MalariaAvaialability_8
 		$MalariaAvaialabilityH = array('Malaria  Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
 
-		return $CHV2_MalariaAvaialability = Cache::remember('CHV2_MalariaAvaialability'.$county,180,function() use($MalariaAvaialabilityH){
+		return $CHV2_MalariaAvaialability = Cache::remember('CHV2_MalariaAvaialability'.$county.$term,180,function() use($MalariaAvaialabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaAvaialabilityH,0,2,5,'COL01','COL04','/^/');
       	});
 	};
 		
 	//ortf_9
 
-	$this->CHV2_ortf= function($county){
+	$this->CHV2_ortf= function($county){ global $term;
 		$ortfExclude = array(4,5);
 		$ortfH = array('Ort Functionality', 'Yes', 'No','No information provided' );
 
-		return $CHV2_ortf = Cache::remember('CHV2_ortf'.$county,180,function() use($ortfExclude,$ortfH){
+		return $CHV2_ortf = Cache::remember('CHV2_ortf'.$county.$term,180,function() use($ortfExclude,$ortfH){
       					$temp = 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,3,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
       						
       					$temp[1][0] = 'Does the facility have an ORT corner?';
@@ -116,93 +117,93 @@ class analysisfunctions extends Controller {
       	});
 	};
 		
-		$this->CHV2_supplies= function($county){
+		$this->CHV2_supplies= function($county){ global $term;
 	//supplies_10
 		$suppliesH = array('Supplies Availability', 'Available', 'Not Available','No information provided' );
 
 
-		return $CHV2_supplies = Cache::remember('CHV2_supplies'.$county,180,function() use($suppliesH){
+		return $CHV2_supplies = Cache::remember('CHV2_supplies'.$county.$term,180,function() use($suppliesH){
       					return 	 self::twoOptionsFullStack( 'CHV2SEC6BLK2RW',$suppliesH,0,2,9,'COL01','COL02','/^/');
       	});
 	};
 		
 	//resources_11
 
-		$this->CHV2_resources= function($county){
+		$this->CHV2_resources= function($county){ global $term;
 		$resourcesH = array('Resource Availability', 'Available', 'Not Available','No information provided' );
 
 
-		return $CHV2_resources = Cache::remember('CHV2_resources'.$county,180,function() use($resourcesH){
+		return $CHV2_resources = Cache::remember('CHV2_resources'.$county.$term,180,function() use($resourcesH){
       					return 	self::twoOptionsFullStack( 'CHV2SEC7BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
 	
       	});
 	};
 
-		$this->CHV2_ownership= function($county){
+		$this->CHV2_ownership= function($county){ global $term;
 	  //ownership_16
-		return $CHV2_ownership = Cache::remember('CHV2_ownership'.$county,180,function() {
+		return $CHV2_ownership = Cache::remember('CHV2_ownership'.$county.$term,180,function() {
 
 			return self::ownership();
 		});
 
 	};
-		$this->CHV2_types= function($county){
+		$this->CHV2_types= function($county){ global $term;
 	//types_17
-		return $CHV2_types = Cache::remember('CHV2_types'.$county,180,function() {
+		return $CHV2_types = Cache::remember('CHV2_types'.$county.$term,180,function() {
 
 			return self::types();
 		});
 	};
 
-	$this->CHV2_staff_trained= function($county){
+	$this->CHV2_staff_trained= function($county){ global $term;
 	//staff_trained_18
-		return $CHV2_staff_trained = Cache::remember('CHV2_staff_trained'.$county,180,function(){
+		return $CHV2_staff_trained = Cache::remember('CHV2_staff_trained'.$county.$term,180,function(){
 			return self::staff_trained();
 		});
 	};
-	$this->CHV2_comm_strategy= function($county){
+	$this->CHV2_comm_strategy= function($county){ global $term;
 	//comm_strategy_19
-		return $CHV2_comm_strategy = Cache::remember('CHV2_comm_strategy'.$county,180,function(){
+		return $CHV2_comm_strategy = Cache::remember('CHV2_comm_strategy'.$county.$term,180,function(){
 			return self::commstrategy();
 		});
 	};
 
 	//lort_20
-	$this->CHV2_lort= function($county){
-		return $CHV2_lort = Cache::remember('CHV2_lort'.$county,180,function(){
+	$this->CHV2_lort= function($county){ global $term;
+		return $CHV2_lort = Cache::remember('CHV2_lort'.$county.$term,180,function(){
 			return self::ortloc();
 		});
 	};
 	//genopd_21
-	$this->CHV2_genopd= function($county){
-		return $CHV2_genopd = Cache::remember('CHV2_genopd'.$county,180,function(){
+	$this->CHV2_genopd= function($county){ global $term;
+		return $CHV2_genopd = Cache::remember('CHV2_genopd'.$county.$term,180,function(){
 			return self::opdgen();
 		});
 	};
 
 	//u5Register_12Year1
-		$this->CHV2_u5Register= function($county,$Year){
-		return $CHV2_u5Register = Cache::remember('CHV2_u5Register'.$county.$Year,180,function() use($Year){
+		$this->CHV2_u5Register= function($county,$Year){ global $term;
+		return $CHV2_u5Register = Cache::remember('CHV2_u5Register'.$county.$Year.$term,180,function() use($Year){
       					return self::u5Register($Year);
       	});
 	};
 
 	//u5RegisterN_13Year3
-		$this->CHV2_u5RegisterN= function($county,$Year){
-		return $CHV2_u5RegisterN = Cache::remember('CHV2_u5RegisterN'.$county.$Year,180,function() use($Year){
+		$this->CHV2_u5RegisterN= function($county,$Year){ global $term;
+		return $CHV2_u5RegisterN = Cache::remember('CHV2_u5RegisterN'.$county.$Year.$term,180,function() use($Year){
       					return self::u5RegisterN($Year);
       	});
 	};
 	//annualtrends_14Year2
-	$this->CHV2_annualtrends= function($county,$Year){
-		return $CHV2_annualtrends = Cache::remember('CHV2_annualtrends'.$county.$Year,180,function() use($Year){
+	$this->CHV2_annualtrends= function($county,$Year){ global $term;
+		return $CHV2_annualtrends = Cache::remember('CHV2_annualtrends'.$county.$Year.$term,180,function() use($Year){
       					return self::annualtrends($Year);
       	});
 	};
 		
 	//annualtrends_15Year4
-	$this->CHV2_annualtrendsN= function($county,$Year){
-		return $CHV2_annualtrendsN = Cache::remember('CHV2_annualtrendsN'.$county.$Year,180,function() use($Year){
+	$this->CHV2_annualtrendsN= function($county,$Year){ global $term;
+		return $CHV2_annualtrendsN = Cache::remember('CHV2_annualtrendsN'.$county.$Year.$term,180,function() use($Year){
       					return self::annualtrendsN($Year);
       	});
 	};
@@ -654,7 +655,7 @@ global $surveys;
 		
 	}
 
-
+if(!isset($array))$array [] = array('No data',0);
 		
  return $array;
 
@@ -708,7 +709,7 @@ $z =  $x->groupby('Owner');
 		$array [] = array( $v[0]['Owner'], count($v));
 		
 	}
-
+if(!isset($array))$array [] = array('No data',0);
  return ($array);
 	
 			}

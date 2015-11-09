@@ -13,9 +13,11 @@ class analyse extends analysisfunctions {
  
   
 
-	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4,$county){
+	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4,$county,$tm){
 	//Feed in survey
-		global $surveys;		
+		global $surveys;
+		global $term;
+		$term = $tm;
 		$surveys = $data;
 		$ch = new analyse();
 		//Json Making
@@ -45,22 +47,27 @@ class analyse extends analysisfunctions {
 		return $JsonArray;
 	}
 
-	public static function getindividual($funct,$data,$county,$yr){
+	public static function getindividual($funct,$data,$county,$yr,$tm){
 
-		global $surveys;		
+		global $surveys;
+		global $term;
+		$term = $tm;	
 		$surveys = $data;
 
 		$ch = new analyse();
 
 		switch ($yr) {
-			case 'not':
+				case 'not':
+				$val = '$x = $ch->'.$funct.'->__invoke("'.$county.'");';
+				break;
+
+		
+				default:
 				$val = '$x = $ch->'.$funct.'->__invoke("'.$county.'","'.$yr.'");';
 
 				break;
 			
-			default:
-				$val = '$x = $ch->'.$funct.'->__invoke("'.$county.'");';
-				break;
+		
 		}
 
 	
