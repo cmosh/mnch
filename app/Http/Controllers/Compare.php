@@ -13,43 +13,42 @@ use Cache;
 class Compare extends Controller {
 
 
-     public function getStuff($key)
-    {
-        $value = Cache::get($key);
-        return $value;
-    }
+   
 
-public function postChv2(){
+public function chv2(){
 
-		 if(Request::ajax()) {
+     if(Request::ajax()) {
+
+      
       $data = Input::all();
       $county = $data['county'];
       $fi = $data['fi'];
       $yr = $data['yr'];
       $term = $data['term'];
 
+       
      
      if($county =='All'){
-     	 $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function()use($term){
-      					return CHSubSurvey::where('Assessment_Term','Like',$term)->get();
-      	});  
+        $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function()use ($term){
+               return CHSubSurvey::where('Assessment_Term','Like',$term)->get();
+       });  
 
      }
-     	else{
+       else{
 
-     		 $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function() use ($county,$term){
-      					return CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$term)->get();
-      	});  
+          $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function() use ($county,$term){
+               return CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$term)->get();
+       });  
 
-     	}
+       }
 
-     	
+    
 
-       echo json_encode(analyse::getindividual($fi,$sdata,$county,$yr));
+       echo json_encode(analyse::getindividual($fi,$sdata,$county,$yr,$term));
   }
 
   die;
 
-	}
+  }
 
 }

@@ -6,6 +6,7 @@
         // Set chart options
         var ftypesoptions = {
                        'width':'100%',
+                       sliceVisibilityThreshold:0,
                        'box-sizing': 'border-box;',
                        'height':300};
 
