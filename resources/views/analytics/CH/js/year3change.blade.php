@@ -20,6 +20,8 @@ function year3() {
        @include('analytics/CH/js/nondiarrhoea')
       $(  "#u5N"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#u5N"  ).removeClass("overlay");
+      var yr = $('#Year3').val();
+   $("#Year3Change").prop('href','/comparison/CHV2/CHV2_u5RegisterN/col/'+yr);
       } 
    });  
 }

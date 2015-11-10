@@ -10,8 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-// Route::controller('compare', 'Compare');
-Route::post('compare/chv2','Compare@chv2');
+Route::controller('compare', 'Compare');
 Route::get('admin/surveys','FormController@index');
 Route::get('admin/surveys/{SurveyID}','FormController@edit');
 Route::get('/comparison/{survey}/{lambda}/{chart}/','AnalyticsController@comparison');

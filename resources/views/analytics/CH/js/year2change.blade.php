@@ -21,6 +21,8 @@ function year2() {
        @include('analytics/CH/js/annualTrends')
       $(  "#anT"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#anT"  ).removeClass("overlay");
+       var yr = $('#Year2').val();
+   $("#Year2Change").prop('href','/comparison/CHV2/CHV2_annualtrends/colfullstack/'+yr);
       } 
    });  
 }

@@ -20,6 +20,8 @@ function year4() {
        @include('analytics/CH/js/orttrends')
       $(  "#ortN"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#ortN"  ).removeClass("overlay");
+      var yr = $('#Year4').val();
+   $("#Year4Change").prop('href','/comparison/CHV2/CHV2_u5RegisterN/col/'+yr);
       } 
    });  
 }

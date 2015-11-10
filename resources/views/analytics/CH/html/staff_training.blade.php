@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Staff Training</h3>
                   <div class="box-tools pull-right">
-                    <a href=""> <button class="btn btn-box-tool">Launch Comparison</button></a>
+                    <a href="/comparison/CHV2/CHV2_staff_trained/barstack/" class="btn btn-box-tool">Launch Comparison</a>
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>

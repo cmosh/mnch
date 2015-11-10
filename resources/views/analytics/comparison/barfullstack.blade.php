@@ -10,7 +10,7 @@
         chartArea:{left:250,top:25,width:'50%',height:'75%'}
       };
 
-      var c = new google.visualization.BarChart(document.getElementById('canvas'+window.bx));
+      var c = new google.visualization.BarChart(document.getElementById(box));
       c.draw(cdata, coptions);
 
        function resizec () {

@@ -52,11 +52,28 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+
               <ul class="nav navbar-nav">
                
                 <!--  <li><a href="/home">Dashboard</a></li> -->
-             <li><a href="/">Child Health Survey</a></li>
+                 @if(isset($loc))
+
+                
+             <li><a  @if(substr($loc,0,2)=='Ch')
+             class="active"
+             @endif
+              href="/">Child Health Survey</a></li>
+
+             <li><a  @if(substr($loc,0,2)=='Ma')
+             class="active"
+             @endif 
+             href="/mnh">Maternal and Neonatal Health Survey</a></li>
+             
+
+             @else
+              <li><a  class="active" href="/">Child Health Survey</a></li>
              <li><a href="/mnh">Maternal and Neonatal Health Survey</a></li>
+             @endif
               </ul>
          
             </div>
@@ -91,7 +108,7 @@
         <div class="container-fluid">
           <!-- Content Header (Page header) -->
           <section class="content-header">
-          
+          @yield('header')
           </section>
 
           <!-- Main content -->
