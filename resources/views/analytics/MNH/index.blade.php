@@ -1,4 +1,11 @@
 @extends('app')
+@section('header')
+  <h1  align="middle">
+                 Maternal and Neonatal Health Survey   
+              <small>(Analysis Results)</small>
+            </h1>
+            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
+@endsection
 
 @section('content')
 
@@ -21,12 +28,10 @@
  <div class="col-md-8">
 
   <!-- small box -->
-              <div class="small-box bg-green">
+               <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3>Maternal Neonatal Healthcare Survey<sup style="font-size: 20px"></sup></h3>
-                   <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p></div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <h3> <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                 
                 </div>
               
               </div>
@@ -148,19 +153,20 @@
         //Initialize Select2 Elements
         $(".select2").select2();
 
-               
+       var inside = $('#thesvg').contents();
+          @foreach($SubmittedCounties as $SubmittedCounty)
+        inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        @endforeach
+         
       });
-
-    </script>
-
-  <script type="text/javascript">
+ 
  
 
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawChart);
 
   $('#County').change(drawChart);
-
+   $('#Term').change(drawChart);
 	
 function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';

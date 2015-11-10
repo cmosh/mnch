@@ -76,15 +76,15 @@ public function postChv2(){
 
     
      if($county =='All'){
-        $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function() use ($term){
-               return CHSubSurvey::where('Assessment_Term','Like',$term)->get();
+        $sdata = Cache::remember('MNHV2SubSurvey'.$county.$term,180,function() use ($term){
+               return MNHVSubSurvey::where('Assessment_Term','Like',$term)->get();
        });  
 
      }
        else{
 
-          $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function() use ($county,$term){
-               return CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$term)->get();
+          $sdata = Cache::remember('MNHV2SubSurvey'.$county.$term,180,function() use ($county,$term){
+               return MNHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$term)->get();
        });  
 
        }

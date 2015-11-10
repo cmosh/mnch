@@ -189,10 +189,15 @@ $Map = (Cache::remember('MapMNH',180,function() {
 
 		
 
-		if($survey=='CHV2'){
+		if($survey=='CHV2')
 
 		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
 							return SubmittedCHCountie::get();
+							 	});
+		elseif($survey=='MNHV2')
+
+		$SubmittedCounties = Cache::remember('SubmittedMNHV2Counties',180,function(){
+							return SubmittedMNHCountie::get();
 							 	});
 
 
@@ -202,7 +207,7 @@ $Map = (Cache::remember('MapMNH',180,function() {
 										   ->with('yr',$yr)
 										   ->with('sv',$survey);
 
-	}
+	
 
 
 

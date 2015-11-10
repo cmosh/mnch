@@ -39,7 +39,7 @@ class analyse extends analysisfunctions {
 			'CHV2_staff_trained'=> $ch->CHV2_staff_trained->__invoke($county),
 			'CHV2_DTreatmentAvailability'=> $ch->CHV2_DTreatmentAvailability->__invoke($county),
 			'CHV2_AntibioticsAvailability'=> $ch->CHV2_AntibioticsAvailability->__invoke($county),
-			'CHV2_MalariaAvaialability'=> $ch->CHV2_AntibioticsAvailability->__invoke($county),
+			'CHV2_MalariaAvaialability'=> $ch->CHV2_MalariaAvaialability->__invoke($county),
 			'CHV2_comm_strategy'=> $ch->CHV2_comm_strategy->__invoke($county),
 			'CHV2_lort'=> $ch->CHV2_lort->__invoke($county),
 			'CHV2_genopd'=> $ch->CHV2_genopd->__invoke($county)
