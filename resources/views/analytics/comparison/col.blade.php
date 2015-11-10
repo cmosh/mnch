@@ -1,17 +1,16 @@
-var cdata = google.visualization.arrayToDataTable(jsonData);
+  var cdata = google.visualization.arrayToDataTable(jsonData);
 
-      var coptions = {
+       var coptions = {
        
-        width: '100%',
+       width: '100%',
         height: 300,
+       
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '50%' },
-        isStacked: true,
-       hAxis: {minValue: 0},
-        vAxis: {minValue:0},
-        chartArea:{left:40,top:25,width:'100%',height:'75%'}
-      };
-      var c = new google.visualization.BarChart(document.getElementById(box));
+        bar: { groupWidth: 35 }
+
+             };
+             
+      var c = new google.visualization.ColumnChart(document.getElementById(box));
       c.draw(cdata, coptions);
 
        function resizec () {

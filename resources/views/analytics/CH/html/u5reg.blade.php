@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Treatment Data in Under 5 Register</h3>
                   <div class="box-tools pull-right">
-                    <a href=""> <button class="btn btn-box-tool">Launch Comparison</button></a>
+                    <a id="Year1Change" href="/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount}}" class="btn btn-box-tool">Launch Comparison</a>
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>

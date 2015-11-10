@@ -20,6 +20,9 @@ function year1() {
        @include('analytics/CH/js/u5reg')
       $(  "#u5"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#u5"  ).removeClass("overlay");
+      var yr = $('#Year1').val();
+   $("#Year1Change").prop('href','/comparison/CHV2/CHV2_u5Register/col/'+yr);
       } 
    });  
+   
 }

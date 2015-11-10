@@ -40,7 +40,7 @@
   <div class="col-md-6">
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Counties</h3>
+                  <h3 class="box-title">Comparison Criteria</h3>
                  <table id="checks">
                  <tr>
                  <td>
@@ -124,25 +124,46 @@
     tolerance: 'pointer'
 });
 $('.sortable li').mousedown(function() {
+
     $('.sortable').not($(this).parent()).each(function() {
         if ($(this).find('li').length >= 3) {
             if ($(this).attr('id') != "main_list" ) {
                 $(this).sortable('disable');
             }
         }
+        
     });
 });
 $('.sortable li').mouseup(function() {
+
     $('.sortable').each(function() {
         $(this).sortable('enable');
+
+
     });
+   
 });
+
+
+
 </script>
     <script type="text/javascript">
   window.cols=0;
   resetpart('base');
    resetpart('mid');
    resetpart('end');
+
+  $('#selt_count').sortable().droppable().on('sortreceive', function(event, ui) {
+ resizecd(true);
+  });
+  $('#main_list').sortable().droppable().on('sortreceive', function(event, ui) {
+  resizecd(true);
+  resetpart('base');
+   resetpart('mid');
+   resetpart('end');
+
+   resizecd(true);
+  });
 
 
 $('#checks').on('click', '.cbox', function (e) {
@@ -205,7 +226,7 @@ function setcolwidth(){
 
     break;
   }
-  resizecd();
+  resizecd(false);
 
 }
 function perfomance(term,values,ov){
@@ -252,7 +273,7 @@ function perfomance(term,values,ov){
   
  
    $.ajax({
-      url: '/compare/chv2',
+      url: '/compare/{{strtolower($sv)}}',
       type: "post",
        data: data,
            success: function(data){
@@ -261,6 +282,7 @@ function perfomance(term,values,ov){
      
 
  
+  	//alert(jsonData);
   
   
     
@@ -281,7 +303,7 @@ function perfomance(term,values,ov){
 
 }
   
-  function thebegin(id){
+  function thebegin(id,bol){
    
 
       var chk =  $('#'+id).prop('checked');
@@ -290,7 +312,7 @@ function perfomance(term,values,ov){
                        var values = $('#selt_count li').map(function() {
                 return $(this).attr('data-value');
             });
-                      perfomance(id,values,false);
+                      perfomance(id,values,bol);
 
                     }
                       
@@ -300,20 +322,20 @@ function perfomance(term,values,ov){
 
   }
 
- function resizecd () {
+ function resizecd (bol) {
      
-     thebegin('base');
-      thebegin('mid');
-       thebegin('end');
+     thebegin('base',bol);
+      thebegin('mid',bol);
+       thebegin('end',bol);
 
            
     }
 
     if (window.addEventListener) {
-        window.addEventListener('resize', resizecd, false);
+        window.addEventListener('resize', resizecd(false), false);
     }
     else if (window.attachEvent) {
-        window.attachEvent('onresize', resizecd);
+        window.attachEvent('onresize', resizecd(false));
     }
 
    

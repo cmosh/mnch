@@ -7,6 +7,7 @@
         var coptions = {
                        'width':'100%',
                        'box-sizing': 'border-box;',
+                       sliceVisibilityThreshold:0,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
