@@ -134,7 +134,7 @@ $Map = (Cache::remember('MapMNH',180,function() {
       	});
 
 
-      	// $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All',$Term);
+      	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All','Baseline');
 		
    
 			

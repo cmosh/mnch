@@ -429,6 +429,8 @@ class analysisfunctions extends Controller {
 
 		};
 
+	
+
 		$this->MNHV2_Reasoncs = function($county){ global $term;
 		//Reasoncs
 		$ReasoncsSLices = array('Supplies and equipment not available','Theatre Space Not Available','Human Resource','Other','No information provided');
@@ -439,12 +441,13 @@ class analysisfunctions extends Controller {
 	};
 
 
-//EXCEL RAWS
-	$this->CHV2_Tools = function(Excel $excel){ 
+		//EXCEL RAWS
+	// $this->CHV2_Tools = function(Excel $excel){ 
 
 		
 
-		}
+	// 	};
+
 
 
 
