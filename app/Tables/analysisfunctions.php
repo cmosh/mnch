@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
  use App\Http\Controllers\ArrayRedis as Cache;
+ use Maatwebsite\Excel\Excel;
 use Illuminate\Http\Request;
 global $term;
 class analysisfunctions extends Controller {
@@ -436,6 +437,14 @@ class analysisfunctions extends Controller {
 		});
 
 	};
+
+
+//EXCEL RAWS
+	$this->CHV2_Tools = function(Excel $excel){ 
+
+		
+
+		}
 
 
 
