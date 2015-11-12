@@ -236,7 +236,7 @@ public function getGuidelines(Excel $excel)
 
 
 
-			$excel->create('Guidelines', function($ex) use($f)  {
+			$excel->create('Guidelines Availability', function($ex) use($f)  {
 
 	    $ex->sheet('Sheet1', function($sheet) use($f){
 	    	
@@ -340,6 +340,355 @@ $arr=array();
 
 
 
+
+public function getTools(Excel $excel)
+	{
+
+		$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC2BLK2%');
+}]);
+
+ $f->load('z');
+
+
+
+			$excel->create('Tools Availability', function($ex) use($f)  {
+
+	    $ex->sheet('Sheet1', function($sheet) use($f){
+	    	
+	
+
+	    		$sheet->row(1, array(
+     'County',	'Subcounty'	,'MFL'	,'Facility Name ',
+     'Level',	'Type',	'Owner'	,'Date of Assessment',
+     'Assessment Type','Version','Assessment Term',
+    'EID Register',	'Under 5 Register',	'ORT Corner Register (Improvised)',
+    'Mother Child Booklet',	'ORT Corner Register (MoH)','IMCI Case Recording Form',	'Referral Slips	ICCM Tools'
+
+	
+     
+
+
+			)
+	    		
+	    		);
+
+	 
+
+ 	   $sheet->cells('A1:K1', function($cells) {
+
+    // manipulate the range of cells
+    $cells->setFontWeight('bold');
+    $cells->setAlignment('center');
+     $cells->setValignment('middle');
+     
+
+});
+
+
+ 
+ 	  
+
+
+	    		
+	    		$counter2=0;
+	    		
+				
+
+	    		foreach ($f as $value) {
+
+
+$arr=array();
+	    				for($i=0;$i<8;$i++) {
+
+ 	   	
+ 	   	
+ 	   	if( $value->x[$i]->Data=='1')
+ 	   		{$arr[$i]='Yes';}
+ 	   	elseif($value->x[$i]->Data=='2')
+ 	   	{
+ 	   		$arr[$i]='No';
+ 	   	}
+ 	   	else
+ 	   	{
+ 	   		$arr[$i]='No Information';
+ 	   	}
+
+
+
+ 	   	# code...
+ 	   }
+	
+	    				$counter2++;
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$value->z->County,$value->z->SubCounty,
+						$value->z->FacilityCode,$value->z->FacilityName,
+		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
+		     			$arr[0],$arr[1],$arr[2],$arr[3],$arr[4],
+		     			$arr[5],$arr[6],$arr[7]
+		     			
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+
+
+
+
+
+
+	})->download('csv');
+
+
+	
+
+}
+
+
+public function getDiarrhoea(Excel $excel)
+	{
+
+		$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC4BLK2%');
+}]);
+
+ $f->load('z');
+
+
+
+			$excel->create('Tools Availability', function($ex) use($f)  {
+
+	    $ex->sheet('Sheet1', function($sheet) use($f){
+	    	
+	
+
+	    		$sheet->row(1, array(
+     'County',	'Subcounty'	,'MFL'	,'Facility Name ',
+     'Level',	'Type',	'Owner'	,'Date of Assessment',
+     'Assessment Type','Version','Assessment Term',
+   'Artemether + Leumefantrine (AL)'	,'Reason'	,
+   'Artesunate Injection',	'Reason',	
+   'Injection Quinine','Reason',	
+   'Tablet Metronidazole','Reason',	
+   'Syrup Metronidazole','Reason',	
+   'Syrup Amoxicillin'	,'Reason',	
+   'Syrup Cotrimoxazole','Reason',	
+   'Tablet Amoxicillin','Reason',	
+   'Tablet Paed Cotrimoxazole','Reason',	
+   'Low Osmolarity Oral Rehydration Salts (ORS)','Reason',	
+   'Vitamin A	50,000 IU','Reason',	
+   'Vitamin A	100,000 IU','Reason',	
+   'Vitamin A	200,000 IU','Reason',	
+   'Zinc Sulphate','Reason',	
+   'ORS & Zinc Co-pack','Reason',	
+   'Rota Virus Vaccine','Reason'
+	 
+     
+
+
+			)
+	    		
+	    		);
+
+	 
+
+ 	   $sheet->cells('A1:K1', function($cells) {
+
+    // manipulate the range of cells
+    $cells->setFontWeight('bold');
+    $cells->setAlignment('center');
+     $cells->setValignment('middle');
+     
+
+});
+
+
+ 
+ 	  
+
+
+	    		
+	    		$counter2=0;
+	    		
+				
+
+	    		foreach ($f as $value) {
+
+
+$arr=array();
+	    				for($i=0;$i<8;$i++) {
+
+ 	   	
+ 	   	
+ 	   	if( $value->x[$i]->Data=='1')
+ 	   		{$arr[$i]='Yes';}
+ 	   	elseif($value->x[$i]->Data=='2')
+ 	   	{
+ 	   		$arr[$i]='No';
+ 	   	}
+ 	   	else
+ 	   	{
+ 	   		$arr[$i]='No Information';
+ 	   	}
+
+
+
+ 	   	# code...
+ 	   }
+	
+	    				$counter2++;
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$value->z->County,$value->z->SubCounty,
+						$value->z->FacilityCode,$value->z->FacilityName,
+		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
+		     			$arr[0],$arr[1],$arr[2],$arr[3],$arr[4],
+		     			$arr[5],$arr[6],$arr[7]
+		     			
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+
+
+
+
+
+
+	})->download('csv');
+}
+
+
+	public function getCommunityStrategy(Excel $excel)
+	{
+
+		$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC8BLK1%');
+}]);
+	  $f->load('z');
+
+					$excel->create('Community Strategy', function($ex) use($f)  {
+
+	    $ex->sheet('Sheet1', function($sheet) use($f){
+	    	
+	  
+ 	   $sheet->row(1, array(
+     '',	''	,''	,'',
+     '',	'',	''	,'',
+     '','',''	,
+     'Community Units','','',
+     'CHEWs','','',
+     'CHVs','','',
+     
+			)
+ 	   );
+
+	    		$sheet->row(2, array(
+     'County',	'Subcounty'	,'MFL'	,'Facility Name ',
+     'Level',	'Type',	'Owner'	,'Date of Assessment',
+     'Assessment Type','Version','Assessment Term'	,
+     'Trained','Not Trained',
+'Trained','Not Trained',
+'Trained','Not Trained'    
+
+			)
+	    		
+	    		);
+
+	   $sheet->mergeCells('L1:M1');
+	   $sheet->mergeCells('N1:O1');
+ 	$sheet->mergeCells('P1:Q1');
+ 	   $sheet->setHeight(1, 20) ;
+ 	   $sheet->getStyle('A1:AC1') ->getAlignment()->setWrapText(true); 
+
+ 	   $sheet->cells('A1:AC2', function($cells) {
+
+    // manipulate the range of cells
+    $cells->setFontWeight('bold');
+    $cells->setAlignment('center');
+     $cells->setValignment('middle');
+     
+
+});
+
+
+	    		
+	    		$counter2=1;
+	    		
+				
+
+	    		foreach ($f as $value) {
+	
+	    				$counter2++;
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$value->z->County,$value->z->SubCounty,
+						$value->z->FacilityCode,$value->z->FacilityName,
+		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
+		     			$value->x[1]->Data,$value->x[0]->Data-$value->x[1]->Data,
+		     			$value->x[4]->Data,$value->x[3]->Data-$value->x[4]->Data,
+		     			$value->x[6]->Data,$value->x[5]->Data-$value->x[6]->Data,
+		     			
+		     			
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+
+
+
+
+
+
+	})->download('csv');
+
+
+	
+
+}
 
 
 
