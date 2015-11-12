@@ -610,9 +610,9 @@ $arr=array();
      '',	''	,''	,'',
      '',	'',	''	,'',
      '','',''	,
-     'Community Units','','',
-     'CHEWs','','',
-     'CHVs','','',
+     'Community Units','',
+     'CHEWs','',
+     'CHVs','',
      
 			)
  	   );
@@ -631,7 +631,7 @@ $arr=array();
 
 	   $sheet->mergeCells('L1:M1');
 	   $sheet->mergeCells('N1:O1');
- 	$sheet->mergeCells('P1:Q1');
+ 		$sheet->mergeCells('P1:Q1');
  	   $sheet->setHeight(1, 20) ;
  	   $sheet->getStyle('A1:AC1') ->getAlignment()->setWrapText(true); 
 
