@@ -16,9 +16,13 @@ use App\Tables\MNHSubSurvey;
 class RawExcelController extends Controller {
 
 
+public function getIndex(){
 
 
-public function FacilitySummary(Excel $excel)
+	return view('analytics.CH.raw');
+}
+
+public function getFacilitySummary(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -100,7 +104,7 @@ public function FacilitySummary(Excel $excel)
 	
 
 }
-	public function StaffTraining(Excel $excel)
+	public function getStaffTraining(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -216,7 +220,7 @@ public function FacilitySummary(Excel $excel)
 
 
 
-public function Guidlines(Excel $excel)
+public function getGuidelines(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();

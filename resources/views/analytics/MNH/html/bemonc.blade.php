@@ -4,6 +4,8 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">PROVISION OF BEmONC SIGNAL FUNCTIONS</h3>
                   <div class="box-tools pull-right">
+                   <a href='/comparison/MNHV2/MNHV2_Bemonc/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>

@@ -11,6 +11,7 @@
 |
 */
 Route::controller('compare', 'Compare');
+Route::controller('rawdata','RawExcelController');
 Route::get('admin/surveys','FormController@index');
 Route::get('admin/surveys/{SurveyID}','FormController@edit');
 Route::get('/comparison/{survey}/{lambda}/{chart}/','AnalyticsController@comparison');
