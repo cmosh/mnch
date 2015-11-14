@@ -1,15 +1,19 @@
 /* HOVER STYLES */
 div#pop-up {
   display: none;
-  position: absolute;
-  width: 280px;
+  position: relative;
+  z-index: 99;
+  width: 250px;
   padding: 10px;
   background: #FFF;
   color: #000000;
   border: 1px solid #1a1a1a;
   font-size: 90%;
 }
-
+.box{
+	 position: relative;
+	  z-index: 1;
+}
 .popbox {
 	display: none;
 	position: absolute;
