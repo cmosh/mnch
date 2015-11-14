@@ -252,7 +252,7 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 
 			 $value = Cache::get($key);
 
-			 $value1 = $value->where('field_setID','=','Chscentralcounty_government')->get();
+			
 
         return ($value1);
 
