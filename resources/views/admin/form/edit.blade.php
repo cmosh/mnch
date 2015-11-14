@@ -17,20 +17,13 @@
 
 @section('content')
    
-    {!! Form::open() !!}     
-    <?php echo $Mel?>
+  
+    <?php  echo $Mel?>
+      {!! Form::open() !!}     
     {!! Form::close() !!}
 
 
 
-
-
-      
-			
-			
-
-
-			
 
         
 
