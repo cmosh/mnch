@@ -15,15 +15,7 @@
               <div id="countybox"></div>     
                 </div><!-- /.box-body -->
 
-                 <div class="box-body" >
-
-               
-           
-
-     
-
-
-
+                 <div class="box-body" >   
            
 
 <div class="form-group" > <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
@@ -44,44 +36,8 @@
                     
                      
                        </select></div>
-                      
 
-      <object  width="100%" id="thesvg" data="/img/map.svg">
-                 </object>
-
-
-                <!--   <table class="table table-striped">
-                    <tbody><tr>
-                    
-                      <th>County</th>
-                      <th>Term</th>
-                      <th>Completed Surveys</th>
-                      <th >Incomplete Surveys</th>
-                       <th>Facilities</th>
-                    </tr>
-                     @foreach ($SurveysDone as $Survey)
-                    <tr>
-                     
-                      <td>{{$Survey->County}}</td>
-                      <td>{{$Survey->Assessment_Term}}</td>
-                      <td>{{$Survey->Submitted}}</td>
-                      <td>{{$Survey->Not_Submitted}}</td>
-                       <td>{{$Survey->Total_Facilities}}</td>
-                    </tr>
-                    @endforeach
-                   
-                   
-                   
-                  </tbody></table> -->
-      
-              <!-- /.box -->
-            </div><!-- /.col (LEFT) --> 
-
-</div>
-</div>
-
-                        <!-- HIDDEN / POP-UP DIV -->
-    <div id="pop-up">
+                        <div id="pop-up" style="height:80px; width:60%;">
      
 
                      <p class="text-center" id="countyname">
@@ -96,3 +52,17 @@
                       </div><!-- /.progress-group -->
                     
                     </div>
+                      
+
+      <object  width="100%" id="thesvg" data="/img/map.svg">
+                 </object>
+
+
+               
+            </div><!-- /.col (LEFT) --> 
+
+</div>
+</div>
+
+                        <!-- HIDDEN / POP-UP DIV -->
+   
