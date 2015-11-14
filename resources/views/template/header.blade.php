@@ -1,7 +1,7 @@
  <header class="main-header header-cont" style="position:fixed" >
 
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
 
 
         @if ($location == 'Home') 
