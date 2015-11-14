@@ -40,7 +40,15 @@
     <script src="/bower_components/jq/jquery-ui.js"></script>   
 
 
+<script type="text/javascript">
+  function pad(s) 
+{ 
+   while (s.length < 2) 
+      s = '0' + s; 
+   return s; 
+};
 
+</script>
 @include('admin/form/js/fields')
   @include('admin/form/js/sectionsortable')
     @include('admin/form/js/boxsortable')

@@ -30,7 +30,7 @@ class form   {
             
             $HtmlLines.= '
             
-            <section>
+            <section id="sec'.$Sec->sectionID.'">
             <div class="secbox">
 
                     
@@ -64,7 +64,77 @@ class form   {
                    <div class="direct-chat-contacts">
 
                      <!-- Options  -->
-                     '.self::$SectionOptions.'
+                      <table class="table">
+               
+                <tbody>
+                  <tr>
+                  <td  style="vertical-align:middle">
+                    <i class="menu-icon fa fa-strikethrough fa-4x" style="color:#3C8DBC;"></i>
+                  Section
+                  </td>
+                    <td>
+                       <a section="'.$Sec->sectionID.'" class="btn btn-app sect  deletesect">
+                    <i class="fa fa-trash" style="color:red"></i> Delete
+                  </a>
+                    </td>
+                  <td>
+                   <a section="'.$Sec->sectionID.'" class="btn btn-app sect  abovesect">
+                    
+                    <i class="fa fa-arrow-up" style="color:green"></i> Add Above
+                  </a>
+                  </td>
+                  <td>
+                    <a section="'.$Sec->sectionID.'" class="btn btn-app sect  belowsect">
+                    <i class="fa fa-arrow-down" style="color:green"></i> Add Below
+                  </a>
+                  </td>
+
+                </tr>
+                  <tr>
+                  <td  style="vertical-align:middle">
+                    <i class="menu-icon fa fa-bold fa-4x" style="color:#1D9F75"></i>
+                  Blocks
+                  </td>
+                    <td>
+                       <a section="'.$Sec->sectionID.'" class="btn btn-app sect  deleteblock">
+                    <i class="fa fa-trash"  style="color:red"></i> Delete All
+                  </a>
+                    </td>
+                  <td>
+                    <a section="'.$Sec->sectionID.'" class="btn btn-app sect  minimiseblock">
+                    
+                    <i class="fa fa-minus"></i> Minimise All
+                  </a>
+                  </td>
+                  <td>
+                    <a section="'.$Sec->sectionID.'" class="btn btn-app sect  addblock">
+                    <i class="fa fa-plus" style="color:green"></i> Add New
+                  </a>
+                  </td>
+
+                </tr>
+                 <tr>
+                  <td  style="vertical-align:middle">
+                    <i class="menu-icon fa fa-align-justify fa-4x" style="color:#FFF7EE"></i>
+                  Rows
+                  </td>
+                  <td>
+                  </td>
+                    <td>
+                        <a section="'.$Sec->sectionID.'" class="btn btn-app sect  deleterows">
+                    <i class="fa fa-trash"  style="color:red"></i> Delete All
+                  </a>
+                    </td>
+                 
+                  <td>
+                     </td>
+
+                </tr>
+
+
+
+                </tbody>
+                </table>
 
 
                   </div>
@@ -84,7 +154,7 @@ class form   {
                 
                 $BlockIDName = $Single_BlockCollection->blockID;
                 
-                $HtmlLines.= '<div class="box box-'.$color.' direct-chat direct-chat-primary" >
+                $HtmlLines.= '<div class="box box-'.$color.' direct-chat direct-chat-primary"  id="block'.$BlockIDName.'">
 
                                      <div class="box-header with-border">
                                      <i class="fa fa-ellipsis-h"></i>
@@ -106,7 +176,7 @@ class form   {
 <input class="form-control " style="text-align:center; width: 100%;" id="'.$BlockIDName.'" name="'.$BlockIDName.'" value="'.$Single_BlockCollection->Name.'" type = "text">
                                    
                                     <table class="table">
-                                    <tbody class = "tablet">';
+                                    <tbody class = "tablet" id="table'.$BlockIDName.'">';
 
                 
                 //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
@@ -128,7 +198,7 @@ class form   {
                         $ColumnSetIDName = $Single_ColumnSetCollection->column_setID;
                         
                         
-                        $HtmlLines.= '<td  class="thetd trow-body" colspan="'.$Single_ColumnSetCollection->col_span.'" id="'.$ColumnSetIDName.'"';
+                        $HtmlLines.= '<td  class="thetd trow-body" colspan="'.$Single_ColumnSetCollection->col_span.'" id="col'.$ColumnSetIDName.'"';
                         
                         $fieldsetID = $Single_ColumnSetCollection->field_setID;                        
                         $currentFieldset = $Single_ColumnSetCollection->field_set;
@@ -142,7 +212,7 @@ class form   {
                         
                               
 
-                                    $HtmlLines.= 'style="vertical-align:middle"> <select class="form-control fieldset asave" name="opt'.$ColumnSetIDName.'" id="opt'.$ColumnSetIDName.'" >';
+                                    $HtmlLines.= 'style="vertical-align:middle"> <select class="form-control fieldset asave" name="'.$ColumnSetIDName.'" id="'.$ColumnSetIDName.'" >';
 
                                 // foreach ($Availablefields as $field) {
 
@@ -177,7 +247,62 @@ class form   {
 
                  <div class="direct-chat-contacts">
                   <!-- Options -->
-                  '.self::$BlockOptions.'                  </div>
+                  <table class="table">
+               
+                <tbody>
+                
+                  <tr>
+                  <td  style="vertical-align:middle">
+                    <i class="menu-icon fa fa-bold fa-4x" style="color:#1D9F75"></i>
+                  Block
+                  </td>
+                    <td>
+                      <a  block="'.$BlockIDName.'" class="btn btn-app bloc deleteblock">
+                    <i class="fa fa-trash"  style="color:red"></i> Delete
+                  </a>
+                    </td>
+                  <td>
+                  <a  block="'.$BlockIDName.'" class="btn btn-app bloc aboveblock">
+                    
+                    <i class="fa fa-arrow-up" style="color:green"></i> Add Above
+                  </a>
+                  </td>
+                  <td>
+                  <a block="'.$BlockIDName.'" class="btn btn-app bloc belowblock">
+                    <i class="fa fa-arrow-down" style="color:green"></i> Add Below
+                  </a>
+                  </td>
+
+                </tr>
+                 <tr>
+                  <td  style="vertical-align:middle">
+                    <i class="menu-icon fa fa-align-justify fa-4x" style="color:#FFF7EE"></i>
+                  Rows
+                  </td>
+                    <td>
+                      <a block="'.$BlockIDName.'" class="btn btn-app bloc deleterows">
+                    <i class="fa fa-trash"  style="color:red"></i> Delete All
+                  </a>
+                    </td>
+                     <td>
+                     </td>
+                  <td>
+                  <a block="'.$BlockIDName.'" class="btn btn-app bloc addrow">
+                    <i class="fa fa-plus" style="color:green"></i> Add New
+                  </a>
+                  </td>
+                 
+
+                </tr>
+
+
+
+                </tbody>
+                </table>
+                  
+
+
+                                  </div>
 
                 </div></div>';
             }
@@ -191,142 +316,4 @@ class form   {
 
        
     }
-
-
-       private static $SectionOptions = ' <table class="table">
-               
-                <tbody>
-                  <tr>
-                  <td  style="vertical-align:middle">
-                    <i class="menu-icon fa fa-strikethrough fa-4x" style="color:#3C8DBC;"></i>
-                  Section
-                  </td>
-                    <td>
-                      <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-trash" style="color:red"></i> Delete
-                  </a>
-                    </td>
-                  <td>
-                  <a command="optimise" class="btn btn-app">
-                    
-                    <i class="fa fa-arrow-up" style="color:green"></i> Add Above
-                  </a>
-                  </td>
-                  <td>
-                  <a command="clearcache" class="btn btn-app">
-                    <i class="fa fa-arrow-down" style="color:green"></i> Add Below
-                  </a>
-                  </td>
-
-                </tr>
-                  <tr>
-                  <td  style="vertical-align:middle">
-                    <i class="menu-icon fa fa-bold fa-4x" style="color:#1D9F75"></i>
-                  Blocks
-                  </td>
-                    <td>
-                      <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-trash"  style="color:red"></i> Delete All
-                  </a>
-                    </td>
-                  <td>
-                  <a command="optimise" class="btn btn-app">
-                    
-                    <i class="fa fa-minus"></i> Minimise All
-                  </a>
-                  </td>
-                  <td>
-                  <a command="clearcache" class="btn btn-app">
-                    <i class="fa fa-plus" style="color:green"></i> Add New
-                  </a>
-                  </td>
-
-                </tr>
-                 <tr>
-                  <td  style="vertical-align:middle">
-                    <i class="menu-icon fa fa-align-justify fa-4x" style="color:#FFF7EE"></i>
-                  Rows
-                  </td>
-                  <td>
-                  </td>
-                    <td>
-                      <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-trash"  style="color:red"></i> Delete All
-                  </a>
-                    </td>
-                 
-                  <td>
-                     </td>
-
-                </tr>
-
-
-
-                </tbody>
-                </table>';
-
-   private static $BlockOptions = ' <table class="table">
-               
-                <tbody>
-                
-                  <tr>
-                  <td  style="vertical-align:middle">
-                    <i class="menu-icon fa fa-bold fa-4x" style="color:#1D9F75"></i>
-                  Block
-                  </td>
-                    <td>
-                      <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-trash"  style="color:red"></i> Delete
-                  </a>
-                    </td>
-                  <td>
-                  <a command="optimise" class="btn btn-app">
-                    
-                    <i class="fa fa-arrow-up" style="color:green"></i> Add Above
-                  </a>
-                  </td>
-                  <td>
-                  <a command="clearcache" class="btn btn-app">
-                    <i class="fa fa-arrow-down" style="color:green"></i> Add Below
-                  </a>
-                  </td>
-
-                </tr>
-                 <tr>
-                  <td  style="vertical-align:middle">
-                    <i class="menu-icon fa fa-align-justify fa-4x" style="color:#FFF7EE"></i>
-                  Rows
-                  </td>
-                    <td>
-                      <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-trash"  style="color:red"></i> Delete All
-                  </a>
-                    </td>
-                     <td>
-                     </td>
-                  <td>
-                  <a command="clearcache" class="btn btn-app">
-                    <i class="fa fa-plus" style="color:green"></i> Add New
-                  </a>
-                  </td>
-                 
-
-                </tr>
-
-
-
-                </tbody>
-                </table>';
-  
-   
-
-    
-
- 
-
-
-     
-
-
-
         }
