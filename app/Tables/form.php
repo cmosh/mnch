@@ -10,7 +10,7 @@ class form   {
 	
 
 
-  public static function edit($SurveyID) {
+  public static function edit($SurveyID,$color) {
 
   	 $Survey = Survey::where('surveyID', '=',$SurveyID)->first();
 
@@ -21,23 +21,32 @@ class form   {
                return*/ $Survey->load('sections.blocks.block_rows.column_sets.field_set.fields');
            /* });*/
 
-        $HtmlLines ='';
+        $HtmlLines =' <div class="fm">';
         $Secs = $entire->sections;
 
         foreach ($Secs as $Sec) {
             
-            $HtmlLines.= '<section>
+            $HtmlLines.= '
+            
+            <section>
+            <div class="secbox">
+
+                    
                     <div class="row">
                         <!-- left column -->
                         <div class="col-md-12">
                         
-                        <div class="box" >                     
-                     <div class="box-body">
-                        <input class="form-control" id="'.$Sec->sectionID.'" name="'.$Sec->sectionID.'" value="' . $Sec->name . '" type = textarea>
-                      
+                        <div class="box  sec-header box-'.$color.'" >                     
+                     <div class="box-header with-border">
+                    
+                     <i class="fa fa-ellipsis-h"></i>
+                        <input class="box-title form-control" style="width:75%;" id="'.$Sec->sectionID.'" name="'.$Sec->sectionID.'" value="' . $Sec->name . '" type = textarea>
+                    
                     
                         </div>
-                        </div>';
+                        </div>
+
+                           <div class="sec sec-body">';
 
   $Array_of_BlockCollections = $Sec->blocks;
 
@@ -46,15 +55,25 @@ class form   {
                 
                 $BlockIDName = $Single_BlockCollection->blockID;
                 
-                $HtmlLines.= '<div class="box box-primary"  >
-                                    <div class="box-header">
-                                     <input class="form-control" id="'.$BlockIDName.'" name="'.$BlockIDName.'" value="'.$Single_BlockCollection->Name.'" type = textarea>
-                      
+                $HtmlLines.= '<div class="box box-'.$color.'"  >
+
+                                     <div class="box-header with-border">
+                                     <i class="fa fa-ellipsis-h"></i>
+                                        <input class="form-control box-title" style="width: 75%;" id="'.$BlockIDName.'" name="'.$BlockIDName.'" value="'.$Single_BlockCollection->Name.'" type = text>
+                                     <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+
+                                    
                                    
                                     </div>
 
+                                   <div style="display: block;" class="box-body">
+
                                    
-                                    <table class="table">';
+                                    <table class="table">
+                                    <tbody class = "tablet">';
+
                 
                 //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
                 
@@ -65,7 +84,7 @@ class form   {
                    
                        
                  
-                  $HtmlLines.= '<tr  id="'.$BlockrowIDName.'" > <td></td>';
+                  $HtmlLines.= '<tr  class="trow" id="'.$BlockrowIDName.'" > <td class="trow-header"><i class="fa fa-ellipsis-h"></i></td>';
                     
                     // $Array_of_ColumnSetCollections = Column_set::where('block_rowID', '=', $Single_BlockRowCollection->block_rowID)->get();
                     $Array_of_ColumnSetCollections = $Single_BlockRowCollection->column_sets;
@@ -75,7 +94,7 @@ class form   {
                         $ColumnSetIDName = $Single_ColumnSetCollection->column_setID;
                         
                         
-                        $HtmlLines.= '<td  class="thetd" colspan="'.$Single_ColumnSetCollection->col_span.'" id="'.$ColumnSetIDName.'"';
+                        $HtmlLines.= '<td  class="thetd trow-body" colspan="'.$Single_ColumnSetCollection->col_span.'" id="'.$ColumnSetIDName.'"';
                         
                         $fieldsetID = $Single_ColumnSetCollection->field_setID;                        
                         $currentFieldset = $Single_ColumnSetCollection->field_set;
@@ -120,13 +139,13 @@ class form   {
                     $HtmlLines.= '</tr>';
                 }
                 
-                $HtmlLines.= '</table> </div>';
+                $HtmlLines.= '</tbody></table> </div></div>';
             }
             
-            $HtmlLines.= '</Section>';
+            $HtmlLines.= '</div></div></Section>';
         }
     
-
+        $HtmlLines.='</div>';
           
             return $HtmlLines;
 
