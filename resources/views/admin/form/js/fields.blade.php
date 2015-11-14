@@ -13,27 +13,27 @@
   
   	var $ajax = $(".fieldset");
 
-    function formatRepo (repo) {
-      if (repo.loading) return repo.text;
+    function formatFset (fset) {
+      if (fset.loading) return fset.text;
 
-      var markup = "<div class='select2-result-repository clearfix'>" +
-        "<div class='select2-result-repository__avatar'><img src='/img/" + repo.type + ".png'>"+repo.type+"</div>" +
-        "<div class='select2-result-repository__meta'>" +
-          "<div class='select2-result-repository__title'> Set: " + repo.field_setName + "</div>";
+      var markup = "<div class='select2-result-fsetsitory clearfix'>" +
+        "<div class='select2-result-fsetsitory__avatar'><img src='/img/" + fset.type + ".png'>"+fset.type+"</div>" +
+        "<div class='select2-result-fsetsitory__meta'>" +
+          "<div class='select2-result-fsetsitory__title'> Set: " + fset.field_setName + "</div>";
 
    
-        markup += "<div class='select2-result-repository__description'> ID: " + repo.field_setID + "</div>";
+        markup += "<div class='select2-result-fsetsitory__description'> ID: " + fset.field_setID + "</div>";
       
 
-      markup += "<div class='select2-result-repository__statistics'>" +
-        "<div class='select2-result-repository__forks'>Field(s): " +  repo.fields.length + "</div>" +
+      markup += "<div class='select2-result-fsetsitory__statistics'>" +
+        "<div class='select2-result-fsetsitory__forks'>Field(s): " +  fset.fields.length + "</div>" +
 
-        "<div class='select2-result-repository__stargazers'>Value(s): ";
+        "<div class='select2-result-fsetsitory__stargazers'>Value(s): ";
 
 
-        for (var i = repo.fields.length - 1; i >= 0; i--) {
+        for (var i = fset.fields.length - 1; i >= 0; i--) {
 
-         	 markup +=repo.fields[i].Label + " = " +repo.fields[i].Value+", ";
+         	 markup +=fset.fields[i].Label + " = " +fset.fields[i].Value+", ";
          }; 
 
          markup = markup.replace(/, +$/, '');
@@ -49,8 +49,8 @@
       return markup;
     }
 
-    function formatRepoSelection (repo) {
-      return repo.field_setName || repo.text; 
+    function formatFsetSelection (fset) {
+      return fset.field_setName || fset.text; 
     }
 
     $ajax.select2({
@@ -82,18 +82,18 @@
                 });
 
           return {
-            results: select2Data
-            // pagination: {
-            //   more: (params.page * 30) < data.total_count
-            // }
+            results: select2Data,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
           };
         },
         cache: true
       },
       escapeMarkup: function (markup) { return markup; },
       minimumInputLength: 1,
-      templateResult: formatRepo,
-      templateSelection: formatRepoSelection
+      templateResult: formatFset,
+      templateSelection: formatFsetSelection
     });
 
   

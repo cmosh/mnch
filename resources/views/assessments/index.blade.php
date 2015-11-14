@@ -273,10 +273,20 @@ $('#date').datepicker({
 <script type="text/javascript">
 $('#some_id').click(function() {
 
+    @if ($loc == 'IM')
+     if($('#Version1').val() == ""||$('#Term').val()==""|| $('#date').val()=="") alert("Please choose the version and date.");
+  
+    @else
+
+     if($('#Version1').val() == ""||$('#County').val()==""||$('#Term').val()==""|| $('#date').val()=="") alert("Please choose the county,version,date and term.");
+ 
+@endif
+   else{
  // assessments/{id}/{date}/{term}/{county}
   var linki = '/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val();
   //alert(linki);
    $(location).attr('href', linki);
+ }
 });
 
            
@@ -285,10 +295,21 @@ $('#some_id').click(function() {
          <script type="text/javascript">
 $('#some_id2').click(function() {
 
+  if($('#Version2').val() == ""||$('#County2').val()==""||$('#Term_2').val()=="") 
+       @if ($loc == 'IM')
+    alert("Please choose in the version.");
+    @else
+     alert("Please choose the county,version and term.");
+    @endif
+  else{
+
  // assessments/{id}/{date}/{term}/{county}
   var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
   //alert(linki);
    $(location).attr('href', linki);
+
+
+ }
 });
 
            
