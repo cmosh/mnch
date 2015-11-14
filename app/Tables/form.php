@@ -14,12 +14,12 @@ class form   {
 
   	 $Survey = Survey::where('surveyID', '=',$SurveyID)->first();
 
-      
+    $Availablefields = Field_set::all();
 
-        $entire = Rache::forever('edited_'.$SurveyID,function()use($Survey){
+        $entire = /*Rache::forever('edited_'.$SurveyID,function()use($Survey){
 
-               return $Survey->load('sections.blocks.block_rows.column_sets.field_set.fields');
-            });
+               return*/ $Survey->load('sections.blocks.block_rows.column_sets.field_set.fields');
+           /* });*/
 
         $HtmlLines ='';
         $Secs = $entire->sections;
@@ -35,26 +35,12 @@ class form   {
                      <div class="box-body">
                         <input class="form-control" id="'.$Sec->sectionID.'" name="'.$Sec->sectionID.'" value="' . $Sec->name . '" type = textarea>
                       
-                      <table width="100%">
-                      <tr>
-                      <td width="25%">
-                          <button type="button" obj="'.$Sec->sectionID.'" objtype="section" class="above form-control btn bg-maroon">Insert Above</button>
-                          </td>
-                          <td width="25%">
-                          <button type="button" obj="'.$Sec->sectionID.'" objtype="section" class="below form-control btn bg-purple">Insert Below</button>
-                          </td>
-                          <td width="25%">
-                          <button type="button" obj="'.$Sec->sectionID.'" objtype="section" class="delete form-control btn btn-danger">Delete</button>
-                          </td>
-                           <td width="25%">
-                          <button type="button" obj="'.$Sec->sectionID.'" objtype="section" class="save form-control btn btn-success">Save</button>
-                          </td>
-                        </tr>
-                        </table>
+                    
                         </div>
                         </div>';
 
   $Array_of_BlockCollections = $Sec->blocks;
+
 
             foreach ($Array_of_BlockCollections as $Single_BlockCollection) {
                 
@@ -67,22 +53,7 @@ class form   {
                                    
                                     </div>
 
-                                      <table width="100%">
-                      <tr>
-                      <td width="25%">
-                          <button type="button" obj="'.$BlockIDName.'" objtype="section" class="above form-control btn bg-maroon">Insert Above</button>
-                          </td>
-                          <td width="25%">
-                          <button type="button" obj="'.$BlockIDName.'" objtype="section" class="below form-control btn bg-purple">Insert Below</button>
-                          </td>
-                          <td width="25%">
-                          <button type="button" obj="'.$BlockIDName.'" objtype="section" class="delete form-control btn btn-danger">Delete</button>
-                          </td>
-                           <td width="25%">
-                          <button type="button" obj="'.$BlockIDName.'" objtype="section" class="save form-control btn btn-success">Save</button>
-                          </td>
-                        </tr>
-                        </table>
+                                   
                                     <table class="table">';
                 
                 //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
@@ -103,19 +74,13 @@ class form   {
                         
                         $ColumnSetIDName = $Single_ColumnSetCollection->column_setID;
                         
-                        $HtmlLines.= '<td   colspan="';
                         
-                        $HtmlLines.= $Single_ColumnSetCollection->col_span;
+                        $HtmlLines.= '<td  class="thetd" colspan="'.$Single_ColumnSetCollection->col_span.'" id="'.$ColumnSetIDName.'"';
                         
-                        $HtmlLines.= '" id="';
-                        $HtmlLines.= $ColumnSetIDName;
-                        $HtmlLines.= '"';
-                        
-                        $fieldsetID = $Single_ColumnSetCollection->field_setID;
-                        
+                        $fieldsetID = $Single_ColumnSetCollection->field_setID;                        
                         $currentFieldset = $Single_ColumnSetCollection->field_set;
                            
-                            
+                            $ids = $ColumnSetIDName.$fieldsetID;
                            if(!isset( $currentFieldset->type)) $typededuction = "error";
                            else{ $typededuction = $currentFieldset->type;}
 
@@ -124,7 +89,23 @@ class form   {
                         
                               
 
-                                    $HtmlLines.= 'style="vertical-align:middle">hereit is';
+                                    $HtmlLines.= 'style="vertical-align:middle"> <select class="form-control fieldset asave" name="opt'.$ColumnSetIDName.'" id="opt'.$ColumnSetIDName.'" >';
+
+                                // foreach ($Availablefields as $field) {
+
+                                   $HtmlLines.='<option value="'.$currentFieldset->field_setID.'">'.$currentFieldset->field_setName.'</option></select> ';
+                                // }
+
+
+
+
+//                                 '
+//                                 <option id="'.$ids.'1" value="volvo" selected>Volvo</option>      
+//   <option id="'.$ids.'1" value="volvo">Volvo</option>
+//   <option  id="'.$ids.'2" value="saab">Saab</option>
+//   <option  id="'.$ids.'3"value="mercedes">Mercedes</option>
+//   <option  id="'.$ids.'4"value="audi">Audi</option>
+// </select> ';
                                   
                                     
                                  

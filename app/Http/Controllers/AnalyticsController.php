@@ -134,7 +134,7 @@ $Map = (Cache::remember('MapMNH',180,function() {
       	});
 
 
-      	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All','Baseline');
+      //	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All','Baseline');
 		
    
 			
@@ -252,7 +252,9 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 
 			 $value = Cache::get($key);
 
-        return count($value);
+			 $value1 = $value->where('field_setID','=','Chscentralcounty_government')->get();
+
+        return ($value1);
 
 		
 	}

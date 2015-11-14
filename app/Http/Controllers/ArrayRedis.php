@@ -65,6 +65,81 @@ public static function remember($key,$minutes,$closure){
       	// return (collect(json_decode($x))->toArray());
 	}
 
+	public static function foreverreplacing($key,$closure){
+
+
+		$redis = LRedis::connection();
+
+	
+			
+      		$result = json_encode($closure());
+
+      		
+      		$redis->delete('laravel:'.$key);
+
+      		$redis->setnx('laravel:'.$key, $result);
+      		
+      		$result = ($redis->get('laravel:'.$key));
+
+      	
+      	
+      	$result = json_decode($result);
+
+      // $result = ($result);
+      	return $result;
+      	// return (collect(json_decode($x))->toArray());
+	}
+
+	public static function foreverjson($key,$closure){
+
+
+
+		$redis = LRedis::connection();
+
+		if($redis->exists('laravel:'.$key)){
+			$result2 = ($redis->get('laravel:'.$key));
+		}else{
+		
+      		$result = json_encode($closure());
+
+      		$redis->setnx('laravel:'.$key, $result);
+      		
+      		$result2 = ($redis->get('laravel:'.$key));
+
+      	}
+      	
+      
+
+      // $result = ($result);
+      	return $result2;
+
+	}
+
+	public static function forevercollection($key,$closure){
+
+
+
+		$redis = LRedis::connection();
+
+		if($redis->exists('laravel:'.$key)){
+			$result2 = ($redis->get('laravel:'.$key));
+		}else{
+		
+      		$result = json_encode($closure());
+
+      		$redis->setnx('laravel:'.$key, $result);
+      		
+      		$result2 = ($redis->get('laravel:'.$key));
+
+      	}
+      	
+      
+
+      // $result = ($result);
+      	return collect(json_decode($result2));
+
+	}
+
 
 	public static function foreveryoung($key,$closure){
 
