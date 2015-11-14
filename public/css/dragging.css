@@ -1,4 +1,27 @@
+    .box-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+    background-color:blue;
+    opacity: 0.1;
+  }
 
+  .sec-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+    background-color:red;
+    opacity: 0.1;
+  }
+  
+  .row-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+    background-color:green;
+    opacity: 0.1;
+  }
+  
         ul.source, ul.target {
       min-height: 50px;
       margin: 0px 25px 10px 0px;

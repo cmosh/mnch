@@ -7,11 +7,14 @@ use App\Tables\SubmittedCHCountie;
 use App\Tables\SubmittedMNHCount;
 use App\Tables\SubmittedMNHCountie;
 use App\Tables\CHSubSurvey;
+
 use App\Tables\Column_set;
 use App\Tables\Survey;
 use App\Tables\analyse;
 use App\Tables\Map;
 use App\Tables\SurveysDone;
+use Maatwebsite\Excel\Excel;
+
 use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
  use App\Http\Controllers\ArrayRedis as Rache;
@@ -19,7 +22,7 @@ use Illuminate\Contracts\Foundation\Application As App;
 use Request;
 use Input;
 use Cache;
-use Excel;
+
 
 	
 class AnalyticsController extends Controller {
@@ -131,7 +134,7 @@ $Map = (Cache::remember('MapMNH',180,function() {
       	});
 
 
-      	// $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All',$Term);
+      //	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All','Baseline');
 		
    
 			
@@ -249,19 +252,23 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 
 			 $value = Cache::get($key);
 
-        return count($value);
+			
+
+        return ($value1);
 
 		
 	}
 
 
-	public function blah()
+	public function blah(Excel $excel)
 	{
 
-		
 
-	}
 
+
+	
+
+}
 
 	
 	

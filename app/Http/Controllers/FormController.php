@@ -3,9 +3,14 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
 use App\Tables\Survey;
+use App\Tables\Section;
 use App\Tables\form;
+use App\Tables\Field_set As Field;
+use App\Http\Controllers\ArrayRedis As Rache;
+use Request;
+use Input;
+use Cache;
 
 class FormController extends Controller {
 
@@ -28,9 +33,41 @@ class FormController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function fields()
+
 	{
-		//
+		
+         if(Request::ajax()) {
+         	  $param = Input::all();
+
+         	  if(isset($param['search'])){
+
+         	  	
+         	 $x = Rache::foreverreplacing('stuff',function() use ($param){
+
+         	 	return $param;
+         	 });
+
+
+         
+
+         	$search = '%'.$param['search'].'%';
+
+         	$sresult = Field::where('Field_setName','Like',$search)->get(); // $Fields->where('Field_setName','Like',$param['search']);
+         	$sresult->load('fields');
+         	$x = Rache::foreverreplacing('MOREstuff',function() use ($sresult){
+
+         	 	return $sresult;
+         	 });
+
+         	echo json_encode($sresult);
+
+
+         }
+
+         }
+
+         die;
 	}
 
 	/**
@@ -62,13 +99,41 @@ class FormController extends Controller {
 	 */
 	public function edit($SurveyID)
 	{
-		$x = form::edit($SurveyID);
+		$loc = substr($SurveyID, 0,2);
+		$color = self::color($loc);
+		$x = form::edit($SurveyID,$color);
+		$Secs = Section::where('surveyID', '=', $SurveyID)->get();     
+		
 
 		return view('admin.form.edit')->with('location','Admin')
 									   ->with('title','Administration')
-									   ->with('fora',$x);
+									   ->with('Mel',$x)
+									    ->with('secs', $Secs);
 	}
 
+
+	private static function color($loc){
+
+		switch ($loc) {
+			case 'MN': $color = "warning";
+
+			break;
+			case 'CH': $color = "info";
+
+
+			break;
+			case 'IM':  $color = "danger";
+
+				break;
+			
+			default:	 $color = "info";
+				
+				break;
+		}
+
+		return $color;
+
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *
