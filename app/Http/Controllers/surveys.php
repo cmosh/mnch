@@ -336,15 +336,17 @@ print_r($fruit);die;
         $sv = $TheAsses->Survey;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
+         $location = substr($sv, 0, 2);
+          $color = self::color($location);   
        if( !isset($Assessment->AssessorName) ){ 
         $Melarray = collect(Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
-                                 return builder::buildview($id,'open',$Participant);
+                                 return builder::buildview($id,'open',$Participant,$color);
                             }));}
-       else $Melarray = builder::buildview($id, 'edit',$Participant);      
+       else $Melarray = builder::buildview($id, 'edit',$Participant,$color);      
         $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
-        $location = substr($sv, 0, 2);
+       
 
           Rache::foreveryoung($id,function(){return "I Exist!";});
         
@@ -373,7 +375,7 @@ print_r($fruit);die;
 
         break;
       
-      default:   $color = "info";
+      default:   $color = "default";
         
         break;
     }
