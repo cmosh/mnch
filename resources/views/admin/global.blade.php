@@ -341,6 +341,8 @@
 
 function sendcommand(cmd) {
 
+  
+ $('#output').html('<i class="fa fa-refresh fa-spin"></i>');
 	var env = "{{env('APP_ENV')}}";
 
 		if(env=='local'){
