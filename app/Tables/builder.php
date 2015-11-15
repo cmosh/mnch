@@ -10,7 +10,7 @@ class builder   {
 	
 
 
-  public static function buildview($AssID, $act,$Participant) {
+  public static function buildview($AssID, $act,$Participant,$color="primary") {
 
   if ($Participant == null){
            $Participant=  new Participantsview;
@@ -160,7 +160,7 @@ class builder   {
                         <!-- left column -->
                         <div class="col-md-12">
                         
-                        <div class="box" id="' . $Sec->identifier . '">                     
+                        <div class="box box-'.$color.' " id="' . $Sec->identifier . '">                     
                      <div class="box-body">
                          <br>                     
                         <center><h2><b>' . $Sec->name . '</b></h2></center>
@@ -183,13 +183,13 @@ class builder   {
                            
                                 <!-- general form elements -->
                                 
-                                <div id="thefacility" class="box box-primary">
+                                <div id="thefacility" class="box box-'.$color.'">
                                 </div>
                                 <div>
                                 <!-- /.box -->
 
                                 <!-- /.box -->
-                                <div class="box box-primary">
+                                <div class="box box-'.$color.'">
                                     
                                     <div class="box-header">
                                         <h3 class="box-title">Assessor Information</h3>
@@ -259,7 +259,7 @@ class builder   {
                         $HtmlLines.= '        
               
                                     <!-- Form Element sizes -->
-                                    <div class="box box-primary">
+                                    <div class="box box-'.$color.'">
                                         <div class="box-header">
                                             <h3 class="box-title">Facility Contact Information</h3>
                                         </div>
@@ -438,7 +438,7 @@ class builder   {
                         $HtmlLines.= '        
               
                                     <!-- Form Element sizes -->
-                                    <div class="box box-primary">
+                                    <div class="box box-'.$color.'">
                                         <div class="box-header">
                                             <h3 class="box-title">Facility Contact Information</h3>
                                         </div>
@@ -588,7 +588,7 @@ class builder   {
                                 </div>
 
 
-<div class="box box-primary">
+<div class="box box-'.$color.'">
                                                 <div class="box-body">
 
                                                     <div class="box-header">
@@ -636,7 +636,7 @@ class builder   {
                         $HtmlLines.= '        
               
                                     <!-- Form Element sizes -->
-                                    <div class="box box-primary">
+                                    <div class="box box-'.$color.'">
                                         <div class="box-header">
                                             <h3 class="box-title">Facility Contact Information</h3>
                                         </div>
@@ -801,7 +801,7 @@ class builder   {
                 
                 $HtmlLines.= '
 
-                                    <div class="box box-primary"  id="' . $BlockIDName . '" automaticallyVisibleIfIDChecked="' . $Single_BlockCollection->dependencyID . '">
+                                    <div class="box box-'.$color.'"  id="' . $BlockIDName . '" automaticallyVisibleIfIDChecked="' . $Single_BlockCollection->dependencyID . '">
                                     <div class="box-header">
                                         <h3 class="box-title">' . $Single_BlockCollection->Name . '</h3>
                                     </div>
