@@ -154,10 +154,10 @@ class form   {
                 
                 $BlockIDName = $Single_BlockCollection->blockID;
                 
-                $HtmlLines.= '<div class="box box-'.$color.' direct-chat direct-chat-primary"  id="block'.$BlockIDName.'">
+                $HtmlLines.= '<div class="box box-'.$color.' theblockto direct-chat direct-chat-primary"  id="block'.$BlockIDName.'">
 
                                      <div class="box-header with-border">
-                                     <i class="fa fa-ellipsis-h"></i>
+                                     <i block="block'.$BlockIDName.'" class="theelipses fa fa-ellipsis-h"></i>
                                       
                                      <div class="box-tools pull-right">
                              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -179,7 +179,7 @@ class form   {
                                     <tbody class = "tablet" id="table'.$BlockIDName.'">';
 
                 
-                //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
+                
                 
                 $Array_of_BlockRowCollections = $Single_BlockCollection->block_rows;
 

@@ -159,7 +159,7 @@ class surveys extends Controller
   
      $var = Rache::forever('build_COLID_'.$sva,function() use ($AssID){
 
-        return builder::buildview($AssID, 'open',null)['ColIDs'];
+        return builder::buildview($AssID, 'open',null,"primary")['ColIDs'];
 
 });
         foreach ($var as $x) {     
@@ -243,23 +243,24 @@ print_r($fruit);die;
        if ($PartID!=null) $Participant = Participantsview::where('PartID','=',$PartID)->first();
        else $Participant = '';
         $Survs = Survey::where('surveyID', '=', $sv)->first();
+         $location = substr($sv, 0, 2);
+         $color = self::color($location);
         $Secs = Rache::forever('build_secs'.$sv,function()use($sv){
             return Section::where('surveyID', '=', $sv)->get();
                              });
         
        if($status == 'New' ){ 
-        $Melarray = Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
-            return builder::buildview($id,'open',$Participant);
+        $Melarray = Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant,$color){
+            return builder::buildview($id,'open',$Participant,$color);
                             });
         $Melarray = collect($Melarray);
                             }
-       else $Melarray = builder::buildview($id,'edit',$Participant);
+       else $Melarray = builder::buildview($id,'edit',$Participant,$color);
 
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
-        $location = substr($sv, 0, 2);
-        $iXd = 'survey/' . $id;
-
+       
+      
         Rache::foreveryoung($id,function(){return "I Exist!";});
 
         
@@ -267,9 +268,7 @@ print_r($fruit);die;
                                        ->with('Participant',$Participant)
                                        ->with('AssID',$id)
                                        ->with('AjaxNames',$AjaxNames)
-                                       ->with('anId',$id)
                                        ->with('Mel', $Mel)
-                                       ->with('id', $iXd)
                                        ->with('location', $location)
                                        ->with('title', $Survs->Name)
                                        ->with('secs', $Secs);
@@ -283,10 +282,12 @@ print_r($fruit);die;
         $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
         $sv = $TheAsses->Survey;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
-        $Secs = Section::where('surveyID', '=', $sv)->get();        
-        $MelArray = builder::buildview($id, 'show','');
+        $Secs = Section::where('surveyID', '=', $sv)->get();
+        $location = substr($sv, 0, 2);
+        $color = self::color($location);           
+        $MelArray = builder::buildview($id, 'show','',$color);
         $Mel = $MelArray['htmll'];
-        $location = substr($sv, 0, 2);        
+
         $iXd = 'survey/' . $id;
         
         return view('surveys.show')->with('Mel', $Mel)
@@ -307,10 +308,12 @@ print_r($fruit);die;
        $Survs = Survey::where('surveyID', '=', $sv)->first();
        $Secs = Section::where('surveyID', '=', $sv)->get();
        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
-       $Melarray = builder::buildview($id, 'edit',$Participant);
+        $location = substr($sv, 0, 2);
+        $color = self::color($location);   
+       $Melarray = builder::buildview($id, 'edit',$Participant,$color);
        $Mel = $Melarray['htmll'];
        $AjaxNames = $Melarray['ajax'];
-       $location = substr($sv, 0, 2);
+     
 
        Rache::foreveryoung($id,function(){return "I Exist!";});
         
@@ -319,7 +322,6 @@ print_r($fruit);die;
                                        ->with('AssID',$id)
                                        ->with('AjaxNames',$AjaxNames)
                                        ->with('Mel', $Mel)
-                                       ->with('id', $id)
                                        ->with('location', $location)
                                        ->with('title', $Survs->Name)
                                        ->with('secs', $Secs);
@@ -351,12 +353,34 @@ print_r($fruit);die;
                                        ->with('AssID',$id)
                                        ->with('AjaxNames',$AjaxNames)
                                        ->with('Mel', $Mel)
-                                       ->with('id', $id)
                                        ->with('location', $location)
                                        ->with('title', $Survs->Name)
                                        ->with('secs', $Secs);
     }
     
+
+    private static function color($loc){
+
+    switch ($loc) {
+      case 'MN': $color = "warning";
+
+      break;
+      case 'CH': $color = "info";
+
+
+      break;
+      case 'IM':  $color = "danger";
+
+        break;
+      
+      default:   $color = "info";
+        
+        break;
+    }
+
+    return $color;
+
+  }
    
 
 }

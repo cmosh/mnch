@@ -55,7 +55,8 @@
             <li><a href="/auth/login">Login</a></li>
             <li><a href="/auth/register">Register</a></li>
           @else
-
+          
+          
            @if (isset($AssID)==true)
                @if($location == 'MN'||$location == 'IM'||$location == 'CH')
 		

@@ -212,7 +212,7 @@ $(document).ready(function(){
              if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');
    $('#saved').hide();
      $('#thesubmit').show();
-      $('#thesubmit').enable();  
+    
     
 }, 1000);
 
