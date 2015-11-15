@@ -301,7 +301,7 @@
 
 function sendcommand(cmd) {
 
-	 
+	 $('#output').html('<i class="fa fa-refresh fa-spin"></i>');
 	  var data = {
           'cmd':cmd,
          '_token': $('input[name=_token]').val(),
