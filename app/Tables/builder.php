@@ -452,7 +452,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeName" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Incharge')->Name) ; $HtmlLines.= '" name= "FacilityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeName" value="' ;if (isset($Contacts->get('Incharge'))) $HtmlLines.=($Contacts->get('Incharge')->Name) ; $HtmlLines.= '" name= "FacilityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -460,7 +460,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="' ;if ($act != 'open')$HtmlLines.=($Contacts->get('Incharge')->Name) ;  $HtmlLines.= '"
+                                                    <input type="text" class="asave form-control" id="FacilityInchargeMobile" name="FacilityInchargeMobile" value="' ;if (isset($Contacts->get('Incharge')))$HtmlLines.=($Contacts->get('Incharge')->Name) ;  $HtmlLines.= '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -469,7 +469,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail"  value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Incharge')->Email) ;  $HtmlLines.= '" name="FacilityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="FacilityInchargeEmail"  value="' ;if (isset($Contacts->get('Incharge'))) $HtmlLines.=($Contacts->get('Incharge')->Email) ;  $HtmlLines.= '" name="FacilityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -490,7 +490,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeName" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('MCH Incharge')->Name) ; $HtmlLines.= '" name= "MCHInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MCHInchargeName" value="' ;if (isset($Contacts->get('MCH Incharge'))) $HtmlLines.=($Contacts->get('MCH Incharge')->Name) ; $HtmlLines.= '" name= "MCHInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -498,7 +498,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('MCH Incharge')->Mobile) ;  $HtmlLines.='"
+                                                    <input type="text" class="asave form-control" id="MCHInchargeMobile" name="MCHInchargeMobile" value="' ;if (isset($Contacts->get('MCH Incharge'))) $HtmlLines.=($Contacts->get('MCH Incharge')->Mobile) ;  $HtmlLines.='"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -507,7 +507,7 @@ class builder   {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail"  value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('MCH Incharge')->Email) ;  $HtmlLines.= '"name="MCHInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MCHInchargeEmail"  value="' ;if (isset($Contacts->get('MCH Incharge'))) $HtmlLines.=($Contacts->get('MCH Incharge')->Email) ;  $HtmlLines.= '"name="MCHInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -524,7 +524,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Maternity Incharge')->Name) ;  $HtmlLines.='" name= "MaternityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeName" value="' ;if (isset($Contacts->get('Maternity Incharge'))) $HtmlLines.=($Contacts->get('Maternity Incharge')->Name) ;  $HtmlLines.='" name= "MaternityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -532,7 +532,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Maternity Incharge')->Mobile) ;  $HtmlLines.= '"name="MaternityInchargeMobile" 
+                                                    <input type="text" class="asave form-control" id="MaternityInchargeMobile" value="' ;if (isset($Contacts->get('Maternity Incharge'))) $HtmlLines.=($Contacts->get('Maternity Incharge')->Mobile) ;  $HtmlLines.= '"name="MaternityInchargeMobile" 
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -541,7 +541,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail"  value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Maternity Incharge')->Email) ;  $HtmlLines.= '" name="MaternityInchargeEmail" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="MaternityInchargeEmail"  value="' ;if (isset($Contacts->get('Maternity Incharge'))) $HtmlLines.=($Contacts->get('Maternity Incharge')->Email) ;  $HtmlLines.= '" name="MaternityInchargeEmail" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -558,7 +558,7 @@ class builder   {
                                                 </div>
                                                  <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" id="OPDInchargeName" name= "OPDInchargeName" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Team Lead')->Name) ;  $HtmlLines.= '" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" id="OPDInchargeName" name= "OPDInchargeName" value="' ;if (isset($Contacts->get('Team Lead'))) $HtmlLines.=($Contacts->get('Team Lead')->Name) ;  $HtmlLines.= '" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -566,7 +566,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>MOBILE</label>
-                                                    <input type="text" class="asave form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="' ;if ($act != 'open') $HtmlLines.=($Contacts->get('Team Lead')->Mobile) ;  $HtmlLines.= '"
+                                                    <input type="text" class="asave form-control" id="OPDInchargeMobile" name="OPDInchargeMobile" value="' ;if (isset($Contacts->get('Team Lead'))) $HtmlLines.=($Contacts->get('Team Lead')->Mobile) ;  $HtmlLines.= '"
                                                     placeholder="Enter Mobile"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
@@ -575,7 +575,7 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>EMAIL</label>
-                                                    <input type="email" class="asave form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'  ;if ($act != 'open') $HtmlLines.=($Contacts->get('Team Lead')->Email) ;  $HtmlLines.= '" placeholder="Enter Email"  ';
+                                                    <input type="email" class="asave form-control" id="OPDInchargeEmail"  name="OPDInchargeEmail" value="'  ;if (isset($Contacts->get('Team Lead'))) $HtmlLines.=($Contacts->get('Team Lead')->Email) ;  $HtmlLines.= '" placeholder="Enter Email"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
