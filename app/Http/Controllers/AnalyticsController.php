@@ -7,7 +7,7 @@ use App\Tables\SubmittedCHCountie;
 use App\Tables\SubmittedMNHCount;
 use App\Tables\SubmittedMNHCountie;
 use App\Tables\CHSubSurvey;
-
+use Illuminate\Http\Request;
 use App\Tables\Column_set;
 use App\Tables\Survey;
 use App\Tables\analyse;
@@ -19,13 +19,22 @@ use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
  use App\Http\Controllers\ArrayRedis as Rache;
 use Illuminate\Contracts\Foundation\Application As App;
-use Request;
+// use Request;
 use Input;
 use Cache;
 
 
 	
 class AnalyticsController extends Controller {
+
+	  protected $request;
+  
+
+	 public function __construct(Request $request)
+    {
+     
+        $this->request = $request;
+    }
 
 
 
@@ -260,12 +269,12 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 	}
 
 
-	public function blah(Excel $excel)
+	public function blah( )
 	{
 
 
 
-
+		return $this->request->getClientIp();
 	
 
 }
