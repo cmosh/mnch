@@ -45,13 +45,13 @@
                   </td>
                   	<td>
                       <a command="shutdown" class="btn btn-app">
-                    <i class="fa fa-pause"></i> Pause
+                    <i class="fa fa-pause"></i> Down
                   </a>
                   	</td>
                   <td>
                   <a command="shutup" class="btn btn-app">
                     
-                    <i class="fa fa-heart-o"></i> Resume
+                    <i class="fa fa-heart-o"></i> Up
                   </a>
                   </td>
                   <td>

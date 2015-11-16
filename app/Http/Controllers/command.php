@@ -96,7 +96,7 @@ class command  {
 		 $thefile = $theurl.':'.$theport;
 		 $thefolder = env('LOCAL_FOLDER');
 
-				 $thelist=array('shutdown'=>array('sudo php artisan down','echo "adminip=\"'.$theip.'\"" >> .env'),
+				 $thelist=array('shutdown'=>array('sudo php artisan down','grep -v "adminip=" .env > .envtemp; mv .envtemp .env','echo "adminip=\"'.$theip.'\"" >> .env','echo Please remeber to turn off maintainence mode when finished if not in a home network.'),
 							'optimise'=>array('php artisan optimize'),
 							'clearcache'=>array('php artisan cache:clear'),
 							'clearresets'=>array('php artisan auth:clear-resets'),
