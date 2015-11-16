@@ -19,7 +19,7 @@ class administration extends Controller {
 	
 		public function __construct( Requested $request)
 	{
-		
+		$this->ip = $request->getClientIp();
 		$this->middleware('auth');
 		$this->clist = command::thelist($request->getClientIp());
 		$this->ssh_connection = command::ssh_connection();
@@ -28,7 +28,8 @@ class administration extends Controller {
 	public function globe()
 	{
 		return view('admin.global')->with('location','Admin')
-								->with('title','Administration');
+								->with('title','Administration')
+								->with('ip',$this->ip);
 	}
 
 	/**
