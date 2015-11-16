@@ -88,15 +88,15 @@ class command  {
 
 
 
-	public static function thelist()
+	public static function thelist($theip)
 	{
-
+		
 		$theport = env('APP_REDISMANAGE');
 		 $theurl = str_replace(env('APP_PORT'), '', str_replace("http://",'',url('')));
 		 $thefile = $theurl.':'.$theport;
 		 $thefolder = env('LOCAL_FOLDER');
 
-				 $thelist=array('shutdown'=>array('sudo php artisan down'),
+				 $thelist=array('shutdown'=>array('sudo php artisan down','echo "adminip=\"'.$theip.'\"" >> .env'),
 							'optimise'=>array('php artisan optimize'),
 							'clearcache'=>array('php artisan cache:clear'),
 							'clearresets'=>array('php artisan auth:clear-resets'),
@@ -105,7 +105,7 @@ class command  {
 							'routecache'=>array('php artisan route:cache'),
 							'routeclear'=>array('php artisan route:clear'),
 							'MemcachedFlush'=>array('sudo service memcached restart'),
-							'shutup'=>array('sudo php artisan up'),
+							'shutup'=>array('sudo php artisan up','grep -v "adminip=" .env > .envtemp; mv .envtemp .env'),
 							'composerupdate'=>array('sudo composer update'),
 							'composerinstall'=>array('sudo composer install'),
 							'localrootfolder'=>array('sudo chown -R :www-data /home/vagrant/'.$thefolder.'/mnch','ls -ld /home/vagrant/'.$thefolder.'/mnch'),

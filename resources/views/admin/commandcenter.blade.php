@@ -49,9 +49,9 @@
                   </a>
                   	</td>
                   <td>
-                  <a command="optimise" class="btn btn-app">
+                  <a command="shutup" class="btn btn-app">
                     
-                    <i class="fa fa-heart-o"></i> Optimise
+                    <i class="fa fa-heart-o"></i> Resume
                   </a>
                   </td>
                   <td>

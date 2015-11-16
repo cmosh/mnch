@@ -14,9 +14,6 @@ return [
     |
     */
     'admin_ips' => [
-        '127.*.*.*',
-        '54.187.244.7',
-        env('adminip2'),
-        env('adminip1')
+        env('adminip'),
     ],
 ];
