@@ -263,6 +263,20 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 	public function blah(Excel $excel)
 	{
 
+$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC4%');
+}]);
+ $f->load('z');
+					
+return $f;
+
+
+	
 
 
 

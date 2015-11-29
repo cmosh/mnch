@@ -16,7 +16,10 @@
                 <div class="box-body">
                 	>>	<a href="/rawdata/facility-summary">Facility Summary</a> 
                   <br>
-             		>>	<a href="/rawdata/staff-training">Staff Training</a> 
+             		>>	<a href="/rawdata/staff-training">Staff Training</a>
+                 <br>
+                >>  <a href="/rawdata/health-services">Health Services</a> 
+
 
                 </div><!-- /.box-body -->
                  
@@ -63,8 +66,8 @@
                  
                 </div>
                 <div class="box-body">
-<!--                  >> <a href="/rawdata/guidelines">Diarrhoea Treatment Commodities</a> 
- -->                  <br>
+                 >> <a href="/rawdata/diarrhoea">Diarrhoea Treatment Commodities</a> 
+                  <br>
                 </div><!-- /.box-body -->
                  
                 </div>

@@ -219,6 +219,128 @@ public function getFacilitySummary(Excel $excel)
 }
 
 
+public function getHealthServices(Excel $excel)
+{
+
+	$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC2BLK2%');
+}]);
+
+ $f->load('z');
+
+
+
+			$excel->create('Health Services', function($ex) use($f)  {
+
+	    $ex->sheet('Sheet1', function($sheet) use($f){
+	    	
+	
+
+	    		$sheet->row(1, array(
+     'County',	'Subcounty'	,'MFL'	,'Facility Name ',
+     'Level',	'Type',	'Owner'	,'Date of Assessment',
+     'Assessment Type','Version','Assessment Term',
+    'General OPD',	'Paediatric OPD'	,'MCH',	'Others'
+
+
+	
+     
+
+
+			)
+	    		
+	    		);
+
+	 
+
+ 	   $sheet->cells('A1:K1', function($cells) {
+
+    // manipulate the range of cells
+    $cells->setFontWeight('bold');
+    $cells->setAlignment('center');
+     $cells->setValignment('middle');
+     
+
+});
+
+
+ 
+ 	  
+
+
+	    		
+	    		$counter2=0;
+	    		
+				
+
+	    		foreach ($f as $value) {
+
+
+$arr=array('','','','');
+	
+
+ 	   	
+ 	   	
+ 	   	if( $value->x[0]->Data=='1')
+ 	   		{$arr[0]='Present';}
+ 	   	elseif($value->x[0]->Data=='2')
+ 	   	{
+ 	   		$arr[1]='Present';
+ 	   	}
+ 	   	elseif($value->x[0]->Data=='3')
+ 	   	{
+ 	   		$arr[2]='Present';
+ 	   	}
+ 	   		elseif($value->x[0]->Data=='4')
+ 	   	{
+ 	   		$arr[3]='Present';
+ 	   	}
+ 	   	
+
+
+ 	   	# code...
+ 	  
+	
+	    				$counter2++;
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$value->z->County,$value->z->SubCounty,
+						$value->z->FacilityCode,$value->z->FacilityName,
+		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
+		     			$arr[0],$arr[1],$arr[2],$arr[3]
+		     			
+		     			
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+
+
+
+
+
+
+	})->download('csv');
+
+
+
+}
+
+
 
 public function getGuidelines(Excel $excel)
 	{
@@ -476,7 +598,7 @@ public function getDiarrhoea(Excel $excel)
 
 
 
-			$excel->create('Tools Availability', function($ex) use($f)  {
+			$excel->create('Diarrhoea', function($ex) use($f)  {
 
 	    $ex->sheet('Sheet1', function($sheet) use($f){
 	    	
@@ -536,26 +658,39 @@ public function getDiarrhoea(Excel $excel)
 
 
 $arr=array();
-	    				for($i=0;$i<8;$i++) {
+	    				for($i=0;$i<30;$i=$i+2) {
 
  	   	
  	   	
- 	   	if( $value->x[$i]->Data=='1')
- 	   		{$arr[$i]='Yes';}
- 	   	elseif($value->x[$i]->Data=='2')
+ 	   	if( $value->x[$i+1]->Data=='1')
+ 	   		{$arr[$i]='Available';
+ 	   		$arr[$i+1]='';
+
+ 	   }
+ 	   	elseif($value->x[$i+1]->Data=='2')
  	   	{
- 	   		$arr[$i]='No';
- 	   	}
- 	   	else
- 	   	{
- 	   		$arr[$i]='No Information';
- 	   	}
+ 	   		$arr[$i]='Not Available';
+ 	   		if( $value->x[$i+2]->Data=='1')
+ 	   		{
+ 	   			$arr[$i+1]='Not Ordered';
+ 	   		}
+ 	   		elseif( $value->x[$i+2]->Data=='2')
+ 	   		{
+ 	   			$arr[$i+1]='Ordered but not yet received';
+ 	   		}
+ 	   		elseif( $value->x[$i+2]->Data=='3')
+ 	   		{
+ 	   			$arr[$i+1]='Expired';
+ 	   		}
 
 
+
+ 	   	}
+ 	   	
 
  	   	# code...
  	   }
-	
+	var_dump($arr);
 	    				$counter2++;
 	    				
 						$sheet->row($counter2+1, array(
@@ -563,9 +698,22 @@ $arr=array();
 		     			$value->z->County,$value->z->SubCounty,
 						$value->z->FacilityCode,$value->z->FacilityName,
 		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
-		     			$arr[0],$arr[1],$arr[2],$arr[3],$arr[4],
-		     			$arr[5],$arr[6],$arr[7]
-		     			
+		     			$arr[0],$arr[1],
+		     			$arr[2],$arr[3],
+		     			$arr[4],$arr[5],
+		     			$arr[6],$arr[7],
+		     			$arr[8],$arr[9],
+		     			$arr[10],$arr[11],
+		     			$arr[12],$arr[13],
+		     			$arr[14],$arr[15],
+		     			$arr[16],$arr[17],
+		     			$arr[18],$arr[19],
+		     			$arr[20],$arr[21],
+		     			$arr[22],$arr[23],
+		     			$arr[24],$arr[25],
+		     			$arr[26],$arr[27],
+		     			$arr[28],$arr[29]
+		     		
 						
 						));
 					
