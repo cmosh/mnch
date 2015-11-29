@@ -1,0 +1,4 @@
+ $('#sortable').sortable().droppable().on('sortreceive', function(event, ui) {
+    var inserted_element = $(ui.helper);
+    // modify your element
+  });

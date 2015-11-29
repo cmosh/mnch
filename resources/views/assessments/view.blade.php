@@ -1,8 +1,8 @@
 @extends('template')
 
 @section('cdns')
- <!-- DATA TABLES -->
-    <link href="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+ 
+   
   @endsection
 
 @section('pageinfo')
@@ -159,8 +159,7 @@
 
   @section('javascript')
 
-   <script src="/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+   
  <script type="text/javascript">
       $(function () {
         $("#example1").DataTable();

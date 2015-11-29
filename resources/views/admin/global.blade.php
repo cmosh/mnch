@@ -1,8 +1,7 @@
 @extends('template')
 @section('cdns')
 
-  <!-- Select2 -->
-    <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+  
    
 @endsection 
 @section('content')
@@ -337,7 +336,7 @@
 
 @section('javascript')
 
-  <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+  
 
 <script type="text/javascript">
       $(function () {

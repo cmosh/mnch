@@ -159,7 +159,6 @@
 @section('javascript')
 
 
-<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
 
 
 <script type="text/javascript">

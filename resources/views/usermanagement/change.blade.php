@@ -10,9 +10,7 @@
 
 @section('cdns')
 
-  <!-- Select2 -->
-    <link href ="/bower_components/parsleyjs/src/parsley.css"  rel="stylesheet" type="text/css" />  
-    
+ 
 
 @endsection       
  
@@ -148,7 +146,6 @@
 
 @section('javascript')
 
-<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
 
 
 <script type="text/javascript">

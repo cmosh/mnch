@@ -30,6 +30,7 @@ Route::get('/','AnalyticsController@ch');
 Route::post('/map','AnalyticsController@mapRequest');
 Route::post('/analytics/chajax','AnalyticsController@chajax');
 Route::post('/analytics/mnhajax','AnalyticsController@mnhajax');
+Route::post('/analytics/maprequest','AnalyticsController@maprequest');
 Route::get('/mnh','AnalyticsController@mnh');
 
 
