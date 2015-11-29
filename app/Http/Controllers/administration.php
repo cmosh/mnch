@@ -23,10 +23,14 @@ class administration extends Controller {
 		$this->middleware('auth');
 		$this->clist = command::thelist($request->getClientIp());
 		$this->ssh_connection = command::ssh_connection();
+		$this->role = $request->user()->role;
+
 	}
 
 	public function globe()
 	{
+		if($this->role<4)return view('errors.404')->with('location','Home');
+	
 		return view('admin.global')->with('location','Admin')
 								->with('title','Administration')
 								->with('ip',$this->ip);
@@ -39,6 +43,7 @@ class administration extends Controller {
 	 */
 	public function localredis()
 	{
+			if($this->role<4)return view('errors.404')->with('location','Home');
 		return view('admin.redmin')->with('location','Admin')
 								->with('title','Administration');
 	}
@@ -46,13 +51,14 @@ class administration extends Controller {
 
 	public function localmem()
 	{
+			if($this->role<4)return view('errors.404')->with('location','Home');
 		return view('admin.memcached')->with('location','Admin')
 								->with('title','Administration');
 	}
 
 	public function commandcenter()
 	{
-
+			if($this->role<4)return view('errors.404')->with('location','Home');
 		
 		return view('admin.commandcenter')->with('location','Admin')
 								->with('title','Administration');

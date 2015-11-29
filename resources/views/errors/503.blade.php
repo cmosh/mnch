@@ -1,41 +1,22 @@
-<html>
-	<head>
-		<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@extends('errors.base')
 
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #B0BEC5;
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato';
-			}
 
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
+@section('header')
 
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
+  <h1  align="middle">
+             Maintenance in Progress
+              <small>...</small>
+            </h1>
+            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:red;" />
+@endsection
 
-			.title {
-				font-size: 72px;
-				margin-bottom: 40px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Be right back.</div>
-			</div>
-		</div>
-	</body>
-</html>
+@section('content')
+ <!-- Content Wrapper. Contains page content -->
+   <div class="error-page">
+            <h2 class="headline text-yellow">  <li class="fa fa-wrench text-yellow fa-4x"> </li></h2>
+            <div class="error-content">
+             
+            </div><!-- /.error-content -->
+          </div><!-- /.error-page -->
+
+@endsection
