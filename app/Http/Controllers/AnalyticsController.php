@@ -269,7 +269,7 @@ $f = CHSubSurvey::all();
 	 $f->load(['x' => function($query) 
 {
 	
-    $query->where('ColumnSetID', 'Like', 'CHV2SEC4%');
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC7BLK2%COL02');
 }]);
  $f->load('z');
 					
