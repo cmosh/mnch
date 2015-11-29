@@ -88,15 +88,17 @@ class command  {
 
 
 
-	public static function thelist()
+	public static function thelist($theip)
 	{
-
+		
 		$theport = env('APP_REDISMANAGE');
 		 $theurl = str_replace(env('APP_PORT'), '', str_replace("http://",'',url('')));
 		 $thefile = $theurl.':'.$theport;
 		 $thefolder = env('LOCAL_FOLDER');
 
-				 $thelist=array('shutdown'=>array('sudo php artisan down'),
+				 $thelist=array('eip'=>array('sudo grep -v "adminip=\"'.$theip.'\"" .env > .envtemp; sudo mv .envtemp .env','sudo echo "adminip=\"'.$theip.'\"" >> .env'),
+				 			'dip'=>array('sudo grep -v "adminip=\"'.$theip.'\"" .env > .envtemp; sudo mv .envtemp .env'),
+				 			'shutdown'=>array('php artisan down','sudo grep -v "adminip=" .env > .envtemp; sudo mv .envtemp .env','sudo echo "adminip=\"'.$theip.'\"" >> .env','sudo echo Please remeber to turn off maintainence mode when finished if not in a home network.'),
 							'optimise'=>array('php artisan optimize'),
 							'clearcache'=>array('php artisan cache:clear'),
 							'clearresets'=>array('php artisan auth:clear-resets'),
@@ -105,7 +107,7 @@ class command  {
 							'routecache'=>array('php artisan route:cache'),
 							'routeclear'=>array('php artisan route:clear'),
 							'MemcachedFlush'=>array('sudo service memcached restart'),
-							'shutup'=>array('sudo php artisan up'),
+							'shutup'=>array('php artisan up','sudo grep -v "adminip=" .env > .envtemp; sudo mv .envtemp .env'),
 							'composerupdate'=>array('sudo composer update'),
 							'composerinstall'=>array('sudo composer install'),
 							'localrootfolder'=>array('sudo chown -R :www-data /home/vagrant/'.$thefolder.'/mnch','ls -ld /home/vagrant/'.$thefolder.'/mnch'),

@@ -1,5 +1,6 @@
 @extends('app')
 @section('header')
+
   <h1  align="middle">
              Child Health Survey
               <small>(Analysis Results)</small>
@@ -40,7 +41,7 @@
                 </div> --}}
               
               </div>
-                        
+                       @include('analytics/popbox')  
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
@@ -161,7 +162,7 @@
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>COMMUNITY STRATEGY</b></h2></center>
+                        <center><h2><b title = "cccc" class="g">COMMUNITY STRATEGY</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -186,19 +187,32 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
  <script type="text/javascript">
-
+window.inside = $('#thesvg').contents();
+  
+ 
 
       $(function () {
-       
+        getmapdata();
+
+       window.inside = $('#thesvg').contents();
         $(".select2").select2();
-        var inside = $('#thesvg').contents();
+
           @foreach($SubmittedCounties as $SubmittedCounty)
-        inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
 
-  
+     
+
+
+ 
+
+ //window.inside.find('.county').data('powertip','sdd');
+
+ //$("#thesvg").contents().find(".county").data('powertip', 'This will be the <b>tooltip text</b>.');
+// $('#element').data('powertip', 'This will be the <b>tooltip text</b>.');
+
  
 
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
@@ -220,7 +234,41 @@ function mapRequest (county) {
   $('#svFaBar').attr('style','width: '+x2+'%');
   
 }
+function getmapdata() {
 
+
+
+ 
+    var data = {
+         
+         '_token': $('input[name=_token]').val()
+       
+    };
+ 
+   $.ajax({
+      url: '/analytics/maprequest',
+      type: "post",
+       data: data,
+           success: function(data){
+     mapdata = JSON.parse(data);
+   
+     var x = window.mapdata;
+   var county = $('#County').val();
+    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
+  
+    @include('analytics/mapdata')
+  
+      
+
+      }
+ 
+   });   
+
+
+
+
+
+}
 function drawChart() {
 
 	  $( ".wait" ).children().addClass("fa fa-refresh fa-spin");
@@ -241,13 +289,14 @@ function drawChart() {
       type: "post",
        data: data,
            success: function(data){
-     mapdata = JSON.parse(data)['map'];
-		var jsonData = JSON.parse(data)['analytics'];
-     var x = window.mapdata;
-
+    
+		var jsonData = JSON.parse(data);
+    
     var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
-    @include('analytics/mapdata')
+   x = window.mapdata;
+
+  @include('analytics/mapdata')
     // var jsonData = jsonData1['analytics'];
     // alert(jsonData['Guidelines']);
 
@@ -304,10 +353,10 @@ $('#Year4').change(year4);
   @include('analytics/CH/js/year4change')
 
 
-var inside = $('#thesvg').contents();
 
-inside.find('.county').click(function() {
-  var cts = this.getAttribute("cname");
+
+window.inside.find('.county').click(function() {
+  var cts = this.getAttribute("title");
    $(document).ready(function() {
 
 $('#County').val(cts);
@@ -320,16 +369,17 @@ $('#X').html('Data from '+TotalSubmitt+ 'facilities in '+$('#County').val());
 drawChart();
 
 var x = 'Selected ' + cts + ' county';
-alert(x);
 
 });
 
-$(function() {
-  var moveLeft = 20;
-  var moveDown = 30;
 
-  inside.find('.county').hover(function(e) {
-      var cts = this.getAttribute("cname");
+
+  $(function() {
+  var moveLeft = 0;
+  var moveDown = 0;
+
+  window.inside.find('.county').hover(function(e) {
+      var cts = this.getAttribute("title");
       mapRequest(cts);
 
     $('div#pop-up').show();
@@ -339,11 +389,12 @@ $(function() {
     $('div#pop-up').hide();
   });
 
-  inside.find('.county').mousemove(function(e) {
+  window.inside.find('.county').mousemove(function(e) {
     $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
   });
 
 });
+
 
 
 

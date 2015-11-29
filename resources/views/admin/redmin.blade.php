@@ -23,7 +23,7 @@
 
 
 @section('js')
-<script type="text/javascript" src="/iframe/js/iframeResizer.min.js"></script>
+
 <script>iFrameResize({log:true})</script>
    
 

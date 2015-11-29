@@ -11,14 +11,7 @@
   @section('cdns')
 
   <!-- Select2 -->
-    <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
-
-
-
-   <link href="/bower_components/jq/jquery-ui.css" rel="stylesheet" />
-
-  
-<script src="/bower_components/jq/jquery-ui.js"></script>
+   
  
 
  
@@ -400,13 +393,8 @@
 
 
  
-   <script src="/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
-
-     <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
-    <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
-    <script src="/bower_components/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-      <script src="/bower_components/zeroclipboard/dist/ZeroClipboard.min.js" type="text/javascript"></script>
+  
+    
    
  <!-- DATA TABLES -->
   <script type="text/javascript">

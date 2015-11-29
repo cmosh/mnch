@@ -10,35 +10,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-
-      <script src="/offline/offline.min.js" type="text/javascript"></script>
+     {!! stylesheet_link_tag('template') !!}  
     
-       <link href="/offline/offline-theme-chrome.css" rel="stylesheet" type="text/css" />
-         
-        <link href="/offline/offline-language-english.css" rel="stylesheet" type="text/css" />
-        
-    <link href="/bower_components/admin-lte/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="/bower_components/admin-lte/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-
- <script src="/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
-
-      <script src="/bower_components/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-
-
-
-
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-    -->
-    <link href="/bower_components/admin-lte/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
-     <link href="/bower_components/parsleyjs/parsley.css" rel="stylesheet" type="text/css" />
-      
 
     @yield('cdns')
 
@@ -105,15 +78,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
      @include('admin/menu')
     </div><!-- ./wrapper -->
 
+    {!!javascript_include_tag('template')!!}
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 2.1.4 -->
    
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="/bower_components/admin-lte/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- AdminLTE App -->
-    <script src="/bower_components/admin-lte/dist/js/app.min.js" type="text/javascript"></script>
-     
+  
 
      @yield('javascript')
      

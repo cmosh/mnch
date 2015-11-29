@@ -9,7 +9,7 @@
 
 
   @section('cdns')
-      <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+   
 
 
 @endsection 
@@ -193,7 +193,7 @@
 
   @section('javascript')
 
- <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+ 
 <script type="text/javascript">
       $(function () {
         //Initialize Select2 Elements
@@ -213,7 +213,7 @@
           
     </script>
 
-    <script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
+    
 
 <script type="text/javascript">
 

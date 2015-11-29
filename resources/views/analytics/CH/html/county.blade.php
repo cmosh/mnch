@@ -3,6 +3,8 @@
 <div class="col-md-4">
                <div class="box box-danger">
                 <div class="box-header with-border">
+                  
+                    
 
                   <h3 class="box-title">Map</h3>
                   <div class="box-tools pull-right">
@@ -37,24 +39,10 @@
                      
                        </select></div>
 
-                        <div id="pop-up" style="height:80px; width:60%;">
-     
-
-                     <p class="text-center" id="countyname">
-                        
-                      </p>
-                      <div class="progress-group">
-                        <span class="progress-text">Surveyed Facilities</span>
-                        <span class="progress-number" id="svFa"></span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" id="svFaBar" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                    
-                    </div>
+                       
                       
 
-      <object  width="100%" id="thesvg" data="/img/map.svg">
+      <object  width="100%" id="thesvg" data="/assets/map.svg">
                  </object>
 
 
@@ -64,5 +52,6 @@
 </div>
 </div>
 
-                        <!-- HIDDEN / POP-UP DIV -->
+
+              <!-- HIDDEN / POP-UP DIV -->
    

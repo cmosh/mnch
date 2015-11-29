@@ -2,9 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-
-
+use Illuminate\Http\Request As Requested;
 use Request;
 use Input;
 use SSH;
@@ -18,17 +16,20 @@ class administration extends Controller {
 	 * @return Response
 	 */
 
-		public function __construct()
+	
+		public function __construct( Requested $request)
 	{
+		$this->ip = $request->getClientIp();
 		$this->middleware('auth');
-		$this->clist = command::thelist();
+		$this->clist = command::thelist($request->getClientIp());
 		$this->ssh_connection = command::ssh_connection();
 	}
 
 	public function globe()
 	{
 		return view('admin.global')->with('location','Admin')
-								->with('title','Administration');
+								->with('title','Administration')
+								->with('ip',$this->ip);
 	}
 
 	/**

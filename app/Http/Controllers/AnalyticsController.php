@@ -29,6 +29,21 @@ class AnalyticsController extends Controller {
 
 
 
+	public function maprequest(){
+ if(Request::ajax()) {  
+   
+$Map = (Cache::remember('MapCH',180,function() {
+return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
+      	}));   
+
+    echo json_encode($Map);
+
+      die;
+
+
+
+	}
+}
 
 	public function chajax(){
 
@@ -63,13 +78,10 @@ class AnalyticsController extends Controller {
 
     $chanalytics  = analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county,$Term);
 		
-$Map = (Cache::remember('MapCH',180,function() {
-      					return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
-      	}));
 
-      $Array =  array('analytics' =>$chanalytics ,'map' =>$Map );		
+   
 
-    echo json_encode($Array);
+    echo json_encode($chanalytics);
 
       die;
 
@@ -108,13 +120,10 @@ public function mnhajax(){
     
     $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county,$Term);
 		
-$Map = (Cache::remember('MapMNH',180,function() {
-      					return 	Map::where('Survey','=','Maternal Neonatal Healthcare')->get()->keyBy('Concat')->toArray();
-      	}));
 
-      $Array =  array('analytics' =>$mnhanalytics ,'map' =>$Map );		
 
-    echo json_encode($Array);
+    
+    echo json_encode($mnhanalytics);
 
       die;
 
@@ -260,12 +269,26 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 	}
 
 
-	public function blah(Excel $excel)
+	public function blah()
 	{
 
+$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC7BLK2%COL02');
+}]);
+ $f->load('z');
+					
+return $f;
 
 
+	
 
+
+		return view('analytics.test');
 	
 
 }

@@ -16,7 +16,10 @@
                 <div class="box-body">
                 	>>	<a href="/rawdata/facility-summary">Facility Summary</a> 
                   <br>
-             		>>	<a href="/rawdata/staff-training">Staff Training</a> 
+             		>>	<a href="/rawdata/staff-training">Staff Training</a>
+                 <br>
+                >>  <a href="/rawdata/health-services">Health Services</a> 
+
 
                 </div><!-- /.box-body -->
                  
@@ -63,8 +66,8 @@
                  
                 </div>
                 <div class="box-body">
-<!--                  >> <a href="/rawdata/guidelines">Diarrhoea Treatment Commodities</a> 
- -->                  <br>
+                 >> <a href="/rawdata/diarrhoea">Diarrhoea Treatment Commodities</a> 
+                  <br>
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -73,10 +76,13 @@
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">SECTION 5 </h3>
-                 
                 </div>
                 <div class="box-body">
-                  <br>
+                 
+                                      >> <a href="/rawdata/ort-functionality">Ort Corner Functionality</a>
+<br>
+                    >> <a href="/rawdata/ort-location">Location of ORT</a>
+
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -88,7 +94,7 @@
                  
                 </div>
                 <div class="box-body">
-                  <br>
+                  >> <a href="/rawdata/supplies-availability">Supplies Availability</a>
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -100,7 +106,7 @@
                  
                 </div>
                 <div class="box-body">
-                  <br>
+                   >> <a href="/rawdata/resource-availability">Supplies Availability</a>
                 </div><!-- /.box-body -->
                  
                 </div>

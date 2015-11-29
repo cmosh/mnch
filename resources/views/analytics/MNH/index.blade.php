@@ -35,7 +35,7 @@
                 </div>
               
               </div>
-                        
+                         @include('analytics/popbox')  
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
@@ -149,16 +149,22 @@
  <script type="text/javascript">
 
 
+    window.inside = $('#thesvg').contents();
+  
+ 
+
       $(function () {
-        //Initialize Select2 Elements
+        getmapdata();
+
+       window.inside = $('#thesvg').contents();
         $(".select2").select2();
 
-       var inside = $('#thesvg').contents();
           @foreach($SubmittedCounties as $SubmittedCounty)
-        inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
+
  
  
 
@@ -178,6 +184,41 @@ function mapRequest (county) {
    x2 = 100*(TotalSubmitt/TotalTotal);
   $('#svFaBar').attr('style','width: '+x2+'%');
   
+}
+function getmapdata() {
+
+
+
+ 
+    var data = {
+         
+         '_token': $('input[name=_token]').val()
+       
+    };
+ 
+   $.ajax({
+      url: '/analytics/maprequest',
+      type: "post",
+       data: data,
+           success: function(data){
+     mapdata = JSON.parse(data);
+   
+     var x = window.mapdata;
+   var county = $('#County').val();
+    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
+  
+    @include('analytics/mapdata')
+  
+      
+
+      }
+ 
+   });   
+
+
+
+
+
 }
 
 function drawChart() {
@@ -200,15 +241,14 @@ function drawChart() {
 
             // alert('x');
           
-     mapdata = JSON.parse(data)['map'];
-		var jsonData = JSON.parse(data)['analytics'];
- /*var x = window.mapdata;
-
-    var county = $('#County').val();
+     
+		var jsonData = JSON.parse(data);
+    
+  var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
-    @include('analytics/mapdata')*/
-    // var jsonData = jsonData1['analytics'];
-    // alert(jsonData['Guidelines']);
+   x = window.mapdata;
+
+  @include('analytics/mapdata')
 
 
 	//include js
@@ -239,9 +279,9 @@ function drawChart() {
     @include('analytics/MNH/js/testing')
   @include('analytics/MNH/js/devkit')
 
+  $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
 
-        //         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
-        // if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}}');
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
       $( ".wait" ).removeClass("overlay");
@@ -273,16 +313,17 @@ $('#County').val(cts);
 drawChart();
 
 var x = 'Selected ' + cts + ' county';
-alert(x);
 
 });
 
-$(function() {
+
+
+  $(function() {
   var moveLeft = 0;
   var moveDown = 0;
 
-  inside.find('.county').hover(function(e) {
-      var cts = this.getAttribute("cname");
+  window.inside.find('.county').hover(function(e) {
+      var cts = this.getAttribute("title");
       mapRequest(cts);
 
     $('div#pop-up').show();
@@ -292,11 +333,12 @@ $(function() {
     $('div#pop-up').hide();
   });
 
-  inside.find('.county').mousemove(function(e) {
+  window.inside.find('.county').mousemove(function(e) {
     $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
   });
 
 });
+
 
 
 

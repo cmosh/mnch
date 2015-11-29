@@ -1,8 +1,7 @@
 @extends('template')
 @section('cdns')
 
-  <!-- Select2 -->
-    <link href="/bower_components/admin-lte/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+  
    
 @endsection 
 @section('content')
@@ -209,6 +208,17 @@
                     <i class="fa fa-bolt"></i> Bring Up
                   </a>
                   	</td>
+                      <td>
+                      <a command="eip" class="btn btn-app">
+                    <i class="fa fa-toggle-on"></i> Enable {{$ip}}
+                  </a>
+                    </td>
+
+                     <td>
+                      <a command="dip" class="btn btn-app">
+                    <i class="fa fa-toggle-off"></i> Disable {{$ip}}
+                  </a>
+                    </td>
 
 
                   </tr>
@@ -326,7 +336,7 @@
 
 @section('javascript')
 
-  <script src="/bower_components/admin-lte/plugins/select2/select2.full.min.js" type="text/javascript"></script>
+  
 
 <script type="text/javascript">
       $(function () {

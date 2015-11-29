@@ -2,7 +2,6 @@
 
 
 
-<script src="/bower_components/parsleyjs/dist/parsley.js" type="text/javascript"></script>
 
 @section('content')
 @if($info!='ok')
