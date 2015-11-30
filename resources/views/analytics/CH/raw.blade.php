@@ -68,7 +68,10 @@
                 <div class="box-body">
                  >> <a href="/rawdata/diarrhoea">Diarrhoea Treatment Commodities</a> 
                   <br>
-                </div><!-- /.box-body -->
+                  >> <a href="/rawdata/antibiotics">Antibiotics</a> 
+                  <br>
+                  >> <a href="/rawdata/malaria">Malaria Treatment Commodities</a> 
+               </div><!-- /.box-body -->
                  
                 </div>
               </div><!-- /.box -->
@@ -106,7 +109,7 @@
                  
                 </div>
                 <div class="box-body">
-                   >> <a href="/rawdata/resource-availability">Supplies Availability</a>
+                   >> <a href="/rawdata/resource-availability">Resource Availability</a>
                 </div><!-- /.box-body -->
                  
                 </div>

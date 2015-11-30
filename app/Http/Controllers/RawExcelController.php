@@ -598,7 +598,324 @@ public function getDiarrhoea(Excel $excel)
 
 
 
-			$excel->create('Diarrhoea Treatment', function($ex) use($f)  {
+			$excel->create('Diarrhoea Treatment Commodities', function($ex) use($f)  {
+
+	    $ex->sheet('Sheet1', function($sheet) use($f){
+	    	
+	
+
+	    		$sheet->row(1, array(
+     'County',	'Subcounty'	,'MFL'	,'Facility Name ',
+     'Level',	'Type',	'Owner'	,'Date of Assessment',
+     'Assessment Type','Version','Assessment Term',
+   // 'Artemether + Leumefantrine (AL)'	,'Reason'	,
+   // 'Artesunate Injection',	'Reason',	
+   // 'Injection Quinine','Reason',	
+   // 'Tablet Metronidazole','Reason',	
+   // 'Syrup Metronidazole','Reason',	
+   // 'Syrup Amoxicillin'	,'Reason',	
+   // 'Syrup Cotrimoxazole','Reason',	
+   // 'Tablet Amoxicillin','Reason',	
+   // 'Tablet Paed Cotrimoxazole','Reason',	
+   'Low Osmolarity Oral Rehydration Salts (ORS)','Reason',	
+   'Vitamin A	50,000 IU','Reason',	
+   'Vitamin A	100,000 IU','Reason',	
+   'Vitamin A	200,000 IU','Reason',	
+   'Zinc Sulphate','Reason',	
+   'ORS & Zinc Co-pack','Reason',	
+   'Rota Virus Vaccine','Reason'
+	 
+     
+
+
+			)
+	    		
+	    		);
+
+	 
+
+ 	   $sheet->cells('A1:K1', function($cells) {
+
+    // manipulate the range of cells
+    $cells->setFontWeight('bold');
+    $cells->setAlignment('center');
+     $cells->setValignment('middle');
+     
+
+});
+
+
+ 
+ 	  
+
+
+	    		
+	    		$counter2=0;
+	    		
+				
+
+	    		foreach ($f as $value) {
+
+
+$arr=array();
+
+
+	    				 for($i=0;$i<=28;$i++) 
+ {
+	# code...
+
+	
+		 	   	
+ 	   	
+ 	   	if( $value->x[$i]->Data=='1')
+ 	   		{
+ 	   			$arr[$i]='Available';
+ 	   		$arr[$i+1]='';
+
+ 	   }
+ 	   	elseif($value->x[$i]->Data=='2')
+ 	   	{
+ 	   		$arr[$i]='Not Available';
+ 	   		if( $value->x[$i+1]->Data=='1')
+ 	   		{
+ 	   			$arr[$i+1]='Not Ordered';
+ 	   		}
+ 	   		elseif( $value->x[$i+1]->Data=='2')
+ 	   		{
+ 	   			$arr[$i+1]='Ordered but not yet received';
+ 	   		}
+ 	   		elseif( $value->x[$i+1]->Data=='3')
+ 	   		{
+ 	   			$arr[$i+1]='Expired';
+ 	   		}
+ 	   		else
+ 	   		{
+ 	   			$arr[$i+1]='';
+ 	   		}
+
+
+
+ 	   	}
+ 	   	else
+ 	   	{
+ 	   		$arr[$i]='';
+ 	   		$arr[$i+1]='';
+ 	   	}
+ 	   	$i++;
+
+ 	   	# code...
+ 	   }
+	
+	    				$counter2++;
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$value->z->County,$value->z->SubCounty,
+						$value->z->FacilityCode,$value->z->FacilityName,
+		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
+		     			// $arr[0],$arr[1],
+		     			// $arr[2],$arr[3],
+		     			// $arr[4],$arr[5],
+		     			// $arr[6],$arr[7],
+		     			// $arr[8],$arr[9],
+		     			// $arr[10],$arr[11],
+		     			// $arr[12],$arr[13],
+		     			// $arr[14],$arr[15],
+		     			// $arr[16],$arr[17],
+		     			$arr[18],$arr[19],
+		     			$arr[20],$arr[21],
+		     			$arr[22],$arr[23],
+		     			$arr[24],$arr[25],
+		     			$arr[26],$arr[27],
+		     			$arr[28],$arr[29]
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+
+
+
+
+
+
+	})->download('csv');
+}
+public function getAntibiotics(Excel $excel)
+	{
+
+		$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC4BLK2%');
+}]);
+
+ $f->load('z');
+
+
+
+			$excel->create('Antibiotics', function($ex) use($f)  {
+
+	    $ex->sheet('Sheet1', function($sheet) use($f){
+	    	
+	
+
+	    		$sheet->row(1, array(
+     'County',	'Subcounty'	,'MFL'	,'Facility Name ',
+     'Level',	'Type',	'Owner'	,'Date of Assessment',
+     'Assessment Type','Version','Assessment Term',
+   // 'Artemether + Leumefantrine (AL)'	,'Reason'	,
+   // 'Artesunate Injection',	'Reason',	
+   // 'Injection Quinine','Reason',	
+   'Tablet Metronidazole','Reason',	
+   'Syrup Metronidazole','Reason',	
+   'Syrup Amoxicillin'	,'Reason',	
+   'Syrup Cotrimoxazole','Reason',	
+   'Tablet Amoxicillin','Reason',	
+   'Tablet Paed Cotrimoxazole','Reason',	
+   
+	 
+     
+
+
+			)
+	    		
+	    		);
+
+	 
+
+ 	   $sheet->cells('A1:K1', function($cells) {
+
+    // manipulate the range of cells
+    $cells->setFontWeight('bold');
+    $cells->setAlignment('center');
+     $cells->setValignment('middle');
+     
+
+});
+
+
+ 
+ 	  
+
+
+	    		
+	    		$counter2=0;
+	    		
+				
+
+	    		foreach ($f as $value) {
+
+
+$arr=array();
+
+	    				for($i=0;$i<=28;$i++) {
+
+		 	   	
+ 	   	
+ 	   	if( $value->x[$i]->Data=='1')
+ 	   		{
+ 	   			$arr[$i]='Available';
+ 	   		$arr[$i+1]='';
+
+ 	   }
+ 	   	elseif($value->x[$i]->Data=='2')
+ 	   	{
+ 	   		$arr[$i]='Not Available';
+ 	   		if( $value->x[$i+1]->Data=='1')
+ 	   		{
+ 	   			$arr[$i+1]='Not Ordered';
+ 	   		}
+ 	   		elseif( $value->x[$i+1]->Data=='2')
+ 	   		{
+ 	   			$arr[$i+1]='Ordered but not yet received';
+ 	   		}
+ 	   		elseif( $value->x[$i+1]->Data=='3')
+ 	   		{
+ 	   			$arr[$i+1]='Expired';
+ 	   		}
+ 	   		else
+ 	   		{
+ 	   			$arr[$i+1]='';
+ 	   		}
+
+
+
+ 	   	}
+ 	   	else
+ 	   	{
+ 	   		$arr[$i]='';
+ 	   		$arr[$i+1]='';
+ 	   	}
+ 	   	$i++;
+
+ 	   	# code...
+ 	   }
+	
+	    				$counter2++;
+	    				
+						$sheet->row($counter2+1, array(
+
+		     			$value->z->County,$value->z->SubCounty,
+						$value->z->FacilityCode,$value->z->FacilityName,
+		     			'',$value->z->Type,$value->z->Owner,$value->Date,$value->Survey,substr($value->Survey,-1,1),$value->Assessment_Term,
+		     			// $arr[0],$arr[1],
+		     			// $arr[2],$arr[3],
+		     			// $arr[4],$arr[5],
+		     			$arr[6],$arr[7],
+		     			$arr[8],$arr[9],
+		     			$arr[10],$arr[11],
+		     			$arr[12],$arr[13],
+		     			$arr[14],$arr[15],
+		     			$arr[16],$arr[17],
+		     		
+						
+						));
+					
+				}
+
+				
+
+
+	       
+
+	    });
+
+
+
+
+
+
+
+	})->download('csv');
+}
+public function getMalaria(Excel $excel)
+	{
+
+		$f = CHSubSurvey::all();
+	
+
+	 $f->load(['x' => function($query) 
+{
+	
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC4BLK2%');
+}]);
+
+ $f->load('z');
+
+
+
+			$excel->create('Malaria Treatment Commodities', function($ex) use($f)  {
 
 	    $ex->sheet('Sheet1', function($sheet) use($f){
 	    	
@@ -611,19 +928,8 @@ public function getDiarrhoea(Excel $excel)
    'Artemether + Leumefantrine (AL)'	,'Reason'	,
    'Artesunate Injection',	'Reason',	
    'Injection Quinine','Reason',	
-   'Tablet Metronidazole','Reason',	
-   'Syrup Metronidazole','Reason',	
-   'Syrup Amoxicillin'	,'Reason',	
-   'Syrup Cotrimoxazole','Reason',	
-   'Tablet Amoxicillin','Reason',	
-   'Tablet Paed Cotrimoxazole','Reason',	
-   'Low Osmolarity Oral Rehydration Salts (ORS)','Reason',	
-   'Vitamin A	50,000 IU','Reason',	
-   'Vitamin A	100,000 IU','Reason',	
-   'Vitamin A	200,000 IU','Reason',	
-   'Zinc Sulphate','Reason',	
-   'ORS & Zinc Co-pack','Reason',	
-   'Rota Virus Vaccine','Reason'
+	
+   
 	 
      
 
@@ -712,18 +1018,8 @@ $arr=array();
 		     			$arr[0],$arr[1],
 		     			$arr[2],$arr[3],
 		     			$arr[4],$arr[5],
-		     			$arr[6],$arr[7],
-		     			$arr[8],$arr[9],
-		     			$arr[10],$arr[11],
-		     			$arr[12],$arr[13],
-		     			$arr[14],$arr[15],
-		     			$arr[16],$arr[17],
-		     			$arr[18],$arr[19],
-		     			$arr[20],$arr[21],
-		     			$arr[22],$arr[23],
-		     			$arr[24],$arr[25],
-		     			$arr[26],$arr[27],
-		     			$arr[28],$arr[29]
+		     	
+		     		
 						
 						));
 					
@@ -744,6 +1040,7 @@ $arr=array();
 
 	})->download('csv');
 }
+
 
 
 
