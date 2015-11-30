@@ -217,6 +217,7 @@ $(document).ready(function(){
          
 </script>
 
+ {!!javascript_include_tag('survey')!!}
 
 <script type="text/javascript">
 
@@ -332,10 +333,10 @@ $("#demo-form").submit(function(e) {
          });
 </script>
 
- {!!javascript_include_tag('survey')!!}
 
-
-
+{!!javascript_include_tag('survey_0')!!}
+{!!javascript_include_tag('survey_1')!!}
+{!!javascript_include_tag('survey_2')!!}
 
 
 @endsection 
