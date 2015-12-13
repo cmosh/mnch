@@ -61,7 +61,7 @@
                @if($location == 'MN'||$location == 'IM'||$location == 'CH')
 		
 				
-            <li> <a href="/assessments/cancel/{{$AssID}}"  role="button">
+            <li> <a href="/assessments/cancel/{{$AssID}}" id="cancLink"  role="button">
               <span><button id="cancelbt" class="btn btn-block btn-warning btn-xs">Cancel and Discard</button></span>  
           </a> </li>
            

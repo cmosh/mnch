@@ -16,6 +16,26 @@ class builder   {
            $Participant=  new Participantsview;
          //  $TheAssessor->Name = '';
         }
+  $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
+
+  $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
+
+
+        // echo $Contacts;
+        $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
+        
+
+
+        $TheAssessor = Assessor::where('AssID', '=', $AssID)->first();
+        if ($TheAssessor == null){
+           $TheAssessor=  new Assessor;
+         //  $TheAssessor->Name = '';
+        }
+         $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
+    
+     
+        
+        $loc = substr($TheAsses->Survey, 0, 2);
         
         $HtmlLines = '<!-- Main content -->
 
@@ -117,26 +137,9 @@ class builder   {
     </div>
     </div>';
         
-        $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
-
-
-        // echo $Contacts;
-        $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
         
 
-
-        $TheAssessor = Assessor::where('AssID', '=', $AssID)->first();
-        if ($TheAssessor == null){
-           $TheAssessor=  new Assessor;
-         //  $TheAssessor->Name = '';
-        }
-         $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
-    
-     
         
-        $loc = substr($TheAsses->Survey, 0, 2);
-
-        $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
 
       
 
@@ -189,7 +192,10 @@ class builder   {
                                 <!-- /.box -->
 
                                 <!-- /.box -->
-                                <div class="box box-'.$color.'">
+                                ';
+                                //Check if survey version is MNHV1 to add/remove assessor block
+                                if($Survey!='MNHV1'){
+                                $HtmlLines.='<div class="box box-'.$color.'">
                                     
                                     <div class="box-header">
                                         <h3 class="box-title">Assessor Information</h3>
@@ -250,6 +256,8 @@ class builder   {
                                     $AjaxNames[]= "AssessorDesignation";
                                     $AjaxNames[]= "AssessorEmail";
                                     $AjaxNames[]= "AssessorNumber";
+
+                                  }//Close if statement for MNHV1 Assessor Block
 
 
 
