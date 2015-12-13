@@ -97,6 +97,6 @@ return [
          * Source-maps files shouldn't be published on a public web server.
          * So you can disable them for your production environment.
          */
-        'sourceMaps' => true,
+        'sourceMaps' => false,
 
 ];
