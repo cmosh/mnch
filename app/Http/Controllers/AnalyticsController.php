@@ -269,7 +269,7 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 	}
 
 
-	public function blah()
+	public function blah()//TODO
 	{
 
 $f = CHSubSurvey::all();
@@ -278,17 +278,12 @@ $f = CHSubSurvey::all();
 	 $f->load(['x' => function($query) 
 {
 	
-    $query->where('ColumnSetID', 'Like', 'CHV2SEC7BLK2%COL02');
+    $query->where('ColumnSetID', 'Like', 'CHV2SEC3BLK%');
 }]);
  $f->load('z');
 					
 return $f;
-
-
-	
-
-
-		return view('analytics.test');
+return view('analytics.test');
 	
 
 }
