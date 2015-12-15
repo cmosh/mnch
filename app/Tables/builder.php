@@ -16,8 +16,7 @@ class builder   {
            $Participant=  new Participantsview;
          //  $TheAssessor->Name = '';
         }
-  $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
-
+  
   $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
 
 
@@ -25,15 +24,18 @@ class builder   {
         $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
         
 
+          $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
+    
+     $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
+
+
 
         $TheAssessor = Assessor::where('AssID', '=', $AssID)->first();
         if ($TheAssessor == null){
            $TheAssessor=  new Assessor;
          //  $TheAssessor->Name = '';
         }
-         $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
-    
-     
+       
         
         $loc = substr($TheAsses->Survey, 0, 2);
         
