@@ -1,0 +1,69 @@
+{
+  "assets": {
+    "jquery.min.map": "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map",
+    "jquery2.min.map": "jquery2.min-83282c7919b18749e2ea00012244b125.map",
+    "map.svg": "map-1cdc1f9f6c53f598e5ee3749d4890129.svg",
+    "app.js": "app-1a79b2103906ae4495244f7683eac416.js",
+    "landing.js": "landing-d1cc6250d1adb8af269bc03aa8144251.js",
+    "template.js": "template-cca199f24ff38007249e191440dece43.js",
+    "app.css": "app-6930abbe38d474e4e1dd77b51fd8d1af.css",
+    "landing.css": "landing-2dc46d87085c111dc80826fe42ac8282.css",
+    "template.css": "template-6930abbe38d474e4e1dd77b51fd8d1af.css"
+  },
+  "files": {
+    "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map": {
+      "logical_path": "jquery.min.map",
+      "mtime": "2015-12-13T20:58:08.000Z",
+      "size": 142045,
+      "digest": "4d3bf1a65feb6e673f6ea4106b775077"
+    },
+    "jquery2.min-83282c7919b18749e2ea00012244b125.map": {
+      "logical_path": "jquery2.min.map",
+      "mtime": "2015-12-13T20:58:08.000Z",
+      "size": 127588,
+      "digest": "83282c7919b18749e2ea00012244b125"
+    },
+    "map-1cdc1f9f6c53f598e5ee3749d4890129.svg": {
+      "logical_path": "map.svg",
+      "mtime": "2015-11-30T18:55:27.000Z",
+      "size": 611889,
+      "digest": "1cdc1f9f6c53f598e5ee3749d4890129"
+    },
+    "app-1a79b2103906ae4495244f7683eac416.js": {
+      "logical_path": "app.js",
+      "mtime": "2015-12-13T21:30:00.000Z",
+      "size": 1183076,
+      "digest": "1a79b2103906ae4495244f7683eac416"
+    },
+    "landing-d1cc6250d1adb8af269bc03aa8144251.js": {
+      "logical_path": "landing.js",
+      "mtime": "2015-11-30T18:55:27.000Z",
+      "size": 224246,
+      "digest": "d1cc6250d1adb8af269bc03aa8144251"
+    },
+    "template-cca199f24ff38007249e191440dece43.js": {
+      "logical_path": "template.js",
+      "mtime": "2015-11-30T18:55:27.000Z",
+      "size": 696769,
+      "digest": "cca199f24ff38007249e191440dece43"
+    },
+    "app-6930abbe38d474e4e1dd77b51fd8d1af.css": {
+      "logical_path": "app.css",
+      "mtime": "2015-11-30T18:55:26.000Z",
+      "size": 288252,
+      "digest": "6930abbe38d474e4e1dd77b51fd8d1af"
+    },
+    "landing-2dc46d87085c111dc80826fe42ac8282.css": {
+      "logical_path": "landing.css",
+      "mtime": "2015-11-30T18:55:26.000Z",
+      "size": 208080,
+      "digest": "2dc46d87085c111dc80826fe42ac8282"
+    },
+    "template-6930abbe38d474e4e1dd77b51fd8d1af.css": {
+      "logical_path": "template.css",
+      "mtime": "2015-11-30T18:55:26.000Z",
+      "size": 288252,
+      "digest": "6930abbe38d474e4e1dd77b51fd8d1af"
+    }
+  }
+}
