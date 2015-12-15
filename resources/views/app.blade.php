@@ -52,7 +52,9 @@
              @else
               <li><a  class="active" href="/">Child Health Survey</a></li>
              <li><a href="/mnh">Maternal and Neonatal Health Survey</a></li>
+             <li><a href="/rawdata">Raw Data</a></li>
              @endif
+              
               </ul>
          
             </div>
