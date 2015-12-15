@@ -14,7 +14,7 @@ use App\Tables\analyse;
 use App\Tables\Map;
 use App\Tables\SurveysDone;
 use Maatwebsite\Excel\Excel;
-
+use App\Tables\Block;
 use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
  use App\Http\Controllers\ArrayRedis as Rache;
@@ -272,21 +272,120 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 	public function blah()//TODO
 	{
 
-$f = CHSubSurvey::all();
+// $f = CHSubSurvey::all();
 	
 
-	 $f->load(['x' => function($query) 
-{
+// 	 $f->load(['x' => function($query) 
+// {
 	
-    $query->where('ColumnSetID', 'Like', 'CHV2SEC3BLK%');
-}]);
- $f->load('z');
+//     $query->where('ColumnSetID', 'Like', 'CHV2SEC3BLK%');
+// }]);
+//  $f->load('z');
 					
-return $f;
-return view('analytics.test');
+// return $f;
+// return view('analytics.test');
 	
+$array=self::u5Register(3);
+return $array;
 
 }
+
+
+
+protected static function u5Register($Year1){
+		//$Year1 = 3;
+
+		
+
+
+
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name'));
+    $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
+		for ($i=2; $i < 9; $i++) {
+
+			$index =  sprintf('%02d',$i);
+			//echo ("world","Peter","Hello world!");
+
+			$Label1 =  str_replace('Treatment with ','',(self::getLabel(0,'CHV2SEC3BLK99DRW'.$index.'COL01')));
+			$Label = $Label1;
+			if ( strstr($Label1, '(Example', true)) $Label = strstr($Label1, '(Example', true);
+
+			$Row = self::u5RegisterRow('RW'.$index,$Year1);
+				
+			$array [] = array (
+			  $Label, 
+			 	$Row[$Year1],
+			 	$Row[$Year1-1],
+			 	$Row[$Year1-2]);
+		
+
+		}
+
+
+		$array[4][0] = 'Zinc';
+		//echo collect($array);
+		return $array;
+
+
+	}
+
+	protected static function u5RegisterRow($Row,$Year1){
+		
+		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'));
+		
+		$array = array ();
+		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
+
+			$array [$i] = self::u5RegisterVal($Years[$i].$Row);
+		//	echo $Years[$i].' '.$i.'<br>';
+
+		}
+
+		return($array);
+	}
+	protected static function u5RegisterVal($cl){
+		$f = CHSubSurvey::all();
+
+		//print_r ($Years);
+		$recset = $f;
+
+		$Data = $recset->load(['x' => function($query) use ($cl)
+{		
+	 
+    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
+}]);
+		
+		//echo $Data;
+		
+
+
+
+
+
+		
+
+
+	//echo '<br>'.$total.'<br>';
+	return $Data;
+		
+	}
+
+
+	protected static function getLabel($trim,$col){
+
+// trim($binary, "\x00..\x1F");
+	$Label = substr( Column_set::where('column_setID','=',$col)->with('field_set.field')->get()[0]->field_set->field->Label,$trim);
+	
+	return $Label;
+
+
+}
+	
+
+
+	
+
+
 
 	
 	
