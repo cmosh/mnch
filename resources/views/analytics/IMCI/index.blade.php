@@ -88,7 +88,7 @@
   
 
  
-<!--   //<script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
  <script type="text/javascript">
 
@@ -111,9 +111,9 @@
 
  
  
-/*
+
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
-google.setOnLoadCallback(drawChart);*/
+google.setOnLoadCallback(drawChart);
 
   $('#County').change(drawChart);
    $('#Term').change(drawChart);
@@ -122,7 +122,7 @@ function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
      x = window.mapdata;
 
-  @include('analytics/mapdata')
+  @include('analytics/imci/mapdata')
 
    document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>/'+TotalTotal;
    x2 = 100*(TotalSubmitt/TotalTotal);
@@ -154,7 +154,7 @@ function getmapdata() {
   
     @include('analytics/imci/mapdata')
     
-    alert(data);
+  //  alert(data);
       
 
       }
@@ -194,7 +194,7 @@ function drawChart() {
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
    x = window.mapdata;
 
-  @include('analytics/mapdata')
+  @include('analytics/imci/mapdata')
 
 
 	//include js

@@ -160,7 +160,7 @@ public function imciajax(){
 
 
  		if ($county == 'All') {      	
-      	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($Term){
+      	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function(){
       					return 	IMCISubSurvey::all();
       	});
       }
