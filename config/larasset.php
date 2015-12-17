@@ -41,7 +41,7 @@ return [
          * The port to serve the asset files on.
          * Useful for your development environment when you run the Assets server
          */
-        'port' => 80,
+        'port' => 3000,
 
         /**
          * Search Paths
@@ -86,7 +86,7 @@ return [
             'landing.js',
             'template.js',
             'template.css',
-            'survey.css'
+            'survey_t.js'
             // 'admin.js',
             // 'admin.css',
         ],

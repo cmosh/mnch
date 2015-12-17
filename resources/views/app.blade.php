@@ -35,24 +35,11 @@
               <ul class="nav navbar-nav">
                
                 <!--  <li><a href="/home">Dashboard</a></li> -->
-                 @if(isset($loc))
-
-                
-             <li><a  @if(substr($loc,0,2)=='Ch')
-             class="active"
-             @endif
-              href="/">Child Health Survey</a></li>
-
-             <li><a  @if(substr($loc,0,2)=='Ma')
-             class="active"
-             @endif 
-             href="/mnh">Maternal and Neonatal Health Survey</a></li>
-             
-
-             @else
-              <li><a  class="active" href="/">Child Health Survey</a></li>
+                 
+              <li><a  href="/">Child Health Survey</a></li>
              <li><a href="/mnh">Maternal and Neonatal Health Survey</a></li>
-             @endif
+             <li><a href="/imci">IMCI Survey</a></li>
+          
               </ul>
          
             </div>
@@ -68,7 +55,7 @@
             <li><a href="/auth/login">Login</a></li>
             <li><a href="/self/register">Register</a></li>
           @else
-           <li><a href="/home">Home</a></li>
+           <li><a href="/home">My Dashboard</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">

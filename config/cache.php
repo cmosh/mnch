@@ -1,5 +1,7 @@
 <?php
 
+   
+
 return [
 
     /*
@@ -12,6 +14,8 @@ return [
     | not explicitly specified when executing a given caching function.
     |
     */
+
+
 
     'default' => env('CACHE_DRIVER', 'file'),
 
@@ -84,6 +88,6 @@ return [
     |
     */
 
-    'prefix' => 'laravel',
+    'prefix' => env('CACHE_PREFIX', 'laravel'),
 
 ];

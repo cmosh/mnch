@@ -66,8 +66,7 @@
 window.setInterval(sonline,120000);
 
 function sonline() {
-  var data = {
-                     
+  var data = {                    
              'action':'set',        
 
             'AssID':'{{$AssID}}',
@@ -136,10 +135,6 @@ $('.asave').change(function () {
     }, 20000);
 });
 
-
-</script>
-
-<script type="text/javascript">
 
 $(document).ready(function(){
      $('.send-btn').click(function(e){ 
@@ -215,12 +210,6 @@ $(document).ready(function(){
   return false;
 });
          
-</script>
-
- {!!javascript_include_tag('survey')!!}
-
-<script type="text/javascript">
-
 
 $('#thesubmit').click(function(){
   $(this).attr('w','surrender');
@@ -320,150 +309,14 @@ $("#demo-form").submit(function(e) {
 
             }); 
 
-         
-</script>
-<script type="text/javascript">
-     $(function () {
-        var Facility = '<div class="box-header"><h3 class="box-title">Facility Information</h3></div><table class="table"><thead><tr><td colspan="1" style="vertical-align:middle"><b>Facility Name</b></td><td colspan="1" style="vertical-align:middle"><b>Facility Type</b></td><td colspan="1" style="vertical-align:middle"><b>Facility Tier</b> </td></tr></thead><tbody><tr><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->FacilityName}}" class="form-control" id="InputFacilityName" disabled="" type="text"></td><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->Type}}" class="form-control" id="InputFacilityType"  disabled="" type="text"> </td><td colspan="1" style="vertical-align:middle"> <input  value="{{$TheFacility->Tier}}" class="form-control" id="InputFacilityTier"  disabled="" type="text"></td></tr></tbody><thead><tr><td colspan="1" style="vertical-align:middle"><b>Owned By</b></td><td colspan="1" style="vertical-align:middle"><b>County</b> </td><td colspan="1" style="vertical-align:middle"><b>District/Sub-County</b> </td> </tr> </thead> <tbody><tr><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->Owner}}" class="form-control" id="InputFacilityOwner"  disabled="" type="text"></td>  <td colspan="1" style="vertical-align:middle"><input value="{{$TheFacility->County}}" class="form-control" id="InputFacilityCounty" placeholder="Enter county" disabled="" type="text"> </td><td colspan="1" style="vertical-align:middle">  <input  value="{{$TheFacility->District}}" class="form-control" id="InputFacilitySubCounty" placeholder="Enter district/sub-county" disabled="" type="text"> </td> </tr></tbody></table>';
-        $('#thefacility').html(Facility);
-         //Initialize Select2 Elements
-        $(".select2").select2();
-        //Money Euro
-        $("[data-mask]").inputmask();
-         });
-</script>
 
-<script type="text/javascript">
-   function executeAutomaticVisibility(name) {
-    $("[name="+name+"]:checked").each(function() {
-        $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").show();
-        
-    $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".themultiple").attr('data-parsley-mincheck','1');
-
-     $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").attr('required','');
-          
-             
-
-  
-});   
-   
-    $("[name="+name+"]:not(:checked)").each(function() {
-       $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").hide();
-          $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".themultiple").removeAttr('data-parsley-mincheck');
-      $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").removeAttr('required');
-            $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".rmselect").removeAttr('selected');
-      $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").removeAttr('checked');
-        $("[automaticallyVisibleIfIdChecked^=" + this.id+"]").find(".thenormal").val('');
-         
-
-    });
-}
-
-$(document).ready( function() {
-    triggers = $("[automaticallyVisibleIfIdChecked]")
-        .map(function(){ return $("#" + $(this).attr("automaticallyVisibleIfIdChecked")).get() })
-    $.unique(triggers);
-    triggers.each( function() {
-        executeAutomaticVisibility(this.name);
-        $(this).change( function(){ executeAutomaticVisibility(this.name); } );
-    });
-});
-</script>
-
-<script type="text/javascript">
-   function executecoolness(name) {
-    $("[name="+name+"]:checked").each(function() {
-        
-        $("[coolradio=" + this.id+"]").show();
-             $("[coolradio=" + this.id+"]").attr('required','');
-
-
-
-
-
-
-            });
-    $("[name="+name+"]:not(:checked)").each(function() {
-        
-        $("[coolradio=" + this.id+"]").hide();
-        $("[coolradio=" + this.id+"]").removeAttr('required');
-            $("[coolradio=" + this.id+"]").val('');
-          
-    });
-}
-
-$(document).ready( function() {
-    triggers = $("[coolradio]")
-        .map(function(){ return $("#" + $(this).attr("coolradio")).get() })
-    $.unique(triggers);
-    triggers.each( function() {
-        executecoolness(this.name);
-        $(this).change( function(){ executecoolness(this.name); } );
-    });
-});
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-        $('#demo-form').parsley({
-            successClass: 'success',
-            errorClass: 'error',
-            errors: {
-                classHandler: function(el) {
-                    return $(el).closest('.control-group');
-                },
-                errorsWrapper: '<span class=\"help-inline\"></span>',
-                errorElem: '<span></span>'
-            }
-        });
-    });
-
-
-   
-
-
-  
-
-$( ".coolhidden" ).change(function() {
-
-  var replaceval =  $(this).attr('coolstore');
-
-  $('#'+replaceval).val(this.value);
-
- 
-});
-
-
- 
-
-$( ".coolmultiple" ).change(function() {
-  var str = this.name;
-  var str2 =  str.slice(0,-2)
-  var thehidden = '#' +str2 + 'other';
-//arrValues.indexOf('Sam') > -1
-  
-  var size = "";
-
-  $("#"+str2+ " option:selected").each(function () {
-                size += $(this).val() + " ";
-            });
-
-
-
-  if (size.indexOf('-1') > -1) {
-  $(thehidden).show();
-  $(thehidden).attr('required','');
-}else{
-   $(thehidden).hide();
-   $(thehidden).removeAttr('required');
-}
-   
-   
-
-});
-
-
+   var Facility = '<div class="box-header"><h3 class="box-title">Facility Information</h3></div><table class="table"><thead><tr><td colspan="1" style="vertical-align:middle"><b>Facility Name</b></td><td colspan="1" style="vertical-align:middle"><b>Facility Type</b></td><td colspan="1" style="vertical-align:middle"><b>Facility Tier</b> </td></tr></thead><tbody><tr><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->FacilityName}}" class="form-control" id="InputFacilityName" disabled="" type="text"></td><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->Type}}" class="form-control" id="InputFacilityType"  disabled="" type="text"> </td><td colspan="1" style="vertical-align:middle"> <input  value="{{$TheFacility->Tier}}" class="form-control" id="InputFacilityTier"  disabled="" type="text"></td></tr></tbody><thead><tr><td colspan="1" style="vertical-align:middle"><b>Owned By</b></td><td colspan="1" style="vertical-align:middle"><b>County</b> </td><td colspan="1" style="vertical-align:middle"><b>District/Sub-County</b> </td> </tr> </thead> <tbody><tr><td colspan="1" style="vertical-align:middle"> <input value="{{$TheFacility->Owner}}" class="form-control" id="InputFacilityOwner"  disabled="" type="text"></td>  <td colspan="1" style="vertical-align:middle"><input value="{{$TheFacility->County}}" class="form-control" id="InputFacilityCounty" placeholder="Enter county" disabled="" type="text"> </td><td colspan="1" style="vertical-align:middle">  <input  value="{{$TheFacility->District}}" class="form-control" id="InputFacilitySubCounty" placeholder="Enter district/sub-county" disabled="" type="text"> </td> </tr></tbody></table>';
+    $('#thefacility').html(Facility);
+    $(".select2").select2();
+    $("[data-mask]").inputmask();
 
 </script>
+
+{!!javascript_include_tag('survey')!!}
 
 @endsection 

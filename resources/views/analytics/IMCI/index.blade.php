@@ -1,7 +1,7 @@
 @extends('app')
 @section('header')
   <h1  align="middle">
-                 Maternal and Neonatal Health Survey   
+                 Integrated Management of Childhood Illness
               <small>(Analysis Results)</small>
             </h1>
             <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
@@ -23,114 +23,58 @@
 
 
    </div>
-   @include('analytics/county')
+   @include('analytics/imci/county')
 
  <div class="col-md-8">
 
   <!-- small box -->
                <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount->X}} healthworkers in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
               
               </div>
-                         @include('analytics/popbox')  
+                         @include('analytics/imci/popbox')  
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>FACILITY INFORMATION</b></h2></center>
+                        <center><h2><b>FIRST TITLE</b></h2></center>
                         <br>
                         </div>
                         </div>
 </div>
 
-         @include('analytics/MNH/html/ownership')
-
-
-         @include('analytics/MNH/html/types')
+     <!-- two/one graphs here -->
            
 
 
      
             <div class="col-md-12">
-                   @include('analytics/MNH/html/dservice')
-
-                    @include('analytics/MNH/html/dserviceconduct')
-
-
-        @include('analytics/MNH/html/hman')
-
-        @include('analytics/MNH/html/skillbirth')
-        @include('analytics/MNH/html/bedcapacity')
-          @include('analytics/MNH/html/hours24')
-
-
+                  
+            <!-- the rest  in section 1-->
             </div>
 
+<!-- the rest -->
 
-
-        <div class="col-md-12">
+    
+   <div class="col-md-12">
                         
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>FACILITY DATA AND MATERNAL AND NEONATAL SERVICE DELIVERY</b></h2></center>
+                        <center><h2><b>CERTIFICATION</b></h2></center>
                         <br>
                         </div>
                         </div>
 </div>
   
- @include('analytics/MNH/html/bemonc')
-  @include('analytics/MNH/html/BemoncChallenge')
-@include('analytics/MNH/html/cemonc')
- @include('analytics/MNH/html/MainBlood')
- @include('analytics/MNH/html/ReasonBlood')
- @include('analytics/MNH/html/Reasoncs')
- @include('analytics/MNH/html/HIVTest')
-  @include('analytics/MNH/html/newborn')
-  @include('analytics/MNH/html/devpep')
-   @include('analytics/MNH/html/kangaroo')
- 
-   
+ @include('analytics/IMCI/html/Certification')
 
 
 
-
-<div class="col-md-12">
-                        
-                        <div class="box-info" >                     
-                     <div class="box-body">
-                         <br>                     
-                        <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY </b></h2></center>
-                        <br>
-                        </div>
-                        </div>
-</div>
-
-          @include('analytics/MNH/html/gjavailability')
-
-
-           @include('analytics/MNH/html/tavailability')
-
-   @include('analytics/MNH/html/jjavailability') 
 
      
-<div class="col-md-12">
-                        
-                        <div class="box-info" >                     
-                     <div class="box-body">
-                         <br>                     
-                        <center><h2><b>EQUIPMENT AVAILABILITY AND FUNCTIONALITY</b></h2></center>
-                        <br>
-                        </div>
-                        </div>
-</div>
-
-      @include('analytics/MNH/html/EquipAvail')
-    @include('analytics/MNH/html/testing')
-  @include('analytics/MNH/html/devkit')
-
 
 
             
@@ -144,7 +88,7 @@
   
 
  
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<!--   //<script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
   
  <script type="text/javascript">
 
@@ -167,9 +111,9 @@
 
  
  
-
+/*
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
-google.setOnLoadCallback(drawChart);
+google.setOnLoadCallback(drawChart);*/
 
   $('#County').change(drawChart);
    $('#Term').change(drawChart);
@@ -193,7 +137,7 @@ function getmapdata() {
     var data = {
          
          '_token': $('input[name=_token]').val(),
-         'survey':'mnh'
+         'survey':'imci'
        
     };
  
@@ -208,8 +152,9 @@ function getmapdata() {
    var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
   
-    @include('analytics/mapdata')
-  
+    @include('analytics/imci/mapdata')
+    
+    alert(data);
       
 
       }
@@ -235,7 +180,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/mnhajax',
+      url: '/analytics/imciajax',
       type: "post",
        data: data,
            success: function(data){
@@ -253,33 +198,8 @@ function drawChart() {
 
 
 	//include js
-    
-	     @include('analytics/MNH/js/gjavailability')
-       @include('analytics/MNH/js/tavailability')
-       @include('analytics/MNH/js/jjavailability')
-       @include('analytics/MNH/js/dservice')
-        @include('analytics/MNH/js/hman')
-       @include('analytics/MNH/js/ownership')
-       @include('analytics/MNH/js/types')
-   @include('analytics/MNH/js/bemonc')
-     @include('analytics/MNH/js/cemonc')
-     @include('analytics/MNH/js/newborn')
-     @include('analytics/MNH/js/HIVTest')
-     @include('analytics/MNH/js/kangaroo')
-     @include('analytics/MNH/js/devpep')
-         @include('analytics/MNH/js/dserviceconduct')
-         @include('analytics/MNH/js/skillbirth')
-           @include('analytics/MNH/js/bedcapacity')
-          @include('analytics/MNH/js/hours24')
-            @include('analytics/MNH/js/BemoncChallenge')
-             @include('analytics/MNH/js/MainBlood')
-             @include('analytics/MNH/js/ReasonBlood')
-              @include('analytics/MNH/js/Reasoncs')
-
-      @include('analytics/MNH/js/EquipAvail')
-    @include('analytics/MNH/js/testing')
-  @include('analytics/MNH/js/devkit')
-
+     @include('analytics/IMCI/js/Certification')
+	    
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
 

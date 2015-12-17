@@ -66,13 +66,14 @@
             <li class="header">Options</li>
             <!-- Optionally, you can add icons to the links -->
           @if($location == 'Admin')
-           <li class=""><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+           <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+           <li class=""><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
 
 
           @else
           @if ($location == 'Home' ) 
-
-           <li class="active"><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+           <li class="active"><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
             <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
 
             <li><a href="/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
@@ -95,21 +96,21 @@
 
            
            @elseif($location == 'ass' )
-
-             <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
            <!--  <li class="active" ><a href="#"><i class="fa fa-link"></i> <span>Assessments</span></a></li> -->
 
            @elseif ($location ==  'umanage' ) 
 
 
-
-             <li ><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+            <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li ><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
             <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
 
             <li><a href="/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
-             <li><a href="/Autosaved/{{Auth::user()->id}}"><i class="fa fa-link"></i> <span>Autosaved Surveys</span></a></li>
+             
     
 
 
@@ -130,14 +131,14 @@
            @elseif ($location ==  'preview')
 
 
-
-             <li ><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
+            <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li ><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
             <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
 
             <li><a href="/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
-             <li><a href="/Autosaved/{{Auth::user()->id}}"><i class="fa fa-link"></i> <span>Autosaved Surveys</span></a></li>
+             
     
 
 
@@ -154,6 +155,34 @@
 
 
 
+                @elseif ($location ==  'pass')
+
+
+            <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li ><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+            <!-- <li><a href="Profile"><i class="fa fa-link"></i> <span>Update Information</span></a></li> -->
+
+            <li><a href="/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
+            <li><a href="/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
+            <li><a href="/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
+             
+    
+
+
+               @if( Auth::user()->role == 2)
+                <li class=""><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+
+               @endif
+
+               @if( Auth::user()->role >= 3)
+                <li ><a href="/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
+                <li class=""><a href="/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+
+               @endif
+
+
+ <li  class="active"><a href="/usermanagement/changepass"><i class="fa fa-link"></i> <span>Change Password</span></a></li>
+
 
 
 
@@ -165,10 +194,10 @@
 
            @else 
 
+            <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
+             <li><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
 
-             <li><a href="/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
-
-              <li class="treeview Active">
+              <li class="treeview active">
               
                             <a href="#">
                                
@@ -194,8 +223,9 @@
            @endif
            
 
-
+@if($location !=  'pass')
            <li><a href="/usermanagement/changepass"><i class="fa fa-link"></i> <span>Change Password</span></a></li>
+           @endif
             <li><a href="/auth/logout"><i class="fa fa-link"></i> <span>Log Out</span></a></li>
 
           </ul><!-- /.sidebar-menu -->

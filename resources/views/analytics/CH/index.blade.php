@@ -26,7 +26,7 @@
 
 
    </div>
-   @include('analytics/CH/html/county')
+   @include('analytics/county')
 
  <div class="col-md-8">
 
@@ -241,8 +241,8 @@ function getmapdata() {
  
     var data = {
          
-         '_token': $('input[name=_token]').val()
-       
+         '_token': $('input[name=_token]').val(),
+          'survey': 'ch'
     };
  
    $.ajax({

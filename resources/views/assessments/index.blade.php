@@ -62,9 +62,10 @@
                 </div><!-- /.box-header -->
                 <!-- form start -->
                
-                <div class="form-horizontal">
+             
 
                   <div class="box-body">
+                     <div class="form-horizontal">
                   <?php $loc = substr ($Survey->surveyID, 0,2) ?>
                 @if($loc=='CH' or $loc=='MN')
                     <div class="form-group">
@@ -135,13 +136,12 @@
                     </div>
                     <p>Click Next to select Health Workers</p>
 @endif
-                    <div>
-                    
-</div>
+                   
 
 
                                        
                   </div><!-- /.box-body -->
+                  
                   <div class="box-footer">
                    
                     <button  id="some_id" class="btn btn-danger form-control">Begin</button>
@@ -155,16 +155,17 @@
               
 
                <div class="col-md-6"  style="height: 100%;">
+
               <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">View Previous Assessments</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <div style="min-height: 100%;" class="form-horizontal">
+               
    
 
                   <div class="box-body">
-
+                     <div style="min-height: 100%;" class="form-horizontal">
                   @if($loc == 'CH' or $loc == 'MN')
                     <div class="form-group">
                       <label for="County2" class="col-sm-2 control-label">Select County</label>
@@ -194,6 +195,7 @@
                       </div>
                     </div>
                   <div class="form-group">
+
                       <label for="Term" class="col-sm-2 control-label">Term</label>
                       <div class="col-sm-10">
                        <select class="form-control select2 " style="width: 100%;" name="Term" id="Term_2"> 
@@ -203,6 +205,7 @@
                          <option value ="Endterm" id ="Term1" >Endterm</option>
                        </select>
                      
+                    
                       </div>
                    @else
                    <div class="form-group">
@@ -253,7 +256,6 @@
 </div>
 
 
-</div>
 
   @endsection
 
