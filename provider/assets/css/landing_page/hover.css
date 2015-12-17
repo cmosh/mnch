@@ -1,7 +1,7 @@
 /* HOVER STYLES */
 div#pop-up {
   display: none;
-
+ position: absolute;
   width: 100%;
   padding: 10px;
   background: #FFF;
@@ -10,7 +10,7 @@ div#pop-up {
   font-size: 90%;
 }
 
-.popbox {
+/*.popbox {
 	display: none;
 	
 	
@@ -33,4 +33,4 @@ div#pop-up {
 	width: 100%;
 	margin: -10px 0px 8px -10px;
 	padding: 5px 10px;
-}
+}*/
