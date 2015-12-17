@@ -35,7 +35,7 @@
                 </div>
               
               </div>
-                         @include('analytics/IMCI/popbox')  
+                        
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
@@ -152,7 +152,7 @@ function getmapdata() {
    var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
   
-    @include('analytics/100/mapdata')
+    @include('analytics/IMCI/mapdata')
     
   //  alert(data);
       
@@ -194,7 +194,7 @@ function drawChart() {
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
    x = window.mapdata;
 
-  @include('analytics/100/mapdata')
+  @include('analytics/IMCI/mapdata')
 
 
 	//include js
