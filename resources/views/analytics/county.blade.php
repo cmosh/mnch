@@ -41,9 +41,9 @@
                        </select></div>
 
                        
-                       @include('analytics/popbox') 
+                     
 
-      <object  width="100%" id="thesvg" data= "http://41.89.6.233:8000/assets/map.svg" >
+      <object  width="100%" id="thesvg" data= "/assests/map.svg" >
                  </object>
 
 
