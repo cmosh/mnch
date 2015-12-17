@@ -16,6 +16,7 @@ class builder   {
            $Participant=  new Participantsview;
          //  $TheAssessor->Name = '';
         }
+  $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
   $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
 
   $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
@@ -31,7 +32,7 @@ class builder   {
            $TheAssessor=  new Assessor;
          //  $TheAssessor->Name = '';
         }
-         $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
+       
     
      
         

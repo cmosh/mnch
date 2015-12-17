@@ -16,20 +16,23 @@ class ArrayRedis extends Controller {
 
   /* Functions for redis operations starts here   */ 
 
+
+
 public static function remember($key,$minutes,$closure){
 
 
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-		if($redis->exists('laravel:'.$key)){
-			$result = ($redis->get('laravel:'.$key));
+		if($redis->exists($prefix.$key)){
+			$result = ($redis->get($prefix.$key));
 		}else{
 		
       		$result = json_encode($closure());
 
-      		$redis->set('laravel:'.$key, $result,$minutes*60);
+      		$redis->set($prefix.$key, $result,$minutes*60);
       		
-      		$result = ($redis->get('laravel:'.$key));
+      		$result = ($redis->get($prefix.$key));
 
       	}
       	
@@ -43,18 +46,18 @@ public static function remember($key,$minutes,$closure){
 
 	public static function forever($key,$closure){
 
-
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-		if($redis->exists('laravel:'.$key)){
-			$result = ($redis->get('laravel:'.$key));
+		if($redis->exists($prefix.$key)){
+			$result = ($redis->get($prefix.$key));
 		}else{
 		
       		$result = json_encode($closure());
 
-      		$redis->setnx('laravel:'.$key, $result);
+      		$redis->setnx($prefix.$key, $result);
       		
-      		$result = ($redis->get('laravel:'.$key));
+      		$result = ($redis->get($prefix.$key));
 
       	}
       	
@@ -67,7 +70,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function foreverreplacing($key,$closure){
 
-
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
 	
@@ -75,11 +78,11 @@ public static function remember($key,$minutes,$closure){
       		$result = json_encode($closure());
 
       		
-      		$redis->delete('laravel:'.$key);
+      		$redis->delete($prefix.$key);
 
-      		$redis->setnx('laravel:'.$key, $result);
+      		$redis->setnx($prefix.$key, $result);
       		
-      		$result = ($redis->get('laravel:'.$key));
+      		$result = ($redis->get($prefix.$key));
 
       	
       	
@@ -92,19 +95,18 @@ public static function remember($key,$minutes,$closure){
 
 	public static function foreverjson($key,$closure){
 
-
-
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-		if($redis->exists('laravel:'.$key)){
-			$result2 = ($redis->get('laravel:'.$key));
+		if($redis->exists($prefix.$key)){
+			$result2 = ($redis->get($prefix.$key));
 		}else{
 		
       		$result = json_encode($closure());
 
-      		$redis->setnx('laravel:'.$key, $result);
+      		$redis->setnx($prefix.$key, $result);
       		
-      		$result2 = ($redis->get('laravel:'.$key));
+      		$result2 = ($redis->get($prefix.$key));
 
       	}
       	
@@ -117,19 +119,18 @@ public static function remember($key,$minutes,$closure){
 
 	public static function forevercollection($key,$closure){
 
-
-
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-		if($redis->exists('laravel:'.$key)){
-			$result2 = ($redis->get('laravel:'.$key));
+		if($redis->exists($prefix.$key)){
+			$result2 = ($redis->get($prefix.$key));
 		}else{
 		
       		$result = json_encode($closure());
 
-      		$redis->setnx('laravel:'.$key, $result);
+      		$redis->setnx($prefix.$key, $result);
       		
-      		$result2 = ($redis->get('laravel:'.$key));
+      		$result2 = ($redis->get($prefix.$key));
 
       	}
       	
@@ -143,22 +144,22 @@ public static function remember($key,$minutes,$closure){
 
 	public static function foreveryoung($key,$closure){
 
-
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-		if($redis->exists('laravel:'.$key)){
+		if($redis->exists($prefix.$key)){
 
-			$redis->setTimeout('laravel:'.$key, 300);
-			$result = ($redis->get('laravel:'.$key));
+			$redis->setTimeout($prefix.$key, 300);
+			$result = ($redis->get($prefix.$key));
 
 
 		}else{
 		
       		$result = ($closure());
 
-      		$redis->set('laravel:'.$key, $result,300);
+      		$redis->set($prefix.$key, $result,300);
       		
-      		$result = ($redis->get('laravel:'.$key));
+      		$result = ($redis->get($prefix.$key));
 
       	}      	
       
@@ -171,20 +172,23 @@ public static function remember($key,$minutes,$closure){
 
 	public static function areyouyoung($key){
 
-
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-		return $redis->exists('laravel:'.$key);
+		return $redis->exists($prefix.$key);
    
 	}
 
 
 	public static function murdersession($key){
+
+
+            $prefix = env('CACHE_PREFIX', 'laravel').':';
 		$redis = LRedis::connection();
 
-			if($redis->exists('laravel:'.$key)){
+			if($redis->exists($prefix.$key)){
 
-			$redis->setTimeout('laravel:'.$key,10);
+			$redis->setTimeout($prefix.$key,10);
 
 	}
 

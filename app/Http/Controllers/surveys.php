@@ -339,7 +339,7 @@ print_r($fruit);die;
          $location = substr($sv, 0, 2);
           $color = self::color($location);   
        if( !isset($Assessment->AssessorName) ){ 
-        $Melarray = collect(Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant){
+        $Melarray = collect(Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant,$color){
                                  return builder::buildview($id,'open',$Participant,$color);
                             }));}
        else $Melarray = builder::buildview($id, 'edit',$Participant,$color);      

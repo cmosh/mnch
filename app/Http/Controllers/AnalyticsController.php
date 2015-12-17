@@ -6,42 +6,56 @@ use App\Tables\SubmittedCHCount;
 use App\Tables\SubmittedCHCountie;
 use App\Tables\SubmittedMNHCount;
 use App\Tables\SubmittedMNHCountie;
+use App\Tables\SubmittedIMCICount;
+use App\Tables\SubmittedIMCICountie;
 use App\Tables\CHSubSurvey;
-
 use App\Tables\Column_set;
 use App\Tables\Survey;
 use App\Tables\analyse;
 use App\Tables\Map;
+use App\Tables\Map_imci;
 use App\Tables\SurveysDone;
 use Maatwebsite\Excel\Excel;
-
+use App\Tables\IMCISubSurvey;
 use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
- use App\Http\Controllers\ArrayRedis as Rache;
+use App\Http\Controllers\ArrayRedis as Rache;
 use Illuminate\Contracts\Foundation\Application As App;
 use Request;
 use Input;
 use Cache;
-
-
 	
 class AnalyticsController extends Controller {
 
+public function maprequest(){
+ if(Request::ajax()) { 
+   $data = Input::all();
+      $survey = $data['survey']; 
 
 
-	public function maprequest(){
- if(Request::ajax()) {  
-   
-$Map = (Cache::remember('MapCH',180,function() {
-return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
+      switch ($survey) {
+      	case 'ch':
+      		$Map = (Cache::remember('MapCH',180,function() {
+			return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
+      	}));
+      		break;      	
+      	case 'mnh':
+      		$Map = (Cache::remember('MapMNH',180,function() {
+			return 	Map::where('Survey','=','Maternal Neonatal Healthcare')->get()->keyBy('Concat')->toArray();
       	}));   
-
-    echo json_encode($Map);
+      		break;
+      	case 'imci':
+      		$Map = (Cache::remember('xMapIMCI',180,function() {
+			return 	Map_imci::where('Survey','=','IMCI')->get()->keyBy('Concat')->toArray();
+      	}));   
+      		break;
+      	default:
+      		
+      		break;
+      } 
+echo json_encode($Map);
 
       die;
-
-
-
 	}
 }
 
@@ -124,6 +138,43 @@ public function mnhajax(){
 
     
     echo json_encode($mnhanalytics);
+
+      die;
+
+
+
+	}
+
+}
+
+
+public function imciajax(){
+
+
+		
+		 if(Request::ajax()) {
+      $data = Input::all();
+      $county = $data['county'];     
+       
+
+
+ 		if ($county == 'All') {      	
+      	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($Term){
+      					return 	IMCISubSurvey::all();
+      	});
+      }
+
+     else  {
+       	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($county){
+      					return 	IMCISubSurvey::where('County','Like',$county)->get();
+      	});     
+       }
+    
+    $IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,$county);	
+
+
+    
+    echo json_encode($IMCIanalytics);
 
       die;
 
@@ -243,7 +294,7 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 		$SubmittedMNHCount = SubmittedMNHCount::first();
 		$SubmittedMNHCounties = SubmittedMNHCountie::get();
 	
-		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
+		$SurveysDone = SurveysDone::where('Name','=','IMCI')->get();
 	
 	
 
@@ -254,6 +305,36 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 			->with('SurveysDone',$SurveysDone);
 
 	}
+
+
+	public function imci()
+	{
+				
+	
+$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
+      					return IMCISubSurvey::all();
+      	});     
+
+
+			$IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,'All','Baseline');
+
+		
+		$SubmittedIMCICount = SubmittedIMCICount::first();
+		$SubmittedIMCICounties = SubmittedIMCICountie::get();
+	
+		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
+	
+	
+
+			return view('analytics.IMCI.index')
+			->with('SubmittedCount',$SubmittedIMCICount)
+			->with('SubmittedCounties',$SubmittedIMCICounties)
+			
+			->with('SurveysDone',$SurveysDone);
+
+	}
+
+
 
 
 

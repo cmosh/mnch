@@ -379,7 +379,7 @@ public function mail()
 public function changepass()
 {
 	$error_message='';
-	return view('usermanagement.change')->with('location','Home')->with('title','Profile')->with('error_message',$error_message);
+	return view('usermanagement.change')->with('location','pass')->with('title','Profile')->with('error_message',$error_message);
 
 
 }

@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::controller('compare', 'Compare');
 Route::controller('rawdata','RawExcelController');
 Route::get('admin/surveys','FormController@index');
@@ -30,9 +31,10 @@ Route::get('/','AnalyticsController@ch');
 Route::post('/map','AnalyticsController@mapRequest');
 Route::post('/analytics/chajax','AnalyticsController@chajax');
 Route::post('/analytics/mnhajax','AnalyticsController@mnhajax');
+Route::post('/analytics/imciajax','AnalyticsController@imciajax');
 Route::post('/analytics/maprequest','AnalyticsController@maprequest');
 Route::get('/mnh','AnalyticsController@mnh');
-
+Route::get('/imci','AnalyticsController@imci');
 
 Route::get('/tester/{key}','AnalyticsController@tester');
 Route::get('/test','AnalyticsController@blah');

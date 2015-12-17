@@ -138,6 +138,27 @@ class analyse extends analysisfunctions {
 
 		return $JsonArray;
 	}
+
+	public static function imcianalytics($data,$county){
+	//Feed in survey
+		global $surveys;		
+		
+		$surveys = $data;
+		
+		$imci = new analyse();
+
+				
+	//Json Making
+
+		$JsonArray = (array(
+			 'Certification' =>$imci->IMCIV1_CERTIFICATION->__invoke($county)			 
+			));
+
+
+
+
+		return $JsonArray;
+	}
 	//public static function 
 
 	}

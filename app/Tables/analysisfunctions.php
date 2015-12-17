@@ -14,6 +14,23 @@ class analysisfunctions extends Controller {
 	
 	 public function __construct() {
 
+
+	 	
+	 		$this->IMCIV1_CERTIFICATION = function($county){ 
+	 	//Tools Availability_2
+
+		$CertificationHeading = array('Certification', 'Yes', 'No','No information provided' );
+		return $CHV2_Tools = Cache::remember('IMCIV1_CERTIFICATION'.$county,180,function() use($CertificationHeading){
+      					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC6BLK7RW',$CertificationHeading,0,1,4,'COL01','COL02','/^/');
+      						
+
+
+      						return $temp;
+
+      	});
+	};
+
+
 	 		$this->CHV2_Tools = function($county){ global $term;
 	 	//Tools Availability_2
 

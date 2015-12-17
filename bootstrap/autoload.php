@@ -33,3 +33,6 @@ if (file_exists($compiledPath))
 {
 	require $compiledPath;
 }
+ /*if (!class_exists('Memcached')) {
+    include ("memcached.php");
+    }*/
