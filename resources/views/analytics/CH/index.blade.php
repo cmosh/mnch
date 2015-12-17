@@ -187,6 +187,8 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   
  <script type="text/javascript">
+
+ $('[title]').qtip();
 window.inside = $('#thesvg').contents();
   
  
