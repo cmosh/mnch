@@ -188,11 +188,12 @@
   
  <script type="text/javascript">
 
- $('[title]').qtip();
+
 window.inside = $('#thesvg').contents();
   
- 
 
+ window.inside.find('[title]').qtip();
+ 
       $(function () {
         getmapdata();
 
