@@ -22,11 +22,11 @@ function isset ()
   return true;
 }
 
-if(isset(x['Midterm'+county]['Submitted']))var MidtermSubmitt = x['Midterm'+county]['Submitted']; else var MidtermSubmitt = 0;
-if(isset(x['Endterm'+county]['Submitted']))var EndtermSubmitt = x['Endterm'+county]['Submitted']; else var EndtermSubmitt = 0;
-if(isset(x['Baseline'+county]['Submitted']))var BaselineSubmitt = x['Baseline'+county]['Submitted'];  else var BaselineSubmitt =0;
-var TotalSubmitt = MidtermSubmitt + EndtermSubmitt +BaselineSubmitt; 
-var TotalTotal = x['Midterm'+county]['Total Facilities']; 
+if(isset(x['Midterm'+county]['Submitted']))var MidtermSubmitt = parseInt(x['Midterm'+county]['Submitted']); else var MidtermSubmitt = 0;
+if(isset(x['Endterm'+county]['Submitted']))var EndtermSubmitt = parseInt(x['Endterm'+county]['Submitted']); else var EndtermSubmitt = 0;
+if(isset(x['Baseline'+county]['Submitted']))var BaselineSubmitt = parseInt(x['Baseline'+county]['Submitted']);  else var BaselineSubmitt =0;
+var TotalSubmitt = parseInt(MidtermSubmitt) + parseInt(EndtermSubmitt) + parseInt(BaselineSubmitt); 
+var TotalTotal = parseInt(x['Midterm'+county]['Total Facilities']); 
   
 
 
