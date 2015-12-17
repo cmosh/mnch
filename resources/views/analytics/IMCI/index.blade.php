@@ -23,7 +23,7 @@
 
 
    </div>
-   @include('analytics/imci/county')
+   @include('analytics/IMCI/county')
 
  <div class="col-md-8">
 
@@ -35,7 +35,7 @@
                 </div>
               
               </div>
-                         @include('analytics/imci/popbox')  
+                         @include('analytics/IMCI/popbox')  
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
@@ -122,7 +122,7 @@ function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
      x = window.mapdata;
 
-  @include('analytics/imci/mapdata')
+  @include('analytics/IMCI/mapdata')
 
    document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>/'+TotalTotal;
    x2 = 100*(TotalSubmitt/TotalTotal);
@@ -152,7 +152,7 @@ function getmapdata() {
    var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
   
-    @include('analytics/imci/mapdata')
+    @include('analytics/100/mapdata')
     
   //  alert(data);
       
@@ -194,7 +194,7 @@ function drawChart() {
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
    x = window.mapdata;
 
-  @include('analytics/imci/mapdata')
+  @include('analytics/100/mapdata')
 
 
 	//include js
