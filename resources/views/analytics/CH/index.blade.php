@@ -1,6 +1,6 @@
 @extends('app')
 @section('header')
-
+ @include('analytics/popbox') 
   <h1  align="middle">
              Child Health Survey
               <small>(Analysis Results)</small>
@@ -41,7 +41,7 @@
                 </div> --}}
               
               </div>
-                       @include('analytics/popbox')  
+                       
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
@@ -379,8 +379,8 @@ var x = 'Selected ' + cts + ' county';
 
 
   $(function() {
-  var moveLeft = 100;
-  var moveDown = -10;
+  var moveLeft = 20;
+  var moveDown = 20;
 
   window.inside.find('.county').hover(function(e) {
       var cts = this.getAttribute("title");
