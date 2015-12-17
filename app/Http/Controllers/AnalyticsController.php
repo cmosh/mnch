@@ -229,7 +229,7 @@ public function imciajax(){
 		$AllYears=$YearsBlock[1];
 		$YearsCount=$YearsBlock[2];
 		
-		$SurveysDone =	Cache::remember('SurveysDoneCHV2',180,function(){
+		$SurveysDone =	Rache::remember('SurveysDoneCHV2',180,function(){
 						 return SurveysDone::where('Name','=','Child Health')->get();
 						});  
 	
