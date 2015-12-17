@@ -379,8 +379,8 @@ var x = 'Selected ' + cts + ' county';
 
 
   $(function() {
-  var moveLeft = 0;
-  var moveDown = 0;
+  var moveLeft = 20;
+  var moveDown = -10;
 
   window.inside.find('.county').hover(function(e) {
       var cts = this.getAttribute("title");
