@@ -7,7 +7,7 @@
                     
 
                   <h3 class="box-title">Map</h3>
-                   @include('analytics/popbox') 
+                  
                   <div class="box-tools pull-right">
                 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -41,7 +41,7 @@
                        </select></div>
 
                        
-                      
+                       @include('analytics/popbox') 
 
       <object  width="100%" id="thesvg" data= "http://41.89.6.233:8000/assets/map.svg" >
                  </object>
