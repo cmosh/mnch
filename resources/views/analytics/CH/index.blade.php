@@ -190,10 +190,15 @@
 
 
 window.inside = $('#thesvg').contents();
-  
 
- window.inside.find('[title]').qtip();
+   $(document).ready(function() {
+            window.inside.find('.county').tooltipster({
+                content: $('@include(analytics/popbox)')
+            });
+        });
+
  
+
       $(function () {
         getmapdata();
 
