@@ -193,7 +193,7 @@ window.inside = $('#thesvg').contents();
 
    $(document).ready(function() {
             window.inside.find('.county').tooltipster({
-                content: $('@include(analytics/popbox)')
+                content: $("@include('analytics/popbox')")
             });
         });
 
