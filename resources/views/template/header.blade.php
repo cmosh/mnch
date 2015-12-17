@@ -2,9 +2,10 @@
 
         <!-- Logo -->
         <a href="/" class="logo">
+        @if((!isset($location))) <?php $location = 'Home' ?>
+        @endif
 
-
-        @if ($location == 'Home') 
+        @if ($location == 'Home'  ) 
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">MNCH Surveys</span>
           <!-- logo for regular state and mobile devices -->
@@ -109,11 +110,11 @@
               <!-- Control Sidebar Toggle Button -->
 
               <li>
-              @if(Auth::user()->role>3)
+             
                 <a href="#" data-toggle="control-sidebar" style=""><i class="fa fa-gears"></i></a>
-              @else
+             
               <a href="#" data-toggle="control-sidebar" style="display:none;"><i class="fa fa-gears"></i></a>
-              @endif
+             
 
               </li>
             </ul>

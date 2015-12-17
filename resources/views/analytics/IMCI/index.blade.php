@@ -173,9 +173,9 @@ function drawChart() {
       $( ".wait" ).addClass("overlay");
 	  var data = {
           'county':$('#County').val(),
-         '_token': $('input[name=_token]').val(),
+         '_token': $('input[name=_token]').val()
         
-         'Term':$('#Term').val()
+        
 
     };
  
@@ -200,7 +200,7 @@ function drawChart() {
 	//include js
      @include('analytics/IMCI/js/Certification')
 	    
-  $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+  $('#X').html('Data from '+TotalSubmitt+ ' healthworkers in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
 
 

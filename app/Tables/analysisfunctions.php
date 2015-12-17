@@ -13,6 +13,69 @@ class analysisfunctions extends Controller {
 	
 	
 	 public function __construct() {
+	 	
+
+
+	 		// imciYN($Block,$rows=array(),$LabelCol,$Data1Col,$Data2Col,$trim,$extratrim)
+
+	 		 $this->IMCIV1_sec3 = function($county){ 
+		return $IMCIV1_sec3 = Cache::remember('IMCIV1_asec3'.$county,180,function(){
+
+						$temp = array(
+							array('Section 3','Yes','No','No Information Provided'),
+							self::imciYN('IMCIV1SEC5BLK1RW',array(3,4,5,6,7),'COL01','COL02','COL04','Malnutrition'),
+							self::imciYN('IMCIV1SEC5BLK2RW',array(3),'COL01','COL02','COL04','Anemic'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(3),'COL01','COL02','COL04','HIV'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(5),'COL01','COL02','COL04','Immunization'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(6),'COL01','COL02','COL04','Vitamin A'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(9),'COL01','COL02','COL04','Deworming'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(10),'COL01','COL02','COL04','Child\'s Feeding'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(11),'COL01','COL02','COL04','Care for development'),
+							self::imciYN('IMCIV1SEC5BLK3RW',array(13),'COL01','COL02','COL04','Mother\'s condition'),  						 
+							);
+      						return $temp;
+
+      	});
+	};
+
+			 $this->IMCIV1_Observation = function($county){ 
+		return $IMCIV1_Observation = Cache::remember('IMCIV1_Observation'.$county,180,function(){
+
+						$temp = array(
+							array('Observation of Case Management','Yes','No','No Information Provided'),
+							self::imciYN('IMCIV1SEC2BLK2RW',array(2,3,4,5,6,7),'COL01','COL02','COL02','Triage'),
+							self::imciYN('IMCIV1SEC2BLK3RW',array(2,3,4,5,6),'COL01','COL02','COL02','Danger Signs'),
+							self::imciYN('IMCIV1SEC3BLK2RW',array(2,3,4,5,6),'COL01','COL02','COL04','Cough & difficulty breathing'),
+							self::imciYN('IMCIV1SEC3BLK4RW',array(2,3,4,5,6,7),'COL01','COL02','COL04','Diarrhoea'),
+							self::imciYN('IMCIV1SEC3BLK6RW',array(3,4,5,6,7,8),'COL01','COL02','COL04','Fever'),
+							self::imciYN('IMCIV1SEC3BLK8RW',array(2,3,4,5,6,7),'COL01','COL02','COL04','Ear Infection') 						 
+							);
+      						return $temp;
+
+      	});
+	};
+
+
+
+
+
+
+
+	 		$this->IMCIV1_WORKLOC = function($county){ 
+	 	//Tools Availability_2
+
+	 			$WORKLOCEX = array(4);
+
+		$WORKLOCHeading = array('Current Working Location', 'Yes', 'No','No information provided' );
+		return $CHV2_Tools = Cache::remember('IMCIV1_WORKLO'.$county,180,function() use($WORKLOCHeading,$WORKLOCEX){
+      					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC1BLK5RW',$WORKLOCHeading,0,3,6,'COL01','COL02','/^Was/',$WORKLOCEX);
+      						
+
+
+      						return $temp;
+
+      	});
+	};
 
 
 	 	
@@ -530,11 +593,6 @@ $countB = count($recset);
 		$Data = collect($Data)->lists('Data');
 
 
-// foreach ($Data as $obj ) {
-// 	if(isset($obj->x[0]->Data))
-// 	$objs[] = $obj->x[0]->Data;
-
-// }
 $Data = array_filter($Data);
 $big0 = array_count_values($Data);
 
@@ -544,6 +602,106 @@ return $big0;
 
 
 	}
+
+	private static function array_sum_identical_keys() {
+    $arrays = func_get_args();
+    $keys = array_keys(array_reduce($arrays, function ($keys, $arr) { return $keys + $arr; }, array()));
+    $sums = array();
+
+    foreach ($keys as $key) {
+        $sums[$key] = array_reduce($arrays, function ($sum, $arr) use ($key) { return $sum + @$arr[$key]; });
+    }
+    return $sums;
+}
+	
+
+
+	protected static function count_YNrowsIMCI($Block,$rows,$cl){
+
+		global $surveys;
+		
+
+ 	foreach ($rows as $i ) {
+
+ 			$array []= $Block.sprintf('%02d',$i).$cl;
+
+ 		}
+
+
+
+ $recset = $surveys;
+ //print_r( $array[0]);
+ 	
+ 		$query = '$Data = $recset->load(["x" => function($query) 
+{
+	
+    $query->where("ColumnSetID", "=","'.$array[0].'" )
+    	  ->where("Data","=","1")';
+
+    	  array_shift($array);
+
+    	  foreach ($array as $a) {
+    	  $query.='->orwhere("ColumnSetID", "=","'.$a.'" )
+    	  		   ->where("Data","=","1")';
+    	  }
+
+
+ 		
+
+ 		$query .= ';}])->lists("x");';
+
+		 eval($query);
+
+
+		 foreach ($Data as $d ) {
+		 if($d->sum('Data')==count($d)) $finalarray [] = 1;
+		 else $finalarray [] = 2;
+		 }
+
+ 	return $finalarray;
+
+}
+	
+	public  static function count_IMCIYN($Block,$cl1,$cl2,$rows){
+global $surveys;
+ 			
+ 			
+
+ $recset = $surveys;
+
+
+ 		$count=count($surveys);
+// echo $recset;
+		$Data1 = self::count_YNrowsIMCI($Block,$rows,$cl1);
+
+		$Data2 = self::count_YNrowsIMCI($Block,$rows,$cl2);
+
+	$DataC = self::array_sum_identical_keys($Data1,$Data2);
+
+
+	// return array('Data1'=>$Data1,'Data2'=>$Data2,'DataC'=>$DataC);
+
+
+	$Data = array_filter($DataC);
+	$ArrayVals = array_count_values($Data);
+
+	if(!isset($ArrayVals[2])) $ArrayVals[2]=0;
+	if(!isset($ArrayVals[3])) $ArrayVals[3]=0;
+	if(!isset($ArrayVals[4])) $ArrayVals[4]=0;
+
+	$Yes = $ArrayVals[2];
+	$No = $ArrayVals[3] + $ArrayVals[4];
+	$Noinfo = $count - $Yes - $No;
+
+	return  array(1=>$Yes,2=>$No,-51=>$Noinfo);
+
+
+
+
+
+	}
+
+
 protected static function getLabel($trim,$col){
 
 // trim($binary, "\x00..\x1F");
@@ -577,6 +735,32 @@ protected static function getLabel($trim,$col){
 		return $array;
 
 	}
+
+	protected static function imciYN($Block,$rows=array(),$LabelCol,$Data1Col,$Data2Col,$label)
+	{
+
+			
+
+		
+		
+			$o = self::count_IMCIYN($Block,$Data1Col,$Data2Col,$rows);
+
+			if(!(isset($o[1]))) $o[1]=0;
+			if(!(isset($o[2]))) $o[2]=0;
+			if(!(isset($o[-51]))) $o[-51]=0;
+			
+			$array = array (
+			 	 $label, 
+			 	$o[1],
+			 	$o[2],
+			 	$o[-51]);
+		
+		
+		
+		return $array;
+
+	}
+
 	protected static function fourOptionsFullStack($Block,$headings,$trim,$b,$t,$LabelCol,$DataCol,$extratrim,$exclude=array(),$extrarow=null)
 	{
 
@@ -954,6 +1138,67 @@ if(!isset($array))$array [] = array('No data',0);
 
 
 
+
+			protected static function practicing(){
+				global $surveys;
+
+				$recset = $surveys;
+
+				$count =  count($surveys);
+
+				$Data = $recset->load(['y' => function($query)
+{
+	
+    $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
+    		->where('Data','=','1');
+}])->lists('y');
+
+				$Data1 = count (array_filter($Data));
+
+					$Data = $recset->load(['y' => function($query)
+{
+	
+    $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
+    		->where('Data','=','2');
+}])->lists('y');
+
+				$Data2 = count (array_filter($Data));
+
+
+					$Data = $recset->load(['y' => function($query)
+{
+	
+    $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
+    		->where('Data','=','3');
+}])->lists('y');
+
+				$Data3 = count (array_filter($Data));
+
+					$Data = $recset->load(['y' => function($query)
+{
+	
+    $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
+    		->where('Data','=','4');
+}])->lists('y');
+
+				$Data4 = count (array_filter($Data));
+				
+				$array = array(
+					array('Assessment Outcome','Outcome','Deficit'),
+					array('Fully Practicing IMCI',$Data1,$count-$Data1),
+					array('Practicing IMCI with gaps',$Data2,$count-$Data2),
+					array('Not Practicing IMC',$Data3,$count-$Data3),
+					array('No Information Provided',$Data4,$count-$Data4)
+
+
+					);
+
+				      
+ return $array;
+
+
+
+			}
 
 
 

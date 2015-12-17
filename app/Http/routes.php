@@ -36,7 +36,7 @@ Route::post('/analytics/maprequest','AnalyticsController@maprequest');
 Route::get('/mnh','AnalyticsController@mnh');
 Route::get('/imci','AnalyticsController@imci');
 
-Route::get('/tester/{key}','AnalyticsController@tester');
+Route::get('/tester/','AnalyticsController@tester');
 Route::get('/test','AnalyticsController@blah');
 
 Route::post('survey/{id}/{status}','surveys@update');

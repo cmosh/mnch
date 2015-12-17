@@ -151,7 +151,12 @@ class analyse extends analysisfunctions {
 	//Json Making
 
 		$JsonArray = (array(
-			 'Certification' =>$imci->IMCIV1_CERTIFICATION->__invoke($county)			 
+			 'Certification' =>$imci->IMCIV1_CERTIFICATION->__invoke($county),
+			 'Sec_3' =>$imci->IMCIV1_sec3->__invoke($county),
+			 'Observation' =>$imci->IMCIV1_Observation->__invoke($county),
+			 'WorkingLocation' =>$imci->IMCIV1_WORKLOC->__invoke($county)	
+
+
 			));
 
 

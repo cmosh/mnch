@@ -1,3 +1,4 @@
+
    <!-- Left side column. contains the logo and sidebar -->
       <style>
 
@@ -65,6 +66,8 @@
           <ul class="sidebar-menu" >
             <li class="header">Options</li>
             <!-- Optionally, you can add icons to the links -->
+            @if((!isset($location))) <?php $location = 'Home' ?>
+        @endif
           @if($location == 'Admin')
            <li class=""><a href="/"><i class="fa fa-link"></i> <span>Home</span></a></li>
            <li class=""><a href="/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
