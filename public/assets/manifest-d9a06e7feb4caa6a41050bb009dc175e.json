@@ -1,0 +1,76 @@
+{
+  "assets": {
+    "jquery.min.map": "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map",
+    "jquery2.min.map": "jquery2.min-83282c7919b18749e2ea00012244b125.map",
+    "map.svg": "map-1cdc1f9f6c53f598e5ee3749d4890129.svg",
+    "app.js": "app-404a7cb817add4d39bdc808b83182f9b.js",
+    "landing.js": "landing-17e2f7458f04ae9f3be7896756c3673a.js",
+    "survey_t.js": "survey_t-88f1086e5ff0277fbf32d4f29847cc5b.js",
+    "template.js": "template-df75eb01347b0505753f82dfd2e3463e.js",
+    "app.css": "app-6930abbe38d474e4e1dd77b51fd8d1af.css",
+    "landing.css": "landing-2dc46d87085c111dc80826fe42ac8282.css",
+    "template.css": "template-6930abbe38d474e4e1dd77b51fd8d1af.css"
+  },
+  "files": {
+    "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map": {
+      "logical_path": "jquery.min.map",
+      "mtime": "2015-12-15T05:13:43.000Z",
+      "size": 142045,
+      "digest": "4d3bf1a65feb6e673f6ea4106b775077"
+    },
+    "jquery2.min-83282c7919b18749e2ea00012244b125.map": {
+      "logical_path": "jquery2.min.map",
+      "mtime": "2015-12-15T05:13:43.000Z",
+      "size": 127588,
+      "digest": "83282c7919b18749e2ea00012244b125"
+    },
+    "map-1cdc1f9f6c53f598e5ee3749d4890129.svg": {
+      "logical_path": "map.svg",
+      "mtime": "2015-12-15T04:17:22.000Z",
+      "size": 611889,
+      "digest": "1cdc1f9f6c53f598e5ee3749d4890129"
+    },
+    "app-404a7cb817add4d39bdc808b83182f9b.js": {
+      "logical_path": "app.js",
+      "mtime": "2015-12-17T07:57:57.000Z",
+      "size": 1775814,
+      "digest": "404a7cb817add4d39bdc808b83182f9b"
+    },
+    "landing-17e2f7458f04ae9f3be7896756c3673a.js": {
+      "logical_path": "landing.js",
+      "mtime": "2015-12-17T07:57:56.000Z",
+      "size": 364266,
+      "digest": "17e2f7458f04ae9f3be7896756c3673a"
+    },
+    "survey_t-88f1086e5ff0277fbf32d4f29847cc5b.js": {
+      "logical_path": "survey_t.js",
+      "mtime": "2015-12-17T07:57:57.000Z",
+      "size": 464604,
+      "digest": "88f1086e5ff0277fbf32d4f29847cc5b"
+    },
+    "template-df75eb01347b0505753f82dfd2e3463e.js": {
+      "logical_path": "template.js",
+      "mtime": "2015-12-17T07:57:57.000Z",
+      "size": 1201507,
+      "digest": "df75eb01347b0505753f82dfd2e3463e"
+    },
+    "app-6930abbe38d474e4e1dd77b51fd8d1af.css": {
+      "logical_path": "app.css",
+      "mtime": "2015-12-15T04:17:22.000Z",
+      "size": 288252,
+      "digest": "6930abbe38d474e4e1dd77b51fd8d1af"
+    },
+    "landing-2dc46d87085c111dc80826fe42ac8282.css": {
+      "logical_path": "landing.css",
+      "mtime": "2015-12-15T04:17:22.000Z",
+      "size": 208080,
+      "digest": "2dc46d87085c111dc80826fe42ac8282"
+    },
+    "template-6930abbe38d474e4e1dd77b51fd8d1af.css": {
+      "logical_path": "template.css",
+      "mtime": "2015-12-15T04:17:22.000Z",
+      "size": 288252,
+      "digest": "6930abbe38d474e4e1dd77b51fd8d1af"
+    }
+  }
+}
