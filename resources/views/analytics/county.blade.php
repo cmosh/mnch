@@ -42,7 +42,7 @@
                        
                       
 
-      <object  width="100%" id="thesvg" data="http://mnch.app:3000/assets/map.svg">
+      <object  width="100%" id="thesvg" data= "{!!asset_path('map.svg')!!}" >
                  </object>
 
 
