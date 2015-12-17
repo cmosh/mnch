@@ -36,17 +36,17 @@ public function maprequest(){
 
       switch ($survey) {
       	case 'ch':
-      		$Map = (Cache::remember('MapCH',180,function() {
+      		$Map = (Rache::remember('MapCH',180,function() {
 			return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
       	}));
       		break;      	
       	case 'mnh':
-      		$Map = (Cache::remember('MapMNH',180,function() {
+      		$Map = (Rache::remember('MapMNH',180,function() {
 			return 	Map::where('Survey','=','Maternal Neonatal Healthcare')->get()->keyBy('Concat')->toArray();
       	}));   
       		break;
       	case 'imci':
-      		$Map = (Cache::remember('xMapIMCI',180,function() {
+      		$Map = (Rache::remember('xMapIMCI',180,function() {
 			return 	Map_imci::where('Survey','=','IMCI')->get()->keyBy('Concat')->toArray();
       	}));   
       		break;
