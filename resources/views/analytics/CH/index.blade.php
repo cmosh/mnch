@@ -1,6 +1,6 @@
 @extends('app')
 @section('header')
- @include('analytics/popbox') 
+
   <h1  align="middle">
              Child Health Survey
               <small>(Analysis Results)</small>
