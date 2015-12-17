@@ -3,7 +3,7 @@ div#pop-up {
   display: none;
  position: absolute;
  z-index: 2147483647;
-  
+  width: 100%;
   padding: 10px;
   background: #FFF;
   color: #000000;
