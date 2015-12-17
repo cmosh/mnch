@@ -7,6 +7,7 @@
             <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
 @endsection
 @section('content')
+<div  class="col-md-12">
 <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
@@ -43,15 +44,24 @@
                 </div>
               </div><!-- /.box -->
 
-
+</div>
+<div  class="col-md-12">
                <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">SECTION 3 </h3>
                  
+                
+
                 </div>
                 <div class="box-body">
+                  >> <a href="/rawdata/">Treatment Data in U5 Register</a>
+                 <br> 
+                 >> <a href="/rawdata/">Annual Treatment Trends</a> 
                  <br>
+                 >> <a href="/rawdata/">Non-Diarrhoea Cases Treated with Zinc & ORS</a> 
+                 <br>
+                 >> <a href="/rawdata/">Annual ORT Corner Management Trends</a> 
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -75,6 +85,8 @@
                  
                 </div>
               </div><!-- /.box -->
+              </div>
+              <div  class="col-md-12">
                <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
@@ -102,6 +114,8 @@
                  
                 </div>
               </div><!-- /.box -->
+              </div>
+              <div  class="col-md-12">
                       <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
@@ -128,6 +142,7 @@
 
                 </div>
               </div><!-- /.box -->
+              </div>
            
             @endsection
 
