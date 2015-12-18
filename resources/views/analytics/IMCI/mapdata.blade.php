@@ -24,7 +24,7 @@ function isset ()
 
 if(isset(x['Baseline'+county]['Submitted']))var BaselineSubmitt = parseInt(x['Baseline'+county]['Submitted']);  else var BaselineSubmitt =0;
 var TotalSubmitt = parseInt(BaselineSubmitt); 
-var TotalTotal = parseInt(x['Baseline'+county]['Total Facilities']); 
+var TotalTotal = parseInt(x['Baseline'+county]['Total Facilities'])+0; 
   
 
 
