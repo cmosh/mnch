@@ -2,6 +2,7 @@
   "assets": {
     "jquery.min.map": "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map",
     "jquery2.min.map": "jquery2.min-83282c7919b18749e2ea00012244b125.map",
+    "blank.png": "blank-9ad45032bdc64ad1bd24405a044ed6d0.png",
     "map.svg": "map-1cdc1f9f6c53f598e5ee3749d4890129.svg",
     "app.js": "app-5f59b0fdc21559047b6ab8c6a913ae27.js",
     "landing.js": "landing-7311c9dfa218aa741221cd189df2c895.js",
@@ -24,6 +25,12 @@
       "mtime": "2015-12-15T05:13:43.000Z",
       "size": 127588,
       "digest": "83282c7919b18749e2ea00012244b125"
+    },
+    "blank-9ad45032bdc64ad1bd24405a044ed6d0.png": {
+      "logical_path": "blank.png",
+      "mtime": "2015-12-15T04:16:57.000Z",
+      "size": 473,
+      "digest": "9ad45032bdc64ad1bd24405a044ed6d0"
     },
     "map-1cdc1f9f6c53f598e5ee3749d4890129.svg": {
       "logical_path": "map.svg",
