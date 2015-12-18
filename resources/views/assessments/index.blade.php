@@ -28,9 +28,8 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  
-                  <!--  @foreach ($Surveys as $Survey) -->
+             <!--  @foreach ($Surveys as $Survey) -->
             <?php $loc = substr ($Survey->surveyID, 0,2) ?>
-
             <!-- @endforeach -->
              
               @if ($loc == 'CH')
@@ -255,7 +254,7 @@
 
 </div>
 
-
+</div>
 
   @endsection
 
