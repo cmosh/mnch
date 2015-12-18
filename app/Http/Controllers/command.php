@@ -21,7 +21,7 @@ class command  {
 				return 'SiteGuban';
 
 				break;
-			case 'live':
+			case 'production':
 				return 'SiteGuban';
 				# code...
 				break;
@@ -46,7 +46,7 @@ class command  {
 				array_unshift($clist,'cd ~/mnch_bak');
 
 				break;
-			case 'live':
+			case 'production':
 				array_unshift($clist,'cd ~/mnch');
 				# code...
 				break;
@@ -68,7 +68,7 @@ class command  {
 
 				break;
 
-			case 'live':
+			case 'production':
 				array_unshift($clist,'cd ~/mnch');
 				# code...
 				break;
@@ -139,23 +139,23 @@ class command  {
 							'testredisremove'=>array('sudo nginx_dissite redistest','sudo service nginx reload'),
 							'testredisreset'=>array('sudo nginx_ensite redistest','sudo service nginx reload'),
 							'testcron'=>array('cd /var/www/mnch_bak/public/phpredmin/public','sudo php index.php cron/index'),
-							'liverootfolder'=>array('sudo chown -R :www-data /var/www/mnch','ls -ld /var/www/mnch'),
-							'livestorage'=>array('sudo chmod -R 775 /var/www/mnch/storage','ls -ld /var/www/mnch/storage'),
-							'liveuploads'=>array('sudo chmod -R 775 /var/www/mnch/public/uploads','ls -ld /var/www/mnch/public/uploads'),
-							'livememcache'=>array('cd /var/www/mnch/public/cache','sudo chmod +rx *','sudo chmod 0777 Config/Memcache.php','sudo chmod 0777 Temp/','ls -ld /var/www/mnch/public/cache'),
-							'liveredmin'=>array('sudo chmod -R 775 /var/www/mnch/public/phpredmin','ls -ld /var/www/mnch/public/phpredmin'),
-							'liveupdate'=>array('git pull','git merge --commit --no-edit origin/test','git push -u origin live'),
-							'livereset'=>array('git reset --hard origin/live'),
-							'livebranch'=>array('git rev-parse --abbrev-ref HEAD'),
-							'livepush'=>array('git push -u origin live'),
-							'livetestgit'=>array('ssh -T git@github.com'),
-							'livemysqldump'=>array(''),
-							'livendown'=>array('sudo nginx_dissite live','sudo service nginx reload'),
-							'livenup'=>array('sudo nginx_ensite live','sudo service nginx reload'),
-							'livecron'=>array('cd /var/www/mnch/public/phpredmin/public','sudo php index.php cron/index'),
-							'liveredis'=>array('sudo cp redisU /etc/nginx/sites-available/redis',"sudo sed -i 's/listenporthhh/".$theport."/g' /etc/nginx/sites-available/redis","sudo sed -i 's/livetestr/mnch/g' /etc/nginx/sites-available/redis",'sudo mv /etc/nginx/sites-available/redis /etc/nginx/sites-available/redislive','sudo nginx_ensite redislive','sudo service nginx reload'),
-							'liveredisremove'=>array('sudo nginx_dissite redislive','sudo service nginx reload'),
-							'liveredisreset'=>array('sudo nginx_ensite redislive','sudo service nginx reload'),
+							'productionrootfolder'=>array('sudo chown -R :www-data /var/www/mnch','ls -ld /var/www/mnch'),
+							'productionstorage'=>array('sudo chmod -R 775 /var/www/mnch/storage','ls -ld /var/www/mnch/storage'),
+							'productionuploads'=>array('sudo chmod -R 775 /var/www/mnch/public/uploads','ls -ld /var/www/mnch/public/uploads'),
+							'productionmemcache'=>array('cd /var/www/mnch/public/cache','sudo chmod +rx *','sudo chmod 0777 Config/Memcache.php','sudo chmod 0777 Temp/','ls -ld /var/www/mnch/public/cache'),
+							'productionredmin'=>array('sudo chmod -R 775 /var/www/mnch/public/phpredmin','ls -ld /var/www/mnch/public/phpredmin'),
+							'productionupdate'=>array('git pull','git merge --commit --no-edit origin/test','git push -u origin live'),
+							'productionreset'=>array('git reset --hard origin/live'),
+							'productionbranch'=>array('git rev-parse --abbrev-ref HEAD'),
+							'productionpush'=>array('git push -u origin live'),
+							'productiontestgit'=>array('ssh -T git@github.com'),
+							'productionmysqldump'=>array(''),
+							'productionndown'=>array('sudo nginx_dissite live','sudo service nginx reload'),
+							'productionnup'=>array('sudo nginx_ensite live','sudo service nginx reload'),
+							'productioncron'=>array('cd /var/www/mnch/public/phpredmin/public','sudo php index.php cron/index'),
+							'productionredis'=>array('sudo cp redisU /etc/nginx/sites-available/redis',"sudo sed -i 's/listenporthhh/".$theport."/g' /etc/nginx/sites-available/redis","sudo sed -i 's/livetestr/mnch/g' /etc/nginx/sites-available/redis",'sudo mv /etc/nginx/sites-available/redis /etc/nginx/sites-available/redislive','sudo nginx_ensite redislive','sudo service nginx reload'),
+							'productionredisremove'=>array('sudo nginx_dissite redislive','sudo service nginx reload'),
+							'productionredisreset'=>array('sudo nginx_ensite redislive','sudo service nginx reload'),
 							'nginxreload'=>array('sudo service nginx reload'),
 							'nginxrestart'=>array('sudo service nginx restart'),
 							'nginxtools'=>array('cd ~/','git clone https://github.com/perusio/nginx_ensite.git','cd nginx_ensite','sudo make install')

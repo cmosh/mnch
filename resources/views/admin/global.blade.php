@@ -30,7 +30,7 @@
                         </label>
                       </div>
               <select id="siteresolver" class="form-control select2">
-              	<option>live</option>
+              	<option>production</option>
               	<option>test</option>
               </select>
               

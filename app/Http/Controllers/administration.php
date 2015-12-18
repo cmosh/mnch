@@ -29,7 +29,7 @@ class administration extends Controller {
 
 	public function globe()
 	{
-		if($this->role<4)return view('errors.404')->with('location','Home');
+		if($this->role<4)return view('errors.403')->with('location','Home');
 	
 		return view('admin.global')->with('location','Admin')
 								->with('title','Administration')
@@ -43,7 +43,7 @@ class administration extends Controller {
 	 */
 	public function localredis()
 	{
-			if($this->role<4)return view('errors.404')->with('location','Home');
+			if($this->role<4)return view('errors.403')->with('location','Home');
 		return view('admin.redmin')->with('location','Admin')
 								->with('title','Administration');
 	}
@@ -51,14 +51,14 @@ class administration extends Controller {
 
 	public function localmem()
 	{
-			if($this->role<4)return view('errors.404')->with('location','Home');
+			if($this->role<4)return view('errors.403')->with('location','Home');
 		return view('admin.memcached')->with('location','Admin')
 								->with('title','Administration');
 	}
 
 	public function commandcenter()
 	{
-			if($this->role<4)return view('errors.404')->with('location','Home');
+			if($this->role<4)return view('errors.403')->with('location','Home');
 		
 		return view('admin.commandcenter')->with('location','Admin')
 								->with('title','Administration');
