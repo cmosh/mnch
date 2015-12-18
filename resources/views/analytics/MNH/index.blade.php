@@ -35,7 +35,7 @@
                 </div>
               
               </div>
-                         @include('analytics/popbox')  
+                       
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
