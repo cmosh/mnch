@@ -41,7 +41,7 @@
                        
                        @include('analytics/IMCI/popbox')  
 
-      <object  width="100%" id="thesvg" data="http://41.89.6.233:8000/assets/map.svg">
+      <object  width="100%" id="thesvg" data="{!!asset_path(map.svg)!!}">
                  </object>
 
 
