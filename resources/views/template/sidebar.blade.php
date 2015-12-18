@@ -16,9 +16,9 @@
           <div class="user-panel">
             <div class="pull-left image">
 
-         
+            {!!image_tag('blank.png')!!}
 
-            <img src='{!!asset_path("blank.png")!!}'>
+            
            
            
 
