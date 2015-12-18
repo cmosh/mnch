@@ -1,4 +1,4 @@
- <div id="pop-up">
+ <div id="pop-up" style="position: absolute;">
      
 
                      <p class="text-center" id="countyname">
