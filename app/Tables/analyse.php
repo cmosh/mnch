@@ -154,9 +154,13 @@ class analyse extends analysisfunctions {
 			 'Certification' =>$imci->IMCIV1_CERTIFICATION->__invoke($county),
 			 'Sec_3' =>$imci->IMCIV1_sec3->__invoke($county),
 			 'Observation' =>$imci->IMCIV1_Observation->__invoke($county),
-			 'WorkingLocation' =>$imci->IMCIV1_WORKLOC->__invoke($county)	
-
-
+			 'WorkingLocation' =>$imci->IMCIV1_WORKLOC->__invoke($county),
+			 'Classification' =>$imci->IMCIV1_Classification->__invoke($county),
+			 'ObservationB' =>$imci->IMCIV1_ObservationB->__invoke($county),
+			 'ClassificationB' =>$imci->IMCIV1_ClassificationB->__invoke($county),
+			 'WeightTaken' =>$imci->IMCIV1_WeightTaken->__invoke($county),
+			 'SpecialNeeds' =>$imci->IMCIV1_SpecialNeeds->__invoke($county)
+			 
 			));
 
 

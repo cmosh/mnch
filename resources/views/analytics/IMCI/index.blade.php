@@ -39,13 +39,14 @@
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>FIRST TITLE</b></h2></center>
+                        <center><h2><b>FACILITY, HCW and WORK STATION INFORMATION</b></h2></center>
                         <br>
                         </div>
                         </div>
+                         @include('analytics/IMCI/html/WorkingLocation')
 </div>
 
-     <!-- two/one graphs here -->
+     
            
 
 
@@ -56,6 +57,49 @@
             </div>
 
 <!-- the rest -->
+ <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>ASSESSMENT OF THE SICK CHILD AGE 2 MONTHS UP TO 5 YEARS</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
+  
+ @include('analytics/IMCI/html/Observation')
+ @include('analytics/IMCI/html/Classification')
+
+
+   <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>ASSESMENT FOR THE SICK YOUNG INFANT AGE UPTO 2 MONTHS</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
+  
+ @include('analytics/IMCI/html/ObservationB')
+ @include('analytics/IMCI/html/ClassificationB')
+ @include('analytics/IMCI/html/WeightTaken')
+ @include('analytics/IMCI/html/SpecialNeeds')
+
+ <div class="col-md-12">
+                        
+                        <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>OBSERVATION OF CASE MANAGEMENT : ONE CASE PER HCW</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
+</div>
+  
+ @include('analytics/IMCI/html/sec3')
 
     
    <div class="col-md-12">
@@ -63,7 +107,7 @@
                         <div class="box-info">                     
                      <div class="box-body">
                          <br>                     
-                        <center><h2><b>CERTIFICATION</b></h2></center>
+                        <center><h2><b>CONSULTATION AND EXIT INTERVIEWS</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -199,6 +243,15 @@ function drawChart() {
 
 	//include js
      @include('analytics/IMCI/js/Certification')
+      @include('analytics/IMCI/js/sec3')
+       @include('analytics/IMCI/js/ObservationB')
+ @include('analytics/IMCI/js/ClassificationB')
+  @include('analytics/IMCI/js/Observation')
+ @include('analytics/IMCI/js/Classification')
+ @include('analytics/IMCI/js/WeightTaken')
+  @include('analytics/IMCI/js/SpecialNeeds')
+   @include('analytics/IMCI/js/WorkingLocation')
+
 	    
   $('#X').html('Data from '+TotalSubmitt+ ' healthworkers in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');

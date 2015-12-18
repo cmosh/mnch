@@ -110,11 +110,11 @@
               <!-- Control Sidebar Toggle Button -->
 
               <li>
-             
+              @if(Auth::user()->role>3)
                 <a href="#" data-toggle="control-sidebar" style=""><i class="fa fa-gears"></i></a>
-             
+              @else
               <a href="#" data-toggle="control-sidebar" style="display:none;"><i class="fa fa-gears"></i></a>
-             
+              @endif
 
               </li>
             </ul>

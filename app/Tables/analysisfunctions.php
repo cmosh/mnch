@@ -57,6 +57,90 @@ class analysisfunctions extends Controller {
 
 
 
+	 $this->IMCIV1_Classification = function($county){ 
+		return $IMCIV1_Classification = Cache::remember('IMCIV1_Classification'.$county,180,function(){
+
+						$temp = array(
+							array('Classification','Yes','No','No Information Provided'),
+							self::imciYN('IMCIV1SEC3BLK2RW',array(7),'COL01','COL02','COL04','Classification for cough'),
+							self::imciYN('IMCIV1SEC3BLK2RW',array(8),'COL01','COL04','COL04','Correct Classification'),
+							self::imciYN('IMCIV1SEC3BLK4RW',array(8),'COL01','COL02','COL04','Correct Assessment & Classify Diarrhoea'),
+							self::imciYN('IMCIV1SEC3BLK4RW',array(9),'COL01','COL04','COL04','Correct Classification'),
+							self::imciYN('IMCIV1SEC3BLK6RW',array(9),'COL01','COL02','COL04','Classification for Fever'),
+							self::imciYN('IMCIV1SEC3BLK6RW',array(10),'COL01','COL04','COL04','Correct Classification'),
+							self::imciYN('IMCIV1SEC3BLK8RW',array(7),'COL01','COL02','COL04','Classification for Ear Infection'),
+							self::imciYN('IMCIV1SEC3BLK8RW',array(8),'COL01','COL04','COL04','Correct Classification')						 
+							);
+      						return $temp;
+
+      	});
+	};
+
+		 $this->IMCIV1_ObservationB = function($county){ 
+		return $IMCIV1_ObservationB = Cache::remember('IMCIV1_ObservationB'.$county,180,function(){
+
+						$temp = array(
+							array('Observation of Case Management','Yes','No','No Information Provided'),
+							self::imciYN('IMCIV1SEC4BLK2RW',array(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22),'COL01','COL02','COL04','Very Servere Disease'),
+							self::imciYN('IMCIV1SEC4BLK4RW',array(2,3),'COL01','COL02','COL04','Jaundice'),
+							self::imciYN('IMCIV1SEC4BLK6RW',array(2,3,4,5,6,7,8,9,10,11,12),'COL01','COL02','COL04','Eye Infection'),
+							self::imciYN('IMCIV1SEC3BLK8RW',array(2,3,4,5,6,7),'COL01','COL02','COL04','Diarrhoea'),
+							self::imciYN('IMCIV1SEC4BLK10RW',array(2,4,6,8),'COL01','COL02','COL04','Breast Feeding Problem'),
+							self::imciYN('IMCIV1SEC4BLK10RW',array(3,5,7,9),'COL01','COL02','COL04','Breast Feeding') 						 
+							);
+      						return $temp;
+
+      	});
+	};
+
+		 $this->IMCIV1_ClassificationB = function($county){ 
+		return $IMCIV1_ClassificationB = Cache::remember('IMCIV1_ClassificationB'.$county,180,function(){
+
+						$temp = array(
+							array('Classification','Yes','No','No Information Provided'),
+							self::imciYN('IMCIV1SEC4BLK2RW',array(23),'COL01','COL02','COL04','Correctly Assessed and Classified VSD'),
+							self::imciYN('IMCIV1SEC4BLK2RW',array(24),'COL01','COL04','COL04','Correct Classification'),
+							self::imciYN('IMCIV1SEC4BLK4RW',array(4),'COL01','COL02','COL04','Jaundice Classification Done'),
+							self::imciYN('IMCIV1SEC4BLK4RW',array(5),'COL01','COL04','COL04','Correct Classification'),
+							self::imciYN('IMCIV1SEC4BLK6RW',array(13),'COL01','COL02','COL04','Eye Infection Correctly Assessed'),
+							self::imciYN('IMCIV1SEC4BLK6RW',array(14),'COL01','COL04','COL04','Eye Infection Classification Done'),
+							self::imciYN('IMCIV1SEC4BLK8RW',array(8),'COL01','COL02','COL04','Diarrhoea Correctly Assessed $ Classified'),
+							self::imciYN('IMCIV1SEC4BLK8RW',array(9),'COL01','COL04','COL04','Diarrhoea Correct Classification'),
+							self::imciYN('IMCIV1SEC4BLK10RW',array(11),'COL01','COL02','COL04','Breast Feeding Correct Classification'),
+							self::imciYN('IMCIV1SEC4BLK10RW',array(12),'COL01','COL04','COL04','Feeding Correctly Assessed $ Classified'),
+							self::imciYN('IMCIV1SEC4BLK11RW',array(4),'COL01','COL04','COL04','Feeding Correct Classification')
+							);
+      						return $temp;
+
+      	});
+	};
+
+	 $this->IMCIV1_WeightTaken = function($county){ 
+		return $IMCIV1_WeightTaken = Cache::remember('IMCIV1_WeightTaken'.$county,180,function(){
+
+						$temp = array(
+							array('Weight','Yes','No','No Information Provided'),
+							self::imciYN('IMCIV1SEC4BLK11RW',array(2),'COL01','COL02','COL04','Weight Taken'),
+							self::imciYN('IMCIV1SEC4BLK11RW',array(3),'COL01','COL02','COL04','Correct Assessment and Classification'),
+							self::imciYN('IMCIV1SEC4BLK11RW',array(4),'COL01','COL04','COL04','Correct Classification')												 
+							);
+      						return $temp;
+
+      	});
+	};
+
+	 $this->IMCIV1_SpecialNeeds = function($county){ 
+		return $IMCIV1_SpecialNeeds = Cache::remember('IMCIV1_SpecialNeeds'.$county,180,function(){
+				$values = self::imciYN('IMCIV1SEC4BLK12RW',array(2,3,4,5,6),'COL01','COL02','COL04','Special Needs');
+						$temp = array(
+								array('Yes',$values[1]),
+								array('No',$values[2]),
+								array('No Information Provided',$values[3])											 
+							);
+      						return $temp;
+
+      	});
+	};
 
 
 
@@ -636,13 +720,13 @@ return $big0;
 {
 	
     $query->where("ColumnSetID", "=","'.$array[0].'" )
-    	  ->where("Data","=","1")';
+    	  ';
 
     	  array_shift($array);
 
     	  foreach ($array as $a) {
     	  $query.='->orwhere("ColumnSetID", "=","'.$a.'" )
-    	  		   ->where("Data","=","1")';
+    	  		   ';
     	  }
 
 
