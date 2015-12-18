@@ -317,6 +317,6 @@ $("#demo-form").submit(function(e) {
 
 </script>
 
-{!!javascript_include_tag('survey')!!}
+{!!javascript_include_tag('survey-1bf6e69c18341244d990250bf5aa3ce0')!!}
 
 @endsection 

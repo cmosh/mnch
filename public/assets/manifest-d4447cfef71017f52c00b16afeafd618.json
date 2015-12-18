@@ -5,6 +5,7 @@
     "map.svg": "map-1cdc1f9f6c53f598e5ee3749d4890129.svg",
     "app.js": "app-5f59b0fdc21559047b6ab8c6a913ae27.js",
     "landing.js": "landing-7311c9dfa218aa741221cd189df2c895.js",
+    "survey.js": "survey-1bf6e69c18341244d990250bf5aa3ce0.js",
     "survey_t.js": "survey_t-d881b20b9826002ef9254acd390d5004.js",
     "template.js": "template-944623347bd11ea0c378512f08446ba2.js",
     "app.css": "app-dca7c6747903567be6f6ac4b8675f5b4.css",
@@ -41,6 +42,12 @@
       "mtime": "2015-12-17T11:59:50.000Z",
       "size": 231989,
       "digest": "7311c9dfa218aa741221cd189df2c895"
+    },
+    "survey-1bf6e69c18341244d990250bf5aa3ce0.js": {
+      "logical_path": "survey.js",
+      "mtime": "2015-12-17T07:57:56.000Z",
+      "size": 0,
+      "digest": "1bf6e69c18341244d990250bf5aa3ce0"
     },
     "survey_t-d881b20b9826002ef9254acd390d5004.js": {
       "logical_path": "survey_t.js",

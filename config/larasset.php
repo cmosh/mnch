@@ -86,7 +86,8 @@ return [
             'landing.js',
             'template.js',
             'template.css',
-            'survey_t.js'
+            'survey_t.js',
+            'survey.js',
             // 'admin.js',
             // 'admin.css',
         ],

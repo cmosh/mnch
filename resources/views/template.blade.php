@@ -77,8 +77,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Control Sidebar -->
      @include('admin/menu')
     </div><!-- ./wrapper -->
-    @if(!isset($TheFacility)) {!!javascript_include_tag('template')!!}
-    @else {!!javascript_include_tag('survey_t')!!}
+    @if(!isset($TheFacility)) {!!javascript_include_tag('template-944623347bd11ea0c378512f08446ba2')!!}
+    @else {!!javascript_include_tag('survey_t-d881b20b9826002ef9254acd390d5004')!!}
     @endif
     <!-- REQUIRED JS SCRIPTS -->
 
