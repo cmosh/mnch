@@ -254,7 +254,7 @@ function drawChart() {
 
 	    
   $('#X').html('Data from '+TotalSubmitt+ ' healthworkers in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} healthworkers in {{count($SubmittedCounties)}} counties');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
