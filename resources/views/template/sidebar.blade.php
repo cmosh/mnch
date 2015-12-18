@@ -16,9 +16,9 @@
           <div class="user-panel">
             <div class="pull-left image">
 
-            {!!image_tag('blank.png')!!}
+            {!!image_tag('blank-9ad45032bdc64ad1bd24405a044ed6d0.png')!!}
 
-            
+
            
            
 
