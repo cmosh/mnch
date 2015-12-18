@@ -96,7 +96,7 @@
    
 
 
-   {!! javascript_link_tag('landing') !!}  
+   {{javascript_link_tag('landing') }}  
  
 
     @yield('js')
