@@ -96,7 +96,7 @@
    
 
 
-   {!!javascript_include_tag('landing')!!}
+   {!!javascript_include_tag('landing-7311c9dfa218aa741221cd189df2c895')!!}
  
 
     @yield('js')
