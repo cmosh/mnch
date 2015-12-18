@@ -96,7 +96,7 @@
    
 
 
-   {!!javascript_include_tag('assets/landing')!!}
+   {!! javascript_link_tag('landing') !!}  
  
 
     @yield('js')
