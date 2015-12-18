@@ -5,3 +5,4 @@
 *.ppk
 public/phpredmin/config.php
 public/cache/Config/Memcache.php
+*.db
