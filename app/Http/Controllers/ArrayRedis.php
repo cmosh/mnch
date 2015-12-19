@@ -21,7 +21,7 @@ class ArrayRedis extends Controller {
 public static function remember($key,$minutes,$closure){
 
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = env('CACHE_PREFIX').':';
 		$redis = LRedis::connection();
 
 		if($redis->exists($prefix.$key)){
