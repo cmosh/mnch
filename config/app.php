@@ -141,7 +141,7 @@ return [
 		'Collective\Remote\RemoteServiceProvider',
 		'Efficiently\Larasset\LarassetServiceProvider',
         'Efficiently\JqueryLaravel\JqueryLaravelServiceProvider',
-        'GrahamCampbell\HTMLMin\HTMLMinServiceProvider',
+        
 
 		/*
 		 * Application Service Providers...
@@ -203,8 +203,7 @@ return [
     	'Html'		=> 'Collective\Html\HtmlFacade',
 		'Asset' 	=> 'Efficiently\Larasset\Facades\Asset',
 		'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
-		'SSH' 		=> 'Collective\Remote\RemoteFacade',
-		'HTMLMin'	=> 'GrahamCampbell\HTMLMin\Facades\HTMLMin'
+		'SSH' 		=> 'Collective\Remote\RemoteFacade'
 
 	],
 
