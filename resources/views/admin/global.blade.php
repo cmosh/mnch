@@ -211,17 +211,7 @@
                     <i class="fa fa-bolt"></i> Bring Up
                   </a>
                   	</td>
-                      <td>
-                      <a command="eip" class="btn btn-app">
-                    <i class="fa fa-toggle-on"></i> Enable {{$ip}}
-                  </a>
-                    </td>
-
-                     <td>
-                      <a command="dip" class="btn btn-app">
-                    <i class="fa fa-toggle-off"></i> Disable {{$ip}}
-                  </a>
-                    </td>
+                      
 
 
                   </tr>
@@ -295,6 +285,28 @@
                     </td>
                  
                 
+                  </tr>
+
+                  <tr>
+                 <td  style="vertical-align:middle">
+                    <i class="fa fa-shirtsinbulk fa-4x"  style="color:blue"></i>
+                  IP 
+                 
+                  </td>
+                    
+                      <td>
+                      <a command="eip" class="btn btn-app">
+                    <i class="fa fa-toggle-on"></i> Enable {{$ip}}
+                  </a>
+                    </td>
+
+                     <td>
+                      <a command="dip" class="btn btn-app">
+                    <i class="fa fa-toggle-off"></i> Disable {{$ip}}
+                  </a>
+                    </td>
+
+
                   </tr>
 
                    <tr>
