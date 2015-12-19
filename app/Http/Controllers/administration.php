@@ -41,14 +41,14 @@ class administration extends Controller {
 
 		$env = env('APP_ENV');
 
-			if($env!='test')abort(404);
+			if($env!='test')abort(403);
 
-		$command = array('cd ~/mnch_bak && php artisan larasset:serve --port 3000 &>/dev/null &','disown');
-
-		 SSH::into($this->ssh_connection)->run($command, function($line)
-      	  	{
-      	  		echo $line.PHP_EOL;
-      	  	});
+		
+		SSH::into('SiteGuban')->run([
+    'cd ~/mnch_bak',
+    'php artisan larasset:serve --port 3000 &>/dev/null &',
+    'disown'
+			]);
 		
 		return redirect()->action('AnalyticsController@ch');
 	}
@@ -61,14 +61,10 @@ class administration extends Controller {
 
 		$env = env('APP_ENV');
 
-			if($env!='test')abort(404);
+			if($env!='test')abort(403);
 
 		$command = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
-		 SSH::into($this->ssh_connection)->run($command, function($line)
-      	  	{
-      	  		echo $line.PHP_EOL;
-      	  	});
-
+		 SSH::into($this->ssh_connection)->run($command);
 		return redirect()->action('AnalyticsController@ch');
 	}
 	/**
