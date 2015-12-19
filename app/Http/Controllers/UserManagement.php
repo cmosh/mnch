@@ -1,10 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-
-
 use App\Http\Controllers\Controller;
-
 use App\User;
 use App\Tables\User_monitor;
 use App\Tables\countie;
@@ -14,13 +11,11 @@ use App\Tables\Counties_incomplete_today;
 use App\Tables\Counties_submitted;
 use App\Tables\Counties_incomplete;
 use App\Tables\assessments;
-
 use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use App\Http\Requests\Requestpass;
 use App\Http\Requests\Requestedit;
-
 use Input;
 use Validator;
 use Redirect;
@@ -32,144 +27,73 @@ use Request As Rq;
 use Carbon\Carbon;
 use Mail;
 
-
-
-
-
 class UserManagement extends Controller {
-/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
+
+	public function __construct(Request $request)
 	{
 		$this->middleware('auth');
+		$this->role = function ($min) use ($request) {
+			if($request->user()->role<$min)abort(403);
+		};
 	}
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index(Request $request)
+	
+	public function index()
+	{		
+		$users=User::where('role','<','4')->get();		
+		$this->role->__invoke(3);
+		return view('usermanagement.view')->with('users',$users)
+										  ->with('location','umanage')
+										  ->with('title','User Management');
+	}
+
+	public function test()
 	{
-		//
-		$users=User::where('role','<','4')->get();
-		
-		if($request->user()->role>=3)
-		{
-		return view('usermanagement.view')->with('users',$users)->with('location','umanage')->with('title','User Management');
-}
-
+		return view('usermanagement.test')->with('location','umanage')
+										  ->with('title','User Management');
 	}
 
+	public function mail()
+	{
+		Mail::send('emails.add', ['name'=>'you','email'=>'email'], function($message)
+					{
+			   			$message->to('pchegenjenga@gmail.com', 'Paul Chege')->subject('Welcome!');
+					});
 
-
-public function test()
-{
-
-	return view('usermanagement.test')->with('location','umanage')->with('title','User Management');
-}
-
-
-
-public function mail()
-{
-
-
-	Mail::send('emails.add', ['name'=>'you','email'=>'email'], function($message)
-{
-    $message->to('pchegenjenga@gmail.com', 'Paul Chege')->subject('Welcome!');
-});
-	return view('usermanagement.test')->with('location','umanage')->with('title','User Management');
-
-
-}
-
-
+		return view('usermanagement.test')->with('location','umanage')
+										  ->with('title','User Management');
+	}
 
 	public function ajax()
-
 	{
-
-         if(Rq::ajax()) {
-
-      $data = Input::all();
-
-      print_r(json_encode($data));
-      die;
-    }
-     
-
-
-
-      
-
-    
-      
-
-
-
+        if(Rq::ajax()) {
+            $data = Input::all();
+            print_r(json_encode($data));
+            die;
+                }     
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create(Request $request)
+	public function create()
 	{
-
-	
-		//
+		$this->role->__invoke(3);
 		$Counties = countie::all();
-	if($request->user()->role>=3)
-		{
-				return view('usermanagement.create')->with('counties',$Counties)->with('location','umanage')->with('title','User Management');
-		}
+		return view('usermanagement.create')->with('counties',$Counties)
+											->with('location','umanage')
+											->with('title','User Management');
 	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-
-
-
-
 
 	public function store(Requestuser $Requestuser)
-
-
-
 	{
-	
-
-	
-       
-
 		$array=$Requestuser->all();
 		$new=array_shift($array);
 		$x = array();
-
-
-
-	$users=new User;
-	foreach ($array as $key ) {
-		# code...
+		$users=new User;
+		foreach ($array as $key ) {
 			$x[]=$key;
-			
-	}
+		}
 
-	
-	$Counties = countie::all();
-	$x[1]=$Counties[$x[1]]->Name;	
-	//$statusnum=1;
-			
-	
+		$Counties = countie::all();
+		$x[1]=$Counties[$x[1]]->Name;
 
-	
 		$data=array(
 		'name'=>$x[0],
 		'county'=>$x[1],
@@ -180,94 +104,62 @@ public function mail()
 		'role'=>$x[5],
 		'status'=>'1'
 		);
-		
-		
 
- User::createOrUpdate(
+		User::createOrUpdate(
                 $data, 
                 array('email' => $x[4]));
-
- Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
-{
-    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
-});
-	
-	$users=User::all();
-	
-	
-			return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
-
-		
-	}
-
-
-
+                Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+                	{
+                	    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
+                	});
+                $users=User::all();
+                return redirect('usermanagement/viewusers')->with('users',$users)
+                										   ->with('location','umanage')
+                										   ->with('title','User Management');
+    }
 
 	public function store_multi(Request $Request)
 	{
-
-		$array=$Request->all();
-		
+		$array=$Request->all();		
 		$x = array();
 
-
-
-
-	foreach ($array as $key ) {
-		# code...
+		foreach ($array as $key ) {
 			$x[]=$key;
-			
-	}
-
-	
-	
-			
-	
-
-	for($i=0;$i<(sizeof($x)-1)/6;$i++)
-	{
-		$num=6*$i;	
-		$data=array(
-		'name'=>$x[1+$num],
-		'county'=>$x[2+$num],
-		'PhoneNumber'=>'0'.$x[3+$num],
-		'IDNumber'=>$x[4+$num],
-		'email'=>$x[5+$num],
-		'password'=>bcrypt('123456'),
-		'role'=>$x[6+$num],
-		'status'=>'1'
-		);
-	
-		
-		
-
- User::createOrUpdate(
-                $data, 
-                array('email' => $x[4+$num]));
-
-  Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
-{
-    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
-});
-		 }
-
-	$users=User::all();
-	
-	
-	
-		return redirect('usermanagement/viewusers')->with('x',$x)->with('users',$users)->with('location','umanage')->with('title','User Management');
-
 		}
 
+		for($i=0;$i<(sizeof($x)-1)/6;$i++){
+				$num=6*$i;
+				$data=array(
+					'name'=>$x[1+$num],
+					'county'=>$x[2+$num],
+					'PhoneNumber'=>'0'.$x[3+$num],
+					'IDNumber'=>$x[4+$num],
+					'email'=>$x[5+$num],
+					'password'=>bcrypt('123456'),
+					'role'=>$x[6+$num],
+					'status'=>'1'
+					);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+		User::createOrUpdate(
+				$data, 
+                array('email' => $x[4+$num]));
+
+                Mail::send('emails.add',['name'=>$data['name'],'email'=>$data['email']], function($message) use($data)
+                	{
+                	    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
+                	});
+		}
+		$users=User::all();
+		return redirect('usermanagement/viewusers')->with('x',$x)
+												   ->with('users',$users)
+												   ->with('location','umanage')
+												   ->with('title','User Management');
+
+	}
+
 	public function show(Request $request)
-	{
+	{	
+		$this->role->__invoke(2);
 		$surveys=Survey::all();
 		$counties=countie::all();
 		$user_monitor=User_monitor::all();
@@ -282,59 +174,45 @@ public function mail()
 		$mnh=User_monitor::where('Survey','like','MNH%')->get();
 		$imci=User_monitor::where('Survey','like','IMCI%')->get();
 
-		if($request->user()->role>=2)
-		{
-
-	return view('usermanagement.monitor')->with('counties',$counties)->with('submittedt',$submittedt)->with('incompletet',$incompletet)->with('mnh',$mnh)->with('imci',$imci)->with('ch',$ch)->with('submitted',$submitted)->with('incomplete',$incomplete)->with('users',$users)->with('assessments',$assessments)->with('surveys',$surveys)->with('counties_assessed',$counties_assessed)->with('user_monitor',$user_monitor)->with('location','preview')->with('title','Progress Review');
-
-		}	
-
-
-
+		return view('usermanagement.monitor')->with('ch',$ch)
+											 ->with('mnh',$mnh)
+											 ->with('imci',$imci)
+											 ->with('users',$users)
+											 ->with('surveys',$surveys)
+											 ->with('counties',$counties)
+											 ->with('location','preview')
+											 ->with('submitted',$submitted)
+											 ->with('submittedt',$submittedt)
+											 ->with('incomplete',$incomplete)
+											 ->with('title','Progress Review')
+											 ->with('incompletet',$incompletet)
+											 ->with('assessments',$assessments)
+											 ->with('user_monitor',$user_monitor)
+											 ->with('counties_assessed',$counties_assessed);
 	}
 
-
-
-
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
-	{
-		//
+	{	
+		$this->role->__invoke(3);
+		$user=User::where('id','=',$id)->get();
+		$Counties = countie::all();
+		$counter=0;
+		$county_index=0;
 
-
-			$user=User::where('id','=',$id)->get();
-			$Counties = countie::all();
-			$counter=0;
-			$county_index=0;
-			foreach ($Counties as $County) {
-				$counter++;
-				if($County->Name==$user[0]->county)
-				{
-					$county_index=$counter-1;
-
-				}
-				# code...
-			}
-
-
-			
-			
-		return view('usermanagement.edit')->with('county_index',$county_index)->with('counties',$Counties)->with('user',$user)->with('location','umanage')->with('title','User Management');
+		foreach ($Counties as $County) {
+						$counter++;
+						if($County->Name==$user[0]->county)
+							{
+								$county_index=$counter-1;
+							}
+						}
+		return view('usermanagement.edit')->with('user',$user)
+										  ->with('counties',$Counties)										  
+										  ->with('location','umanage')
+										  ->with('title','User Management')
+										  ->with('county_index',$county_index);
+	}
 	
-}
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update(Requestedit $Requestedit,$id)
 	{
 		
@@ -366,8 +244,8 @@ public function mail()
                 array('id' => $id));
 		 
 	$users=User::all();
-	
-	
+			
+			$this->role->__invoke(3);
 				return redirect('usermanagement/viewusers')->with('users',$users)->with('location','umanage')->with('title','User Management');
 
 	}
@@ -454,11 +332,9 @@ $array=$Requestpass->all();
 	public function status_change()
 	{
 		//
-if(Rq::ajax()) {
-
+	if(Rq::ajax()) {
        	$data = Input::all();
-		$user =User::find($data['id']);
-		
+		$user =User::find($data['id']);		
 		if($user->status==0)
 		{
 				$user->status='1';
@@ -473,16 +349,12 @@ if(Rq::ajax()) {
 				$string = "deactivated";
 
 		}
-
-
 		$user->update();
 		Mail::send('emails.status',['name'=>$user->name,'email'=>$user->email,'status' => $string], function($message) use($user) 
 		{
 		    $message->to($user->email, 'MNCH_noreply')->subject('Account Status');
 		});
-
-      print_r(json_encode($data));
-     
+		print_r(json_encode($data));   
       die;
     }
 		
@@ -526,7 +398,7 @@ if(Rq::ajax()) {
 
 public function multi()
 	{
-		//
+		$this->role->__invoke(3);
 						return view('usermanagement.multi')->with('location','umanage')->with('title','User Management')->with('error_msg','');
 
 	}

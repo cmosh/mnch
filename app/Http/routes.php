@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::controller('compare', 'Compare');
 Route::controller('rawdata','RawExcelController');
 Route::get('admin/surveys','FormController@index');
@@ -35,19 +34,12 @@ Route::post('/analytics/imciajax','AnalyticsController@imciajax');
 Route::post('/analytics/maprequest','AnalyticsController@maprequest');
 Route::get('/mnh','AnalyticsController@mnh');
 Route::get('/imci','AnalyticsController@imci');
-
 Route::get('/tester/','AnalyticsController@tester');
 Route::get('/test','AnalyticsController@blah');
-
 Route::post('survey/{id}/{status}','surveys@update');
-
-
-
 Route::get('status/{status}/{AssID}','AssessmentController@status');
-
 Route::post('survey/session','surveys@session');
 Route::post('survey/set','surveys@set');
-
 Route::post('survey/save','surveys@saveajax');
 Route::get('home', 'HomeController@index');
 Route::get('usermanagement','UserManagement@index');
@@ -65,31 +57,21 @@ Route::post('usermanagement/update/{id}','UserManagement@update');
 Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
 Route::get('usermanagement/changepass','UserManagement@changepass');
 Route::post('/usermanagement/ajax','UserManagement@ajax');
-
 Route::get('usermanagement/test','UserManagement@test');
 Route::get('usermanagement/mail','UserManagement@mail');
-
-
 Route::post('usermanagement/store','UserManagement@store');
-Route::get('password/email',function(){
-	abort(404);
-});
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
 ]);
 Route::get('self/register','Register@index');
 Route::post('self/store','Register@store');
-
 Route::get('assessments/cancel/{id}','AssessmentController@destroy');
 Route::put('assessments/{id}','surveys@update');
 Route::get('assessments/resume/{id}','surveys@edit');
 Route::get('assessments/badresume/{id}','surveys@badedit');
-
 Route::get('assessments/show/{id}','surveys@show');
-
 Route::get('assessments/start/{id}','surveys@create');
-
 Route::get('assessment/{sv}','AssessmentController@index');
 Route::get('assessments/{id}/{county}/{term}','AssessmentController@show');
 Route::get('assessments/{id}/{date}/{term}/{county}','AssessmentController@create');

@@ -59,16 +59,7 @@ return [
                 ],
             ],
         ],
-
-         'memcached2' => [
-            'driver'  => 'memcached',
-            'servers' => [
-                [
-                    'host' => '127.0.0.1', 'port' => 11212, 'weight' => 100,
-                ],
-            ],
-        ],
-
+       
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',

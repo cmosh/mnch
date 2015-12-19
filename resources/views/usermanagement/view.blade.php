@@ -3,22 +3,7 @@
  <title>MNCH | {{$title}}</title>
 @endsection
 
-@section('pageinfo')
 
- 
-         
-  @endsection
-
-
-  @section('cdns')
-
-  <!-- Select2 -->
-   
- 
-
- 
-
-@endsection 
 
 @section('content')
 

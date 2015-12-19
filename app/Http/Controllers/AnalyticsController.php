@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Http\Controllers\ArrayRedis as Rache;
 use Illuminate\Contracts\Foundation\Application As App;
 use Request;
+use Illuminate\Http\Request As Requested;
 use Input;
 use Cache;
 	
@@ -341,6 +342,11 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 
 		public function tester(){
 
+			$env = env('APP_ENV');
+
+			if($env!='local')abort(404);
+
+
 			$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
       					return IMCISubSurvey::all();
       	});    
@@ -353,9 +359,14 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 	}
 
 
-	public function blah()
-	{
-		return phpinfo();
+	public function blah( Requested $request)
+	{		
+		$env = env('APP_ENV');
+
+			if($env!='local')abort(404);
+
+			return $request;
+
 	}
 
 

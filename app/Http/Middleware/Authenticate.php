@@ -43,6 +43,12 @@ class Authenticate {
 				return redirect()->guest('auth/login');
 			}
 		}
+		else{
+			if($request->user()->status!=1){
+
+			abort(402);
+		}
+		}
 
 		return $next($request);
 	}
