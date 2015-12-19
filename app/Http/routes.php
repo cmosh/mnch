@@ -71,6 +71,9 @@ Route::get('usermanagement/mail','UserManagement@mail');
 
 
 Route::post('usermanagement/store','UserManagement@store');
+Route::get('password/email',function(){
+	abort(404);
+});
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
