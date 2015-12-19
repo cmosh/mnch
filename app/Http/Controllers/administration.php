@@ -43,7 +43,7 @@ class administration extends Controller {
 
 			if($env!='test')abort(404);
 
-		$command = array('cd ~/mnch_bak && nohup php artisan larasset:serve --port 3000 &','cd');
+		$command = array('cd ~/mnch_bak && php artisan larasset:serve --port 3000 &>/dev/null &','disown');
 
 		 SSH::into($this->ssh_connection)->run($command, function($line)
       	  	{
