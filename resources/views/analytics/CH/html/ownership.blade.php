@@ -11,9 +11,9 @@
                 <div class="box-body">
 
               <div id="ownership"></div>     
-                </div><!-- /.box-body -->
+                </div>
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->       
+              </div>
+            </div> 

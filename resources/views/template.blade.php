@@ -9,10 +9,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
    @yield('title')
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Maternal,Neonatal and Child Health Surveys Tools Kenya">
+    <meta name="keywords" content="MNCH,IMCI,MNH,CH,ChildHealth,Materanal,Neonatal,MNCHKenya,Kenya,MNCHTool,Tool,Surveys,Child,Mother">
     <!-- Bootstrap 3.3.4 -->
      {!! stylesheet_link_tag('template') !!}  
     
-
+    <link rel="shortcut icon" href='{!!asset_path("favicon.ico")!!}' type="image/x-icon">
+    <link rel="icon" href='{!!asset_path("favicon.ico")!!}' type="image/x-icon">
     @yield('cdns')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

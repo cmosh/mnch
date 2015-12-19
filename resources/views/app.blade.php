@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Maternal,Neonatal and Child Health Surveys Tools Kenya">
+    <meta name="keywords" content="MNCH,IMCI,MNH,CH,ChildHealth,Materanal,Neonatal,MNCHKenya,Kenya,MNCHTool,Tool,Surveys,Child,Mother">
+     <link rel="shortcut icon" href='{!!asset_path("favicon.ico")!!}' type="image/x-icon">
+    <link rel="icon" href='{!!asset_path("favicon.ico")!!}' type="image/x-icon">
     {!! stylesheet_link_tag('landing') !!}  
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -24,18 +26,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/home">MNCH</a>
+        <a class="navbar-brand" href="/home">MNCH</a></div>
+
        
-
-
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 
               <ul class="nav navbar-nav">
                
-                <!--  <li><a href="/home">Dashboard</a></li> -->
+           
                  
               <li><a  href="/">Child Health Survey</a></li>
              <li><a href="/mnh">Maternal and Neonatal Health Survey</a></li>
@@ -50,7 +48,7 @@
               </ul>
          
             </div>
-            <!-- Navbar Right Menu -->
+           
               <div class="navbar-custom-menu">
                
               <ul class="nav navbar-nav">
@@ -72,27 +70,27 @@
           @endif
         </ul>
 
-              </div><!-- /.navbar-custom-menu -->
-          </div><!-- /.container-fluid -->
+              </div>
+          </div>
         </nav>
       </header>
-      <!-- Full Width Column -->
+    
 
       <div class="content-wrapper">
         <div class="container-fluid">
-          <!-- Content Header (Page header) -->
+        
           <section class="content-header">
           @yield('header')
           </section>
 
-          <!-- Main content -->
+         
           <section class="content">
            @yield('content')
-          </section><!-- /.content -->
-        </div><!-- /.container -->
-      </div><!-- /.content-wrapper -->
+          </section>
+        </div>
+      </div>
       @include('template/footer')
-    </div><!-- ./wrapper -->
+    </div>
 
    
 
