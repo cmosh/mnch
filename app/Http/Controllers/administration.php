@@ -40,7 +40,7 @@ class administration extends Controller {
 	public function serve(){
 
 		$env = env('APP_ENV');
-
+			$this->role->__invoke(3);
 			if($env!='test')abort(403);
 
 		$command = 'cd ~/mnch_bak && screen -d -m php artisan larasset:serve --port 3000';
@@ -60,7 +60,7 @@ class administration extends Controller {
 	public function stop(){
 
 		$env = env('APP_ENV');
-
+			$this->role->__invoke(3);
 			if($env!='test')abort(403);
 
 		$command = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
