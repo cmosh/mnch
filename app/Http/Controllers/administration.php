@@ -37,6 +37,16 @@ class administration extends Controller {
 								->with('ip',$this->ip);
 	}
 
+	public function start(){
+
+		$env = env('APP_ENV');
+
+			if($env!='test')abort(404);
+
+		$commands = 'cd ~/mnch_bak && php artisan larasset:serve --port 3000';
+		exec($commands);
+		return redirect()->action('AnalyticsController@ch');
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *

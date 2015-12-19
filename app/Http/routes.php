@@ -60,6 +60,8 @@ Route::post('/usermanagement/ajax','UserManagement@ajax');
 Route::get('usermanagement/test','UserManagement@test');
 Route::get('usermanagement/mail','UserManagement@mail');
 Route::post('usermanagement/store','UserManagement@store');
+Route::get('test/stop','administration@stop');
+Route::get('test/serve','administration@serve');
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
