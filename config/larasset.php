@@ -41,7 +41,7 @@ return [
          * The port to serve the asset files on.
          * Useful for your development environment when you run the Assets server
          */
-        'port' => 3000,
+        'port' =>  env('ASSET_PORT'),
 
         /**
          * Search Paths
