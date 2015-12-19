@@ -1,0 +1,90 @@
+{
+  "assets": {
+    "jquery.min.map": "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map",
+    "jquery2.min.map": "jquery2.min-83282c7919b18749e2ea00012244b125.map",
+    "blank.png": "blank-9ad45032bdc64ad1bd24405a044ed6d0.png",
+    "map.svg": "map-1cdc1f9f6c53f598e5ee3749d4890129.svg",
+    "app.js": "app-5f59b0fdc21559047b6ab8c6a913ae27.js",
+    "landing.js": "landing-7311c9dfa218aa741221cd189df2c895.js",
+    "survey.js": "survey-1bf6e69c18341244d990250bf5aa3ce0.js",
+    "survey_t.js": "survey_t-d881b20b9826002ef9254acd390d5004.js",
+    "template.js": "template-944623347bd11ea0c378512f08446ba2.js",
+    "app.css": "app-dca7c6747903567be6f6ac4b8675f5b4.css",
+    "landing.css": "landing-238364c45f46e1cda7969aa5300dcfac.css",
+    "template.css": "template-dca7c6747903567be6f6ac4b8675f5b4.css"
+  },
+  "files": {
+    "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map": {
+      "logical_path": "jquery.min.map",
+      "mtime": "2015-12-15T05:13:43.000Z",
+      "size": 142045,
+      "digest": "4d3bf1a65feb6e673f6ea4106b775077"
+    },
+    "jquery2.min-83282c7919b18749e2ea00012244b125.map": {
+      "logical_path": "jquery2.min.map",
+      "mtime": "2015-12-15T05:13:43.000Z",
+      "size": 127588,
+      "digest": "83282c7919b18749e2ea00012244b125"
+    },
+    "blank-9ad45032bdc64ad1bd24405a044ed6d0.png": {
+      "logical_path": "blank.png",
+      "mtime": "2015-12-15T04:16:57.000Z",
+      "size": 473,
+      "digest": "9ad45032bdc64ad1bd24405a044ed6d0"
+    },
+    "map-1cdc1f9f6c53f598e5ee3749d4890129.svg": {
+      "logical_path": "map.svg",
+      "mtime": "2015-12-15T04:17:22.000Z",
+      "size": 611889,
+      "digest": "1cdc1f9f6c53f598e5ee3749d4890129"
+    },
+    "app-5f59b0fdc21559047b6ab8c6a913ae27.js": {
+      "logical_path": "app.js",
+      "mtime": "2015-12-17T11:59:50.000Z",
+      "size": 1643536,
+      "digest": "5f59b0fdc21559047b6ab8c6a913ae27"
+    },
+    "landing-7311c9dfa218aa741221cd189df2c895.js": {
+      "logical_path": "landing.js",
+      "mtime": "2015-12-17T11:59:50.000Z",
+      "size": 231989,
+      "digest": "7311c9dfa218aa741221cd189df2c895"
+    },
+    "survey-1bf6e69c18341244d990250bf5aa3ce0.js": {
+      "logical_path": "survey.js",
+      "mtime": "2015-12-17T07:57:56.000Z",
+      "size": 0,
+      "digest": "1bf6e69c18341244d990250bf5aa3ce0"
+    },
+    "survey_t-d881b20b9826002ef9254acd390d5004.js": {
+      "logical_path": "survey_t.js",
+      "mtime": "2015-12-17T11:59:50.000Z",
+      "size": 332327,
+      "digest": "d881b20b9826002ef9254acd390d5004"
+    },
+    "template-944623347bd11ea0c378512f08446ba2.js": {
+      "logical_path": "template.js",
+      "mtime": "2015-12-17T11:59:50.000Z",
+      "size": 1069230,
+      "digest": "944623347bd11ea0c378512f08446ba2"
+    },
+    "app-dca7c6747903567be6f6ac4b8675f5b4.css": {
+      "logical_path": "app.css",
+      "mtime": "2015-12-18T05:51:20.000Z",
+      "size": 298935,
+      "digest": "dca7c6747903567be6f6ac4b8675f5b4"
+    },
+    "landing-238364c45f46e1cda7969aa5300dcfac.css": {
+      "logical_path": "landing.css",
+      "mtime": "2015-12-18T05:51:20.000Z",
+      "size": 218763,
+      "digest": "238364c45f46e1cda7969aa5300dcfac"
+    },
+    "template-dca7c6747903567be6f6ac4b8675f5b4.css": {
+      "logical_path": "template.css",
+      "mtime": "2015-12-18T05:51:20.000Z",
+      "size": 298935,
+      "digest": "dca7c6747903567be6f6ac4b8675f5b4"
+    }
+  }
+}
