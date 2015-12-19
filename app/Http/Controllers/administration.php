@@ -23,14 +23,15 @@ class administration extends Controller {
 		$this->middleware('auth');
 		$this->clist = command::thelist($request->getClientIp());
 		$this->ssh_connection = command::ssh_connection();
-		if($request->user()->role<4 )abort(403);
+		$this->role = function ($min) use ($request) {
+			if($request->user()->role<$min)abort(403);
+		};
 
 	}
 
 	public function globe()
 	{
-		
-	
+		$this->role->__invoke(4);	
 		return view('admin.global')->with('location','Admin')
 								->with('title','Administration')
 								->with('ip',$this->ip);
@@ -43,22 +44,22 @@ class administration extends Controller {
 	 */
 	public function localredis()
 	{
-			
+		$this->role->__invoke(4);			
 		return view('admin.redmin')->with('location','Admin')
 								->with('title','Administration');
 	}
 
 
 	public function localmem()
-	{
-			
+	{	
+		$this->role->__invoke(4);		
 		return view('admin.memcached')->with('location','Admin')
 								->with('title','Administration');
 	}
 
 	public function commandcenter()
 	{	
-		
+		$this->role->__invoke(4);
 		return view('admin.commandcenter')->with('location','Admin')
 								->with('title','Administration');
 
