@@ -13,8 +13,7 @@
 		"maatwebsite/excel": "^2.0",
 		"guzzlehttp/guzzle": "^6.1",
 		"laravelcollective/remote": "~5.0",
-		"efficiently/larasset": "1.1.*",
-		"graham-campbell/htmlmin": "^4.0"
+		"efficiently/larasset": "1.1.*"		
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
