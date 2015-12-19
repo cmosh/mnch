@@ -47,6 +47,21 @@ class administration extends Controller {
 		exec($commands);
 		return redirect()->action('AnalyticsController@ch');
 	}
+
+
+
+
+
+	public function stop(){
+
+		$env = env('APP_ENV');
+
+			if($env!='test')abort(404);
+
+		$commands = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
+		exec($commands);
+		return redirect()->action('AnalyticsController@ch');
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *
