@@ -37,14 +37,14 @@ class administration extends Controller {
 								->with('ip',$this->ip);
 	}
 
-	public function start(){
+	public function serve(){
 
 		$env = env('APP_ENV');
 
 			if($env!='test')abort(404);
 
 		$commands = 'cd ~/mnch_bak && php artisan larasset:serve --port 3000';
-		exec($commands);
+		$output = shell_exec($commands);
 		return redirect()->action('AnalyticsController@ch');
 	}
 
@@ -59,7 +59,7 @@ class administration extends Controller {
 			if($env!='test')abort(404);
 
 		$commands = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
-		exec($commands);
+		$output = shell_exec($commands);
 		return redirect()->action('AnalyticsController@ch');
 	}
 	/**
