@@ -33,7 +33,7 @@ class HomeController extends Controller {
 		{
 
 			$location= 'Home';
-		return view('home.home')->with('location',$location)->('title',$location);
+		return view('home.home')->with('location',$location)->with('title',$location);
 	}
 
 }
