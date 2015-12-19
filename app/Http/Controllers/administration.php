@@ -43,8 +43,13 @@ class administration extends Controller {
 
 			if($env!='test')abort(404);
 
-		$commands = 'cd ~/mnch_bak && php artisan larasset:serve --port 3000';
-		$output = shell_exec($commands);
+		$command = 'cd ~/mnch_bak && php artisan larasset:serve --port 3000';
+
+		 SSH::into($this->ssh_connection)->run($command, function($line)
+      	  	{
+      	  		echo $line.PHP_EOL;
+      	  	});
+		
 		return redirect()->action('AnalyticsController@ch');
 	}
 
@@ -58,8 +63,12 @@ class administration extends Controller {
 
 			if($env!='test')abort(404);
 
-		$commands = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
-		$output = shell_exec($commands);
+		$command = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
+		 SSH::into($this->ssh_connection)->run($command, function($line)
+      	  	{
+      	  		echo $line.PHP_EOL;
+      	  	});
+
 		return redirect()->action('AnalyticsController@ch');
 	}
 	/**
