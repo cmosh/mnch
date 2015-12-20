@@ -159,8 +159,12 @@ class analyse extends analysisfunctions {
 			 'ObservationB' =>$imci->IMCIV1_ObservationB->__invoke($county),
 			 'ClassificationB' =>$imci->IMCIV1_ClassificationB->__invoke($county),
 			 'WeightTaken' =>$imci->IMCIV1_WeightTaken->__invoke($county),
-			 'SpecialNeeds' =>$imci->IMCIV1_SpecialNeeds->__invoke($county)
-			 
+			 'SpecialNeeds' =>$imci->IMCIV1_SpecialNeeds->__invoke($county),
+			 'Consobsv'=>$imci->IMCIV1_CONSOBSV->__invoke($county),
+			 'ExitInterview'=>$imci->IMCIV1_EXTINT->__invoke($county),
+			 'ExitInterviewB'=>$imci->IMCIV1_EXTINTB->__invoke($county),
+			 'CertCriteriia'=>$imci->IMCIV1_CERTIFICATIONCRITERIA->__invoke($county),
+			 'Outcome'=>$imci->IMCIV1_outcome->__invoke($county)
 			));
 
 

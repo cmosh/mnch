@@ -17,6 +17,14 @@ class analysisfunctions extends Controller {
 
 
 	 		// imciYN($Block,$rows=array(),$LabelCol,$Data1Col,$Data2Col,$trim,$extratrim)
+	 	 $this->IMCIV1_outcome = function($county){ 
+		return $IMCIV1_outcome = Cache::remember('IMCIV1_aoutcome'.$county,180,function(){
+
+
+					return self::practicing();
+
+      	});
+	};
 
 	 		 $this->IMCIV1_sec3 = function($county){ 
 		return $IMCIV1_sec3 = Cache::remember('IMCIV1_asec3'.$county,180,function(){
@@ -143,15 +151,13 @@ class analysisfunctions extends Controller {
 	};
 
 
-
-
-	 		$this->IMCIV1_WORKLOC = function($county){ 
+		$this->IMCIV1_WORKLOC = function($county){ 
 	 	//Tools Availability_2
 
 	 			$WORKLOCEX = array(4);
 
 		$WORKLOCHeading = array('Current Working Location', 'Yes', 'No','No information provided' );
-		return $CHV2_Tools = Cache::remember('IMCIV1_WORKLO'.$county,180,function() use($WORKLOCHeading,$WORKLOCEX){
+		return $IMCIV1_WORKLOC = Cache::remember('IMCIV1_WORKLO'.$county,180,function() use($WORKLOCHeading,$WORKLOCEX){
       					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC1BLK5RW',$WORKLOCHeading,0,3,6,'COL01','COL02','/^Was/',$WORKLOCEX);
       						
 
@@ -162,12 +168,81 @@ class analysisfunctions extends Controller {
 	};
 
 
-	 	
-	 		$this->IMCIV1_CERTIFICATION = function($county){ 
+
+	 		$this->IMCIV1_CONSOBSV = function($county){ 
+	 	//Tools Availability_2
+
+	 			$CONSOBSVEX = array(3,6,7,8);
+
+		$CONSOBSVHeading = array('Consultation Observation', 'Yes', 'No','No information provided' );
+		return $IMCIV1_CONSOBSV = Cache::remember('IMCIV1_CVONSOBSV'.$county,180,function() use($CONSOBSVHeading,$CONSOBSVEX){
+      					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC6BLK1RW',$CONSOBSVHeading,0,1,10,'COL01','COL02','/^Did the provider /',$CONSOBSVEX);
+      						
+      						$temp[1][0]='Use IMCI Chart Booklet';
+      						$temp[2][0]='Used u5 Register';
+      						$temp[3][0]='Instructed on How to Give Meds';
+      						$temp[4][0]='First Dose Given at Hospital';
+      						$temp[5][0]='When to Return';
+
+      						return $temp;
+
+      	});
+	};
+	//
+
+	$this->IMCIV1_EXTINT = function($county){ 
+	 	//Tools Availability_2
+
+	 			$EXTINTEX = array(2,4);
+
+		$EXTINTHeading = array('Exit Interview', 'Yes', 'No','No information provided' );
+		return $IMCIV1_EXTINT = Cache::remember('IMCIV1_EXTINT'.$county,180,function() use($EXTINTHeading,$EXTINTEX){
+      					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC6BLK2RW',$EXTINTHeading,0,1,6,'COL01','COL02','/^Did the provider /',$EXTINTEX);
+      						
+      						$temp[1][0]='Caregiver Satisfaction';
+      						$temp[2][0]='Correct Medicine Instructions';
+      						$temp[3][0]='When to Return';
+      						
+
+      						return $temp;
+
+      	});
+	};
+
+
+	$this->IMCIV1_EXTINTB = function($county){ 
+	 	//Tools Availability_2
+
+
+
+		$EXTINTBHeading = array('Exit Interview', 'Self','Spouse','Relative','Friend','Community Health Worker','Media','Other','No information provided' );
+		return $IMCIV1_EXTINTB = Cache::remember('IMCIV1_vEXTINTB'.$county,180,function() use($EXTINTBHeading){
+      					$temp =	  self::SevenOptionsFullStack( 'IMCIV1SEC6BLK2RW',$EXTINTBHeading,0,2,3,'COL01','COL02','/^/');
+      						
+      						
+      						return $temp;
+
+      	});
+	};
+
+
+		$this->IMCIV1_CERTIFICATIONCRITERIA = function($county){ 
+	 	//Tools Availability_2
+
+		$CERTIFICATIONCRITERIAHeading = array('Criteria For Certification : Section A', 'Yes', 'No','No information provided' );
+		return $IMCIV1_CERTIFICATIONCRITERIA = Cache::remember('IMCIV1_CERTIFICATIONCRITERIA'.$county,180,function() use($CERTIFICATIONCRITERIAHeading){
+      					$temp =  self::twoOptionsFullStack( 'IMCIV1SEC6BLK4RW',$CERTIFICATIONCRITERIAHeading,0,1,6,'COL01','COL02','/^/');
+      					$temp2 = array(self::imciYN('IMCIV1SEC6BLK4RW',array(1,2,3,4,5),'COL01','COL02','COL02','Meet All Criteria'));
+      					array_splice( $temp, 1, 0, $temp2 );	
+      					return $temp;
+      	});
+      	};
+
+	$this->IMCIV1_CERTIFICATION = function($county){ 
 	 	//Tools Availability_2
 
 		$CertificationHeading = array('Certification', 'Yes', 'No','No information provided' );
-		return $CHV2_Tools = Cache::remember('IMCIV1_CERTIFICATION'.$county,180,function() use($CertificationHeading){
+		return $IMCIV1_CERTIFICATION = Cache::remember('IMCIV1_CERTIFICATION'.$county,180,function() use($CertificationHeading){
       					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC6BLK7RW',$CertificationHeading,0,1,4,'COL01','COL02','/^/');
       						
 
@@ -176,6 +251,8 @@ class analysisfunctions extends Controller {
 
       	});
 	};
+
+
 
 
 	 		$this->CHV2_Tools = function($county){ global $term;
@@ -662,7 +739,7 @@ $countB = count($recset);
  return array('Functionality',$countF,$countB-$countF,0);
 	}
 
-	private  static function count_YN($cl){
+	protected  static function count_YN($cl){
  global $surveys;
  
 
@@ -687,7 +764,7 @@ return $big0;
 
 	}
 
-	private static function array_sum_identical_keys() {
+	protected static function array_sum_identical_keys() {
     $arrays = func_get_args();
     $keys = array_keys(array_reduce($arrays, function ($keys, $arr) { return $keys + $arr; }, array()));
     $sums = array();
@@ -746,7 +823,7 @@ return $big0;
 
 }
 	
-	public  static function count_IMCIYN($Block,$cl1,$cl2,$rows){
+	protected  static function count_IMCIYN($Block,$cl1,$cl2,$rows){
 global $surveys;
  			
  			
@@ -1268,7 +1345,7 @@ if(!isset($array))$array [] = array('No data',0);
 				$Data4 = count (array_filter($Data));
 				
 				$array = array(
-					array('Assessment Outcome','Outcome','Deficit'),
+					array('Assessment Outcome','Yes','No'),
 					array('Fully Practicing IMCI',$Data1,$count-$Data1),
 					array('Practicing IMCI with gaps',$Data2,$count-$Data2),
 					array('Not Practicing IMC',$Data3,$count-$Data3),
@@ -1926,11 +2003,11 @@ echo $TCU;
 
 	protected static function MNHPies($slices,$col){
 
-global $surveys;
+
 
 				// $slices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other (Specify)','No information provided');
 
-
+		global $surveys;
 		 $recset = $surveys;
 
 $Data = $recset->load(['y' => function($query) use ($col)
@@ -1989,10 +2066,26 @@ if(!isset($vl[$otherval])) $vl[$otherval] = 0;
 	}
 
 
+	public static function trained($surveys){
+
+		//global $surveys;
+		 $recset = $surveys;
+
+
+// 		 $Data = $recset->load(['y' => function($query) use ($col)
+// {
+	
+//     $query->where('ColumnSetID','=',$col);
+// }])->lists('y');
+
+
+// 	}
+
+		 return $recset;
 
 
 
-
+}
 
 
 

@@ -351,10 +351,9 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
       					return IMCISubSurvey::all();
       	});    
 
-      //return analyse::practicing($IMCISubSurvey); 
-
-			//return analyse::count_YNrowsIMCI('IMCIV1SEC5BLK1RW',array(3,4,5,6,7),'COL02',$IMCISubSurvey);
-			return analyse::imcianalytics($IMCISubSurvey,'All');
+   
+		//	return analyse::imcianalytics($IMCISubSurvey,'All');
+			return analyse::trained($IMCISubSurvey);
 		
 	}
 
