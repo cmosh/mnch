@@ -6,7 +6,7 @@ var ExitInterviewdata = google.visualization.arrayToDataTable(jsonData['ExitInte
       var ExitInterviewoptions = {
       
 
-       hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
+      
         width: '100%',
         colors: ['green', 'red','#C6C6C6'],
         height: 300,
@@ -23,8 +23,8 @@ var ExitInterviewdata = google.visualization.arrayToDataTable(jsonData['ExitInte
 
 var ExitInterviewBdata2 = google.visualization.arrayToDataTable(jsonData['ExitInterviewB']);
       var ExitInterviewB2options = {
-        colors: ['#3366CC', '#DC3912', '#FF9900','#C6C6C6'],
-       hAxis: {direction:-1, slantedText:true, slantedTextAngle:45 },
+        colors: ['#ffc34d','#00e673','#ff5500','#00e5e6','#3366CC', '#DC3912', '#FF9900','#C6C6C6'],
+      
         width: '100%',
         height: 300,
         title: 'Who Advised Caregivers to Seek Professional Help',
