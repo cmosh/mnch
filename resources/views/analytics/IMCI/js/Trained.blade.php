@@ -10,7 +10,7 @@ var Traineddata = google.visualization.arrayToDataTable(jsonData['Trained']);
         chartArea:{left:250,top:25,width:'50%',height:'75%'}
       };
 
-      var Trained = new google.visualization.BarChart(document.getElementById('Trained'));
+      var Trained = new google.visualization.ColumnChart(document.getElementById('Trained'));
       Trained.draw(Traineddata, Trainedoptions);
 
        function resizeTrained () {
