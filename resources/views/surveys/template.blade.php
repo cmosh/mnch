@@ -315,6 +315,22 @@ $("#demo-form").submit(function(e) {
     $(".select2").select2();
     $("[data-mask]").inputmask();
 
+
+     $(document).ready(function(){
+              $("#cancelbt").click(function(event){
+          $("#cancLink").attr("href", "waiting");
+          var canconf= confirm('Are you sure you want to cancel the survey? All progress will be lost?');
+          if(event.target==this && canconf==true){     
+          $("#cancLink").attr("href", "/assessments/cancel/{{$AssID}}");
+          alert( "Cancel Successful");
+             }
+          else{
+          $("#cancLink").attr("href", "#");
+          alert( "Cancel aborted");
+          }
+              });
+          });
+
 </script>
 
 {!!javascript_include_tag('survey')!!}
