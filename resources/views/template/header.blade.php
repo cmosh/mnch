@@ -75,38 +75,18 @@
            
                @endif
                @endif
-              <li class="dropdown user user-menu">
-                <!-- Menu Toggle Button -->
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-                   
-                <ul class="dropdown-menu">
-                  <!-- The user image in the menu -->
-                  <li class="user-header">
-                    
-                  <p>  {{ Auth::user()->email }}  </p> 
 
-                    
+                <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+               
+                <li><a href="/usermanagement/changepass">Change Password</a></li>
+                 <li><a href="/auth/logout">Logout</a></li>
+              </ul>
+            </li>
 
-
-                  </li>
-                  
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="/usermanagement/changepass" class="btn btn-default btn-flat">Change Password</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="/auth/logout" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-</li>
-                    
-                  
 
                 
-                </ul>
-
-                 
-              </li>
               @endif
        
               <!-- Control Sidebar Toggle Button -->
