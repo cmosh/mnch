@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
  use App\Http\Controllers\ArrayRedis as Cache;
+ use Cache as Mache;
  use Maatwebsite\Excel\Excel;
 use Illuminate\Http\Request;
 global $term;
@@ -17,7 +18,13 @@ class analysisfunctions extends Controller {
 
 
 	 		// imciYN($Block,$rows=array(),$LabelCol,$Data1Col,$Data2Col,$trim,$extratrim)
-	 	 $this->IMCIV1_outcome = function($county){ 
+	 	 $this->IMCIV1_trained = function($county){ 
+		return $IMCIV1_trained = Cache::remember('IMCIV1_trained'.$county,180,function()use($county){
+			return self::trained($county);
+      	});
+      		};
+
+		 $this->IMCIV1_outcome = function($county){ 
 		return $IMCIV1_outcome = Cache::remember('IMCIV1_aoutcome'.$county,180,function(){
 
 
@@ -157,8 +164,8 @@ class analysisfunctions extends Controller {
 	 			$WORKLOCEX = array(4);
 
 		$WORKLOCHeading = array('Current Working Location', 'Yes', 'No','No information provided' );
-		return $IMCIV1_WORKLOC = Cache::remember('IMCIV1_WORKLO'.$county,180,function() use($WORKLOCHeading,$WORKLOCEX){
-      					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC1BLK5RW',$WORKLOCHeading,0,3,6,'COL01','COL02','/^Was/',$WORKLOCEX);
+		return $IMCIV1_WORKLOC = Cache::remember('IMCIV1_WORKLOCC'.$county,180,function() use($WORKLOCHeading,$WORKLOCEX){
+      					$temp =	  self::twoOptionsFullStack( 'IMCIV1SEC1BLK5RW',$WORKLOCHeading,0,2,6,'COL01','COL02','/^Was/',$WORKLOCEX);
       						
 
 
@@ -2066,27 +2073,76 @@ if(!isset($vl[$otherval])) $vl[$otherval] = 0;
 	}
 
 
-	public static function trained($surveys){
+	protected static function trained($county){
 
-		//global $surveys;
+		global $surveys;
 		 $recset = $surveys;
 
 
-// 		 $Data = $recset->load(['y' => function($query) use ($col)
-// {
-	
-//     $query->where('ColumnSetID','=',$col);
-// }])->lists('y');
 
 
-// 	}
+		 $Assessed =  $recset->groupby('Type');
 
-		 return $recset;
+		 foreach ($Assessed as $Type => $Workers) {
+		 	$AssessedParticipants [] = array($Type,count($Workers));
+		 }
+
+		 $AssessedParticipants = collect($AssessedParticipants)->keyBy(0);
+
+		if($county=='All'){
+			$AllParticipants = Mache::rememberForever('AllParticipant'.$county,function(){
+
+				$temp = Participantsview::all();
+				$Assessed = $temp->groupby('FacilityGroup');
+				foreach ($Assessed as $Type => $Workers) {
+		 		$Array [] = array($Type, count($Workers));
+				 }
+				 return collect($Array)->keyBy(0);
+
+			});
+		}
+		else{
+			$AllParticipants = Mache::rememberForever('AllParticipant'.$county,function() use ($county){
+				$temp = Participantsview::where('County','=',$county)->get();
+				$Assessed = $temp->groupby('FacilityGroup');
+				foreach ($Assessed as $Type => $Workers) {
+		 		$Array [] = array($Type, count($Workers));
+				 }
+				 return collect($Array)->keyBy(0);
+
+			});
+		}
+
+		
+
+		$Array [] = array('Total Number of HCWS Trained and Assessed','Trained & Assessed','Trained & Not Assessed');
+		foreach ($AllParticipants as $key => $value) {
+				
+			if(isset($AssessedParticipants[$key])) $Assessed = $AssessedParticipants[$key][1];
+			else $Assessed = 0;
+			if(isset($value[1]))$val = $value[1]; else $val =0;
+			$Not = $val - $Assessed;
+			$Array [] = array($key,$Assessed,$Not);
+
+
+		}
+
+		return $Array;
+
+		
 
 
 
 }
+		
+	public static function sunit($surveys){
 
+	// global $surveys;
+		 $recset = $surveys;
 
+	$col = 'IMCIV1SEC1BLK5RW1COL02';
+
+	return $col;
+}
 
 }

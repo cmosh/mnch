@@ -296,7 +296,7 @@ $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
 		$SubmittedMNHCount = SubmittedMNHCount::first();
 		$SubmittedMNHCounties = SubmittedMNHCountie::get();
 	
-		$SurveysDone = SurveysDone::where('Name','=','IMCI')->get();
+		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
 	
 	
 
@@ -318,13 +318,13 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
       	});     
 
 
-			$IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,'All','Baseline');
+			///$IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,'All');
 
 		
 		$SubmittedIMCICount = SubmittedIMCICount::first();
 		$SubmittedIMCICounties = SubmittedIMCICountie::get();
 	
-		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
+		$SurveysDone = SurveysDone::where('Name','=','IMCI')->get();
 	
 	
 
@@ -347,24 +347,24 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 			if($env!='local')abort(404);
 
 
-			$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
-      					return IMCISubSurvey::all();
-      	});    
+			$IMCISubSurvey = /*Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
+      					return*/ IMCISubSurvey::all();
+     /* 	}); */   
 
    
-		//	return analyse::imcianalytics($IMCISubSurvey,'All');
-			return analyse::trained($IMCISubSurvey);
+			return analyse::imcianalytics($IMCISubSurvey,'All');
+			//return analyse::sunit($IMCISubSurvey);
 		
 	}
 
 
-	public function blah( Requested $request)
+	public function blah( )
 	{		
 		$env = env('APP_ENV');
 
 			if($env!='local')abort(404);
 
-			return $request;
+			Cache::forget('IMCIV2SubSurveyAll');
 
 	}
 

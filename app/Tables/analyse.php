@@ -164,7 +164,8 @@ class analyse extends analysisfunctions {
 			 'ExitInterview'=>$imci->IMCIV1_EXTINT->__invoke($county),
 			 'ExitInterviewB'=>$imci->IMCIV1_EXTINTB->__invoke($county),
 			 'CertCriteriia'=>$imci->IMCIV1_CERTIFICATIONCRITERIA->__invoke($county),
-			 'Outcome'=>$imci->IMCIV1_outcome->__invoke($county)
+			 'Outcome'=>$imci->IMCIV1_outcome->__invoke($county),
+			 'Trained'=>$imci->IMCIV1_trained->__invoke($county)
 			));
 
 

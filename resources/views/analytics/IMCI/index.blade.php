@@ -43,7 +43,8 @@
                         <br>
                         </div>
                         </div>
-                         @include('analytics/IMCI/html/WorkingLocation')
+                         @include('analytics/IMCI/html/Trained')
+
 </div>
 
      
@@ -51,11 +52,8 @@
 
 
      
-            <div class="col-md-12">
-                  
-            <!-- the rest  in section 1-->
-            </div>
-
+            @include('analytics/IMCI/html/WorkingLocation')
+            
 <!-- the rest -->
  <div class="col-md-12">
                         
@@ -112,6 +110,11 @@
                         </div>
                         </div>
 </div>
+
+  @include('analytics/IMCI/html/Consobsv')
+  @include('analytics/IMCI/html/ExitInterview')
+  @include('analytics/IMCI/html/CertCriteriia')
+  @include('analytics/IMCI/html/Outcome')
   
  @include('analytics/IMCI/html/Certification')
 
@@ -251,7 +254,11 @@ function drawChart() {
  @include('analytics/IMCI/js/WeightTaken')
   @include('analytics/IMCI/js/SpecialNeeds')
    @include('analytics/IMCI/js/WorkingLocation')
-
+@include('analytics/IMCI/js/Consobsv')
+  @include('analytics/IMCI/js/ExitInterview')
+  @include('analytics/IMCI/js/CertCriteriia')
+  @include('analytics/IMCI/js/Outcome')
+   @include('analytics/IMCI/js/Trained')
 	    
   $('#X').html('Data from '+TotalSubmitt+ ' healthworkers in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} healthworkers in {{count($SubmittedCounties)}} counties');
