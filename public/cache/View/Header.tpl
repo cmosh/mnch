@@ -5,7 +5,7 @@
    <script type="text/javascript">
  
  
- var rurl = "<?php echo ($_SERVER['HTTP_HOST']) ?>"+"/admin/memcached"; }
+ var rurl = "<?php echo ($_SERVER['HTTP_HOST']) ?>"+"/admin/memcached"; 
  if (frameElement==null){
     window.top.location.href= rurl;
  }
@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
 
-    
+
 </head>
 
 
