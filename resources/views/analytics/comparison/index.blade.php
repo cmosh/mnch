@@ -1,8 +1,7 @@
 @extends('app')
 
 @section('content')
- <link href="/css/dragging.css" rel="stylesheet" type="text/css" />
-
+ 
   
               {!! Form::open() !!}{!! Form::close() !!}
 
@@ -113,8 +112,7 @@
 
 
 @section('js')
-    <link href="/bower_components/jq/jquery-ui.css" rel="stylesheet" /> 
-    <script src="/bower_components/jq/jquery-ui.js"></script>    
+  
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
     google.load('visualization', '1', {packages: ['corechart', 'bar']});

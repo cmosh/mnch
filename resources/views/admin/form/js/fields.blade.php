@@ -16,8 +16,10 @@
     function formatFset (fset) {
       if (fset.loading) return fset.text;
 
+
+
       var markup = "<div class='select2-result-fsetsitory clearfix'>" +
-        "<div class='select2-result-fsetsitory__avatar'><img src='/img/" + fset.type + ".png'>"+fset.type+"</div>" +
+        "<div class='select2-result-fsetsitory__avatar'><img src='{!!asset_path('/'')!!}" + fset.type + ".png'>"+fset.type+"</div>" +
         "<div class='select2-result-fsetsitory__meta'>" +
           "<div class='select2-result-fsetsitory__title'> Set: " + fset.field_setName + "</div>";
 

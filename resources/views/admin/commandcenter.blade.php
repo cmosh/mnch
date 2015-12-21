@@ -219,21 +219,16 @@
 
                   </td>
 
-              
-                  	<td>
-                      <a command="{{env('APP_ENV')}}redis" class="btn btn-app">
-                    <i class="fa fa-cubes" style="color:blue"></i> Setup &amp; Start
-                  </a>
-                  	</td>
+                               
 
                       <td>
-                      <a command="{{env('APP_ENV')}}redisremove" class="btn btn-app">
+                      <a command="redisremove" class="btn btn-app">
                     <i class="fa fa-cubes" style="color:orange"></i> Pause 
                   </a>
                     </td>
 
                       <td>
-                      <a command="{{env('APP_ENV')}}redisreset" class="btn btn-app">
+                      <a command="redisreset" class="btn btn-app">
                     <i class="fa fa-cubes" style="color:green"></i> Resume
                   </a>
                     </td>
