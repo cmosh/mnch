@@ -2,9 +2,11 @@
   "assets": {
     "jquery.min.map": "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map",
     "jquery2.min.map": "jquery2.min-83282c7919b18749e2ea00012244b125.map",
-    "Thumbs.db": "Thumbs-0cb065f3311f773ce1f48ec7a2363317.db",
-    "ZeroClipboard.swf": "ZeroClipboard-113dd5cd3f07b9d002cd71fb8ba146ac.swf",
+    "Thumbs.db": "Thumbs-c12e76dc65ec95543a87570d92648cc3.db",
     "blank.png": "blank-9ad45032bdc64ad1bd24405a044ed6d0.png",
+    "combo.png": "combo-940262fa5f35495e5f0ce696ebe1cd2b.png",
+    "coolmultiplecombo.png": "coolmultiplecombo-749db872f699e9eca210acbf04846cbf.png",
+    "coolradio.png": "coolradio-b8f5e7aa457faa27f830bc9e0dfe27f9.png",
     "favicon.ico": "favicon-165fbdc830c8f86c6ce1b67011bbc505.ico",
     "images/Thumbs.db": "images/Thumbs-b0d49a13988b9992e12669503ea83292.db",
     "images/ui-bg_glass_65_ffffff_1x400.png": "images/ui-bg_glass_65_ffffff_1x400-24c8cf21f83412ff885562719cfc8ec1.png",
@@ -16,15 +18,21 @@
     "images/ui-icons_666666_256x240.png": "images/ui-icons_666666_256x240-9d101431bece3913e816a35fcb4f892f.png",
     "images/ui-icons_ff0084_256x240.png": "images/ui-icons_ff0084_256x240-7e4a957359991eb366f83504901a284d.png",
     "images/ui-icons_ffffff_256x240.png": "images/ui-icons_ffffff_256x240-0f64dea0e15bdb20705cc940ede53a94.png",
+    "label.png": "label-44e756a787e5eba03d36b40309fcd054.png",
     "map.svg": "map-1cdc1f9f6c53f598e5ee3749d4890129.svg",
-    "app.js": "app-5f59b0fdc21559047b6ab8c6a913ae27.js",
-    "landing.js": "landing-7311c9dfa218aa741221cd189df2c895.js",
+    "multiplecombo.png": "multiplecombo-9999bb8a7eafd28d792b628d3e12f192.png",
+    "number.png": "number-c8120e76331c719d27fe9f815c2c0b37.png",
+    "radio.png": "radio-78fd6a6bf4311c5ec06648c65c4f6f2c.png",
+    "text.png": "text-332db56469bff00cfafe2bf75221b937.png",
+    "app.js": "app-cd813ad58d234d56a5ea63177cff3450.js",
+    "landing.js": "landing-2d620fad46706fcbbc3ea4fed22bb5c4.js",
     "survey.js": "survey-1bf6e69c18341244d990250bf5aa3ce0.js",
-    "survey_t.js": "survey_t-d881b20b9826002ef9254acd390d5004.js",
-    "template.js": "template-944623347bd11ea0c378512f08446ba2.js",
-    "app.css": "app-dca7c6747903567be6f6ac4b8675f5b4.css",
-    "landing.css": "landing-238364c45f46e1cda7969aa5300dcfac.css",
-    "template.css": "template-dca7c6747903567be6f6ac4b8675f5b4.css"
+    "survey_t.js": "survey_t-2f25bcd2afe6d0b29fac5a8d14f002a4.js",
+    "template.js": "template-7da0d0a6f0c8c994405cfc0564c0d482.js",
+    "ZeroClipboard.swf": "ZeroClipboard-113dd5cd3f07b9d002cd71fb8ba146ac.swf",
+    "app.css": "app-f8f73c0b5c8c8960caae69f6d2d40fd2.css",
+    "landing.css": "landing-8c68e6d0acb0f139f304c88c1e70d99d.css",
+    "template.css": "template-f8f73c0b5c8c8960caae69f6d2d40fd2.css"
   },
   "files": {
     "jquery.min-4d3bf1a65feb6e673f6ea4106b775077.map": {
@@ -39,23 +47,35 @@
       "size": 127588,
       "digest": "83282c7919b18749e2ea00012244b125"
     },
-    "Thumbs-0cb065f3311f773ce1f48ec7a2363317.db": {
+    "Thumbs-c12e76dc65ec95543a87570d92648cc3.db": {
       "logical_path": "Thumbs.db",
-      "mtime": "2015-12-19T10:12:03.000Z",
+      "mtime": "2015-12-21T08:25:42.000Z",
       "size": 9728,
-      "digest": "0cb065f3311f773ce1f48ec7a2363317"
-    },
-    "ZeroClipboard-113dd5cd3f07b9d002cd71fb8ba146ac.swf": {
-      "logical_path": "ZeroClipboard.swf",
-      "mtime": "2015-12-15T04:16:53.000Z",
-      "size": 6580,
-      "digest": "113dd5cd3f07b9d002cd71fb8ba146ac"
+      "digest": "c12e76dc65ec95543a87570d92648cc3"
     },
     "blank-9ad45032bdc64ad1bd24405a044ed6d0.png": {
       "logical_path": "blank.png",
       "mtime": "2015-12-15T04:16:57.000Z",
       "size": 473,
       "digest": "9ad45032bdc64ad1bd24405a044ed6d0"
+    },
+    "combo-940262fa5f35495e5f0ce696ebe1cd2b.png": {
+      "logical_path": "combo.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 2089,
+      "digest": "940262fa5f35495e5f0ce696ebe1cd2b"
+    },
+    "coolmultiplecombo-749db872f699e9eca210acbf04846cbf.png": {
+      "logical_path": "coolmultiplecombo.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 1280,
+      "digest": "749db872f699e9eca210acbf04846cbf"
+    },
+    "coolradio-b8f5e7aa457faa27f830bc9e0dfe27f9.png": {
+      "logical_path": "coolradio.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 11973,
+      "digest": "b8f5e7aa457faa27f830bc9e0dfe27f9"
     },
     "favicon-165fbdc830c8f86c6ce1b67011bbc505.ico": {
       "logical_path": "favicon.ico",
@@ -123,23 +143,53 @@
       "size": 6299,
       "digest": "0f64dea0e15bdb20705cc940ede53a94"
     },
+    "label-44e756a787e5eba03d36b40309fcd054.png": {
+      "logical_path": "label.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 5250,
+      "digest": "44e756a787e5eba03d36b40309fcd054"
+    },
     "map-1cdc1f9f6c53f598e5ee3749d4890129.svg": {
       "logical_path": "map.svg",
       "mtime": "2015-12-15T04:17:22.000Z",
       "size": 611889,
       "digest": "1cdc1f9f6c53f598e5ee3749d4890129"
     },
-    "app-5f59b0fdc21559047b6ab8c6a913ae27.js": {
-      "logical_path": "app.js",
-      "mtime": "2015-12-17T11:59:50.000Z",
-      "size": 1643536,
-      "digest": "5f59b0fdc21559047b6ab8c6a913ae27"
+    "multiplecombo-9999bb8a7eafd28d792b628d3e12f192.png": {
+      "logical_path": "multiplecombo.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 1295,
+      "digest": "9999bb8a7eafd28d792b628d3e12f192"
     },
-    "landing-7311c9dfa218aa741221cd189df2c895.js": {
+    "number-c8120e76331c719d27fe9f815c2c0b37.png": {
+      "logical_path": "number.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 11616,
+      "digest": "c8120e76331c719d27fe9f815c2c0b37"
+    },
+    "radio-78fd6a6bf4311c5ec06648c65c4f6f2c.png": {
+      "logical_path": "radio.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 6033,
+      "digest": "78fd6a6bf4311c5ec06648c65c4f6f2c"
+    },
+    "text-332db56469bff00cfafe2bf75221b937.png": {
+      "logical_path": "text.png",
+      "mtime": "2015-12-15T04:17:17.000Z",
+      "size": 14641,
+      "digest": "332db56469bff00cfafe2bf75221b937"
+    },
+    "app-cd813ad58d234d56a5ea63177cff3450.js": {
+      "logical_path": "app.js",
+      "mtime": "2015-12-21T08:10:13.000Z",
+      "size": 1261921,
+      "digest": "cd813ad58d234d56a5ea63177cff3450"
+    },
+    "landing-2d620fad46706fcbbc3ea4fed22bb5c4.js": {
       "logical_path": "landing.js",
-      "mtime": "2015-12-17T11:59:50.000Z",
-      "size": 231989,
-      "digest": "7311c9dfa218aa741221cd189df2c895"
+      "mtime": "2015-12-21T08:10:13.000Z",
+      "size": 454133,
+      "digest": "2d620fad46706fcbbc3ea4fed22bb5c4"
     },
     "survey-1bf6e69c18341244d990250bf5aa3ce0.js": {
       "logical_path": "survey.js",
@@ -147,35 +197,41 @@
       "size": 0,
       "digest": "1bf6e69c18341244d990250bf5aa3ce0"
     },
-    "survey_t-d881b20b9826002ef9254acd390d5004.js": {
+    "survey_t-2f25bcd2afe6d0b29fac5a8d14f002a4.js": {
       "logical_path": "survey_t.js",
-      "mtime": "2015-12-17T11:59:50.000Z",
-      "size": 332327,
-      "digest": "d881b20b9826002ef9254acd390d5004"
+      "mtime": "2015-12-21T08:10:13.000Z",
+      "size": 554473,
+      "digest": "2f25bcd2afe6d0b29fac5a8d14f002a4"
     },
-    "template-944623347bd11ea0c378512f08446ba2.js": {
+    "template-7da0d0a6f0c8c994405cfc0564c0d482.js": {
       "logical_path": "template.js",
-      "mtime": "2015-12-17T11:59:50.000Z",
-      "size": 1069230,
-      "digest": "944623347bd11ea0c378512f08446ba2"
+      "mtime": "2015-12-21T08:10:13.000Z",
+      "size": 687620,
+      "digest": "7da0d0a6f0c8c994405cfc0564c0d482"
     },
-    "app-dca7c6747903567be6f6ac4b8675f5b4.css": {
+    "ZeroClipboard-113dd5cd3f07b9d002cd71fb8ba146ac.swf": {
+      "logical_path": "ZeroClipboard.swf",
+      "mtime": "2015-12-15T04:16:53.000Z",
+      "size": 6580,
+      "digest": "113dd5cd3f07b9d002cd71fb8ba146ac"
+    },
+    "app-f8f73c0b5c8c8960caae69f6d2d40fd2.css": {
       "logical_path": "app.css",
-      "mtime": "2015-12-18T05:51:20.000Z",
-      "size": 298935,
-      "digest": "dca7c6747903567be6f6ac4b8675f5b4"
+      "mtime": "2015-12-21T08:11:52.000Z",
+      "size": 294844,
+      "digest": "f8f73c0b5c8c8960caae69f6d2d40fd2"
     },
-    "landing-238364c45f46e1cda7969aa5300dcfac.css": {
+    "landing-8c68e6d0acb0f139f304c88c1e70d99d.css": {
       "logical_path": "landing.css",
-      "mtime": "2015-12-18T05:51:20.000Z",
-      "size": 218763,
-      "digest": "238364c45f46e1cda7969aa5300dcfac"
+      "mtime": "2015-12-21T08:11:52.000Z",
+      "size": 270470,
+      "digest": "8c68e6d0acb0f139f304c88c1e70d99d"
     },
-    "template-dca7c6747903567be6f6ac4b8675f5b4.css": {
+    "template-f8f73c0b5c8c8960caae69f6d2d40fd2.css": {
       "logical_path": "template.css",
-      "mtime": "2015-12-18T05:51:20.000Z",
-      "size": 298935,
-      "digest": "dca7c6747903567be6f6ac4b8675f5b4"
+      "mtime": "2015-12-21T08:11:52.000Z",
+      "size": 294844,
+      "digest": "f8f73c0b5c8c8960caae69f6d2d40fd2"
     }
   }
 }
