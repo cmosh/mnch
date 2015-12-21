@@ -16,13 +16,13 @@ use App\Tables\MNHSubSurvey;
 class RawExcelController extends Controller {
 
 
-public function getIndex(){
+public function index(){
 
 
 	return view('analytics.CH.raw');
 }
 
-public function getFacilitySummary(Excel $excel)
+public function FacilitySummary(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -104,7 +104,7 @@ public function getFacilitySummary(Excel $excel)
 	
 
 }
-	public function getStaffTraining(Excel $excel)
+	public function StaffTraining(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -219,7 +219,7 @@ public function getFacilitySummary(Excel $excel)
 }
 
 
-public function getHealthServices(Excel $excel)
+public function HealthServices(Excel $excel)
 {
 
 	$f = CHSubSurvey::all();
@@ -342,7 +342,7 @@ $arr=array('','','','');
 
 
 
-public function getGuidelines(Excel $excel)
+public function Guidelines(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -463,7 +463,7 @@ $arr=array();
 
 
 
-public function getTools(Excel $excel)
+public function Tools(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -582,7 +582,7 @@ $arr=array();
 }
 
 
-public function getDiarrhoea(Excel $excel)
+public function Diarrhoea(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -748,7 +748,7 @@ $arr=array();
 
 	})->download('csv');
 }
-public function getAntibiotics(Excel $excel)
+public function Antibiotics(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -899,7 +899,7 @@ $arr=array();
 
 	})->download('csv');
 }
-public function getMalaria(Excel $excel)
+public function Malaria(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -1045,7 +1045,7 @@ $arr=array();
 
 
 
-public function getOrtFunctionality(Excel $excel)
+public function OrtFunctionality(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -1148,7 +1148,7 @@ public function getOrtFunctionality(Excel $excel)
 
 
 
-public function getOrtLocation(Excel $excel)
+public function OrtLocation(Excel $excel)
 {
 
 	$f = CHSubSurvey::all();
@@ -1276,7 +1276,7 @@ $arr=array('','','','','');
 
 
 
-public function getSuppliesAvailability(Excel $excel)
+public function SuppliesAvailability(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -1397,7 +1397,7 @@ $arr=array();
 	})->download('csv');
 }
 
-public function getResourceAvailability(Excel $excel)
+public function ResourceAvailability(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();
@@ -1515,7 +1515,7 @@ $arr=array();
 }
 
 
-	public function getCommunityStrategy(Excel $excel)
+	public function CommunityStrategy(Excel $excel)
 	{
 
 		$f = CHSubSurvey::all();

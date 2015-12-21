@@ -12,7 +12,7 @@ class command  {
 
 	public static function ssh_connection(){
 
-		switch (env('APP_ENV')) {
+		switch (config('app.env')) {
 			case 'local':
 				return 'local_homestead';
 
@@ -37,9 +37,9 @@ class command  {
 
 	public static function environment($clist){
 
-		switch (env('APP_ENV')) {
+		switch (config('app.env')) {
 			case 'local':
-				array_unshift($clist,'cd ~/'.env("LOCAL_FOLDER").'/mnch');
+				array_unshift($clist,'cd ~/'.config("app.folder").'/mnch');
 
 				break;
 			case 'test':
@@ -91,10 +91,10 @@ class command  {
 	public static function thelist($theip)
 	{
 		
-		$theport = env('APP_REDISMANAGE');
-		 $theurl = str_replace(env('APP_PORT'), '', str_replace("http://",'',url('')));
-		 $thefile = $theurl.':'.$theport;
-		 $thefolder = env('LOCAL_FOLDER');
+		
+		 $theurl = str_replace("http://",'',url(''));
+		
+		 $thefolder = config('app.folder');
 
 				 $thelist=array('eip'=>array('sudo grep -v "adminip=\"'.$theip.'\"" .env > .envtemp; sudo mv .envtemp .env','sudo echo "adminip=\"'.$theip.'\"" >> .env'),
 				 			'dip'=>array('sudo grep -v "adminip=\"'.$theip.'\"" .env > .envtemp; sudo mv .envtemp .env'),

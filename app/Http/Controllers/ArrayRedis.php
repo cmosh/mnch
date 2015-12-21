@@ -21,7 +21,7 @@ class ArrayRedis extends Controller {
 public static function remember($key,$minutes,$closure){
 
 
-            $prefix = env('CACHE_PREFIX').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 		if($redis->exists($prefix.$key)){
@@ -46,7 +46,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function forever($key,$closure){
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 		if($redis->exists($prefix.$key)){
@@ -70,7 +70,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function foreverreplacing($key,$closure){
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 	
@@ -95,7 +95,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function foreverjson($key,$closure){
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 		if($redis->exists($prefix.$key)){
@@ -119,7 +119,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function forevercollection($key,$closure){
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 		if($redis->exists($prefix.$key)){
@@ -144,7 +144,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function foreveryoung($key,$closure){
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 		if($redis->exists($prefix.$key)){
@@ -172,7 +172,7 @@ public static function remember($key,$minutes,$closure){
 
 	public static function areyouyoung($key){
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 		return $redis->exists($prefix.$key);
@@ -183,7 +183,7 @@ public static function remember($key,$minutes,$closure){
 	public static function murdersession($key){
 
 
-            $prefix = env('CACHE_PREFIX', 'laravel').':';
+            $prefix = config('cache.prefix').':';
 		$redis = LRedis::connection();
 
 			if($redis->exists($prefix.$key)){

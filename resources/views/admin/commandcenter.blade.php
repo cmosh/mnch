@@ -1,3 +1,4 @@
+
 @extends('template')
 @section('title')
  <title>MNCH | {{$title}}</title>
@@ -22,7 +23,7 @@
             <div class="col-sm-4 invoice-col">
              
               <address>
-                <strong>{{env('APP_ENV')}} site</strong><br>
+                <strong>{{config('app.env')}} site</strong><br>
                 SSH Connection<br>
                 Authentication: private key<br>
                 
@@ -99,40 +100,40 @@
                   Set Permissions
                   </td>
                   	<td>
-                      <a command="{{env('APP_ENV')}}rootfolder" class="btn btn-app">
+                      <a command="{{config('app.env')}}rootfolder" class="btn btn-app">
                     <i class="fa fa-folder"></i> Root Folder
                   </a>
                   	</td>
                   <td>
-                  <a command="{{env('APP_ENV')}}storage" class="btn btn-app">
+                  <a command="{{config('app.env')}}storage" class="btn btn-app">
                     
                     <i class="fa fa-fire"></i> Storage 
                   </a>
                   </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}uploads" class="btn btn-app">
+                  <a command="{{config('app.env')}}uploads" class="btn btn-app">
                     <i class="fa fa-magnet"></i> Uploads
                   </a>
                   </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}memcache" class="btn btn-app">
+                  <a command="{{config('app.env')}}memcache" class="btn btn-app">
                     <i class="fa fa-life-ring"></i> Memcached
                   </a>
                   </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}redmin" class="btn btn-app">
+                  <a command="{{config('app.env')}}redmin" class="btn btn-app">
                     <i class="fa fa-money"></i> Redmin
                   </a>
                  </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}cron" class="btn btn-app">
+                  <a command="{{config('app.env')}}cron" class="btn btn-app">
                     <i class="fa fa-genderless"></i>Cron
                   </a>
                  </td>
                 
                   </tr>
 
-                  @if(env('APP_ENV')!='local')
+                  @if(config('app.env')!='local')
 
                    <tr>
                   <td  style="vertical-align:middle">
@@ -140,28 +141,28 @@
                   Github
                   </td>
                   	<td>
-                      <a command="{{env('APP_ENV')}}update" class="btn btn-app">
+                      <a command="{{config('app.env')}}update" class="btn btn-app">
                     <i class="fa fa-upload"></i> Update Site
                   </a>
                   	</td>
                   <td>
-                  <a command="{{env('APP_ENV')}}reset" class="btn btn-app">
+                  <a command="{{config('app.env')}}reset" class="btn btn-app">
                     
                     <i class="fa fa-recycle"></i> Git Reset
                   </a>
                   </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}branch" class="btn btn-app">
+                  <a command="{{config('app.env')}}branch" class="btn btn-app">
                     <i class="fa fa-chain-broken"></i> Check Branch
                   </a>
                   </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}push" class="btn btn-app">
+                  <a command="{{config('app.env')}}push" class="btn btn-app">
                     <i class="fa fa-play"></i> Git Push
                   </a>
                   </td>
                   <td>
-                  <a command="{{env('APP_ENV')}}testgit" class="btn btn-app">
+                  <a command="{{config('app.env')}}testgit" class="btn btn-app">
                     <i class="fa fa-repeat"></i> Test SSH
                   </a>
                  </td>
@@ -199,13 +200,13 @@
                     </td>
 
                      <td>
-                      <a command="{{env('APP_ENV')}}ndown" class="btn btn-app">
+                      <a command="{{config('app.env')}}ndown" class="btn btn-app">
                     <i class="fa fa-retweet"></i> Shutdown Site
                   </a>
                     </td>
 
                       <td>
-                      <a command="{{env('APP_ENV')}}nup" class="btn btn-app">
+                      <a command="{{config('app.env')}}nup" class="btn btn-app">
                     <i class="fa fa-retweet"></i> Serve Site
                   </a>
                     </td>

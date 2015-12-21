@@ -39,7 +39,7 @@ class administration extends Controller {
 
 	public function serve(){
 
-		$env = env('APP_ENV');
+		$env = config('app.env');
 			$this->role->__invoke(3);
 			if($env!='test')abort(403);
 
@@ -59,7 +59,7 @@ class administration extends Controller {
 
 	public function stop(){
 
-		$env = env('APP_ENV');
+		$env = config('app.env');
 			$this->role->__invoke(3);
 			if($env!='test')abort(403);
 
@@ -118,7 +118,7 @@ class administration extends Controller {
 	public function globcmd(){
          if(Request::ajax()) {
       $data = Input::all();
-      	$cmd=str_replace(env('APP_ENV'), $data['appenv'],$data['cmd']); 
+      	$cmd=str_replace(config('app.env'), $data['appenv'],$data['cmd']); 
 
       	$command=$this->clist[$cmd];
       	$command=command::environmentG($command,$data['appenv']);

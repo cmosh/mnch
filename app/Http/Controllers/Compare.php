@@ -27,7 +27,8 @@ class Compare extends Controller {
 
    
 
-public function postChv2(){
+public function chv2(){
+
 
      if(Request::ajax()) {
 
@@ -63,7 +64,7 @@ public function postChv2(){
   }
 
 
-  public function postMnhv2(){
+  public function mnhv2(){
 
      if(Request::ajax()) {
 

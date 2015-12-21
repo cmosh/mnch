@@ -26,6 +26,7 @@ use Request;
 use Illuminate\Http\Request As Requested;
 use Input;
 use Cache;
+
 	
 class AnalyticsController extends Controller {
 
@@ -342,7 +343,7 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 
 		public function tester(){
 
-			$env = env('APP_ENV');
+			$env = config("app.env");
 
 			if($env!='local')abort(404);
 
@@ -360,11 +361,13 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 
 	public function blah( )
 	{		
-		$env = env('APP_ENV');
+		// $env = config("app.env");
 
-			if($env!='local')abort(404);
+		// 	if($env!='local')abort(404);
 
-			Cache::forget('IMCIV2SubSurveyAll');
+		// 	Cache::forget('IMCIV2SubSurveyAll');
+
+		return config('app.env');
 
 	}
 

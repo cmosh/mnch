@@ -8,14 +8,14 @@
         <div class="tab-content">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">{{env("APP_ENV")}} site</h3>
+            <h3 class="control-sidebar-heading">{{config("app.env")}} site</h3>
             <ul class="control-sidebar-menu">
               <li>
                 <a href="/admin/redmin">
                   <i class="menu-icon fa fa-cubes bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Redis</h4>
-                    <p>The {{env("APP_ENV")}} site's Redis Control Panel</p>
+                    <p>The {{config("app.env")}} site's Redis Control Panel</p>
                   </div>
                 </a>
               </li>
@@ -24,7 +24,7 @@
                   <i class="menu-icon fa fa-medium bg-green"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">MemcahceD</h4>
-                    <p>The {{env("APP_ENV")}} site's MemcahceD Control Panel</p>
+                    <p>The {{config("app.env")}} site's MemcahceD Control Panel</p>
                   </div>
                 </a>
               </li>
@@ -35,7 +35,7 @@
                   <div class="menu-info">
                       
                     <h4 class="control-sidebar-subheading">Command Center</h4>
-                    <p>The {{env("APP_ENV")}} site's Command Control Panel</p>
+                    <p>The {{config("app.env")}} site's Command Control Panel</p>
                   </div>
                 </a>
               </li>
