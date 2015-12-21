@@ -5,7 +5,7 @@
    <script type="text/javascript">
  
  
- var rurl = "<?php echo ($_SERVER['HTTP_HOST']) ?>"+"/admin/memcached"; 
+ var rurl = "http://"+"<?php echo ($_SERVER['HTTP_HOST']) ?>"+"/admin/memcached"; 
  if (frameElement==null){
     window.top.location.href= rurl;
  }
