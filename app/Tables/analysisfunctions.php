@@ -730,7 +730,7 @@ $countB = count($recset);
     	   ->where('Data','=','1')
     	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW07COL02')
     	   ->where('Data','=','1');
-}])->lists('x');
+}])->lists('x')->toArray();
       	 $countF = 0;
       foreach ($Data as $data) {
 
@@ -758,7 +758,7 @@ $countB = count($recset);
     $query->where('ColumnSetID', '=', $cl);
 }])->lists('y');
 
-		$Data = collect($Data)->lists('Data');
+		$Data = $Data->lists('Data')->all();
 
 
 $Data = array_filter($Data);
@@ -1003,7 +1003,7 @@ protected static function getLabel($trim,$col){
 
 
 
-    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name'));
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray());
     $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=2; $i < 9; $i++) {
 
@@ -1027,7 +1027,7 @@ protected static function getLabel($trim,$col){
 
 
 		$array[4][0] = 'Zinc';
-		//echo collect($array);
+		
 		return $array;
 
 
@@ -1035,7 +1035,7 @@ protected static function getLabel($trim,$col){
 
 	protected static function u5RegisterRow($Row,$Year1){
 		
-		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'));
+		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray());
 		
 		$array = array ();
 		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
@@ -1090,7 +1090,7 @@ protected static function getLabel($trim,$col){
 
 	protected static function annualtrends($Year2){
 
-		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'))[$Year2];
+		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray())[$Year2];
 
 		//print_r ($Years[3]);
 		$Array [] = array('Treatment Trends','ORS+ Zinc','ORS','Zinc','Antibiotics','Others','No Treatment')
@@ -1133,7 +1133,7 @@ protected static function getLabel($trim,$col){
 		    $query->where('ColumnSetID', '=',$mcol);
 		}])->lists('y');
 
-				$Data = collect($Data);
+				
 				$Month [] = ($Data->sum('Data'));
 					
 				}
@@ -1147,7 +1147,7 @@ protected static function getLabel($trim,$col){
 		protected static function u5RegisterN($Year1){
 		//$Year1 = 3;
 
-    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name'));
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray());
     $array [] = array('Non Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=10; $i < 13; $i++) {
 
@@ -1174,7 +1174,7 @@ protected static function getLabel($trim,$col){
 
 	protected static function u5RegisterNRow($Row,$Year1){
 		
-		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'));
+		$Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray());
 		
 		$array = array ();
 		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
@@ -1214,7 +1214,7 @@ protected static function getLabel($trim,$col){
 
 	protected static function annualtrendsN($Year2){
 
-		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID'))[$Year2];
+		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray())[$Year2];
 
 		//print_r ($Years[3]);
 		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases')
@@ -1251,7 +1251,7 @@ protected static function getLabel($trim,$col){
 		    $query->where('ColumnSetID', '=',$mcol );
 		}])->lists('y');
 
-				$Data = collect($Data);
+				
 				$Month = ($Data->sum('Data'));
 					
 				
@@ -1288,10 +1288,9 @@ if(!isset($array))$array [] = array('No data',0);
 // }])->lists('z');
 
 
-// $x = collect($Data);
 
 
-// $z =  $x->groupby('Type');
+// $z =  $Data->groupby('Type');
 
 
 // 	foreach ($z as $v) {
@@ -1319,7 +1318,7 @@ if(!isset($array))$array [] = array('No data',0);
 	
     $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
     		->where('Data','=','1');
-}])->lists('y');
+}])->lists('y')->toArray();
 
 				$Data1 = count (array_filter($Data));
 
@@ -1328,7 +1327,7 @@ if(!isset($array))$array [] = array('No data',0);
 	
     $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
     		->where('Data','=','2');
-}])->lists('y');
+}])->lists('y')->toArray();
 
 				$Data2 = count (array_filter($Data));
 
@@ -1338,7 +1337,7 @@ if(!isset($array))$array [] = array('No data',0);
 	
     $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
     		->where('Data','=','3');
-}])->lists('y');
+}])->lists('y')->toArray();
 
 				$Data3 = count (array_filter($Data));
 
@@ -1347,7 +1346,7 @@ if(!isset($array))$array [] = array('No data',0);
 	
     $query->where('ColumnSetID', '=', 'IMCIV1SEC6BLK3RW01COL01')
     		->where('Data','=','4');
-}])->lists('y');
+}])->lists('y')->toArray();
 
 				$Data4 = count (array_filter($Data));
 				
@@ -1380,10 +1379,9 @@ $Data = $recset->load(['z' => function($query)
 	
     $query->select('FacilityCode','Owner');
 }])->lists('z');
-$x = collect($Data);
 
 
-$z =  $x->groupby('Owner');
+$z =  $Data->groupby('Owner');
 
 
 	foreach ($z as $v) {
@@ -1459,7 +1457,7 @@ protected static function staff_trained_col_MNH($col){
     $query->where('ColumnSetID', '=', 'MNHV2SEC4BLK1RW03'.$col);
 }])->lists('y');
 
-$DataD = collect($DataD)->sum('Data');
+$DataD = $DataD->sum('Data');
 
 	$DataN = $recset->load(['y' => function($query) use($col)
 {
@@ -1467,7 +1465,7 @@ $DataD = collect($DataD)->sum('Data');
     $query->where('ColumnSetID', '=', 'MNHV2SEC4BLK1RW04'.$col);
 }])->lists('y');
 
-$DataN = collect($DataN)->sum('Data');
+$DataN = $DataN->sum('Data');
 
 	$DataR = $recset->load(['y' => function($query) use($col)
 {
@@ -1475,7 +1473,7 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'MNHV2SEC4BLK1RW05'.$col);
 }])->lists('y');
 
-	$DataR = collect($DataR)->sum('Data');
+	$DataR = $DataR->sum('Data');
 
 
 	return  array($DataD,$DataN,$DataR);
@@ -1494,7 +1492,7 @@ protected static function staff_trained_col($col){
     $query->where('ColumnSetID', '=', 'CHV2SEC1BLK1RW02'.$col);
 }])->lists('y');
 
-$DataD = collect($DataD)->sum('Data');
+$DataD = $DataD->sum('Data');
 
 	$DataN = $recset->load(['y' => function($query) use($col)
 {
@@ -1502,7 +1500,7 @@ $DataD = collect($DataD)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC1BLK1RW03'.$col);
 }])->lists('y');
 
-$DataN = collect($DataN)->sum('Data');
+$DataN = $DataN->sum('Data');
 
 	$DataR = $recset->load(['y' => function($query) use($col)
 {
@@ -1510,7 +1508,7 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC1BLK1RW04'.$col);
 }])->lists('y');
 
-	$DataR = collect($DataR)->sum('Data');
+	$DataR = $DataR->sum('Data');
 
 
 	return  array($DataD,$DataN,$DataR);
@@ -1527,7 +1525,7 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC1BLK2RW01COL02');
 }])->lists('y');
 
-	$RawData = array_filter(collect($Data)->lists('Data'));
+	$RawData = array_filter($Data->lists('Data')->all());
 	
 
 	$x = array_count_values($RawData);
@@ -1604,18 +1602,17 @@ $DataN = collect($DataN)->sum('Data');
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW02COL02');
 		}])->lists('y');
 
-	$TCU = collect($Data)->count('Data');
-echo $TCU;
+	$TCU = $Data->count('Data');
+
 
 	$Data = $recset->load(['y' => function($query) 
 		{
 	
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW03COL02');
-		}])->lists('y');
-
-	
-		$Data=collect($Data);
+		}])->lists('y');	
+		
 	$Data = $Data->groupby('Data');
+
 	 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
 	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
 	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
@@ -1624,14 +1621,6 @@ echo $TCU;
 	$TCUnt =$count1 + $count2 + $count3 +$count4;
 	$TCUt = $TCU-$TCUnt;
 
-	// $Data = $recset->load(['y' => function($query) 
-	// 	{
-	
- //    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW05COL02');
-	// 	}])->lists('y');
-
-	// $CHEWS = collect($Data)->sum('Data');
-	
 
 	$Data = $recset->load(['y' => function($query) 
 		{
@@ -1639,7 +1628,6 @@ echo $TCU;
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW06COL02');
 		}])->lists('y');
 
-		$Data=collect($Data);
 	$Data = $Data->groupby('Data');
 		 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
 	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
@@ -1647,16 +1635,8 @@ echo $TCU;
 	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
 	 
 	$CHEWSnt =$count1 + $count2 + $count3 +$count4;
-	//	$CHEWSnt =  count($Data['0'])+count($Data['00'])+count($Data['000'])+count($Data['0000']);
-		$CHEWSt = $TCU-$CHEWSnt;
-
-	// $Data = $recset->load(['y' => function($query) 
-	// 	{
 	
- //    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW07COL02');
-	// 	}])->lists('y');
-
-	// $CHV = collect($Data)->sum('Data');
+		$CHEWSt = $TCU-$CHEWSnt;
 	
 
 	$Data = $recset->load(['y' => function($query) 
@@ -1665,7 +1645,6 @@ echo $TCU;
     $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW08COL02');
 		}])->lists('y');
 
-	$Data=collect($Data);
 	$Data = $Data->groupby('Data');
  if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
 	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
@@ -1700,8 +1679,8 @@ echo $TCU;
     $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW04COL02');
 }])->lists('y');
 
-	$RawData = array_filter(collect($Data)->lists('Data'));
-	$all = collect($Data)->count('Data');
+	$RawData = array_filter($Data->lists('Data')->all());
+	$all = $Data->count('Data');
 	
 	$x = array_count_values($RawData);
 	//print_r($x);
@@ -1748,7 +1727,7 @@ echo $TCU;
     $query->where('ColumnSetID', '=', 'MNHV2SEC1BLK1RW03COL02');
 }])->lists('y');
 
-	$RawData = array_filter(collect($Data)->lists('Data'));
+	$RawData = array_filter($Data->lists('Data')->all());
 	
 	$x = array_count_values($RawData);
 	
@@ -1858,7 +1837,7 @@ echo $TCU;
     ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW06COL02');
 		}])->lists('y');
 
-	$Total = collect($Data)->sum('Data');
+	$Total = $Data->sum('Data');
 
 	$Data = $recset->load(['y' => function($query) use ($type)
 		{
@@ -1867,7 +1846,7 @@ echo $TCU;
     ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW07COL02');
 		}])->lists('y');
 
-	$Maternity = collect($Data)->sum('Data');
+	$Maternity = $Data->sum('Data');
 
 	$Data = $recset->load(['y' => function($query) use ($type)
 		{
@@ -1876,7 +1855,7 @@ echo $TCU;
     ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW08COL02');
 		}])->lists('y');
 
-	$NewBorn = collect($Data)->sum('Data');
+	$NewBorn = $Data->sum('Data');
 
 
 
@@ -1919,8 +1898,7 @@ echo $TCU;
 		}])->lists('y');
 
 	
-		$Data=collect($Data);
-	$Data = $Data->groupby('Data')->toArray();
+	$Data = $Data->groupby('Data')->all();
 
 	$keys = array_keys($Data);
 
@@ -1990,7 +1968,7 @@ echo $TCU;
     ->where('ColumnSetID', '=', $col);
 		}])->lists('y');
 
-		 $Data = collect($Data)->groupby('Data')->toArray();
+		 $Data = $Data->groupby('Data')->all();
 
 		 if(!isset($Data[1])) $Data[1] = array();
 		 if(!isset($Data[2])) $Data[2] = array();
@@ -2023,7 +2001,7 @@ $Data = $recset->load(['y' => function($query) use ($col)
     $query->where('ColumnSetID','=',$col);
 }])->lists('y');
 
-	$Data=array_filter(collect($Data)->lists('Data'));
+	$Data=array_filter($Data->lists('Data')->all());
 
 	$x =  array_count_values($Data);
 
@@ -2082,7 +2060,7 @@ if(!isset($vl[$otherval])) $vl[$otherval] = 0;
 
 
 		 $Assessed =  $recset->groupby('Type');
-
+		 
 		 foreach ($Assessed as $Type => $Workers) {
 		 	$AssessedParticipants [] = array($Type,count($Workers));
 		 }

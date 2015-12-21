@@ -84,7 +84,7 @@ class analyse extends analysisfunctions {
 		global $surveys;
 		$recset = $surveys;
 
-	$Years = Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name');
+	$Years = Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray();
 	return $Years;
 
 

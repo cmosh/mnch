@@ -7,12 +7,12 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"laravel/framework": "5.0.*",
-		"laravelcollective/html": "~5.0",
-		"vetruvet/laravel-phpredis": "1.*",
+		"laravel/framework": "5.1.*",
+		"laravelcollective/html": "5.1.*",
+		"nardev/laravel-5.1-phpredis": "dev-master",
 		"maatwebsite/excel": "^2.0",
 		"guzzlehttp/guzzle": "^6.1",
-		"laravelcollective/remote": "~5.0",
+		"laravelcollective/remote": "5.1.*",
 		"efficiently/larasset": "1.1.*"		
 	},
 	"require-dev": {
