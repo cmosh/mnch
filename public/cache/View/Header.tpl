@@ -2,12 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-   
+   <script type="text/javascript">
+ 
+ 
+ var rurl = "<?php echo ($_SERVER['HTTP_HOST']) ?>"+"/admin/memcached"; }
+ if (frameElement==null){
+    window.top.location.href= rurl;
+ }
+ else{
+    if(parent.window.location!=rurl){
+
+        window.top.location.href=rurl;
+        }
+
+
+    } </script>
     <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
+
+    
 </head>
 
-<?php echo ($_SERVER['HTTP_HOST']) ?>
+
 <body>
 <div style="margin:0pt auto; width:1000px; clear:both;">
        
