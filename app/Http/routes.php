@@ -23,8 +23,6 @@ Route::get('/admin/memcached', 'administration@localmem');
 Route::get('/admin/commandcenter', 'administration@commandcenter');
 Route::post('/admin/docmd', 'administration@docmd');
 Route::post('/admin/globcmd', 'administration@globcmd');
-Route::get('/redmin','CacheController@redmin');
-Route::get('/memcached','CacheController@memcached');
 Route::post('/analytics/comparison','AnalyticsController@compare');
 Route::get('/','AnalyticsController@ch');
 Route::post('/map','AnalyticsController@mapRequest');

@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
 </head>
+
+<?php echo basename($_SERVER['PHP_SELF']) ?>
 <body>
 <div style="margin:0pt auto; width:1000px; clear:both;">
        
