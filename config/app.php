@@ -143,7 +143,7 @@ return [
 		// Collective\Remote\RemoteServiceProvider::class,
 		Efficiently\Larasset\LarassetServiceProvider::class,
         Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
-        Illuminate\Broadcasting\BroadfcastServiceProvider::class,
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
 
 
 		/*
