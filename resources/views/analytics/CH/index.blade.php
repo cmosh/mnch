@@ -209,16 +209,6 @@ window.inside = $('#thesvg').contents();
 
      
 
-
- 
-
- //window.inside.find('.county').data('powertip','sdd');
-
- //$("#thesvg").contents().find(".county").data('powertip', 'This will be the <b>tooltip text</b>.');
-// $('#element').data('powertip', 'This will be the <b>tooltip text</b>.');
-
- 
-
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawChart);
   
