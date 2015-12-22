@@ -15,7 +15,6 @@ use App\Tables\analyse;
 use App\Tables\Map;
 use App\Tables\Map_imci;
 use App\Tables\SurveysDone;
-use Maatwebsite\Excel\Excel;
 use App\Tables\IMCISubSurvey;
 use App\Tables\Block;
 use App\Tables\MNHSubSurvey;
@@ -361,13 +360,12 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 
 	public function blah( )
 	{		
-		// $env = config("app.env");
+		$env = config("app.env");
 
-		// 	if($env!='local')abort(404);
+			if($env!='local')abort(404);
 
-		// 	Cache::forget('IMCIV2SubSurveyAll');
-
-		return config('app.env');
+			
+		
 
 	}
 
