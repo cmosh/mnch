@@ -140,10 +140,10 @@ return [
 		Illuminate\View\ViewServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
-		Collective\Remote\RemoteServiceProvider::class,
+		// Collective\Remote\RemoteServiceProvider::class,
 		Efficiently\Larasset\LarassetServiceProvider::class,
         Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
-        Illuminate\Broadcasting\BroadcastServiceProvider::class,
+        Illuminate\Broadcasting\BroadfcastServiceProvider::class,
 
 
 		/*
@@ -155,6 +155,7 @@ return [
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
+		App\Providers\RemoteServiceProvider::class,
 
 	],
 

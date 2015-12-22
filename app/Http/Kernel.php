@@ -17,7 +17,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'App\Http\Middleware\VerifyCsrfToken',
-		'Efficiently\JqueryLaravel\VerifyJavascriptResponse',
+		'App\Http\Middleware\VerifyJavascriptResponse',
 	];
 
 	/**
