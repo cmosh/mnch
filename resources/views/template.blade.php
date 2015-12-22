@@ -37,23 +37,25 @@
     @endif
 
 <script>
+offline = false;
     $(function(){
 
        
         Offline.on('confirmed-down', function () {
-             $("[href]").click(function(e){
-              e.preventDefault();
-             });
+          window.offline = true;
+             
         });
 
          Offline.on('confirmed-up', function () {
-            $("[href]").click(function(e){
-          
-              $(this).unbind('click').trigger('click');
-                      });
+           window.offline = false;
                        });
        
-
+         $("[href]").click(function(e){
+             if(window.offline) e.preventDefault();
+             });
+         $(".btn").click(function(e){
+             if(window.offline) e.preventDefault();
+             });
     });
 </script>
 
