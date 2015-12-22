@@ -62,22 +62,43 @@
 
 
               
-                  <h3 class="box-title">
+                  
 
- <div id="loader" class="box box-default" >
 
- <div  class="overlay">
-  <i class="fa fa-refresh fa-spin"></i>
-</div>
- </div>
-                 
-<div style="text-align:center"  id="notification" class="alert alert-success alert-dismissable">
+
+ <div id="loader" style="width:80%;"  class="center-block alert alert-warning alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4>  <i class="icon fa fa-check"></i> </h4>
-                   <p id="notificationtext" ></p>
+                    <table>
+  <tr >
+  <td  width="100%">
+  <h3 id="notificationstart" ></h3>
+  <p>Please Wait</p>
+  </td  class="col-md-3">
+  <td width="25%">
+  <i class="fa fa-refresh fa-spin fa-4x pullright"></i>
+  </td>
+  </tr>
+    </table>   
+                  
                   </div>
-                   
 
+                 
+<div  id="notification" style="width:80%;" class="center-block alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <table>
+  <tr >
+  <td  width="100%">
+  <h3 id="notificationtext"></h3>
+  <p>Success</p>
+  </td  class="col-md-3">
+  <td width="25%">
+    <i class="fa fa-check fa-4x pullright"></i>  
+  </td>
+  </tr>
+    </table>                      
+                  </div>
+
+                   <h3 class="box-title">
                   Users
                   </h3>
                 </div><!-- /.box-header -->
@@ -438,6 +459,7 @@
  {
   if (confirm('Are you sure you want to activate {{$user->name}} ?')) {
   $('html,body').scrollTop(0);
+  document.getElementById("notificationstart").innerHTML = "Activating {{$user->name}}";
   $('#loader').show();
 
    function ajax3() {
@@ -482,6 +504,7 @@ $("#notification").delay(2000).show(0, function() {
  {
 
   if (confirm('Are you sure you want to Deactivate {{$user->name}} ?')) {
+    document.getElementById("notificationstart").innerHTML = "Deactivating {{$user->name}}";
      $('#loader').show();
   
 
@@ -530,6 +553,7 @@ $("#notification").delay(2000).show(0, function() {
    $('#reset{{$user->id}}').click(function check()
 {
   if (confirm('Are you sure you want to reset password for {{$user->name}} ?')) {
+    document.getElementById("notificationstart").innerHTML = "Reseting {{$user->name}}'s password";
      $('#loader').show();
   
 
