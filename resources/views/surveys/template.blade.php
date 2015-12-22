@@ -317,6 +317,7 @@ $("#demo-form").submit(function(e) {
 
 
      $(document).ready(function(){
+      if(window.offline) e.preventDefault();
               $("#cancelbt").click(function(event){
           $("#cancLink").attr("href", "waiting");
           var canconf= confirm('Are you sure you want to cancel the survey? All progress will be lost?');
