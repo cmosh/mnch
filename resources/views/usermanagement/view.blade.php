@@ -66,7 +66,7 @@
 
 
 
- <div id="loader" style="width:80%;"  class="center-block alert alert-warning alert-dismissable">
+ <div id="loader" style="display:none; width:80%;"  class="center-block alert alert-warning alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <table>
   <tr >
@@ -83,7 +83,7 @@
                   </div>
 
                  
-<div  id="notification" style="width:80%;" class="center-block alert alert-success alert-dismissable">
+<div  id="notification" style="display:none; width:80%;" class="center-block alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <table>
   <tr >
@@ -406,8 +406,6 @@
    
  <!-- DATA TABLES -->
   <script type="text/javascript">
-  $("#notification").hide();
-   $('#loader').hide();
 
 
       $(function () {
