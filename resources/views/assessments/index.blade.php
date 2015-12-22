@@ -286,6 +286,8 @@ $('#some_id').click(function() {
   //alert(linki);
    $(location).attr('href', linki);
  }
+
+ if(window.offline) e.preventDefault();
 });
 
            
@@ -293,6 +295,7 @@ $('#some_id').click(function() {
          
          <script type="text/javascript">
 $('#some_id2').click(function() {
+
 
   if($('#Version2').val() == ""||$('#County2').val()==""||$('#Term_2').val()=="") 
        @if ($loc == 'IM')
@@ -306,7 +309,7 @@ $('#some_id2').click(function() {
   var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
   //alert(linki);
    $(location).attr('href', linki);
-
+   if(window.offline) e.preventDefault();
 
  }
 });

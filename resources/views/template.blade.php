@@ -53,9 +53,7 @@ offline = false;
          $("[href]").click(function(e){
              if(window.offline) e.preventDefault();
              });
-         $(".btn").click(function(e){
-             if(window.offline) e.preventDefault();
-             });
+        
     });
 </script>
 

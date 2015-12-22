@@ -108,7 +108,7 @@
   </div>
   <div class="form-group" >
   
-  {!! Form::submit('Start Assessment',['class' => 'btn btn-success form-control btn-lg']) !!}
+  {!! Form::submit('Start Assessment',['class' => 'btn btn-success form-control btn-lg','id'=>'startass']) !!}
   </div>
 {!! Form::close() !!}
                 </div><!-- /.info-box-content -->
@@ -270,12 +270,16 @@
  
   
 
- <!-- DATA TABLES -->
+
   <script type="text/javascript">
       $(function () {
         $("#example1").DataTable();
        
       });
+
+      $("#startass").click(function(e){
+             if(window.offline) e.preventDefault();
+             });
     </script>
  
 
