@@ -46,6 +46,12 @@
              });
         });
 
+         Offline.on('confirmed-up', function () {
+            $("[href]").click(function(e){
+          
+              $(this).unbind('click').trigger('click');
+                      });
+                       });
        
 
     });
