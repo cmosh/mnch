@@ -1,4 +1,4 @@
-<?php namespace App\Providers;
+<?php namespace App\Http\Middleware;
 
 use Closure;
 use Efficiently\JqueryLaravel\CrossOriginRequestException;
