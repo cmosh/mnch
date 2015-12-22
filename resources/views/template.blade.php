@@ -35,6 +35,23 @@
     @if(!isset($Mel)) {!!javascript_include_tag('template')!!}
     @else {!!javascript_include_tag('survey_t')!!}
     @endif
+
+<script>
+    $(function(){
+
+       
+        Offline.on('confirmed-down', function () {
+             $("[href]").click(function(e){
+              e.preventDefault();
+             });
+        });
+
+       
+
+    });
+</script>
+
+   
     @yield('javascript')
   </body>
 </html>
