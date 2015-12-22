@@ -118,7 +118,7 @@ return [
 		 */
 		
 		Illuminate\Auth\AuthServiceProvider::class,
-		// Illuminate\Bus\BusServiceProvider::class,
+		Illuminate\Bus\BusServiceProvider::class,
 		Illuminate\Cache\CacheServiceProvider::class,
 		Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
 		Illuminate\Cookie\CookieServiceProvider::class,
