@@ -284,10 +284,11 @@ $('#some_id').click(function() {
  // assessments/{id}/{date}/{term}/{county}
   var linki = '/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val();
   //alert(linki);
+  if(window.offline) e.preventDefault();
    $(location).attr('href', linki);
  }
 
- if(window.offline) e.preventDefault();
+ 
 });
 
            
@@ -308,8 +309,9 @@ $('#some_id2').click(function() {
  // assessments/{id}/{date}/{term}/{county}
   var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
   //alert(linki);
-   $(location).attr('href', linki);
    if(window.offline) e.preventDefault();
+   $(location).attr('href', linki);
+  
 
  }
 });
