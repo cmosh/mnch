@@ -80,16 +80,12 @@ return [
          * to include, you can add them to this precompile array.
          */
         'precompile' => [
-            'app.css',
-            'app.js',
             'landing.css',
-            'landing.js',
-            'template.js',
             'template.css',
+            'landing.js',
+            'template.js',            
             'survey_t.js',
             'survey.js',
-            // 'admin.js',
-            // 'admin.css',
         ],
 
         /**
