@@ -200,14 +200,12 @@ public function imciajax(){
 		
    
 			
-		$SubmittedCHCount = Cache::remember('SubmittedCHV2Count',180,function(){
-							return SubmittedCHCount::first();
-							 	});  
+		$SubmittedCHCount =  SubmittedCHCount::first();
+							 
 
 
-		$SubmittedCHCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
-							return SubmittedCHCountie::get();
-							 	});  
+		$SubmittedCHCounties = SubmittedCHCountie::get();
+							 	
 
 
 
