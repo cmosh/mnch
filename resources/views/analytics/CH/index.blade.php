@@ -14,7 +14,7 @@
           
            
         
-  <div class="row">
+  <!--<div class="row">
  
              
               {!! Form::open() !!}
@@ -25,10 +25,11 @@
                          {!! Form::close() !!}
 
 
-   </div>
+   </div> -->
    @include('analytics/county')
 
- <div class="col-md-8">
+ <div class="row">
+ <div class="col-md-9">
 
   <!-- small box -->
               <div class="small-box bg-blue">
@@ -55,6 +56,7 @@
 
 
          @include('analytics/CH/html/types')
+  </div>       
   <div class="col-md-12">
          
 
