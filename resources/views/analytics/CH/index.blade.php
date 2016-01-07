@@ -28,7 +28,7 @@
    </div> -->
    @include('analytics/county')
 
- <div class="row">
+ 
  <div class="col-md-9">
 
   <!-- small box -->
@@ -56,7 +56,7 @@
 
 
          @include('analytics/CH/html/types')
-  </div>       
+
   <div class="col-md-12">
          
 
