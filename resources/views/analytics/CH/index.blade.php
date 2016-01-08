@@ -14,7 +14,7 @@
           
            
         
-  <!--<div class="row">
+  <div class="row">
  
              
               {!! Form::open() !!}
@@ -25,7 +25,7 @@
                          {!! Form::close() !!}
 
 
-   </div> -->
+   </div>
    @include('analytics/county')
 
  
