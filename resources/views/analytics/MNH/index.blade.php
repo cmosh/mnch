@@ -1,9 +1,9 @@
 @extends('app')
 @section('header')
-  <h1  align="middle">
+  <!--<h1  align="middle">-->
                  Maternal and Neonatal Health Survey   
               <small>(Analysis Results)</small>
-            </h1>
+            <!--</h1>-->
             <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
 @endsection
 

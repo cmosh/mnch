@@ -81,15 +81,16 @@
               </div>
           </div>
         </nav>
+        <div class="title-main">
+          <h2 align="middle">@yield('header')</h2>
+          </div>
       </header>
     
 
       <div class="content-wrapper">
         <div class="container-fluid">
         
-          <section class="content-header">
-          @yield('header')
-          </section>
+          
 
          
           <section class="content">
@@ -107,6 +108,20 @@
  
 
     @yield('js')
+<style type="text/css">
+  
+  @media screen and (max-width: 480px) {
+    
+}
+  .title-main{
+    width:100%;
+    height:50px;
+    background-color: #fff;
+    margin-top: 0;
+    margin-bottom: 0
 
+
+  }
+</style>
   </body>
 </html>
