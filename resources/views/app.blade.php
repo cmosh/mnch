@@ -90,10 +90,8 @@
       <div class="content-wrapper">
         <div class="container-fluid">
         
-          
-
-         
           <section class="content">
+          <div class="row"><div class="title-main"></div></div>
            @yield('content')
           </section>
         </div>
@@ -121,6 +119,10 @@
     margin-bottom: 0
 
 
+  }
+  .title-main>h2{
+    margin-top: 0;
+    margin-bottom: 0
   }
 </style>
   </body>
