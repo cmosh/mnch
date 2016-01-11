@@ -223,9 +223,7 @@ function mapRequest (county) {
 
   @include('analytics/mapdata')
 
-   document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>/'+TotalTotal;
-   x2 = 100*(TotalSubmitt/TotalTotal);
-  $('#svFaBar').attr('style','width: '+x2+'%');
+   document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>'; 
   
 }
 function getmapdata() {
