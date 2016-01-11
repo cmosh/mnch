@@ -36,6 +36,7 @@
     @if($id!='IM')
     <div class="box-body">
           <p><b>County  :</b> {{$thecounty}} </p>
+           <p><b>Sub County  :</b> {{$subcounty}} </p>
           <p><b>Assessment Term:</b> {{$term}}</p>
 
 

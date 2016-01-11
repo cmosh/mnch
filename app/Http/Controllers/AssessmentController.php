@@ -13,7 +13,10 @@ use App\Tables\Surveyview;
 use App\Tables\Participantsview;
 use App\Tables\Imciview;
 use App\Tables\Autosaving;
+use App\Tables\subcounty;
+use ArrayRedis as Cache;
 use Request;
+use Input;
 
 class AssessmentController extends Controller {
 	
@@ -22,6 +25,11 @@ class AssessmentController extends Controller {
 		$this->middleware('auth');
 	}
 	
+
+
+
+
+
 	public function index($sv)
 	{
 		$sv = '%'.$sv.'%';		
@@ -35,7 +43,7 @@ class AssessmentController extends Controller {
 	}
 
 	
-	public function create($id,$date,$term,$countie)
+	public function create($id,$date,$term,$countie,$subcounty)
 	{
 			$loc = substr ($id, 0,2);
 			
@@ -44,8 +52,8 @@ class AssessmentController extends Controller {
 			$All = Participantsview::all();
 			} 
 			else {
-			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Date','=',$date)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
-			$All = Facilities::where('County','Like',$countie)->get();
+			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
+			$All = Facilities::where('County','Like',$countie)->where('District','=',$subcounty)->get();
 			}
 
 			if($loc=='IM')
@@ -96,10 +104,10 @@ class AssessmentController extends Controller {
 
 	}
 
-	public function show($id,$county,$term)
+	public function show($id,$county,$term,$subcounty)
 	{
 			$sv = '%'.$id.'%';
-			if ($id != 'IM') $Assessments = Surveyview::where('County','like',$county)->where('Survey','like',$sv)->where('Term','like',$term)->get();
+			if ($id != 'IM') $Assessments = Surveyview::where('County','like',$county)->where('District','=',$subcounty)->where('Survey','like',$sv)->where('Term','like',$term)->get();
 			else $Assessments = Imciview::all();
 
 					return view('assessments.view')->with('Assessments',$Assessments)
@@ -107,7 +115,8 @@ class AssessmentController extends Controller {
 												   ->with('title','Assessments')
 												   ->with('id',$id)
 												   ->with('term',$term)
-												   ->with('thecounty',$county);
+												   ->with('thecounty',$county)
+												   ->with('subcounty',$subcounty);
 	}
 
 	
@@ -135,6 +144,29 @@ class AssessmentController extends Controller {
 		 	default:
 		 	}
 		 }
+
+
+
+		 public function subcounties()
+
+	{
+		
+         if(Request::ajax()) {
+         	  $param = Input::all();
+
+            $search = '%'.$param['search'].'%';
+         	$county = $param['county'];
+         	$sresult = subcounty::where('County','=',$county)->where('SubCounty','Like',$search)->get(); 
+         
+         	echo json_encode($sresult);
+
+
+         }
+
+         
+
+         die;
+	}
 
 }
 	

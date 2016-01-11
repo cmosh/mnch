@@ -394,6 +394,21 @@ var x = 'Selected ' + cts + ' county';
 
     </script>
   
+  <script type="text/javascript" charset="utf-8">
+$(function(){
+  $("select#County").change(function(){
+
+
+    $.getJSON("/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
+      var options = '';
+      for (var i = 0; i < j.length; i++) {
+        options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';
+      }
+      $("select#Term").html(options);
+    })
+  })
+})
+</script>
     
    
 @endsection
