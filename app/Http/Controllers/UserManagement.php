@@ -10,7 +10,7 @@ use App\Tables\Counties_submitted_today;
 use App\Tables\Counties_incomplete_today;
 use App\Tables\Counties_submitted;
 use App\Tables\Counties_incomplete;
-use App\Tables\assessments;
+use App\Tables\AssessmentsN;
 use App\Tables\Survey;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
@@ -169,7 +169,7 @@ class UserManagement extends Controller {
 		$submittedt=Counties_submitted_today::all();
 		$incompletet=Counties_incomplete_today::all();
 		$users=User::all();
-		$assessments=assessments::all();
+		$assessments=AssessmentsN::all();
 		$ch=User_monitor::where('Survey','like','CH%')->get();
 		$mnh=User_monitor::where('Survey','like','MNH%')->get();
 		$imci=User_monitor::where('Survey','like','IMCI%')->get();

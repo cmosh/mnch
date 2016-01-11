@@ -1,10 +1,10 @@
 @extends('app')
 @section('header')
 
-  <h1  align="middle">
+ <!--<h1  align="middle">-->
              Child Health Survey
               <small>(Analysis Results)</small>
-            </h1>
+            <!--</h1>-->
             <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
 @endsection
 @section('content')
@@ -28,7 +28,8 @@
    </div>
    @include('analytics/county')
 
- <div class="col-md-8">
+ 
+ <div class="col-md-9">
 
   <!-- small box -->
               <div class="small-box bg-blue">
@@ -55,6 +56,7 @@
 
 
          @include('analytics/CH/html/types')
+
   <div class="col-md-12">
          
 

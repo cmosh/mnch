@@ -81,18 +81,17 @@
               </div>
           </div>
         </nav>
+        <div class="title-main">
+          <h2 align="middle">@yield('header')</h2>
+          </div>
       </header>
     
 
       <div class="content-wrapper">
         <div class="container-fluid">
         
-          <section class="content-header">
-          @yield('header')
-          </section>
-
-         
           <section class="content">
+          <div class="row"><div class="title-trans"></div></div>
            @yield('content')
           </section>
         </div>
@@ -107,6 +106,64 @@
  
 
     @yield('js')
+<style type="text/css">
+  
+  @media only screen and (min-width: 692px) and (max-width:851px) {
+   .title-trans{
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    width:100%;
+    height:210px;
 
+  } 
+}
+@media only screen and (min-width: 893px) and (max-width:1052px){
+  .title-trans{
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    width:100%;
+    height:170px;
+
+  }
+
+}
+
+@media only screen and (min-width: 852px) and (max-width:892px){
+
+  .title-trans{
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    width:100%;
+    height:110px;
+
+  }
+}
+
+
+  .title-main{
+    width:100%;
+    height:50px;
+    background-color: #fff;
+    margin-top: 0;
+    margin-bottom: 0
+
+
+  }
+  .title-main>h2{
+    margin-top: 0;
+    margin-bottom: 0
+  }
+  .title-trans{
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    width:100%;
+    height:50px;
+
+  }
+</style>
   </body>
 </html>
