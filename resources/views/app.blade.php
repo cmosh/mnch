@@ -148,7 +148,8 @@
     height:50px;
     background-color: #fff;
     margin-top: 0;
-    margin-bottom: 0
+    margin-bottom: 0;
+    opacity: 0.5;
 
 
   }
@@ -164,6 +165,17 @@
     height:50px;
 
   }
+  #info-title{
+    max-height: 70px;
+    
+  }
+  #facilitiesBox,#info-title{
+    margin:0;
+  }
+  #staffTraining,#healthServices{
+    margin-bottom:0;
+  }
+  
 </style>
   </body>
 </html>

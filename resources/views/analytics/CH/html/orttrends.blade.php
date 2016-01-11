@@ -1,11 +1,13 @@
  <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Annual ORT Corner Management Trends</h3>
-                  <div class="box-tools pull-right">
-                   <a id="Year4Change" href="/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount}}" class="btn btn-box-tool">Launch Comparison</a>
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
+                  <h3 class="box-title">Annual ORT Corner Management Trends
+                    <small>
+                   <a id="Year4Change" href="/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
+                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
                   <select class="" style="width: 100%;" name="Year4" id="Year4"> 

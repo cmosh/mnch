@@ -1,11 +1,14 @@
  <div class="col-md-4">
-               <div class="box box-success">
+               <div class="box box-success" >
                 <div class="box-header with-border">
-                  <h3 class="box-title">Health Services (Where sick children are seen)</h3>
-                  <div class="box-tools pull-right">
-                     <a href="/comparison/CHV2/CHV2_genopd/pie/" class="btn btn-box-tool">Launch Comparison</a>
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
+                  <h3 class="box-title">Health Services (Where sick children are seen)
+                   <small>
+                     <a href="/comparison/CHV2/CHV2_genopd/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                    </small>
+                   <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> 
+                  </h3>
+                  
+                    
                 </div>
                 <div class="box-body">
 

@@ -1,12 +1,13 @@
 
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Community Strategy(Trained in ICCM)</h3>
-                  <div class="box-tools pull-right">
-                   <a href="/comparison/CHV2/CHV2_comm_strategy/colfullstack/" class="btn btn-box-tool">Launch Comparison</a>
-
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
+                  <h3 class="box-title">Community Strategy(Trained in ICCM)
+                    <small>
+                   <a href="/comparison/CHV2/CHV2_comm_strategy/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    </small>
+                  <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </h3>
+                  
                 </div>
                 <div class="box-body">
 
