@@ -43,7 +43,7 @@
 
              <li><a href="/rawdata">Raw Data</a></li>
           
-              @if (config('app.env')=='test')
+              @if (config('app.env')=='test'||config('app.mak'))
            <li> <a href="/test/serve/"  role="button">
               <span><button  class="btn btn-block btn-success btn-xs">serve assets</button></span>  
           </a> </li>

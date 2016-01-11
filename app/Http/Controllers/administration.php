@@ -40,10 +40,19 @@ class administration extends Controller {
 	public function serve(){
 
 		$env = config('app.env');
-			$this->role->__invoke(3);
-			if($env!='test')abort(403);
+		$mak = config('app.mak');
+		$folder = config('app.folder');
 
-		$command = 'cd ~/mnch_bak && screen -d -m php artisan larasset:serve --port 3000';
+			$this->role->__invoke(3);
+			if($env!='test'){
+
+			if($mak) $command = 'cd ~/'.$folder.'/mnch && screen -d -m php artisan larasset:serve --port 3000';
+			else abort(403);
+			
+
+			}
+			else { $command = 'cd ~/mnch_bak && screen -d -m php artisan larasset:serve --port 3000';}
+
 
 		 SSH::into($this->ssh_connection)->run($command, function($line)
       	  	{
@@ -60,8 +69,10 @@ class administration extends Controller {
 	public function stop(){
 
 		$env = config('app.env');
+		$mak = config('app.mak');
+		
 			$this->role->__invoke(3);
-			if($env!='test')abort(403);
+			if($env!='test' && !$mak)abort(403);
 
 		$command = 'pid=$(lsof -i:3000 -t); kill -TERM $pid || kill -KILL $pid';
 		 SSH::into($this->ssh_connection)->run($command, function($line)

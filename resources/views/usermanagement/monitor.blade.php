@@ -828,7 +828,7 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
 {
     
 
-  ajax();
+  ajax2();
            
   });
 
