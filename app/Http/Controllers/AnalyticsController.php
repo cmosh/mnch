@@ -17,6 +17,7 @@ use App\Tables\Map_imci;
 use App\Tables\SurveysDone;
 use App\Tables\IMCISubSurvey;
 use App\Tables\Block;
+use App\Tables\Term;
 use App\Tables\MNHSubSurvey;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Controllers\ArrayRedis as Rache;
@@ -367,7 +368,31 @@ $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
 
 	}
 
+public function terms()
+{
+		
+         if(Request::ajax()) {
+         	  $param = Input::all();
+ 
+         	$county = $param['county'];
+         	if ($county == 'All') {
+         		$array = array();
+         		$array[] = array('County'=>'All','Term'=>'Baseline');
+         		$array[] = array('County'=>'All','Term'=>'Midterm');
+         		$array[] = array('County'=>'All','Term'=>'Endterm');
+         		$sresult = collect($array);  
+         		 }
+         	else {	$sresult = Term::where('County','Like',$county)->get(); 
+         }
+         	echo json_encode($sresult);
 
+
+         }
+
+         
+
+         die;
+	}
 
 
 

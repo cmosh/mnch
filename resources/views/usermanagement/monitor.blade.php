@@ -150,6 +150,7 @@
                          <th>Date</th>
                          <th>Facility</th>
                          <th >County</th>
+                         <th>Sub-County</th>
                          <th>Entered by</th>
                         
 
@@ -171,6 +172,7 @@
                          <th>Date</th>
                          <th>Facility</th>
                          <th >County</th>
+                         <th>Sub-County</th>
                          <th>Entered by</th>
                         
 
@@ -201,6 +203,8 @@
                         <td><?php echo $dateformated?>  </td>
                         <td >{{ $user->FacilityName}}  </td>
                         <td  >{{$user->County}}</td>
+                        <td>{{$user->SubCounty}}
+
                         <td >{{ $user->username}} </td>
                         @if($user->Status=='Submitted')
  <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">

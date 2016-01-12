@@ -23,7 +23,8 @@
 
 @section('content')
 
-
+{!! Form::open() !!}
+{!! Form::close() !!}
 <div class="col-md-12">
               <div class="box box-default">
                 <div class="box-header with-border">
@@ -45,7 +46,7 @@
              
                 <div class="inner">
                   <h2>{{$Survey->Name}} Survey</h2>
-                  <!-- <p>Runtime: {{$Survey->Runtime}}<br>Version {{$Survey->Version}} </p> -->
+                
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -85,12 +86,26 @@
                      
                       </div>
                       </div>
+                          <!-- the stuff 1 -->
+            <div class="form-group">
+                       <label for="SubCounty1" class="col-sm-2 control-label">Select Sub-County</label>
+                      <div class="col-sm-10">
+                      <select class="form-control select2 subcounty " style="width: 100%;" name="SubCounty1" id="SubCounty1"> 
+                        <option value ="" >Select Sub-County</option>
+                      
+                      
+                       </select>
+                      </div>
+                    </div>
+<!-- the stuff 1 -->
+
+
 					<div class="form-group">
                       <label for="Version1" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                       <option value ="" >Select Version</option>
-                       @foreach($Surveys as $Survey)
+                       @foreach($Surveys->reverse() as $Survey)
                        <!-- change if later -->
                          
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}} </option>
@@ -118,12 +133,18 @@
                       </div>
                     </div>
                     @else
+
+
+                
+
+
+
                     <div class="form-group">
                       <label for="Version1" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version1"> 
                        <option value ="" >Select Version</option>
-                       @foreach($Surveys as $Survey)
+                       @foreach($Surveys->reverse() as $Survey)
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         @endforeach
                        </select>
@@ -182,13 +203,31 @@
                        </select>
 						</div>
 						</div>
+
+<!-- the stuff 2 -->
+            <div class="form-group">
+                       <label for="Version2" class="col-sm-2 control-label">Select Sub-County</label>
+                      <div class="col-sm-10">
+                      <select class="form-control select2 subcounty" style="width: 100%;" name="SubCounty2" id="SubCounty2"> 
+                        <option value ="" >Select Sub-County</option>
+                      
+                       @foreach($Surveys->reverse() as $Survey)
+                     
+                       <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
+                        
+                        @endforeach
+                       </select>
+                      </div>
+                    </div>
+<!-- the stuff 2 -->
+
 						<div class="form-group">
                        <label for="Version2" class="col-sm-2 control-label">Select Version</label>
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version2" id="Version2"> 
                         <option value ="" >Select Version</option>
                       
-                       @foreach($Surveys as $Survey)
+                       @foreach($Surveys->reverse() as $Survey)
                      
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
                         
@@ -215,7 +254,7 @@
                       <div class="col-sm-10">
                       <select class="form-control select2 " style="width: 100%;" name="Version1" id="Version2"> 
                         <option value ="" >Select Version</option>
-                       @foreach($Surveys as $Survey)
+                       @foreach($Surveys->reverse() as $Survey)
                        <!-- change if later -->
                          
                        <option value ="{{$Survey->surveyID}}" id ="{{$Survey->Version}}" >Version {{$Survey->Version}} :{{$Survey->Runtime}}</option>
@@ -272,17 +311,19 @@ $('#date').datepicker({
 <script type="text/javascript">
 $('#some_id').click(function() {
 
+  
+
     @if ($loc == 'IM')
      if($('#Version1').val() == ""||$('#Term').val()==""|| $('#date').val()=="") alert("Please choose the version and date.");
   
     @else
 
-     if($('#Version1').val() == ""||$('#County').val()==""||$('#Term').val()==""|| $('#date').val()=="") alert("Please choose the county,version,date and term.");
+     if($('#Version1').val() == ""||$('#County').val()==""||$('#SubCounty1').val()==""||$('#Term').val()==""|| $('#date').val()=="") alert("Please choose the county,sub-county,version,date and term.");
  
 @endif
    else{
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val();
+  var linki = '/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val()+'/'+ $('#SubCounty1').val();
   //alert(linki);
   if(window.offline) e.preventDefault();
    $(location).attr('href', linki);
@@ -298,16 +339,16 @@ $('#some_id').click(function() {
 $('#some_id2').click(function() {
 
 
-  if($('#Version2').val() == ""||$('#County2').val()==""||$('#Term_2').val()=="") 
+  if($('#Version2').val() == ""||$('#SubCounty2').val()==""||$('#County2').val()==""||$('#Term_2').val()=="") 
        @if ($loc == 'IM')
-    alert("Please choose in the version.");
+    alert("Please choose  the version.");
     @else
-     alert("Please choose the county,version and term.");
+     alert("Please choose the county,sub-county,version and term.");
     @endif
   else{
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val();
+  var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val()+'/'+ $('#SubCounty2').val();
   //alert(linki);
    if(window.offline) e.preventDefault();
    $(location).attr('href', linki);
@@ -342,6 +383,91 @@ $('#some_id2').click(function() {
 
 
 
- 
+ <script type="text/javascript">
+
+
+
+
+
+  $.fn.select2.amd.require([
+    "select2/core",
+    "select2/utils",
+    "select2/compat/matcher"
+  ], function (Select2, Utils, oldMatcher) {
+   
+  
+    var $ajax = $(".subcounty");
+
+    function formatFset (fset) {
+      if (fset.loading) return fset.text;
+
+
+
+      var markup = "<div>"+fset.text+"</div>";
+
+      return markup;
+    }
+
+    function formatFsetSelection (fset) {
+      return fset.text || fset.text; 
+    }
+
+    $ajax.select2({
+      ajax: {
+        url: "/assessment/subcounties",
+        type:'post',
+        dataType: 'json',
+       
+        delay: 250,
+        data: function (params) {
+
+          $x = $(this).attr('id');
+          if ($x=='SubCounty1') var county =  $('#County').val();
+          else var county =  $('#County2').val();
+
+          return {
+            search: params.term,
+            county: county,
+            page: params.page,
+            _token: $('input[name=_token]').val()
+          };
+        },
+        processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+
+           var select2Data = $.map(data, function (obj) {
+                    obj.id = obj.SubCounty;
+                    obj.text = obj.SubCounty;
+
+                    return obj;
+                });
+
+          return {
+            results: select2Data,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      escapeMarkup: function (markup) { return markup; },
+      minimumInputLength: 1,
+      templateResult: formatFset,
+      templateSelection: formatFsetSelection
+    });
+
+  
+
+});
+  
+
+  
+  
+</script>
 
   @endsection

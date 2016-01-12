@@ -143,7 +143,7 @@
                   @else
                   <th>Name</th>
                         <th>Code</th>
-                        <th>County</th>
+                        <th>Sub-County</th>
                         <th>Type</th>
                         <th>Owner</th>
 
@@ -161,7 +161,7 @@
                         <tr>
                         <td class="rr"> {{ $al->FacilityName}}</td>
                         <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
-                        <td> {{ $al->County}}</td>
+                        <td> {{ $al->District}}</td>
                         <td> {{ $al->Type}}</td>
                         <td> {{ $al->Owner}}</td>
 
@@ -217,7 +217,7 @@
                   @else
                   <th>Name</th>
                         <th>Code</th>
-                        <th>County</th>
+                        <th>Sub-County</th>
                         <th>Type</th>
                         <th>Owner</th>
                         <th>Action</th>

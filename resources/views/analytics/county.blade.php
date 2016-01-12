@@ -41,6 +41,15 @@
                        </select></div>
 
                        
+
+
+  
+
+
+
+
+
+
                        @include('analytics/popbox') 
 
       <object  width="100%" id="thesvg" data= '{!!asset_path("map.svg")!!}' >
