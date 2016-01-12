@@ -5,7 +5,7 @@
              Child Health Survey
               <small>(Analysis Results)</small>
             <!--</h1>-->
-            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
+            
 @endsection
 @section('content')
 

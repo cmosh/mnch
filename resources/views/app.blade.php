@@ -17,16 +17,16 @@
   <body class="skin-blue fixed layout-top-nav">
     <div class="wrapper">
       <header class="main-header">
-        <nav class="navbar navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
           <div class="container-fluid">
             <div class="navbar-header">
-             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" style="margin-right:0px;">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/home">MNCH</a></div>
+        <a class="navbar-brand" href="/home" style="color:white">MNCH</a></div>
 
        
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
@@ -65,7 +65,7 @@
         <ul class="nav navbar-nav navbar-right">
           @if (Auth::guest())
             <li><a href="/auth/login">Login</a></li>
-            <li><a href="/self/register">Register</a></li>
+            <li><a href="/self/register" style="margin-right:5px;">Register</a></li>
           @else
            <li><a href="/home">My Dashboard</a></li>
             <li class="dropdown">
@@ -147,14 +147,17 @@
     width:100%;
     height:50px;
     background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.7);
     margin-top: 0;
     margin-bottom: 0;
-    opacity: 0.5;
+    border-bottom: medium solid #181818;
+    
 
 
   }
   .title-main>h2{
     margin-top: 0;
+    padding-top: 10px;
     margin-bottom: 0
   }
   .title-trans{
@@ -165,6 +168,10 @@
     height:50px;
 
   }
+  .conc{
+    opacity: 0.9 !important;
+  }
+
   #info-title{
     max-height: 70px;
     
