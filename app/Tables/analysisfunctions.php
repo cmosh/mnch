@@ -1374,23 +1374,19 @@ global $surveys;
 
 		 $recset = $surveys;
 
-$Data = $recset->load(['z' => function($query)
-{
 	
-    $query->select('FacilityCode','Owner');
-}])->lists('z');
+		 	$Data = $recset->groupby('Owner');
+      	
 
-
-$z =  $Data->groupby('Owner');
-
-
-	foreach ($z as $v) {
+      		foreach ($Data as $v) {
 
 		$array [] = array( $v[0]['Owner'], count($v));
 		
 	}
+
 if(!isset($array))$array [] = array('No data',0);
- return ($array);
+		
+ return $array;
 	
 			}
 
