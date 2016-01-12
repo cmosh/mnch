@@ -482,7 +482,7 @@ public function multi()
     					'D' => 'yyyy-dd-mm'
 					));
 	    		$sheet->row(1, array(
-     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County',	'Entered by'	,'Status'	
+     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County','Sub-County',	'Entered by'	,'Status'	
 
 			)
 	    		
@@ -499,7 +499,7 @@ public function multi()
 	    				
 						$sheet->row($counter2+1, array(
 
-		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->username,$user_m->Status
+		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->District,$user_m->username,$user_m->Status
 						
 						));
 					
@@ -602,7 +602,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 
 	    	
 	    		$sheet->row(1, array(
-     'Tool Name','Versionvar'.Carbon::today(),	'Assessment Term'	,'Assessor'	,'Date'	,'Facility Name','Facility Code',	'County',	'Entered by'	,'User role','Status'	
+     'Tool Name','Versionvar'.Carbon::today(),	'Assessment Term'	,'Assessor'	,'Date'	,'Facility Name','Facility Code',	'County','Sub-County',	'Entered by'	,'User role','Status'	
 
 			)
 	    		
@@ -640,7 +640,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 	    				
 						$sheet->row($counter2+1, array(
 
-		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->FacilityCode,$user_m->County,$user_m->username,$role,$user_m->Status
+		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->FacilityCode,$user_m->County,$user_m->District,$user_m->username,$role,$user_m->Status
 						
 						));
 					
