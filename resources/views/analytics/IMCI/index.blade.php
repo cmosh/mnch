@@ -26,7 +26,7 @@
    <div class="row">
    @include('analytics/IMCI/county')
 
- <div class="col-md-8">
+ 
 
   <!-- small box -->
                <div class="small-box bg-blue">
@@ -51,15 +51,14 @@
 
 
 
-</div> 
-<div class="col-md-8">    
+   
            
 
 
      
             @include('analytics/IMCI/html/WorkingLocation')
             
-            </div>
+            
             </div>
 
 <!-- the rest -->
