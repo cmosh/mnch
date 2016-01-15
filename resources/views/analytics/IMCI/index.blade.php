@@ -119,10 +119,10 @@
 </div>
 
   @include('analytics/IMCI/html/Consobsv')
-  @include('analytics/IMCI/html/ExitInterview')
+  
   @include('analytics/IMCI/html/CertCriteriia')
   @include('analytics/IMCI/html/Outcome')
-  
+  @include('analytics/IMCI/html/ExitInterview')
  @include('analytics/IMCI/html/Certification')
 
 
