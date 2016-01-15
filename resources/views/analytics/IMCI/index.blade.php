@@ -46,19 +46,22 @@
                         <br>
                         </div>
                         </div>
+                        
                          @include('analytics/IMCI/html/Trained')
 
 
 
-     
+</div> 
+<div class="col-md-8">    
            
 
 
      
             @include('analytics/IMCI/html/WorkingLocation')
-            </div>
-            </div>
             
+            </div>
+            </div>
+
 <!-- the rest -->
  <div class="col-md-12">
                         
