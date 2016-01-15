@@ -56,15 +56,22 @@
      
             <div class="col-md-12">
             <div class="row">
+            <div class="col-sm-3">
                    @include('analytics/MNH/html/dservice')
-
+                   </div>
+                   <div class="col-sm-8">
+@include('analytics/MNH/html/hman')
+</div>
                     @include('analytics/MNH/html/dserviceconduct')
 
 
-        @include('analytics/MNH/html/hman')
+        
         </div>
 <div class="row">
+
         @include('analytics/MNH/html/skillbirth')
+          
+
         @include('analytics/MNH/html/bedcapacity')
           @include('analytics/MNH/html/hours24')
 </div>
