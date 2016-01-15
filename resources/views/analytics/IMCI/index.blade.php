@@ -47,13 +47,13 @@
                         </div>
                         </div>
                         
-                         
+                         @include('analytics/IMCI/html/Trained')
 
 
 </div>
    
            
-@include('analytics/IMCI/html/Trained')
+
 
      
             @include('analytics/IMCI/html/WorkingLocation')
