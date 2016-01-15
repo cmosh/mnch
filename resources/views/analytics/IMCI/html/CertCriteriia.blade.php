@@ -3,10 +3,7 @@
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Certification Criteria
-                  <small>
-                    <a href="/comparison/CHV2/CHV2_DTreatmentCommodities/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
-                    
-                    </small>
+                  
 
                     </h3>
 
