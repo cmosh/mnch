@@ -104,12 +104,12 @@
  </div>
  <div class="row">
  @include('analytics/MNH/html/HIVTest')
-  @include('analytics/MNH/html/newborn')
+  
   </div>
   <div class="row">
   @include('analytics/MNH/html/kangaroo')
   @include('analytics/MNH/html/devpep')
-   
+  @include('analytics/MNH/html/newborn')
    </div>
  
    
