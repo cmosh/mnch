@@ -46,17 +46,17 @@
                         <br>
                         </div>
                         </div>
-                        
+                        <div class="row">
                          @include('analytics/IMCI/html/Trained')
-
-
+ @include('analytics/IMCI/html/WorkingLocation')
+</div>
 </div>
    
            
 
 
      
-            @include('analytics/IMCI/html/WorkingLocation')
+           
             
             
             </div>
