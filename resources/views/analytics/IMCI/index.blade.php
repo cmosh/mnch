@@ -56,7 +56,7 @@
 
      
             @include('analytics/IMCI/html/WorkingLocation')
-            
+            </div>
 <!-- the rest -->
  <div class="col-md-12">
                         
