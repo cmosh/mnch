@@ -54,7 +54,7 @@
 </div>
 
      
-            <div class="col-md-12">
+            
             <div class="row">
             
                    @include('analytics/MNH/html/dservice')
@@ -67,6 +67,7 @@
 @include('analytics/MNH/html/hman')
         
         </div>
+        <div class="col-md-12">
 <div class="row">
 
         @include('analytics/MNH/html/skillbirth')
