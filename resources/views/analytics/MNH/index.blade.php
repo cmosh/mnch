@@ -23,6 +23,7 @@
 
 
    </div>
+   <div class="row">
    @include('analytics/county')
 
  <div class="col-md-8">
@@ -50,7 +51,7 @@
 
          @include('analytics/MNH/html/types')
            
-
+</div>
 
      
             <div class="col-md-12">
