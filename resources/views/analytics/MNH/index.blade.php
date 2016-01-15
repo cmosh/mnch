@@ -59,11 +59,12 @@
             
                    @include('analytics/MNH/html/dservice')
                    
-@include('analytics/MNH/html/hman')
+
 
                     @include('analytics/MNH/html/dserviceconduct')
-
-
+                    </div>
+<div class="row">
+@include('analytics/MNH/html/hman')
         
         </div>
 <div class="row">
