@@ -56,7 +56,7 @@
      
             <div class="col-md-12">
             
-            
+     <div class="row">       
             
                    @include('analytics/MNH/html/dservice')
                    
@@ -65,7 +65,7 @@
                     @include('analytics/MNH/html/dserviceconduct')
                    
 @include('analytics/MNH/html/hman')
-     
+     </div>
 <div class="row">
 
 
@@ -107,8 +107,9 @@
   @include('analytics/MNH/html/newborn')
   </div>
   <div class="row">
+  @include('analytics/MNH/html/kangaroo')
   @include('analytics/MNH/html/devpep')
-   @include('analytics/MNH/html/kangaroo')
+   
    </div>
  
    
