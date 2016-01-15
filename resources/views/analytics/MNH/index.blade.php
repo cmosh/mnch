@@ -66,7 +66,7 @@
                    
 @include('analytics/MNH/html/hman')
      
-
+<div class="row">
 
 
         @include('analytics/MNH/html/skillbirth')
@@ -75,7 +75,7 @@
         @include('analytics/MNH/html/bedcapacity')
           @include('analytics/MNH/html/hours24')
 
-
+</div>
             </div>
 
 
@@ -93,8 +93,7 @@
   <div class="row">
  @include('analytics/MNH/html/bemonc')
   @include('analytics/MNH/html/BemoncChallenge')
-  </div>
-  <div class="row">
+  
 @include('analytics/MNH/html/cemonc')
  
  </div>
