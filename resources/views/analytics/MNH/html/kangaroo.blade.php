@@ -1,9 +1,14 @@
    <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Provison of KMC</h3>
+                  <h3 class="box-title">Provison of KMC
+                  <small>
+                    <a href="/comparison/MNHV2/MNHV2_Kangaroo1/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
                   <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_Kangaroo1/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+                   
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -17,7 +22,10 @@
                  
                   <div class="box-tools pull-right">
                   
-                     <a href='/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+                     <small>
+                    <a href="/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>

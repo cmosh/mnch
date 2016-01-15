@@ -1,9 +1,14 @@
   <div class="col-md-4">
                <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Main Source of Blood</h3>
+                  <h3 class="box-title">Main Source of Blood
+                  <small>
+                    <a href="/comparison/MNHV2/MNHV2_MainBlood/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
                   <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_MainBlood/pie/' class='btn btn-box-tool'>Launch Comparison</a>
+                   
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
