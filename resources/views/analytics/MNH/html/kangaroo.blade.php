@@ -20,13 +20,13 @@
 
                   <div class="box-header with-border">
                  
-                  <div class="box-tools pull-right">
+                  
                   
                      <small>
                     <a href="/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
-
+<div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>

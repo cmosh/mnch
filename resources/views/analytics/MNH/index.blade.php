@@ -55,17 +55,19 @@
 
      
             <div class="col-md-12">
+            <div class="row">
                    @include('analytics/MNH/html/dservice')
 
                     @include('analytics/MNH/html/dserviceconduct')
 
 
         @include('analytics/MNH/html/hman')
-
+        </div>
+<div class="row">
         @include('analytics/MNH/html/skillbirth')
         @include('analytics/MNH/html/bedcapacity')
           @include('analytics/MNH/html/hours24')
-
+</div>
 
             </div>
 
@@ -81,17 +83,26 @@
                         </div>
                         </div>
 </div>
-  
+  <div class="row">
  @include('analytics/MNH/html/bemonc')
   @include('analytics/MNH/html/BemoncChallenge')
+  </div>
+  <div class="row">
 @include('analytics/MNH/html/cemonc')
  @include('analytics/MNH/html/MainBlood')
+ </div>
+ <div class="row">
  @include('analytics/MNH/html/ReasonBlood')
  @include('analytics/MNH/html/Reasoncs')
+ </div>
+ <div class="row">
  @include('analytics/MNH/html/HIVTest')
   @include('analytics/MNH/html/newborn')
+  </div>
+  <div class="row">
   @include('analytics/MNH/html/devpep')
    @include('analytics/MNH/html/kangaroo')
+   </div>
  
    
 
