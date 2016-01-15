@@ -1,5 +1,5 @@
 
-           
+           <div class="col-md-4">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">HCWs Trained and Assessed
@@ -19,6 +19,6 @@
                  <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
-
+</div>
               </div><!-- /.box -->
            
