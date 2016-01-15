@@ -2,9 +2,13 @@
             <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">PROVISION OF CEmONC SIGNAL FUNCTIONS</h3>
-                  <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_Cemonc/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+                  <h3 class="box-title">PROVISION OF CEmONC SIGNAL FUNCTIONS
+                  <small>
+                    <a href="/comparison/MNHV2/MNHV2_Cemonc/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
+                 
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
