@@ -94,18 +94,20 @@
  @include('analytics/MNH/html/bemonc')
   @include('analytics/MNH/html/BemoncChallenge')
   
-@include('analytics/MNH/html/cemonc')
+
  
  </div>
+ <div class="row">
+ @include('analytics/MNH/html/cemonc')
+ @include('analytics/MNH/html/HIVTest')
+  
+  </div>
  <div class="row">
  @include('analytics/MNH/html/MainBlood')
  @include('analytics/MNH/html/ReasonBlood')
  @include('analytics/MNH/html/Reasoncs')
  </div>
- <div class="row">
- @include('analytics/MNH/html/HIVTest')
-  
-  </div>
+ 
   <div class="row">
   @include('analytics/MNH/html/kangaroo')
   @include('analytics/MNH/html/devpep')
