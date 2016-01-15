@@ -89,9 +89,10 @@
   </div>
   <div class="row">
 @include('analytics/MNH/html/cemonc')
- @include('analytics/MNH/html/MainBlood')
+ 
  </div>
  <div class="row">
+ @include('analytics/MNH/html/MainBlood')
  @include('analytics/MNH/html/ReasonBlood')
  @include('analytics/MNH/html/Reasoncs')
  </div>
