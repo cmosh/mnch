@@ -470,7 +470,7 @@
 
  
    $.ajax({
-       url: '/usermanagement/status_change',
+       url: '/{{config("app.prefix")}}/usermanagement/status_change',
       type: "post",
        data: data,
            success: function(data){   
@@ -516,7 +516,7 @@ $("#notification").delay(2000).show(0, function() {
 
  
    $.ajax({
-       url: '/usermanagement/status_change',
+       url: '/{{config("app.prefix")}}/usermanagement/status_change',
       type: "post",
        data: data,
            success: function(data){
@@ -565,7 +565,7 @@ $("#notification").delay(2000).show(0, function() {
 
  
    $.ajax({
-       url: '/usermanagement/reset',
+       url: '/{{config("app.prefix")}}/usermanagement/reset',
       type: "post",
        data: data,
            success: function(data){

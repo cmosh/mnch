@@ -48,7 +48,7 @@
               <div class="box-body">
               <br>
               <br>
-                            {!! Form::open(['url' => '/{{config('app.prefix')}}/usermanagement/addusers_multi/store','id'=>'form-multiedit']) !!}
+                            {!! Form::open(['url' => '/'.config('app.prefix').'/usermanagement/addusers_multi/store','id'=>'form-multiedit']) !!}
 
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>

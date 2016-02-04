@@ -192,7 +192,7 @@ $(document).ready(function(){
          $('#saved').show();
           
            setTimeout(function(){
-             if(btn=='head') window.location = ('{{URL::asset("/{{config(\'app.prefix\')}}/status/save")}}/{{$AssID}}');
+             if(btn=='head') window.location = ('{{URL::asset("/.".config("app.prefix")."/status/save")}}/{{$AssID}}');
    $('#saved').hide();
      $('#thesubmit').show();
     
@@ -289,7 +289,7 @@ $("#demo-form").submit(function(e) {
              @endif
 
               setTimeout(function(){
-   window.location = ('{{URL::asset("/{{config(\'app.prefix\')}}/status/submit")}}/{{$AssID}}');
+   window.location = ('{{URL::asset("/".config("app.prefix")."/status/submit")}}/{{$AssID}}');
 }, 1000);
 
              

@@ -52,7 +52,7 @@
 
 
 
-   {!! Form::open(['url' => '/{{config('app.prefix')}}/usermanagement/update/pass/'.Auth::user()->id,'id'=>'demo-form']) !!}     
+   {!! Form::open(['url' => '/'.config('app.prefix').'/usermanagement/update/pass/'.Auth::user()->id,'id'=>'demo-form']) !!}     
 
  <div class="box-body">
          <div class="form-group">

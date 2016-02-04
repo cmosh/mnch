@@ -143,7 +143,7 @@
           </div>
         @endif
         <div class="secure"><b style="color:red">Upload Excel File</b></div>
-        {!! Form::open(array('url'=>'/{{config('app.prefix')}}/usermanagement/multi_upload','method'=>'POST', 'files'=>true)) !!}
+        {!! Form::open(array('url'=>'/'.config('app.prefix').'/usermanagement/multi_upload','method'=>'POST', 'files'=>true)) !!}
          <div class="control-group">
           <div class="controls">
           {!! Form::file('image') !!}
