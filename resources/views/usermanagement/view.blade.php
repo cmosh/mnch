@@ -188,7 +188,7 @@
 
                       </td>
  <td class="hideprint">
- <form action="/usermanagement/editusers/{{$user->id}}">
+ <form action="/{{config('app.prefix')}}/usermanagement/editusers/{{$user->id}}">
     <input class="btn btn-primary form-control " type="submit" value="EDIT">
     </form>
     </td>
@@ -313,7 +313,7 @@
 
                       </td>
  <td class="hideprint">
- <form action="/usermanagement/editusers/{{$user->id}}">
+ <form action="/{{config('app.prefix')}}/usermanagement/editusers/{{$user->id}}">
     <input class="btn btn-primary form-control " type="submit" value="EDIT">
     </form>
     </td>

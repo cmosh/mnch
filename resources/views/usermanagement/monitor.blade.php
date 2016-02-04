@@ -207,7 +207,7 @@
 
                         <td >{{ $user->username}} </td>
                         @if($user->Status=='Submitted')
- <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
+ <td class="hideprint"><form action="/{{config('app.prefix')}}/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
                @elseif($user->Status=='Incomplete' || $user->Status=='New')
 
@@ -407,7 +407,7 @@
         
                     
 
-<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county->Name}}/{{$survey->surveyID}}">
+<td class="hideprint"><form action="/{{config('app.prefix')}}/usermanagement/export/{{$location}}/todayentry/{{$county->Name}}/{{$survey->surveyID}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
@@ -581,7 +581,7 @@
         
                     
 
-<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county->Name}}/{{$survey->surveyID}}">
+<td class="hideprint"><form action="/{{config('app.prefix')}}/usermanagement/export/{{$location}}/totalentry/{{$county->Name}}/{{$survey->surveyID}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
