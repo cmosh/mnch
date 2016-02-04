@@ -219,7 +219,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '/analytics/maprequest',
+      url: '/{{config("app.prefix")}}/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -256,7 +256,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/mnhajax',
+      url: '/{{config("app.prefix")}}/analytics/mnhajax',
       type: "post",
        data: data,
            success: function(data){

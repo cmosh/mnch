@@ -196,7 +196,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '/analytics/maprequest',
+      url: '/{{config("app.prefix")}}/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -234,7 +234,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/imciajax',
+      url: '/{{config("app.prefix")}}/analytics/imciajax',
       type: "post",
        data: data,
            success: function(data){

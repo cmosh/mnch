@@ -2,6 +2,7 @@
 
 return [
 	
+	'prefix' => env('URL_PREFIX'),
 	'folder' => env('APP_FOLDER'),
 	'mak' => env('MAK',false),
 	'env' => env('APP_ENV', 'production'),
