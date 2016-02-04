@@ -695,7 +695,7 @@
      $.ajax({
 
     
-      url: '/survey/session',
+      url: '/{{config("app.prefix")}}/survey/session',
       type: "post",
        data: data,
        error: function(){
@@ -713,8 +713,8 @@
 
              
 
-             if(Bad) window.location = ('{{URL::asset("/assessments/resume/")}}/'+AssID);
-           else window.location = ('{{URL::asset("/assessments/badresume/")}}/'+AssID);
+             if(Bad) window.location = ('{{URL::asset("{{config(\'app.prefix\')}}/assessments/resume/")}}/'+AssID);
+           else window.location = ('{{URL::asset("{{config(\'app.prefix\')}}/assessments/badresume/")}}/'+AssID);
 
            }else if(data){
 
@@ -853,7 +853,7 @@ function ajax2() {
     };
 
    $.ajax({
-       url: '/usermanagement/ajax',
+       url: '/{{config("app.prefix")}}/usermanagement/ajax',
       type: "post",
        data: data,
            success: function(data){
@@ -921,7 +921,7 @@ function ajax() {
     };
 
    $.ajax({
-       url: '/usermanagement/ajax',
+       url: '/{{config("app.prefix")}}/usermanagement/ajax',
       type: "post",
        data: data,
            success: function(data){

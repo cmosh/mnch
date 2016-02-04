@@ -75,7 +75,7 @@ function sonline() {
 
     };
   $.ajax({
-      url: '/survey/session',
+      url: '/{{config("app.prefix")}}/survey/session',
       type: "post",
        data: data,
      
@@ -120,7 +120,7 @@ $('.asave').change(function () {
 
 
     $.ajax({
-      url: '/survey/save',
+      url: '/{{config("app.prefix")}}3/survey/save',
       type: "post",
        data: data,
        error:function(){
@@ -170,7 +170,7 @@ $(document).ready(function(){
         $.extend( data, data2 );
 
     $.ajax({
-      url: '/survey/save',
+      url: '/{{config("app.prefix")}}/survey/save',
       type: "post",
        data: data,
        error:function(){
@@ -192,7 +192,7 @@ $(document).ready(function(){
          $('#saved').show();
           
            setTimeout(function(){
-             if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');
+             if(btn=='head') window.location = ('{{URL::asset("/{{config(\'app.prefix\')}}/status/save")}}/{{$AssID}}');
    $('#saved').hide();
      $('#thesubmit').show();
     
@@ -257,7 +257,7 @@ $("#demo-form").submit(function(e) {
     $.ajax({
 
     
-      url: '/survey/save',
+      url: '/{{config("app.prefix")}}/survey/save',
       type: "post",
        data: data,
         error:function(){
@@ -289,7 +289,7 @@ $("#demo-form").submit(function(e) {
              @endif
 
               setTimeout(function(){
-   window.location = ('{{URL::asset("/status/submit")}}/{{$AssID}}');
+   window.location = ('{{URL::asset("/{{config(\'app.prefix\')}}/status/submit")}}/{{$AssID}}');
 }, 1000);
 
              

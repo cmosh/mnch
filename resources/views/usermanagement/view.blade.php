@@ -23,7 +23,7 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="/usermanagement/addusers" class="small-box-footer">Add <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/{{config('app.prefix')}}/usermanagement/addusers" class="small-box-footer">Add <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
 
@@ -39,7 +39,7 @@
                   <i class="ion ion-person-add"></i>
                 </div>
 
-                <a href="/usermanagement/addusers_multi" class="small-box-footer">Add<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/{{config('app.prefix')}}/usermanagement/addusers_multi" class="small-box-footer">Add<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
 
@@ -49,7 +49,7 @@
 
 <div class="box box-primary">
                 <div class="box-header">
-                <a style="float:right" href="/usermanagement/export/{{$location}}/users/all/all">Download excel</a>
+                <a style="float:right" href="/{{config('app.prefix')}}/usermanagement/export/{{$location}}/users/all/all">Download excel</a>
                 <br>
                <a style="float:right" id="copy-button" data-clipboard-text="{{$users}}">Copy to Clipboard</a>
 

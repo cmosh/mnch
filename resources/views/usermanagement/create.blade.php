@@ -22,7 +22,7 @@
         <div class="panel-body">
           
       
- {!! Form::open(['url' => 'usermanagement/store','id'=>'form-add']) !!}
+ {!! Form::open(['url' => '/{{config('app.prefix')}}/usermanagement/store','id'=>'form-add']) !!}
 
 
 

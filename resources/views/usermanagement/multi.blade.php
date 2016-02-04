@@ -37,7 +37,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  <p style="color:red">Upload an Excel file with the user details, using the format below.</p> 
-                 <p>Download the excel template <u><a href="/usermanagement/export/{{$location}}/multi/template/template">here</a></u></p> 
+                 <p>Download the excel template <u><a href="/{{config('app.prefix')}}/usermanagement/export/{{$location}}/multi/template/template">here</a></u></p> 
 
             </div><!-- /.box-body -->
               </div>
@@ -143,7 +143,7 @@
           </div>
         @endif
         <div class="secure"><b style="color:red">Upload Excel File</b></div>
-        {!! Form::open(array('url'=>'usermanagement/multi_upload','method'=>'POST', 'files'=>true)) !!}
+        {!! Form::open(array('url'=>'/{{config('app.prefix')}}/usermanagement/multi_upload','method'=>'POST', 'files'=>true)) !!}
          <div class="control-group">
           <div class="controls">
           {!! Form::file('image') !!}
