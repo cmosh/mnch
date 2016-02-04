@@ -210,8 +210,8 @@
 
              
 
-             if(Bad) window.location = ('{{URL::asset("/{{config("app.prefix")}}/assessments/resume/")}}/'+AssID);
-           else window.location = ('{{URL::asset("/{{config("app.prefix")}}/assessments/badresume/")}}/'+AssID);
+             if(Bad) window.location = ('{{URL::asset("/assessments/resume/")}}/'+AssID);
+           else window.location = ('{{URL::asset("/assessments/badresume/")}}/'+AssID);
 
            }else if(data){
 
