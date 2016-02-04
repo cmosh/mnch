@@ -12,7 +12,7 @@
         <div class="panel-body">
           
       
- {!! Form::open(['url' => '/'.config('app.prefix').'/self/store','id'=>'form-add']) !!}
+ {!! Form::open(['url' => '/self/store','id'=>'form-add']) !!}
 
 
 

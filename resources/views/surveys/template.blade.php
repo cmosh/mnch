@@ -289,7 +289,7 @@ $("#demo-form").submit(function(e) {
              @endif
 
               setTimeout(function(){
-   window.location = ('{{URL::asset("/".config("app.prefix")."/status/submit")}}/{{$AssID}}');
+   window.location = ('{{URL::asset("/status/submit")}}/{{$AssID}}');
 }, 1000);
 
              
@@ -322,7 +322,7 @@ $("#demo-form").submit(function(e) {
           $("#cancLink").attr("href", "waiting");
           var canconf= confirm('Are you sure you want to cancel the survey? All progress will be lost?');
           if(event.target==this && canconf==true){     
-          $("#cancLink").attr("href", "{{config('app.prefix')}}/assessments/cancel/{{$AssID}}");
+          $("#cancLink").attr("href", "/{{config('app.prefix')}}/assessments/cancel/{{$AssID}}");
           alert( "Cancel Successful");
              }
           else{

@@ -23,7 +23,7 @@
         
 
 
-   {!! Form::open(['url' => '/'.config('app.prefix').'/usermanagement/update/'.$user[0]->id,'id'=>'form-edit']) !!}
+   {!! Form::open(['url' => '/usermanagement/update/'.$user[0]->id,'id'=>'form-edit']) !!}
 
  
 <div class="box-body">
