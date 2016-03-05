@@ -52,8 +52,6 @@ Route::post('analytics/imciajax','AnalyticsController@imciajax');
 Route::post('analytics/maprequest','AnalyticsController@maprequest');
 Route::get('mnh','AnalyticsController@mnh');
 Route::get('imci','AnalyticsController@imci');
-Route::get('tester/','AnalyticsController@tester');
-Route::get('test','AnalyticsController@blah');
 
 Route::get('home', 'HomeController@index');
 
@@ -78,6 +76,24 @@ Route::post('usermanagement/store','UserManagement@store');
 
 Route::get('test/stop','administration@stop');
 Route::get('test/serve','administration@serve');
+
+
+Route::group(['prefix' => 'test'], function () {
+
+     Route::get('/','testcontroller@index');
+     Route::get('{variable}','testcontroller@variable');
+     Route::get('{variable}/{variable2}','testcontroller@variable');
+
+
+});
+
+Route::get('user', array('before' => 'old', function()
+{
+    return 'You are over 200 years old!';
+}));
+
+
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController', 

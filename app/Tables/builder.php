@@ -13,8 +13,8 @@ class builder   {
   public static function buildview($AssID, $act,$Participant,$color="primary") {
 
   if ($Participant == null){
-           $Participant=  new Participantsview;
-         //  $TheAssessor->Name = '';
+           $Participant=  new Participants;
+         
         }
 
   
@@ -22,7 +22,7 @@ class builder   {
   $Contacts = Contact::where('AssID', '=', $AssID)->get()->keyBy('Cadre');
 
 
-        // echo $Contacts;
+       
         $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
         
 
@@ -34,8 +34,7 @@ class builder   {
 
         $TheAssessor = Assessor::where('AssID', '=', $AssID)->first();
         if ($TheAssessor == null){
-           $TheAssessor=  new Assessor;
-         //  $TheAssessor->Name = '';
+           $TheAssessor=  new Assessor;        
         }
        
 
@@ -286,7 +285,9 @@ class builder   {
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
-                                                    <input type="text" class="asave form-control" value="';if ($act != 'open') $HtmlLines.=($Contacts->get('Facility Incharge')->Name); $HtmlLines.='"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name"  ';
+                                                    <input type="text" class="asave form-control" value="';
+                    if ($act != 'open') $HtmlLines.=($Contacts->get('Facility Incharge')->Name); 
+                    $HtmlLines.='"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';
                         }
@@ -611,7 +612,7 @@ class builder   {
                                                 <div class="row">
 
                                                         <div class="col-xs-4">
-                                                            <label>First Name</label>
+                                                            <label>Name</label>
                                                             <input class="asave form-control" id="HCWName" value="'.$Participant->Name_of_Participant.'" placeholder="Enter first name" type="text" disabled>
                                                         </div>
                                                         
@@ -816,7 +817,7 @@ class builder   {
 
                                     <div class="box box-'.$color.'"  id="' . $BlockIDName . '" automaticallyVisibleIfIDChecked="' . $Single_BlockCollection->dependencyID . '">
                                     <div class="box-header">
-                                        <h3 class="box-title">' . $Single_BlockCollection->Name . '</h3>
+                                        <h3 class="box-title">' . $Single_BlockCollection->name . '</h3>
                                     </div>
                                     <table class="table">';
                 
@@ -892,9 +893,7 @@ class builder   {
                                         
                                         // code...
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
+                                        $HtmlLines.= 'style="vertical-align:middle">';
                                         
                                         if ($datass->get($ColumnSetIDName) == null) {
                                         } 
@@ -906,8 +905,7 @@ class builder   {
                                     else {
                                         
                                         //saving-text
-                                        $HtmlLines.= 'style="vertical-align:middle"  >
-                                                                                    <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
+                       $HtmlLines.= 'style="vertical-align:middle"  > <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
                                         $ColID[] = $ColumnSetIDName;
                                         
                                         foreach ($fieldValueList as $fieldd) {
@@ -916,9 +914,8 @@ class builder   {
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
                                              $AjaxNames[]= $fieldIDName;
-                                            $HtmlLines.= '
-                                                                                            <div class="input-group">
-                                                                                           <input class="form-control asave thenormal" type="text" name ="';
+                                            $HtmlLines.= '<div class="input-group">
+                                            <input class="form-control asave thenormal '.$Single_ColumnSetCollection->class.' " type="text" name ="';
                                             $HtmlLines.= $fieldIDName;
                                             $HtmlLines.= '" id="';
                                             $HtmlLines.= $fieldIDName;

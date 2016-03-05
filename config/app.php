@@ -131,8 +131,7 @@ return [
 		Illuminate\Pagination\PaginationServiceProvider::class,
 		Illuminate\Pipeline\PipelineServiceProvider::class,
 		Illuminate\Queue\QueueServiceProvider::class,
-		//Illuminate\Redis\RedisServiceProvider::class,
-		Nardev\PhpRedis\PhpRedisServiceProvider::class,
+		Vetruvet\PhpRedis\PhpRedisServiceProvider::class,
 		Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 		Illuminate\Session\SessionServiceProvider::class,
 		Illuminate\Translation\TranslationServiceProvider::class,
@@ -140,7 +139,7 @@ return [
 		Illuminate\View\ViewServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
-		// Collective\Remote\RemoteServiceProvider::class,
+		Collective\Remote\RemoteServiceProvider::class,
 		Efficiently\Larasset\LarassetServiceProvider::class,
         Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -154,8 +153,7 @@ return [
 		App\Providers\ConfigServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-		App\Providers\AuthServiceProvider::class,
-		App\Providers\RemoteServiceProvider::class,
+		App\Providers\AuthServiceProvider::class
 
 	],
 
@@ -209,7 +207,8 @@ return [
     	'Html'		=> Collective\Html\HtmlFacade::class,
 		'Asset' 	=> Efficiently\Larasset\Facades\Asset::class,
 		'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
-		'SSH' 		=> Collective\Remote\RemoteFacade::class
+		'SSH' 		=> Collective\Remote\RemoteFacade::class,
+		'Uuid' 		=> Webpatser\Uuid\Uuid::class
 
 	],
 

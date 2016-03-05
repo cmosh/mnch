@@ -348,7 +348,7 @@ $('#some_id2').click(function() {
   else{
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + ($('#Version2').val()).substring(0,2) + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val()+'/'+ $('#SubCounty2').val();
+  var linki = '/assessments/' + $('#Version2').val() + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val()+'/'+ $('#SubCounty2').val();
   //alert(linki);
    if(window.offline) e.preventDefault();
    $(location).attr('href', linki);
