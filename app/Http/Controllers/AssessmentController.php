@@ -116,19 +116,19 @@ class AssessmentController extends Controller {
 
 	}
 
-	public function show($id,$county,$term,$subcounty)
+	public function show($survey,$county,$term,$subcounty)
 	{
-			$id = substr($id, 0,2);
+			$id = substr($survey, 0,2);
 			if ($id != 'IM') 
 {
 				$AssessmentsList = assessments::View(array(
-    				'County'=>'Samburu',
-    				'SubCounty'=>'Samburu Central',
-    				'Survey'=>'CHV2',
-    				'Term'=>'Baseline'
+    				'County'=>$county,
+    				'SubCounty'=>$subcounty,
+    				'Survey'=>$survey,
+    				'Term'=>$term
     				))->get();
 
-    			$Assessments = $this->Map->transform($AssessmentsList,'AssessmentList');
+    			$Assessments = $this->Map->Assessmentsfilter($AssessmentsList);
 }
 			else $Assessments = Imciview::all();
 

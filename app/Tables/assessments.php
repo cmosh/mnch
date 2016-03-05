@@ -30,19 +30,18 @@ class assessments extends Eloquent  {
      {
         return $query->where('Survey',$params['Survey'])
      				 ->where('Assessment_Term',$params['Term'])
-     				 ->select('Assessment_ID','Facility_ID','Survey','Assessment_Term','Date','status')
-     				 ->with(['facility'=>function($query){
-     				 	$query->select('FacilityCode','FacilityName');
+     				 ->select('Assessment_ID','Facility_ID','Survey','Assessment_Term','Date','Status')
+     				 ->with(['facility'=>function($query) use ($params){
+     				 	$query->select('FacilityCode','FacilityName','County','District')
+     				 		->where('County',$params['County'])
+     				 		->where('District',$params['SubCounty']);
      				 	}])
      				 ->with(['assessor'=>function($query){
      				 	$query->select('Name','AssID');
      				 }])
-     				/* ->whereHas('facility', function($q) use ($params){
-    					$q->where('County',$params['County'])
-    					  ->where('District',$params['SubCounty']);
-							})*/
+     				 
                      ;    
-    }
+    }	
 
      public function facility() {
         return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode');
