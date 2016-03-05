@@ -75,41 +75,33 @@
                        @foreach($Assessments as $Assessment)
 
             <tr >
-                        <td style= "display:none;"> {{ $Assessment->AssID}}</td>
-                        <td style= "display:none;"> {{ $Assessment->FacilityID}}</td>
-
-                        @if ( (substr ($Assessment->Survey, 0,2)) =='CH')
-                           <td> CH Survey </td>
-                           @elseif ( (substr ($Assessment->Survey, 0,2)) =='MN')
-                              <td> MNH Survey</td>
-                              @else
-                                 <td> IMCI Survey </td>
-                                 @endif
-                      @if ( $id !='IM') <td> {{ $Assessment->Term}}</td>
+                        <td style= "display:none;"> {{ $Assessment['AssID']}}</td>
+                        <td style= "display:none;"> {{ $Assessment['FacilityID']}}</td>
+                        <td> {{ $Assessment['Survey']}} </td>
+                                 
+                      @if ( $id !='IM') <td> {{ $Assessment['Term']}}</td>
                        @endif
-                        @if ( $id =='IM') <td>{{ $Assessment->Participant}}</td>
+                        @if ( $id =='IM') <td>{{ $Assessment['Participant']}}</td>
                          @endif
                        
-                        <td> @if(isset($Assessment->AssessorName))
-                        {{$Assessment->AssessorName}} 
-                        @endif &nbsp; </td>
-                        <td> {{ $Assessment->Date}}</td>
-                        <td> {{$Assessment->FacilityName}}</td>
+                        <td> {{$Assessment['Assessor']}}</td>
+                        <td> {{ $Assessment['Date']}}</td>
+                        <td> {{$Assessment['Facility']}}</td>
 
 
 
- @if($Assessment->Status=='Submitted')
-                        <td><form action="/assessments/show/{{$Assessment->AssID}}">
+ @if($Assessment['Status']=='Submitted')
+                        <td><form action="/assessments/show/{{$Assessment['AssID']}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>
 
-     @elseif($Assessment->Status=='Incomplete' || $Assessment->Status=='New')
+     @elseif($Assessment['Status']=='Incomplete' || $Assessment['Status']=='New')
 
-     	 <td><form class="theresume" AssID="{{$Assessment->AssID}}" bad="{{isset($Assessment->AssessorName)}}">
+     	 <td><form class="theresume" AssID="{{$Assessment['AssID']}}" bad="{{$Assessment['Bad']}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
 
      @else
 
-      <td> {{$Assessment->Status}}</td>
+      <td> {{$Assessment['Status']}}</td>
 
      @endif
 

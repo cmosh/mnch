@@ -157,18 +157,18 @@
                       
                       @if($loc!='IM')
 
-                        @foreach($All as $al)
+                        @foreach($All as $Facility)
                         <tr>
-                        <td class="rr"> {{ $al->FacilityName}}</td>
-                        <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
-                        <td> {{ $al->District}}</td>
-                        <td> {{ $al->Type}}</td>
-                        <td> {{ $al->Owner}}</td>
+                        <td class="rr"> {{ $Facility['Name']}}</td>
+                        <td class="nr"><span>{{ $Facility['Code']}}</span>  </td>
+                        <td> {{ $Facility['SubCounty']}}</td>
+                        <td> {{ $Facility['Type']}}</td>
+                        <td> {{ $Facility['Owner']}}</td>
 
-                          @if(isset($DoneAss->get($al->FacilityCode)->Status) == false)   
+                          @if($Facility['Action'] == "Ready")   
                         <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
                           @else
-                          <td> {{($DoneAss->get($al->FacilityCode)->Status)}} </td>
+                          <td> {{$Facility['Action']}} </td>
                           @endif
 
                       </tr>
@@ -179,20 +179,19 @@
 
                   @else
 
-                           @foreach($All as $al)
+                           @foreach($All as $Participant)
                         <tr>
-                        <td class="rr"> {{ $al->Name_of_Participant}}</td>
-                        <td><span>{{ $al->FacilityName}}</span>  </td>
-                         <td class="nr"><span>{{ $al->FacilityCode}}</span>  </td>
-                        <td> {{ $al->training_site}}</td>
-                        <td> {{ $al->id_Number}}</td>
-                        <td style="display:none;" class="vr">{{$al->PartID}}</td>
+                        <td class="rr"> {{ $Participant['Name']}}</td>
+                        <td><span>{{ $Participant['Facility']}}</span>  </td>
+                         <td class="nr"><span>{{ $Participant['FacilityCode']}}</span>  </td>
+                        <td> {{ $Participant['TrainigSite']}}</td>
+                        <td> {{ $Participant['IDNumber']}}</td>
+                        <td style="display:none;" class="vr">{{$Participant['PartID']}}</td>
 
-
-                       @if(isset($DoneAss->get($al->PartID)->Status) == false)   
+                           @if($Participant['Status'] == "Ready")   
                         <td> <button type="button" class="use-address btn btn-primary form-control" /> Select </button> </td>
                           @else
-                          <td> {{($DoneAss->get($al->PartID)->Status)}} </td>
+                          <td> {{$Participant['Status']}} </td>
                           @endif
 
                       </tr>

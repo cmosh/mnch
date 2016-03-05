@@ -7,13 +7,15 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"laravel/framework": "5.2.0 as 5.1.8",
-		"laravelcollective/html": "dev-master as 5.1.1",
-		"nardev/laravel-5.1-phpredis": "dev-master",
+		"laravel/framework": "5.2.9 as 5.1.8",
+		"laravelcollective/html": "5.2.4 as 5.1.1",
+		"vetruvet/laravel-phpredis": "1.0.3",
 		"maatwebsite/excel": "^2.0",
 		"guzzlehttp/guzzle": "^6.1",
-		"laravelcollective/remote": "5.1.*",
-		"efficiently/larasset": "1.1.*"		
+		"laravelcollective/remote": "5.2.*",
+		"efficiently/larasset": "1.1.*",
+		"webpatser/laravel-uuid": "2.*"	,
+		"orangehill/iseed": "2.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

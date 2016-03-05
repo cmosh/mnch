@@ -13,16 +13,18 @@ use App\Tables\Surveyview;
 use App\Tables\Participantsview;
 use App\Tables\Imciview;
 use App\Tables\Autosaving;
-use App\Tables\subcounty;
-use ArrayRedis as Cache;
+use App\Helpers\Map;
+use Cache;
 use Request;
 use Input;
+use Uuid;
 
 class AssessmentController extends Controller {
 	
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->Map = new Map;
 	}
 	
 
@@ -48,12 +50,25 @@ class AssessmentController extends Controller {
 			$loc = substr ($id, 0,2);
 			
 			if ($loc == "IM") {
-			$DoneAss = assessments::where('PartID','<>','')->get()->keyBy('PartID');			
-			$All = Participantsview::all();
+
+			// $DoneAss = assessments::where('PartID','<>','')->get()->keyBy('PartID');			
+			// $All = Participantsview::all();
+			
+			$ParticipantsList = Participants::view()->get();
+    		$All = $this->Map->transform($ParticipantsList,'ParticipantsList');
+    		
 			} 
 			else {
-			$DoneAss = assessments::where('Assessment_Term','=',$term)->where('Survey','=',$id)->get()->keyBy('Facility_ID');
-			$All = Facilities::where('County','Like',$countie)->where('District','=',$subcounty)->get();
+			
+			
+			$FacilityList = Facilities::AssessmentList( array('County'=>$countie,
+														    'SubCounty'=>$subcounty,
+														    'Term'=>$term,
+														    'Survey'=>$id
+														    ))->get();
+
+			$All = $this->Map->transform($FacilityList,'FacilityList');
+			
 			}
 
 			if($loc=='IM')
@@ -63,12 +78,9 @@ class AssessmentController extends Controller {
 				$countie='';
 			}
 			
-			$countIDBF = assessments::orderBy('Counter', 'desc')->first();			
-			$countIDBF2 = $countIDBF->Counter;
-			$countID = $countIDBF2 + 1;
-
-			return view('assessments.create')->with('DoneAss',$DoneAss)
-											 ->with('theterm',$term)
+			
+			$countID = Uuid::generate(4);
+			return view('assessments.create')->with('theterm',$term)
 											 ->with('thedate',$date)
 											 ->with('location','ass')
 											 ->with('loc',$loc)
@@ -106,8 +118,18 @@ class AssessmentController extends Controller {
 
 	public function show($id,$county,$term,$subcounty)
 	{
-			$sv = '%'.$id.'%';
-			if ($id != 'IM') $Assessments = Surveyview::where('County','like',$county)->where('District','=',$subcounty)->where('Survey','like',$sv)->where('Term','like',$term)->get();
+			$id = substr($id, 0,2);
+			if ($id != 'IM') 
+{
+				$AssessmentsList = assessments::View(array(
+    				'County'=>'Samburu',
+    				'SubCounty'=>'Samburu Central',
+    				'Survey'=>'CHV2',
+    				'Term'=>'Baseline'
+    				))->get();
+
+    			$Assessments = $this->Map->transform($AssessmentsList,'AssessmentList');
+}
 			else $Assessments = Imciview::all();
 
 					return view('assessments.view')->with('Assessments',$Assessments)
@@ -154,13 +176,14 @@ class AssessmentController extends Controller {
          if(Request::ajax()) {
          	  $param = Input::all();
 
-            $search = '%'.$param['search'].'%';
-         	$county = $param['county'];
-         	$sresult = subcounty::where('County','=',$county)->where('SubCounty','Like',$search)->get(); 
-         
+         	 $sresult = Cache::remember('SubcountySearch'.$param['county'].$param['search'],180,function() use($param){   
+
+         				$temp = Facilities::SubCounties($param)->get();
+
+         				return $temp;
+
+         			});
          	echo json_encode($sresult);
-
-
          }
 
          

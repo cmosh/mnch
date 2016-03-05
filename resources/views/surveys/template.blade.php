@@ -332,8 +332,26 @@ $("#demo-form").submit(function(e) {
               });
           });
 
-</script>
 
+
+  $('.Date').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        onClose: function(dateText, inst) { 
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+    });
+
+</script>
+<style type="text/css">
+  .ui-datepicker-calendar {
+    display: none;
+    }
+</style>
 {!!javascript_include_tag('survey')!!}
 
 @endsection 
