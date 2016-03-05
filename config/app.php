@@ -143,8 +143,7 @@ return [
 		Efficiently\Larasset\LarassetServiceProvider::class,
         Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
-
-
+        Orangehill\Iseed\IseedServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */

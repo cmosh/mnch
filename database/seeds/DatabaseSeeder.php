@@ -15,6 +15,19 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		// $this->call('UserTableSeeder');
-	}
+	    $this->call('BlocksTableSeeder');
+        $this->call('BlockRowsTableSeeder');
+        $this->call('SectionsTableSeeder');
+        $this->call('SurveysTableSeeder');
+        $this->call('FieldsTableSeeder');
+        $this->call('ColumnSetsTableSeeder');
+        $this->call('FacilitiesTableSeeder');
+        $this->call('FacilityGroupsTableSeeder');
+        $this->call('FacilityOwnersTableSeeder');
+        $this->call('FieldSetsTableSeeder');
+        $this->call('ParticipantsTableSeeder');
+        $this->call('TermsTableSeeder');
+        $this->call('CountiesTableSeeder');
+    }
 
 }
