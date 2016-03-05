@@ -440,8 +440,8 @@ $('#some_id2').click(function() {
           params.page = params.page || 1;
 
            var select2Data = $.map(data, function (obj) {
-                    obj.id = obj.SubCounty;
-                    obj.text = obj.SubCounty;
+                    obj.id = obj.District;
+                    obj.text = obj.District;
 
                     return obj;
                 });

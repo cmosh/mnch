@@ -1,11 +1,11 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Cache;
 
-class Facilities extends Model {
+class Facilities extends Eloquent {
 
-	protected $table = 'Facilities';
+	protected $collection = 'Facilities';
 
 	protected $fillable = ['Index','FacilityName', 'FacilityCode','County','Type','Owner'];
 	
@@ -18,8 +18,8 @@ class Facilities extends Model {
      public function scopeSubCounties($query,$params)
     {
     	return 	$query->where('County', $params['county'])
-				        			  ->where('District','Like','%'.$params['search'].'%')
-				        			  ->select('County', 'District as SubCounty')
+				        			  ->where('District','like','%'.$params['search'].'%')
+				        			  ->select('County', 'District')
 				        			  ->groupBy('District');      							        
     }
 

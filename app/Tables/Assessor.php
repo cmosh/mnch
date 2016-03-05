@@ -1,10 +1,10 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Assessor extends Model {
+class Assessor extends Eloquent {
 
-	protected $table = 'assessors';
+	protected $collection = 'assessors';
 	 public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();
     if (is_null($record)) {

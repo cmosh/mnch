@@ -1,10 +1,10 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Participants extends Model {
+class Participants extends Eloquent {
 
-	protected $table = 'Participants';
+	protected $collection = 'Participants';
 
 	protected $fillable = ['Index','Name_of_Participant', 'FacilityName','PartID','mobile_Number','email_address','training_site'];
 	

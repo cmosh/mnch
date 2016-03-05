@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('ParticipantsTableSeeder');
         $this->call('TermsTableSeeder');
         $this->call('CountiesTableSeeder');
+        $this->call('UsersTableSeeder');
     }
 
 }

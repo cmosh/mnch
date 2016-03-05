@@ -15,7 +15,8 @@
 		"laravelcollective/remote": "5.2.*",
 		"efficiently/larasset": "1.1.*",
 		"webpatser/laravel-uuid": "2.*"	,
-		"orangehill/iseed": "2.*"
+		"orangehill/iseed": "2.*",
+		"jenssegers/mongodb": "^3.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

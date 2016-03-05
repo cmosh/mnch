@@ -5,7 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Tables\User_monitor;
+// use App\Tables\User_monitor;
 use App\Tables\countie;
 
 

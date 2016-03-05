@@ -144,6 +144,7 @@ return [
         Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */

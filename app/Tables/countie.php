@@ -1,8 +1,10 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class countie extends Model {
+class countie extends Eloquent {
+
+	protected $collection = 'counties';
 
 	//
 

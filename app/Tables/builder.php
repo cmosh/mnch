@@ -286,7 +286,7 @@ class builder   {
                                                 <div class="col-xs-3">
                                                     <label>NAME</label>
                                                     <input type="text" class="asave form-control" value="';
-                    if ($act != 'open') $HtmlLines.=($Contacts->get('Facility Incharge')->Name); 
+                    if ($act != 'open') $HtmlLines.=($Contacts->get('Facility Incharge')->name); 
                     $HtmlLines.='"id="FacilityInchargeName" name= "FacilityInchargeName" placeholder="Enter Name"  ';
                         if ($act == 'show') {
                             $HtmlLines.= 'disabled';

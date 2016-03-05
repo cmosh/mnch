@@ -97,7 +97,7 @@ $('.asave').change(function () {
         var data = {
             'type':'auto',  
             'AssID':'{{$AssID}}',
-            'user':{{ Auth::user()->id }},
+            'user':'{{ Auth::user()->id }}',
                     @foreach($AjaxNames as $AjaxName)
             '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
                     @endforeach
@@ -150,7 +150,7 @@ $(document).ready(function(){
 
         'type':'auto',
         'AssID':'{{$AssID}}',
-         'user':{{ Auth::user()->id }},
+         'user':'{{ Auth::user()->id }}',
          @foreach($AjaxNames as $AjaxName)
           '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
   
@@ -235,7 +235,7 @@ $("#demo-form").submit(function(e) {
 
         'type':'Submitted',
         'AssID':'{{$AssID}}',
-         'user':{{ Auth::user()->id }},
+         'user':'{{ Auth::user()->id }}',
          @foreach($AjaxNames as $AjaxName)
           '{{$AjaxName}}': $('[name^="{{$AjaxName}}"]').val(),
   

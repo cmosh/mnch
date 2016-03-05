@@ -1,11 +1,11 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use DB;
-class assessments extends Model  {
+class assessments extends Eloquent  {
 
 	//
-	protected $table='assessments';
+	protected $collection ='assessments';
 	protected $dates = ['Date'];
 	 public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();
@@ -28,12 +28,7 @@ class assessments extends Model  {
 
      public function scopeView($query,$params)
      {
-
-
-
-
-
-     	return $query->where('Survey',$params['Survey'])
+        return $query->where('Survey',$params['Survey'])
      				 ->where('Assessment_Term',$params['Term'])
      				 ->select('Assessment_ID','Facility_ID','Survey','Assessment_Term','Date','status')
      				 ->with(['facility'=>function($query){
@@ -42,13 +37,12 @@ class assessments extends Model  {
      				 ->with(['assessor'=>function($query){
      				 	$query->select('Name','AssID');
      				 }])
-     				 ->whereHas('facility', function($q) use ($params){
+     				/* ->whereHas('facility', function($q) use ($params){
     					$q->where('County',$params['County'])
     					  ->where('District',$params['SubCounty']);
-							});    				
-
-     				 
-     }
+							})*/
+                     ;    
+    }
 
      public function facility() {
         return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode');

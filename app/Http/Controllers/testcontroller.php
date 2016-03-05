@@ -24,10 +24,7 @@ class testcontroller extends Controller
 
     	public function index(){
 
-    		 // return Participants::with('assessment')->get();
-    		 $test1 = Participants::view()->get();
-    		$test = $this->Map->transform($test1,'ParticipantsList');
-    		return $test;
+    		return assessments::View(array('Survey'=>'CHV2','Term'=>'Baseline','County'=>'Baringo','SubCounty'=>'Baringo Central'))->get();
 
     	}
 

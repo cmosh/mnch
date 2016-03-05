@@ -1,8 +1,8 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Survey extends Model {
+class Survey extends Eloquent {
 
 	// each Survey has many sections
     public function sections() {

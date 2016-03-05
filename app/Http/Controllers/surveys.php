@@ -234,11 +234,11 @@ print_r($fruit);die;
 
  public function create($id) {
 
-        $assess = assessments::where('Assessment_ID','=',$id)->first();
-        $TheFacility = Facilities::where('FacilityCode', '=', $assess->Facility_ID)->first();
+         $assess = assessments::where('Assessment_ID','=',$id)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', intval($assess->Facility_ID))->first();
         $PartID = $assess->PartID;
-        $sv = $assess->Survey;
-        $status = $assess->status;
+         $sv = $assess->Survey;
+        $status = $assess->Status;
 
        if ($PartID!=null) $Participant = Participants::where('PartID','=',$PartID)->first();
        else $Participant = '';
@@ -263,7 +263,7 @@ print_r($fruit);die;
       
         Rache::foreveryoung($id,function(){return "I Exist!";});
 
-        
+      
         return view('surveys.template')->with('TheFacility',$TheFacility)
                                        ->with('Participant',$Participant)
                                        ->with('AssID',$id)
@@ -279,7 +279,7 @@ print_r($fruit);die;
     public function show($id) {
         
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
-        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', intval($TheAsses->Facility_ID))->first();
         $sv = $TheAsses->Survey;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
@@ -307,7 +307,7 @@ print_r($fruit);die;
        $sv = $TheAsses->Survey;
        $Survs = Survey::where('surveyID', '=', $sv)->first();
        $Secs = Section::where('surveyID', '=', $sv)->get();
-       $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+       $TheFacility = Facilities::where('FacilityCode', '=', intval($TheAsses->Facility_ID))->first();
         $location = substr($sv, 0, 2);
         $color = self::color($location);   
        $Melarray = builder::buildview($id, 'edit',$Participant,$color);
@@ -343,7 +343,7 @@ print_r($fruit);die;
                                  return builder::buildview($id,'open',$Participant,$color);
                             }));}
        else $Melarray = builder::buildview($id, 'edit',$Participant,$color);      
-        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', intval($TheAsses->Facility_ID))->first();
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
        

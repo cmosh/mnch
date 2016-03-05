@@ -67,7 +67,7 @@ class AssessmentController extends Controller {
 														    'Survey'=>$id
 														    ))->get();
 
-			$All = $this->Map->transform($FacilityList,'FacilityList');
+			 $All = $this->Map->transform($FacilityList,'FacilityList');
 			
 			}
 
@@ -102,7 +102,7 @@ class AssessmentController extends Controller {
 	}
 
 		$assessments->Assessment_ID=$x[0];
-		$assessments->Facility_ID=$x[1];
+		$assessments->Facility_ID=intval($x[1]);
 		$assessments->Assessment_Term=$x[2];
 		$assessments->Date=$x[3];
 		$assessments->Survey= $id;

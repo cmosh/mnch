@@ -1,13 +1,13 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Datarecord extends Model {
+class Datarecord extends Eloquent {
 	
 
 	//
 
-	protected $table='datarecords';
+	protected $collection='datarecords';
 
 	public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();
