@@ -108,7 +108,7 @@ class AssessmentController extends Controller {
 		$assessments->Survey= $id;
 		$assessments->UserId= $x[4];
 		$assessments->Status= $x[5];
-		$assessments->PartID=$x[6];
+		$assessments->PartID=intval($x[6]);
 
 	$assessments->save();
 	$ur = 'assessments/start/'.$x[0];
@@ -130,7 +130,13 @@ class AssessmentController extends Controller {
 
     			$Assessments = $this->Map->Assessmentsfilter($AssessmentsList);
 }
-			else $Assessments = Imciview::all();
+			else {
+
+		$AssessmentsList = assessments::Participants(array('Survey'=>$survey))->get();
+
+          $Assessments =  $this->Map->ParticipantsFilter($AssessmentsList);
+         
+			}
 
 					return view('assessments.view')->with('Assessments',$Assessments)
 												   ->with('location','ass')

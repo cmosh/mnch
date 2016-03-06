@@ -24,7 +24,26 @@ class Map{
         'Date' => date_format(date_create($item->Date),'jS F Y'),
         'Facility' => $item->facility->FacilityName,
         'Status' => $item->Status,
-        'Bad' => $this->ValidityTest($item->status)];
+        'Bad' => $this->ValidityTest($item->Status)];
+          });
+
+
+  }
+
+
+  public function ParticipantsFilter($collection){
+    
+
+  return  $collection->transform(function ($item, $key) {
+     return [ 'AssID' => $item->Assessment_ID,
+        'FacilityID' => $item->Facility_ID,
+        'Survey' => substr($item->Survey,0,-2).' Survey',
+        'Participant' => $item->participant->Name_of_Participant,
+        'Assessor' => $item->assessor->Name,
+        'Date' => date_format(date_create($item->Date),'jS F Y'),
+        'Facility' => $item->facility->FacilityName,
+        'Status' => $item->Status,
+        'Bad' => $this->ValidityTest($item->Status)];
           });
 
 

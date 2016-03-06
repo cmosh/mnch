@@ -11,7 +11,6 @@ use App\Tables\Assessor;
 use App\Tables\assessments;
 use App\Tables\Datarecord;
 use App\Tables\Facilities;
-use App\Tables\Surveyview;
 use App\Http\Controllers\ArrayRedis As Rache;
 use Request;
 use Input;
@@ -330,7 +329,7 @@ print_r($fruit);die;
     public function badedit($id) {
 
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
-        $Assessment = Surveyview::where('AssID','=',$id)->first();
+      
         $PartID = $TheAsses->PartID;
        if ($PartID!=null) $Participant = Participants::where('PartID','=',$PartID)->first();else $Participant='';
         $sv = $TheAsses->Survey;
@@ -338,7 +337,7 @@ print_r($fruit);die;
         $Secs = Section::where('surveyID', '=', $sv)->get();
          $location = substr($sv, 0, 2);
           $color = self::color($location);   
-       if( !isset($Assessment->AssessorName) ){ 
+       if( $TheAsses->Status=='New' ){ 
         $Melarray = collect(Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant,$color){
                                  return builder::buildview($id,'open',$Participant,$color);
                             }));}

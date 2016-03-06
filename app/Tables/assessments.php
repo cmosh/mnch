@@ -43,6 +43,27 @@ class assessments extends Eloquent  {
                      ;    
     }	
 
+     public function scopeParticipants($query,$params)
+     {
+        return $query->where('Survey',$params['Survey'])
+     				 ->select('Assessment_ID','Facility_ID','Survey','Assessment_Term','Date','Status','PartID')
+     				 ->with(['facility'=>function($query) use ($params){
+     				 	$query->select('FacilityCode','FacilityName');
+     				 	}])
+     				 ->with(['assessor'=>function($query){
+     				 	$query->select('Name','AssID');
+     				 }])
+     				 ->with(['participant'=>function($query){
+     				 	$query->select('Name_of_Participant','PartID');
+     				 }])
+     				 
+                     ;    
+    }	
+
+
+    public function participant() {
+        return $this->belongsTo('App\Tables\Participants','PartID','PartID');
+    }
      public function facility() {
         return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode');
     }
