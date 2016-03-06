@@ -39,7 +39,7 @@ class UserManagement extends Controller {
 	
 	public function index()
 	{		
-		$users=User::where('role','<','4')->get();		
+		$users=User::NonAdmins()->get();		
 		$this->role->__invoke(3);
 		return view('usermanagement.view')->with('users',$users)
 										  ->with('location','umanage')
@@ -101,8 +101,8 @@ class UserManagement extends Controller {
 		'IDNumber'=>$x[3],
 		'email'=>$x[4],
 		'password'=>bcrypt('123456'),
-		'role'=>$x[5],
-		'status'=>'1'
+		'role'=>intval($x[5]),
+		'status'=>1
 		);
 
 		User::createOrUpdate(
@@ -112,7 +112,7 @@ class UserManagement extends Controller {
                 	{
                 	    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
                 	});
-                $users=User::all();
+                $users=User::NonAdmins();
                 return redirect('usermanagement/viewusers')->with('users',$users)
                 										   ->with('location','umanage')
                 										   ->with('title','User Management');
@@ -136,8 +136,8 @@ class UserManagement extends Controller {
 					'IDNumber'=>$x[4+$num],
 					'email'=>$x[5+$num],
 					'password'=>bcrypt('123456'),
-					'role'=>$x[6+$num],
-					'status'=>'1'
+					'role'=>intval($x[6+$num]),
+					'status'=>1
 					);
 
 		User::createOrUpdate(
@@ -194,14 +194,15 @@ class UserManagement extends Controller {
 	public function edit($id)
 	{	
 		$this->role->__invoke(3);
-		$user=User::where('id','=',$id)->get();
+		$user=User::find($id);
 		$Counties = countie::all();
 		$counter=0;
 		$county_index=0;
 
 		foreach ($Counties as $County) {
+
 						$counter++;
-						if($County->Name==$user[0]->county)
+						if($County->Name==$user->county)
 							{
 								$county_index=$counter-1;
 							}
@@ -234,14 +235,14 @@ class UserManagement extends Controller {
 		'PhoneNumber'=>$x[2],
 		'IDNumber'=>$x[3],
 		'email'=>$x[4],
-		'role'=>$x[5]
+		'role'=>intval($x[5])
 		);
 		
 		
-
+// return $data;
  User::createOrUpdate(
                 $data, 
-                array('id' => $id));
+                array('_id' => $id));
 		 
 	$users=User::all();
 			
@@ -280,7 +281,7 @@ $array=$Requestpass->all();
 			
 			}
 
-			$oldpass=User::where('id','=',$id)->first();
+			$oldpass=User::find($id);
 
 		if(Hash::check($x[1], $oldpass->password))
 		{	
@@ -294,7 +295,7 @@ $array=$Requestpass->all();
 
 		 User::createOrUpdate(
 		                $data, 
-		                array('id' => $id));
+		                array('_id' => $id));
 		 $error_message="ok";
 
 					}
@@ -337,14 +338,14 @@ $array=$Requestpass->all();
 		$user =User::find($data['id']);		
 		if($user->status==0)
 		{
-				$user->status='1';
+				$user->status=1;
 				$user->password=bcrypt('123456'); 
 				$string = "activated";
 
 		}
 		else
 		{
-				$user->status='0';
+				$user->status=0;
 				$user->password=bcrypt('!!##9342ax!!##9ax$kb787y$kb!!##9ax$kbyyx*!!##9ax$k243by%');
 				$string = "deactivated";
 
@@ -405,7 +406,14 @@ public function multi()
 
 
 
-
+	public function example(){
+        $file = public_path()."/downloads/example.xlsx";
+        $headers = array("Content-Type:   application/vnd.ms-excel; charset=utf-8",
+						 "Content-Disposition: attachment; filename=abc.xls",
+						 "Expires: 0",
+						 "Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        return Response::download($file, 'example.xlsx',$headers);
+    }
 
  
 	public function export(Excel $excel,$loc,$type1,$type2,$type3)
@@ -709,8 +717,8 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 		'IDNumber'=>$result[0][$i]->idnumber,
 		'password'=>bcrypt('123456'),
 		'email'=>$result[0][$i]->email,
-		'role'=>$result[0][$i]->role,
-		'status'=>'1'
+		'role'=>intval($result[0][$i]->role),
+		'status'=>1
 		);
 
 

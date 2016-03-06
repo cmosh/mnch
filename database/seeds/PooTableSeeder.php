@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class PooTableSeeder extends Seeder
 {
 
     /**
@@ -14,14 +14,11 @@ class UsersTableSeeder extends Seeder
     {
         
 
-        \DB::table('users')->delete();
+       \DB::table('users')->delete();
         
         \DB::table('users')->insert(array (
             0 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
                 'name' => 'Clive Makamara',
                 'email' => 'cmosh@live.com',
                 'password' => '$2y$10$3wc96VTjfoGyo1lGJN0gHus80634I1AY9E2kcdsaxIddKJGO3nDVS',
@@ -37,9 +34,7 @@ class UsersTableSeeder extends Seeder
             ),
             1 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'James Koech',
                 'email' => 'jkoech@dhd.com',
                 'password' => '$2y$10$9tFTtyqpx4kiIZmqoGGe.e262NjpFR1AAJqCoab6fEGWjnIuDK9pm',
@@ -55,9 +50,7 @@ class UsersTableSeeder extends Seeder
             ),
             2 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Henry Koech',
                 'email' => 'cmosh0@live.com',
                 'password' => '$2y$10$A80u5wf/m3M22ejDJcSi0OEEQv.ItS9EQEh/jo5S5F01ig1mu.UWi',
@@ -73,9 +66,7 @@ class UsersTableSeeder extends Seeder
             ),
             3 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Demo User',
                 'email' => 'user@mnch.com',
                 'password' => '$2y$10$Y/CcpQq.nOKHxjxXp6gPH.a8mymJ4Sp.wzryosX70BBHktuBpMR0O',
@@ -91,9 +82,7 @@ class UsersTableSeeder extends Seeder
             ),
             4 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Gift Kiti',
                 'email' => 'gkiti@bates.com',
                 'password' => '$2y$10$hr1XRKi7tloxyEZVii3.cOvFOxvlgR7AgBAWqo6HhCso8Ag/s.T.6',
@@ -109,9 +98,7 @@ class UsersTableSeeder extends Seeder
             ),
             5 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Nicole Mwaura',
                 'email' => 'nikkimwaura@gmail.com',
                 'password' => '$2y$10$Zb3/iQnE1.82QV6ecNiNKu/16DEuUtu7c9jXWQ6axBh7PeklHxdzq',
@@ -127,9 +114,7 @@ class UsersTableSeeder extends Seeder
             ),
             6 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Betty Wariari',
                 'email' => 'bwariari@clintonhealthaccess.org',
                 'password' => '$2y$10$hDFGuH2KgJPSSZA9hC79ueTZjiA1AmGJ5pWggXtwkD3IaGfvrcsBa',
@@ -145,9 +130,7 @@ class UsersTableSeeder extends Seeder
             ),
             7 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Collins Cheruiyot',
                 'email' => 'ccheruiyot@clintonhealthaccess.org',
                 'password' => '$2y$10$Zzf8Ld.aOVijxlWr6dm5h.ponUVmPDE6pguFH4cxGy58xLoSWeA5G',
@@ -163,9 +146,7 @@ class UsersTableSeeder extends Seeder
             ),
             8 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Brian Mokaya',
                 'email' => 'bmmokaya@gmail.com',
                 'password' => '$2y$10$913MyrBHYRcLJvG97D0BfOkUnVhqgMsp3WSddDvH8uT1d/4c0.ZgO',
@@ -181,9 +162,7 @@ class UsersTableSeeder extends Seeder
             ),
             9 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Jane Rose',
                 'email' => 'jaynerawz@gmail.com',
                 'password' => '$2y$10$cvqbDCSsOTgI05s6CGcNjeWu7.UG5gbjPknz6Up7zLLxBM2KyoBRK',
@@ -199,9 +178,7 @@ class UsersTableSeeder extends Seeder
             ),
             10 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Sheila Mutheu',
                 'email' => 'smutheu@clintonhealthaccess.org',
                 'password' => '$2y$10$FoDXDtR8Ih45PrfgTtat4OnlDXqjNT8ejvzNnERMBBZa3zY3F22LW',
@@ -217,9 +194,7 @@ class UsersTableSeeder extends Seeder
             ),
             11 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Rosemary Kihoto',
                 'email' => 'rkihoto@clintonhealthaccess.org',
                 'password' => '$2y$10$rzD9WeJoCwMYPyvYx.r1J.6yw1Cmb40x1xZe.oUKPeTKISfapR6Wa',
@@ -235,9 +210,7 @@ class UsersTableSeeder extends Seeder
             ),
             12 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'David Livingston',
                 'email' => 'stone.openda@yahoo.com',
                 'password' => '$2y$10$esP6NhCkxnmpFw9cJJDkCO/jmPf1QWbyT0PvU0h36UfQjYv7CD3OK',
@@ -253,9 +226,7 @@ class UsersTableSeeder extends Seeder
             ),
             13 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Derrick David Njiru',
                 'email' => 'daviddwien@gmail.com',
                 'password' => '$2y$10$dQSGMT4L3ofAxB9sbsXh6OT0DAaLYWuDEYsHnQQwJeXkvgWaxm7p.',
@@ -271,9 +242,7 @@ class UsersTableSeeder extends Seeder
             ),
             14 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Elisha Ochang',
                 'email' => 'elisha.ochang@strathmore.edu',
                 'password' => '$2y$10$m7Un9OfjJK.bk8H8nTV/qeuoNQPZKzORmGe7yJawGaG8jzufjloyG',
@@ -289,9 +258,7 @@ class UsersTableSeeder extends Seeder
             ),
             15 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Job Maithia Maina',
                 'email' => 'Jmbuthiam@gmail.com',
                 'password' => '$2y$10$VEIGbnn/qepZPhvH1.3YmOFA4L8QUsRFFppsHjrsO7XH64CFjK3M2',
@@ -307,9 +274,7 @@ class UsersTableSeeder extends Seeder
             ),
             16 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Peter Evans Ngare',
                 'email' => 'ivunz75@gmail.com',
                 'password' => '$2y$10$/2XF.K5PRBrz4OzK6YSoXOgFVdY2hGOlwT1hpNsiW2Z/VE32U24aW',
@@ -325,9 +290,7 @@ class UsersTableSeeder extends Seeder
             ),
             17 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Ruth Muthoni Ndegwa',
                 'email' => 'rmuthonindegwa@gmail.com',
                 'password' => '$2y$10$McYU7ej3mf94KzgXGm5FL.RqRLoozvdUfCd9ZSwTsVT3Cws2a.2DW',
@@ -343,9 +306,7 @@ class UsersTableSeeder extends Seeder
             ),
             18 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Thomas Macharia Nyambura',
                 'email' => 'thomas.nyambura@strathmore.edu',
                 'password' => '$2y$10$zSmhVoCJxgKlsspavurANeM2ORzkRKFGX/OvTqNg4zMV.UuhkPsNe',
@@ -361,9 +322,7 @@ class UsersTableSeeder extends Seeder
             ),
             19 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Eddie Kago',
                 'email' => 'eddiekago@gmail.com',
                 'password' => '$2y$10$eyNJpAFrqKYREVR4SwSYvOewWuIS.bMfm56keT885sg5iq8gcefeq',
@@ -379,9 +338,7 @@ class UsersTableSeeder extends Seeder
             ),
             20 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Cynthia Ndivo',
                 'email' => 'ndivocyn@gmail.com',
                 'password' => '$2y$10$juvuVOVwWoI9x2iv7WsoYe1Cqf/IGwsYV.A.4PgRqT146EnRlIIz2',
@@ -397,9 +354,7 @@ class UsersTableSeeder extends Seeder
             ),
             21 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Glen Iningu',
                 'email' => 'giningu@gmail.com',
                 'password' => '$2y$10$9rj.jLbM5by0EWO1U4IRqeixze36QT9vnjERtkEFP7/G9zdkygWDS',
@@ -415,9 +370,7 @@ class UsersTableSeeder extends Seeder
             ),
             22 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Jimmy Karu',
                 'email' => 'jimmykaru.karu@gmail.com',
                 'password' => '$2y$10$mS4rEfveR6kE3GXQz5VofOS6xI414M7pNgpKh4E0TfNfvovw5PZky',
@@ -433,9 +386,7 @@ class UsersTableSeeder extends Seeder
             ),
             23 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Mary Musau',
                 'email' => 'mary.saumu@gmail.com',
                 'password' => '$2y$10$41lJ8oEEWZo/gH4SJJ.Qa.GQKjBdFkC0qHV44RFlwamUM1F58Kx56',
@@ -451,9 +402,7 @@ class UsersTableSeeder extends Seeder
             ),
             24 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Phoebe Mumo',
                 'email' => 'phoebe.mumo25@yahoo.com',
                 'password' => '$2y$10$0PoXoEzaKvLpBFL6qM7axeXUnJRMAFhvEquJPbcu6nECPRh6xSKz6',
@@ -469,9 +418,7 @@ class UsersTableSeeder extends Seeder
             ),
             25 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Augustine Makosi',
                 'email' => 'augustinemakosi@yahoo.com',
                 'password' => '$2y$10$8IFX2RRhTtHOv.ZiEEOQd.j8HeFK8Sb1gSyHJ.dGCHa7Jn2NGP9Zq',
@@ -487,9 +434,7 @@ class UsersTableSeeder extends Seeder
             ),
             26 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Abednego Mutuku',
                 'email' => 'abednegomutuku19@gmail.com',
                 'password' => '$2y$10$9oJk4ihuWuBBHaZbUybSEe0V3xeuwEQw9SJTcKVtLiPXTGkvCqXny',
@@ -505,9 +450,7 @@ class UsersTableSeeder extends Seeder
             ),
             27 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Beth Mutisya',
                 'email' => 'bnjeri59@yahoo.com',
                 'password' => '$2y$10$zul.ixr/mdahL2lEdnNFSONziCma0oJHpohgheSYLEu.6wM8DF3AC',
@@ -523,9 +466,7 @@ class UsersTableSeeder extends Seeder
             ),
             28 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Nelson Mbithi',
                 'email' => 'nelsonmbithi@gmail.com',
                 'password' => '$2y$10$XBWygNv7McAkvVgvuZ2bUOEN4ur9q2VA.RJ4yB4WSRwuCWyCCSBhK',
@@ -541,9 +482,7 @@ class UsersTableSeeder extends Seeder
             ),
             29 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Gregory Mutungi',
                 'email' => 'mutungigregory@yahoo.com',
                 'password' => '$2y$10$vDrEuHk6I72p4pr/yBbsvOIA2OVybD7ZocLPBV/AgTCoM4xzPO6IO',
@@ -559,9 +498,7 @@ class UsersTableSeeder extends Seeder
             ),
             30 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Joshua Muia',
                 'email' => 'joshuakieti@yahoo.com',
                 'password' => '$2y$10$KXZ4TXnAGrK4cUDNg3MElurbAk4a1xLqYlAa04riyLMQYG8hg5Bim',
@@ -577,9 +514,7 @@ class UsersTableSeeder extends Seeder
             ),
             31 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Regina Muliko',
                 'email' => 'rmuliko@yahoo.com',
                 'password' => '$2y$10$sMnkghx7D1i/Q/yNbdq/Gur0J26X8znsBfXKi3TEzq6TiXLToyw0y',
@@ -595,9 +530,7 @@ class UsersTableSeeder extends Seeder
             ),
             32 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Ezekiel Kingoo',
                 'email' => 'kngezekiel9@gmail.com',
                 'password' => '$2y$10$mS4rEfveR6kE3GXQz5VofOS6xI414M7pNgpKh4E0TfNfvovw5PZky',
@@ -613,9 +546,7 @@ class UsersTableSeeder extends Seeder
             ),
             33 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Stanslous Ndeto',
                 'email' => 'stanslousndeto@gmail.com',
                 'password' => '$2y$10$cw6BbSZH8A71GJB6gyx/uO/gj8KoQcXMJSCSmd/i54yaZbQSoPJZy',
@@ -631,9 +562,6 @@ class UsersTableSeeder extends Seeder
             ),
             34 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
                 'id' => 43,
                 'name' => 'Tabitha Ruo',
                 'email' => 'tabithawangui20@gmail.com',
@@ -650,9 +578,6 @@ class UsersTableSeeder extends Seeder
             ),
             35 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
                 'id' => 44,
                 'name' => 'Michael Kamenju',
                 'email' => 'mikekamenju@gmail.com',
@@ -669,9 +594,7 @@ class UsersTableSeeder extends Seeder
             ),
             36 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Joseph Kamalu',
                 'email' => 'muuokamalu@yahoo.com',
                 'password' => '$2y$10$mS4rEfveR6kE3GXQz5VofOS6xI414M7pNgpKh4E0TfNfvovw5PZky',
@@ -687,9 +610,7 @@ class UsersTableSeeder extends Seeder
             ),
             37 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Paul Chege Njenga',
                 'email' => 'pchegenjenga@gmail.com',
                 'password' => '$2y$10$FgYNyIPC8lUT8F7sCafGJea4x0aypVBh/3I4jfQ6KnxAI92cXWqrO',
@@ -705,9 +626,7 @@ class UsersTableSeeder extends Seeder
             ),
             38 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Patrick Mwangi',
                 'email' => 'pmwangi03@yahoo.com',
                 'password' => '$2y$10$UItQ69gmNtX0nw1XPErLlO0l3EERDbwBU.drOmr3IrgdH6VFOlReq',
@@ -723,9 +642,7 @@ class UsersTableSeeder extends Seeder
             ),
             39 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Hannah Wanjiku',
                 'email' => 'hnwanjiku@gmail.com',
                 'password' => '$2y$10$B6dehMHaWB6QY.2/Tq9E3uUYCEAVHL8EoxzpigWp9vUKSzkusm8f.',
@@ -741,9 +658,7 @@ class UsersTableSeeder extends Seeder
             ),
             40 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Antony Mwangi',
                 'email' => 'antonimwangi@gmail.com',
                 'password' => '$2y$10$5RtKjBLpV3.6geaRdC7qOeMZAoYuB3xg4QN1zWuE5Q4MQmT8VkVXu',
@@ -759,9 +674,7 @@ class UsersTableSeeder extends Seeder
             ),
             41 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Rosemary Kiige',
                 'email' => 'kiigerosemary@gmail.com',
                 'password' => '$2y$10$LZnRZoyETr2bsG.F6qSi7OVii4Pz14m2IRw7xVSEm7Bfvv179cNXC',
@@ -777,9 +690,7 @@ class UsersTableSeeder extends Seeder
             ),
             42 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Josephine Okeari',
                 'email' => 'Josephinenyabiage42@gmail.com',
                 'password' => '$2y$10$J6ztAQ7vdq3tTawUEFWezuFAF4awAUOUC.SMXzJP3awgXvkovUiq2',
@@ -795,9 +706,7 @@ class UsersTableSeeder extends Seeder
             ),
             43 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Mary Wanjora',
                 'email' => 'wanjoramary@gmail.com',
                 'password' => '$2y$10$kZAPK1Fr9xYewwfqhGbGT..Lt7obl0GtOolp3xn7DGBykbe156B2S',
@@ -813,9 +722,7 @@ class UsersTableSeeder extends Seeder
             ),
             44 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'John Kabiru',
                 'email' => 'johanamdinah@gmail.com',
                 'password' => '$2y$10$ArgAXYIaYzLiHN5yvYpjtu.ty1sjmzgWWPxo2mBsqzukY1TFlVRu.',
@@ -831,9 +738,7 @@ class UsersTableSeeder extends Seeder
             ),
             45 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Gachanja Kamau',
                 'email' => 'gachanjakamau@gmail.com',
                 'password' => '$2y$10$Ma/yM9diiby1OlFw42ik8O.wTjJs892x7RXAYUhKN0pb8KY/Or4ie',
@@ -849,9 +754,7 @@ class UsersTableSeeder extends Seeder
             ),
             46 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Daniel Gachathi',
                 'email' => 'destiny.gachathi@gmail.com',
                 'password' => '$2y$10$0vd0t3m/8V3u1FR/CkR7kuqzMrNidC7sfQUGWqhhQbBL19M1/DXwy',
@@ -867,9 +770,7 @@ class UsersTableSeeder extends Seeder
             ),
             47 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Moses Njiku',
                 'email' => 'mnjiruh@gmail.com',
                 'password' => '$2y$10$wiNy9tv3fjDadUhOJx8MHOcVrM9ND6cF4eIbLbyW0CcE4MblzH9Sa',
@@ -885,9 +786,7 @@ class UsersTableSeeder extends Seeder
             ),
             48 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Boniface Njoroge',
                 'email' => 'bonige02@yahoo.com',
                 'password' => '$2y$10$cq6.R3HqSQHPVzwIRiga2Ob3rCHlD98VWwL7wtYJRggrxBiBXT7f.',
@@ -903,9 +802,7 @@ class UsersTableSeeder extends Seeder
             ),
             49 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Ruth Kamau',
                 'email' => 'ruthkamau406@yahoo.com',
                 'password' => '$2y$10$CS7QBvUsAD5xiQcB0FFQUuXurWIt1NKwGRUkDxZ242D.17SD6o0zi',
@@ -921,9 +818,7 @@ class UsersTableSeeder extends Seeder
             ),
             50 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Irene Mucheru',
                 'email' => 'mucheruirene@gmail.com',
                 'password' => '$2y$10$5MK3RQvDDvXP/y3jvkS94u6zd/sAfZmAt78Cl41r/JqjfNHiw18HO',
@@ -939,9 +834,7 @@ class UsersTableSeeder extends Seeder
             ),
             51 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Ferdnard Gakure',
                 'email' => 'ferdnardgakure@yahoo.com',
                 'password' => '$2y$10$5CO3PKm1WP0.zY2kUdHaYueqXBthfN.Dv98TdGQeNMwn2aq.ubmy.',
@@ -957,9 +850,7 @@ class UsersTableSeeder extends Seeder
             ),
             52 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Lucy Irungu',
                 'email' => 'irungu4@gmail.com',
                 'password' => '$2y$10$lwgUpq75z2wocqnV40shg.sZRYXH06PqUPk7su.5.3w4ZW4sFPaoi',
@@ -975,9 +866,7 @@ class UsersTableSeeder extends Seeder
             ),
             53 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'James Mwangi',
                 'email' => 'karanimuthua@gmail.com',
                 'password' => '$2y$10$d3U.j9gXoT4FOa6fGiOQdOezDPkgqec916xzi8QAJRH805sfyOuNS',
@@ -993,9 +882,7 @@ class UsersTableSeeder extends Seeder
             ),
             54 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Lucy Muhoro',
                 'email' => 'wamwithalj@yahoo.com',
                 'password' => '$2y$10$A5KSj4XU1Vd4tiveGa6fsedyLRSj2tpywBtl6CKOXCF5mWnEtdhEK',
@@ -1011,9 +898,7 @@ class UsersTableSeeder extends Seeder
             ),
             55 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Margaret Ndegwa',
                 'email' => 'magaretndegwa2@gmail.com',
                 'password' => '$2y$10$cQgeMSFCm3bYRarJPsInVeX97mhrHOVfViNRq1k9.ewotJihj49pO',
@@ -1029,9 +914,7 @@ class UsersTableSeeder extends Seeder
             ),
             56 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Esther Wahome',
                 'email' => 'estherwanjikuh@yahoo.com',
                 'password' => '$2y$10$tQa72nsh/W05auG0sKiZn.kjOtJEB7zy8bhnRTynLxZYJjbty5RuS',
@@ -1047,9 +930,7 @@ class UsersTableSeeder extends Seeder
             ),
             57 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Muguku Eutychu',
                 'email' => 'muguku23@gmail.com',
                 'password' => '$2y$10$GRvLqkDiwiQe2I9.osi4h.HZsEJgBMSieQMd2jVVsp8mJghARqfO6',
@@ -1065,9 +946,7 @@ class UsersTableSeeder extends Seeder
             ),
             58 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Rahab Isabell',
                 'email' => 'rahabmuthoro55@yahoo.com',
                 'password' => '$2y$10$By6yKCyEXVVUmG.Dog4EmOGQA0aGX2YG4P3B8UcxNa3UaCrvXuYoa',
@@ -1083,9 +962,7 @@ class UsersTableSeeder extends Seeder
             ),
             59 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Nicholas Kanyagia',
                 'email' => 'nkk77707@gmail.com',
                 'password' => '$2y$10$A80u5wf/m3M22ejDJcSi0OEEQv.ItS9EQEh/jo5S5F01ig1mu.UWi',
@@ -1101,9 +978,7 @@ class UsersTableSeeder extends Seeder
             ),
             60 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'patrick kamau mwangi',
                 'email' => 'pkmwangi03@yahoo.com',
                 'password' => '$2y$10$D/OvDBQycVRIVYKVLS2h6.SJ2EbaZGAUenc8DhhG5PxsO2IENSld6',
@@ -1119,9 +994,7 @@ class UsersTableSeeder extends Seeder
             ),
             61 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Alfred Opon',
                 'email' => 'alfredaejae@gmail.com',
                 'password' => '$2y$10$VPIUerXFBgVVi42GEKLflua5rckBF8H7LcgPSOrnNtYJZ57Ci4XnW',
@@ -1137,9 +1010,6 @@ class UsersTableSeeder extends Seeder
             ),
             62 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
                 'id' => 77710,
                 'name' => 'Dr Stephen Njenga',
                 'email' => 'ngethe.steve@gmail.com',
@@ -1156,9 +1026,7 @@ class UsersTableSeeder extends Seeder
             ),
             63 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'sarah kahiu',
                 'email' => 'sarahkahiu@gmail.com',
                 'password' => '$2y$10$2uA7jq.KraqFRg/QTwIhL.jDDlZCWpGuPSaSIWv4qRM7Vij0W5MJO',
@@ -1174,9 +1042,7 @@ class UsersTableSeeder extends Seeder
             ),
             64 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'denis muasa',
                 'email' => 'denomuasa@gmail.com',
                 'password' => '$2y$10$sXowqq3r7VT8RV1xqJHzQe/KhZrrivJgQVk2eccqAUmEYnxCbWkfu',
@@ -1192,9 +1058,7 @@ class UsersTableSeeder extends Seeder
             ),
             65 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Solokioko Mbithi',
                 'email' => 'solokmbithi@gmail.com',
                 'password' => '$2y$10$IJxg42YPtHWju4uo5xR8../7IVboFGER2IO65RcQ4BQ0f3LzuBTSC',
@@ -1210,9 +1074,7 @@ class UsersTableSeeder extends Seeder
             ),
             66 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Elvin  Njau',
                 'email' => 'njauelvin@gmail.com',
                 'password' => '$2y$10$/hFrWc.T3/bdTrYv1sxCL.bfxbC8tGol1JsNPQfNjo4cu8C3q9GS.',
@@ -1228,9 +1090,7 @@ class UsersTableSeeder extends Seeder
             ),
             67 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Dennis Mong\'are',
                 'email' => 'mongaredennis@ymail.com',
                 'password' => '$2y$10$ojbPTy4t1gDqefU4/yPUu.KYHi72KXFDa5zNJUzwEvP0KRAzSYNs6',
@@ -1246,9 +1106,7 @@ class UsersTableSeeder extends Seeder
             ),
             68 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Christine Kimeu',
                 'email' => 'ckimeu50@gmail.com',
                 'password' => '$2y$10$YMD6TwVjF2HGqnRdK8CCfeTSSh3ju76O6DtTSod9rQ3aw5zG00hiG',
@@ -1264,9 +1122,7 @@ class UsersTableSeeder extends Seeder
             ),
             69 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Rhoda Orido',
                 'email' => 'rhodaorido@yahoo.com',
                 'password' => '$2y$10$.P.hwoHQvwtM7Ps7I2zltOurW7Y9ETJJFJZinWaWCDPAFtw5Xl7t6',
@@ -1282,9 +1138,7 @@ class UsersTableSeeder extends Seeder
             ),
             70 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Ephantus Wahome',
                 'email' => 'ephantuswahome@gmail.com',
                 'password' => '$2y$10$NPGpu0GIAzavyNoyaHVGVukmbadZmxzWU/ooOej4H6PdO3RKemqi.',
@@ -1300,9 +1154,7 @@ class UsersTableSeeder extends Seeder
             ),
             71 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Josephine Ngeno',
                 'email' => 'tetyojose@yahoo.com',
                 'password' => '$2y$10$WephL8bxFIaxj6N5nNNQQebAzT8UmSUyIzSPrpBuh9NbT/9VSFE/q',
@@ -1318,9 +1170,7 @@ class UsersTableSeeder extends Seeder
             ),
             72 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Samuel Seno',
                 'email' => 'samwelseno@gmail.com',
                 'password' => '$2y$10$/XAhvknRMK43BuAIVQFbF.AUg1QiiEHYQp4K6s6AtZhKzichxFlf6',
@@ -1336,9 +1186,7 @@ class UsersTableSeeder extends Seeder
             ),
             73 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Gerald Yaile',
                 'email' => 'gsamaryk@gmail.com',
                 'password' => '$2y$10$zjRdS87fl6z9tQai5aMbGOJscAjgG2ONf0Drc4sd.ME5oEjX7Wmjm',
@@ -1354,9 +1202,7 @@ class UsersTableSeeder extends Seeder
             ),
             74 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Jonathan Taraiya',
                 'email' => 'tnkukuu@gmail.com',
                 'password' => '$2y$10$5yxiT5P4BRQe9cJ76MZlJOHmFmO1bAEFi.b6T3Yup6pgN7osy3jzW',
@@ -1372,9 +1218,7 @@ class UsersTableSeeder extends Seeder
             ),
             75 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Anthony Langat',
                 'email' => 'langatkanthony@gmail.com',
                 'password' => '$2y$10$FC9yp.J.q0misvhftDP3ZOspNKjKPHg0t9UH/OU9PrrWNuSek/FzO',
@@ -1390,9 +1234,7 @@ class UsersTableSeeder extends Seeder
             ),
             76 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Felistas Misiati',
                 'email' => 'felistas.misiati@gmail.com',
                 'password' => '$2y$10$m5HEJqj0kP8JE3n0lXc2xOtahmyOmsGe3.GzWWBAxVU/NGmdIpgwO',
@@ -1408,9 +1250,7 @@ class UsersTableSeeder extends Seeder
             ),
             77 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Jackson Koskei',
                 'email' => 'koskeijack24@yahoo.om',
                 'password' => '$2y$10$cxsA866g68HZoD5uz3r6h.xmUw7CdOthMYI4Ubk0dwY0DiKXgVh2q',
@@ -1426,9 +1266,7 @@ class UsersTableSeeder extends Seeder
             ),
             78 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Dickson Kigwenay',
                 'email' => 'scmohnarowest@yahoo.com',
                 'password' => '$2y$10$Jb7Wnvd3NKWotnzGn3ut/.qPx6ZWnu7T.dNhoMcv2um2H9nLlzalC',
@@ -1444,9 +1282,7 @@ class UsersTableSeeder extends Seeder
             ),
             79 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'David Kimojino',
                 'email' => 'dkimojino@yahoo.com',
                 'password' => '$2y$10$3BN6MI9kVwuQbZzkPBWpK.XqsdVFWILAU2MZ6TUdxwjA0d7FJgnvu',
@@ -1462,9 +1298,7 @@ class UsersTableSeeder extends Seeder
             ),
             80 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Naomy Chemutai',
                 'email' => 'naomichemutai@gmail.com',
                 'password' => '$2y$10$Rl5J8pimnmD4z4farf7M5.vR0WJtzYfW/I9kPG7FbtggeySaz9t8G',
@@ -1480,9 +1314,7 @@ class UsersTableSeeder extends Seeder
             ),
             81 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Kimani Maina',
                 'email' => 'kimanimaina4@gmail.com',
                 'password' => '$2y$10$BjSxHrwaDDp/BUeOrl7xnu.FNwRWpjzRhYjZZW1dIcszkAL4IGjbi',
@@ -1498,9 +1330,7 @@ class UsersTableSeeder extends Seeder
             ),
             82 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Edwin Kurere',
                 'email' => 'edwin_kiprotich@yahoo.com',
                 'password' => '$2y$10$hIbKJYHa0GoSuW/6iPBxH.wbNx5X2mWd8QeBY9tkbYfByP6yrEqba',
@@ -1516,9 +1346,7 @@ class UsersTableSeeder extends Seeder
             ),
             83 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Langat Joel',
                 'email' => 'joellangat52@yahoo.com',
                 'password' => '$2y$10$rsBw2a2HF2mXqW1KFAtqruDmKNh7kZydotSVL.qzLqWjjHkkt0AQu',
@@ -1534,9 +1362,7 @@ class UsersTableSeeder extends Seeder
             ),
             84 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'George Mwita',
                 'email' => 'mwitageorge2008@gmail.com',
                 'password' => '$2y$10$8ZBARKo43zvRc4e4zFePUuVwUSEUwiyiuj.3fnqY9CORayhSm0j6y',
@@ -1552,9 +1378,7 @@ class UsersTableSeeder extends Seeder
             ),
             85 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Lumarai Kabula',
                 'email' => 'tkabula2@gmail.com',
                 'password' => '$2y$10$aiAd8M86aZp47uOwYKU/Q.2CPibMxZwbc3Iv.naRCTBppvLGEbuVy',
@@ -1570,9 +1394,7 @@ class UsersTableSeeder extends Seeder
             ),
             86 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Irene Melop',
                 'email' => 'irenemelop75@gmail.com',
                 'password' => '$2y$10$UfFiGAmWQVdq1QIJk2Md1.E2MIsTKyfVEGXvM.lHOK8PEeQMSoF3u',
@@ -1588,9 +1410,7 @@ class UsersTableSeeder extends Seeder
             ),
             87 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Loice Kerich',
                 'email' => 'loicekerich@yahoo.com',
                 'password' => '$2y$10$ScYX2Uhq5XU2wstKMnyPmesZoTh47ZcSHH2AjHgx/EUMX.lr5HlLS',
@@ -1606,9 +1426,7 @@ class UsersTableSeeder extends Seeder
             ),
             88 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'Enoch Kotikot',
                 'email' => 'kotenoch21967@gmail.com',
                 'password' => '$2y$10$D.7gAJ.C1YSsEU1PSNlbReqqOq2B.LH9v.M1n.fE3e2waVSTPfbYi',
@@ -1624,9 +1442,7 @@ class UsersTableSeeder extends Seeder
             ),
             89 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'aaaa',
                 'email' => 'aaa@example.com',
                 'password' => '$2y$10$1PQv4UiaDEe5bkBOv9UTFeBEAuoX9P1vTBlxrFB9w.JJRTrzWftmW',
@@ -1642,9 +1458,7 @@ class UsersTableSeeder extends Seeder
             ),
             90 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'aaaa',
                 'email' => 'aaas@example.com',
                 'password' => '$2y$10$1L9tp1mcq9PBpCiy4XMmFuwuZGveV5o/iN3ZStoWPF6yM3HjcdrkW',
@@ -1660,9 +1474,7 @@ class UsersTableSeeder extends Seeder
             ),
             91 => 
             array (
-                '_id' => 
-                MongoDB\BSON\ObjectID::__set_state(array(
-                )),
+                
                 'name' => 'aaaaa',
                 'email' => 'cccs@example.com',
                 'password' => '$2y$10$tUh7XHjp4kWI0sAybwqyY.NYbmWqA6OrlXmpsWDr.NC4oLRuK9lAm',
@@ -1677,6 +1489,7 @@ class UsersTableSeeder extends Seeder
                 'deleted_at' => NULL,
             ),
         ));
+        
         
         
     }

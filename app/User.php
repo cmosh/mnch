@@ -34,6 +34,13 @@ class User extends Eloquent implements AuthenticatableContract, AuthorizableCont
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	public function scopeNonAdmins($query)
+     {
+
+     	return $query->where('role','<',4);
+     				 
+     }
+
 
 	 public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();

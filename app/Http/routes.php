@@ -73,6 +73,7 @@ Route::post('usermanagement/ajax','UserManagement@ajax');
 Route::get('usermanagement/test','UserManagement@test');
 Route::get('usermanagement/mail','UserManagement@mail');
 Route::post('usermanagement/store','UserManagement@store');
+Route::get('usermanagement/example','UserManagement@example');
 
 Route::get('test/stop','administration@stop');
 Route::get('test/serve','administration@serve');

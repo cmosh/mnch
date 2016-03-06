@@ -23,7 +23,7 @@
         
 
 
-   {!! Form::open(['url' => 'usermanagement/update/'.$user[0]->id,'id'=>'form-edit']) !!}
+   {!! Form::open(['url' => 'usermanagement/update/'.$user->id,'id'=>'form-edit']) !!}
 
  
 <div class="box-body">
@@ -31,7 +31,7 @@
               <label class="col-md-4 control-label">Name</label>
 
               <div class="col-md-6">
-              <input placeholder="Enter Name" id="name" class="form-control" value="{{$user[0]->name}}" name="name" type="text" required/>
+              <input placeholder="Enter Name" id="name" class="form-control" value="{{$user->name}}" name="name" type="text" required/>
               </div>
             </div>
 </div>
@@ -64,7 +64,7 @@
          <div class="form-group">
               <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-6">
-<input placeholder="Enter Mobile Number ( 07xxxxxxxx )" data-parsley-type="digits" id="phone" value="{{$user[0]->PhoneNumber}}" data-parsley-length="[10, 10]"  class="form-control" name="PhoneNumber" type="text"  required/>
+<input placeholder="Enter Mobile Number ( 07xxxxxxxx )" data-parsley-type="digits" id="phone" value="{{$user->PhoneNumber}}" data-parsley-length="[10, 10]"  class="form-control" name="PhoneNumber" type="text"  required/>
 
               </div>
             </div>
@@ -74,7 +74,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">ID Number</label>
               <div class="col-md-6">
-<input placeholder="Enter ID Number" data-parsley-type="digits" value="{{$user[0]->IDNumber}}" data-parsley-minlength="4" id="IDNumber" class="form-control" name="idnum" type="text" required/> 
+<input placeholder="Enter ID Number" data-parsley-type="digits" value="{{$user->IDNumber}}" data-parsley-minlength="4" id="IDNumber" class="form-control" name="idnum" type="text" required/> 
               </div>
             </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">E-Mail Address</label>
               <div class="col-md-6">
-<input placeholder="Enter Email address ( example@site.com )"  id="email" parsley-type="email" value="{{$user[0]->email}}" class="form-control" name="email" type="email" required />
+<input placeholder="Enter Email address ( example@site.com )"  id="email" parsley-type="email" value="{{$user->email}}" class="form-control" name="email" type="email" required />
               </div>
             </div>
             </div>
@@ -91,7 +91,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">Role</label>
               <div class="col-md-6">
-                {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ], $user[0]->role ,array('id'=>'role','class'=>'form-control')) !!}
+                {!! Form::select('roles',['County User','Data Clerk','Program User', 'System User' ], $user->role ,array('id'=>'role','class'=>'form-control')) !!}
               </div>
             </div>
             </div>
