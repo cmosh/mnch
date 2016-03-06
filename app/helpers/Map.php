@@ -30,6 +30,14 @@ class Map{
 
   }
 
+  public function CountyFilter($collection){
+        
+      return  $collection->transform(function ($item, $key) {
+      
+ return [ 'Name' => $item->facility];
+        
+          });
+  }
 
   public function ParticipantsFilter($collection){
     

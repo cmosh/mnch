@@ -52,16 +52,58 @@ class Facilities extends Eloquent {
 
      }
 
+
+     // public function scopeCounty($query){
+     //    return $query->where('County','Baringo')
+     //    // ->groupBy('County')
+     //             ->groupBy(['assessment'=>function($query) use ($params){
+     //                    $query->where('Assessment_Term',$params['Term'])
+     //                          ->where('Survey',$params['Survey'])
+     //                          ->select('Facility_ID','Assessment_Term','Survey','Status');
+     //                 }]);
+     //                 ->with(['assessments_County'=>function($query){
+     //                    $query->groupBy('Facility_ID')
+
+     //                 }]);
+     // }
+
      public function scopeMissing($query,$search){
      	return $query->where('FacilityName','REGEXP',$search)
      				 ->select('FacilityName','FacilityCode');
      }
 
-     public function assessment() {
+     public function subassessment() {
+        return $this->hasOne('App\Tables\assessments','Facility_ID','FacilityCode')->where('Status','Submitted');
+    }
+
+    public function assessment() {
         return $this->hasOne('App\Tables\assessments','Facility_ID','FacilityCode');
     }
 
+     public function assessments_County() {
+        return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode');
+    }
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 }

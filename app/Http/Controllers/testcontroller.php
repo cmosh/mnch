@@ -10,7 +10,9 @@ use App\Tables\Facilities;
 use App\Tables\subcounty;
 use App\Tables\assessments;
 use App\Helpers\Map;
+use App\Helpers\County;
 use App\Tables\Participants;
+use App\Tables\counties;
 
 class testcontroller extends Controller
 {
@@ -24,11 +26,15 @@ class testcontroller extends Controller
 
     	public function index(){
 
-    		$test = assessments::Participants(array('Survey'=>'IMCIV1'))->get();
+//             >var user = db.users.findOne({"name":"Tom Benzamin"})
+// >var dbRef = user.address
+// >db[dbRef.$ref].findOne({"_id":(dbRef.$id)})
 
-         // return   $Assessments = $this->Map->transform($test,'AssessmentList');
-         return $test2 =  $this->Map->ParticipantsFilter($test);
+    	return	County::Submitted();
 
+           // $test = Facilities::with('thecounty')->get()->take(2);
+        // $test = counties::with('facilities')->get()->take(2);
+            // return $test;
         
 
     	}
