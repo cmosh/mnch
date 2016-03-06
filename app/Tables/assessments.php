@@ -60,13 +60,24 @@ class assessments extends Eloquent  {
                      ;    
     }	
 
+    // public function scopeCounties($query){
+    //     return $query->select('Facility_ID')
 
+    //                   ->with(['facility'=>function($query) {
+    //                     $query->select('FacilityCode','County');
+    //                          // ->groupby('County');
+    //                     }]);
+    // }
     public function participant() {
         return $this->belongsTo('App\Tables\Participants','PartID','PartID');
     }
      public function facility() {
         return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode');
     }
+    public function facility_short() {
+        return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode')->select('FacilityCode','County');
+    }
+
 
     public function assessor(){
     	return $this->hasOne('App\Tables\Assessor','AssID','Assessment_ID');

@@ -355,7 +355,7 @@
                         
                         <td>
                           
-                         {{$county->Name}}
+                         {{$county}}
                         </td>
 
                         <td> 
@@ -536,7 +536,7 @@
                       
 
                         
-                        <td> {{$county->Name}}</td>
+                        <td> {{$county}}</td>
 
                         <td> 
                                

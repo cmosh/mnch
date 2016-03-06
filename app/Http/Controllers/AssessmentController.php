@@ -8,7 +8,7 @@ use App\Tables\Facilities;
 use App\Tables\Participants;
 use App\Tables\Survey;
 use App\Tables\Assessor;
-use App\Tables\countie;
+use App\Tables\counties;
 use App\Tables\Surveyview;
 use App\Tables\Participantsview;
 use App\Tables\Imciview;
@@ -36,7 +36,7 @@ class AssessmentController extends Controller {
 	{
 		$sv = '%'.$sv.'%';		
 		$Surveys = Survey::where('surveyID','like',$sv)->get();
-		$Counties = countie::all();
+		$Counties = counties::all();
 
 		return view('assessments.index')->with('Counties',$Counties)
 										->with('location','ass')
@@ -45,7 +45,7 @@ class AssessmentController extends Controller {
 	}
 
 	
-	public function create($id,$date,$term,$countie,$subcounty)
+	public function create($id,$date,$term,$county,$subcounty)
 	{
 			$loc = substr ($id, 0,2);
 			
@@ -61,7 +61,7 @@ class AssessmentController extends Controller {
 			else {
 			
 			
-			$FacilityList = Facilities::AssessmentList( array('County'=>$countie,
+			$FacilityList = Facilities::AssessmentList( array('County'=>$county,
 														    'SubCounty'=>$subcounty,
 														    'Term'=>$term,
 														    'Survey'=>$id
@@ -75,7 +75,7 @@ class AssessmentController extends Controller {
 			{
 				$date=$date;
 				$term='';
-				$countie='';
+				$county='';
 			}
 			
 			
@@ -88,7 +88,7 @@ class AssessmentController extends Controller {
 											 ->with('title','Assessments')
 											 ->with('countID',$countID)
 											 ->with('All',$All)
-											 ->with('thecounty',$countie);
+											 ->with('thecounty',$county);
 	}
 
 	public function store($id)

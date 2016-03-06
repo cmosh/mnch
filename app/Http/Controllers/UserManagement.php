@@ -4,18 +4,20 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Tables\User_monitor;
-use App\Tables\countie;
+use App\Tables\counties;
 use App\Tables\Counties_assessed;
 use App\Tables\Counties_submitted_today;
 use App\Tables\Counties_incomplete_today;
 use App\Tables\Counties_submitted;
 use App\Tables\Counties_incomplete;
-use App\Tables\AssessmentsN;
+use App\Tables\assessments;
 use App\Tables\Survey;
+use App\Helpers\County;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use App\Http\Requests\Requestpass;
 use App\Http\Requests\Requestedit;
+use App\Helpers\Map;
 use Input;
 use Validator;
 use Redirect;
@@ -31,6 +33,7 @@ class UserManagement extends Controller {
 
 	public function __construct(Request $request)
 	{
+		$this->Map = new Map;
 		$this->middleware('auth');
 		$this->role = function ($min) use ($request) {
 			if($request->user()->role<$min)abort(403);
@@ -75,7 +78,7 @@ class UserManagement extends Controller {
 	public function create()
 	{
 		$this->role->__invoke(3);
-		$Counties = countie::all();
+		$Counties = counties::all();
 		return view('usermanagement.create')->with('counties',$Counties)
 											->with('location','umanage')
 											->with('title','User Management');
@@ -91,7 +94,7 @@ class UserManagement extends Controller {
 			$x[]=$key;
 		}
 
-		$Counties = countie::all();
+		$Counties = counties::all();
 		$x[1]=$Counties[$x[1]]->Name;
 
 		$data=array(
@@ -161,15 +164,18 @@ class UserManagement extends Controller {
 	{	
 		$this->role->__invoke(2);
 		$surveys=Survey::all();
-		$counties=countie::all();
-		$user_monitor=User_monitor::all();
-		$counties_assessed=Counties_assessed::all();
+		$counties=counties::all();
+
+	//	$user_monitor=User_monitor::all();
+		
+		return $counties_assessed= County::AllAssessed();
 		$submitted=Counties_submitted::all();
 		$incomplete=Counties_incomplete::all();
 		$submittedt=Counties_submitted_today::all();
 		$incompletet=Counties_incomplete_today::all();
 		$users=User::all();
 		$assessments=AssessmentsN::all();
+
 		$ch=User_monitor::where('Survey','like','CH%')->get();
 		$mnh=User_monitor::where('Survey','like','MNH%')->get();
 		$imci=User_monitor::where('Survey','like','IMCI%')->get();
@@ -195,7 +201,7 @@ class UserManagement extends Controller {
 	{	
 		$this->role->__invoke(3);
 		$user=User::find($id);
-		$Counties = countie::all();
+		$Counties = counties::all();
 		$counter=0;
 		$county_index=0;
 
@@ -226,7 +232,7 @@ class UserManagement extends Controller {
 			$x[]=$key;
 			
 	}
-	$Counties = countie::all();
+	$Counties = counties::all();
 	$x[1]=$Counties[$x[1]]->Name;
 	
 		$data=array(
@@ -731,7 +737,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 		}
 
 	}
-		$counties=countie::all();
+		$counties=counties::all();
       return view('usermanagement.multiedit')->with('counties',$counties)->with('users',$x)->with('location','umanage')->with('title','User Management');
     }
     else {

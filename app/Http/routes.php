@@ -55,25 +55,32 @@ Route::get('imci','AnalyticsController@imci');
 
 Route::get('home', 'HomeController@index');
 
-Route::get('usermanagement','UserManagement@index');
-Route::get('usermanagement/viewusers','UserManagement@index');
-Route::get('usermanagement/monitor','UserManagement@show');
-Route::get('usermanagement/addusers','UserManagement@create');
-Route::get('usermanagement/addusers_multi','UserManagement@multi');
-Route::post('usermanagement/addusers_multi/store','UserManagement@store_multi');
-Route::post('usermanagement/status_change','UserManagement@status_change');
-Route::post('usermanagement/reset','UserManagement@reset');
-Route::get('usermanagement/export/{loc}/{type1}/{type2}/{type3}','UserManagement@export');
-Route::post('usermanagement/multi_upload','UserManagement@upload');
-Route::get('usermanagement/editusers/{id}','UserManagement@edit');
-Route::post('usermanagement/update/{id}','UserManagement@update');
-Route::post('usermanagement/update/pass/{id}/','UserManagement@updatepass');
-Route::get('usermanagement/changepass','UserManagement@changepass');
-Route::post('usermanagement/ajax','UserManagement@ajax');
-Route::get('usermanagement/test','UserManagement@test');
-Route::get('usermanagement/mail','UserManagement@mail');
-Route::post('usermanagement/store','UserManagement@store');
-Route::get('usermanagement/example','UserManagement@example');
+Route::group(['prefix' => 'usermanagement'], function () {
+
+		Route::get('/','UserManagement@index');
+		Route::get('test','UserManagement@test');
+		Route::get('mail','UserManagement@mail');		
+		Route::get('monitor','UserManagement@show');
+		Route::get('viewusers','UserManagement@index');
+		Route::get('addusers','UserManagement@create');
+		Route::get('example','UserManagement@example');	
+		Route::get('editusers/{id}','UserManagement@edit');
+		Route::get('addusers_multi','UserManagement@multi');
+		Route::get('changepass','UserManagement@changepass');
+		Route::get('export/{loc}/{type1}/{type2}/{type3}','UserManagement@export');
+
+		Route::post('ajax','UserManagement@ajax');		
+		Route::post('store','UserManagement@store');
+		Route::post('reset','UserManagement@reset');
+		Route::post('update/{id}','UserManagement@update');
+		Route::post('multi_upload','UserManagement@upload');		
+		Route::post('status_change','UserManagement@status_change');
+		Route::post('update/pass/{id}/','UserManagement@updatepass');		
+		Route::post('addusers_multi/store','UserManagement@store_multi');
+
+});
+
+
 
 Route::get('test/stop','administration@stop');
 Route::get('test/serve','administration@serve');
@@ -104,17 +111,27 @@ Route::controllers([
 Route::get('self/register','Register@index');
 Route::post('self/store','Register@store');
 
-Route::get('assessments/cancel/{id}','AssessmentController@destroy');
-Route::put('assessments/{id}','surveys@update');
-Route::get('assessments/resume/{id}','surveys@edit');
-Route::get('assessments/badresume/{id}','surveys@badedit');
-Route::get('assessments/show/{id}','surveys@show');
-Route::get('assessments/start/{id}','surveys@create');
-Route::get('assessment/{sv}','AssessmentController@index');
-Route::get('assessments/{id}/{county}/{term}/{subcounty}','AssessmentController@show');
-Route::get('assessments/{id}/{date}/{term}/{county}/{subcounty}','AssessmentController@create');
-Route::post('assessments/{id}','AssessmentController@store');
-Route::post('assessment/subcounties','AssessmentController@subcounties');
+Route::group(['prefix' => 'assessments'], function () {
+
+		Route::get('cancel/{id}','AssessmentController@destroy');
+		Route::put('{id}','surveys@update');
+		Route::get('resume/{id}','surveys@edit');
+		Route::get('badresume/{id}','surveys@badedit');
+		Route::get('show/{id}','surveys@show');
+		Route::get('start/{id}','surveys@create');
+		Route::get('{id}/{county}/{term}/{subcounty}','AssessmentController@show');
+		Route::get('{id}/{date}/{term}/{county}/{subcounty}','AssessmentController@create');
+		Route::post('{id}','AssessmentController@store');
+
+});
+
+Route::group(['prefix' => 'assessment'], function () {
+
+		Route::get('{sv}','AssessmentController@index');
+		Route::post('subcounties','AssessmentController@subcounties');
+
+});
+
 Route::get('status/{status}/{AssID}','AssessmentController@status');
 Route::post('survey/session','surveys@session');
 Route::post('survey/save','surveys@saveajax');
