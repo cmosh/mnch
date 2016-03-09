@@ -165,20 +165,19 @@ class UserManagement extends Controller {
 		$this->role->__invoke(2);
 		$surveys=Survey::all();
 		$counties=counties::all();
-
-	//	$user_monitor=User_monitor::all();
 		
-		return $counties_assessed= County::AllAssessed();
-		$submitted=Counties_submitted::all();
-		$incomplete=Counties_incomplete::all();
-		$submittedt=Counties_submitted_today::all();
-		$incompletet=Counties_incomplete_today::all();
+		$user_monitor=assessments::Monitor();		
+		$counties_assessed= County::AllAssessed();
+		$submitted=County::Submitted();
+		$incomplete=County::Incomplete();
+		$submittedt=County::SubmittedToday();
+		$incompletet=County::IncompleteToday();
 		$users=User::all();
-		$assessments=AssessmentsN::all();
+		$assessments=assessments::all();
 
-		$ch=User_monitor::where('Survey','like','CH%')->get();
-		$mnh=User_monitor::where('Survey','like','MNH%')->get();
-		$imci=User_monitor::where('Survey','like','IMCI%')->get();
+		$ch=assessments::Monitor('CH');	
+		$mnh=assessments::Monitor('MNH');	
+		$imci=assessments::Monitor('IMCI');	
 
 		return view('usermanagement.monitor')->with('ch',$ch)
 											 ->with('mnh',$mnh)

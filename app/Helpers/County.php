@@ -13,33 +13,124 @@ class County{
 
 public static function AllAssessed(){
 
-	 $Assessments = assessments::all();
-
-	$result = new Collection;
+	 $Assessments = assessments::all();	
 	
-			 $Assessments->load('facility_short');
-
-
-			 return $Assessments->lists('facility_short')->lists('County')->unique();
+	$Assessments->load('facility_short');
+	
+	return $Assessments->lists('facility_short')->lists('County')->unique();
 	}
 
 public static function Submitted(){
 
-	 	$Assessments = assessments::where('Status','Submitted')->get();
-	 	$Facilities =  $Assessments->lists('Facility_ID')->toArray();
-	 //	return counties::whereRaw(['Name' => array("Nairobi","Aringo")])->get();
- return 	counties::raw()->find( { $or : [ { 'Name' : "Nairobi" }, { "Name" : "Baringo" } ] });
+	
+	$Counties = assessments::where('Status','Submitted')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
+
+	$SubmittedCounties;
+	$Surveys = ['CH','MNH','IMCI'];
+	foreach ($Counties as $County) {
+		foreach ($Surveys as $Survey) {
+				 isset($result['New']) ? $result['New']: 0;
+				$Number = Facilities::CountyAssessments(array('County'=>$County,
+                                                        'Survey'=>$Survey,
+                                                        'Status'=>'Submitted'
+                                                        )
+                                                );
+		$SubmittedCounties [] = $Number < 1 ? null :
+						array(  'Description' => $Survey.' Survey',
+								'County' => $County,
+								'submitted' => $Number
+						);
+						
+
+			}
+		}
+	return array_filter($SubmittedCounties);	
+	}
+
+
+	public static function SubmittedToday(){
+
+	
+	$Counties = assessments::where('Status','Submitted')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
+
+	$SubmittedCounties;
+	$Surveys = ['CH','MNH','IMCI'];
+	foreach ($Counties as $County) {
+		foreach ($Surveys as $Survey) {
+				 isset($result['New']) ? $result['New']: 0;
+				$Number = Facilities::CountyAssessmentsToday(array('County'=>$County,
+                                                        'Survey'=>$Survey,
+                                                        'Status'=>'Submitted'
+                                                        )
+                                                );
+		$SubmittedCounties [] = $Number < 1 ? null :
+						array(  'Description' => $Survey.' Survey',
+								'County' => $County,
+								'submitted' => $Number
+						);
+						
+
+			}
+		}
+	return array_filter($SubmittedCounties);	
+	}
+
+
+
 
 public static function Incomplete(){
 
-	 $Assessments = assessments::all();
-
-	$result = new Collection;
 	
-			 $Assessments->load('facility_short');
+	$Counties = assessments::where('Status','Incomplete')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
+
+	$IncompleteCounties;
+	$Surveys = ['CH','MNH','IMCI'];
+	foreach ($Counties as $County) {
+		foreach ($Surveys as $Survey) {
+				 isset($result['New']) ? $result['New']: 0;
+				$Number = Facilities::CountyAssessments(array('County'=>$County,
+                                                        'Survey'=>$Survey,
+                                                        'Status'=>'Incomplete'
+                                                        )
+                                                );
+		$IncompleteCounties [] = $Number < 1 ? null :
+						array(  'Description' => $Survey.' Survey',
+								'County' => $County,
+								'incomplete' => $Number
+						);
+						
+
+			}
+		}
+	return array_filter($IncompleteCounties);	
+	}
 
 
-			 return $Assessments->lists('facility_short')->lists('County')->unique();
+	public static function IncompleteToday(){
+
+	
+	$Counties = assessments::where('Status','Incomplete')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
+
+	$IncompleteCounties;
+	$Surveys = ['CH','MNH','IMCI'];
+	foreach ($Counties as $County) {
+		foreach ($Surveys as $Survey) {
+				 isset($result['New']) ? $result['New']: 0;
+				$Number = Facilities::CountyAssessmentsToday(array('County'=>$County,
+                                                        'Survey'=>$Survey,
+                                                        'Status'=>'Incomplete'
+                                                        )
+                                                );
+		$IncompleteCounties [] = $Number < 1 ? null :
+						array(  'Description' => $Survey.' Survey',
+								'County' => $County,
+								'incomplete' => $Number
+						);
+						
+
+			}
+		}
+	return array_filter($IncompleteCounties);	
 	}
 
 

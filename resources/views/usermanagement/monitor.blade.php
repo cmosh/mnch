@@ -187,36 +187,33 @@
                     <tbody>
                     
                         @foreach($user_monitor as $user)
-                         @if(substr($user->Survey,0,2)==substr($survey->surveyID,0,2))
+                         @if(substr($user['Survey'],0,2)==substr($survey->surveyID,0,2))
                         <tr>
                      <td>
 
-                                {{$user->Version}} :{{$user->Runtime}}
+                                {{$user['Version']}} :{{$user['Runtime']}}
 
                          </td>
-                        <td > {{ $user->Assessment_Term}}</td>
-                        <td > {{ $user->assname}}</td>
-                        <?php
-                          $date= date_create($user->Date);
-                          $dateformated=date_format($date,'d F Y');
-                         ?>
-                        <td><?php echo $dateformated?>  </td>
-                        <td >{{ $user->FacilityName}}  </td>
-                        <td  >{{$user->County}}</td>
-                        <td>{{$user->SubCounty}}
+                        <td > {{ $user['Assessment_Term']}}</td>
+                        <td > {{ $user['assname']}}</td>
+                       
+                        <td>{{ date_format(date_create($user['Date']),'d F Y')}} </td>
+                        <td >{{ $user['FacilityName']}}  </td>
+                        <td  >{{$user['County']}}</td>
+                        <td>{{$user['SubCounty']}}
 
-                        <td >{{ $user->username}} </td>
-                        @if($user->Status=='Submitted')
- <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
+                        <td >{{ $user['username']}} </td>
+                        @if($user['Status']=='Submitted')
+ <td class="hideprint"><form action="/assessments/show/{{$user['Assessment_ID']}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
-               @elseif($user->Status=='Incomplete' || $user->Status=='New')
+               @elseif($user['Status']=='Incomplete' || $user['Status']=='New')
 
-       <td><form class="theresume" AssID="{{$user->Assessment_ID}}" bad="{{isset($user->assname)}}">
+       <td><form class="theresume" AssID="{{$user['Assessment_ID']}}" bad="{{is_null($user['assname'])}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
 
      @else
 
-      <td> {{$user->Status}}</td>
+      <td> {{$user['Status']}}</td>
 
      @endif
                         
@@ -361,7 +358,7 @@
                         <td> 
                        
                         @foreach($submittedt as $subt)
-                            @if($county->Name==$subt->County && $subt->Description==$survey->Description)
+                            @if($county==$subt['County'] && $subt['Description']==$survey->Description)
                                 
 {{$subt->submitted}}
                                 
@@ -384,7 +381,7 @@
                         <td > 
 
                          @foreach($incompletet as $inct)
-                            @if($county->Name==$inct->County && $inct->Description==$survey->Description)
+                            @if($county==$inct['County'] && $inct['Description']==$survey['Description'])
                                 
 {{$inct->incomplete}}
                                 
@@ -407,7 +404,7 @@
         
                     
 
-<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county->Name}}/{{$survey->surveyID}}">
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county}}/{{$survey->surveyID}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
@@ -541,7 +538,7 @@
                         <td> 
                                
                         @foreach($submitted as $sub)
-                              @if($county->Name==$sub->County && $sub->Description==$survey->Description)
+                              @if($county==['$sub->County'] && $sub['Description']==$survey->Description)
                                 
                                   {{$sub->submitted}}
                            
@@ -558,7 +555,7 @@
                         <td > 
 
                            @foreach($incomplete as $inc)
-                              @if($county->Name==$inc->County && $inc->Description==$survey->Description)
+                              @if($county==$inc['County'] && $inc['Description']==$survey->Description)
                                 
 {{$inc->incomplete}}
                                 
@@ -581,7 +578,7 @@
         
                     
 
-<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county->Name}}/{{$survey->surveyID}}">
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county}}/{{$survey->surveyID}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        

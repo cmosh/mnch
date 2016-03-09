@@ -75,12 +75,63 @@ class assessments extends Eloquent  {
         return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode');
     }
     public function facility_short() {
-        return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode')->select('FacilityCode','County');
+        return $this->belongsTo('App\Tables\Facilities','Facility_ID','FacilityCode')->select('FacilityCode','District','FacilityName','County');
     }
 
-
+    public function user(){
+         return $this->belongsTo('App\User','UserId')->select('name','role');
+    }
     public function assessor(){
     	return $this->hasOne('App\Tables\Assessor','AssID','Assessment_ID');
+    }
+
+     public function assessor_short(){
+        return $this->hasOne('App\Tables\Assessor','AssID','Assessment_ID')->select('AssID','Name');
+    }
+
+    public function survey(){
+        return $this->hasOne('App\Tables\Survey','Survey','surveyID')->select('surveyID','Version','Runtime','Description');
+    }
+
+    public static function Monitor($Survey='all'){
+
+        if($Survey == 'all'){
+
+       $Surveys = Self::with('facility_short')->with('user')->with('survey')->with('assessor_short')->get();
+
+
+
+    }
+        else
+    {
+       $Surveys = Self::where('Survey','Like',$Survey.'%')->with('facility_short')->with('user')->with('survey')->with('assessor_short')->get();
+    }
+
+        return  $Surveys->transform(function ($item, $key) {
+                 return collect([
+                        'username'=>$item->user->name,
+                        'Survey'=>$item->Survey,
+                        'Assessment_Term'=>$item->Assessment_Term,
+                        'Date'=>$item->Date,
+                        'Status'=>$item->Status,
+                        'FacilityName'=>$item->facility_short->FacilityName,
+                        'assname'=> isset($item->assessor_short->Name) ?  $item->assessor_short->Name : null,
+                        'Assessment_ID'=>$item->Assessment_ID,
+                        'County'=>$item->facility_short->County,
+                        'id'=>$item->user->_id,
+                        'role'=>$item->role,
+                        'FacilityCode'=>$item->Facility_ID,
+                        'Version'=>$item->survey->Version,
+                        'Runtime'=>$item->survey->Runtime,
+                        'Description'=>$item->survey->Description,
+                        'updated_at'=>$item->updated_at,
+                        'SubCounty'=>$item->facility_short->District
+                    ]);
+                 
+                });
+
+
+
     }
 
 

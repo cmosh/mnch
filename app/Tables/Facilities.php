@@ -2,7 +2,7 @@
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Cache;
-
+use Carbon\Carbon;
 class Facilities extends Eloquent {
 
 	protected $collection = 'Facilities';
@@ -80,9 +80,73 @@ class Facilities extends Eloquent {
         return $this->hasOne('App\Tables\assessments','Facility_ID','FacilityCode');
     }
 
-     public function assessments_County() {
-        return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode');
+     public function assessments_short() {
+        return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode')->select('Facility_ID','Survey','Status');
     }
+    public static function CountyAssessments($params){
+        
+    $result = array_count_values (
+                        array_filter(
+             
+                        self::where('County',$params['County']) 
+                           ->select('FacilityCode','County')
+                           ->with(['assessments_short'=>function($query) use ($params){
+                                  $query->where('Survey','like',$params['Survey'].'%')
+                                        ;
+                            }])
+                           // ->with('assessments_short')
+                           ->get()
+                           ->lists('assessments_short')
+                           ->lists(0)
+                           ->lists('Status')
+                           ->toArray()
+                           )
+                        );
+
+    $result['Submitted'] = isset($result['Submitted']) ? $result['Submitted']: 0;
+     $result['Incomplete'] = isset($result['Incomplete']) ? $result['Incomplete']: 0;
+      $result['New'] = isset($result['New']) ? $result['New']: 0;
+
+     
+    if($params['Status']=='Submitted'){
+        return $result['Submitted'];
+    }
+    else {
+        return $result['Incomplete'] + $result['New'];
+    }}
+
+     public static function CountyAssessmentsToday($params){
+        
+    $result = array_count_values (
+                        array_filter(
+             
+                        self::where('County',$params['County']) 
+                           ->select('FacilityCode','County')
+                           ->with(['assessments_short'=>function($query) use ($params){
+                                  $query->where('Survey','like',$params['Survey'].'%')
+                                        ->where('created_at','>', Carbon::today())
+                                        ;
+                            }])
+                           // ->with('assessments_short')
+                           ->get()
+                           ->lists('assessments_short')
+                           ->lists(0)
+                           ->lists('Status')
+                           ->toArray()
+                           )
+                        );
+
+    $result['Submitted'] = isset($result['Submitted']) ? $result['Submitted']: 0;
+     $result['Incomplete'] = isset($result['Incomplete']) ? $result['Incomplete']: 0;
+      $result['New'] = isset($result['New']) ? $result['New']: 0;
+
+     
+    if($params['Status']=='Submitted'){
+        return $result['Submitted'];
+    }
+    else {
+        return $result['Incomplete'] + $result['New'];
+    }}
 
     
 
