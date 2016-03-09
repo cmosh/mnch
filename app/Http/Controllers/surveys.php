@@ -96,10 +96,7 @@ class surveys extends Controller
       $stype = array_shift($array);
       $AssID = array_shift($array);
       $UserId = array_shift($array);
-     $fruit = array_pop($array);
-
-
-    
+     $fruit = array_pop($array);   
 
 
     $surveyyy = assessments::where('Assessment_ID', '=', $AssID)->first();
@@ -161,68 +158,26 @@ class surveys extends Controller
         return builder::buildview($AssID, 'open',null,"primary")['ColIDs'];
 
 });
+     $data;
         foreach ($var as $x) {     
             $datavalue = array_shift($array);
             $dataid = $AssID.$x;
-            $fruit = $AssID;
-
-            if( !isset(DataRecord::where('DataID','=',$dataid)->first()->AssID)) {
-
-                 $data = new Datarecord; 
-                 $data->ColumnSetID =  $x; 
-                  $data->DataID =  $dataid;   
-                  $data->AssID = $AssID;
-
-            if (gettype($datavalue) == "array") { $data->Data = implode(",", $datavalue); }  
-            else {$data->Data = str_replace( array('_'), '', $datavalue);}                                                   
-                 $data->save();      
+            // $fruit = $AssID;
 
 
-                  }
-                                                          
-
-             else {
-
-                 if (gettype($datavalue) == "array") { $datas = implode(",", $datavalue);}
-                    else {$datas = str_replace(array('_'), '', $datavalue);}  
-                      
-            Datarecord::createOrUpdate(
-                array('ColumnSetID' => $x,
-                 'DataID' =>$dataid, 
-                 'AssID' => $AssID, 
-                 'Data' => $datas),
-                  array('DataID' => $dataid));
-        }
-
+            $datas = str_replace(array('_'), '', $datavalue);                      
+            $data [$x]  = $datas;                             
+        
     }
 
 
-
-
         assessments::createOrUpdate(
-                array('UserId' => $UserId,
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
-
-     
-
-
-              if ($stype == 'auto') { 
-               assessments::createOrUpdate(
-                array('Status' => 'Incomplete',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));   
-                }
-
-
-                elseif($stype == 'Submitted') {
-             assessments::createOrUpdate(
-                array('Status' => 'Submitted',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
-                  }     
-
-
+                array('Data' => $data,                
+                 'Assessment_ID' => $AssID, 
+                 'UserId' => $UserId,
+                 'Status' => $stype == 'auto' ? 'Incomplete' : 'Submitted'
+                 ),
+                  array('Assessment_ID' => $AssID));
 }
 
     

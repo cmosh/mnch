@@ -20,7 +20,7 @@ class Map{
         'FacilityID' => $item->Facility_ID,
         'Survey' => substr($item->Survey,0,-2).' Survey',
         'Term' => $item->Assessment_Term,
-        'Assessor' => $item->assessor->Name,
+        'Assessor' => isset($item->assessor->Name) ? $item->assessor->Name : "",
         'Date' => date_format(date_create($item->Date),'jS F Y'),
         'Facility' => $item->facility->FacilityName,
         'Status' => $item->Status,

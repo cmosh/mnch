@@ -23,10 +23,12 @@ class builder   {
 
 
        
-        $datass = Datarecord::where('AssID', '=', $AssID)->get()->keyBy('ColumnSetID');
+        
         
 
           $TheAsses = assessments::where('Assessment_ID', '=', $AssID)->first();
+
+          $datass = $TheAsses->Data;
     
      $Survey = Survey::where('surveyID', '=', $TheAsses->Survey)->first();
 
@@ -895,12 +897,10 @@ class builder   {
                                         
                                         $HtmlLines.= 'style="vertical-align:middle">';
                                         
-                                        if ($datass->get($ColumnSetIDName) == null) {
-                                        } 
-                                        else {
+                                       
                                             
-                                            $HtmlLines.= $datass->get($ColumnSetIDName)->Data;
-                                        }
+                                            $HtmlLines.=  $datass[$ColumnSetIDName];
+                                        
                                     } 
                                     else {
                                         
@@ -909,8 +909,7 @@ class builder   {
                                         $ColID[] = $ColumnSetIDName;
                                         
                                         foreach ($fieldValueList as $fieldd) {
-                                              if(isset($datass->get($ColumnSetIDName)->Data))$dts=$datass->get($ColumnSetIDName)->Data;
-                                            else $dts = "";
+                                             $dts = $datass[$ColumnSetIDName];
                                             
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
                                              $AjaxNames[]= $fieldIDName;
@@ -937,16 +936,12 @@ class builder   {
                                         
                                         // code...
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
+                                        $HtmlLines.= ' style="vertical-align:middle">';
                                         
-                                        if ($datass->get($ColumnSetIDName) == null) {
-                                        } 
-                                        else {
+                                       
                                             
-                                            $HtmlLines.= $datass->get($ColumnSetIDName)->Data;
-                                        }
+                                             $HtmlLines.=  $datass[$ColumnSetIDName];
+                                      
                                     } 
                                     else {
                                         
@@ -955,8 +950,7 @@ class builder   {
                                         $HtmlLines.= 'style="vertical-align:middle"  >
                                                                                     <div automaticallyVisibleIfIDChecked="' . $Single_ColumnSetCollection->dependencyID . '" >';
                                         $ColID[] = $ColumnSetIDName;
-                                          if(isset($datass->get($ColumnSetIDName)->Data))$dts=$datass->get($ColumnSetIDName)->Data;
-                                            else $dts = "";
+                                         $dts = $datass[$ColumnSetIDName];
 
                                         foreach ($fieldValueList as $fieldd) {
                                             
@@ -980,16 +974,12 @@ class builder   {
                                         
                                         // code...
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
+                                        $HtmlLines.= 'style="vertical-align:middle">';
                                         
-                                        if ($datass->get($ColumnSetIDName) == null) {
-                                        } 
-                                        else {
+                                      
                                             
-                                            $HtmlLines.= $datass->get($ColumnSetIDName)->Data;
-                                        }
+                                          $HtmlLines.=  $datass[$ColumnSetIDName];
+                                        
                                     } 
 
 
@@ -1001,8 +991,7 @@ class builder   {
                                         $ColID[] = $ColumnSetIDName;
                                         
                                         foreach ($fieldValueList as $fieldd) {
-                                            if(isset($datass->get($ColumnSetIDName)->Data))$dts=$datass->get($ColumnSetIDName)->Data;
-                                            else $dts = "";
+                                           $dts = $datass[$ColumnSetIDName];
                                             $fieldIDName = $ColumnSetIDName . $fieldd->field_ID;
                                              $AjaxNames[]= $fieldIDName;
                                             $HtmlLines.= '
@@ -1026,13 +1015,11 @@ class builder   {
 
                                 case "radio":
                                     
-                                    if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                    $H = $datass[$ColumnSetIDName];
                                     if ($act == 'show') {
                                         
                                         // code...
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
+                                        $HtmlLines.= 'style="vertical-align:middle">';
                                         
                                         if ($H == null || $H == ' ' || is_numeric($H) == false) {
                                             
@@ -1093,7 +1080,7 @@ class builder   {
                                     break;
 
                                 case "combo":
-                                   if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                   $H = $datass[$ColumnSetIDName];
                                     
                                     if ($act == 'show') {
                                         $HtmlLines.= '
@@ -1150,22 +1137,16 @@ class builder   {
                                     break;
 
                                 case "multiplecombo":
-                                    if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                    $H = $datass[$ColumnSetIDName];
                                     if ($act == 'show') {
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
-                                        
-                                       if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
-                                        
+                                        $HtmlLines.= 'style="vertical-align:middle">';
                                         if ($H == null || $H == ' ' ||$H =='error') {
-                                            
                                             $HtmlLines.= $H;
                                         } 
                                         else {
                                             
-                                            $vl = explode(",", $H);
+                                            $vl =$H;
                                             
                                             foreach ($vl as $vll) {
                                                 
@@ -1194,8 +1175,9 @@ class builder   {
                                             $fieldValue = $fieldd->Value;
                                             
                                                        
-                                                    
-                                                    if (     (strpos($H, $fieldValue) !== false)           ) {
+                                                     $H2 = implode(",", (array)$H);
+
+                                                    if (     (strpos($H2, $fieldValue) !== false)           ) {
                                                         $HtmlLines.= '<option class="rmselect" value ="'.$fieldValue.'" selected>'.$fieldd->Label.'</option>';
                                                     } 
                                                     else {
@@ -1211,15 +1193,11 @@ class builder   {
 
                                       case "coolmultiplecombo":
 
-                                    if($datass->get($ColumnSetIDName) == null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                    $H = $datass[$ColumnSetIDName];
                                    // echo $H;
                                     if ($act == 'show') {
                                         
-                                        $HtmlLines.= '
-
-                                                                                         style="vertical-align:middle">';
-                                        
-                                       if($datass->get($ColumnSetIDName) ==null) $H ="error";else $H =$datass->get($ColumnSetIDName)->Data;
+                                        $HtmlLines.= 'style="vertical-align:middle">';                                       
                                         
                                         if ($H == null || $H == ' ' ||$H =='error') {
                                             
@@ -1227,7 +1205,7 @@ class builder   {
                                         } 
                                         else {
                                             
-                                            $vl = explode(",", $H);
+                                            $vl = $H;
                                             
                                             foreach ($vl as $vll) {
                                                 
@@ -1262,19 +1240,20 @@ class builder   {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
-                                        $varother = substr(strrchr($H, ","), 1);
+                                        $H2 = implode(",", $H);
+                                        $varother = substr(strrchr($H2, ","), 1);                                        
                                         if ($varother == '-1' ){}else{
 
                                         if (is_numeric($varother)) {$varother= '-989';}
 
 }
                                         
-                                            if (     (strpos($H, $fieldValue) !== false)  ) {
+                                            if (     (strpos($H2, $fieldValue) !== false)  ) {
                                                         $HtmlLines.= '<option class="rmselect" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" selected>'.$fieldd->Label.'</option> ';
                                                     } 
                                                     else{
 
-                                            if (     (strpos($H, $varother) !== false) and $fieldValue == -1 ) {
+                                            if (     (strpos($H2, $varother) !== false) and $fieldValue == -1 ) {
                                                         $HtmlLines.= '<option class="rmselect" value ="'.$varother.'"id ="'.$fieldIDOnly.'" selected>'.$fieldd->Label.'</option> ';
                                                     } 
 
@@ -1307,8 +1286,7 @@ class builder   {
 
 
                                 case "coolradio":
-                                     if($datass->get($ColumnSetIDName) ==null) $H =-78;else $H =$datass->get($ColumnSetIDName)->Data;
-
+                                     $H = $datass[$ColumnSetIDName];
                                     if ($act == 'show') {
                                         
                                         $HtmlLines.= 'style="vertical-align:middle">';
