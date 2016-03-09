@@ -53,12 +53,12 @@
                   <span style="color:red">>> Click on the labels to open/close panels</span>
                   <br>
                    @foreach($surveys as $survey)
-                    @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
+                    @if(($survey->id=='CHV2') || ($survey->id=='MNHV2') || ($survey->id=='IMCIV1') )
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$survey->surveyID}}">
-                            @if($survey->surveyID=='CHV2')
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$survey->id}}">
+                            @if($survey->id=='CHV2')
 
                             Child Health 
                               <small>
@@ -70,7 +70,7 @@
                              Records )
                              </small>
                             
-                            @elseif($survey->surveyID=='MNHV2')
+                            @elseif($survey->id=='MNHV2')
 
                             Maternal and Neonatal Health
 
@@ -86,7 +86,7 @@
 
 
 
-                            @elseif($survey->surveyID=='IMCIV1')
+                            @elseif($survey->id=='IMCIV1')
 
                             Integrated Management of Childhood Illness
 
@@ -107,7 +107,7 @@
 
 
 
-                             <small id="{{$survey->surveyID}}status_info">
+                             <small id="{{$survey->id}}status_info">
                              </small>
 
 
@@ -122,18 +122,18 @@
 
                         </h4>
                       </div>
-                      <div id="collapse{{$survey->surveyID}}" class="panel-collapse collapse">
+                      <div id="collapse{{$survey->id}}" class="panel-collapse collapse">
                         <div class="box-body">
 <table style="float:right">
                          <tr>
-                                  <td><a id="excel{{$survey->surveyID}}">Download Excel</a></td>                   
+                                  <td><a id="excel{{$survey->id}}">Download Excel</a></td>                   
                            </tr>
                            
                       </table>
                 
                 <br>
                 <br>
-                <table id="example1{{$survey->surveyID}}" cellspacing="0"  class="table table-bordered table-striped">
+                <table id="example1{{$survey->id}}" cellspacing="0"  class="table table-bordered table-striped">
   
 
 
@@ -187,33 +187,33 @@
                     <tbody>
                     
                         @foreach($user_monitor as $user)
-                         @if(substr($user['Survey'],0,2)==substr($survey->surveyID,0,2))
+                         @if(substr($user->Survey,0,2)==substr($survey->id,0,2))
                         <tr>
                      <td>
 
-                                {{$user['Version']}} :{{$user['Runtime']}}
+                                {{$user->asurvey->Version}} :{{$user->asurvey->Runtime}}
 
                          </td>
-                        <td > {{ $user['Assessment_Term']}}</td>
-                        <td > {{ $user['assname']}}</td>
+                        <td > {{ $user->Assessment_Term}}</td>
+                        <td > {{ isset($user->assessor_short->Name) ? $user->assessor_short->Name : "" }}</td>
                        
-                        <td>{{ date_format(date_create($user['Date']),'d F Y')}} </td>
-                        <td >{{ $user['FacilityName']}}  </td>
-                        <td  >{{$user['County']}}</td>
-                        <td>{{$user['SubCounty']}}
+                        <td>{{ date_format(date_create($user->Date),'d F Y')}} </td>
+                        <td >{{ $user->facility_short->FacilityName}}  </td>
+                        <td  >{{$user->facility_short->County}}</td>
+                        <td>{{$user->facility_short->District}}
 
-                        <td >{{ $user['username']}} </td>
-                        @if($user['Status']=='Submitted')
- <td class="hideprint"><form action="/assessments/show/{{$user['Assessment_ID']}}">
+                        <td >{{ $user->user->name}} </td>
+                        @if($user->Status=='Submitted')
+ <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
                @elseif($user['Status']=='Incomplete' || $user['Status']=='New')
 
-       <td><form class="theresume" AssID="{{$user['Assessment_ID']}}" bad="{{is_null($user['assname'])}}">
+       <td><form class="theresume" AssID="{{$user->Assessment_ID}}" bad="{{isset($user->assessor_short->Name)}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
 
      @else
 
-      <td> {{$user['Status']}}</td>
+      <td> {{$user->Status}}</td>
 
      @endif
                         
@@ -265,13 +265,13 @@
                   <div class="tab-pane" id="tab_2">
                   <span style="color:red"> >> Click on the labels to open/close panels</span>
                       @foreach($surveys as $survey)
-                                         @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
+                                         @if(($survey->id=='CHV2') || ($survey->id=='MNHV2') || ($survey->id=='IMCIV1') )
 
                     <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2{{$survey->surveyID}}">
-                             @if($survey->surveyID=='CHV2')
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2{{$survey->id}}">
+                             @if($survey->id=='CHV2')
 
                             Child Health
 
@@ -279,7 +279,7 @@
 
 
                             @endif
-                            @if($survey->surveyID=='MNHV2')
+                            @if($survey->id=='MNHV2')
 
                             Maternal and Neonatal Health
 
@@ -287,7 +287,7 @@
 
 
                             @endif
-                            @if($survey->surveyID=='IMCIV1')
+                            @if($survey->id=='IMCIV1')
 
                             Integrated Management of Childhood Illness
 
@@ -298,9 +298,9 @@
                           </a>
                         </h4>
                       </div>
-                      <div id="collapse2{{$survey->surveyID}}" class="panel-collapse collapse">
+                      <div id="collapse2{{$survey->id}}" class="panel-collapse collapse">
                         <div class="box-body">
-                         <table id="example2{{$survey->surveyID}}" class="table table-bordered table-striped">
+                         <table id="example2{{$survey->id}}" class="table table-bordered table-striped">
   
 
 
@@ -358,9 +358,9 @@
                         <td> 
                        
                         @foreach($submittedt as $subt)
-                            @if($county==$subt['County'] && $subt['Description']==$survey->Description)
+                            @if($county==$subt['County'] && substr($subt['Description'],0,2)==substr($survey->Description,0,2))
                                 
-{{$subt->submitted}}
+{{$subt['submitted']}}
                                 
 
                                 
@@ -381,9 +381,9 @@
                         <td > 
 
                          @foreach($incompletet as $inct)
-                            @if($county==$inct['County'] && $inct['Description']==$survey['Description'])
+                            @if($county==$inct['County'] && substr($inct['Description'],0,2)==substr($survey->Description,0,2))
                                 
-{{$inct->incomplete}}
+{{$inct['incomplete']}}
                                 
 
                                 
@@ -404,7 +404,7 @@
         
                     
 
-<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county}}/{{$survey->surveyID}}">
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county}}/{{$survey->id}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
@@ -465,12 +465,12 @@
                   @foreach($surveys as $survey)
 
 
-                                         @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
+                                         @if(($survey->id=='CHV2') || ($survey->id=='MNHV2') || ($survey->id=='IMCIV1') )
                   <div class="panel box box-primary">
                       <div class="box-header with-border">
                         <h4 class="box-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3{{$survey->surveyID}}">
-                            @if($survey->surveyID=='CHV2')
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3{{$survey->id}}">
+                            @if($survey->id=='CHV2')
 
                             Child Health
 
@@ -478,7 +478,7 @@
 
 
                             @endif
-                            @if($survey->surveyID=='MNHV2')
+                            @if($survey->id=='MNHV2')
 
                             Maternal and Neonatal Health
 
@@ -486,7 +486,7 @@
 
 
                             @endif
-                            @if($survey->surveyID=='IMCIV1')
+                            @if($survey->id=='IMCIV1')
 
                             Integrated Management of Childhood Illness
 
@@ -498,9 +498,9 @@
                         </h4>
                       </div>
 
-                      <div id="collapse3{{$survey->surveyID}}" class="panel-collapse collapse">
+                      <div id="collapse3{{$survey->id}}" class="panel-collapse collapse">
                         <div class="box-body">
- <table id="example3{{$survey->surveyID}}" class="table table-bordered table-striped">
+ <table id="example3{{$survey->id}}" class="table table-bordered table-striped">
   
 
 
@@ -578,7 +578,7 @@
         
                     
 
-<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county}}/{{$survey->surveyID}}">
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county}}/{{$survey->id}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
@@ -631,7 +631,7 @@
 
 
  @foreach($surveys as $survey)
- @if($survey->surveyID=='CHV2'|| 'MNHV2'||'IMCIV1')
+ @if($survey->id=='CHV2'|| 'MNHV2'||'IMCIV1')
   <script type="text/javascript">
 
 </script>
@@ -659,7 +659,7 @@
 
 
  @foreach($surveys as $survey)
-                     @if(($survey->surveyID=='CHV2') || ($survey->surveyID=='MNHV2') || ($survey->surveyID=='IMCIV1') )
+                     @if(($survey->id=='CHV2') || ($survey->id=='MNHV2') || ($survey->id=='IMCIV1') )
 
 
        
@@ -753,13 +753,13 @@ $(document).ready(function() {
   
 
 
-var table=$('#example1{{$survey->surveyID}}').DataTable( 
+var table=$('#example1{{$survey->id}}').DataTable( 
  {
    
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
-                var select='<select id="{{$survey->surveyID}}' + column.index()+ '"class="colms" style="width:100%"  ><option style="width:100%" value=""></option></select>';
+                var select='<select id="{{$survey->id}}' + column.index()+ '"class="colms" style="width:100%"  ><option style="width:100%" value=""></option></select>';
 
                 var select = $(select)
                     .appendTo( $(column.header()).empty() )
@@ -786,14 +786,14 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
     } );
 
 
-  //   $('#refresh{{$survey->surveyID}}').click(function()
+  //   $('#refresh{{$survey->id}}').click(function()
   //     {
   // $('.colms').val("");
   // table.draw();
 
   //       });
- document.getElementById("example1{{$survey->surveyID}}_filter").style.display = 'none';
-  $('#{{$survey->surveyID}}Action').hide();
+ document.getElementById("example1{{$survey->id}}_filter").style.display = 'none';
+  $('#{{$survey->id}}Action').hide();
 
 
 
@@ -807,14 +807,14 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
 
  $(function () 
  {
-       $('#example2{{$survey->surveyID}}').DataTable(
+       $('#example2{{$survey->id}}').DataTable(
 
         {
            "aaSorting": [[ 1, "desc" ]]
          });
        
 
-       $('#example3{{$survey->surveyID}}').DataTable(
+       $('#example3{{$survey->id}}').DataTable(
        {
            "aaSorting": [[ 1, "desc" ]]
 
@@ -825,7 +825,7 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
 
 
 
- $('#excel{{$survey->surveyID}}').click(function()
+ $('#excel{{$survey->id}}').click(function()
 {
     
 
@@ -837,13 +837,13 @@ var table=$('#example1{{$survey->surveyID}}').DataTable(
 function ajax2() {
  
     var data = {
-          'version':$('#{{$survey->surveyID}}Version').val(),
-          'term':$('#{{$survey->surveyID}}Assessment Term').val(),
-          'assessor':$('#{{$survey->surveyID}}Assessor').val(),
-          'date':$('#{{$survey->surveyID}}Date').val(),
-          'facility':$('#{{$survey->surveyID}}Facility').val(),
-          'county':$('#{{$survey->surveyID}}County').val(),
-          'user':$('#{{$survey->surveyID}}Entered by').val(),
+          'version':$('#{{$survey->id}}Version').val(),
+          'term':$('#{{$survey->id}}Assessment Term').val(),
+          'assessor':$('#{{$survey->id}}Assessor').val(),
+          'date':$('#{{$survey->id}}Date').val(),
+          'facility':$('#{{$survey->id}}Facility').val(),
+          'county':$('#{{$survey->id}}County').val(),
+          'user':$('#{{$survey->id}}Entered by').val(),
 
          '_token': $('input[name=_token]').val()
         

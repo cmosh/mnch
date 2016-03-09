@@ -10,7 +10,7 @@ class Section extends Eloquent {
     }
 
      public function survey() {
-        return $this->belongsTo('App\Tables\Survey','surveyID','surveyID');
+        return $this->belongsTo('App\Tables\Survey','_id','surveyID');
     }
 
 }

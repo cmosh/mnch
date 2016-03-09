@@ -89,47 +89,22 @@ class assessments extends Eloquent  {
         return $this->hasOne('App\Tables\Assessor','AssID','Assessment_ID')->select('AssID','Name');
     }
 
-    public function survey(){
-        return $this->hasOne('App\Tables\Survey','Survey','surveyID')->select('surveyID','Version','Runtime','Description');
+    public function asurvey(){
+        return $this->belongsTo('App\Tables\Survey','Survey')->select('surveyID','Version','Runtime','Description');
     }
 
-    public static function Monitor($Survey='all'){
+    public static function Monitor($params=null){
 
-        if($Survey == 'all'){
+       $params['County'] = isset($params['County']) ? $params['County'] : false ;
+         $params['Survey'] = isset($params['Survey']) ? $params['Survey'] : false ;
 
-       $Surveys = Self::with('facility_short')->with('user')->with('survey')->with('assessor_short')->get();
+     $Surveys = $params['Survey'] ? Self::where('Survey','Like',$params['Survey'].'%')->get() : Self::all() ;
+   
 
+      $Surveys->load('facility_short')->load('user')->load('asurvey')->load('assessor_short');
 
-
-    }
-        else
-    {
-       $Surveys = Self::where('Survey','Like',$Survey.'%')->with('facility_short')->with('user')->with('survey')->with('assessor_short')->get();
-    }
-
-        return  $Surveys->transform(function ($item, $key) {
-                 return collect([
-                        'username'=>$item->user->name,
-                        'Survey'=>$item->Survey,
-                        'Assessment_Term'=>$item->Assessment_Term,
-                        'Date'=>$item->Date,
-                        'Status'=>$item->Status,
-                        'FacilityName'=>$item->facility_short->FacilityName,
-                        'assname'=> isset($item->assessor_short->Name) ?  $item->assessor_short->Name : null,
-                        'Assessment_ID'=>$item->Assessment_ID,
-                        'County'=>$item->facility_short->County,
-                        'id'=>$item->user->_id,
-                        'role'=>$item->role,
-                        'FacilityCode'=>$item->Facility_ID,
-                        'Version'=>$item->survey->Version,
-                        'Runtime'=>$item->survey->Runtime,
-                        'Description'=>$item->survey->Description,
-                        'updated_at'=>$item->updated_at,
-                        'SubCounty'=>$item->facility_short->District
-                    ]);
-                 
-                });
-
+      return  $params['County'] ? $Surveys->where('facility_short.County',$params['County']) : $Surveys;
+    
 
 
     }

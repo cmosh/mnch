@@ -165,8 +165,11 @@ class UserManagement extends Controller {
 		$this->role->__invoke(2);
 		$surveys=Survey::all();
 		$counties=counties::all();
+
 		
-		$user_monitor=assessments::Monitor();		
+		 $user_monitor=assessments::Monitor();	
+
+		
 		$counties_assessed= County::AllAssessed();
 		$submitted=County::Submitted();
 		$incomplete=County::Incomplete();
@@ -175,9 +178,9 @@ class UserManagement extends Controller {
 		$users=User::all();
 		$assessments=assessments::all();
 
-		$ch=assessments::Monitor('CH');	
-		$mnh=assessments::Monitor('MNH');	
-		$imci=assessments::Monitor('IMCI');	
+		$ch=assessments::Monitor(['Survey'=>'CH']);	
+		$mnh=assessments::Monitor(['Survey'=>'MNH']);	
+		$imci=assessments::Monitor(['Survey'=>'IMCI']);	
 
 		return view('usermanagement.monitor')->with('ch',$ch)
 											 ->with('mnh',$mnh)
@@ -421,7 +424,7 @@ public function multi()
     }
 
  
-	public function export(Excel $excel,$loc,$type1,$type2,$type3)
+	/*public function export(Excel $excel,$loc,$type1,$type2,$type3)
 	{
 		if($loc=='umanage' && $type1=='users' && $type2=='all')
 		{
@@ -504,7 +507,7 @@ public function multi()
 	    		
 	    		$counter2=0;
 	    		
-				$usermonitor=User_monitor::where('Survey','Like',$survey_name.'%')->get();
+				$usermonitor=assessments::monitor($survey_name);
 
 	    		foreach ($usermonitor as $user_m) {
 	
@@ -512,7 +515,7 @@ public function multi()
 	    				
 						$sheet->row($counter2+1, array(
 
-		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->District,$user_m->username,$user_m->Status
+		     			substr($user_m['Survey'],-1,1), $user_m['Assessment_Term'],$user_m['assname'],$user_m['Date'],$user_m['FacilityName'],$user_m['County'],$user_m['District'],$user_m['username'],$user_m['Status']
 						
 						));
 					
@@ -603,7 +606,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 	    				if($data['time']=='totalentry')
 	    				{
 
-	    					$usermonitor=User_monitor::where('Survey','Like',$data['survey'].'%')->where('County','Like',$data['county'])->get();
+	    					$usermonitor=assessments::where($data['survey'],)->where('County','Like',$data['county'])->get();
 
 	    				}
 	    				else
@@ -653,7 +656,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 	    				
 						$sheet->row($counter2+1, array(
 
-		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->FacilityCode,$user_m->County,$user_m->District,$user_m->username,$role,$user_m->Status
+		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m['assname'],$user_m['Date'],$user_m['FacilityName'],$user_m->FacilityCode,$user_m['County'],$user_m['District'],$user_m['username'],$role,$user_m['Status']
 						
 						));
 					
@@ -683,7 +686,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 
 	
 
-
+*/
 
 
 	public function upload(Excel $excel) {

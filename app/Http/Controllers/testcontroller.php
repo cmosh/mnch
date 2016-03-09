@@ -13,7 +13,7 @@ use App\Helpers\Map;
 use App\Helpers\County;
 use App\Tables\Participants;
 use App\Tables\counties;
-
+use Carbon\Carbon;
 class testcontroller extends Controller
 {
 
@@ -26,16 +26,12 @@ class testcontroller extends Controller
 
     	public function index(){
 
-//             >var user = db.users.findOne({"name":"Tom Benzamin"})
-// >var dbRef = user.address
-// >db[dbRef.$ref].findOne({"_id":(dbRef.$id)})
+            // return assessments::where('created_at','>', Carbon::today())->get();
+            return assessments::Monitor();
+             
 
-    	return	County::Submitted();
 
-           // $test = Facilities::with('thecounty')->get()->take(2);
-        // $test = counties::with('facilities')->get()->take(2);
-            // return $test;
-        
+         
 
     	}
 

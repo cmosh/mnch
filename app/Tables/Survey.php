@@ -3,10 +3,10 @@
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class Survey extends Eloquent {
-
+	protected $collection ='surveys';
 	// each Survey has many sections
     public function sections() {
-        return $this->hasMany('App\Tables\Section','surveyID','surveyID');
+        return $this->hasMany('App\Tables\Section','surveyID','id');
     }
 
 }
