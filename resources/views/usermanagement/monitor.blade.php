@@ -538,9 +538,9 @@
                         <td> 
                                
                         @foreach($submitted as $sub)
-                              @if($county==['$sub->County'] && $sub['Description']==$survey->Description)
+                              @if($county==$sub['County'] && substr($sub['Description'],0,2)==substr($survey->Description,0,2))
                                 
-                                  {{$sub->submitted}}
+                                  {{$sub['submitted']}}
                            
                             @endif
 
@@ -555,9 +555,9 @@
                         <td > 
 
                            @foreach($incomplete as $inc)
-                              @if($county==$inc['County'] && $inc['Description']==$survey->Description)
+                              @if($county==$inc['County'] && substr($inc['Description'],0,2)==substr($survey->Description,0,2))
                                 
-{{$inc->incomplete}}
+{{$inc['incomplete']}}
                                 
 
                                 
