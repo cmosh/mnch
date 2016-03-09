@@ -423,8 +423,7 @@ public function multi()
         return Response::download($file, 'example.xlsx',$headers);
     }
 
- 
-	/*public function export(Excel $excel,$loc,$type1,$type2,$type3)
+public function export(Excel $excel,$loc,$type1,$type2,$type3)
 	{
 		if($loc=='umanage' && $type1=='users' && $type2=='all')
 		{
@@ -507,7 +506,7 @@ public function multi()
 	    		
 	    		$counter2=0;
 	    		
-				$usermonitor=assessments::monitor($survey_name);
+				$usermonitor=assessments::monitor(['Survey'=>$survey_name]);
 
 	    		foreach ($usermonitor as $user_m) {
 	
@@ -515,7 +514,15 @@ public function multi()
 	    				
 						$sheet->row($counter2+1, array(
 
-		     			substr($user_m['Survey'],-1,1), $user_m['Assessment_Term'],$user_m['assname'],$user_m['Date'],$user_m['FacilityName'],$user_m['County'],$user_m['District'],$user_m['username'],$user_m['Status']
+		     						substr($user_m->Survey,-1,1),
+		     						 $user_m->Assessment_Term,
+		     						 isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",
+		     						 	$user_m->Date,
+		     						 	$user_m->facility_short->FacilityName,
+		     						 	$user_m->facility_short->County,
+		     						 	$user_m->facility_short->District,
+		     						 	$user_m->user->name,
+		     						 	$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status
 						
 						));
 					
@@ -606,19 +613,20 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 	    				if($data['time']=='totalentry')
 	    				{
 
-	    					$usermonitor=assessments::where($data['survey'],)->where('County','Like',$data['county'])->get();
+	    					$usermonitor=assessments::Monitor(['Survey'=>$data['survey'],'County'=>$data['county']]);	    					
 
 	    				}
 	    				else
 	    				{
-	    						    					$usermonitor=User_monitor::where('Survey','Like',$data['survey'].'%')->where('County','Like',$data['county'])->where('updated_at','>=',Carbon::today())->get();
+	    $usermonitor=assessments::Monitor([ 'Survey'=> $data['survey'], 'County' => $data['county'] ],true);
 
+	    	
 	    				}
 
 
 	    	
 	    		$sheet->row(1, array(
-     'Tool Name','Versionvar'.Carbon::today(),	'Assessment Term'	,'Assessor'	,'Date'	,'Facility Name','Facility Code',	'County','Sub-County',	'Entered by'	,'User role','Status'	
+     'Tool Name','Version',	'Assessment Term'	,'Assessor'	,'Date('.Carbon::today()->format('d/m/Y').')','Facility Name','Facility Code',	'County','Sub-County',	'Entered by'	,'User role','Status'	
 
 			)
 	    		
@@ -633,30 +641,30 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 	
 	    				$counter2++;
 
-	    				if($user_m->role==0)
+	    				if($user_m->user->role==0)
 		    			{
 		    				$role='countyuser';
 		    			}
-		    			if($user_m->role==1)
+		    			if($user_m->user->role==1)
 		    			{
 		    				$role='dataclerk';
 		    			}
-		    			if($user_m->role==2)
+		    			if($user_m->user->role==2)
 		    			{
 		    				$role='programuser';
 		    			}
-		    			if($user_m->role>=3)
+		    			if($user_m->user->role>=3)
 		    			{
 		    				$role='systemuser';
 		    			}
-		    			if($user_m->role=='')
+		    			if($user_m->user->role=='')
 		    			{
 		    				$role='Unknown';
 		    			}
 	    				
 						$sheet->row($counter2+1, array(
 
-		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m['assname'],$user_m['Date'],$user_m['FacilityName'],$user_m->FacilityCode,$user_m['County'],$user_m['District'],$user_m['username'],$role,$user_m['Status']
+		     			$user_m->asurvey->Description,$user_m->asurvey->Version.":".$user_m->asurvey->Runtime,$user_m->Assessment_Term, isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",$user_m->Date,$user_m->facility_short->FacilityName,$user_m->facility_short->FacilityCode,$user_m->facility_short->County,$user_m->facility_short->District,$user_m->user->name,$role,$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status
 						
 						));
 					
@@ -682,11 +690,6 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 
 	}
 }
-
-
-	
-
-*/
 
 
 	public function upload(Excel $excel) {

@@ -126,7 +126,7 @@
                         <div class="box-body">
 <table style="float:right">
                          <tr>
-                                  <td><a id="excel{{$survey->id}}">Download Excel</a></td>                   
+                                  <td><a id="excel{{$survey->id}}"></a></td>                   
                            </tr>
                            
                       </table>

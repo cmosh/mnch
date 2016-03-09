@@ -1,7 +1,7 @@
 <?php namespace App\Tables;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use DB;
+use Carbon\Carbon;
 class assessments extends Eloquent  {
 
 	//
@@ -93,17 +93,21 @@ class assessments extends Eloquent  {
         return $this->belongsTo('App\Tables\Survey','Survey')->select('surveyID','Version','Runtime','Description');
     }
 
-    public static function Monitor($params=null){
+    public static function Monitor($params=null,$today=false){
 
        $params['County'] = isset($params['County']) ? $params['County'] : false ;
          $params['Survey'] = isset($params['Survey']) ? $params['Survey'] : false ;
 
-     $Surveys = $params['Survey'] ? Self::where('Survey','Like',$params['Survey'].'%')->get() : Self::all() ;
+         if($today)
+            $Surveys = $params['Survey'] ? Self::where('Survey','Like',$params['Survey'].'%')->where('updated_at','>=',Carbon::today())->get() : Self::where('updated_at','>=',Carbon::today()) ;
+         else
+            $Surveys = $params['Survey'] ? Self::where('Survey','Like',$params['Survey'].'%')->get() : Self::all() ;
    
 
       $Surveys->load('facility_short')->load('user')->load('asurvey')->load('assessor_short');
 
-      return  $params['County'] ? $Surveys->where('facility_short.County',$params['County']) : $Surveys;
+      
+        return $params['County'] ? $Surveys->where('facility_short.County',$params['County']) : $Surveys;
     
 
 
