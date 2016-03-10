@@ -31,13 +31,15 @@ use Mail;
 
 class UserManagement extends Controller {
 
-	public function __construct(Request $request)
+	public function __construct(Request $request,Excel $excel)
 	{
 		$this->Map = new Map;
 		$this->middleware('auth');
 		$this->role = function ($min) use ($request) {
 			if($request->user()->role<$min)abort(403);
 		};
+		$this->roles = [0=>'countyuser',1=>'dataclerk',2=>'programuser',3=>'systemuser',4=>'systemuser'];
+		$this->excel = $excel;
 	}
 	
 	public function index()
@@ -423,273 +425,90 @@ public function multi()
         return Response::download($file, 'example.xlsx',$headers);
     }
 
-public function export(Excel $excel,$loc,$type1,$type2,$type3)
+
+
+public function export($loc,$type1,$type2,$type3)
 	{
-		if($loc=='umanage' && $type1=='users' && $type2=='all')
-		{
+		switch ($loc) {
+			case 'umanage':
+				$this->exportusers();				
+				break;
+			case 'preview':
+				$type1 == 'general' ? $this->exportgeneral($type2) : $this->exportcounty($type1,$type2,$type3);
+				break;			
+			default:
+				return;
+				break;
+		}
+	}
 
-				$excel->create('ALL_USERS', function($ex) {
+	
+	private function exportusers(){
 
-	    $ex->sheet('Sheetname', function($sheet) {
-	    	
-	    		$sheet->row(1, array(
-     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
-
-			)
-	    		
-	    		);
+		$this->excel->create('ALL_USERS', function($ex) {
+			$ex->sheet('Sheetname', function($sheet) {	    	
+	    		$sheet->row(1,['Name','County','PhoneNumber','IDNumber'	,'email','role']);
 	    		$users=User::all();
 	    		$counter=0;
-	    		foreach ($users as $user) {
-	    			# code...
-	    		
-	    			$counter++;
-		    			if($user->role==0)
-		    			{
-		    				$role='countyuser';
-		    			}
-		    			if($user->role==1)
-		    			{
-		    				$role='dataclerk';
-		    			}
-		    			if($user->role==2)
-		    			{
-		    				$role='programuser';
-		    			}
-		    			if($user->role>=3)
-		    			{
-		    				$role='systemuser';
-		    			}
-		    			if($user->role=='')
-		    			{
-		    				$role='Unknown';
-		    			}
+	    			foreach ($users as $user) { 
+	    				$counter++;
+						$role = $this->roles[$user->role];
+						$sheet->row($counter+1,[$user->name, $user->county,$user->PhoneNumber,$user->IDNumber,$user->email,$role]);	
+					} 
+				});
+		})->download('xls');
+			
+	}
 
+	private function exportgeneral($survey_id){
 
-						$sheet->row($counter+1, array(
+		$survey_name=substr($survey_id,0,2);
+		$this->excel->create('general'.$survey_name, function($ex) use($survey_name) {
+			$ex->sheet('Sheetname', function($sheet) use($survey_name) {
 
-		     			$user->name, $user->county,$user->PhoneNumber,$user->IDNumber,$user->email,$role
-						
-						));
-					
-				}
-
-
-	       
-
-	    });
-
-	})->download('xls');
-			}
-
-
-			else if((substr($type2,0,2)=='CH'|| 'IM'||'MN') && ($loc=='preview' && $type1=='general'))
-		{
-
-			{
-
-				$survey_name=substr($type2,0,2);
-				$excel->create('general'.$survey_name, function($ex) use($survey_name) {
-
-	    $ex->sheet('Sheetname', function($sheet) use($survey_name) {
-	    	
-	    	$sheet->setColumnFormat(array(
-    					'D' => 'yyyy-dd-mm'
-					));
-	    		$sheet->row(1, array(
-     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County','Sub-County',	'Entered by'	,'Status'	
-
-			)
-	    		
-	    		);
-
-	    		
-	    		$counter2=0;
-	    		
+				$sheet->setColumnFormat(['D' => 'yyyy-dd-mm']);
+	    		$sheet->row(1,['Version','Assessment Term','Assessor','Date','Facility','County','Sub-County','Entered by','Status']);
+	    		$counter2=0;	    		
 				$usermonitor=assessments::monitor(['Survey'=>$survey_name]);
-
-	    		foreach ($usermonitor as $user_m) {
-	
-	    				$counter2++;
-	    				
-						$sheet->row($counter2+1, array(
-
-		     						substr($user_m->Survey,-1,1),
-		     						 $user_m->Assessment_Term,
-		     						 isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",
+	    			foreach ($usermonitor as $user_m) {	
+	    				$counter2++;	    				
+						$sheet->row($counter2+1,[
+										substr($user_m->Survey,-1,1),
+										$user_m->Assessment_Term,
+										isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",
 		     						 	$user_m->Date,
 		     						 	$user_m->facility_short->FacilityName,
 		     						 	$user_m->facility_short->County,
 		     						 	$user_m->facility_short->District,
 		     						 	$user_m->user->name,
-		     						 	$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status
-						
-						));
-					
-				}
-
-				
-
-
-	       
-
-	    });
-
-	})->download('xls');
-
-
-
-
-
-
-
-
-
-			}
-
-
-		
-}
-
-else if($loc=='umanage' && $type1=='multi' && $type2=='template')
-{
-
-
-$excel->create('EXCEL TEMPLATE', function($ex) {
-
-	    $ex->sheet('Sheetname', function($sheet) {
-	    	
-	    		$sheet->row(1, array(
-     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
-
-			)
-	    		
-	    		);
-	    			$sheet->row(2, array(
-     'Username1',	'Nairobi'	,'715909090',	'123123'	,'email@site.com'	,'programuser'		
-
-			)
-	    		
-	    		);
-	    		
-					
+		     						 	$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status	
+		     						 	]					
+						);
+					}
 				});
+		})->download('xls');
+	}	
 
+	private function exportcounty($time,$county,$survey_id){
 
-	       
-
-	  
-
-	})->download('xls');
-
-
-
-
-}
-
-
-else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
-
-
-
-{
-
-	$survey_name=substr($type3,0,2);
-	$county_name=$type2;
-	$data=array(
-			'survey'=>$survey_name,
-			'county'=>$county_name,
-			'time'=>$type1
-
-		);
-
-
-
-
-				$excel->create($type1.$data['survey'].$data['county'], function($ex) use($data) {
-
-	    $ex->sheet('Sheetname', function($sheet) use($data) {
-
-	    				if($data['time']=='totalentry')
-	    				{
-
-	    					$usermonitor=assessments::Monitor(['Survey'=>$data['survey'],'County'=>$data['county']]);	    					
-
-	    				}
-	    				else
-	    				{
-	    $usermonitor=assessments::Monitor([ 'Survey'=> $data['survey'], 'County' => $data['county'] ],true);
-
-	    	
-	    				}
-
-
-	    	
-	    		$sheet->row(1, array(
-     'Tool Name','Version',	'Assessment Term'	,'Assessor'	,'Date('.Carbon::today()->format('d/m/Y').')','Facility Name','Facility Code',	'County','Sub-County',	'Entered by'	,'User role','Status'	
-
-			)
-	    		
-	    		);
-
-	    		
-	    		$counter2=0;
-	    		
-
+			$survey_name=substr($survey_id,0,2);
+			$county_name=$county;
+			$data=['survey'=>$survey_name,'county'=>$county_name,'time'=>$time];
+			$this->excel->create($time.$data['survey'].$data['county'], function($ex) use($data) {
+				$ex->sheet('Sheetname', function($sheet) use($data) {
+				$usermonitor = $data['time']=='totalentry' ? assessments::Monitor(['Survey'=>$data['survey'],'County'=>$data['county']])
+												  : assessments::Monitor([ 'Survey'=> $data['survey'],'County' => $data['county']],true);
+				$sheet->row(1,['Tool Name','Version','Assessment Term','Assessor','Date('.Carbon::today()->format('d/m/Y').')','Facility Name','Facility Code',	'County','Sub-County','Entered by','User role','Status']);	    		
+	    		$counter2=0; 
 	    		foreach ($usermonitor as $user_m) {
 
-	
 	    				$counter2++;
-
-	    				if($user_m->user->role==0)
-		    			{
-		    				$role='countyuser';
-		    			}
-		    			if($user_m->user->role==1)
-		    			{
-		    				$role='dataclerk';
-		    			}
-		    			if($user_m->user->role==2)
-		    			{
-		    				$role='programuser';
-		    			}
-		    			if($user_m->user->role>=3)
-		    			{
-		    				$role='systemuser';
-		    			}
-		    			if($user_m->user->role=='')
-		    			{
-		    				$role='Unknown';
-		    			}
-	    				
-						$sheet->row($counter2+1, array(
-
-		     			$user_m->asurvey->Description,$user_m->asurvey->Version.":".$user_m->asurvey->Runtime,$user_m->Assessment_Term, isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",$user_m->Date,$user_m->facility_short->FacilityName,$user_m->facility_short->FacilityCode,$user_m->facility_short->County,$user_m->facility_short->District,$user_m->user->name,$role,$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status
-						
-						));
-					
+	    				$role = $this->roles[$user_m->user->role];
+	    				$sheet->row($counter2+1,[$user_m->asurvey->Description,$user_m->asurvey->Runtime,$user_m->Assessment_Term."(V".$user_m->asurvey->Version.")", isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",$user_m->Date,$user_m->facility_short->FacilityName,$user_m->facility_short->FacilityCode,$user_m->facility_short->County,$user_m->facility_short->District,$user_m->user->name,$role,$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status]);				
 				}
-
-				
-
-
-	       
-
-	    });
-
-	})->download('xls');
-
-
-
-
-
-
-
-
-
-
-	}
-}
+			});
+			})->download('xls');
+		}
 
 
 	public function upload(Excel $excel) {

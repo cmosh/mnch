@@ -126,7 +126,7 @@
                         <div class="box-body">
 <table style="float:right">
                          <tr>
-                                  <td><a id="excel{{$survey->id}}"></a></td>                   
+                                  <td><a id="excel{{$survey->id}}">Download Excel</a></td>                   
                            </tr>
                            
                       </table>
@@ -829,7 +829,7 @@ var table=$('#example1{{$survey->id}}').DataTable(
 {
     
 
-  ajax();
+   window.open('/usermanagement/export/preview/general/{{$survey->id}}/download');
            
   });
 
