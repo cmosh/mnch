@@ -15,8 +15,7 @@ var staff_Traineddata = google.visualization.arrayToDataTable(jsonData['CHV2_sta
       staff_Trained.draw(staff_Traineddata, staff_Trainedoptions);
 
        function resizestaff_Trained () {
-      
-       
+
            staff_Trained.draw(staff_Traineddata, staff_Trainedoptions);
 
     }

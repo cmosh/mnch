@@ -2,10 +2,10 @@
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Tools</h3>
-                  <div class="box-tools pull-right">
-                   <a href="/comparison/CHV2/CHV2_Tools/barfullstack/" class="btn btn-box-tool">Launch Comparison</a>
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
+                  <small>
+                   <a href="/comparison/CHV2/CHV2_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    </small>
+                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 

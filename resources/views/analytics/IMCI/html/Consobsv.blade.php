@@ -1,8 +1,10 @@
 
-            <div class="col-md-12">
+            <div class="col-md-4">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Consultation Observation</h3>
+                  <h3 class="box-title">Consultation Observation
+                 
+                    </h3>
                   <div class="box-tools pull-right">
                      <!-- <a href="/comparison/IMCIV1/Certification/barfullstack/" class="btn btn-box-tool">Launch Comparison</a> -->
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>

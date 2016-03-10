@@ -1,10 +1,14 @@
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Equipment Availability</h3>
-                  <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_EquipAvail/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+                  <h3 class="box-title">Equipment Availability
+                  <small>
+                    <a href="/comparison/MNHV2/MNHV2_EquipAvail/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
+              <div class="box-tools pull-right">
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>

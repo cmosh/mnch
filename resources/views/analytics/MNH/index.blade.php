@@ -4,7 +4,7 @@
                  Maternal and Neonatal Health Survey   
               <small>(Analysis Results)</small>
             <!--</h1>-->
-            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
+            
 @endsection
 
 @section('content')
@@ -23,6 +23,7 @@
 
 
    </div>
+   <div class="row">
    @include('analytics/county')
 
  <div class="col-md-8">
@@ -50,22 +51,31 @@
 
          @include('analytics/MNH/html/types')
            
-
+</div>
 
      
             <div class="col-md-12">
+            
+     <div class="row">       
+            
                    @include('analytics/MNH/html/dservice')
+                   
+
 
                     @include('analytics/MNH/html/dserviceconduct')
+                   
+@include('analytics/MNH/html/hman')
+     </div>
+<div class="row">
 
-
-        @include('analytics/MNH/html/hman')
 
         @include('analytics/MNH/html/skillbirth')
+          
+
         @include('analytics/MNH/html/bedcapacity')
           @include('analytics/MNH/html/hours24')
 
-
+</div>
             </div>
 
 
@@ -80,17 +90,29 @@
                         </div>
                         </div>
 </div>
-  
+  <div class="row">
  @include('analytics/MNH/html/bemonc')
   @include('analytics/MNH/html/BemoncChallenge')
-@include('analytics/MNH/html/cemonc')
+  
+
+ 
+ </div>
+ <div class="row">
+ @include('analytics/MNH/html/cemonc')
+ @include('analytics/MNH/html/HIVTest')
+  
+  </div>
+ <div class="row">
  @include('analytics/MNH/html/MainBlood')
  @include('analytics/MNH/html/ReasonBlood')
  @include('analytics/MNH/html/Reasoncs')
- @include('analytics/MNH/html/HIVTest')
-  @include('analytics/MNH/html/newborn')
+ </div>
+ 
+  <div class="row">
+  @include('analytics/MNH/html/kangaroo')
   @include('analytics/MNH/html/devpep')
-   @include('analytics/MNH/html/kangaroo')
+  @include('analytics/MNH/html/newborn')
+   </div>
  
    
 

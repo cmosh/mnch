@@ -1,10 +1,10 @@
 @extends('app')
 @section('header')
-  <h1  align="middle">
+  <!-- <h1  align="middle"> -->
                  Integrated Management of Childhood Illness
               <small>(Analysis Results)</small>
-            </h1>
-            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
+            <!-- </h1> -->
+            
 @endsection
 
 @section('content')
@@ -23,6 +23,7 @@
 
 
    </div>
+   <div class="row">
    @include('analytics/IMCI/county')
 
  <div class="col-md-8">
@@ -33,7 +34,9 @@
                   <h3> <p id="X">Data from {{$SubmittedCount->X}} healthworkers in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
-              
+              {{--  <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div> --}}
               </div>
                         
                         <div class="box-info">                     
@@ -43,17 +46,21 @@
                         <br>
                         </div>
                         </div>
+                        <div class="row">
                          @include('analytics/IMCI/html/Trained')
-
+ @include('analytics/IMCI/html/WorkingLocation')
 </div>
-
-     
+</div>
+   
            
 
 
      
-            @include('analytics/IMCI/html/WorkingLocation')
+           
             
+            
+            </div>
+
 <!-- the rest -->
  <div class="col-md-12">
                         
@@ -112,10 +119,10 @@
 </div>
 
   @include('analytics/IMCI/html/Consobsv')
-  @include('analytics/IMCI/html/ExitInterview')
+  
   @include('analytics/IMCI/html/CertCriteriia')
   @include('analytics/IMCI/html/Outcome')
-  
+  @include('analytics/IMCI/html/ExitInterview')
  @include('analytics/IMCI/html/Certification')
 
 

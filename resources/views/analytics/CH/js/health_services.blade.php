@@ -9,7 +9,8 @@
                        'width':'100%',
                         'box-sizing': 'border-box;',
                        'height':300,
-                       sliceVisibilityThreshold:0
+                       sliceVisibilityThreshold:0,
+                       legend: {position: 'top', maxLines:2 }
                        };
 
        
