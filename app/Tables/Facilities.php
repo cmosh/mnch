@@ -53,19 +53,7 @@ class Facilities extends Eloquent {
      }
 
 
-     // public function scopeCounty($query){
-     //    return $query->where('County','Baringo')
-     //    // ->groupBy('County')
-     //             ->groupBy(['assessment'=>function($query) use ($params){
-     //                    $query->where('Assessment_Term',$params['Term'])
-     //                          ->where('Survey',$params['Survey'])
-     //                          ->select('Facility_ID','Assessment_Term','Survey','Status');
-     //                 }]);
-     //                 ->with(['assessments_County'=>function($query){
-     //                    $query->groupBy('Facility_ID')
 
-     //                 }]);
-     // }
 
      public function scopeMissing($query,$search){
      	return $query->where('FacilityName','REGEXP',$search)
@@ -81,7 +69,7 @@ class Facilities extends Eloquent {
     }
 
      public function assessments_short() {
-        return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode')->select('Facility_ID','Survey','Status');
+        return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode')->select('Facility_ID','Survey','Status','Assessment_Term');
     }
     public static function CountyAssessments($params){
         
@@ -94,7 +82,6 @@ class Facilities extends Eloquent {
                                   $query->where('Survey','like',$params['Survey'].'%')
                                         ;
                             }])
-                           // ->with('assessments_short')
                            ->get()
                            ->lists('assessments_short')
                            ->lists(0)
@@ -127,7 +114,6 @@ class Facilities extends Eloquent {
                                         ->where('created_at','>', Carbon::today())
                                         ;
                             }])
-                           // ->with('assessments_short')
                            ->get()
                            ->lists('assessments_short')
                            ->lists(0)
@@ -148,6 +134,37 @@ class Facilities extends Eloquent {
         return $result['Incomplete'] + $result['New'];
     }}
 
+
+     public static function MapAssessments($params){
+        
+    $result = array_count_values (
+                        array_filter(
+             
+                        self::where('County',$params['County']) 
+                           ->select('FacilityCode','County')
+                           ->with(['assessments_short'=>function($query) use ($params){
+                                  $query->where('Survey','like',$params['Survey'].'%')
+                                        ->where('Assessment_Term',$params['Term']);
+                            }])
+                           ->get()
+                           ->lists('assessments_short')
+                           ->lists(0)
+                           ->lists('Status')
+                           ->toArray()
+                           )
+                        );
+
+    $result['Submitted'] = isset($result['Submitted']) ? $result['Submitted']: 0;
+     $result['Incomplete'] = isset($result['Incomplete']) ? $result['Incomplete']: 0;
+      $result['New'] = isset($result['New']) ? $result['New']: 0;
+
+     
+    if($params['Status']=='Submitted'){
+        return $result['Submitted'];
+    }
+    else {
+        return $result['Incomplete'] + $result['New'];
+    }}
     
 
 

@@ -27,6 +27,7 @@ class testcontroller extends Controller
     	public function index(){
 
             // return assessments::where('created_at','>', Carbon::today())->get();
+            return County::Map('CH');
         return   $usermonitor=assessments::Monitor([ 'Survey'=> 'CH', 'County' => 'Baringo' ],true);
              
 

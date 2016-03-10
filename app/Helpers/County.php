@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Tables\counties;
+use App\Tables\Term;
 use App\Tables\assessments;
 use App\Tables\Facilities;
 use Illuminate\Support\Collection;
@@ -19,7 +20,45 @@ public static function AllAssessed(){
 	
 	return $Assessments->lists('facility_short')->lists('County')->unique();
 	}
+public static function Map($Survey){
 
+	$Counties = counties::all()->lists('Name');
+	$Terms = Term::all()->lists('Term');
+	$SubmittedCounties = [];
+	
+	foreach ($Counties as $County) {
+	
+
+		foreach ($Terms as $Term) {
+			
+				$Number = Facilities::MapAssessments(array('County'=>$County,
+                                                        'Survey'=>$Survey,
+                                                        'Status'=>'Submitted',
+                                                        'Term'=>$Term
+                                                        )
+                                                );
+				$Number1 = Facilities::MapAssessments(array('County'=>$County,
+                                                        'Survey'=>$Survey,
+                                                        'Status'=>'Incomplete',
+                                                        'Term'=>$Term
+                                                        )
+                                                );
+
+		$SubmittedCounties [$Term.$County] = ['Survey' => $Survey,
+											  'County' => $County,
+											  'Submitted' => $Number,
+											  'Not_Submitted' => $Number1,
+											  'All_Attempted' =>  $Number1 + $Number,
+										   	  'Term' => $Term
+												];
+		}
+						
+
+			
+		}
+	return ($SubmittedCounties);	
+
+}
 public static function Submitted(){
 
 	

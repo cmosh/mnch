@@ -2,23 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tables\SubmittedCHCount;
-use App\Tables\SubmittedCHCountie;
-use App\Tables\SubmittedMNHCount;
-use App\Tables\SubmittedMNHCountie;
-use App\Tables\SubmittedIMCICount;
-use App\Tables\SubmittedIMCICountie;
-use App\Tables\CHSubSurvey;
 use App\Tables\Column_set;
 use App\Tables\Survey;
 use App\Tables\analyse;
-use App\Tables\Map;
-use App\Tables\Map_imci;
-use App\Tables\SurveysDone;
-use App\Tables\IMCISubSurvey;
 use App\Tables\Block;
 use App\Tables\Term;
-use App\Tables\MNHSubSurvey;
+use App\Helpers\County;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Controllers\ArrayRedis as Rache;
 use Illuminate\Contracts\Foundation\Application As App;
@@ -39,17 +28,17 @@ public function maprequest(){
       switch ($survey) {
       	case 'ch':
       		$Map = (Rache::remember('MapCH',180,function() {
-			return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
+			return  County::Map('CH');
       	}));
       		break;      	
       	case 'mnh':
       		$Map = (Rache::remember('MapMNH',180,function() {
-			return 	Map::where('Survey','=','Maternal Neonatal Healthcare')->get()->keyBy('Concat')->toArray();
+			return 	 County::Map('MNH');
       	}));   
       		break;
       	case 'imci':
-      		$Map = (Rache::remember('xMapIMCI',180,function() {
-			return 	Map_imci::where('Survey','=','IMCI')->get()->keyBy('Concat')->toArray();
+      		$Map = (Rache::remember('MapIMCI',180,function() {
+			return  County::Map('IMCI');
       	}));   
       		break;
       	default:
@@ -195,9 +184,6 @@ public function imciajax(){
 	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.'All',180,function(){
       					return 	CHSubSurvey::all();
       	});
-
-
-      //	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All','Baseline');
 		
    
 			

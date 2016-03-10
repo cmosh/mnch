@@ -5,7 +5,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 class Term extends Eloquent  {
 
 	
-	protected $collection='CountyTerms';
+	protected $collection='Terms';
 
 	
 
