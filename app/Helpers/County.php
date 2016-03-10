@@ -25,7 +25,7 @@ public static function Submitted(){
 	
 	$Counties = assessments::where('Status','Submitted')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
 
-	$SubmittedCounties;
+	$SubmittedCounties = [];
 	$Surveys = ['CH','MNH','IMCI'];
 	foreach ($Counties as $County) {
 		foreach ($Surveys as $Survey) {
@@ -53,7 +53,7 @@ public static function Submitted(){
 	
 	$Counties = assessments::where('Status','Submitted')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
 
-	$SubmittedCounties;
+	$SubmittedCounties = [];
 	$Surveys = ['CH','MNH','IMCI'];
 	foreach ($Counties as $County) {
 		foreach ($Surveys as $Survey) {
@@ -83,7 +83,7 @@ public static function Incomplete(){
 	
 	$Counties = assessments::where('Status','Incomplete')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
 
-	$IncompleteCounties;
+	$IncompleteCounties =[];
 	$Surveys = ['CH','MNH','IMCI'];
 	foreach ($Counties as $County) {
 		foreach ($Surveys as $Survey) {
@@ -111,7 +111,7 @@ public static function Incomplete(){
 	
 	$Counties = assessments::where('Status','Incomplete')->with('facility_short')->get()->lists('facility_short')->lists('County')->unique();
 
-	$IncompleteCounties;
+	$IncompleteCounties = [];
 	$Surveys = ['CH','MNH','IMCI'];
 	foreach ($Counties as $County) {
 		foreach ($Surveys as $Survey) {
