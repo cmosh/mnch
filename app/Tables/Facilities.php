@@ -68,9 +68,37 @@ class Facilities extends Eloquent {
         return $this->hasOne('App\Tables\assessments','Facility_ID','FacilityCode');
     }
 
+    public function fowner() {
+        return $this->belongsTo('App\Tables\FacilityOwner','Owner','Owner');
+    }
+
+    public function ftypes() {
+        return $this->belongsTo('App\Tables\FacilityGroup','Type','FacilityType');
+    }
+
      public function assessments_short() {
         return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode')->select('Facility_ID','Survey','Status','Assessment_Term');
     }
+
+     public function assessments() {
+        return $this->hasMany('App\Tables\assessments','Facility_ID','FacilityCode');
+    }
+
+    public static function SubmittedAssessments($Survey,$Term,$County=false){
+
+      $Assessments = $County ? self::where('County',$County)->select('FacilityCode','County') : 
+                             self::select('FacilityCode','County') ;
+       return $Assessments->with(['assessments'=>function($query) use ($Survey,$Term){
+                                  $query->where('Survey','like',$Survey.'%')
+                                        ->where('Assessment_Term',$Term)
+                                        ->where('Status','Submitted');
+                            }])
+                    ->get()
+                    ->lists('assessments')->flatten();
+
+    }
+
+
     public static function CountyAssessments($params){
         
     $result = array_count_values (

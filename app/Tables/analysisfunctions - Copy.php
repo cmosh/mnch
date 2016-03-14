@@ -689,7 +689,13 @@ class analysisfunctions extends Controller {
 	};
 
 
+		//EXCEL RAWS
+	// $this->CHV2_Tools = function(Excel $excel){ 
+
 		
+
+	// 	};
+
 
 
 
@@ -1258,25 +1264,42 @@ protected static function getLabel($trim,$col){
 	protected static function types(){
 global $surveys;
 
-		 $Data = $surveys->lists('Facility_ID');
-	 
-	 $Facilities = Facilities::whereIn('FacilityCode',$Data)
-									->select('FacilityID','Type')
-									->with('ftypes')
-									->get()
-									->lists('ftypes');
-									// return
-	$Types = $Facilities->groupby('FacilityGroup');
+		 $recset = $surveys;
 
-	foreach ($Types as $Group=>$Type) {
+	
+		 	$Data = $recset->groupby('Type');
+      	
 
-		$array [] = [$Group, count($Type)];
+      		foreach ($Data as $v) {
+
+		$array [] = array( $v[0]['Type'], count($v));
 		
 	}
 
-if(!isset($array))$array [] = ['No data',0];
+if(!isset($array))$array [] = array('No data',0);
 		
  return $array;
+
+
+// $Data = $recset->load(['z' => function($query)
+// {
+	
+//     $query->select('FacilityCode','Type');
+// }])->lists('z');
+
+
+
+
+// $z =  $Data->groupby('Type');
+
+
+// 	foreach ($z as $v) {
+
+// 		$array [] = array( $v[0]['Type'], count($v));
+		
+// 	}
+
+//  return ($array);
 	
 			}
 
@@ -1349,26 +1372,23 @@ if(!isset($array))$array [] = ['No data',0];
 	protected static function ownership(){
 global $surveys;
 
-		 $Data = $surveys->lists('Facility_ID');
-	 
-	 $Facilities = Facilities::whereIn('FacilityCode',$Data)
-									->select('FacilityID','Owner')
-									->with('fowner')
-									->get()
-									->lists('fowner');
-									// return
-	$Owners = $Facilities->groupby('Group');
+		 $recset = $surveys;
 
-	foreach ($Owners as $Group=>$Owner) {
+	
+		 	$Data = $recset->groupby('Owner');
+      	
 
-		$array [] = [$Group, count($Owner)];
+      		foreach ($Data as $v) {
+
+		$array [] = array( $v[0]['Owner'], count($v));
 		
 	}
 
-if(!isset($array))$array [] = ['No data',0];
+if(!isset($array))$array [] = array('No data',0);
 		
  return $array;
-}
+	
+			}
 
 protected static function staff_trained(){
 

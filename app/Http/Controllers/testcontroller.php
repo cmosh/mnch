@@ -13,6 +13,7 @@ use App\Helpers\Map;
 use App\Helpers\County;
 use App\Tables\Participants;
 use App\Tables\counties;
+use App\Tables\analysisfunctions;
 use Carbon\Carbon;
 class testcontroller extends Controller
 {
@@ -26,13 +27,11 @@ class testcontroller extends Controller
 
     	public function index(){
 
-            // return assessments::where('created_at','>', Carbon::today())->get();
-            return County::Map('CH');
-        return   $usermonitor=assessments::Monitor([ 'Survey'=> 'CH', 'County' => 'Baringo' ],true);
-             
+            // return Facilities::whereIn('FacilityCode',[19224,19310,14180,17486,18393,14181])->get();
 
-
+           $Data =  Facilities::SubmittedAssessments('CH','Baseline','Baringo');
          
+            return analysisfunctions::types($Data);
 
     	}
 

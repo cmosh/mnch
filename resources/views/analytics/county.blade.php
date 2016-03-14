@@ -23,9 +23,9 @@
 
 <div class="form-group" > <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
         <option value="All" selected>All Counties</option>
-                      @foreach($SubmittedCounties as $SubmittedCountie)
+                      @foreach($SubmittedCounties as $SubmittedCounty)
 
-                       <option value ="{{$SubmittedCountie->County}}" id ="box{{$SubmittedCountie->County}}" >{{$SubmittedCountie->County}}</option>
+          <option value ="{{$SubmittedCounty}}" id ="box{{$SubmittedCounty}}" >{{$SubmittedCounty}}</option>
                         @endforeach
                        </select></div>
 

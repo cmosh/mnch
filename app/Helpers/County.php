@@ -20,6 +20,17 @@ public static function AllAssessed(){
 	
 	return $Assessments->lists('facility_short')->lists('County')->unique();
 	}
+
+
+public static function AllSubmitted($Survey){
+	$Assessments = assessments::where('Status','Submitted')->where('Survey','Like',$Survey.'%')->get();	
+	
+	$Assessments->load('facility_short');
+	
+	return $Assessments->lists('facility_short')->lists('County')->unique();
+	}
+
+
 public static function Map($Survey){
 
 	$Counties = counties::all()->lists('Name');

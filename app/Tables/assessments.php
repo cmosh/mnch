@@ -26,6 +26,13 @@ class assessments extends Eloquent  {
      				 }]);
      }
 
+     public function scopeSubmitted($query,$Survey)
+     {
+
+        return $query->where('Survey','Like',$Survey.'%')
+                     ->where('Status','Submitted');
+     }
+
      public function scopeView($query,$params)
      {
         return $query->where('Survey',$params['Survey'])

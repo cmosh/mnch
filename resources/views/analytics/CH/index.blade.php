@@ -36,7 +36,7 @@
   <!-- small box -->
               <div id="facilitiesBox" class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
                {{--  <div class="icon">
@@ -217,7 +217,7 @@ window.inside = $('#thesvg').contents();
         $(".select2").select2();
 
           @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
@@ -310,27 +310,11 @@ function drawChart() {
 
 	//include js
     
-	     @include('analytics/CH/js/gjavailability')
-       @include('analytics/CH/js/tavailability')
-       @include('analytics/CH/js/chsec4diarhoea')
-       @include('analytics/CH/js/chsec4antibiotics')
-       @include('analytics/CH/js/chsec4malaria')
-       @include('analytics/CH/js/ort_func')
-       @include('analytics/CH/js/supplies_availability')
-       @include('analytics/CH/js/resource_availability')
-       @include('analytics/CH/js/u5reg')
-	     @include('analytics/CH/js/annualTrends')
-       @include('analytics/CH/js/nondiarrhoea')
-       @include('analytics/CH/js/orttrends')
-       @include('analytics/CH/js/ownership')
+	     @include('analytics/CH/js/ownership')
        @include('analytics/CH/js/types')
-       @include('analytics/CH/js/staff_training')
-       @include('analytics/CH/js/community_strategy')
-       @include('analytics/CH/js/locationortcorner')
-       @include('analytics/CH/js/health_services') 
 
         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
