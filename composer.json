@@ -9,7 +9,7 @@
 	"require": {
 		"laravel/framework": "5.2.9 as 5.1.8",
 		"laravelcollective/html": "5.2.4 as 5.1.1",
-		"vetruvet/laravel-phpredis": "1.0.3",
+		"tillkruss/larvel-phpredis": "1.0.*",
 		"maatwebsite/excel": "^2.0",
 		"guzzlehttp/guzzle": "^6.1",
 		"laravelcollective/remote": "5.2.*",

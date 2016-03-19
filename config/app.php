@@ -132,7 +132,7 @@ return [
 		Illuminate\Pagination\PaginationServiceProvider::class,
 		Illuminate\Pipeline\PipelineServiceProvider::class,
 		Illuminate\Queue\QueueServiceProvider::class,
-		Vetruvet\PhpRedis\PhpRedisServiceProvider::class,
+		TillKruss\LaravelPHPRedis\RedisServiceProvider::class,
 		Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
 		// Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 		Illuminate\Session\SessionServiceProvider::class,

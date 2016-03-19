@@ -13,8 +13,11 @@ use App\Helpers\Map;
 use App\Helpers\County;
 use App\Tables\Participants;
 use App\Tables\counties;
+use App\Tables\users;
 use App\Tables\analysisfunctions;
 use Carbon\Carbon;
+use Cache;
+
 class testcontroller extends Controller
 {
 
@@ -28,10 +31,12 @@ class testcontroller extends Controller
     	public function index(){
 
             // return Facilities::whereIn('FacilityCode',[19224,19310,14180,17486,18393,14181])->get();
+            
 
            $Data =  Facilities::SubmittedAssessments('CH','Baseline');
          
-            return analysisfunctions::staff_trained($Data);
+            return analysisfunctions::ortloc($Data);
+           
 
     	}
 

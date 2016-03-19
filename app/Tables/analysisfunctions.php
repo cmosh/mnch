@@ -403,11 +403,12 @@ class analysisfunctions extends Controller {
 		});
 	};
 
-	$this->CHV2_staff_trained= function($county){ global $term;
-	//staff_trained_18
-		return $CHV2_staff_trained = Cache::remember('CHV2_staff_trained'.$county.$term,180,function(){
+	$this->CHV2_staff_trained= function($county){ 
+	 global $term;
+	 return Cache::remember('CHV2_staff_trained'.$county.$term,180,function(){
 			return self::staff_trained();
 		});
+		
 	};
 	$this->CHV2_comm_strategy= function($county){ global $term;
 	//comm_strategy_19
@@ -686,80 +687,24 @@ class analysisfunctions extends Controller {
 		});
 
 	};
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-	 	
-
-      
-    }
-
-	
-
-
-	protected static function ortfunction(){
+}
+public static function ortfunction(){
 		global $surveys;
-
-			$recset = $surveys;
-$countB = count($recset);
-      	 $Data = $recset->load(['x' => function($query)
-{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW03COL02')
-    	  ->where('Data','=','1')
-    	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW06COL02')
-    	   ->where('Data','=','1')
-    	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW07COL02')
-    	   ->where('Data','=','1');
-}])->lists('x')->toArray();
-      	 $countF = 0;
-      foreach ($Data as $data) {
-
-      	if(count($data) == 3){
-
-      		$countF++;
-      	}
-
-      
-      }
-     
-
- return array('Functionality',$countF,$countB-$countF,0);
+	    $countB = count($surveys);
+      	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")
+										->where('CHV2SEC5BLK1RW06COL02',"1")
+										->where('CHV2SEC5BLK1RW07COL02',"1");
+      	$countF = count($Data);
+      	return array('Functionality',$countF,$countB-$countF,0);
 	}
 
 	protected  static function count_YN($cl){
- global $surveys;
+	global $surveys;
  
-
- $recset = $surveys;
-// echo $recset;
-		$Data = $recset->load(['y' => function($query) use ($cl)
-{
-	
-    $query->where('ColumnSetID', '=', $cl);
-}])->lists('y');
-
-		$Data = $Data->lists('Data')->all();
-
-
-$Data = array_filter($Data);
-$big0 = array_count_values($Data);
-
-
-
-return $big0;
+ 	$Data = $surveys->lists('Data')->lists($cl)->toArray();
+    $Data = array_filter($Data);
+    $big0 = array_count_values($Data);
+    return $big0;
 
 
 	}
@@ -1487,21 +1432,11 @@ $DataN = $DataN->sum('Data');
 }
 
 
-	protected static function opdgen(){
+	public static function opdgen(){
 		global $surveys;
 
-		$recset = $surveys;
-	$Data = $recset->load(['y' => function($query) 
-{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC1BLK2RW01COL02');
-}])->lists('y');
-
-	$RawData = array_filter($Data->lists('Data')->all());
-	
-
-	$x = array_count_values($RawData);
-	
+    $Data = $surveys->lists('Data')->lists('CHV2SEC1BLK2RW01COL02')->collapse()->toArray();
+	$x = array_count_values($Data);
 
 	$ones = 0;
 	foreach ($x as $key => $value) {
@@ -1566,66 +1501,49 @@ $DataN = $DataN->sum('Data');
 	protected static function commstrategy(){
 		global $surveys;
 
-		$recset = $surveys;
+	$recset = $surveys->lists('Data');
 
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW02COL02');
-		}])->lists('y');
+	$Data = $recset->lists('CHV2SEC8BLK1RW02COL02');
+	$TCU = count($Data);
 
-	$TCU = $Data->count('Data');
-
-
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW03COL02');
-		}])->lists('y');	
+	$Data = $recset->lists('CHV2SEC8BLK1RW03COL02')->toArray();	
 		
-	$Data = $Data->groupby('Data');
+	$Data = array_count_values($Data);
 
-	 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
-	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
-	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
-	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
 	 
 	$TCUnt =$count1 + $count2 + $count3 +$count4;
 	$TCUt = $TCU-$TCUnt;
 
 
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW06COL02');
-		}])->lists('y');
+	$Data = $recset->lists('CHV2SEC8BLK1RW06COL02');
 
-	$Data = $Data->groupby('Data');
-		 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
-	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
-	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
-	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
 	 
 	$CHEWSnt =$count1 + $count2 + $count3 +$count4;
 	
 		$CHEWSt = $TCU-$CHEWSnt;
 	
 
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW08COL02');
-		}])->lists('y');
+	$Data = $recset->lists('CHV2SEC8BLK1RW08COL02');
 
-	$Data = $Data->groupby('Data');
- if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
-	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
-	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
-	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
 	 
 	$CHVnt =$count1 + $count2 + $count3 +$count4;
-	//$CHVnt =  count($Data['0'])+count($Data['00'])+count($Data['000'])+count($Data['0000']);
-	
+
 	$CHVt = $TCU-$CHVnt;
 
 		$Array [] = array ('Community Strategy','Trained (>0)','Not Trained (0)');
@@ -1640,23 +1558,16 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	protected static function ortloc(){
+	public static function ortloc(){
 		global $surveys;
 
-		$recset = $surveys;
+		$recset = $surveys->lists('Data');
 
-	$Data = $recset->load(['y' => function($query) 
-{
+	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02')->collapse();
+	 $all =count($Data);
 	
-    $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW04COL02');
-}])->lists('y');
-
-	$RawData = array_filter($Data->lists('Data')->all());
-	$all = $Data->count('Data');
+	$x = array_count_values($Data->toArray());
 	
-	$x = array_count_values($RawData);
-	//print_r($x);
-	//echo "<br><br><br>";
 	if (!(isset($x[2]))) {$x[2]=0;}
 	$MCH = $x[2];
 	if (!(isset($x[3]))) {$x[3]=0;}
@@ -1666,8 +1577,6 @@ $DataN = $DataN->sum('Data');
 	if (!(isset($x[4]))) {$x[4]=0;}
 	$Ward = $x[4];
 	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
-
-	//echo $Other;
 
 	$Array [] = array('MCH',$MCH);
 	$Array [] = array('U5 Clinic',$U5_Clinic);

@@ -312,7 +312,19 @@ function drawChart() {
     
 	     @include('analytics/CH/js/ownership')
        @include('analytics/CH/js/types')
-
+       @include('analytics/CH/js/staff_training')
+       @include('analytics/CH/js/health_services') 
+       @include('analytics/CH/js/gjavailability')
+       @include('analytics/CH/js/tavailability')
+       @include('analytics/CH/js/chsec4diarhoea')
+       @include('analytics/CH/js/chsec4antibiotics')
+       @include('analytics/CH/js/chsec4malaria')
+       @include('analytics/CH/js/supplies_availability')
+       @include('analytics/CH/js/resource_availability')
+       @include('analytics/CH/js/community_strategy')
+       @include('analytics/CH/js/ort_func')
+       @include('analytics/CH/js/locationortcorner')
+       
         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
