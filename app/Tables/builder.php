@@ -1274,7 +1274,7 @@ class builder   {
                                       $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'"  style="display:none;" type="text" placeholder="Specify" style="width: 100%;" > </div>';
                                     } else {
                                       if ($varother == -1){$varother = null;}
-                                     $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" placeholder="Specify" style="width: 100%;" required> </div>';
+                                     $HtmlLines.= '<input class="form-control asave coolhidden " coolstore="'.$fieldIDOnly.'" id="'.$fieldName.$other.'" value="'.$varother.'" type="text" placeholder="Specify" style="width: 100%;"> </div>';
                                     }
                                     
 
