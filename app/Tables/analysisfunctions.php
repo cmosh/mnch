@@ -2,8 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
- use App\Http\Controllers\ArrayRedis as Cache;
- use Cache as Mache;
+ use Cache;
  use Maatwebsite\Excel\Excel;
 use Illuminate\Http\Request;
 global $term;
@@ -1370,27 +1369,24 @@ if(!isset($array))$array [] = ['No data',0];
  return $array;
 }
 
-protected static function staff_trained(){
+public static function staff_trained(){
+global $surveys;
+		$Data = $surveys->lists('Data');
 
-	$Array [] = array('No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s');
-	for ($i=4; $i <10 ; $i++) { 
-
-		$index = sprintf('%02d',$i);
-		$col = self::staff_trained_col('COL'.$index);
-		$Label = trim(self::getLabel(0,'CHV2SEC1BLK1RW01COL'.$index)  ,'/^No umber of staf train/');
-		$Array [] = array(
-
-			trim(str_replace("in ", "", $Label),'/^d/'),
-			$col[0],
-			$col[1],
-			$col[2]
-			);
+		$Array [] = ['Staff Trained','Doctors','Nurses','R.C.O.s'];
+	$Array []=['IMCI',$Data->sum('CHV2SEC1BLK1RW02COL04'),$Data->sum('CHV2SEC1BLK1RW03COL04'),$Data->sum('CHV2SEC1BLK1RW03COL04')];
+$Array []=['ICCM',$Data->sum('CHV2SEC1BLK1RW02COL05'),$Data->sum('CHV2SEC1BLK1RW03COL05'),$Data->sum('CHV2SEC1BLK1RW03COL05')];
+$Array []=['Enhanced Diarrhoea Management',$Data->sum('CHV2SEC1BLK1RW02COL06'),$Data->sum('CHV2SEC1BLK1RW03COL06'),$Data->sum('CHV2SEC1BLK1RW03COL06')];
+$Array []=['Diarrhoea and Pneumonia CMEs for U5s',$Data->sum('CHV2SEC1BLK1RW02COL07'),$Data->sum('CHV2SEC1BLK1RW03COL07'),$Data->sum('CHV2SEC1BLK1RW03COL07')];
+$Array []=['EID sample collection training',$Data->sum('CHV2SEC1BLK1RW02COL08'),$Data->sum('CHV2SEC1BLK1RW03COL08'),$Data->sum('CHV2SEC1BLK1RW03COL08')];
+$Array []=['Staff Still Working in Child Health Unit',$Data->sum('CHV2SEC1BLK1RW02COL09'),$Data->sum('CHV2SEC1BLK1RW03COL09'),$Data->sum('CHV2SEC1BLK1RW03COL09')];
 
 
+
+return($Array);
 
 		
-	}
-	return ($Array);
+	
 	
 
 }			

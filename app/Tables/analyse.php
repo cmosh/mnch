@@ -36,7 +36,7 @@ class analyse extends analysisfunctions {
 			// 'CHV2_annualtrendsN'=> $ch->CHV2_annualtrendsN->__invoke($county,$Year4),
 			'CHV2_ownership' => $ch->CHV2_ownership->__invoke($county),
 			'CHV2_types' => $ch->CHV2_types->__invoke($county),
-			// 'CHV2_staff_trained'=> $ch->CHV2_staff_trained->__invoke($county),
+			'CHV2_staff_trained'=> $ch->CHV2_staff_trained->__invoke($county),
 			// 'CHV2_DTreatmentAvailability'=> $ch->CHV2_DTreatmentAvailability->__invoke($county),
 			// 'CHV2_AntibioticsAvailability'=> $ch->CHV2_AntibioticsAvailability->__invoke($county),
 			// 'CHV2_MalariaAvaialability'=> $ch->CHV2_MalariaAvaialability->__invoke($county),

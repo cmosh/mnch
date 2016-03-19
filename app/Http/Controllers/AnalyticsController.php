@@ -12,7 +12,6 @@ use App\Tables\Facilities;
 use App\Helpers\County;
 
 use Illuminate\Database\Eloquent\Collection;
-use App\Http\Controllers\ArrayRedis as Rache;
 use Illuminate\Contracts\Foundation\Application As App;
 use Request;
 use Illuminate\Http\Request As Requested;
@@ -30,17 +29,17 @@ public function maprequest(){
 
       switch ($survey) {
       	case 'ch':
-      		$Map = (Rache::remember('MapCH',180,function() {
+      		$Map = (Cache::remember('MapCH',180,function() {
 			return  County::Map('CH');
       	}));
       		break;      	
       	case 'mnh':
-      		$Map = (Rache::remember('MapMNH',180,function() {
+      		$Map = (Cache::remember('MapMNH',180,function() {
 			return 	 County::Map('MNH');
       	}));   
       		break;
       	case 'imci':
-      		$Map = (Rache::remember('MapIMCI',180,function() {
+      		$Map = (Cache::remember('MapIMCI',180,function() {
 			return  County::Map('IMCI');
       	}));   
       		break;

@@ -29,9 +29,9 @@ class testcontroller extends Controller
 
             // return Facilities::whereIn('FacilityCode',[19224,19310,14180,17486,18393,14181])->get();
 
-           $Data =  Facilities::SubmittedAssessments('CH','Baseline','Baringo');
+           $Data =  Facilities::SubmittedAssessments('CH','Baseline');
          
-            return analysisfunctions::types($Data);
+            return analysisfunctions::staff_trained($Data);
 
     	}
 

@@ -1240,7 +1240,7 @@ class builder   {
                                         
                                         $fieldIDOnly = $ColumnSetIDName . $fieldd->field_ID;
                                         $fieldValue = $fieldd->Value;
-                                        $H2 = implode(",", $H);
+                                        $H2 = implode(",", (array)$H);
                                         $varother = substr(strrchr($H2, ","), 1);                                        
                                         if ($varother == '-1' ){}else{
 
