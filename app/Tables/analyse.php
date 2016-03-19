@@ -30,10 +30,10 @@ class analyse extends analysisfunctions {
 			'CHV2_ortf'=> $ch->CHV2_ortf->__invoke($county),
 			'CHV2_supplies' =>$ch->CHV2_supplies->__invoke($county),
 			'CHV2_resources'=> $ch->CHV2_resources->__invoke($county),
-			// 'CHV2_u5Register'=> $ch->CHV2_u5Register->__invoke($county,$Year1),
-			// 'CHV2_u5RegisterN'=> $ch->CHV2_u5RegisterN->__invoke($county,$Year3),
-			// 'CHV2_annualtrends'=> $ch->CHV2_annualtrends->__invoke($county,$Year2),
-			// 'CHV2_annualtrendsN'=> $ch->CHV2_annualtrendsN->__invoke($county,$Year4),
+			'CHV2_u5Register'=> $ch->CHV2_u5Register->__invoke($county,$Year1),
+			'CHV2_u5RegisterN'=> $ch->CHV2_u5RegisterN->__invoke($county,$Year3),
+			'CHV2_annualtrends'=> $ch->CHV2_annualtrends->__invoke($county,$Year2),
+			'CHV2_annualtrendsN'=> $ch->CHV2_annualtrendsN->__invoke($county,$Year4),
 			'CHV2_ownership' => $ch->CHV2_ownership->__invoke($county),
 			'CHV2_types' => $ch->CHV2_types->__invoke($county),
 			'CHV2_staff_trained'=> $ch->CHV2_staff_trained->__invoke($county),
@@ -84,7 +84,7 @@ class analyse extends analysisfunctions {
 		global $surveys;
 		$recset = $surveys;
 
-	$Years = Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray();
+	$Years = Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray();
 	return $Years;
 
 

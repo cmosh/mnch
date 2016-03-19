@@ -324,7 +324,11 @@ function drawChart() {
        @include('analytics/CH/js/community_strategy')
        @include('analytics/CH/js/ort_func')
        @include('analytics/CH/js/locationortcorner')
-       
+       @include('analytics/CH/js/u5reg')
+       @include('analytics/CH/js/annualTrends')
+       @include('analytics/CH/js/nondiarrhoea')
+       @include('analytics/CH/js/orttrends') 
+
         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 

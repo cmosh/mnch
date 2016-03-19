@@ -15,8 +15,7 @@ function year1() {
       type: "post",
        data: data,
            success: function(data){
-        // mapdata = JSON.parse(data)['map'];
-    var jsonData = JSON.parse(data)['analytics'];
+    var jsonData = JSON.parse(data);
        @include('analytics/CH/js/u5reg')
       $(  "#u5"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#u5"  ).removeClass("overlay");

@@ -197,9 +197,9 @@ echo json_encode($Map);
 
 
 
-		/*$YearsBlock =Cache::remember('CHV2YearsAllYears',180,function() use ($CHSubSurvey){
+		$YearsBlock =Cache::remember('CHV2YearsAllYears',180,function() use ($CHSubSurvey){
 
-			$Years = analyse::sec3Years($CHSubSurvey);
+		$Years = analyse::sec3Years($CHSubSurvey);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
 		$AllYears = $Years;
@@ -207,14 +207,15 @@ echo json_encode($Map);
 		unset($Years[1]);
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
-		return array($Years,$AllYears,$YearsCount);
+
+		return [$Years,$AllYears,$YearsCount];
 
 
 		});
-*/
-		$Years=[2015,2014,2013];
-		$AllYears=[1,2,3];
-		$YearsCount=2;
+
+		$Years=$YearsBlock[0];
+		$AllYears=$YearsBlock[1];
+		$YearsCount=$YearsBlock[2];
 		
 		
 	

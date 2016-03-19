@@ -934,19 +934,13 @@ protected static function getLabel($trim,$col){
 
 	
 	protected static function u5Register($Year1){
-		//$Year1 = 3;
-		global $surveys;
+	
 
-		
-
-
-
-    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray());
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray());
     $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=2; $i < 9; $i++) {
 
 			$index =  sprintf('%02d',$i);
-			//echo ("world","Peter","Hello world!");
 
 			$Label1 =  str_replace('Treatment with ','',(self::getLabel(0,'CHV2SEC3BLK99DRW'.$index.'COL01')));
 			$Label = $Label1;
@@ -979,60 +973,37 @@ protected static function getLabel($trim,$col){
 		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
 
 			$array [$i] = self::u5RegisterVal($Years[$i].$Row);
-		//	echo $Years[$i].' '.$i.'<br>';
+		
 
 		}
 
 		return($array);
 	}
+
 	protected static function u5RegisterVal($cl){
 		global $surveys;
 
-		//print_r ($Years);
-		$recset = $surveys;
-
-		$Data = $recset->load(['x' => function($query) use ($cl)
-{		
-	 
-    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
-}]);
+		$Data = $surveys->lists('Data');
+		$columns = Column_set::where('column_setID','Like',$cl.'%')->get()->lists('column_setID')->toArray();
 		
-		//echo $Data;
-		$total = 0;
-
-
-
-
-		foreach ($Data as $obj ) {
-
+		return $Data->sum(function ($assessment) use ($columns){
+		$assessment = collect($assessment);
+		$filtered = $assessment->only($columns);
+		return 	$filtered->values()->sum();
 		
-	$tt= ( $obj->x->sum('Data'));
-	//echo $tt.'	';
-	$total += $tt;
-	$thearrray [] = $tt;
+			});
 
-
-}
-
-		
-
-
-	//echo '<br>'.$total.'<br>';
-	return $total;
-		
 	}
-	
 
-
-	
 
 	protected static function annualtrends($Year2){
 
 		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray())[$Year2];
 
 		//print_r ($Years[3]);
-		$Array [] = array('Treatment Trends','ORS+ Zinc','ORS','Zinc','Antibiotics','Others','No Treatment')
-	;for ($i=2; $i <14 ; $i++) { 
+		$Array [] = array('Treatment Trends','ORS+ Zinc','ORS','Zinc','Antibiotics','Others','No Treatment');
+
+		for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsM($Block,'COL'.$index);
 		$Array [] = array(
@@ -1055,29 +1026,18 @@ protected static function getLabel($trim,$col){
 
 	protected static function annualtrendsM($Block,$Col){
 
-			global $surveys;
-
-				$recset = $surveys;
+		global $surveys;
 				
-				for ($i=3; $i <9 ; $i++) { 
-					$index = sprintf('%02d',$i);
+		for ($i=3; $i <9 ; $i++) 
+
+				{ 
+		  $index = sprintf('%02d',$i);
 		  $mcol = $Block.'RW'.$index.$Col;
-
-
-
-					$Data = $recset->load(['y' => function($query) use ($mcol)
-		{		
-			 
-		    $query->where('ColumnSetID', '=',$mcol);
-		}])->lists('y');
-
-				
-				$Month [] = ($Data->sum('Data'));
-					
+		  $Data = $surveys->lists($mcol);
+		  $Month [] = $Data->sum();					
 				}
-				return ($Month);
 
-
+		return ($Month);
 
 	}
 
@@ -1085,7 +1045,7 @@ protected static function getLabel($trim,$col){
 		protected static function u5RegisterN($Year1){
 		//$Year1 = 3;
 
-    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray());
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray());
     $array [] = array('Non Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=10; $i < 13; $i++) {
 
@@ -1125,28 +1085,21 @@ protected static function getLabel($trim,$col){
 		return($array);
 	}
 	protected static function u5RegisterNVal($cl){
+
 		global $surveys;
 
-		//print_r ($Years);
-		$recset = $surveys;
-		$Data = $recset->load(['x' => function($query) use ($cl)
-{		
-	 
-    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
-}]);
+		$Data = $surveys->lists('Data');
+		$columns = Column_set::where('column_setID','Like',$cl.'%')->get()->lists('column_setID')->toArray();
 		
-		$total = 0;
-		foreach ($Data as $obj ) {
-
+		return $Data->sum(function ($assessment) use ($columns){
+		$assessment = collect($assessment);
+		$filtered = $assessment->only($columns);
+		return 	$filtered->values()->sum();
 		
-	$total += ( $obj->x->sum('Data'));
-	
+			});
 
-}
 
-	return $total;
-		
-	}
+		}
 
 
 
@@ -1155,46 +1108,34 @@ protected static function getLabel($trim,$col){
 		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray())[$Year2];
 
 		//print_r ($Years[3]);
-		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases')
-	;for ($i=2; $i <14 ; $i++) { 
+		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases');
+
+		for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsNM($Block,'COL'.$index);
 		$Array [] = array(
 			(self::getLabel(0,'CHV2SEC3BLK96DRW01COL'.$index)),
 			$Data
 			);
+			}
 		
-		
-	}
-		
-	return($Array);
+			return($Array);
 
 
 	}
 
 	protected static function annualtrendsNM($Block,$Col){
 
-			global $surveys;
-
-				$recset = $surveys;
+		global $surveys;
 				
-				
-					$index = 13;
+	
+		  $index = 13;
 		  $mcol = $Block.'RW'.$index.$Col;
-
-
-
-					$Data = $recset->load(['y' => function($query) use ($mcol)
-		{		
-		    $query->where('ColumnSetID', '=',$mcol );
-		}])->lists('y');
-
+		  $Data = $surveys->lists($mcol);
+		  $Month [] = $Data->sum();					
 				
-				$Month = ($Data->sum('Data'));
-					
-				
-				return ($Month);
 
+		return ($Month);
 
 }
 	
