@@ -275,31 +275,16 @@ function drawChart() {
 
 	//include js
     
-	     @include('analytics/MNH/js/gjavailability')
-       @include('analytics/MNH/js/tavailability')
+	     @include('analytics/MNH/js/gjavailability')     
+        @include('analytics/MNH/js/tavailability')
        @include('analytics/MNH/js/jjavailability')
        @include('analytics/MNH/js/dservice')
         @include('analytics/MNH/js/hman')
        @include('analytics/MNH/js/ownership')
        @include('analytics/MNH/js/types')
-   @include('analytics/MNH/js/bemonc')
-     @include('analytics/MNH/js/cemonc')
-     @include('analytics/MNH/js/newborn')
-     @include('analytics/MNH/js/HIVTest')
-     @include('analytics/MNH/js/kangaroo')
-     @include('analytics/MNH/js/devpep')
-         @include('analytics/MNH/js/dserviceconduct')
-         @include('analytics/MNH/js/skillbirth')
-           @include('analytics/MNH/js/bedcapacity')
-          @include('analytics/MNH/js/hours24')
-            @include('analytics/MNH/js/BemoncChallenge')
-             @include('analytics/MNH/js/MainBlood')
-             @include('analytics/MNH/js/ReasonBlood')
-              @include('analytics/MNH/js/Reasoncs')
-
-      @include('analytics/MNH/js/EquipAvail')
-    @include('analytics/MNH/js/testing')
-  @include('analytics/MNH/js/devkit')
+        @include('analytics/MNH/js/bemonc')
+        @include('analytics/MNH/js/cemonc')
+      
 
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');

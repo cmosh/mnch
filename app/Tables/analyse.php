@@ -105,8 +105,8 @@ class analyse extends analysisfunctions {
 	//Json Making
 
 		$JsonArray = (array(
-			 'Guidelines' =>$mnh->MNHV2_Guidelines->__invoke($county),
-			 'Tools' =>$mnh->MNHV2_Tools->__invoke($county),
+			'Guidelines' =>$mnh->MNHV2_Guidelines->__invoke($county),
+			'Tools' =>$mnh->MNHV2_Tools->__invoke($county),
 			'DService' => $mnh->MNHV2_DService->__invoke($county),
 			'HMan' => $mnh->MNHV2_HMan->__invoke($county),
 			'Bemonc'=>$mnh->MNHV2_Bemonc->__invoke($county),
@@ -114,23 +114,23 @@ class analyse extends analysisfunctions {
 			'ownership' => $mnh->MNHV2_ownership->__invoke($county),
 			'types' => $mnh->MNHV2_types->__invoke($county),
 			'jaids' => $mnh->MNHV2_jjavailability->__invoke($county),
-			'NewBornCare' => $mnh->MNHV2_NewBornCare->__invoke($county),
-			'Kangaroo1' => $mnh->MNHV2_Kangaroo1->__invoke($county),
-			'Kangaroo2' => $mnh->MNHV2_Kangaroo2->__invoke($county),
-			'devpep' => $mnh->MNHV2_devpep->__invoke($county),
-			'dserviceconduct' =>$mnh->MNHV2_dserviceconduct->__invoke($county),
-			'skillbirth' => $mnh->MNHV2_skillbirth->__invoke($county),
-			'bedcapacity' => $mnh->MNHV2_bedcapacity->__invoke($county),
-			'hours24'=> $mnh->MNHV2_hours24->__invoke($county),
-			'BemoncChallenge'=>$mnh->MNHV2_BemoncChallenge->__invoke($county),
-			'staff_trained'=>$mnh->MNHV2_staff_trained->__invoke($county),
-			'MainBlood'=>$mnh->MNHV2_MainBlood->__invoke($county),
-			'ReasonBlood'=>$mnh->MNHV2_ReasonBlood->__invoke($county),
-			'Reasoncs'=>$mnh->MNHV2_Reasoncs->__invoke($county),
-			'EquipAvail'=>$mnh->MNHV2_EquipAvail->__invoke($county),
-			'testing'=>$mnh->MNHV2_testing->__invoke($county),
-			'devkit'=>$mnh->MNHV2_devkit->__invoke($county),
-			'HIVTest'=>$mnh->MNHV2_HIVTest->__invoke($county)
+			// 'NewBornCare' => $mnh->MNHV2_NewBornCare->__invoke($county),
+			// 'Kangaroo1' => $mnh->MNHV2_Kangaroo1->__invoke($county),
+			// 'Kangaroo2' => $mnh->MNHV2_Kangaroo2->__invoke($county),
+			// 'devpep' => $mnh->MNHV2_devpep->__invoke($county),
+			// 'dserviceconduct' =>$mnh->MNHV2_dserviceconduct->__invoke($county),
+			// 'skillbirth' => $mnh->MNHV2_skillbirth->__invoke($county),
+			// 'bedcapacity' => $mnh->MNHV2_bedcapacity->__invoke($county),
+			// 'hours24'=> $mnh->MNHV2_hours24->__invoke($county),
+			// 'BemoncChallenge'=>$mnh->MNHV2_BemoncChallenge->__invoke($county),
+			// 'staff_trained'=>$mnh->MNHV2_staff_trained->__invoke($county),
+			// 'MainBlood'=>$mnh->MNHV2_MainBlood->__invoke($county),
+			// 'ReasonBlood'=>$mnh->MNHV2_ReasonBlood->__invoke($county),
+			// 'Reasoncs'=>$mnh->MNHV2_Reasoncs->__invoke($county),
+			// 'EquipAvail'=>$mnh->MNHV2_EquipAvail->__invoke($county),
+			// 'testing'=>$mnh->MNHV2_testing->__invoke($county),
+			// 'devkit'=>$mnh->MNHV2_devkit->__invoke($county),
+			// 'HIVTest'=>$mnh->MNHV2_HIVTest->__invoke($county)
 			));
 
 
