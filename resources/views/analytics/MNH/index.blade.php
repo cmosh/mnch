@@ -182,7 +182,7 @@
         $(".select2").select2();
 
           @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
@@ -284,6 +284,14 @@ function drawChart() {
        @include('analytics/MNH/js/types')
         @include('analytics/MNH/js/bemonc')
         @include('analytics/MNH/js/cemonc')
+         @include('analytics/MNH/js/newborn')
+     @include('analytics/MNH/js/HIVTest')
+     @include('analytics/MNH/js/kangaroo')
+     @include('analytics/MNH/js/devpep')
+         
+                 @include('analytics/MNH/js/EquipAvail')
+    @include('analytics/MNH/js/testing')
+  @include('analytics/MNH/js/devkit')
       
 
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());

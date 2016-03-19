@@ -1764,39 +1764,34 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	protected static function FacilityTypes2Stack($col,$headings){
+	public static function FacilityTypes2Stack($col,$headings){
 
 		global $surveys;
 
-		$array [] = $headings;
+		 $array [] = $headings;
 
 
-	$recset = $surveys;
+	$recset =  $surveys->transform(function ($item, $key) {
+   			  collect($item)->put('Type',Facilities::Type($item['Facility_ID']));
+				});
 
-				$Rec = $recset->groupby('Type');
+
+	
+		 $Rec = $recset->groupby('Type');
       	
 
-      		foreach ($Rec as $v) {
+      		foreach ($Rec as $type => $assessment) {
 
-      			$type = $v[0]['Type'];
+      		
 
+		 $Data = $assessment->lists('Data');
 
-
-
-	$Data = $recset->load(['y' => function($query) use ($type,$col)
-		{
+		 $Data = $Data->groupby($col);
+		 isset($Data["1"]) ?: $Data["1"] = [];
+		  isset($Data["2"]) ?: $Data["2"] = [];
+		   isset($Data["-51"]) ?: $Data["-51"] = [];
 	
-    $query->where('Type','=',$type)
-    ->where('ColumnSetID', '=', $col);
-		}])->lists('y');
-
-		 $Data = $Data->groupby('Data')->all();
-
-		 if(!isset($Data[1])) $Data[1] = array();
-		 if(!isset($Data[2])) $Data[2] = array();
-		 if(!isset($Data[-51])) $Data[-51] = array();
-		
-		 $array [] = array($type,count($Data[1]),count($Data[2]),count($Data[-51]));
+		 $array [] = array($type,count($Data["1"]),count($Data["2"]),count($Data["-51"]));
 
 	}
 

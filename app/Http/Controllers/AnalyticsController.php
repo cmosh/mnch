@@ -2,19 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tables\Column_set;
 use App\Tables\assessments;
-use App\Tables\Survey;
 use App\Tables\analyse;
-use App\Tables\Block;
-use App\Tables\Term;
 use App\Tables\Facilities;
 use App\Helpers\County;
-
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Foundation\Application As App;
 use Request;
-use Illuminate\Http\Request As Requested;
 use Input;
 use Cache;
 
@@ -146,41 +138,6 @@ public function mnhajax(){
 }
 
 
-// public function imciajax(){
-
-
-		
-// 		 if(Request::ajax()) {
-//       $data = Input::all();
-//       $county = $data['county'];     
-       
-
-
-//  		if ($county == 'All') {      	
-//       	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function(){
-//       					return 	IMCISubSurvey::all();
-//       	});
-//       }
-
-//      else  {
-//        	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($county){
-//       					return 	IMCISubSurvey::where('County','Like',$county)->get();
-//       	});     
-//        }
-    
-//     $IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,$county);	
-
-
-    
-//     echo json_encode($IMCIanalytics);
-
-//       die;
-
-
-
-// 	}
-
-// }
 
 
 
@@ -222,9 +179,7 @@ public function mnhajax(){
 			->with('Years',$Years)
 			->with('YearsCount',$YearsCount)
 			->with('AllYears',$AllYears)
-			// ->with('SurveysDone',$SurveysDone)
 			->with('loc','Child Health Survey');
-
 
 				
 	}
@@ -232,11 +187,9 @@ public function mnhajax(){
 	public function mnh()
 	{
 			
-		$MNHSubSurvey =	assessments::Submitted('MNH')->get();    
-      	$SubmittedMNHCount =  assessments::Submitted('MNH')->count();
+	   	$SubmittedMNHCount =  assessments::Submitted('MNH')->count();
       	$SubmittedMNHCounties = County::AllSubmitted('MNH');
 	
-		//$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All','Baseline');
 
 		return view('analytics.MNH.index')
 			->with('SubmittedCount',$SubmittedMNHCount)
@@ -244,39 +197,70 @@ public function mnhajax(){
 
 	}
 
+public function terms()
+{
+		
+         if(Request::ajax()) {
+         	  $param = Input::all();
+ 		
+         	$county = $param['county'];
+         	if ($county == 'All') {
+         		$array[] = ['County'=>'All','Term'=>'Baseline'];
+         		$array[] = ['County'=>'All','Term'=>'Midterm'];
+         		$array[] = ['County'=>'All','Term'=>'Endterm'];
+         		
+         		 }
+         	else {	
+       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Baseline'];
+      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Midterm'];
+        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Endterm'];
+         	}
+         	echo json_encode(collect($array));
 
 
-// 	public function comparison($survey,$lambda,$chart,$yr='not'){
+         }
+
+         
+
+         die;
+	}
+	
+	
+// public function imciajax(){
+
 
 		
-
-// 		if($survey=='CHV2')
-
-// 		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
-// 							return SubmittedCHCountie::get();
-// 							 	});
-// 		elseif($survey=='MNHV2')
-
-// 		$SubmittedCounties = Cache::remember('SubmittedMNHV2Counties',180,function(){
-// 							return SubmittedMNHCountie::get();
-// 							 	});
+// 		 if(Request::ajax()) {
+//       $data = Input::all();
+//       $county = $data['county'];     
+       
 
 
-// 		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
-// 										   ->with('funct',$lambda)
-// 										   ->with('chart',$chart)
-// 										   ->with('yr',$yr)
-// 										   ->with('sv',$survey);
+//  		if ($county == 'All') {      	
+//       	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function(){
+//       					return 	IMCISubSurvey::all();
+//       	});
+//       }
 
-	
+//      else  {
+//        	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($county){
+//       					return 	IMCISubSurvey::where('County','Like',$county)->get();
+//       	});     
+//        }
+    
+//     $IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,$county);	
 
 
+    
+//     echo json_encode($IMCIanalytics);
+
+//       die;
+
+
+
+// 	}
 
 // }
-
-	
-
-
 
 // 	public function imci()
 // 	{
@@ -306,75 +290,31 @@ public function mnhajax(){
 // 	}
 
 
+// 	public function comparison($survey,$lambda,$chart,$yr='not'){
 
-
-
-// 		public function tester(){
-
-// 			$env = config("app.env");
-
-// 			if($env!='local')abort(404);
-
-
-// 			$IMCISubSurvey = /*Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
-//       					return*/ IMCISubSurvey::all();
-//      /* 	}); */   
-
-   
-// 			return analyse::imcianalytics($IMCISubSurvey,'All');
-// 			//return analyse::sunit($IMCISubSurvey);
-		
-// 	}
-
-
-// 	public function blah( )
-// 	{		
-// 		$env = config("app.env");
-
-// 			if($env!='local')abort(404);
-
-			
-// 			return("x");
 		
 
-// 	}
+// 		if($survey=='CHV2')
 
-public function terms()
-{
-		
-         if(Request::ajax()) {
-         	  $param = Input::all();
- 		
-         	$county = $param['county'];
-         	if ($county == 'All') {
-         		$array[] = ['County'=>'All','Term'=>'Baseline'];
-         		$array[] = ['County'=>'All','Term'=>'Midterm'];
-         		$array[] = ['County'=>'All','Term'=>'Endterm'];
-         		
-         		 }
-         	else {	
-       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Baseline'];
-      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Midterm'];
-        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Endterm'];
-         	}
-         	echo json_encode(collect($array));
+// 		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
+// 							return SubmittedCHCountie::get();
+// 							 	});
+// 		elseif($survey=='MNHV2')
+
+// 		$SubmittedCounties = Cache::remember('SubmittedMNHV2Counties',180,function(){
+// 							return SubmittedMNHCountie::get();
+// 							 	});
 
 
-         }
-
-         
-
-         die;
-	}
-
-
-
+// 		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
+// 										   ->with('funct',$lambda)
+// 										   ->with('chart',$chart)
+// 										   ->with('yr',$yr)
+// 										   ->with('sv',$survey);
 
 	
 
 
 
-	
-	
-
+// }
 }

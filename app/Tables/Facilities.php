@@ -88,14 +88,36 @@ class Facilities extends Eloquent {
 
       $Assessments = $County ? self::where('County',$County)->select('FacilityCode','County') : 
                              self::select('FacilityCode','County') ;
+
        return $Assessments->with(['assessments'=>function($query) use ($Survey,$Term){
                                   $query->where('Survey','like',$Survey.'%')
                                         ->where('Assessment_Term',$Term)
                                         ->where('Status','Submitted');
                             }])
+
                     ->get()
                     ->lists('assessments')->flatten();
 
+    }
+
+    public static function Type($FacilityCode){
+
+      $Facilities = Cache::rememberForever('FacilityTypes', function() {
+          $temp = self::select('FacilityCode','Type')->with('ftypes')->get()->toArray();
+          return collect($temp);
+      });     
+
+      return $Facilities->where('FacilityCode',$FacilityCode)->first()['ftypes']['FacilityGroup'];
+    }
+
+     public static function Owner($FacilityCode){
+
+      $Facilities = Cache::rememberForever('FacilityOwners', function() {
+          $temp = self::select('FacilityCode','Owner')->with('fowner')->get()->toArray();
+          return collect($temp);
+      });     
+
+      return $Facilities->where('FacilityCode',$FacilityCode)->first()['fowner']['Group'];
     }
 
 
