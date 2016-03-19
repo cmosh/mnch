@@ -31,7 +31,7 @@
   <!-- small box -->
                <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
               
@@ -302,7 +302,7 @@ function drawChart() {
   @include('analytics/MNH/js/devkit')
 
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");

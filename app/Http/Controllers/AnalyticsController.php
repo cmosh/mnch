@@ -79,7 +79,8 @@ echo json_encode($Map);
 
       else{
        	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
-      					return 	Facilities::SubmittedAssessments('CH',$Term,$County)->get();
+      					$temp = Facilities::SubmittedAssessments('CH',$Term,$county)->toArray();
+      					return collect($temp);
       	});
       
       }
@@ -101,46 +102,48 @@ echo json_encode($Map);
 
 
 
-// public function mnhajax(){
+public function mnhajax(){
+
 
 
 		
-// 		 if(Request::ajax()) {
-//       $data = Input::all();
-//       $county = $data['county'];     
-//         $Term = $data['Term'];
+		 if(Request::ajax()) {
+      $data = Input::all();
+      $county = $data['county'];     
+        $Term = $data['Term'];
 
 
-//  		if ($county == 'All') {
+ 		if ($county == 'All') {
       	
-//       	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($Term){
-//       					return 	MNHSubSurvey::where('Assessment_Term','Like',$Term)->get();
-//       	});
+      	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($Term){
+      					$temp = Facilities::SubmittedAssessments('MNH', $Term)->toArray();
+      					return collect($temp);      				
+      	});
 
-//       }
+      }
 
-//      else  {
-//        	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
-//       					return 	MNHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
-//       	});
+     else  {
+       	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
+      					$temp = Facilities::SubmittedAssessments('CH',$Term,$county)->toArray();
+      					return collect($temp);
+      	});
       
 
-// }
+		}
     
-//     $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county,$Term);
-		
+    $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county,$Term);	
 
 
     
-//     echo json_encode($mnhanalytics);
+    echo json_encode($mnhanalytics);
 
-//       die;
+      die;
 
 
 
-// 	}
+	}
 
-// }
+}
 
 
 // public function imciajax(){
@@ -184,16 +187,9 @@ echo json_encode($Map);
 	public function ch()
 	{
 				
-	$CHSubSurvey =	assessments::Submitted('CH')->get();
-      
-		
-   
-			
-		$SubmittedCHCount =  assessments::Submitted('CH')->count();
-							 
-
-
-		$SubmittedCHCounties = County::AllSubmitted('CH');							 	
+		$CHSubSurvey = assessments::Submitted('CH')->get();         			
+      	$SubmittedCHCount =  assessments::Submitted('CH')->count();
+      	$SubmittedCHCounties = County::AllSubmitted('CH');							 	
 
 
 
@@ -233,6 +229,21 @@ echo json_encode($Map);
 				
 	}
 
+	public function mnh()
+	{
+			
+		$MNHSubSurvey =	assessments::Submitted('MNH')->get();    
+      	$SubmittedMNHCount =  assessments::Submitted('MNH')->count();
+      	$SubmittedMNHCounties = County::AllSubmitted('MNH');
+	
+		//$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All','Baseline');
+
+		return view('analytics.MNH.index')
+			->with('SubmittedCount',$SubmittedMNHCount)
+			->with('SubmittedCounties',$SubmittedMNHCounties);
+
+	}
+
 
 
 // 	public function comparison($survey,$lambda,$chart,$yr='not'){
@@ -265,33 +276,6 @@ echo json_encode($Map);
 
 	
 
-
-// 	public function mnh()
-// 	{
-				
-	
-// $MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
-//       					return MNHSubSurvey::all();
-//       	});     
-
-
-// 		//	$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All','Baseline');
-
-		
-// 		$SubmittedMNHCount = SubmittedMNHCount::first();
-// 		$SubmittedMNHCounties = SubmittedMNHCountie::get();
-	
-// 		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
-	
-	
-
-// 			return view('analytics.MNH.index')
-// 			->with('SubmittedCount',$SubmittedMNHCount)
-// 			->with('SubmittedCounties',$SubmittedMNHCounties)
-			
-// 			->with('SurveysDone',$SurveysDone);
-
-// 	}
 
 
 // 	public function imci()
@@ -355,31 +339,33 @@ echo json_encode($Map);
 
 // 	}
 
-// public function terms()
-// {
+public function terms()
+{
 		
-//          if(Request::ajax()) {
-//          	  $param = Input::all();
- 
-//          	$county = $param['county'];
-//          	if ($county == 'All') {
-//          		$array = array();
-//          		$array[] = array('County'=>'All','Term'=>'Baseline');
-//          		$array[] = array('County'=>'All','Term'=>'Midterm');
-//          		$array[] = array('County'=>'All','Term'=>'Endterm');
-//          		$sresult = collect($array);  
-//          		 }
-//          	else {	$sresult = Term::where('County','Like',$county)->get(); 
-//          }
-//          	echo json_encode($sresult);
+         if(Request::ajax()) {
+         	  $param = Input::all();
+ 		
+         	$county = $param['county'];
+         	if ($county == 'All') {
+         		$array[] = ['County'=>'All','Term'=>'Baseline'];
+         		$array[] = ['County'=>'All','Term'=>'Midterm'];
+         		$array[] = ['County'=>'All','Term'=>'Endterm'];
+         		
+         		 }
+         	else {	
+       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Baseline'];
+      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Midterm'];
+        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Endterm'];
+         	}
+         	echo json_encode(collect($array));
 
 
-//          }
+         }
 
          
 
-//          die;
-// 	}
+         die;
+	}
 
 
 
