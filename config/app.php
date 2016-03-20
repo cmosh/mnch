@@ -5,7 +5,7 @@ return [
 	'folder' => env('APP_FOLDER'),
 	'mak' => env('MAK',false),
 	'env' => env('APP_ENV', 'production'),
-	'prefix' =>env('APP_PREFIX','/'),
+	'prefix' => '/'.env('APP_PREFIX'),
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode

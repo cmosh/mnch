@@ -825,15 +825,15 @@ protected static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
-			 	$o[1],
-			 	$o[2],
-			 	$o[-51]);
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
 		}
 
 		}
@@ -851,15 +851,15 @@ protected static function getLabel($trim,$col){
 		
 			$o = self::count_IMCIYN($Block,$Data1Col,$Data2Col,$rows);
 
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array = array (
 			 	 $label, 
-			 	$o[1],
-			 	$o[2],
-			 	$o[-51]);
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
 		
 		
 		
@@ -875,17 +875,17 @@ protected static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[3]))) $o[3]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["3"]))) $o["3"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
-			 	$o[1],
-			 	$o[2],
-			 	$o[3],
-			 	$o[-51]
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["3"],
+			 	$o["-51"]
 			 	);
 		}
 
@@ -903,25 +903,25 @@ protected static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[3]))) $o[3]=0;
-			if(!(isset($o[4]))) $o[4]=0;
-			if(!(isset($o[5]))) $o[5]=0;
-			if(!(isset($o[6]))) $o[6]=0;
-			if(!(isset($o[7]))) $o[7]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["3"]))) $o["3"]=0;
+			if(!(isset($o["4"]))) $o["4"]=0;
+			if(!(isset($o["5"]))) $o["5"]=0;
+			if(!(isset($o["6"]))) $o["6"]=0;
+			if(!(isset($o["7"]))) $o["7"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
-			 	$o[1],
-			 	$o[2],
-			 	$o[3],
-			 	$o[4],
-			 	$o[5],
-			 	$o[6],
-			 	$o[7],
-			 	$o[-51]
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["3"],
+			 	$o["4"],
+			 	$o["5"],
+			 	$o["6"],
+			 	$o["7"],
+			 	$o["-51"]
 			 	);
 		}
 
@@ -1538,102 +1538,32 @@ $DataN = $DataN->sum('Data');
 
 		protected static function dserviceconduct()
 		{
-
-
 			global $surveys;
+			$recset = $surveys->lists('Data');
+			$Data = $recset->lists('MNHV2SEC1BLK1RW03COL02')->collapse()->toArray();	
 
-							$recset = $surveys;
-	$Data = $recset->load(['y' => function($query) 
-{
-	
-    $query->where('ColumnSetID', '=', 'MNHV2SEC1BLK1RW03COL02');
-}])->lists('y');
+			$x = array_count_values(array_filter($Data));
 
-	$RawData = array_filter($Data->lists('Data')->all());
-	
-	$x = array_count_values($RawData);
-	
+			$others = 0;
+			foreach ($x as $key => $value) {
+				if($key !== "1" && $key !== "2" && $key !== "3" && $key !== "4" && $key !== "5")
+					$others += $value;
 
-	$ones = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'1') !== false) {
-    $ones += $value;
 			}
-		
-	}
+				isset($x["1"]) ?: $x["1"]=0;
+				isset($x["2"]) ?: $x["2"]=0;
+				isset($x["3"]) ?: $x["3"]=0;
+				isset($x["4"]) ?: $x["4"]=0;
+				isset($x["5"]) ?: $x["5"]=0;
 
+				$Array [] = array('Inadequate skill',$x["1"]);
+				$Array [] = array('Inadequate staff',$x["2"]);
+				$Array [] = array('Inadequate infrastructure',$x["3"]);
+				$Array [] = array('Inadequate Equipment',$x["4"]);
+				$Array [] = array('Inadequate Commodities and Suppliers',$x["5"]);
+				$Array [] = array('Others',$others);
 
-
-	$twos = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'2') !== false) {
-    $twos += $value;
-			}
-		
-	}
-
-	
-
-	$threes = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'3') !== false) {
-    $threes += $value;
-			}
-		
-	}
-
-	$fours = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'4') !== false) {
-    $threes += $value;
-			}
-		
-	}
-	$fives = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'5') !== false) {
-    $threes += $value;
-			}
-		
-	}
-
-	
-
-	$others = 0;
-	foreach ($x as $key => $value) {
-
-		if ( (trim($key,'12345,')) !== ''   )   {
-
-			$others+=$value;
-		}
-		
-	}
-
-	
-
-
-
-
-
-
-
-
-	$Array [] = array('Inadequate skill',$ones);
-	$Array [] = array('Inadequate staff',$twos);
-	$Array [] = array('Inadequate infrastructure',$threes);
-	$Array [] = array('Inadequate Equipment',$fours);
-	$Array [] = array('Inadequate Commodities and Suppliers',$fives);
-	$Array [] = array('Others',$others);
-
-	return ($Array);
-
-
-
+				return $Array;
 		}
 
 		protected static function bedcapacity(){
@@ -1807,20 +1737,12 @@ $DataN = $DataN->sum('Data');
 
 
 
-				// $slices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other (Specify)','No information provided');
-
 		global $surveys;
-		 $recset = $surveys;
+		 $recset = $surveys->lists('Data');
 
-$Data = $recset->load(['y' => function($query) use ($col)
-{
-	
-    $query->where('ColumnSetID','=',$col);
-}])->lists('y');
+		$Data = $recset->lists($col);
 
-	$Data=array_filter($Data->lists('Data')->all());
-
-	$x =  array_count_values($Data);
+	 $x =  array_count_values($Data->toArray());
 
 	 $otherval = count($slices)-1;
 	 $noinfoval = count($slices);
@@ -1831,19 +1753,18 @@ $Data = $recset->load(['y' => function($query) use ($col)
 	foreach ($x as $key => $value) {
 
 		if (is_numeric($key)) {
-
+			$key = intval($key);
 			if(!isset($vl[$key])) $vl[$key] = 0;
-
-			$vl[$key] += $value; 
-   			
+			$vl[$key] += $value;   			
 			}
-			elseif ($key==-51) {
-if(!isset($vl[$noinfoval])) $vl[$noinfoval] = 0;
+			elseif ($key=="-51") {
+			if(!isset($vl[$noinfoval])) $vl[$noinfoval] = 0;
 				$vl[$noinfoval] += $value; 
 				
-			}else{
+			}
+			else{
 
-if(!isset($vl[$otherval])) $vl[$otherval] = 0;
+			if(!isset($vl[$otherval])) $vl[$otherval] = 0;
 				$vl[$otherval] += $value; 
 			}
 
