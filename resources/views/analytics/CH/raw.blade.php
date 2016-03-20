@@ -15,11 +15,11 @@
                  
                 </div>
                 <div class="box-body">
-                	>>	<a href="/rawdata/facility-summary">Facility Summary</a> 
+                	>>	<a href="{{config('app.prefix')}}/rawdata/facility-summary">Facility Summary</a> 
                   <br>
-             		>>	<a href="/rawdata/staff-training">Staff Training</a>
+             		>>	<a href="{{config('app.prefix')}}/rawdata/staff-training">Staff Training</a>
                  <br>
-                >>  <a href="/rawdata/health-services">Health Services</a> 
+                >>  <a href="{{config('app.prefix')}}/rawdata/health-services">Health Services</a> 
 
 
                 </div><!-- /.box-body -->
@@ -35,9 +35,9 @@
                  
                 </div>
                 <div class="box-body">
-                	>>	<a href="/rawdata/guidelines">Guidelines & Job Aids Availability</a> 
+                	>>	<a href="{{config('app.prefix')}}/rawdata/guidelines">Guidelines & Job Aids Availability</a> 
                   <br>
-             		   >> <a href="/rawdata/tools">Tools Availability</a> 
+             		   >> <a href="{{config('app.prefix')}}/rawdata/tools">Tools Availability</a> 
 
                 </div><!-- /.box-body -->
                  
@@ -55,13 +55,13 @@
 
                 </div>
                 <div class="box-body">
-                  >> <a href="/rawdata/">Treatment Data in U5 Register</a>
+                  >> <a href="{{config('app.prefix')}}/rawdata/">Treatment Data in U5 Register</a>
                  <br> 
-                 >> <a href="/rawdata/">Annual Treatment Trends</a> 
+                 >> <a href="{{config('app.prefix')}}/rawdata/">Annual Treatment Trends</a> 
                  <br>
-                 >> <a href="/rawdata/">Non-Diarrhoea Cases Treated with Zinc & ORS</a> 
+                 >> <a href="{{config('app.prefix')}}/rawdata/">Non-Diarrhoea Cases Treated with Zinc & ORS</a> 
                  <br>
-                 >> <a href="/rawdata/">Annual ORT Corner Management Trends</a> 
+                 >> <a href="{{config('app.prefix')}}/rawdata/">Annual ORT Corner Management Trends</a> 
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -76,11 +76,11 @@
                  
                 </div>
                 <div class="box-body">
-                 >> <a href="/rawdata/diarrhoea">Diarrhoea Treatment Commodities</a> 
+                 >> <a href="{{config('app.prefix')}}/rawdata/diarrhoea">Diarrhoea Treatment Commodities</a> 
                   <br>
-                  >> <a href="/rawdata/antibiotics">Antibiotics</a> 
+                  >> <a href="{{config('app.prefix')}}/rawdata/antibiotics">Antibiotics</a> 
                   <br>
-                  >> <a href="/rawdata/malaria">Malaria Treatment Commodities</a> 
+                  >> <a href="{{config('app.prefix')}}/rawdata/malaria">Malaria Treatment Commodities</a> 
                </div><!-- /.box-body -->
                  
                 </div>
@@ -94,9 +94,9 @@
                 </div>
                 <div class="box-body">
                  
-                                      >> <a href="/rawdata/ort-functionality">Ort Corner Functionality</a>
+                                      >> <a href="{{config('app.prefix')}}/rawdata/ort-functionality">Ort Corner Functionality</a>
 <br>
-                    >> <a href="/rawdata/ort-location">Location of ORT</a>
+                    >> <a href="{{config('app.prefix')}}/rawdata/ort-location">Location of ORT</a>
 
                 </div><!-- /.box-body -->
                  
@@ -109,7 +109,7 @@
                  
                 </div>
                 <div class="box-body">
-                  >> <a href="/rawdata/supplies-availability">Supplies Availability</a>
+                  >> <a href="{{config('app.prefix')}}/rawdata/supplies-availability">Supplies Availability</a>
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -123,7 +123,7 @@
                  
                 </div>
                 <div class="box-body">
-                   >> <a href="/rawdata/resource-availability">Resource Availability</a>
+                   >> <a href="{{config('app.prefix')}}/rawdata/resource-availability">Resource Availability</a>
                 </div><!-- /.box-body -->
                  
                 </div>
@@ -135,7 +135,7 @@
                  
                 </div>
                 <div class="box-body">
-                                                  >> <a href="/rawdata/community-strategy">Community Strategy</a> 
+                                                  >> <a href="{{config('app.prefix')}}/rawdata/community-strategy">Community Strategy</a> 
 
                   <br>
                 </div><!-- /.box-body -->

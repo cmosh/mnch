@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Community Strategy(Trained in ICCM)
                     <small>
-                   <a href="/comparison/CHV2/CHV2_comm_strategy/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_comm_strategy/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                   </h3>

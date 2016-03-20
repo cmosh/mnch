@@ -4,7 +4,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">PROVISION OF BEmONC SIGNAL FUNCTIONS
                   <small>
-                    <a href="/comparison/MNHV2/MNHV2_Bemonc/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Bemonc/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
 

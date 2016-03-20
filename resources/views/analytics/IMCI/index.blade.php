@@ -31,7 +31,7 @@
   <!-- small box -->
                <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount->X}} healthworkers in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount}} healthworkers in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
               {{--  <div class="icon">
@@ -196,7 +196,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '/analytics/maprequest',
+      url: '{{config("app.prefix")}}/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -234,7 +234,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/imciajax',
+      url: '{{config("app.prefix")}}/analytics/imciajax',
       type: "post",
        data: data,
            success: function(data){

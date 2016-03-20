@@ -91,7 +91,7 @@
 
 
  @if($Assessment['Status']=='Submitted')
-                        <td><form action="/assessments/show/{{$Assessment['AssID']}}">
+                        <td><form action="{{config('app.prefix')}}/assessments/show/{{$Assessment['AssID']}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>
 
      @elseif($Assessment['Status']=='Incomplete' || $Assessment['Status']=='New')
@@ -184,7 +184,7 @@
      $.ajax({
 
     
-      url: '/survey/session',
+      url: '{{config("app.prefix")}}/survey/session',
       type: "post",
        data: data,
        error: function(){

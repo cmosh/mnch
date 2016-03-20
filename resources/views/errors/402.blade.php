@@ -22,7 +22,7 @@
               <h3><i class="fa fa-warning text-yellow"></i>Your account has been deactivated.</h3>
              
                 Please contact your direct supervisor for more details or to
-               reactivate your account in case of a mistake.<a href="/">return to the homepage.</a>
+               reactivate your account in case of a mistake.<a href="{{config('app.prefix')}}/">return to the homepage.</a>
              
               
             </div><!-- /.error-content -->

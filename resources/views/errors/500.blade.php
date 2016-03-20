@@ -22,7 +22,7 @@
               <h3><i class="fa fa-warning text-yellow"></i> Sorry! Internal server error, please retry the action later</h3>
              
                 We could not perform the action you initiated.
-                Meanwhile, you may <a href="/home">return to your dashboard</a>
+                Meanwhile, you may <a href="{{config('app.prefix')}}/home">return to your dashboard</a>
              
               
             </div><!-- /.error-content -->

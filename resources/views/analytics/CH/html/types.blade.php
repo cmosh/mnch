@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Facility Types
                   <small class="" id="box-toolspull-right">
-                     <a href="/comparison/CHV2/CHV2_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                   </h3>

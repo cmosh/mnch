@@ -22,7 +22,7 @@
               <h3><i class="fa fa-warning text-yellow"></i> Sorry! You are not allowed to access this resource with this method.</h3>
              
                 We do not allow this action without proper authorisation.
-                Meanwhile, you may <a href="/home">return to your dashboard</a>
+                Meanwhile, you may <a href="{{config('app.prefix')}}/home">return to your dashboard</a>
              
               
             </div><!-- /.error-content -->

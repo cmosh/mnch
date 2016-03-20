@@ -108,7 +108,7 @@
 
            <div class="col-md-6" >
             
-<form action="/usermanagement/viewusers">
+<form action="{{config('app.prefix')}}/usermanagement/viewusers">
     <input class="btn btn-primary form-control" type="submit"  value="Cancel and go back"></form>         </div>
    </div>
    </div>

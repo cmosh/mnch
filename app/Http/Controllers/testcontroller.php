@@ -30,13 +30,7 @@ class testcontroller extends Controller
 
     	public function index(){
 
-            // return Facilities::whereIn('FacilityCode',[19224,19310,14180,17486,18393,14181])->get();
-            
-
-           $Data =  Facilities::SubmittedAssessments('MNH','Baseline');
-         $NewBornCareHeadings = array('New Born Care','Yes','No','No information provided');
-
-            return analysisfunctions::FacilityTypes2Stack($Data,'MNHV2SEC2BLK5RW03COL02',$NewBornCareHeadings);
+      return  $x = config('app.prefix');
            
 
     	}

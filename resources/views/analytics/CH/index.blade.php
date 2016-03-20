@@ -253,7 +253,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '/analytics/maprequest',
+      url: '{{config("app.prefix")}}/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -292,7 +292,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/chajax',
+      url: '{{config("app.prefix")}}/analytics/chajax',
       type: "post",
        data: data,
            success: function(data){
@@ -412,7 +412,7 @@ $(function(){
   $("select#County").change(function(){
 
 
-    $.getJSON("/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
+    $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
         options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';

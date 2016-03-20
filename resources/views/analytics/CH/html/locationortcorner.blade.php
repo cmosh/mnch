@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Location of ORT Corner
                     <small>
-                     <a href="/comparison/CHV2/CHV2_lort/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_lort/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>

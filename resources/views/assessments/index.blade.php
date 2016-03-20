@@ -323,7 +323,7 @@ $('#some_id').click(function() {
 @endif
    else{
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val()+'/'+ $('#SubCounty1').val();
+  var linki = '{{config("app.prefix")}}/assessments/' + $('#Version1').val() + '/'+ $('#date').val() +'/' +$('#Term').val() +'/'+ $('#County').val()+'/'+ $('#SubCounty1').val();
   //alert(linki);
   if(window.offline) e.preventDefault();
    $(location).attr('href', linki);
@@ -348,7 +348,7 @@ $('#some_id2').click(function() {
   else{
 
  // assessments/{id}/{date}/{term}/{county}
-  var linki = '/assessments/' + $('#Version2').val() + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val()+'/'+ $('#SubCounty2').val();
+  var linki = '{{config("app.prefix")}}/assessments/' + $('#Version2').val() + '/'+ $('#County2').val()+ '/'+ $('#Term_2').val()+'/'+ $('#SubCounty2').val();
   //alert(linki);
    if(window.offline) e.preventDefault();
    $(location).attr('href', linki);
@@ -414,7 +414,7 @@ $('#some_id2').click(function() {
 
     $ajax.select2({
       ajax: {
-        url: "/assessment/subcounties",
+        url: "{{config('app.prefix')}}/assessment/subcounties",
         type:'post',
         dataType: 'json',
        

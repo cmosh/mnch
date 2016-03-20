@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Tools
                   <small>
-                    <a href="/comparison/MNHV2/MNHV2_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     </h3>

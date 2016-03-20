@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Provison of KMC
                   <small>
-                    <a href="/comparison/MNHV2/MNHV2_Kangaroo1/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo1/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     </h3>
@@ -23,7 +23,7 @@
                   
                   
                      <small>
-                    <a href="/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
 <div class="box-tools pull-right">

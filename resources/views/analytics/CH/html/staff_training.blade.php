@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Staff Training
                   <small>
-                    <a href="/comparison/CHV2/CHV2_staff_trained/barstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_staff_trained/barstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                   </h3>

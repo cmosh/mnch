@@ -26,7 +26,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/home" style="color:white">MNCH</a></div>
+        <a class="navbar-brand" href="{{config('app.prefix')}}/home" style="color:white">MNCH</a></div>
 
        
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
@@ -35,19 +35,19 @@
                
            
                  
-              <li><a  href="/">Child Health Survey</a></li>
-             <li><a href="/mnh">Maternal and Neonatal Health Survey</a></li>
+              <li><a  href="{{config('app.prefix')}}/">Child Health Survey</a></li>
+             <li><a href="{{config('app.prefix')}}/mnh">Maternal and Neonatal Health Survey</a></li>
 
-             <li><a href="/imci">IMCI Survey</a></li>
+             <li><a href="{{config('app.prefix')}}/imci">IMCI Survey</a></li>
           
 
-             <li><a href="/rawdata">Raw Data</a></li>
+             <li><a href="{{config('app.prefix')}}/rawdata">Raw Data</a></li>
           
               @if (config('app.env')=='test'||config('app.mak'))
-           <li> <a href="/test/serve/"  role="button">
+           <li> <a href="{{config('app.prefix')}}/test/serve/"  role="button">
               <span><button  class="btn btn-block btn-success btn-xs">serve assets</button></span>  
           </a> </li>
-          <li> <a href="/test/stop/"   role="button">
+          <li> <a href="{{config('app.prefix')}}/test/stop/"   role="button">
               <span><button  class="btn btn-block btn-danger btn-xs">stop assets</button></span>  
           </a> </li>
           @endif
@@ -64,15 +64,15 @@
 
         <ul class="nav navbar-nav navbar-right">
           @if (Auth::guest())
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/self/register" style="margin-right:5px;">Register</a></li>
+            <li><a href="{{config('app.prefix')}}/auth/login">Login</a></li>
+            <li><a href="{{config('app.prefix')}}/self/register" style="margin-right:5px;">Register</a></li>
           @else
-           <li><a href="/home">My Dashboard</a></li>
+           <li><a href="{{config('app.prefix')}}/home">My Dashboard</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-              <li><a href="/usermanagement/changepass">Change Password</a></li>
-                <li><a href="/auth/logout">Logout</a></li>
+              <li><a href="{{config('app.prefix')}}/usermanagement/changepass">Change Password</a></li>
+                <li><a href="{{config('app.prefix')}}/auth/logout">Logout</a></li>
               </ul>
             </li>
           @endif
