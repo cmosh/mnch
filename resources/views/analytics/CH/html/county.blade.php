@@ -42,7 +42,7 @@
                        
                       
 
-      <object  width="100%" id="thesvg" data="/assets/map.svg">
+      <object  width="100%" id="thesvg" data="{{config('app.prefix')}}/assets/map.svg">
                  </object>
 
 

@@ -10,7 +10,13 @@ use App\Tables\Facilities;
 use App\Tables\subcounty;
 use App\Tables\assessments;
 use App\Helpers\Map;
+use App\Helpers\County;
 use App\Tables\Participants;
+use App\Tables\counties;
+use App\Tables\users;
+use App\Tables\analysisfunctions;
+use Carbon\Carbon;
+use Cache;
 
 class testcontroller extends Controller
 {
@@ -24,10 +30,8 @@ class testcontroller extends Controller
 
     	public function index(){
 
-    		 // return Participants::with('assessment')->get();
-    		 $test1 = Participants::view()->get();
-    		$test = $this->Map->transform($test1,'ParticipantsList');
-    		return $test;
+      return  $x = config('app.prefix');
+           
 
     	}
 

@@ -22,7 +22,7 @@
               <h3><i class="fa fa-warning text-yellow"></i> Sorry! You are unathorised to view this content. Contact the site administrator for more information.</h3>
              
                 This action has been recorded and you will be reported.
-                Meanwhile, you may <a href="/home">return to your dashboard</a>
+                Meanwhile, you may <a href="{{config('app.prefix')}}/home">return to your dashboard</a>
              
               
             </div><!-- /.error-content -->

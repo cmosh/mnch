@@ -1,8 +1,8 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Section extends Model {
+class Section extends Eloquent {
 
 	// each Section has many blocks
     public function blocks() {
@@ -10,7 +10,7 @@ class Section extends Model {
     }
 
      public function survey() {
-        return $this->belongsTo('App\Tables\Survey','surveyID','surveyID');
+        return $this->belongsTo('App\Tables\Survey','_id','surveyID');
     }
 
 }

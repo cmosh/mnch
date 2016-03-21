@@ -9,6 +9,53 @@ class Map{
 
 
 
+  public function Assessmentsfilter($collection){
+    $Assessment = $collection->filter(function ($item) {
+   
+    return $item->facility != null;
+});
+
+  return  $Assessment->transform(function ($item, $key) {
+     return [ 'AssID' => $item->Assessment_ID,
+        'FacilityID' => $item->Facility_ID,
+        'Survey' => substr($item->Survey,0,-2).' Survey',
+        'Term' => $item->Assessment_Term,
+        'Assessor' => isset($item->assessor->Name) ? $item->assessor->Name : "",
+        'Date' => date_format(date_create($item->Date),'jS F Y'),
+        'Facility' => $item->facility->FacilityName,
+        'Status' => $item->Status,
+        'Bad' => $this->ValidityTest($item->Status)];
+          });
+
+
+  }
+
+  public function CountyFilter($collection){
+        
+      return  $collection->transform(function ($item, $key) {
+      
+ return [ 'Name' => $item->facility];
+        
+          });
+  }
+
+  public function ParticipantsFilter($collection){
+    
+
+  return  $collection->transform(function ($item, $key) {
+     return [ 'AssID' => $item->Assessment_ID,
+        'FacilityID' => $item->Facility_ID,
+        'Survey' => substr($item->Survey,0,-2).' Survey',
+        'Participant' => $item->participant->Name_of_Participant,
+        'Assessor' => $item->assessor->Name,
+        'Date' => date_format(date_create($item->Date),'jS F Y'),
+        'Facility' => $item->facility->FacilityName,
+        'Status' => $item->Status,
+        'Bad' => $this->ValidityTest($item->Status)];
+          });
+
+
+  }
 
   public function transform($collection,$map){
   
@@ -16,23 +63,7 @@ class Map{
      
   }
 
-
-  public function AssessmentList($item){
-   
-       
-       
-     
-       return [ 'AssID' => $item->Assessment_ID,
-        'FacilityID' => $item->Facility_ID,
-        'Survey' => substr($item->Survey,0,-2).' Survey',
-        'Term' => $item->Assessment_Term,
-        'Assessor' => $item->assessor->Name,
-        'Date' => date_format(date_create($item->Date),'jS F Y'),
-        'Facility' => $item->facility->FacilityName,
-        'Status' => $item->status,
-        'Bad' => $this->ValidityTest($item->status)];
-        
-  }
+ 
 
     public function ParticipantsList($item){
     

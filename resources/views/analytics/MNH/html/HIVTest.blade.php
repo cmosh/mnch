@@ -1,9 +1,14 @@
      <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">HIV Testing and Counselling</h3>
+                  <h3 class="box-title">HIV Testing and Counselling
+                  <small>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_HIVTest/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
                   <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_HIVTest/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+                  
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>

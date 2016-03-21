@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "91985e04c7fa4533cc6ece85bb7e3287",
-    "content-hash": "db65ecdef07bfede49fde6f03f7af35b",
+    "hash": "e6cb90cf788de5479fe197db26605101",
+    "content-hash": "b162474e119aa0b049ba271ba7d4a977",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -354,16 +354,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.0.3",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea"
+                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/b1e1c0d55f8083c71eda2c28c12a228d708294ea",
-                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/bb9024c526b22f3fe6ae55a561fd70653d470aa8",
+                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8",
                 "shasum": ""
             },
             "require": {
@@ -401,7 +401,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2015-10-15 22:28:00"
+            "time": "2016-03-08 01:15:46"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -547,6 +547,67 @@
                 }
             ],
             "time": "2015-04-20 18:58:01"
+        },
+        {
+            "name": "jenssegers/mongodb",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/laravel-mongodb.git",
+                "reference": "e1c12ac063eb0d5f4f10cc91f6e269b67cae4e80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/laravel-mongodb/zipball/e1c12ac063eb0d5f4f10cc91f6e269b67cae4e80",
+                "reference": "e1c12ac063eb0d5f4f10cc91f6e269b67cae4e80",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "^5.1",
+                "illuminate/database": "^5.1",
+                "illuminate/events": "^5.1",
+                "illuminate/support": "^5.1",
+                "mongodb/mongodb": "^1.0.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "orchestra/testbench": "^3.1",
+                "phpunit/phpunit": "^4.0|^5.0",
+                "satooshi/php-coveralls": "^0.6"
+            },
+            "suggest": {
+                "jenssegers/mongodb-sentry": "Add Sentry support to Laravel-MongoDB",
+                "jenssegers/mongodb-session": "Add MongoDB session support to Laravel-MongoDB"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Jenssegers\\Mongodb": "src/",
+                    "Jenssegers\\Eloquent": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "A MongoDB based Eloquent model and Query builder for Laravel (Moloquent)",
+            "homepage": "https://github.com/jenssegers/laravel-mongodb",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model",
+                "moloquent",
+                "mongo",
+                "mongodb"
+            ],
+            "time": "2016-03-04 21:34:41"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -839,16 +900,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.17",
+            "version": "1.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "02f5b6c9a8b9278c8381e3361e7bd9d641c740ca"
+                "reference": "e87a786e3ae12a25cf78a71bb07b4b384bfaa83a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/02f5b6c9a8b9278c8381e3361e7bd9d641c740ca",
-                "reference": "02f5b6c9a8b9278c8381e3361e7bd9d641c740ca",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/e87a786e3ae12a25cf78a71bb07b4b384bfaa83a",
+                "reference": "e87a786e3ae12a25cf78a71bb07b4b384bfaa83a",
                 "shasum": ""
             },
             "require": {
@@ -918,7 +979,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-02-19 15:35:38"
+            "time": "2016-03-14 21:54:11"
         },
         {
             "name": "maatwebsite/excel",
@@ -989,17 +1050,77 @@
             "time": "2016-03-01 17:45:44"
         },
         {
-            "name": "monolog/monolog",
-            "version": "1.18.0",
+            "name": "mongodb/mongodb",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "e19b764b5c855580e8ffa7e615f72c10fd2f99cc"
+                "url": "https://github.com/mongodb/mongo-php-library.git",
+                "reference": "6093d68c06bebcc5361b9e49178725efd9182ed4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e19b764b5c855580e8ffa7e615f72c10fd2f99cc",
-                "reference": "e19b764b5c855580e8ffa7e615f72c10fd2f99cc",
+                "url": "https://api.github.com/repos/mongodb/mongo-php-library/zipball/6093d68c06bebcc5361b9e49178725efd9182ed4",
+                "reference": "6093d68c06bebcc5361b9e49178725efd9182ed4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mongodb": "^1.1.0",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MongoDB\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                },
+                {
+                    "name": "Hannes Magnusson",
+                    "email": "bjori@mongodb.com"
+                },
+                {
+                    "name": "Derick Rethans",
+                    "email": "github@derickrethans.nl"
+                }
+            ],
+            "description": "MongoDB driver library",
+            "homepage": "https://jira.mongodb.org/browse/PHPLIB",
+            "keywords": [
+                "database",
+                "driver",
+                "mongodb",
+                "persistence"
+            ],
+            "time": "2016-03-04 20:27:01"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
+                "reference": "a5f2734e8c16f3aa21b3da09715d10e15b4d2d45",
                 "shasum": ""
             },
             "require": {
@@ -1064,7 +1185,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-03-01 18:00:40"
+            "time": "2016-03-13 16:08:35"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -1259,16 +1380,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.2.1",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "f078eba3bcf140fd69b5fcc3ea5ac809abf729dc"
+                "reference": "c7e26a21ba357863de030f0b9e701c7d04593774"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/f078eba3bcf140fd69b5fcc3ea5ac809abf729dc",
-                "reference": "f078eba3bcf140fd69b5fcc3ea5ac809abf729dc",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c7e26a21ba357863de030f0b9e701c7d04593774",
+                "reference": "c7e26a21ba357863de030f0b9e701c7d04593774",
                 "shasum": ""
             },
             "require": {
@@ -1303,7 +1424,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-02-29 17:25:04"
+            "time": "2016-03-18 20:34:03"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -2078,7 +2199,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -2137,7 +2258,7 @@
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
@@ -2193,7 +2314,7 @@
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
@@ -2542,47 +2663,51 @@
             "time": "2015-12-08 16:14:14"
         },
         {
-            "name": "vetruvet/laravel-phpredis",
-            "version": "v1.0.3",
+            "name": "tillkruss/larvel-phpredis",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vetruvet/laravel-phpredis.git",
-                "reference": "1dc73e054c375f7a9329152ee4777aab6bfa6a2b"
+                "url": "https://github.com/tillkruss/laravel-phpredis.git",
+                "reference": "68d4c5ddd059c033356585948c4994bc7afe589c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vetruvet/laravel-phpredis/zipball/1dc73e054c375f7a9329152ee4777aab6bfa6a2b",
-                "reference": "1dc73e054c375f7a9329152ee4777aab6bfa6a2b",
+                "url": "https://api.github.com/repos/tillkruss/laravel-phpredis/zipball/68d4c5ddd059c033356585948c4994bc7afe589c",
+                "reference": "68d4c5ddd059c033356585948c4994bc7afe589c",
                 "shasum": ""
             },
             "require": {
-                "ext-redis": "*",
-                "illuminate/redis": "5.* || 4.*",
-                "illuminate/support": "5.* || 4.*"
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "illuminate/cache": "~5.2",
+                "illuminate/redis": "~5.2",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Vetruvet\\PhpRedis": "src/"
+                "psr-4": {
+                    "TillKruss\\LaravelPHPRedis\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "Valera Trubachev",
-                    "email": "vetruvet@gmail.com"
+                    "name": "Till Krüss",
+                    "homepage": "https://till.kruss.me"
                 }
             ],
-            "description": "Use phpredis as the redis connection in Laravel",
+            "description": "A Redis driver for Laravel 5 that adds compatibility for PHPRedis, the PCEL Redis Extension.",
             "keywords": [
                 "laravel",
                 "phpredis",
                 "redis"
             ],
-            "time": "2016-01-25 16:24:59"
+            "time": "2016-03-01 06:14:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3200,16 +3325,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.23",
+            "version": "4.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483"
+                "reference": "a1066c562c52900a142a0e2bbf0582994671385e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e351261f9cd33daf205a131a1ba61c6d33bd483",
-                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1066c562c52900a142a0e2bbf0582994671385e",
+                "reference": "a1066c562c52900a142a0e2bbf0582994671385e",
                 "shasum": ""
             },
             "require": {
@@ -3268,7 +3393,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-02-11 14:56:33"
+            "time": "2016-03-14 06:16:08"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

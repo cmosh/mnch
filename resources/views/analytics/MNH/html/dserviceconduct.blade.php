@@ -1,9 +1,13 @@
   <div class="col-md-4">
                <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Main reason for not conducting deliveries</h3>
-                  <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_dserviceconduct/pie/' class='btn btn-box-tool'>Launch Comparison</a>
+                  <h3 class="box-title">Main reason for not conducting deliveries
+                  <small>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_dserviceconduct/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
+                 <div class="box-tools pull-right">
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>

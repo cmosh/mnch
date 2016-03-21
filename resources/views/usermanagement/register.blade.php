@@ -122,7 +122,7 @@
             {!! Form::close() !!}
                      <div class="col-lg-6" >
             
-<form action="/auth/login">
+<form action="{{config('app.prefix')}}/auth/login">
     <input class="btn btn-primary form-control" type="submit" value="Cancel and go back"></form>         </div>
    </div>
    </div>

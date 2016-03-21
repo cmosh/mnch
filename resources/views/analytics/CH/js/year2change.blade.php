@@ -15,8 +15,8 @@ function year2() {
       type: "post",
        data: data,
            success: function(data){
-      // mapdata = JSON.parse(data)['map'];
-    var jsonData = JSON.parse(data)['analytics'];
+    
+    var jsonData = JSON.parse(data);
 
        @include('analytics/CH/js/annualTrends')
       $(  "#anT"  ).children().removeClass("fa fa-refresh fa-spin");

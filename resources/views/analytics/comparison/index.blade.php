@@ -271,7 +271,7 @@ function perfomance(term,values,ov){
   
  
    $.ajax({
-      url: '/compare/{{strtolower($sv)}}',
+      url: '{{config("app.prefix")}}/compare/{{strtolower($sv)}}',
       type: "post",
        data: data,
            success: function(data){
@@ -284,7 +284,7 @@ function perfomance(term,values,ov){
   
   
     
-	  @include('/analytics/comparison/'.$chart)	  
+	  @include('{{config("app.prefix")}}/analytics/comparison/'.$chart)	  
 	
      $('#title'+box).html(county);
 

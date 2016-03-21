@@ -8,7 +8,11 @@ var ownershipdata = new google.visualization.DataTable();
                        'width':'100%',
                        sliceVisibilityThreshold:0,
                         'box-sizing': 'border-box;',
-                       'height':300};
+                       'height':300,chartArea: {width: '100%'},
+                       legend: {position: 'top', maxLines:2 },textStyle: {fontSize: 4},
+                        pieStartAngle: 100
+                       };
+
 
         // Instantiate and draw our chart, passing in some options.
         var ownership = new google.visualization.PieChart(document.getElementById('ownership'));

@@ -5,7 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Tables\User_monitor;
+// use App\Tables\User_monitor;
 use App\Tables\countie;
 
 
@@ -83,8 +83,8 @@ $array=$Requestuser->all();
 		'IDNumber'=>$x[3],
 		'email'=>$x[4],
 		'password'=>bcrypt('41414f!#!#!#934h141!#1!#sdhsdkj'),
-		'role'=>$x[5],
-		'status'=>'0'
+		'role'=>intval($x[5]),
+		'status'=>0
 		);
 		
 		

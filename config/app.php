@@ -5,6 +5,7 @@ return [
 	'folder' => env('APP_FOLDER'),
 	'mak' => env('MAK',false),
 	'env' => env('APP_ENV', 'production'),
+	'prefix' => env('APP_PREFIX','/') == '/' ? '': '/'.env('APP_PREFIX'),
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -131,8 +132,9 @@ return [
 		Illuminate\Pagination\PaginationServiceProvider::class,
 		Illuminate\Pipeline\PipelineServiceProvider::class,
 		Illuminate\Queue\QueueServiceProvider::class,
-		Vetruvet\PhpRedis\PhpRedisServiceProvider::class,
-		Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+		TillKruss\LaravelPHPRedis\RedisServiceProvider::class,
+		Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
+		// Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 		Illuminate\Session\SessionServiceProvider::class,
 		Illuminate\Translation\TranslationServiceProvider::class,
 		Illuminate\Validation\ValidationServiceProvider::class,
@@ -144,6 +146,7 @@ return [
         Efficiently\JqueryLaravel\JqueryLaravelServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */

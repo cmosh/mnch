@@ -15,8 +15,8 @@ function year4() {
       type: "post",
        data: data,
            success: function(data){
-         // mapdata = JSON.parse(data)['map'];
-    var jsonData = JSON.parse(data)['analytics'];
+       
+    var jsonData = JSON.parse(data);
        @include('analytics/CH/js/orttrends')
       $(  "#ortN"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#ortN"  ).removeClass("overlay");

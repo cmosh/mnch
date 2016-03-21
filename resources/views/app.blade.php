@@ -17,16 +17,16 @@
   <body class="skin-blue fixed layout-top-nav">
     <div class="wrapper">
       <header class="main-header">
-        <nav class="navbar navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
           <div class="container-fluid">
             <div class="navbar-header">
-             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" style="margin-right:0px;">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/home">MNCH</a></div>
+        <a class="navbar-brand" href="{{config('app.prefix')}}/home" style="color:white">MNCH</a></div>
 
        
               <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
@@ -35,19 +35,19 @@
                
            
                  
-              <li><a  href="/">Child Health Survey</a></li>
-             <li><a href="/mnh">Maternal and Neonatal Health Survey</a></li>
+              <li><a  href="{{config('app.prefix')}}/">Child Health Survey</a></li>
+             <li><a href="{{config('app.prefix')}}/mnh">Maternal and Neonatal Health Survey</a></li>
 
-             <li><a href="/imci">IMCI Survey</a></li>
+             <li><a href="{{config('app.prefix')}}/imci">IMCI Survey</a></li>
           
 
-             <li><a href="/rawdata">Raw Data</a></li>
+             <li><a href="{{config('app.prefix')}}/rawdata">Raw Data</a></li>
           
               @if (config('app.env')=='test'||config('app.mak'))
-           <li> <a href="/test/serve/"  role="button">
+           <li> <a href="{{config('app.prefix')}}/test/serve/"  role="button">
               <span><button  class="btn btn-block btn-success btn-xs">serve assets</button></span>  
           </a> </li>
-          <li> <a href="/test/stop/"   role="button">
+          <li> <a href="{{config('app.prefix')}}/test/stop/"   role="button">
               <span><button  class="btn btn-block btn-danger btn-xs">stop assets</button></span>  
           </a> </li>
           @endif
@@ -64,15 +64,15 @@
 
         <ul class="nav navbar-nav navbar-right">
           @if (Auth::guest())
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/self/register">Register</a></li>
+            <li><a href="{{config('app.prefix')}}/auth/login">Login</a></li>
+            <li><a href="{{config('app.prefix')}}/self/register" style="margin-right:5px;">Register</a></li>
           @else
-           <li><a href="/home">My Dashboard</a></li>
+           <li><a href="{{config('app.prefix')}}/home">My Dashboard</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-              <li><a href="/usermanagement/changepass">Change Password</a></li>
-                <li><a href="/auth/logout">Logout</a></li>
+              <li><a href="{{config('app.prefix')}}/usermanagement/changepass">Change Password</a></li>
+                <li><a href="{{config('app.prefix')}}/auth/logout">Logout</a></li>
               </ul>
             </li>
           @endif
@@ -147,13 +147,17 @@
     width:100%;
     height:50px;
     background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.7);
     margin-top: 0;
-    margin-bottom: 0
+    margin-bottom: 0;
+    border-bottom: medium solid #181818;
+    
 
 
   }
   .title-main>h2{
     margin-top: 0;
+    padding-top: 10px;
     margin-bottom: 0
   }
   .title-trans{
@@ -164,6 +168,21 @@
     height:50px;
 
   }
+  .conc{
+    opacity: 0.9 !important;
+  }
+
+  #info-title{
+    max-height: 70px;
+    
+  }
+  #facilitiesBox,#info-title{
+    margin:0;
+  }
+  #staffTraining,#healthServices{
+    margin-bottom:0;
+  }
+  
 </style>
   </body>
 </html>

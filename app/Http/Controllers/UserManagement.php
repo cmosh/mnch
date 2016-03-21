@@ -4,18 +4,20 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Tables\User_monitor;
-use App\Tables\countie;
+use App\Tables\counties;
 use App\Tables\Counties_assessed;
 use App\Tables\Counties_submitted_today;
 use App\Tables\Counties_incomplete_today;
 use App\Tables\Counties_submitted;
 use App\Tables\Counties_incomplete;
-use App\Tables\AssessmentsN;
+use App\Tables\assessments;
 use App\Tables\Survey;
+use App\Helpers\County;
 use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use App\Http\Requests\Requestpass;
 use App\Http\Requests\Requestedit;
+use App\Helpers\Map;
 use Input;
 use Validator;
 use Redirect;
@@ -29,17 +31,20 @@ use Mail;
 
 class UserManagement extends Controller {
 
-	public function __construct(Request $request)
+	public function __construct(Request $request,Excel $excel)
 	{
+		$this->Map = new Map;
 		$this->middleware('auth');
 		$this->role = function ($min) use ($request) {
 			if($request->user()->role<$min)abort(403);
 		};
+		$this->roles = [0=>'countyuser',1=>'dataclerk',2=>'programuser',3=>'systemuser',4=>'systemuser'];
+		$this->excel = $excel;
 	}
 	
 	public function index()
 	{		
-		$users=User::where('role','<','4')->get();		
+		$users=User::NonAdmins()->get();		
 		$this->role->__invoke(3);
 		return view('usermanagement.view')->with('users',$users)
 										  ->with('location','umanage')
@@ -75,7 +80,7 @@ class UserManagement extends Controller {
 	public function create()
 	{
 		$this->role->__invoke(3);
-		$Counties = countie::all();
+		$Counties = counties::all();
 		return view('usermanagement.create')->with('counties',$Counties)
 											->with('location','umanage')
 											->with('title','User Management');
@@ -91,7 +96,7 @@ class UserManagement extends Controller {
 			$x[]=$key;
 		}
 
-		$Counties = countie::all();
+		$Counties = counties::all();
 		$x[1]=$Counties[$x[1]]->Name;
 
 		$data=array(
@@ -101,8 +106,8 @@ class UserManagement extends Controller {
 		'IDNumber'=>$x[3],
 		'email'=>$x[4],
 		'password'=>bcrypt('123456'),
-		'role'=>$x[5],
-		'status'=>'1'
+		'role'=>intval($x[5]),
+		'status'=>1
 		);
 
 		User::createOrUpdate(
@@ -112,7 +117,7 @@ class UserManagement extends Controller {
                 	{
                 	    $message->to($data['email'], 'MNCH_noreply')->subject('Accout Creation');
                 	});
-                $users=User::all();
+                $users=User::NonAdmins();
                 return redirect('usermanagement/viewusers')->with('users',$users)
                 										   ->with('location','umanage')
                 										   ->with('title','User Management');
@@ -136,8 +141,8 @@ class UserManagement extends Controller {
 					'IDNumber'=>$x[4+$num],
 					'email'=>$x[5+$num],
 					'password'=>bcrypt('123456'),
-					'role'=>$x[6+$num],
-					'status'=>'1'
+					'role'=>intval($x[6+$num]),
+					'status'=>1
 					);
 
 		User::createOrUpdate(
@@ -161,18 +166,23 @@ class UserManagement extends Controller {
 	{	
 		$this->role->__invoke(2);
 		$surveys=Survey::all();
-		$counties=countie::all();
-		$user_monitor=User_monitor::all();
-		$counties_assessed=Counties_assessed::all();
-		$submitted=Counties_submitted::all();
-		$incomplete=Counties_incomplete::all();
-		$submittedt=Counties_submitted_today::all();
-		$incompletet=Counties_incomplete_today::all();
+		$counties=counties::all();
+
+		
+		 $user_monitor=assessments::Monitor();	
+
+		
+		$counties_assessed= County::AllAssessed();
+		$submitted=County::Submitted();
+		$incomplete=County::Incomplete();
+		$submittedt=County::SubmittedToday();
+		$incompletet=County::IncompleteToday();
 		$users=User::all();
-		$assessments=AssessmentsN::all();
-		$ch=User_monitor::where('Survey','like','CH%')->get();
-		$mnh=User_monitor::where('Survey','like','MNH%')->get();
-		$imci=User_monitor::where('Survey','like','IMCI%')->get();
+		$assessments=assessments::all();
+
+		$ch=assessments::Monitor(['Survey'=>'CH']);	
+		$mnh=assessments::Monitor(['Survey'=>'MNH']);	
+		$imci=assessments::Monitor(['Survey'=>'IMCI']);	
 
 		return view('usermanagement.monitor')->with('ch',$ch)
 											 ->with('mnh',$mnh)
@@ -194,14 +204,15 @@ class UserManagement extends Controller {
 	public function edit($id)
 	{	
 		$this->role->__invoke(3);
-		$user=User::where('id','=',$id)->get();
-		$Counties = countie::all();
+		$user=User::find($id);
+		$Counties = counties::all();
 		$counter=0;
 		$county_index=0;
 
 		foreach ($Counties as $County) {
+
 						$counter++;
-						if($County->Name==$user[0]->county)
+						if($County->Name==$user->county)
 							{
 								$county_index=$counter-1;
 							}
@@ -225,7 +236,7 @@ class UserManagement extends Controller {
 			$x[]=$key;
 			
 	}
-	$Counties = countie::all();
+	$Counties = counties::all();
 	$x[1]=$Counties[$x[1]]->Name;
 	
 		$data=array(
@@ -234,14 +245,14 @@ class UserManagement extends Controller {
 		'PhoneNumber'=>$x[2],
 		'IDNumber'=>$x[3],
 		'email'=>$x[4],
-		'role'=>$x[5]
+		'role'=>intval($x[5])
 		);
 		
 		
-
+// return $data;
  User::createOrUpdate(
                 $data, 
-                array('id' => $id));
+                array('_id' => $id));
 		 
 	$users=User::all();
 			
@@ -280,7 +291,7 @@ $array=$Requestpass->all();
 			
 			}
 
-			$oldpass=User::where('id','=',$id)->first();
+			$oldpass=User::find($id);
 
 		if(Hash::check($x[1], $oldpass->password))
 		{	
@@ -294,7 +305,7 @@ $array=$Requestpass->all();
 
 		 User::createOrUpdate(
 		                $data, 
-		                array('id' => $id));
+		                array('_id' => $id));
 		 $error_message="ok";
 
 					}
@@ -337,14 +348,14 @@ $array=$Requestpass->all();
 		$user =User::find($data['id']);		
 		if($user->status==0)
 		{
-				$user->status='1';
+				$user->status=1;
 				$user->password=bcrypt('123456'); 
 				$string = "activated";
 
 		}
 		else
 		{
-				$user->status='0';
+				$user->status=0;
 				$user->password=bcrypt('!!##9342ax!!##9ax$kb787y$kb!!##9ax$kbyyx*!!##9ax$k243by%');
 				$string = "deactivated";
 
@@ -405,272 +416,99 @@ public function multi()
 
 
 
+	public function example(){
+        $file = public_path()."/downloads/example.xlsx";
+        $headers = array("Content-Type:   application/vnd.ms-excel; charset=utf-8",
+						 "Content-Disposition: attachment; filename=abc.xls",
+						 "Expires: 0",
+						 "Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        return Response::download($file, 'example.xlsx',$headers);
+    }
 
 
- 
-	public function export(Excel $excel,$loc,$type1,$type2,$type3)
+
+public function export($loc,$type1,$type2,$type3)
 	{
-		if($loc=='umanage' && $type1=='users' && $type2=='all')
-		{
+		switch ($loc) {
+			case 'umanage':
+				$this->exportusers();				
+				break;
+			case 'preview':
+				$type1 == 'general' ? $this->exportgeneral($type2) : $this->exportcounty($type1,$type2,$type3);
+				break;			
+			default:
+				return;
+				break;
+		}
+	}
 
-				$excel->create('ALL_USERS', function($ex) {
+	
+	private function exportusers(){
 
-	    $ex->sheet('Sheetname', function($sheet) {
-	    	
-	    		$sheet->row(1, array(
-     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
-
-			)
-	    		
-	    		);
+		$this->excel->create('ALL_USERS', function($ex) {
+			$ex->sheet('Sheetname', function($sheet) {	    	
+	    		$sheet->row(1,['Name','County','PhoneNumber','IDNumber'	,'email','role']);
 	    		$users=User::all();
 	    		$counter=0;
-	    		foreach ($users as $user) {
-	    			# code...
-	    		
-	    			$counter++;
-		    			if($user->role==0)
-		    			{
-		    				$role='countyuser';
-		    			}
-		    			if($user->role==1)
-		    			{
-		    				$role='dataclerk';
-		    			}
-		    			if($user->role==2)
-		    			{
-		    				$role='programuser';
-		    			}
-		    			if($user->role>=3)
-		    			{
-		    				$role='systemuser';
-		    			}
-		    			if($user->role=='')
-		    			{
-		    				$role='Unknown';
-		    			}
-
-
-						$sheet->row($counter+1, array(
-
-		     			$user->name, $user->county,$user->PhoneNumber,$user->IDNumber,$user->email,$role
-						
-						));
-					
-				}
-
-
-	       
-
-	    });
-
-	})->download('xls');
-			}
-
-
-			else if((substr($type2,0,2)=='CH'|| 'IM'||'MN') && ($loc=='preview' && $type1=='general'))
-		{
-
-			{
-
-				$survey_name=substr($type2,0,2);
-				$excel->create('general'.$survey_name, function($ex) use($survey_name) {
-
-	    $ex->sheet('Sheetname', function($sheet) use($survey_name) {
-	    	
-	    	$sheet->setColumnFormat(array(
-    					'D' => 'yyyy-dd-mm'
-					));
-	    		$sheet->row(1, array(
-     'Version',	'Assessment Term'	,'Assessor'	,'Date'	,'Facility',	'County','Sub-County',	'Entered by'	,'Status'	
-
-			)
-	    		
-	    		);
-
-	    		
-	    		$counter2=0;
-	    		
-				$usermonitor=User_monitor::where('Survey','Like',$survey_name.'%')->get();
-
-	    		foreach ($usermonitor as $user_m) {
-	
-	    				$counter2++;
-	    				
-						$sheet->row($counter2+1, array(
-
-		     			substr($user_m->Survey,-1,1), $user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->County,$user_m->District,$user_m->username,$user_m->Status
-						
-						));
-					
-				}
-
-				
-
-
-	       
-
-	    });
-
-	})->download('xls');
-
-
-
-
-
-
-
-
-
-			}
-
-
-		
-}
-
-else if($loc=='umanage' && $type1=='multi' && $type2=='template')
-{
-
-
-$excel->create('EXCEL TEMPLATE', function($ex) {
-
-	    $ex->sheet('Sheetname', function($sheet) {
-	    	
-	    		$sheet->row(1, array(
-     'Name',	'County'	,'PhoneNumber',	'IDNumber'	,'email'	,'role'		
-
-			)
-	    		
-	    		);
-	    			$sheet->row(2, array(
-     'Username1',	'Nairobi'	,'715909090',	'123123'	,'email@site.com'	,'programuser'		
-
-			)
-	    		
-	    		);
-	    		
-					
+	    			foreach ($users as $user) { 
+	    				$counter++;
+						$role = $this->roles[$user->role];
+						$sheet->row($counter+1,[$user->name, $user->county,$user->PhoneNumber,$user->IDNumber,$user->email,$role]);	
+					} 
 				});
+		})->download('xls');
+			
+	}
 
+	private function exportgeneral($survey_id){
 
-	       
+		$survey_name=substr($survey_id,0,2);
+		$this->excel->create('general'.$survey_name, function($ex) use($survey_name) {
+			$ex->sheet('Sheetname', function($sheet) use($survey_name) {
 
-	  
+				$sheet->setColumnFormat(['D' => 'yyyy-dd-mm']);
+	    		$sheet->row(1,['Version','Assessment Term','Assessor','Date','Facility','County','Sub-County','Entered by','Status']);
+	    		$counter2=0;	    		
+				$usermonitor=assessments::monitor(['Survey'=>$survey_name]);
+	    			foreach ($usermonitor as $user_m) {	
+	    				$counter2++;	    				
+						$sheet->row($counter2+1,[
+										substr($user_m->Survey,-1,1),
+										$user_m->Assessment_Term,
+										isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",
+		     						 	$user_m->Date,
+		     						 	$user_m->facility_short->FacilityName,
+		     						 	$user_m->facility_short->County,
+		     						 	$user_m->facility_short->District,
+		     						 	$user_m->user->name,
+		     						 	$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status	
+		     						 	]					
+						);
+					}
+				});
+		})->download('xls');
+	}	
 
-	})->download('xls');
+	private function exportcounty($time,$county,$survey_id){
 
-
-
-
-}
-
-
-else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
-
-
-
-{
-
-	$survey_name=substr($type3,0,2);
-	$county_name=$type2;
-	$data=array(
-			'survey'=>$survey_name,
-			'county'=>$county_name,
-			'time'=>$type1
-
-		);
-
-
-
-
-				$excel->create($type1.$data['survey'].$data['county'], function($ex) use($data) {
-
-	    $ex->sheet('Sheetname', function($sheet) use($data) {
-
-	    				if($data['time']=='totalentry')
-	    				{
-
-	    					$usermonitor=User_monitor::where('Survey','Like',$data['survey'].'%')->where('County','Like',$data['county'])->get();
-
-	    				}
-	    				else
-	    				{
-	    						    					$usermonitor=User_monitor::where('Survey','Like',$data['survey'].'%')->where('County','Like',$data['county'])->where('updated_at','>=',Carbon::today())->get();
-
-	    				}
-
-
-	    	
-	    		$sheet->row(1, array(
-     'Tool Name','Versionvar'.Carbon::today(),	'Assessment Term'	,'Assessor'	,'Date'	,'Facility Name','Facility Code',	'County','Sub-County',	'Entered by'	,'User role','Status'	
-
-			)
-	    		
-	    		);
-
-	    		
-	    		$counter2=0;
-	    		
-
+			$survey_name=substr($survey_id,0,2);
+			$county_name=$county;
+			$data=['survey'=>$survey_name,'county'=>$county_name,'time'=>$time];
+			$this->excel->create($time.$data['survey'].$data['county'], function($ex) use($data) {
+				$ex->sheet('Sheetname', function($sheet) use($data) {
+				$usermonitor = $data['time']=='totalentry' ? assessments::Monitor(['Survey'=>$data['survey'],'County'=>$data['county']])
+												  : assessments::Monitor([ 'Survey'=> $data['survey'],'County' => $data['county']],true);
+				$sheet->row(1,['Tool Name','Version','Assessment Term','Assessor','Date('.Carbon::today()->format('d/m/Y').')','Facility Name','Facility Code',	'County','Sub-County','Entered by','User role','Status']);	    		
+	    		$counter2=0; 
 	    		foreach ($usermonitor as $user_m) {
 
-	
 	    				$counter2++;
-
-	    				if($user_m->role==0)
-		    			{
-		    				$role='countyuser';
-		    			}
-		    			if($user_m->role==1)
-		    			{
-		    				$role='dataclerk';
-		    			}
-		    			if($user_m->role==2)
-		    			{
-		    				$role='programuser';
-		    			}
-		    			if($user_m->role>=3)
-		    			{
-		    				$role='systemuser';
-		    			}
-		    			if($user_m->role=='')
-		    			{
-		    				$role='Unknown';
-		    			}
-	    				
-						$sheet->row($counter2+1, array(
-
-		     			$user_m->Description,$user_m->Version.":".$user_m->Runtime,$user_m->Assessment_Term,$user_m->assname,$user_m->Date,$user_m->FacilityName,$user_m->FacilityCode,$user_m->County,$user_m->District,$user_m->username,$role,$user_m->Status
-						
-						));
-					
+	    				$role = $this->roles[$user_m->user->role];
+	    				$sheet->row($counter2+1,[$user_m->asurvey->Description,$user_m->asurvey->Runtime,$user_m->Assessment_Term."(V".$user_m->asurvey->Version.")", isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",$user_m->Date,$user_m->facility_short->FacilityName,$user_m->facility_short->FacilityCode,$user_m->facility_short->County,$user_m->facility_short->District,$user_m->user->name,$role,$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status]);				
 				}
-
-				
-
-
-	       
-
-	    });
-
-	})->download('xls');
-
-
-
-
-
-
-
-
-
-
-	}
-}
-
-
-	
-
-
+			});
+			})->download('xls');
+		}
 
 
 	public function upload(Excel $excel) {
@@ -709,8 +547,8 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 		'IDNumber'=>$result[0][$i]->idnumber,
 		'password'=>bcrypt('123456'),
 		'email'=>$result[0][$i]->email,
-		'role'=>$result[0][$i]->role,
-		'status'=>'1'
+		'role'=>intval($result[0][$i]->role),
+		'status'=>1
 		);
 
 
@@ -723,7 +561,7 @@ else if($loc=='preview' && ($type1=='totalentry' || $type1=='todayentry'))
 		}
 
 	}
-		$counties=countie::all();
+		$counties=counties::all();
       return view('usermanagement.multiedit')->with('counties',$counties)->with('users',$x)->with('location','umanage')->with('title','User Management');
     }
     else {

@@ -1,14 +1,15 @@
 <?php namespace App;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
+class User extends Eloquent implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
 
 	use Authenticatable, Authorizable, CanResetPassword;
 
@@ -17,7 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $collection = 'users';
 
 	/**
 	 * The attributes that are mass assignable.
@@ -32,6 +33,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+	public function scopeNonAdmins($query)
+     {
+
+     	return $query->where('role','<',4);
+     				 
+     }
 
 
 	 public static function createOrUpdate($data, $keys) {

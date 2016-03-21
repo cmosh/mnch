@@ -1,8 +1,8 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Block extends Model {
+class Block extends Eloquent {
 
 	// each Block has many block_rows
     public function block_rows() {

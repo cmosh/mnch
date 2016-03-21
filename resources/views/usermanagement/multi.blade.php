@@ -37,7 +37,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  <p style="color:red">Upload an Excel file with the user details, using the format below.</p> 
-                 <p>Download the excel template <u><a href="/usermanagement/export/{{$location}}/multi/template/template">here</a></u></p> 
+                 <p>Download the excel template <u><a href="{{config('app.prefix')}}/usermanagement/example">here</a></u></p> 
 
             </div><!-- /.box-body -->
               </div>

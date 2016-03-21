@@ -1,8 +1,8 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Field extends Model {
+class Field extends Eloquent {
 
 	//
 		public function field_set() {

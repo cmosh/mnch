@@ -5,7 +5,7 @@
              Child Health Survey
               <small>(Analysis Results)</small>
             <!--</h1>-->
-            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
+            
 @endsection
 @section('content')
 
@@ -24,17 +24,19 @@
 
                          {!! Form::close() !!}
 
-
+<!-- -->
    </div>
+   <div class="row">
    @include('analytics/county')
 
  
- <div class="col-md-9">
+ 
+ <div class="col-md-9"  >
 
   <!-- small box -->
-              <div class="small-box bg-blue">
+              <div id="facilitiesBox" class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
                {{--  <div class="icon">
@@ -43,21 +45,25 @@
               
               </div>
                        
-                        <div class="box-info">                     
-                     <div class="box-body">
+                        <div  id="info-title">                     
+                     <div class=" " >
                          <br>                     
-                        <center><h2><b>FACILITY INFORMATION</b></h2></center>
+                        <center ><h2 id="info-title"><b>FACILITY INFORMATION</b></h2></center>
                         <br>
                         </div>
                         </div>
 </div>
 
+
          @include('analytics/CH/html/ownership')
 
 
          @include('analytics/CH/html/types')
+<div class="col-md-3">
 
-  <div class="col-md-12">
+</div>
+</div>
+  <div class="row">
          
 
  @include('analytics/CH/html/staff_training')
@@ -67,44 +73,47 @@
 
  </div>
   
-<div class="col-md-12">
+<div class="row">
                         
                         <div class="box-info" >                     
-                     <div class="box-body">
+                     <div class=" ">
                          <br>                     
                         <center><h2><b>GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY</b></h2></center>
                         <br>
                         </div>
                         </div>
 </div>
-
+<div class="row">
           @include('analytics/CH/html/gjavailability')
 
 
            @include('analytics/CH/html/tavailability')
+</div>
 
- <div class="col-md-12">
+ <div class="row">
                         
                         <div class="box-info">                     
-                     <div class="box-body">
+                     <div class="">
                          <br>                     
                         <center><h2><b>DOCUMENTED FACILITY LEVEL DATA</b></h2></center>
                         <br>
                         </div>
                         </div>
 </div>
+        <div class="row">
          @include('analytics/CH/html/u5reg')
 
 
          @include('analytics/CH/html/annualTrends')
-           
+           </div>
 
-
+        <div class="row">
          @include('analytics/CH/html/nondiarrhoea')
        
          @include('analytics/CH/html/orttrends')
+         </div>
 
-<div class="col-md-12">
+<div class="row">
                         
                         <div class="box-info" >                     
                      <div class="box-body">
@@ -114,13 +123,14 @@
                         </div>
                         </div>
 </div>
-
+          <div class="row">
            @include('analytics/CH/html/chsec4diarhoea')
             @include('analytics/CH/html/chsec4antibiotics')
               @include('analytics/CH/html/chsec4malaria')
+          </div>
 
 
-<div class="col-md-12">
+<div class="row">
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -130,48 +140,51 @@
                         </div>
                         </div>
 </div>
- @include('analytics/CH/html/ort_func')
- @include('analytics/CH/html/locationortcorner')
+ <div class="row ">
+       @include('analytics/CH/html/ort_func')
+       @include('analytics/CH/html/locationortcorner')
+ </div>
+<div class="row">
+        <div class="col-md-4">
+                                
+                                <div class="box-info">                     
+                             <div class="box-body">
+                                 <br>                     
+                                <center><h2><b>SUPPLIES AVAILABILITY</b></h2></center>
+                                <br>
+                                </div>
+                                </div>
 
-<div class="col-md-4">
-                        
-                        <div class="box-info">                     
-                     <div class="box-body">
-                         <br>                     
-                        <center><h2><b>SUPPLIES AVAILABILITY</b></h2></center>
-                        <br>
-                        </div>
-                        </div>
-
- @include('analytics/CH/html/supplies_availability')
-</div>
+         @include('analytics/CH/html/supplies_availability')
+        </div>
 
 
-<div class="col-md-4">
-                        
-                        <div class="box-info">                     
-                     <div class="box-body">
-                         <br>                     
-                        <center><h2><b>RESOURCE AVAILABILITY</b></h2></center>
-                        <br>
-                        </div>
-                        </div>
+        <div class="col-md-4">
+                                
+                                <div class="box-info">                     
+                             <div class="box-body">
+                                 <br>                     
+                                <center><h2><b>RESOURCE AVAILABILITY</b></h2></center>
+                                <br>
+                                </div>
+                                </div>
 
- @include('analytics/CH/html/resource_availability')
-</div>
-<div class="col-md-4">
-                        
-                        <div class="box-info">                     
-                     <div class="box-body">
-                         <br>                     
-                        <center><h2><b title = "cccc" class="g">COMMUNITY STRATEGY</b></h2></center>
-                        <br>
-                        </div>
-                        </div>
+         @include('analytics/CH/html/resource_availability')
+        </div>
+        <div class="col-md-4">
+                                
+                                <div class="box-info">                     
+                             <div class="box-body">
+                                 <br>                     
+                                <center><h2><b title = "cccc" class="g">COMMUNITY STRATEGY</b></h2></center>
+                                <br>
+                                </div>
+                                </div>
 
- @include('analytics/CH/html/community_strategy')
+         @include('analytics/CH/html/community_strategy')
 
-           
+                   
+        </div>
 </div>
 
 
@@ -204,7 +217,7 @@ window.inside = $('#thesvg').contents();
         $(".select2").select2();
 
           @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
@@ -240,7 +253,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '/analytics/maprequest',
+      url: '{{config("app.prefix")}}/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -279,7 +292,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/chajax',
+      url: '{{config("app.prefix")}}/analytics/chajax',
       type: "post",
        data: data,
            success: function(data){
@@ -297,27 +310,27 @@ function drawChart() {
 
 	//include js
     
-	     @include('analytics/CH/js/gjavailability')
+	     @include('analytics/CH/js/ownership')
+       @include('analytics/CH/js/types')
+       @include('analytics/CH/js/staff_training')
+       @include('analytics/CH/js/health_services') 
+       @include('analytics/CH/js/gjavailability')
        @include('analytics/CH/js/tavailability')
        @include('analytics/CH/js/chsec4diarhoea')
        @include('analytics/CH/js/chsec4antibiotics')
        @include('analytics/CH/js/chsec4malaria')
-       @include('analytics/CH/js/ort_func')
        @include('analytics/CH/js/supplies_availability')
        @include('analytics/CH/js/resource_availability')
-       @include('analytics/CH/js/u5reg')
-	     @include('analytics/CH/js/annualTrends')
-       @include('analytics/CH/js/nondiarrhoea')
-       @include('analytics/CH/js/orttrends')
-       @include('analytics/CH/js/ownership')
-       @include('analytics/CH/js/types')
-       @include('analytics/CH/js/staff_training')
        @include('analytics/CH/js/community_strategy')
+       @include('analytics/CH/js/ort_func')
        @include('analytics/CH/js/locationortcorner')
-       @include('analytics/CH/js/health_services') 
+       @include('analytics/CH/js/u5reg')
+       @include('analytics/CH/js/annualTrends')
+       @include('analytics/CH/js/nondiarrhoea')
+       @include('analytics/CH/js/orttrends') 
 
         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
@@ -399,7 +412,7 @@ $(function(){
   $("select#County").change(function(){
 
 
-    $.getJSON("/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
+    $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
         options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';

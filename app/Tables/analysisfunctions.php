@@ -2,8 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
- use App\Http\Controllers\ArrayRedis as Cache;
- use Cache as Mache;
+ use Cache;
  use Maatwebsite\Excel\Excel;
 use Illuminate\Http\Request;
 global $term;
@@ -404,11 +403,12 @@ class analysisfunctions extends Controller {
 		});
 	};
 
-	$this->CHV2_staff_trained= function($county){ global $term;
-	//staff_trained_18
-		return $CHV2_staff_trained = Cache::remember('CHV2_staff_trained'.$county.$term,180,function(){
+	$this->CHV2_staff_trained= function($county){ 
+	 global $term;
+	 return Cache::remember('CHV2_staff_trained'.$county.$term,180,function(){
 			return self::staff_trained();
 		});
+		
 	};
 	$this->CHV2_comm_strategy= function($county){ global $term;
 	//comm_strategy_19
@@ -687,86 +687,24 @@ class analysisfunctions extends Controller {
 		});
 
 	};
-
-
-		//EXCEL RAWS
-	// $this->CHV2_Tools = function(Excel $excel){ 
-
-		
-
-	// 	};
-
-
-
-
-
-
-
-
-
-
-
-
-
-	 	
-
-      
-    }
-
-	
-
-
-	protected static function ortfunction(){
+}
+public static function ortfunction(){
 		global $surveys;
-
-			$recset = $surveys;
-$countB = count($recset);
-      	 $Data = $recset->load(['x' => function($query)
-{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW03COL02')
-    	  ->where('Data','=','1')
-    	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW06COL02')
-    	   ->where('Data','=','1')
-    	  ->orwhere('ColumnSetID', '=', 'CHV2SEC5BLK1RW07COL02')
-    	   ->where('Data','=','1');
-}])->lists('x')->toArray();
-      	 $countF = 0;
-      foreach ($Data as $data) {
-
-      	if(count($data) == 3){
-
-      		$countF++;
-      	}
-
-      
-      }
-     
-
- return array('Functionality',$countF,$countB-$countF,0);
+	    $countB = count($surveys);
+      	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")
+										->where('CHV2SEC5BLK1RW06COL02',"1")
+										->where('CHV2SEC5BLK1RW07COL02',"1");
+      	$countF = count($Data);
+      	return array('Functionality',$countF,$countB-$countF,0);
 	}
 
 	protected  static function count_YN($cl){
- global $surveys;
+	global $surveys;
  
-
- $recset = $surveys;
-// echo $recset;
-		$Data = $recset->load(['y' => function($query) use ($cl)
-{
-	
-    $query->where('ColumnSetID', '=', $cl);
-}])->lists('y');
-
-		$Data = $Data->lists('Data')->all();
-
-
-$Data = array_filter($Data);
-$big0 = array_count_values($Data);
-
-
-
-return $big0;
+ 	$Data = $surveys->lists('Data')->lists($cl)->toArray();
+    $Data = array_filter($Data);
+    $big0 = array_count_values($Data);
+    return $big0;
 
 
 	}
@@ -887,15 +825,15 @@ protected static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
-			 	$o[1],
-			 	$o[2],
-			 	$o[-51]);
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
 		}
 
 		}
@@ -913,15 +851,15 @@ protected static function getLabel($trim,$col){
 		
 			$o = self::count_IMCIYN($Block,$Data1Col,$Data2Col,$rows);
 
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array = array (
 			 	 $label, 
-			 	$o[1],
-			 	$o[2],
-			 	$o[-51]);
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
 		
 		
 		
@@ -937,17 +875,17 @@ protected static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[3]))) $o[3]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["3"]))) $o["3"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
-			 	$o[1],
-			 	$o[2],
-			 	$o[3],
-			 	$o[-51]
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["3"],
+			 	$o["-51"]
 			 	);
 		}
 
@@ -965,25 +903,25 @@ protected static function getLabel($trim,$col){
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
-			if(!(isset($o[1]))) $o[1]=0;
-			if(!(isset($o[2]))) $o[2]=0;
-			if(!(isset($o[3]))) $o[3]=0;
-			if(!(isset($o[4]))) $o[4]=0;
-			if(!(isset($o[5]))) $o[5]=0;
-			if(!(isset($o[6]))) $o[6]=0;
-			if(!(isset($o[7]))) $o[7]=0;
-			if(!(isset($o[-51]))) $o[-51]=0;
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["3"]))) $o["3"]=0;
+			if(!(isset($o["4"]))) $o["4"]=0;
+			if(!(isset($o["5"]))) $o["5"]=0;
+			if(!(isset($o["6"]))) $o["6"]=0;
+			if(!(isset($o["7"]))) $o["7"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
 			
 			$array [] = array (
 			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
-			 	$o[1],
-			 	$o[2],
-			 	$o[3],
-			 	$o[4],
-			 	$o[5],
-			 	$o[6],
-			 	$o[7],
-			 	$o[-51]
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["3"],
+			 	$o["4"],
+			 	$o["5"],
+			 	$o["6"],
+			 	$o["7"],
+			 	$o["-51"]
 			 	);
 		}
 
@@ -996,19 +934,13 @@ protected static function getLabel($trim,$col){
 
 	
 	protected static function u5Register($Year1){
-		//$Year1 = 3;
-		global $surveys;
+	
 
-		
-
-
-
-    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray());
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray());
     $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=2; $i < 9; $i++) {
 
 			$index =  sprintf('%02d',$i);
-			//echo ("world","Peter","Hello world!");
 
 			$Label1 =  str_replace('Treatment with ','',(self::getLabel(0,'CHV2SEC3BLK99DRW'.$index.'COL01')));
 			$Label = $Label1;
@@ -1041,60 +973,37 @@ protected static function getLabel($trim,$col){
 		for ($i=$Year1; $i > $Year1-3 ; $i--) { 
 
 			$array [$i] = self::u5RegisterVal($Years[$i].$Row);
-		//	echo $Years[$i].' '.$i.'<br>';
+		
 
 		}
 
 		return($array);
 	}
+
 	protected static function u5RegisterVal($cl){
 		global $surveys;
 
-		//print_r ($Years);
-		$recset = $surveys;
-
-		$Data = $recset->load(['x' => function($query) use ($cl)
-{		
-	 
-    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
-}]);
+		$Data = $surveys->lists('Data');
+		$columns = Column_set::where('column_setID','Like',$cl.'%')->get()->lists('column_setID')->toArray();
 		
-		//echo $Data;
-		$total = 0;
-
-
-
-
-		foreach ($Data as $obj ) {
-
+		return $Data->sum(function ($assessment) use ($columns){
+		$assessment = collect($assessment);
+		$filtered = $assessment->only($columns);
+		return 	$filtered->values()->sum();
 		
-	$tt= ( $obj->x->sum('Data'));
-	//echo $tt.'	';
-	$total += $tt;
-	$thearrray [] = $tt;
+			});
 
-
-}
-
-		
-
-
-	//echo '<br>'.$total.'<br>';
-	return $total;
-		
 	}
-	
 
-
-	
 
 	protected static function annualtrends($Year2){
 
 		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray())[$Year2];
 
 		//print_r ($Years[3]);
-		$Array [] = array('Treatment Trends','ORS+ Zinc','ORS','Zinc','Antibiotics','Others','No Treatment')
-	;for ($i=2; $i <14 ; $i++) { 
+		$Array [] = array('Treatment Trends','ORS+ Zinc','ORS','Zinc','Antibiotics','Others','No Treatment');
+
+		for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsM($Block,'COL'.$index);
 		$Array [] = array(
@@ -1117,29 +1026,18 @@ protected static function getLabel($trim,$col){
 
 	protected static function annualtrendsM($Block,$Col){
 
-			global $surveys;
-
-				$recset = $surveys;
+		global $surveys;
 				
-				for ($i=3; $i <9 ; $i++) { 
-					$index = sprintf('%02d',$i);
+		for ($i=3; $i <9 ; $i++) 
+
+				{ 
+		  $index = sprintf('%02d',$i);
 		  $mcol = $Block.'RW'.$index.$Col;
-
-
-
-					$Data = $recset->load(['y' => function($query) use ($mcol)
-		{		
-			 
-		    $query->where('ColumnSetID', '=',$mcol);
-		}])->lists('y');
-
-				
-				$Month [] = ($Data->sum('Data'));
-					
+		  $Data = $surveys->lists($mcol);
+		  $Month [] = $Data->sum();					
 				}
-				return ($Month);
 
-
+		return ($Month);
 
 	}
 
@@ -1147,7 +1045,7 @@ protected static function getLabel($trim,$col){
 		protected static function u5RegisterN($Year1){
 		//$Year1 = 3;
 
-    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('Name')->toArray());
+    $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray());
     $array [] = array('Non Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=10; $i < 13; $i++) {
 
@@ -1187,28 +1085,21 @@ protected static function getLabel($trim,$col){
 		return($array);
 	}
 	protected static function u5RegisterNVal($cl){
+
 		global $surveys;
 
-		//print_r ($Years);
-		$recset = $surveys;
-		$Data = $recset->load(['x' => function($query) use ($cl)
-{		
-	 
-    $query->where('ColumnSetID', 'Like',$cl.'COL%' );
-}]);
+		$Data = $surveys->lists('Data');
+		$columns = Column_set::where('column_setID','Like',$cl.'%')->get()->lists('column_setID')->toArray();
 		
-		$total = 0;
-		foreach ($Data as $obj ) {
-
+		return $Data->sum(function ($assessment) use ($columns){
+		$assessment = collect($assessment);
+		$filtered = $assessment->only($columns);
+		return 	$filtered->values()->sum();
 		
-	$total += ( $obj->x->sum('Data'));
-	
+			});
 
-}
 
-	return $total;
-		
-	}
+		}
 
 
 
@@ -1217,46 +1108,34 @@ protected static function getLabel($trim,$col){
 		$Block = array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('blockID')->toArray())[$Year2];
 
 		//print_r ($Years[3]);
-		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases')
-	;for ($i=2; $i <14 ; $i++) { 
+		$Array [] = array('Annual ORT Treatment Trends','Total Number of Documented Cases');
+
+		for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsNM($Block,'COL'.$index);
 		$Array [] = array(
 			(self::getLabel(0,'CHV2SEC3BLK96DRW01COL'.$index)),
 			$Data
 			);
+			}
 		
-		
-	}
-		
-	return($Array);
+			return($Array);
 
 
 	}
 
 	protected static function annualtrendsNM($Block,$Col){
 
-			global $surveys;
-
-				$recset = $surveys;
+		global $surveys;
 				
-				
-					$index = 13;
+	
+		  $index = 13;
 		  $mcol = $Block.'RW'.$index.$Col;
-
-
-
-					$Data = $recset->load(['y' => function($query) use ($mcol)
-		{		
-		    $query->where('ColumnSetID', '=',$mcol );
-		}])->lists('y');
-
+		  $Data = $surveys->lists($mcol);
+		  $Month [] = $Data->sum();					
 				
-				$Month = ($Data->sum('Data'));
-					
-				
-				return ($Month);
 
+		return ($Month);
 
 }
 	
@@ -1264,42 +1143,25 @@ protected static function getLabel($trim,$col){
 	protected static function types(){
 global $surveys;
 
-		 $recset = $surveys;
+		 $Data = $surveys->lists('Facility_ID');
+	 
+	 $Facilities = Facilities::whereIn('FacilityCode',$Data)
+									->select('FacilityID','Type')
+									->with('ftypes')
+									->get()
+									->lists('ftypes');
+									// return
+	$Types = $Facilities->groupby('FacilityGroup');
 
-	
-		 	$Data = $recset->groupby('Type');
-      	
+	foreach ($Types as $Group=>$Type) {
 
-      		foreach ($Data as $v) {
-
-		$array [] = array( $v[0]['Type'], count($v));
+		$array [] = [$Group, count($Type)];
 		
 	}
 
-if(!isset($array))$array [] = array('No data',0);
+if(!isset($array))$array [] = ['No data',0];
 		
  return $array;
-
-
-// $Data = $recset->load(['z' => function($query)
-// {
-	
-//     $query->select('FacilityCode','Type');
-// }])->lists('z');
-
-
-
-
-// $z =  $Data->groupby('Type');
-
-
-// 	foreach ($z as $v) {
-
-// 		$array [] = array( $v[0]['Type'], count($v));
-		
-// 	}
-
-//  return ($array);
 	
 			}
 
@@ -1372,45 +1234,45 @@ if(!isset($array))$array [] = array('No data',0);
 	protected static function ownership(){
 global $surveys;
 
-		 $recset = $surveys;
+		 $Data = $surveys->lists('Facility_ID');
+	 
+	 $Facilities = Facilities::whereIn('FacilityCode',$Data)
+									->select('FacilityID','Owner')
+									->with('fowner')
+									->get()
+									->lists('fowner');
+									// return
+	$Owners = $Facilities->groupby('Group');
 
-	
-		 	$Data = $recset->groupby('Owner');
-      	
+	foreach ($Owners as $Group=>$Owner) {
 
-      		foreach ($Data as $v) {
-
-		$array [] = array( $v[0]['Owner'], count($v));
+		$array [] = [$Group, count($Owner)];
 		
 	}
 
-if(!isset($array))$array [] = array('No data',0);
+if(!isset($array))$array [] = ['No data',0];
 		
  return $array;
-	
-			}
+}
 
-protected static function staff_trained(){
+public static function staff_trained(){
+global $surveys;
+		$Data = $surveys->lists('Data');
 
-	$Array [] = array('No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s');
-	for ($i=4; $i <10 ; $i++) { 
-
-		$index = sprintf('%02d',$i);
-		$col = self::staff_trained_col('COL'.$index);
-		$Label = trim(self::getLabel(0,'CHV2SEC1BLK1RW01COL'.$index)  ,'/^No umber of staf train/');
-		$Array [] = array(
-
-			trim(str_replace("in ", "", $Label),'/^d/'),
-			$col[0],
-			$col[1],
-			$col[2]
-			);
+		$Array [] = ['Staff Trained','Doctors','Nurses','R.C.O.s'];
+	$Array []=['IMCI',$Data->sum('CHV2SEC1BLK1RW02COL04'),$Data->sum('CHV2SEC1BLK1RW03COL04'),$Data->sum('CHV2SEC1BLK1RW03COL04')];
+$Array []=['ICCM',$Data->sum('CHV2SEC1BLK1RW02COL05'),$Data->sum('CHV2SEC1BLK1RW03COL05'),$Data->sum('CHV2SEC1BLK1RW03COL05')];
+$Array []=['Enhanced Diarrhoea Management',$Data->sum('CHV2SEC1BLK1RW02COL06'),$Data->sum('CHV2SEC1BLK1RW03COL06'),$Data->sum('CHV2SEC1BLK1RW03COL06')];
+$Array []=['Diarrhoea and Pneumonia CMEs for U5s',$Data->sum('CHV2SEC1BLK1RW02COL07'),$Data->sum('CHV2SEC1BLK1RW03COL07'),$Data->sum('CHV2SEC1BLK1RW03COL07')];
+$Array []=['EID sample collection training',$Data->sum('CHV2SEC1BLK1RW02COL08'),$Data->sum('CHV2SEC1BLK1RW03COL08'),$Data->sum('CHV2SEC1BLK1RW03COL08')];
+$Array []=['Staff Still Working in Child Health Unit',$Data->sum('CHV2SEC1BLK1RW02COL09'),$Data->sum('CHV2SEC1BLK1RW03COL09'),$Data->sum('CHV2SEC1BLK1RW03COL09')];
 
 
+
+return($Array);
 
 		
-	}
-	return ($Array);
+	
 	
 
 }			
@@ -1511,21 +1373,11 @@ $DataN = $DataN->sum('Data');
 }
 
 
-	protected static function opdgen(){
+	public static function opdgen(){
 		global $surveys;
 
-		$recset = $surveys;
-	$Data = $recset->load(['y' => function($query) 
-{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC1BLK2RW01COL02');
-}])->lists('y');
-
-	$RawData = array_filter($Data->lists('Data')->all());
-	
-
-	$x = array_count_values($RawData);
-	
+    $Data = $surveys->lists('Data')->lists('CHV2SEC1BLK2RW01COL02')->collapse()->toArray();
+	$x = array_count_values($Data);
 
 	$ones = 0;
 	foreach ($x as $key => $value) {
@@ -1590,66 +1442,49 @@ $DataN = $DataN->sum('Data');
 	protected static function commstrategy(){
 		global $surveys;
 
-		$recset = $surveys;
+	$recset = $surveys->lists('Data');
 
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW02COL02');
-		}])->lists('y');
+	$Data = $recset->lists('CHV2SEC8BLK1RW02COL02');
+	$TCU = count($Data);
 
-	$TCU = $Data->count('Data');
-
-
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW03COL02');
-		}])->lists('y');	
+	$Data = $recset->lists('CHV2SEC8BLK1RW03COL02')->toArray();	
 		
-	$Data = $Data->groupby('Data');
+	$Data = array_count_values($Data);
 
-	 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
-	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
-	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
-	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
 	 
 	$TCUnt =$count1 + $count2 + $count3 +$count4;
 	$TCUt = $TCU-$TCUnt;
 
 
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW06COL02');
-		}])->lists('y');
+	$Data = $recset->lists('CHV2SEC8BLK1RW06COL02');
 
-	$Data = $Data->groupby('Data');
-		 if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
-	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
-	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
-	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
 	 
 	$CHEWSnt =$count1 + $count2 + $count3 +$count4;
 	
 		$CHEWSt = $TCU-$CHEWSnt;
 	
 
-	$Data = $recset->load(['y' => function($query) 
-		{
-	
-    $query->where('ColumnSetID', '=', 'CHV2SEC8BLK1RW08COL02');
-		}])->lists('y');
+	$Data = $recset->lists('CHV2SEC8BLK1RW08COL02');
 
-	$Data = $Data->groupby('Data');
- if(isset($Data['0'])) $count1 = count($Data['0']); else $count1 = 0; 
-	 if(isset($Data['00'])) $count2 = count($Data['00']); else $count2 = 0; 
-	 if(isset($Data['000'])) $count3 = count($Data['000']); else $count3 = 0; 
-	 if(isset($Data['0000'])) $count4 = count($Data['0000']); else $count4 = 0; 
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
 	 
 	$CHVnt =$count1 + $count2 + $count3 +$count4;
-	//$CHVnt =  count($Data['0'])+count($Data['00'])+count($Data['000'])+count($Data['0000']);
-	
+
 	$CHVt = $TCU-$CHVnt;
 
 		$Array [] = array ('Community Strategy','Trained (>0)','Not Trained (0)');
@@ -1664,23 +1499,16 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	protected static function ortloc(){
+	public static function ortloc(){
 		global $surveys;
 
-		$recset = $surveys;
+		$recset = $surveys->lists('Data');
 
-	$Data = $recset->load(['y' => function($query) 
-{
+	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02')->collapse();
+	 $all =count($Data);
 	
-    $query->where('ColumnSetID', '=', 'CHV2SEC5BLK1RW04COL02');
-}])->lists('y');
-
-	$RawData = array_filter($Data->lists('Data')->all());
-	$all = $Data->count('Data');
+	$x = array_count_values($Data->toArray());
 	
-	$x = array_count_values($RawData);
-	//print_r($x);
-	//echo "<br><br><br>";
 	if (!(isset($x[2]))) {$x[2]=0;}
 	$MCH = $x[2];
 	if (!(isset($x[3]))) {$x[3]=0;}
@@ -1690,8 +1518,6 @@ $DataN = $DataN->sum('Data');
 	if (!(isset($x[4]))) {$x[4]=0;}
 	$Ward = $x[4];
 	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
-
-	//echo $Other;
 
 	$Array [] = array('MCH',$MCH);
 	$Array [] = array('U5 Clinic',$U5_Clinic);
@@ -1712,102 +1538,32 @@ $DataN = $DataN->sum('Data');
 
 		protected static function dserviceconduct()
 		{
-
-
 			global $surveys;
+			$recset = $surveys->lists('Data');
+			$Data = $recset->lists('MNHV2SEC1BLK1RW03COL02')->collapse()->toArray();	
 
-							$recset = $surveys;
-	$Data = $recset->load(['y' => function($query) 
-{
-	
-    $query->where('ColumnSetID', '=', 'MNHV2SEC1BLK1RW03COL02');
-}])->lists('y');
+			$x = array_count_values(array_filter($Data));
 
-	$RawData = array_filter($Data->lists('Data')->all());
-	
-	$x = array_count_values($RawData);
-	
+			$others = 0;
+			foreach ($x as $key => $value) {
+				if($key !== "1" && $key !== "2" && $key !== "3" && $key !== "4" && $key !== "5")
+					$others += $value;
 
-	$ones = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'1') !== false) {
-    $ones += $value;
 			}
-		
-	}
+				isset($x["1"]) ?: $x["1"]=0;
+				isset($x["2"]) ?: $x["2"]=0;
+				isset($x["3"]) ?: $x["3"]=0;
+				isset($x["4"]) ?: $x["4"]=0;
+				isset($x["5"]) ?: $x["5"]=0;
 
+				$Array [] = array('Inadequate skill',$x["1"]);
+				$Array [] = array('Inadequate staff',$x["2"]);
+				$Array [] = array('Inadequate infrastructure',$x["3"]);
+				$Array [] = array('Inadequate Equipment',$x["4"]);
+				$Array [] = array('Inadequate Commodities and Suppliers',$x["5"]);
+				$Array [] = array('Others',$others);
 
-
-	$twos = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'2') !== false) {
-    $twos += $value;
-			}
-		
-	}
-
-	
-
-	$threes = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'3') !== false) {
-    $threes += $value;
-			}
-		
-	}
-
-	$fours = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'4') !== false) {
-    $threes += $value;
-			}
-		
-	}
-	$fives = 0;
-	foreach ($x as $key => $value) {
-
-		if (strpos($key,'5') !== false) {
-    $threes += $value;
-			}
-		
-	}
-
-	
-
-	$others = 0;
-	foreach ($x as $key => $value) {
-
-		if ( (trim($key,'12345,')) !== ''   )   {
-
-			$others+=$value;
-		}
-		
-	}
-
-	
-
-
-
-
-
-
-
-
-	$Array [] = array('Inadequate skill',$ones);
-	$Array [] = array('Inadequate staff',$twos);
-	$Array [] = array('Inadequate infrastructure',$threes);
-	$Array [] = array('Inadequate Equipment',$fours);
-	$Array [] = array('Inadequate Commodities and Suppliers',$fives);
-	$Array [] = array('Others',$others);
-
-	return ($Array);
-
-
-
+				return $Array;
 		}
 
 		protected static function bedcapacity(){
@@ -1938,39 +1694,34 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	protected static function FacilityTypes2Stack($col,$headings){
+	public static function FacilityTypes2Stack($col,$headings){
 
 		global $surveys;
 
-		$array [] = $headings;
+		 $array [] = $headings;
 
 
-	$recset = $surveys;
+	$recset =  $surveys->transform(function ($item, $key) {
+   			  collect($item)->put('Type',Facilities::Type($item['Facility_ID']));
+				});
 
-				$Rec = $recset->groupby('Type');
+
+	
+		 $Rec = $recset->groupby('Type');
       	
 
-      		foreach ($Rec as $v) {
+      		foreach ($Rec as $type => $assessment) {
 
-      			$type = $v[0]['Type'];
+      		
 
+		 $Data = $assessment->lists('Data');
 
-
-
-	$Data = $recset->load(['y' => function($query) use ($type,$col)
-		{
+		 $Data = $Data->groupby($col);
+		 isset($Data["1"]) ?: $Data["1"] = [];
+		  isset($Data["2"]) ?: $Data["2"] = [];
+		   isset($Data["-51"]) ?: $Data["-51"] = [];
 	
-    $query->where('Type','=',$type)
-    ->where('ColumnSetID', '=', $col);
-		}])->lists('y');
-
-		 $Data = $Data->groupby('Data')->all();
-
-		 if(!isset($Data[1])) $Data[1] = array();
-		 if(!isset($Data[2])) $Data[2] = array();
-		 if(!isset($Data[-51])) $Data[-51] = array();
-		
-		 $array [] = array($type,count($Data[1]),count($Data[2]),count($Data[-51]));
+		 $array [] = array($type,count($Data["1"]),count($Data["2"]),count($Data["-51"]));
 
 	}
 
@@ -1986,20 +1737,12 @@ $DataN = $DataN->sum('Data');
 
 
 
-				// $slices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other (Specify)','No information provided');
-
 		global $surveys;
-		 $recset = $surveys;
+		 $recset = $surveys->lists('Data');
 
-$Data = $recset->load(['y' => function($query) use ($col)
-{
-	
-    $query->where('ColumnSetID','=',$col);
-}])->lists('y');
+		$Data = $recset->lists($col);
 
-	$Data=array_filter($Data->lists('Data')->all());
-
-	$x =  array_count_values($Data);
+	 $x =  array_count_values($Data->toArray());
 
 	 $otherval = count($slices)-1;
 	 $noinfoval = count($slices);
@@ -2010,19 +1753,18 @@ $Data = $recset->load(['y' => function($query) use ($col)
 	foreach ($x as $key => $value) {
 
 		if (is_numeric($key)) {
-
+			$key = intval($key);
 			if(!isset($vl[$key])) $vl[$key] = 0;
-
-			$vl[$key] += $value; 
-   			
+			$vl[$key] += $value;   			
 			}
-			elseif ($key==-51) {
-if(!isset($vl[$noinfoval])) $vl[$noinfoval] = 0;
+			elseif ($key=="-51") {
+			if(!isset($vl[$noinfoval])) $vl[$noinfoval] = 0;
 				$vl[$noinfoval] += $value; 
 				
-			}else{
+			}
+			else{
 
-if(!isset($vl[$otherval])) $vl[$otherval] = 0;
+			if(!isset($vl[$otherval])) $vl[$otherval] = 0;
 				$vl[$otherval] += $value; 
 			}
 

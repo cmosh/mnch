@@ -1,10 +1,15 @@
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Skilled birth attendants</h3>
+                  <h3 class="box-title">Skilled birth attendants
+                  <small>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_skillbirth/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    
+                    </small>
+                    </h3>
                   <div class="box-tools pull-right">
-                   <a href='/comparison/MNHV2/MNHV2_skillbirth/barfullstack/' class='btn btn-box-tool'>Launch Comparison</a>
+                   
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>

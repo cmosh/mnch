@@ -2,28 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tables\SubmittedCHCount;
-use App\Tables\SubmittedCHCountie;
-use App\Tables\SubmittedMNHCount;
-use App\Tables\SubmittedMNHCountie;
-use App\Tables\SubmittedIMCICount;
-use App\Tables\SubmittedIMCICountie;
-use App\Tables\CHSubSurvey;
-use App\Tables\Column_set;
-use App\Tables\Survey;
+use App\Tables\assessments;
 use App\Tables\analyse;
-use App\Tables\Map;
-use App\Tables\Map_imci;
-use App\Tables\SurveysDone;
-use App\Tables\IMCISubSurvey;
-use App\Tables\Block;
-use App\Tables\Term;
-use App\Tables\MNHSubSurvey;
-use Illuminate\Database\Eloquent\Collection;
-use App\Http\Controllers\ArrayRedis as Rache;
-use Illuminate\Contracts\Foundation\Application As App;
+use App\Tables\Facilities;
+use App\Helpers\County;
 use Request;
-use Illuminate\Http\Request As Requested;
 use Input;
 use Cache;
 
@@ -38,18 +21,18 @@ public function maprequest(){
 
       switch ($survey) {
       	case 'ch':
-      		$Map = (Rache::remember('MapCH',180,function() {
-			return 	Map::where('Survey','=','Child Health')->get()->keyBy('Concat')->toArray();
+      		$Map = (Cache::remember('MapCH',180,function() {
+			return  County::Map('CH');
       	}));
       		break;      	
       	case 'mnh':
-      		$Map = (Rache::remember('MapMNH',180,function() {
-			return 	Map::where('Survey','=','Maternal Neonatal Healthcare')->get()->keyBy('Concat')->toArray();
+      		$Map = (Cache::remember('MapMNH',180,function() {
+			return 	 County::Map('MNH');
       	}));   
       		break;
       	case 'imci':
-      		$Map = (Rache::remember('xMapIMCI',180,function() {
-			return 	Map_imci::where('Survey','=','IMCI')->get()->keyBy('Concat')->toArray();
+      		$Map = (Cache::remember('MapIMCI',180,function() {
+			return  County::Map('IMCI');
       	}));   
       		break;
       	default:
@@ -79,7 +62,8 @@ echo json_encode($Map);
       if ($county == 'All' ) {
       	
       	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($Term){
-      					return 	CHSubSurvey::where('Assessment_Term','Like',$Term)->get();
+      					$temp = Facilities::SubmittedAssessments('CH', $Term)->toArray();
+      					return collect($temp);
       	});
 
 
@@ -87,7 +71,8 @@ echo json_encode($Map);
 
       else{
        	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
-      					return 	CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
+      					$temp = Facilities::SubmittedAssessments('CH',$Term,$county)->toArray();
+      					return collect($temp);
       	});
       
       }
@@ -112,6 +97,7 @@ echo json_encode($Map);
 public function mnhajax(){
 
 
+
 		
 		 if(Request::ajax()) {
       $data = Input::all();
@@ -122,21 +108,22 @@ public function mnhajax(){
  		if ($county == 'All') {
       	
       	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($Term){
-      					return 	MNHSubSurvey::where('Assessment_Term','Like',$Term)->get();
+      					$temp = Facilities::SubmittedAssessments('MNH', $Term)->toArray();
+      					return collect($temp);      				
       	});
 
       }
 
      else  {
        	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
-      					return 	MNHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$Term)->get();
+      					$temp = Facilities::SubmittedAssessments('CH',$Term,$county)->toArray();
+      					return collect($temp);
       	});
       
 
-}
+		}
     
-    $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county,$Term);
-		
+    $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county,$Term);	
 
 
     
@@ -151,68 +138,21 @@ public function mnhajax(){
 }
 
 
-public function imciajax(){
-
-
-		
-		 if(Request::ajax()) {
-      $data = Input::all();
-      $county = $data['county'];     
-       
-
-
- 		if ($county == 'All') {      	
-      	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function(){
-      					return 	IMCISubSurvey::all();
-      	});
-      }
-
-     else  {
-       	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($county){
-      					return 	IMCISubSurvey::where('County','Like',$county)->get();
-      	});     
-       }
-    
-    $IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,$county);	
-
-
-    
-    echo json_encode($IMCIanalytics);
-
-      die;
-
-
-
-	}
-
-}
 
 
 
 	public function ch()
 	{
 				
-	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.'All',180,function(){
-      					return 	CHSubSurvey::all();
-      	});
-
-
-      //	 $chanalytics  = analyse::chanalytics($CHSubSurvey,3,3,3,3,'All','Baseline');
-		
-   
-			
-		$SubmittedCHCount =  SubmittedCHCount::first();
-							 
-
-
-		$SubmittedCHCounties = SubmittedCHCountie::get();
-							 	
+		$CHSubSurvey = assessments::Submitted('CH')->get();         			
+      	$SubmittedCHCount =  assessments::Submitted('CH')->count();
+      	$SubmittedCHCounties = County::AllSubmitted('CH');							 	
 
 
 
 		$YearsBlock =Cache::remember('CHV2YearsAllYears',180,function() use ($CHSubSurvey){
 
-			$Years = analyse::sec3Years($CHSubSurvey);
+		$Years = analyse::sec3Years($CHSubSurvey);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
 		$AllYears = $Years;
@@ -220,7 +160,8 @@ public function imciajax(){
 		unset($Years[1]);
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
-		return array($Years,$AllYears,$YearsCount);
+
+		return [$Years,$AllYears,$YearsCount];
 
 
 		});
@@ -229,9 +170,7 @@ public function imciajax(){
 		$AllYears=$YearsBlock[1];
 		$YearsCount=$YearsBlock[2];
 		
-		$SurveysDone =	Rache::remember('SurveysDoneCHV2',180,function(){
-						 return SurveysDone::where('Name','=','Child Health')->get();
-						});  
+		
 	
 
 			return view('analytics.CH.index')
@@ -240,132 +179,21 @@ public function imciajax(){
 			->with('Years',$Years)
 			->with('YearsCount',$YearsCount)
 			->with('AllYears',$AllYears)
-			->with('SurveysDone',$SurveysDone)
 			->with('loc','Child Health Survey');
-
 
 				
 	}
-
-
-
-	public function comparison($survey,$lambda,$chart,$yr='not'){
-
-		
-
-		if($survey=='CHV2')
-
-		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
-							return SubmittedCHCountie::get();
-							 	});
-		elseif($survey=='MNHV2')
-
-		$SubmittedCounties = Cache::remember('SubmittedMNHV2Counties',180,function(){
-							return SubmittedMNHCountie::get();
-							 	});
-
-
-		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
-										   ->with('funct',$lambda)
-										   ->with('chart',$chart)
-										   ->with('yr',$yr)
-										   ->with('sv',$survey);
-
-	
-
-
-
-}
-
-	
-
 
 	public function mnh()
 	{
-				
-	
-$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.'All',180,function(){
-      					return MNHSubSurvey::all();
-      	});     
-
-
-		//	$mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,'All','Baseline');
-
-		
-		$SubmittedMNHCount = SubmittedMNHCount::first();
-		$SubmittedMNHCounties = SubmittedMNHCountie::get();
-	
-		$SurveysDone = SurveysDone::where('Name','=','Maternal Neonatal Healthcare')->get();
-	
+			
+	   	$SubmittedMNHCount =  assessments::Submitted('MNH')->count();
+      	$SubmittedMNHCounties = County::AllSubmitted('MNH');
 	
 
-			return view('analytics.MNH.index')
+		return view('analytics.MNH.index')
 			->with('SubmittedCount',$SubmittedMNHCount)
-			->with('SubmittedCounties',$SubmittedMNHCounties)
-			
-			->with('SurveysDone',$SurveysDone);
-
-	}
-
-
-	public function imci()
-	{
-				
-	
-$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
-      					return IMCISubSurvey::all();
-      	});     
-
-
-			///$IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,'All');
-
-		
-		$SubmittedIMCICount = SubmittedIMCICount::first();
-		$SubmittedIMCICounties = SubmittedIMCICountie::get();
-	
-		$SurveysDone = SurveysDone::where('Name','=','IMCI')->get();
-	
-	
-
-			return view('analytics.IMCI.index')
-			->with('SubmittedCount',$SubmittedIMCICount)
-			->with('SubmittedCounties',$SubmittedIMCICounties)
-			
-			->with('SurveysDone',$SurveysDone);
-
-	}
-
-
-
-
-
-		public function tester(){
-
-			$env = config("app.env");
-
-			if($env!='local')abort(404);
-
-
-			$IMCISubSurvey = /*Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
-      					return*/ IMCISubSurvey::all();
-     /* 	}); */   
-
-   
-			return analyse::imcianalytics($IMCISubSurvey,'All');
-			//return analyse::sunit($IMCISubSurvey);
-		
-	}
-
-
-	public function blah( )
-	{		
-		$env = config("app.env");
-
-			if($env!='local')abort(404);
-
-			
-			return("x");
-		
+			->with('SubmittedCounties',$SubmittedMNHCounties);
 
 	}
 
@@ -374,18 +202,20 @@ public function terms()
 		
          if(Request::ajax()) {
          	  $param = Input::all();
- 
+ 		
          	$county = $param['county'];
          	if ($county == 'All') {
-         		$array = array();
-         		$array[] = array('County'=>'All','Term'=>'Baseline');
-         		$array[] = array('County'=>'All','Term'=>'Midterm');
-         		$array[] = array('County'=>'All','Term'=>'Endterm');
-         		$sresult = collect($array);  
+         		$array[] = ['County'=>'All','Term'=>'Baseline'];
+         		$array[] = ['County'=>'All','Term'=>'Midterm'];
+         		$array[] = ['County'=>'All','Term'=>'Endterm'];
+         		
          		 }
-         	else {	$sresult = Term::where('County','Like',$county)->get(); 
-         }
-         	echo json_encode($sresult);
+         	else {	
+       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Baseline'];
+      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Midterm'];
+        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Endterm'];
+         	}
+         	echo json_encode(collect($array));
 
 
          }
@@ -394,15 +224,97 @@ public function terms()
 
          die;
 	}
+	
+	
+// public function imciajax(){
+
+
+		
+// 		 if(Request::ajax()) {
+//       $data = Input::all();
+//       $county = $data['county'];     
+       
+
+
+//  		if ($county == 'All') {      	
+//       	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function(){
+//       					return 	IMCISubSurvey::all();
+//       	});
+//       }
+
+//      else  {
+//        	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($county){
+//       					return 	IMCISubSurvey::where('County','Like',$county)->get();
+//       	});     
+//        }
+    
+//     $IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,$county);	
+
+
+    
+//     echo json_encode($IMCIanalytics);
+
+//       die;
 
 
 
+// 	}
+
+// }
+
+// 	public function imci()
+// 	{
+				
+	
+// $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
+//       					return IMCISubSurvey::all();
+//       	});     
+
+
+// 			///$IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,'All');
+
+		
+// 		$SubmittedIMCICount = SubmittedIMCICount::first();
+// 		$SubmittedIMCICounties = SubmittedIMCICountie::get();
+	
+// 		$SurveysDone = SurveysDone::where('Name','=','IMCI')->get();
+	
+	
+
+// 			return view('analytics.IMCI.index')
+// 			->with('SubmittedCount',$SubmittedIMCICount)
+// 			->with('SubmittedCounties',$SubmittedIMCICounties)
+			
+// 			->with('SurveysDone',$SurveysDone);
+
+// 	}
+
+
+// 	public function comparison($survey,$lambda,$chart,$yr='not'){
+
+		
+
+// 		if($survey=='CHV2')
+
+// 		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
+// 							return SubmittedCHCountie::get();
+// 							 	});
+// 		elseif($survey=='MNHV2')
+
+// 		$SubmittedCounties = Cache::remember('SubmittedMNHV2Counties',180,function(){
+// 							return SubmittedMNHCountie::get();
+// 							 	});
+
+
+// 		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
+// 										   ->with('funct',$lambda)
+// 										   ->with('chart',$chart)
+// 										   ->with('yr',$yr)
+// 										   ->with('sv',$survey);
 
 	
 
 
 
-	
-	
-
+// }
 }

@@ -1,11 +1,11 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Term extends Model  {
+class Term extends Eloquent  {
 
 	
-	protected $table='CountyTerms';
+	protected $collection='Terms';
 
 	
 

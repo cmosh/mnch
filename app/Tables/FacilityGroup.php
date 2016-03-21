@@ -1,10 +1,10 @@
 <?php namespace App\Tables;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class FacilityGroup extends Model {
+class FacilityGroup extends Eloquent {
 
-	protected $table = 'FacilityGroups';
+	protected $collection = 'FacilityGroups';
 
 	 public function x()
     {

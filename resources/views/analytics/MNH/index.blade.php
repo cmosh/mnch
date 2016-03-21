@@ -4,7 +4,7 @@
                  Maternal and Neonatal Health Survey   
               <small>(Analysis Results)</small>
             <!--</h1>-->
-            <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
+            
 @endsection
 
 @section('content')
@@ -23,6 +23,7 @@
 
 
    </div>
+   <div class="row">
    @include('analytics/county')
 
  <div class="col-md-8">
@@ -30,7 +31,7 @@
   <!-- small box -->
                <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
               
@@ -50,22 +51,31 @@
 
          @include('analytics/MNH/html/types')
            
-
+</div>
 
      
             <div class="col-md-12">
+            
+     <div class="row">       
+            
                    @include('analytics/MNH/html/dservice')
+                   
+
 
                     @include('analytics/MNH/html/dserviceconduct')
+                   
+@include('analytics/MNH/html/hman')
+     </div>
+<div class="row">
 
-
-        @include('analytics/MNH/html/hman')
 
         @include('analytics/MNH/html/skillbirth')
+          
+
         @include('analytics/MNH/html/bedcapacity')
           @include('analytics/MNH/html/hours24')
 
-
+</div>
             </div>
 
 
@@ -80,17 +90,29 @@
                         </div>
                         </div>
 </div>
-  
+  <div class="row">
  @include('analytics/MNH/html/bemonc')
   @include('analytics/MNH/html/BemoncChallenge')
-@include('analytics/MNH/html/cemonc')
+  
+
+ 
+ </div>
+ <div class="row">
+ @include('analytics/MNH/html/cemonc')
+ @include('analytics/MNH/html/HIVTest')
+  
+  </div>
+ <div class="row">
  @include('analytics/MNH/html/MainBlood')
  @include('analytics/MNH/html/ReasonBlood')
  @include('analytics/MNH/html/Reasoncs')
- @include('analytics/MNH/html/HIVTest')
-  @include('analytics/MNH/html/newborn')
+ </div>
+ 
+  <div class="row">
+  @include('analytics/MNH/html/kangaroo')
   @include('analytics/MNH/html/devpep')
-   @include('analytics/MNH/html/kangaroo')
+  @include('analytics/MNH/html/newborn')
+   </div>
  
    
 
@@ -160,7 +182,7 @@
         $(".select2").select2();
 
           @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
@@ -197,7 +219,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '/analytics/maprequest',
+      url: '{{config("app.prefix")}}/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -234,7 +256,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '/analytics/mnhajax',
+      url: '{{config("app.prefix")}}/analytics/mnhajax',
       type: "post",
        data: data,
            success: function(data){
@@ -253,34 +275,32 @@ function drawChart() {
 
 	//include js
     
-	     @include('analytics/MNH/js/gjavailability')
-       @include('analytics/MNH/js/tavailability')
-       @include('analytics/MNH/js/jjavailability')
-       @include('analytics/MNH/js/dservice')
-        @include('analytics/MNH/js/hman')
-       @include('analytics/MNH/js/ownership')
-       @include('analytics/MNH/js/types')
-   @include('analytics/MNH/js/bemonc')
+	   @include('analytics/MNH/js/gjavailability')     
+     @include('analytics/MNH/js/tavailability')
+     @include('analytics/MNH/js/jjavailability')
+     @include('analytics/MNH/js/dservice')
+     @include('analytics/MNH/js/hman')
+     @include('analytics/MNH/js/ownership')
+     @include('analytics/MNH/js/types')
+     @include('analytics/MNH/js/bemonc')
      @include('analytics/MNH/js/cemonc')
      @include('analytics/MNH/js/newborn')
      @include('analytics/MNH/js/HIVTest')
      @include('analytics/MNH/js/kangaroo')
-     @include('analytics/MNH/js/devpep')
-         @include('analytics/MNH/js/dserviceconduct')
-         @include('analytics/MNH/js/skillbirth')
-           @include('analytics/MNH/js/bedcapacity')
-          @include('analytics/MNH/js/hours24')
+     @include('analytics/MNH/js/devpep')        
+     @include('analytics/MNH/js/EquipAvail')
+     @include('analytics/MNH/js/testing')
+     @include('analytics/MNH/js/devkit')
+              @include('analytics/MNH/js/hours24')
             @include('analytics/MNH/js/BemoncChallenge')
              @include('analytics/MNH/js/MainBlood')
              @include('analytics/MNH/js/ReasonBlood')
               @include('analytics/MNH/js/Reasoncs')
-
-      @include('analytics/MNH/js/EquipAvail')
-    @include('analytics/MNH/js/testing')
-  @include('analytics/MNH/js/devkit')
+              @include('analytics/MNH/js/dserviceconduct')
+      
 
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} facilities in {{count($SubmittedCounties)}} counties');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
@@ -350,7 +370,7 @@ $(function(){
 
 
 
-    $.getJSON("/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
+    $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
         options += '<option value="' + j[i].Term + '" selected>' + j[i].Term + '</option>';

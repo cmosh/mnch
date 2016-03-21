@@ -6,7 +6,10 @@
         height: 300,
        
         legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: 35 }
+        bar: { groupWidth: 35 },
+        hAxis: {textStyle: {
+                fontSize: 8, bold:'true'
+            }}
 
              };
       var u5Register = new google.visualization.ColumnChart(document.getElementById('uRegister'));

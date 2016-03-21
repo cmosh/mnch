@@ -11,7 +11,6 @@ use App\Tables\Assessor;
 use App\Tables\assessments;
 use App\Tables\Datarecord;
 use App\Tables\Facilities;
-use App\Tables\Surveyview;
 use App\Http\Controllers\ArrayRedis As Rache;
 use Request;
 use Input;
@@ -97,10 +96,7 @@ class surveys extends Controller
       $stype = array_shift($array);
       $AssID = array_shift($array);
       $UserId = array_shift($array);
-     $fruit = array_pop($array);
-
-
-    
+     $fruit = array_pop($array);   
 
 
     $surveyyy = assessments::where('Assessment_ID', '=', $AssID)->first();
@@ -162,68 +158,26 @@ class surveys extends Controller
         return builder::buildview($AssID, 'open',null,"primary")['ColIDs'];
 
 });
+     $data;
         foreach ($var as $x) {     
             $datavalue = array_shift($array);
             $dataid = $AssID.$x;
-            $fruit = $AssID;
-
-            if( !isset(DataRecord::where('DataID','=',$dataid)->first()->AssID)) {
-
-                 $data = new Datarecord; 
-                 $data->ColumnSetID =  $x; 
-                  $data->DataID =  $dataid;   
-                  $data->AssID = $AssID;
-
-            if (gettype($datavalue) == "array") { $data->Data = implode(",", $datavalue); }  
-            else {$data->Data = str_replace( array('_'), '', $datavalue);}                                                   
-                 $data->save();      
+            // $fruit = $AssID;
 
 
-                  }
-                                                          
-
-             else {
-
-                 if (gettype($datavalue) == "array") { $datas = implode(",", $datavalue);}
-                    else {$datas = str_replace(array('_'), '', $datavalue);}  
-                      
-            Datarecord::createOrUpdate(
-                array('ColumnSetID' => $x,
-                 'DataID' =>$dataid, 
-                 'AssID' => $AssID, 
-                 'Data' => $datas),
-                  array('DataID' => $dataid));
-        }
-
+            $datas = str_replace(array('_'), '', $datavalue);                      
+            $data [$x]  = $datas;                             
+        
     }
 
 
-
-
         assessments::createOrUpdate(
-                array('UserId' => $UserId,
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
-
-     
-
-
-              if ($stype == 'auto') { 
-               assessments::createOrUpdate(
-                array('Status' => 'Incomplete',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));   
-                }
-
-
-                elseif($stype == 'Submitted') {
-             assessments::createOrUpdate(
-                array('Status' => 'Submitted',
-                  'Assessment_ID' => $AssID), 
-                array('Assessment_ID' => $AssID));
-                  }     
-
-
+                array('Data' => $data,                
+                 'Assessment_ID' => $AssID, 
+                 'UserId' => $UserId,
+                 'Status' => $stype == 'auto' ? 'Incomplete' : 'Submitted'
+                 ),
+                  array('Assessment_ID' => $AssID));
 }
 
     
@@ -234,11 +188,11 @@ print_r($fruit);die;
 
  public function create($id) {
 
-        $assess = assessments::where('Assessment_ID','=',$id)->first();
-        $TheFacility = Facilities::where('FacilityCode', '=', $assess->Facility_ID)->first();
+         $assess = assessments::where('Assessment_ID','=',$id)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', intval($assess->Facility_ID))->first();
         $PartID = $assess->PartID;
-        $sv = $assess->Survey;
-        $status = $assess->status;
+         $sv = $assess->Survey;
+        $status = $assess->Status;
 
        if ($PartID!=null) $Participant = Participants::where('PartID','=',$PartID)->first();
        else $Participant = '';
@@ -263,7 +217,7 @@ print_r($fruit);die;
       
         Rache::foreveryoung($id,function(){return "I Exist!";});
 
-        
+      
         return view('surveys.template')->with('TheFacility',$TheFacility)
                                        ->with('Participant',$Participant)
                                        ->with('AssID',$id)
@@ -279,7 +233,7 @@ print_r($fruit);die;
     public function show($id) {
         
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
-        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', intval($TheAsses->Facility_ID))->first();
         $sv = $TheAsses->Survey;
         $Survs = Survey::where('surveyID', '=', $sv)->first();
         $Secs = Section::where('surveyID', '=', $sv)->get();
@@ -307,7 +261,7 @@ print_r($fruit);die;
        $sv = $TheAsses->Survey;
        $Survs = Survey::where('surveyID', '=', $sv)->first();
        $Secs = Section::where('surveyID', '=', $sv)->get();
-       $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+       $TheFacility = Facilities::where('FacilityCode', '=', intval($TheAsses->Facility_ID))->first();
         $location = substr($sv, 0, 2);
         $color = self::color($location);   
        $Melarray = builder::buildview($id, 'edit',$Participant,$color);
@@ -330,7 +284,7 @@ print_r($fruit);die;
     public function badedit($id) {
 
         $TheAsses = assessments::where('Assessment_ID', '=', $id)->first();
-        $Assessment = Surveyview::where('AssID','=',$id)->first();
+      
         $PartID = $TheAsses->PartID;
        if ($PartID!=null) $Participant = Participants::where('PartID','=',$PartID)->first();else $Participant='';
         $sv = $TheAsses->Survey;
@@ -338,12 +292,12 @@ print_r($fruit);die;
         $Secs = Section::where('surveyID', '=', $sv)->get();
          $location = substr($sv, 0, 2);
           $color = self::color($location);   
-       if( !isset($Assessment->AssessorName) ){ 
+       if( $TheAsses->Status=='New' ){ 
         $Melarray = collect(Rache::forever('build_newSurvey_'.$sv,function() use ($id,$Participant,$color){
                                  return builder::buildview($id,'open',$Participant,$color);
                             }));}
        else $Melarray = builder::buildview($id, 'edit',$Participant,$color);      
-        $TheFacility = Facilities::where('FacilityCode', '=', $TheAsses->Facility_ID)->first();
+        $TheFacility = Facilities::where('FacilityCode', '=', intval($TheAsses->Facility_ID))->first();
         $Mel = $Melarray['htmll'];
         $AjaxNames = $Melarray['ajax'];
        

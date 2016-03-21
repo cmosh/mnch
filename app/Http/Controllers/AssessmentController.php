@@ -8,7 +8,7 @@ use App\Tables\Facilities;
 use App\Tables\Participants;
 use App\Tables\Survey;
 use App\Tables\Assessor;
-use App\Tables\countie;
+use App\Tables\counties;
 use App\Tables\Surveyview;
 use App\Tables\Participantsview;
 use App\Tables\Imciview;
@@ -36,7 +36,7 @@ class AssessmentController extends Controller {
 	{
 		$sv = '%'.$sv.'%';		
 		$Surveys = Survey::where('surveyID','like',$sv)->get();
-		$Counties = countie::all();
+		$Counties = counties::all();
 
 		return view('assessments.index')->with('Counties',$Counties)
 										->with('location','ass')
@@ -45,7 +45,7 @@ class AssessmentController extends Controller {
 	}
 
 	
-	public function create($id,$date,$term,$countie,$subcounty)
+	public function create($id,$date,$term,$county,$subcounty)
 	{
 			$loc = substr ($id, 0,2);
 			
@@ -61,13 +61,13 @@ class AssessmentController extends Controller {
 			else {
 			
 			
-			$FacilityList = Facilities::AssessmentList( array('County'=>$countie,
+			$FacilityList = Facilities::AssessmentList( array('County'=>$county,
 														    'SubCounty'=>$subcounty,
 														    'Term'=>$term,
 														    'Survey'=>$id
 														    ))->get();
 
-			$All = $this->Map->transform($FacilityList,'FacilityList');
+			 $All = $this->Map->transform($FacilityList,'FacilityList');
 			
 			}
 
@@ -75,7 +75,7 @@ class AssessmentController extends Controller {
 			{
 				$date=$date;
 				$term='';
-				$countie='';
+				$county='';
 			}
 			
 			
@@ -88,7 +88,7 @@ class AssessmentController extends Controller {
 											 ->with('title','Assessments')
 											 ->with('countID',$countID)
 											 ->with('All',$All)
-											 ->with('thecounty',$countie);
+											 ->with('thecounty',$county);
 	}
 
 	public function store($id)
@@ -102,13 +102,13 @@ class AssessmentController extends Controller {
 	}
 
 		$assessments->Assessment_ID=$x[0];
-		$assessments->Facility_ID=$x[1];
+		$assessments->Facility_ID=intval($x[1]);
 		$assessments->Assessment_Term=$x[2];
 		$assessments->Date=$x[3];
 		$assessments->Survey= $id;
 		$assessments->UserId= $x[4];
 		$assessments->Status= $x[5];
-		$assessments->PartID=$x[6];
+		$assessments->PartID=intval($x[6]);
 
 	$assessments->save();
 	$ur = 'assessments/start/'.$x[0];
@@ -116,21 +116,27 @@ class AssessmentController extends Controller {
 
 	}
 
-	public function show($id,$county,$term,$subcounty)
+	public function show($survey,$county,$term,$subcounty)
 	{
-			$id = substr($id, 0,2);
+			$id = substr($survey, 0,2);
 			if ($id != 'IM') 
 {
 				$AssessmentsList = assessments::View(array(
-    				'County'=>'Samburu',
-    				'SubCounty'=>'Samburu Central',
-    				'Survey'=>'CHV2',
-    				'Term'=>'Baseline'
+    				'County'=>$county,
+    				'SubCounty'=>$subcounty,
+    				'Survey'=>$survey,
+    				'Term'=>$term
     				))->get();
 
-    			$Assessments = $this->Map->transform($AssessmentsList,'AssessmentList');
+    			$Assessments = $this->Map->Assessmentsfilter($AssessmentsList);
 }
-			else $Assessments = Imciview::all();
+			else {
+
+		$AssessmentsList = assessments::Participants(array('Survey'=>$survey))->get();
+
+          $Assessments =  $this->Map->ParticipantsFilter($AssessmentsList);
+         
+			}
 
 					return view('assessments.view')->with('Assessments',$Assessments)
 												   ->with('location','ass')

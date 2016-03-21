@@ -22,7 +22,7 @@
               <h3><i class="fa fa-warning text-yellow"></i> Sorry! Page not found.</h3>
              
                 We could not find the page you were looking for.
-                Meanwhile, you may <a href="/home">return to your dashboard</a>
+                Meanwhile, you may <a href="{{config('app.prefix')}}/home">return to your dashboard</a>
              
               
             </div><!-- /.error-content -->
