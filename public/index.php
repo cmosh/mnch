@@ -1,4 +1,20 @@
 <?php
+
+
+
+
+    $segments = ( isset($_SERVER['REQUEST_URI']) ? explode('/', trim($_SERVER['REQUEST_URI'],'/')) : array('/') );
+
+    $urls = ['redis'];
+    
+    if (in_array($segments[0], $urls) ) {
+        // require_once __DIR__.'/wp/vendor/autoload.php';
+        exit;
+    }
+
+
+
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
