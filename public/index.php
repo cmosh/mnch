@@ -6,7 +6,6 @@
     $segments = ( isset($_SERVER['REQUEST_URI']) ? explode('/', trim($_SERVER['REQUEST_URI'],'/')) : array('/') );
    
     $segments =  $segments[0] !== 'MNCH' ?: array_reverse($segments) ;
-     print_r($segments);
     $urls = ['redis'];
     
     if (in_array($segments[0], $urls) ) {
