@@ -9,6 +9,7 @@
     
     if (in_array($segments[0], $urls) ) {
         // require_once __DIR__.'/wp/vendor/autoload.php';
+        require_once  __DIR__.'/../app/Redmin/public/index.php';
         exit;
     }
 
