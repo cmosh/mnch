@@ -1,0 +1,8 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^(www.)?41.89.6.209$
+RewriteCond %{REQUEST_URI} !^/MNCH/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /MNCH/$1
+RewriteCond %{HTTP_HOST} ^(www.)?41.89.6.209$
+RewriteRule ^(/)?$ MNCH/index.php [L]
