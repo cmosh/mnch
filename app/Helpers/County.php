@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Helpers;
-use App\Tables\counties;
-use App\Tables\Term;
-use App\Tables\assessments;
-use App\Tables\Facilities;
+use App\Models\Counties;
+use App\Models\Term;
+use App\Models\Assessments;
+use App\Models\Facilities;
 use Illuminate\Support\Collection;
 
 
@@ -70,6 +70,44 @@ public static function Map($Survey){
 	return ($SubmittedCounties);	
 
 }
+
+
+public static function MapIM(){
+
+	$Counties = counties::all()->lists('Name');
+	$SubmittedCounties = [];
+	
+	foreach ($Counties as $County) {
+	
+
+			
+				$Number = Facilities::MapAssessmentsIM(array('County'=>$County,
+                                                        'Survey'=>'IMCI',
+                                                        'Status'=>'Submitted'
+                                                        )
+                                                );
+				$Number1 = Facilities::MapAssessmentsIM(array('County'=>$County,
+                                                        'Survey'=>'IMCI',
+                                                        'Status'=>'Incomplete'
+                                                        )
+                                                );
+
+		$SubmittedCounties [$County] = ['Survey' => 'IMCI',
+											  'County' => $County,
+											  'Submitted' => $Number,
+											  'Not_Submitted' => $Number1,
+											  'All_Attempted' =>  $Number1 + $Number,
+										   	  'Term' => 'Baseline'
+												];
+						
+
+			
+		}
+	return ($SubmittedCounties);	
+
+}
+
+
 public static function Submitted(){
 
 	

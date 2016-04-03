@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Helpers;
-use App\Tables\Facilities;
+use App\Models\Facilities;
 use Illuminate\Support\Collection;
-
+use Cache;
 
 class Map{
 
@@ -144,6 +144,89 @@ class Map{
         
   }
 
+   public function ParticipantsListCounties($item){
+    
+        $facilityName = 'Not';
+        $facilityCode = 'Not';
+        $calcsearch = 's';
+      if($item->facility){
+        $facilityCode = $item->facility->FacilityCode;
+        $facilityName = $item->facility->FacilityName;
+      }else{
+
+       $string = str_replace("Dispensary ", "", $item->FacilityName);
+        $string = str_replace("Dispensary", "", $string);
+        $string = str_replace("dispensary", "", $string);
+        $string = str_replace("dispensary ", "", $string);
+        $string = str_replace("Medical ", "", $string);
+        $string = str_replace("medical", "", $string);
+        $string = str_replace("medical ", "", $string);
+        $string = str_replace("Medical", "", $string);
+        $string = str_replace("Clinic ", "", $string);
+        $string = str_replace("clinic ", "", $string);
+        $string = str_replace("Clinic", "", $string);
+        $string = str_replace("clinic", "", $string);
+        $string = str_replace("Centre", "", $string);
+        $string = str_replace("Centre ", "", $string);
+        $string = str_replace("centre", "", $string);
+        $string = str_replace("centre ", "", $string);
+        $string = str_replace("Hospital ", "", $string);
+        $string = str_replace("hospital ", "", $string);
+        $string = str_replace("Hospital", "", $string);
+        $string = str_replace("hospital", "", $string);
+        $string = str_replace("International ", "", $string);
+        $string = str_replace("International", "", $string);
+        $string = str_replace("international ", "", $string);
+        $string = str_replace("international", "", $string);
+        $string = str_replace("Health ", "", $string);
+        $string = str_replace("Health", "", $string);
+        $string = str_replace("health ", "", $string);
+        $string = str_replace("health", "", $string);
+        $string = str_replace(" - ", "", $string);
+        $string = str_replace("  ", " ", $string);
+        $string = str_replace("-", "", $string);
+        $string = str_replace("H/C", "", $string);
+        $string = str_replace("â€™", "'", $string);
+        $string = str_replace("â€“ ", "", $string);
+        $string = str_replace("(", "", $string);
+        $string = str_replace(")", "", $string);
+        
+        
+
+
+        $calcsearch =  rtrim((str_replace(" ", "|",$string)),"|");
+
+
+        if($result=Facilities::missing($calcsearch)->first()){
+          $facilityName=$result->FacilityName;
+          $facilityCode=$result->FacilityCode;
+        }else{
+          $result=Facilities::missing('Kenyatta National Hospital')->first();
+          $facilityName=$result->FacilityName;
+          $facilityCode=$result->FacilityCode;
+        }
+        
+      }
+      
+       
+     
+       return 
+
+       collect([ 
+       'Name' => $item->Name_of_Participant,
+       'Facility' => $facilityName,
+       'FacilityCode' => $facilityCode,
+       'FacilityType' => Facilities::where('FacilityCode',$facilityCode)->with('ftypes')->first()->ftypes->FacilityGroup,
+       'TrainigSite' => $item->training_site,
+       'IDNumber' => $item->id_Number,
+       'Status' => $this->StatusCheckIM($item->assessment),
+       'PartID' => $item->PartID,
+       'County' => Facilities::where('FacilityCode',$facilityCode)->first()->County
+       ]);
+
+        
+  }
+
 
 
   public function FacilityList($item){
@@ -177,6 +260,22 @@ class Map{
         } 
     else 
       return 'Ready';
+  }
+
+
+   private function StatusCheckIM($Assessment){
+
+    if($Assessment!=null)
+        switch ($Assessment['Status']) {
+          case 'Submitted':
+           return 'Assessed';
+            break;          
+          default: 
+            return 'Not Assessed';
+            break;
+        } 
+    else 
+      return 'Not Assessed';
   }
 
 

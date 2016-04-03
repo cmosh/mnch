@@ -1,50 +1,29 @@
 <?php namespace App\Http\Controllers;
-use App\Http\Requests;
-
 
 use App\Http\Controllers\Controller;
-
-use App\User;
-// use App\Tables\User_monitor;
-use App\Tables\countie;
-
-
-
-use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
-
-use Input;
-
+use Illuminate\Http\Request;
+use App\Models\Counties;
+use App\Http\Requests;
+use App\Models\User;
+use Carbon\Carbon;
+use Response;
 use Redirect;
 use Session;
-use Response;
+use Input;
 use Hash;
-use Request As Rq;
-use Carbon\Carbon;
 use Mail;
 
 class Register extends Controller {
 
 
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-
-
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
 	public function index()
 
 		{
 
 
-				$Counties = countie::all();
+				$Counties = Counties::all();
 				return view('usermanagement.register')->with('counties',$Counties)->with('info','');
 		
 	}
@@ -63,19 +42,15 @@ $array=$Requestuser->all();
 
 	$users=new User;
 	foreach ($array as $key ) {
-		# code...
+		
 			$x[]=$key;
 			
 	}
 
 	
-	$Counties = countie::all();
+	$Counties = Counties::all();
 	$x[1]=$Counties[$x[1]]->Name;	
-	//$statusnum=1;
-			
-	
 
-	
 		$data=array(
 		'name'=>$x[0],
 		'county'=>$x[1],

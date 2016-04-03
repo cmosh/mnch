@@ -2,9 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tables\assessments;
-use App\Tables\analyse;
-use App\Tables\Facilities;
+use App\Models\Assessments;
+use App\Helpers\Analyse;
+use App\Models\Facilities;
 use App\Helpers\County;
 use Request;
 use Input;
@@ -31,8 +31,8 @@ public function maprequest(){
       	}));   
       		break;
       	case 'imci':
-      		$Map = (Cache::remember('MapIMCI',180,function() {
-			return  County::Map('IMCI');
+      		$Map = (Cache::remember('sdfgsdsfgsdMapIMCI',180,function() {
+			return  County::MapIM();
       	}));   
       		break;
       	default:
@@ -78,7 +78,7 @@ echo json_encode($Map);
       }
      
 
-    $chanalytics  = analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county,$Term);
+    $chanalytics  = Analyse::chanalytics($CHSubSurvey,$Year_1,$Year_2,$Year_3,$Year_4,$county,$Term);
 		
 
    
@@ -123,7 +123,7 @@ public function mnhajax(){
 
 		}
     
-    $mnhanalytics  = analyse::mnhanalytics($MNHSubSurvey,$county,$Term);	
+    $mnhanalytics  = Analyse::mnhanalytics($MNHSubSurvey,$county,$Term);	
 
 
     
@@ -152,7 +152,7 @@ public function mnhajax(){
 
 		$YearsBlock =Cache::remember('CHV2YearsAllYears',180,function() use ($CHSubSurvey){
 
-		$Years = analyse::sec3Years($CHSubSurvey);
+		$Years = Analyse::sec3Years($CHSubSurvey);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
 		$AllYears = $Years;
@@ -226,68 +226,57 @@ public function terms()
 	}
 	
 	
-// public function imciajax(){
+public function imciajax(){
+
 
 
 		
-// 		 if(Request::ajax()) {
-//       $data = Input::all();
-//       $county = $data['county'];     
+		 if(Request::ajax()) {
+      $data = Input::all();
+      $county = $data['county'];     
        
 
 
-//  		if ($county == 'All') {      	
-//       	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function(){
-//       					return 	IMCISubSurvey::all();
-//       	});
-//       }
+ 		if ($county == 'All') {      	
+      	$IMCISubSurvey = Cache::remember('IMCISusbssSurvey'.$county,180,function(){
+      					return Facilities::SubmittedIM();
+      	});
+      }
 
-//      else  {
-//        	$IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.$county,180,function() use($county){
-//       					return 	IMCISubSurvey::where('County','Like',$county)->get();
-//       	});     
-//        }
+     else  {
+       	$IMCISubSurvey = Cache::remember('IMCISubSurvey'.$county,180,function() use($county){
+      					return 	Facilities::SubmittedIM($county);
+      	});     
+       }
     
-//     $IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,$county);	
+    $IMCIanalytics  = Analyse::IMCIanalytics($IMCISubSurvey,$county);	
 
 
     
-//     echo json_encode($IMCIanalytics);
+    echo json_encode($IMCIanalytics);
 
-//       die;
-
-
-
-// 	}
-
-// }
-
-// 	public function imci()
-// 	{
-				
-	
-// $IMCISubSurvey = Cache::remember('IMCIV2SubSurvey'.'All',180,function(){
-//       					return IMCISubSurvey::all();
-//       	});     
+      die;
 
 
-// 			///$IMCIanalytics  = analyse::IMCIanalytics($IMCISubSurvey,'All');
 
-		
-// 		$SubmittedIMCICount = SubmittedIMCICount::first();
-// 		$SubmittedIMCICounties = SubmittedIMCICountie::get();
-	
-// 		$SurveysDone = SurveysDone::where('Name','=','IMCI')->get();
+	}
+
+}
+
+	public function imci()
+	{
+       $IMCISubSurvey = assessments::Submitted('IMCI')->get();               
+        $SubmittedIMCICount =  assessments::Submitted('IMCI')->count();
+        $SubmittedIMCICounties = County::AllSubmitted('IMCI');  
+
 	
 	
 
-// 			return view('analytics.IMCI.index')
-// 			->with('SubmittedCount',$SubmittedIMCICount)
-// 			->with('SubmittedCounties',$SubmittedIMCICounties)
-			
-// 			->with('SurveysDone',$SurveysDone);
+			return view('analytics.IMCI.index')
+			->with('SubmittedCount',$SubmittedIMCICount)
+			->with('SubmittedCounties',$SubmittedIMCICounties);
 
-// 	}
+	}
 
 
 // 	public function comparison($survey,$lambda,$chart,$yr='not'){

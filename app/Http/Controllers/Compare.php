@@ -2,20 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tables\SubmittedCHCount;
-use App\Tables\SubmittedCHCountie;
-use App\Tables\SubmittedMNHCount;
-use App\Tables\SubmittedMNHCountie;
-use App\Tables\CHSubSurvey;
-use App\Tables\Column_set;
-use App\Tables\Survey;
-use App\Tables\analyse;
-use App\Tables\Map;
-use App\Tables\SurveysDone;
-use App\Tables\MNHSubSurvey;
-use Illuminate\Database\Eloquent\Collection;
- use App\Http\Controllers\ArrayRedis as Rache;
-use Illuminate\Contracts\Foundation\Application As App;
 use Request;
 use Input;
 use Cache;
@@ -27,7 +13,7 @@ class Compare extends Controller {
 
    
 
-public function chv2(){
+public function chv2(){/*
 
 
      if(Request::ajax()) {
@@ -59,12 +45,12 @@ public function chv2(){
        echo json_encode(analyse::getindividual($fi,$sdata,$county,$yr,$term));
   }
 
-  die;
+  die;*/
 
   }
 
 
-  public function mnhv2(){
+  public function mnhv2(){/*
 
      if(Request::ajax()) {
 
@@ -97,7 +83,7 @@ public function chv2(){
 
   die;
 
-  }
+  }*/
 
 
 }

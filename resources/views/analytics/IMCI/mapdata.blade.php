@@ -21,13 +21,6 @@ function isset ()
   }
   return true;
 }
-
-if(isset(x['Baseline'+county]['Submitted']))var BaselineSubmitt = parseInt(x['Baseline'+county]['Submitted']); else var BaselineSubmitt = 0;
+if(isset(x[county]['Submitted']))var BaselineSubmitt = parseInt(x[county]['Submitted']); else var BaselineSubmitt =0;
+var BaselineSubmitt = parseInt(x[county]['Submitted']);
 var TotalSubmitt = parseInt(BaselineSubmitt); 
-if(isset(x['Baseline'+county]['Total Facilities']))var TotalTotal = parseInt(x['Baseline'+county]['Total Facilities']); else var TotalTotal = 0;
-  
-
-
-
-
-

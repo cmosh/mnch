@@ -114,11 +114,11 @@ Route::post('self/store','Register@store');
 Route::group(['prefix' => 'assessments'], function () {
 
 		Route::get('cancel/{id}','AssessmentController@destroy');
-		Route::put('{id}','surveys@update');
-		Route::get('resume/{id}','surveys@edit');
-		Route::get('badresume/{id}','surveys@badedit');
-		Route::get('show/{id}','surveys@show');
-		Route::get('start/{id}','surveys@create');
+		Route::put('{id}','SurveysController@update');
+		Route::get('resume/{id}','SurveysController@edit');
+		Route::get('badresume/{id}','SurveysController@badedit');
+		Route::get('show/{id}','SurveysController@show');
+		Route::get('start/{id}','SurveysController@create');
 		Route::get('{id}/{county}/{term}/{subcounty}','AssessmentController@show');
 		Route::get('{id}/{date}/{term}/{county}/{subcounty}','AssessmentController@create');
 		Route::post('{id}','AssessmentController@store');
@@ -133,8 +133,8 @@ Route::group(['prefix' => 'assessment'], function () {
 });
 
 Route::get('status/{status}/{AssID}','AssessmentController@status');
-Route::post('survey/session','surveys@session');
-Route::post('survey/save','surveys@saveajax');
+Route::post('survey/session','SurveysController@session');
+Route::post('survey/save','SurveysController@saveajax');
 
 
 

@@ -2,7 +2,6 @@
 
 
 
-	
     $segments = ( isset($_SERVER['REQUEST_URI']) ? explode('/', trim($_SERVER['REQUEST_URI'],'/')) : array('/') );
    
     $segments =  $segments[0] !== 'MNCH' ?: array_reverse($segments) ;

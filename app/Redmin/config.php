@@ -5,6 +5,7 @@ $config = array(
     'production'         => true,
     'default_layout'     => 'layout',
     'timezone'           => 'Europe/Amsterdam',
+    'path' =>   __DIR__,
     'log' => array(
         'driver'    => 'file',
         'threshold' => 1, /* 0: Disable Logging 1: Error 2: Notice 3: Info 4: Warning 5: Debug */

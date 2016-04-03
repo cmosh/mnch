@@ -3,15 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Tables\CHSubSurvey;
-
-
 use Maatwebsite\Excel\Excel;
-
-use App\Tables\MNHSubSurvey;
-
-
-
 	
 class RawExcelController extends Controller {
 

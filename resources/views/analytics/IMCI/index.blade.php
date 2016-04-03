@@ -158,7 +158,7 @@
         $(".select2").select2();
 
           @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty->County)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#E5E5FF');   
         @endforeach
          
       });
@@ -178,9 +178,7 @@ function mapRequest (county) {
 
   @include('analytics/IMCI/mapdata')
 
-   document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>/'+TotalTotal;
-   x2 = 100*(TotalSubmitt/TotalTotal);
-  $('#svFaBar').attr('style','width: '+x2+'%');
+   document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>';
   
 }
 function getmapdata() {
@@ -268,7 +266,7 @@ function drawChart() {
    @include('analytics/IMCI/js/Trained')
 	    
   $('#X').html('Data from '+TotalSubmitt+ ' healthworkers in '+$('#County').val());
-        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount->X}} healthworkers in {{count($SubmittedCounties)}} counties');
+        if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} healthworkers in {{count($SubmittedCounties)}} counties');
 
 
       $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");

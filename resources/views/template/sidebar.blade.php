@@ -99,7 +99,7 @@
                             <ul  class="treeview-menu" style="overflow:auto">
                       	@foreach ($secs as $sec)
                             	 <li  class="" >
-                                    <a  href="#{{$sec->identifier}}"><x50>{{$sec->name}}</x50></a>
+                                    <a  href="#{{$sec['identifier']}}"><x50>{{$sec['name']}}</x50></a>
                                 </li>
                             	@endforeach  
                                </ul>

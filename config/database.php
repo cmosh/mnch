@@ -128,7 +128,7 @@ return [
 
 		'default' => [
 			'host'     => '127.0.0.1',
-			'port'     => env('APP_REDISPORT'),
+			'port'     => env('APP_REDISPORT',6379),
 			'database' => 0,
 		],
 

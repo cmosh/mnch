@@ -147,6 +147,8 @@ return [
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Fingo\LaravelCacheFallback\CacheFallbackServiceProvider::class,
+        Fingo\LaravelSessionFallback\SessionFallbackServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */
@@ -210,7 +212,8 @@ return [
 		'Asset' 	=> Efficiently\Larasset\Facades\Asset::class,
 		'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
 		'SSH' 		=> Collective\Remote\RemoteFacade::class,
-		'Uuid' 		=> Webpatser\Uuid\Uuid::class
+		'Uuid' 		=> Webpatser\Uuid\Uuid::class,
+		'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
 
 	],
 

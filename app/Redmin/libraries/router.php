@@ -35,7 +35,7 @@ final class router
         ) ? 'https' : 'http';
         $this->host     = $_SERVER['HTTP_HOST'];
         $this->baseUrl  = $this->protocol.'://'.$this->host;
-        $this->url      = $this->protocol.'://'.$this->host.$_SERVER['SCRIPT_NAME'];
+        $this->url      = $this->protocol.'://'.$this->host.'/redis'.$_SERVER['SCRIPT_NAME'];
         $this->path     = '';
 
         if (PHP_SAPI != 'cli') {

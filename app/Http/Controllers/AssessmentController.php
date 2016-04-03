@@ -2,18 +2,14 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\ArrayRedis As Rache;
-use App\Tables\assessments;
-use App\Tables\Facilities;
-use App\Tables\Participants;
-use App\Tables\Survey;
-use App\Tables\Assessor;
-use App\Tables\counties;
-use App\Tables\Surveyview;
-use App\Tables\Participantsview;
-use App\Tables\Imciview;
-use App\Tables\Autosaving;
+use App\Models\assessments;
+use App\Models\Facilities;
+use App\Models\Participants;
+use App\Models\Survey;
+use App\Models\Assessor;
+use App\Models\counties;
 use App\Helpers\Map;
+use App\Helpers\Session;
 use Cache;
 use Request;
 use Input;
@@ -51,8 +47,7 @@ class AssessmentController extends Controller {
 			
 			if ($loc == "IM") {
 
-			// $DoneAss = assessments::where('PartID','<>','')->get()->keyBy('PartID');			
-			// $All = Participantsview::all();
+			
 			
 			$ParticipantsList = Participants::view()->get();
     		$All = $this->Map->transform($ParticipantsList,'ParticipantsList');
@@ -150,7 +145,7 @@ class AssessmentController extends Controller {
 	
 	public function destroy($id)
 	{
-		Rache::murdersession($id);
+		Session::murdersession($id);
 		assessments::where('Assessment_ID', '=', $id)->delete();
 		return redirect('/home');
 	}
@@ -158,7 +153,7 @@ class AssessmentController extends Controller {
 	
 	public function status($status,$AssID)
 	{
-		Rache::murdersession($AssID);
+		Session::murdersession($AssID);
 
 		switch ($status) {
 		 	case 'save': 

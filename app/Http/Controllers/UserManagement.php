@@ -1,32 +1,26 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Tables\User_monitor;
-use App\Tables\counties;
-use App\Tables\Counties_assessed;
-use App\Tables\Counties_submitted_today;
-use App\Tables\Counties_incomplete_today;
-use App\Tables\Counties_submitted;
-use App\Tables\Counties_incomplete;
-use App\Tables\assessments;
-use App\Tables\Survey;
-use App\Helpers\County;
-use Illuminate\Http\Request;
 use App\Http\Requests\Requestuser;
 use App\Http\Requests\Requestpass;
 use App\Http\Requests\Requestedit;
+use Maatwebsite\Excel\Excel;
+use Illuminate\Http\Request;
+use App\Models\Assessments;
+use App\Models\Counties;
+use App\Helpers\County;
+use App\Http\Requests;
+use App\Models\Survey;
+use App\Models\User;
 use App\Helpers\Map;
-use Input;
+use Carbon\Carbon;
+use Request As Rq;
 use Validator;
+use Response;
 use Redirect;
 use Session;
-use Maatwebsite\Excel\Excel;
-use Response;
+use Input;
 use Hash;
-use Request As Rq;
-use Carbon\Carbon;
 use Mail;
 
 class UserManagement extends Controller {
@@ -80,7 +74,7 @@ class UserManagement extends Controller {
 	public function create()
 	{
 		$this->role->__invoke(3);
-		$Counties = counties::all();
+		$Counties = Counties::all();
 		return view('usermanagement.create')->with('counties',$Counties)
 											->with('location','umanage')
 											->with('title','User Management');
@@ -96,7 +90,7 @@ class UserManagement extends Controller {
 			$x[]=$key;
 		}
 
-		$Counties = counties::all();
+		$Counties = Counties::all();
 		$x[1]=$Counties[$x[1]]->Name;
 
 		$data=array(
@@ -166,10 +160,10 @@ class UserManagement extends Controller {
 	{	
 		$this->role->__invoke(2);
 		$surveys=Survey::all();
-		$counties=counties::all();
+		$counties=Counties::all();
 
 		
-		 $user_monitor=assessments::Monitor();	
+		$user_monitor=Assessments::Monitor();	
 
 		
 		$counties_assessed= County::AllAssessed();
@@ -178,11 +172,11 @@ class UserManagement extends Controller {
 		$submittedt=County::SubmittedToday();
 		$incompletet=County::IncompleteToday();
 		$users=User::all();
-		$assessments=assessments::all();
+		$assessments=Assessments::all();
 
-		$ch=assessments::Monitor(['Survey'=>'CH']);	
-		$mnh=assessments::Monitor(['Survey'=>'MNH']);	
-		$imci=assessments::Monitor(['Survey'=>'IMCI']);	
+		$ch=Assessments::Monitor(['Survey'=>'CH']);	
+		$mnh=Assessments::Monitor(['Survey'=>'MNH']);	
+		$imci=Assessments::Monitor(['Survey'=>'IMCI']);	
 
 		return view('usermanagement.monitor')->with('ch',$ch)
 											 ->with('mnh',$mnh)
@@ -205,7 +199,7 @@ class UserManagement extends Controller {
 	{	
 		$this->role->__invoke(3);
 		$user=User::find($id);
-		$Counties = counties::all();
+		$Counties = Counties::all();
 		$counter=0;
 		$county_index=0;
 
@@ -236,7 +230,7 @@ class UserManagement extends Controller {
 			$x[]=$key;
 			
 	}
-	$Counties = counties::all();
+	$Counties = Counties::all();
 	$x[1]=$Counties[$x[1]]->Name;
 	
 		$data=array(
@@ -469,7 +463,7 @@ public function export($loc,$type1,$type2,$type3)
 				$sheet->setColumnFormat(['D' => 'yyyy-dd-mm']);
 	    		$sheet->row(1,['Version','Assessment Term','Assessor','Date','Facility','County','Sub-County','Entered by','Status']);
 	    		$counter2=0;	    		
-				$usermonitor=assessments::monitor(['Survey'=>$survey_name]);
+				$usermonitor=Assessments::monitor(['Survey'=>$survey_name]);
 	    			foreach ($usermonitor as $user_m) {	
 	    				$counter2++;	    				
 						$sheet->row($counter2+1,[
@@ -496,8 +490,8 @@ public function export($loc,$type1,$type2,$type3)
 			$data=['survey'=>$survey_name,'county'=>$county_name,'time'=>$time];
 			$this->excel->create($time.$data['survey'].$data['county'], function($ex) use($data) {
 				$ex->sheet('Sheetname', function($sheet) use($data) {
-				$usermonitor = $data['time']=='totalentry' ? assessments::Monitor(['Survey'=>$data['survey'],'County'=>$data['county']])
-												  : assessments::Monitor([ 'Survey'=> $data['survey'],'County' => $data['county']],true);
+				$usermonitor = $data['time']=='totalentry' ? Assessments::Monitor(['Survey'=>$data['survey'],'County'=>$data['county']])
+												  : Assessments::Monitor([ 'Survey'=> $data['survey'],'County' => $data['county']],true);
 				$sheet->row(1,['Tool Name','Version','Assessment Term','Assessor','Date('.Carbon::today()->format('d/m/Y').')','Facility Name','Facility Code',	'County','Sub-County','Entered by','User role','Status']);	    		
 	    		$counter2=0; 
 	    		foreach ($usermonitor as $user_m) {
@@ -561,7 +555,7 @@ public function export($loc,$type1,$type2,$type3)
 		}
 
 	}
-		$counties=counties::all();
+		$counties=Counties::all();
       return view('usermanagement.multiedit')->with('counties',$counties)->with('users',$x)->with('location','umanage')->with('title','User Management');
     }
     else {

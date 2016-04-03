@@ -1,8 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request As Requested;
+use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Helpers\Command;
 use Request;
 use Input;
 use SSH;
@@ -21,8 +22,8 @@ class administration extends Controller {
 	{
 		$this->ip = $request->getClientIp();
 		$this->middleware('auth');
-		$this->clist = command::thelist($request->getClientIp());
-		$this->ssh_connection = command::ssh_connection();
+		$this->clist = Command::thelist($request->getClientIp());
+		$this->ssh_connection = Command::ssh_connection();
 		$this->role = function ($min) use ($request) {
 			if($request->user()->role<$min)abort(403);
 		};
@@ -116,7 +117,7 @@ class administration extends Controller {
       $data = Input::all();
       	$cmd=$data['cmd']; 
       	$command=$this->clist[$cmd];
-      	$command=command::environment($command);
+      	$command=Command::environment($command);
       	  SSH::into($this->ssh_connection)->run($command, function($line)
       	  	{
       	  		echo $line.PHP_EOL;
@@ -132,7 +133,7 @@ class administration extends Controller {
       	$cmd=str_replace(config('app.env'), $data['appenv'],$data['cmd']); 
 
       	$command=$this->clist[$cmd];
-      	$command=command::environmentG($command,$data['appenv']);
+      	$command=Command::environmentG($command,$data['appenv']);
       	  SSH::into($data['connection'])->run($command, function($line)
       	  	{
       	  		echo $line.PHP_EOL;
