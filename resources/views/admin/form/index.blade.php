@@ -14,7 +14,7 @@
 
                   @foreach($Surveys as $Survey)
 
-                   <a href="/admin/surveys/{{$Survey->surveyID}}"  role="button">
+                   <a href="{{config('app.prefix')}}/admin/surveys/{{$Survey->surveyID}}"  role="button">
               <span>
 
 	 <button class="btn btn-block btn-info">{{$Survey->Name}} {{$Survey->Version}}</button>

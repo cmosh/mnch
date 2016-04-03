@@ -8,7 +8,7 @@
             <h3 class="control-sidebar-heading">{{config("app.env")}} site</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href="/admin/redmin">
+                <a href="{{config('app.prefix')}}/admin/redmin">
                   <i class="menu-icon fa fa-cubes bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Redis</h4>
@@ -17,7 +17,7 @@
                 </a>
               </li>
                <li>
-                <a href="/admin/memcached">
+                <a href="{{config('app.prefix')}}/admin/memcached">
                   <i class="menu-icon fa fa-medium bg-green"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">MemcahceD</h4>
@@ -27,7 +27,7 @@
               </li>
 
               <li>
-                <a href="/admin/commandcenter">
+                <a href="{{config('app.prefix')}}/admin/commandcenter">
                   <i class="menu-icon fa fa-globe bg-black"></i>
                   <div class="menu-info">
                       
@@ -41,7 +41,7 @@
           <h3 class="control-sidebar-heading">Global Operations</h3>
           <ul class="control-sidebar-menu">
               <li>
-                <a href="/admin/global">
+                <a href="{{config('app.prefix')}}/admin/global">
                   <i class="menu-icon fa fa-beer bg-maroon"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Command Panel</h4>
