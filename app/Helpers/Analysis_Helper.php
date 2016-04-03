@@ -1109,53 +1109,7 @@ $DataN = $DataN->sum('Data');
 
 		 }
 
-		 return
-  	$Array;
-
-
-		 $AssessedParticipants = collect($AssessedParticipants)->keyBy(0);
-
-		if($county=='All'){
-			$AllParticipants = Mache::rememberForever('AllParticipant'.$county,function(){
-
-				$temp = Participantsview::all();
-				$Assessed = $temp->groupby('FacilityGroup');
-				foreach ($Assessed as $Type => $Workers) {
-		 		$Array [] = array($Type, count($Workers));
-				 }
-				 return collect($Array)->keyBy(0);
-
-			});
-		}
-		else{
-			$AllParticipants = Mache::rememberForever('AllParticipant'.$county,function() use ($county){
-				$temp = Participantsview::where('County','=',$county)->get();
-				$Assessed = $temp->groupby('FacilityGroup');
-				foreach ($Assessed as $Type => $Workers) {
-		 		$Array [] = array($Type, count($Workers));
-				 }
-				 return collect($Array)->keyBy(0);
-
-			});
-		}
-
-		
-
-		$Array [] = array('Total Number of HCWS Trained and Assessed','Trained & Assessed','Trained & Not Assessed');
-		foreach ($AllParticipants as $key => $value) {
-				
-			if(isset($AssessedParticipants[$key])) $Assessed = $AssessedParticipants[$key][1];
-			else $Assessed = 0;
-			if(isset($value[1]))$val = $value[1]; else $val =0;
-			$Not = $val - $Assessed;
-			$Array [] = array($key,$Assessed,$Not);
-
-
-		}
-
-		return $Array;
-
-		
+		 return	$Array;		
 
 
 
