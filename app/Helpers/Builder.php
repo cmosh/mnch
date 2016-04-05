@@ -154,7 +154,7 @@ class Builder {
 
       
 
-         $entire = Cache::rememberForever('sfad_'.$TheAsses->Survey,function()use($Survey){
+         $entire = Cache::rememberForever('builder_'.$TheAsses->Survey,function()use($Survey){
 
                return $Survey->load('sections.blocks.block_rows.column_sets.field_set.fields')->toArray();
             });
