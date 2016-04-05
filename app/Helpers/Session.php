@@ -49,6 +49,8 @@ class Session {
             Cache::setPrefix('mnch_users');   
             Cache::forget($key);
 
-}
+}     
+
+      
 
 }

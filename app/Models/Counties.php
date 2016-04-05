@@ -2,7 +2,7 @@
 
 use Moloquent;
 
-class counties extends Moloquent {
+class Counties extends Moloquent {
 
 	protected $collection = 'counties';
 

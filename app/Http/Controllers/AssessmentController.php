@@ -2,12 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\assessments;
+use App\Models\Assessments;
 use App\Models\Facilities;
 use App\Models\Participants;
 use App\Models\Survey;
 use App\Models\Assessor;
-use App\Models\counties;
+use App\Models\Counties;
 use App\Helpers\Map;
 use App\Helpers\Session;
 use Cache;
@@ -32,7 +32,7 @@ class AssessmentController extends Controller {
 	{
 		$sv = '%'.$sv.'%';		
 		$Surveys = Survey::where('surveyID','like',$sv)->get();
-		$Counties = counties::all();
+		$Counties = Counties::all();
 
 		return view('assessments.index')->with('Counties',$Counties)
 										->with('location','ass')
@@ -91,7 +91,7 @@ class AssessmentController extends Controller {
 		$array=Request::all();
 		$new=array_shift($array);
 		$x = array();
-		$assessments=new assessments;
+		$assessments=new Assessments;
 	foreach ($array as $key ) {		
 			$x[]=$key;			
 	}
@@ -116,7 +116,7 @@ class AssessmentController extends Controller {
 			$id = substr($survey, 0,2);
 			if ($id != 'IM') 
 {
-				$AssessmentsList = assessments::View(array(
+				$AssessmentsList = Assessments::View(array(
     				'County'=>$county,
     				'SubCounty'=>$subcounty,
     				'Survey'=>$survey,
@@ -127,7 +127,7 @@ class AssessmentController extends Controller {
 }
 			else {
 
-		$AssessmentsList = assessments::Participants(array('Survey'=>$survey))->get();
+		$AssessmentsList = Assessments::Participants(array('Survey'=>$survey))->get();
 
           $Assessments =  $this->Map->ParticipantsFilter($AssessmentsList);
          
@@ -146,7 +146,7 @@ class AssessmentController extends Controller {
 	public function destroy($id)
 	{
 		Session::murdersession($id);
-		assessments::where('Assessment_ID', '=', $id)->delete();
+		Assessments::where('Assessment_ID', '=', $id)->delete();
 		return redirect('/home');
 	}
 
@@ -160,7 +160,7 @@ class AssessmentController extends Controller {
 		 	return redirect('/home'); 
 		 	break;
 		 	case 'submit':
-		 	$red = assessments::where('Assessment_ID','=',$AssID)->first();
+		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
 		 	$irect = substr($red->Survey,0,2);
 		 	return redirect('/assessment/'.$irect);
 		 	break;		 	
