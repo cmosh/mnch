@@ -52,18 +52,12 @@ class analyse extends Analysis_Constructor {
 
 		switch ($yr) {
 				case 'not':
-				$val = '$x = $in->'.$funct.'->__invoke("'.$county.'");';
-				break;
-
-		
+			$x = $in->{$funct}->__invoke($county);
+				break;		
 				default:
-				$val = '$x = $in->'.$funct.'->__invoke("'.$county.'","'.$yr.'");';
-
+			$x = $in->{$funct}->__invoke($county,$yr);
 				break;
-			
-		
-		}	
-		 eval($val);
+			}
 		 return $x;	
 	}
 

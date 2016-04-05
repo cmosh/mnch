@@ -67,10 +67,9 @@ window.setInterval(sonline,120000);
 
 function sonline() {
   var data = {                    
-             'action':'set',        
-
-            'AssID':'{{$AssID}}',
-             
+             'action':'set',
+             'AssID':'{{$AssID}}',
+            'Survey':'{{$Survey}}',             
          '_token': $('input[name=_token]').val()
 
     };

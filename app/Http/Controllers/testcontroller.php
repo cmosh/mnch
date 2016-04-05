@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Facilities;
 use App\Models\subcounty;
 use App\Models\assessments;
+use App\Models\Survey;
 use App\Helpers\Map;
 use App\Helpers\County;
+use App\Helpers\Session;
 use App\Models\Participants;
 use App\Models\counties;
 use App\Models\users;
 use App\Helpers\Analysis_Helper;
+use App\Models\Survey_temp;
 // use App\Models\analysisfunctions;
 use Carbon\Carbon;
 use Cache;
+use Request;
 
 class testcontroller extends Controller
 {
@@ -30,6 +34,24 @@ class testcontroller extends Controller
 	
 
     	public function index(){
+
+       
+        return Cache::all();
+        return config('cache.prefix');
+       return Cache::tags(['Assessments']);
+
+        return Session::foreveryoung();
+        return Config('cache_fallback.fallback_order');
+        $surveys = Survey::all();
+        
+      $surveys->load('sections.blocks.block_rows.column_sets.field_set.fields');
+    
+      foreach ($surveys as $survey ) {
+         $Survey_temp  = new Survey_temp($survey->toArray());    
+         $Survey_temp->save();
+      }
+     
+        return;
 
             $filter = function(&$Data){
               $Data = collect($Data)->where('IMCIV1SEC2BLK1RW1COL02','1');
@@ -57,6 +79,11 @@ class testcontroller extends Controller
 
 
     	public function variable($variable,$variable2){
+        Cache::setPrefix("G");
+         config(['cache.prefix' => $variable]);   
+         Cache::put($variable2,'test',1); 
+
+         return Cache::get($variable2);
 
     		$test =Facilities::SubCounties($variable,'%'.$variable2.'%')->get();
 

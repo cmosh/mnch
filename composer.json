@@ -7,18 +7,19 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"laravel/framework": "5.2.9 as 5.1.8",
-		"laravelcollective/html": "5.2.4 as 5.1.1",
+		"laravel/framework": "5.2.*",
+		"laravelcollective/html": "5.2.*",
 		"tillkruss/larvel-phpredis": "1.0.*",
 		"maatwebsite/excel": "^2.0",
 		"guzzlehttp/guzzle": "^6.1",
 		"laravelcollective/remote": "5.2.*",
-		"efficiently/larasset": "1.1.*",
+		"efficiently/larasset": "dev-master",
 		"webpatser/laravel-uuid": "2.*"	,
 		"orangehill/iseed": "2.*",
 		"jenssegers/mongodb": "^3.0",
 		"fingo/laravel-cache-fallback": "^1.0",
-		"fingo/laravel-session-fallback": "^1.0"
+		"fingo/laravel-session-fallback": "^1.0",
+		"mouf/nodejs-installer": "~1.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

@@ -41,6 +41,7 @@ class SurveysController extends Controller{
                    $AssID = $array['AssID'];
 
                    $action = $array['action'];
+                   $Survey = $array['Survey'];
 
 
                    switch ($action) {
@@ -55,9 +56,9 @@ class SurveysController extends Controller{
 
                          case 'set':
 
-                            $bol=  Session::foreveryoung($AssID,function(){
+                            $bol=  Session::foreveryoung($AssID,function() use ($Survey){
 
-                            return "I Exist!";
+                            return $Survey;
 
                                     });
                              echo $bol;
@@ -239,7 +240,8 @@ echo("I am a teapot, don't give me coffee!");die;
                                        ->with('Mel', $Mel)
                                        ->with('location', $location)
                                        ->with('title', $Survs->Name)
-                                       ->with('secs', $secs);
+                                       ->with('secs', $secs)
+                                       ->with('Survey',$sv);
     }
     
  
@@ -292,7 +294,8 @@ echo("I am a teapot, don't give me coffee!");die;
                                        ->with('Mel', $Mel)
                                        ->with('location', $location)
                                        ->with('title', $Survs->Name)
-                                       ->with('secs', $Secs);
+                                       ->with('secs', $Secs)
+                                       ->with('Survey',$sv);
     }
 
     public function badedit($id) {
@@ -325,7 +328,8 @@ echo("I am a teapot, don't give me coffee!");die;
                                        ->with('Mel', $Mel)
                                        ->with('location', $location)
                                        ->with('title', $Survs->Name)
-                                       ->with('secs', $Secs);
+                                       ->with('secs', $Secs)
+                                       ->with('Survey',$sv);
     }
     
 
