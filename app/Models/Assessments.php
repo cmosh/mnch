@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 use Carbon\Carbon;
-class Assessments extends Eloquent  {
+class Assessments extends Moloquent  {
 
 	//
 	protected $collection ='assessments';

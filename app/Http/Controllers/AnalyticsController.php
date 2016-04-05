@@ -279,31 +279,27 @@ public function imciajax(){
 	}
 
 
-// 	public function comparison($survey,$lambda,$chart,$yr='not'){
+	public function comparison($survey,$lambda,$chart,$yr='not'){
 
 		
 
-// 		if($survey=='CHV2')
+		if($survey=='CHV2')
 
-// 		$SubmittedCounties = Cache::remember('SubmittedCHV2Counties',180,function(){
-// 							return SubmittedCHCountie::get();
-// 							 	});
-// 		elseif($survey=='MNHV2')
+		$SubmittedCounties = County::AllSubmitted('CH'); 
 
-// 		$SubmittedCounties = Cache::remember('SubmittedMNHV2Counties',180,function(){
-// 							return SubmittedMNHCountie::get();
-// 							 	});
+		elseif($survey=='MNHV2')
 
+		$SubmittedCounties = County::AllSubmitted('MNH');  
 
-// 		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
-// 										   ->with('funct',$lambda)
-// 										   ->with('chart',$chart)
-// 										   ->with('yr',$yr)
-// 										   ->with('sv',$survey);
+		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
+										   ->with('funct',$lambda)
+										   ->with('chart',$chart)
+										   ->with('yr',$yr)
+										   ->with('sv',$survey);
 
 	
 
 
 
-// }
+}
 }

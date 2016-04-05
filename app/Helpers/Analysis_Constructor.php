@@ -30,6 +30,11 @@ class Analysis_Constructor extends Analysis_Helper {
 	 		 $this->IMCIV1_sec3 = function($county){ 
 		return $IMCIV1_sec3 = Cache::remember('IMCIV1_sechh3'.$county,180,function(){
 
+						/*$filter = function(&$data){
+							$data = $data->where('IMCIV1SEC5BLK1RW01COL02','1')
+										;
+						};*/
+
 						$temp = array(
 							array('Section 3','Yes','No','No Information Provided'),
 							self::imciYN('IMCIV1SEC5BLK1RW',array(3,4,5,6,7),'COL02','COL04','Malnutrition'),

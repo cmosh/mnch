@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 
-class counties extends Eloquent {
+class counties extends Moloquent {
 
 	protected $collection = 'counties';
 

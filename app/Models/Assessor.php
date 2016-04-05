@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 
-class Assessor extends Eloquent {
+class Assessor extends Moloquent {
 
 	protected $collection = 'assessors';
 	 public static function createOrUpdate($data, $keys) {

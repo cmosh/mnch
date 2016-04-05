@@ -2,6 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Helpers\Analyse;
+use App\Models\Facilities;
 use Request;
 use Input;
 use Cache;
@@ -13,7 +15,7 @@ class Compare extends Controller {
 
    
 
-public function chv2(){/*
+public function chv2(){
 
 
      if(Request::ajax()) {
@@ -23,67 +25,73 @@ public function chv2(){/*
       $county = $data['county'];
       $fi = $data['fi'];
       $yr = $data['yr'];
-      $term = $data['term'];
-
-    
-     if($county =='All'){
-        $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function() use ($term){
-               return CHSubSurvey::where('Assessment_Term','Like',$term)->get();
-       });  
-
-     }
-       else{
-
-          $sdata = Cache::remember('CHV2SubSurvey'.$county.$term,180,function() use ($county,$term){
-               return CHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$term)->get();
-       });  
-
-       }
-
-    
-
-       echo json_encode(analyse::getindividual($fi,$sdata,$county,$yr,$term));
-  }
-
-  die;*/
-
-  }
+      $Term = $data['term'];
 
 
-  public function mnhv2(){/*
 
-     if(Request::ajax()) {
+      if ($county == 'All' ) {
+        
+        $sdata = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($Term){
+                $temp = Facilities::SubmittedAssessments('CH', $Term)->toArray();
+                return collect($temp);
+        });
 
-     
-      $data = Input::all();
-      $county = $data['county'];
-      $fi = $data['fi'];
-      $yr = $data['yr'];
-      $term = $data['term'];
 
-    
-     if($county =='All'){
-        $sdata = Cache::remember('MNHV2SubSurvey'.$county.$term,180,function() use ($term){
-               return MNHVSubSurvey::where('Assessment_Term','Like',$term)->get();
-       });  
+      }
 
-     }
-       else{
+      else{
+        $sdata = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
+                $temp = Facilities::SubmittedAssessments('CH',$Term,$county)->toArray();
+                return collect($temp);
+        });
+      
+      }
 
-          $sdata = Cache::remember('MNHV2SubSurvey'.$county.$term,180,function() use ($county,$term){
-               return MNHSubSurvey::where('County','Like',$county)->where('Assessment_Term','Like',$term)->get();
-       });  
-
-       }
-
-    
-
-       echo json_encode(analyse::getindividual($fi,$sdata,$county,$yr,$term));
+      echo json_encode(Analyse::getindividual($fi,$sdata,$county,$yr,$Term));
   }
 
   die;
 
-  }*/
+  }
 
+
+  public function mnhv2(){
+
+     if(Request::ajax()) {
+
+     
+      $data = Input::all();
+      $county = $data['county'];
+      $fi = $data['fi'];
+      $yr = $data['yr'];
+      $Term = $data['term'];
+
+    
+     if($county =='All'){
+
+        $sdata = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($Term){
+                $temp = Facilities::SubmittedAssessments('MNH', $Term)->toArray();
+                return collect($temp);
+        });
+     
+
+     }
+       else{
+
+        $sdata = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
+                $temp = Facilities::SubmittedAssessments('MNH',$Term,$county)->toArray();
+                return collect($temp);
+        });          
+
+       }
+
+    
+
+       echo json_encode(analyse::getindividual($fi,$sdata,$county,$yr,$Term));
+  }
+
+  die;
+
+  }
 
 }

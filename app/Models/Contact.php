@@ -1,10 +1,9 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 
-class Contact extends Eloquent {
+class Contact extends Moloquent {
 
-	//
 
 	 public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();

@@ -1,10 +1,10 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 use Cache;
 use App\Helpers\Map;
 
-class Participants extends Eloquent {
+class Participants extends Moloquent {
 
 	protected $collection = 'Participants';
 

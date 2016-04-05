@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 
-class Term extends Eloquent  {
+class Term extends Moloquent  {
 
 	
 	protected $collection='Terms';

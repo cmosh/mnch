@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 
-class FacilityGroup extends Eloquent {
+class FacilityGroup extends Moloquent {
 
 	protected $collection = 'FacilityGroups';
 

@@ -43,7 +43,7 @@ class analyse extends Analysis_Constructor {
 
 	public static function getindividual($funct,$data,$county,$yr,$tm){
 
-		/*global $surveys;
+		global $surveys;
 		global $term;
 		$term = $tm;	
 		$surveys = $data;
@@ -62,16 +62,9 @@ class analyse extends Analysis_Constructor {
 				break;
 			
 		
-		}
-
-	
-		 eval($val);*/
-
-
-
-		return '$x';
-
-		
+		}	
+		 eval($val);
+		 return $x;	
 	}
 
 	public static function sec3Years($surveys){

@@ -1,9 +1,9 @@
 <?php namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Moloquent;
 use Cache;
 use Carbon\Carbon;
-class Facilities extends Eloquent {
+class Facilities extends Moloquent {
 
 	protected $collection = 'Facilities';
 

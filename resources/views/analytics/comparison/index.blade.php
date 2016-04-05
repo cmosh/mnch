@@ -22,7 +22,7 @@
                <ul id="main_list" class="source sortable">
                <li data-value="All">All Counties</li>
                @foreach ($SubmittedCounties as $SubmittedCounty ) 
-                <li data-value="{{$SubmittedCounty->County}}"> {{$SubmittedCounty->County}}</li>
+                <li data-value="{{$SubmittedCounty}}"> {{$SubmittedCounty}}</li>
                @endforeach
    
 </ul>
@@ -271,7 +271,7 @@ function perfomance(term,values,ov){
   
  
    $.ajax({
-      url: '{{config("app.prefix")}}/compare/{{strtolower($sv)}}',
+      url: "{{config('app.prefix')}}/compare/{{strtolower($sv)}}",
       type: "post",
        data: data,
            success: function(data){
@@ -284,7 +284,7 @@ function perfomance(term,values,ov){
   
   
     
-	  @include('{{config("app.prefix")}}/analytics/comparison/'.$chart)	  
+	  @include("/analytics/comparison/".$chart)	  
 	
      $('#title'+box).html(county);
 

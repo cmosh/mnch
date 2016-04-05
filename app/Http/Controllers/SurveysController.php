@@ -181,7 +181,7 @@ class SurveysController extends Controller{
                  ),
                   array('Assessment_ID' => $AssID));
 
-
+        if($stype !== 'auto'){
         if($sva == 'IMCIV1'){
          if (Cache::has('ParticipantsListCounties')) {              
               $Participants = collect(Cache::pull('ParticipantsListCounties'));
@@ -190,6 +190,7 @@ class SurveysController extends Controller{
              
               }
         }
+      }
         
 }
 
