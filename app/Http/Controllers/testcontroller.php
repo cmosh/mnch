@@ -31,17 +31,17 @@ class testcontroller extends Controller
 
     	public function index(){
 
-          //   $filter = function(&$Data){
-          //     // $Data = collect($Data)->where('IMCIV1SEC2BLK1RW1COL02','232');
-          //   };
+            $filter = function(&$Data){
+              $Data = collect($Data)->where('IMCIV1SEC2BLK1RW1COL02','1');
+            };
 
-            // $surveys = Facilities::SubmittedIM();
+            $surveys = Facilities::SubmittedIM();
 
             //    $x = Analysis_Helper::trained('All',$surveys);
 
             //    return $x;
 
-          // $x = Analysis_Helper::imciYN('IMCIV1SEC5BLK1RW',array(3,4,5,6,7),'COL02','COL04','Malnutrition',$surveys,$filter);
+        return  $x = Analysis_Helper::imciYN('IMCIV1SEC5BLK1RW',array(3,4,5,6,7),'COL02','COL04','Malnutrition',$surveys,$filter);
 
 
           // return $x;
