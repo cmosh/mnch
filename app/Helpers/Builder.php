@@ -1318,7 +1318,7 @@ class Builder {
 
                                           else
 
-                                            $HtmlLines.= $fieldValueList['$H']['Label'];
+                                            $HtmlLines.= $fieldValueList[$H]['Label'];
                                         } 
                                         else {
                                             
