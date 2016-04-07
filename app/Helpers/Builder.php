@@ -1302,10 +1302,13 @@ class Builder {
                                         
                                         if ($H == null || $H == ' ' || is_numeric($H) == false) {
                                             
-                                            foreach ($H as $hh) {
+                                            if(is_array($H)){
+                                              foreach ($H as $hh) {
                                                $HtmlLines.= $fieldValueList[$hh]['Label'];
                                             }
-                                           
+                                            }
+                                            
+                                            $HtmlLines.= $fieldValueList[$H]['Label'];
                                         } 
                                         elseif ((string)(int)$H == $H) {
                                             //echo $H;
