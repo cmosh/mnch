@@ -868,7 +868,7 @@ class Builder {
                             
                          
                           $typededuction = $currentFieldset['type'];
-                          $fieldValueList = collect($currentFieldset->fields)->keyBy('Value');
+                          $fieldValueList = collect($currentFieldset['fields'])->keyBy('Value');
                           self::objectify($fieldValueList);
                               if ($act == 'show')  $ColID = 0;
                            
