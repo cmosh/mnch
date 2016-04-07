@@ -1309,7 +1309,7 @@ class Builder {
                                             }
                                             
                                             else{
-                                            $HtmlLines.= $fieldValueList[$H]['Label'];
+                                            // $HtmlLines.= $fieldValueList[$H]['Label'];
                                           }
                                         } 
                                         elseif ((string)(int)$H == $H) {
