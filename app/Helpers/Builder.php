@@ -867,7 +867,7 @@ class Builder {
                             //number,text,combo,multiplecombo,coolcombo,label,radio
                             
                          
-                          $typededuction = $currentFieldset->type;
+                          $typededuction = (object)$currentFieldset->type;
                           $fieldValueList = collect($currentFieldset->fields)->keyBy('Value');
                           self::objectify($fieldValueList);
                               if ($act == 'show')  $ColID = 0;

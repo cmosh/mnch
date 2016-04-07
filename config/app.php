@@ -149,6 +149,7 @@ return [
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Fingo\LaravelCacheFallback\CacheFallbackServiceProvider::class,
         Fingo\LaravelSessionFallback\SessionFallbackServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */
@@ -214,6 +215,7 @@ return [
 		'SSH' 		=> Collective\Remote\RemoteFacade::class,
 		'Uuid' 		=> Webpatser\Uuid\Uuid::class,
 		'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
+		'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
 
 	],
 

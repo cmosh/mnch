@@ -22,6 +22,7 @@ use App\Models\Survey_temp;
 use Carbon\Carbon;
 use Cache;
 use Request;
+use Telegram;
 
 class testcontroller extends Controller
 {
