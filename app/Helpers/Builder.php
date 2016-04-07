@@ -1300,7 +1300,7 @@ class Builder {
                                         
                                         $HtmlLines.= 'style="vertical-align:middle">';
                                         
-                                        if ($H == null || $H == ' ' || is_numeric($H) == false) {
+                                        if ($H == null || $H == '' || $H == ' ' || is_numeric($H) == false) {
                                             
                                             if(is_array($H)){
                                               foreach ($H as $hh) {
