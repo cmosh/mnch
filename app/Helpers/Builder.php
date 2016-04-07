@@ -857,7 +857,7 @@ class Builder {
                         $fieldsetID = $Single_ColumnSetCollection->field_setID;
                         
                         $currentFieldset = $Single_ColumnSetCollection->field_set;
-                        self::objectify($currentFieldset);
+                      
                             // echo  $Single_ColumnSetCollection->column_setID;
                             // echo $Single_ColumnSetCollection->field_setID;
                       //  foreach ($currentFieldsets as $currentFieldset) {
