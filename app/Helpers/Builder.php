@@ -1039,7 +1039,7 @@ class Builder {
                                             $HtmlLines.= 'No information provided';
                                         } 
                                         else {
-                                            $HtmlLines.= $fieldValueList->get($H)->Label;
+                                            $HtmlLines.= $fieldValueList[$H]['Label'];
                                         }
                                     } 
                                     else {
@@ -1101,7 +1101,7 @@ class Builder {
                                             
                                            if($H == '-51'){  $HtmlLines.= 'No information provided';
 
-                                           } else{$HtmlLines.= $fieldValueList->get($H)->Label;
+                                           } else{$HtmlLines.= $fieldValueList[$H]['Label'];
                                         }
                                       }
                                         else{
@@ -1158,7 +1158,7 @@ class Builder {
                                             foreach ($vl as $vll) {
                                                 
                                                 if (is_numeric($vll)) {
-                                                    $HtmlLines.= $fieldValueList->get($vll)->Label;
+                                                    $HtmlLines.= $fieldValueList[$vll]['Label'];
                                                     $HtmlLines.= ",";
                                                 }
                                             }
@@ -1218,8 +1218,8 @@ class Builder {
                                             foreach ($vl as $vll) {
                                                 
                                                 if (is_numeric($vll)) {
-
-                                                    $HtmlLines.= $fieldValueList->get((string)$vll)->Label;
+                                                    // echo($fieldValueList);
+                                                    $HtmlLines.= $fieldValueList[$vll]['Label'];
                                                     $HtmlLines.= ",";
                                                 }else{
                                                      $HtmlLines.= $vll;
@@ -1302,7 +1302,10 @@ class Builder {
                                         
                                         if ($H == null || $H == ' ' || is_numeric($H) == false) {
                                             
-                                            $HtmlLines.= $H;
+                                            foreach ($H as $hh) {
+                                               $HtmlLines.= $fieldValueList[$hh]['Label'];
+                                            }
+                                           
                                         } 
                                         elseif ((string)(int)$H == $H) {
                                             //echo $H;
@@ -1310,7 +1313,7 @@ class Builder {
 
                                           else
 
-                                            $HtmlLines.= $fieldValueList->get($H)->Label;
+                                            $HtmlLines.= $fieldValueList['$H']['Label'];
                                         } 
                                         else {
                                             
