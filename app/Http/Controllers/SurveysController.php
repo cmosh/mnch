@@ -41,7 +41,7 @@ class SurveysController extends Controller{
                    $AssID = $array['AssID'];
 
                    $action = $array['action'];
-                   $Survey = $array['Survey'];
+                   if(isset($array['Survey']))  $Survey = $array['Survey'];
 
 
                    switch ($action) {
