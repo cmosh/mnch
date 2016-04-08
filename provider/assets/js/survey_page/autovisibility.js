@@ -38,12 +38,6 @@ $(document).ready( function() {
     $("[name="+name+"]:checked").each(function() {
         
         $("[coolradio=" + this.id+"]").show();
-             $("[coolradio=" + this.id+"]").attr('required','');
-
-
-
-
-
 
             });
     $("[name="+name+"]:not(:checked)").each(function() {
@@ -113,7 +107,7 @@ $( ".coolmultiple" ).change(function() {
 
   if (size.indexOf('-1') > -1) {
   $(thehidden).show();
-  $(thehidden).attr('required','');
+  // $(thehidden).attr('required','');
 }else{
    $(thehidden).hide();
    $(thehidden).removeAttr('required');
