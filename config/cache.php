@@ -81,4 +81,6 @@ return [
 
     'prefix' => env('CACHE_PREFIX', 'laravel'),
 
+    'timeout' => env('CACHE_TIMEOUT',60)
+
 ];
