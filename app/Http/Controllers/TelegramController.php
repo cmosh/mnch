@@ -20,6 +20,11 @@ class TelegramController extends Controller
     }
 
     public function webhook($token){
-    	return $token;
+    	$response = Telegram::sendMessage([
+  'chat_id' => 'CHAT_ID', 
+  'text' => 'Hello World'
+		]);
+
+		$messageId = $response->getMessageId();
     }
 }
