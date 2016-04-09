@@ -82,8 +82,7 @@ Route::group(['prefix' => 'usermanagement'], function () {
 
 
 
-Route::get('test/stop','administration@stop');
-Route::get('test/serve','administration@serve');
+
 
 
 Route::group(['prefix' => 'test'], function () {
@@ -91,9 +90,17 @@ Route::group(['prefix' => 'test'], function () {
      Route::get('/','testcontroller@index');
      Route::get('{variable}','testcontroller@variable');
      Route::get('{variable}/{variable2}','testcontroller@variable');
-
+     Route::get('stop','administration@stop');
+     Route::get('serve','administration@serve');
 
 });
+
+Route::group(['prefix' => 'telegram'], function () {
+
+     Route::get('/','TelegramController@index');
+
+});
+
 
 Route::get('user', array('before' => 'old', function()
 {
