@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Telegram;
+use Session;
 
 class TelegramController extends Controller
 {
-    public function index(){
-    	$response = Telegram::getMe();
+    public function index(request $request){
+    return	Session::all();
+		
+    }
 
-		$botId = $response->getId();
-		$firstName = $response->getFirstName();
-		$username = $response->getUsername();
-
-		return $username;
+    public function hook(){
+    return $response = Telegram::setWebhook(['url' => 'http://41.89.6.209/MNCH/telegram/'.config('telegram.bot_token').'/webhook']);
     }
 }

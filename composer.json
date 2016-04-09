@@ -20,7 +20,8 @@
 		"fingo/laravel-cache-fallback": "^1.0",
 		"fingo/laravel-session-fallback": "^1.0",
 		"mouf/nodejs-installer": "~1.0",
-		"irazasyed/telegram-bot-sdk": "^2.0"
+		"irazasyed/telegram-bot-sdk": "^2.0",
+		"spatie/activitylog": "^2.4"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

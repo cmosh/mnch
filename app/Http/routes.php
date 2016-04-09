@@ -98,6 +98,8 @@ Route::group(['prefix' => 'test'], function () {
 Route::group(['prefix' => 'telegram'], function () {
 
      Route::get('/','TelegramController@index');
+     Route::post('hook','TelegramController@hook');
+     Route::post('{token}/webhook','TelegramController@webhook');
 
 });
 
