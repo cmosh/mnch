@@ -100,6 +100,7 @@ Route::group(['prefix' => 'telegram'], function () {
      Route::get('/','TelegramController@index');
      Route::get('hook','TelegramController@hook');
      Route::post(config('telegram.bot_token').'/webhook','TelegramController@webhook');
+     Route::get('send/{a}','TelegramController@send');
 
 });
 

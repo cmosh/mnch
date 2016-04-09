@@ -19,8 +19,17 @@ class TelegramController extends Controller
     return $response = Telegram::setWebhook(['url' => 'https://41.89.6.209/MNCH/telegram/'.config('telegram.bot_token').'/webhook']);
     }
 
-    public function webhook($token){
-    	$response = Telegram::sendMessage([
+    public function send($message){
+    	  Telegram::sendMessage([
+  'chat_id' => 'CHAT_ID', 
+  'text' => $message
+		]);
+    }
+    public function webhook(){
+
+   $updates = Telegram::getWebhookUpdates();
+
+   Telegram::sendMessage([
   'chat_id' => 'CHAT_ID', 
   'text' => 'Hello World'
 		]);
