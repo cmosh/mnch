@@ -345,8 +345,26 @@ $("#demo-form").submit(function(e) {
         }
     });
 
+
+    $(function () {
+    $('.Temp').on('keyup', function (e) {
+        if (!this.value.match(/^\d{0,5}(\.[0-9]{1,2})?$/)) {
+            $(this).addClass('errortemp'); // adding error class
+        } else {
+            $(this).removeClass('errortemp'); // remove error class
+        }
+    });
+});
+
+
 </script>
+
+
 <style type="text/css">
+.errortemp {
+    color:red;
+}
+
   .ui-datepicker-calendar {
     display: none;
     }
