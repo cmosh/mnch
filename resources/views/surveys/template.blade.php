@@ -64,7 +64,7 @@
 
 
 window.setInterval(sonline,120000);
-
+window.ParsleyConfig = { excluded: "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden" };
 function sonline() {
   var data = {                    
              'action':'set',
