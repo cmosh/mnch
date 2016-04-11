@@ -73,7 +73,7 @@ class AssessmentController extends Controller {
 				$county='';
 			}
 			
-			
+			#what is the use of Uuid?
 			$countID = Uuid::generate(4);
 			return view('assessments.create')->with('theterm',$term)
 											 ->with('thedate',$date)
@@ -89,6 +89,8 @@ class AssessmentController extends Controller {
 	public function store($id)
 	{
 		$array=Request::all();
+
+		#what is the necessity of $new here?
 		$new=array_shift($array);
 		$x = array();
 		$assessments=new Assessments;

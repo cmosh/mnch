@@ -196,7 +196,7 @@ $(document).ready(function(){
      $('#thesubmit').show();
     
     
-}, 1000);
+}, 10000);// changed from 1000ms to allow users to visibly read the saved notification
       }
    
 
