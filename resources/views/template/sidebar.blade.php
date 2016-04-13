@@ -31,11 +31,11 @@
             @if((!isset($location))) <?php $location = 'Home' ?>
         @endif
           @if($location == 'Admin')
-           <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-           <li class=""><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>          @else
+           <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+           <li class=""><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>          @else
           @if ($location == 'Home' ) 
-             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-           <li class="active"><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>MHome</span></a></li>
+           <li class="active"><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>Home</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
@@ -47,11 +47,11 @@
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
                @endif
                @elseif($location == 'ass' )
-             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-             <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+             <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
             @elseif ($location ==  'umanage' )
-            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
@@ -63,8 +63,8 @@
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
                @endif
                @elseif ($location ==  'preview')
-               <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+               <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
              <li><a href="{{config('app.prefix')}}/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
@@ -76,8 +76,8 @@
                 <li class="active"><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
                @endif
                 @elseif ($location ==  'pass')
-            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
            <li><a href="{{config('app.prefix')}}/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
@@ -90,8 +90,8 @@
                @endif
                <li  class="active"><a href="{{config('app.prefix')}}/usermanagement/changepass"><i class="fa fa-link"></i> <span>Change Password</span></a></li>
               @else 
-            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-             <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
+            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+             <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
               <li class="treeview active">              
                             <a href="#">                               
                                 <span>{{$title}}</span>
