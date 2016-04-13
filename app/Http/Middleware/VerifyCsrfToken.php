@@ -12,6 +12,11 @@ class VerifyCsrfToken extends BaseVerifier {
 	 * @param  \Closure  $next
 	 * @return mixed
 	 */
+
+	protected $except = [
+	config('telegram.bot_token').'/*',
+	];
+	
 	public function handle($request, Closure $next)
 	{
 		return parent::handle($request, $next);
