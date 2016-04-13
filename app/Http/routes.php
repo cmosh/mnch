@@ -58,7 +58,7 @@ Route::get('home', 'HomeController@index');
 Route::group(['prefix' => config('telegram.bot_token')],function(){
 		Route::post('webhook', function () {
 		    $updates = Telegram::getWebhookUpdates();
-		    Cache::put('updates',$updates,60);
+		    Cache::put('aaaaaaaaaaaaaaaaaaaaaaa','c',60);
 		    return 'ok';
 		});
 });
