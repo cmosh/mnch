@@ -22,7 +22,9 @@ class Session {
             $Roles = [0=>'countyuser',1=>'dataclerk',2=>'programuser',3=>'systemuser',4=>'Developer'];
             $expiresAt = Carbon::now()->addMinutes(5);
             $value  = $closure();
-            Cache::setPrefix('mnch_users');                
+            $driver = self::driver();
+            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');    
+                        
             Cache::put($key, 
                                  ['Assessment'=>$key,
                                   'UserName'=>$User->name,
@@ -39,14 +41,14 @@ class Session {
 
 
 	public static function areyouyoung($key){
-            Cache::setPrefix('mnch_users');   
+            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');   
 		return Cache::has($key);
    
 	}
 
 
 	public static function murdersession($key){
-            Cache::setPrefix('mnch_users');   
+            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');   
             Cache::forget($key);
 
 }     
