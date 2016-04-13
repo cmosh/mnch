@@ -14,12 +14,8 @@ class VerifyCsrfToken extends BaseVerifier {
 	 */
 
 
-	protected $except = [
-	];
-
 	public function __construct(){
-		$this->except [] = config('telegram.bot_token').'/*';
-	}
+		}
 
 	public function handle($request, Closure $next)
 	{
