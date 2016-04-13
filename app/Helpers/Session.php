@@ -26,7 +26,8 @@ class Session {
             if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');    
                         
             Cache::put($key, 
-                                 ['Assessment'=>$key,
+                                 ['Assessment'=>
+                                 $key,
                                   'UserName'=>$User->name,
                                   'County'=>$User->County,
                                   'email'=>$User->email,
@@ -41,6 +42,7 @@ class Session {
 
 
 	public static function areyouyoung($key){
+    $driver = self::driver();
             if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');   
 		return Cache::has($key);
    
@@ -48,6 +50,7 @@ class Session {
 
 
 	public static function murdersession($key){
+    $driver = self::driver();
             if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');   
             Cache::forget($key);
 
