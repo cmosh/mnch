@@ -67,7 +67,7 @@
             <li><a href="{{config('app.prefix')}}/auth/login">Login</a></li>
             <li><a href="{{config('app.prefix')}}/self/register" style="margin-right:5px;">Register</a></li>
           @else
-           <li><a href="{{config('app.prefix')}}/home">My Dashboard</a></li>
+           <li><a href="{{config('app.prefix')}}/home">My Home</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
