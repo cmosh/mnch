@@ -55,7 +55,7 @@ Route::get('imci','AnalyticsController@imci');
 
 Route::get('home', 'HomeController@index');
 
-Route::group(['prefix' => config('telegram.bot_token'),function(){
+Route::group(['prefix' => config('telegram.bot_token')],function(){
 		Route::post('webhook', function () {
 		    $updates = Telegram::getWebhookUpdates();
 		    Cache::put('updates',$updates,60);
