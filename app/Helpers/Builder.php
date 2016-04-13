@@ -1183,9 +1183,9 @@ class Builder {
                                             $fieldValue = $fieldd->Value;
                                             
                                                        
-                                                     $H2 = implode(",", (array)$H);
+                                                    
 
-                                                    if (     (strpos($H2, $fieldValue) !== false)           ) {
+                                                    if (in_array($fieldValue, (array)$H) ) {
                                                         $HtmlLines.= '<option class="rmselect" value ="'.$fieldValue.'" selected>'.$fieldd->Label.'</option>';
                                                     } 
                                                     else {
@@ -1257,12 +1257,12 @@ class Builder {
 
 }
                                         
-                                            if (     (strpos($H2, $fieldValue) !== false)  ) {
+                                            if (in_array($fieldValue, (array)$H) ) {
                                                         $HtmlLines.= '<option class="rmselect" value ="'.$fieldValue.'"id ="'.$fieldIDOnly.'" selected>'.$fieldd->Label.'</option> ';
                                                     } 
                                                     else{
 
-                                            if (     (strpos($H2, $varother) !== false) and $fieldValue == -1 ) {
+                                            if (  (in_array($varother, (array)$H) ) and $fieldValue == -1 ) {
                                                         $HtmlLines.= '<option class="rmselect" value ="'.$varother.'"id ="'.$fieldIDOnly.'" selected>'.$fieldd->Label.'</option> ';
                                                     } 
 
