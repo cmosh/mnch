@@ -450,7 +450,7 @@ $('#fcbtn').click(function () {
        data: data,
       success: function(data){
         data2 = JSON.parse(data)
-        var text= "Facility Code&nbsp;&nbsp;Facility Name<br>";
+        var text= "Code&nbsp;&nbsp;&nbsp;Facility Name<br>";
          $.each(data2, function(key, value) {
                  text = text + value.FacilityCode + "&nbsp;&nbsp;&nbsp;" + value.FacilityName + "<br>";
             });      
