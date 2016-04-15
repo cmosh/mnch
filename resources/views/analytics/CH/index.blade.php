@@ -455,7 +455,7 @@ $('#fcbtn').click(function () {
                  text = text + value.FacilityCode + "\t\t\t" + value.FacilityName + "\n";
             });      
 
-         $("#dialog").innerHTML(text);
+         $("#dialog").html(text);
 
           $("#dialog").dialog({
 
