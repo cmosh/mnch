@@ -450,10 +450,13 @@ $('#fcbtn').click(function () {
        data: data,
       success: function(data){
         data2 = JSON.parse(data)
-        var text= "Code&nbsp;&nbsp;&nbsp;Facility Name&nbsp;&nbsp;&nbsp;SubCounty<br>";
+        var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>Sub County</th></tr>';
          $.each(data2, function(key, value) {
-                 text = text + value.FacilityCode + "&nbsp;&nbsp;&nbsp;" + value.FacilityName + "&nbsp;&nbsp;&nbsp;" + value.SubCounty + "<br>";
+                 text = text + "<tr><td>"+value.FacilityCode + "</td><td>" + value.FacilityName + "</td><td>" + value.SubCounty + "</td></tr>";
             });      
+
+         text = text + "</table>";
+
 
          $("#dialog").html(text);
 
