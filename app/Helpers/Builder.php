@@ -988,7 +988,7 @@ class Builder {
                                         
                                       
                                             
-                                          $HtmlLines.=  $datass[$ColumnSetIDName];
+                                          $HtmlLines.=  $datass[$ColumnSetIDName]." ";
 
                                                foreach ($fieldValueList as $fieldd) {
                                             self::objectify($fieldd); 
