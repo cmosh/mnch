@@ -100,6 +100,28 @@ class Facilities extends Moloquent {
 
     }
 
+    public static function SubmittedAssessmentsList($Survey,$County=false){
+
+      $Assessments = $County ? self::where('County',$County)->select('FacilityCode','FacilityName','County') : 
+                             self::select('FacilityCode','FacilityName','County') ;
+
+       $s =  $Assessments->with(['assessments'=>function($query) use ($Survey,$Term){
+                                  $query->where('Survey','like',$Survey.'%')
+                                        ->where('Status','Submitted');
+                            }])
+
+                    ->get()
+                    ->lists('assessments')->flatten();
+
+      return   $s->transform(function ($item, $key) {
+     return [ 'Facility Code' => $item->Facility_ID,
+              'Facility Name' => self::where('FacilityCode', $item->Facility_ID)->first()->FacilityName,
+              ];
+          });
+
+    }
+
+
      public static function SubmittedIM($County=false){
 
       $Assessments = $County ? self::where('County',$County)->select('FacilityCode','County') : 

@@ -44,6 +44,18 @@ echo json_encode($Map);
       die;
 	}
 }
+  public function facilitylist(){
+     if(Request::ajax()) {
+      $data = Input::all();
+      $county = $data['county'];
+      $survey = $data['survey'];
+
+      echo Facilities::SubmittedAssessmentsList('CH',$county);
+
+
+    }
+
+  }
 
 	public function chajax(){
 
@@ -147,8 +159,7 @@ public function mnhajax(){
 		$CHSubSurvey = assessments::Submitted('CH')->get();         			
       	$SubmittedCHCount =  assessments::Submitted('CH')->count();
       	$SubmittedCHCounties = County::AllSubmitted('CH');							 	
-
-
+         
 
 		$YearsBlock =Cache::remember('CHV2YearsAllYears',180,function() use ($CHSubSurvey){
 

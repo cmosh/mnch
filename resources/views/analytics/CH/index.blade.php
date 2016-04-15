@@ -37,7 +37,9 @@
               <div id="facilitiesBox" class="small-box bg-blue">
                 <div class="inner">
                   <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
-                 
+                 <li> <a id="faclink"  role="button">
+              <span><button id="facbtn" class="btn btn-block btn-warning btn-xs">View</button></span>  
+          </a> </li>
                 </div>
                {{--  <div class="icon">
                   <i class="ion ion-stats-bars"></i>

@@ -50,6 +50,7 @@ Route::post('analytics/chajax','AnalyticsController@chajax');
 Route::post('analytics/mnhajax','AnalyticsController@mnhajax');
 Route::post('analytics/imciajax','AnalyticsController@imciajax');
 Route::post('analytics/maprequest','AnalyticsController@maprequest');
+Route::post('analytics/facilitylist','AnalyticsController@facilitylist');
 Route::get('mnh','AnalyticsController@mnh');
 Route::get('imci','AnalyticsController@imci');
 

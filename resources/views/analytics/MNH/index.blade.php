@@ -369,18 +369,17 @@ $(function(){
   $("select#County").change(function(){
 
 
-
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
-        options += '<option value="' + j[i].Term + '" selected>' + j[i].Term + '</option>';
+        options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
       }
-
-
       $("select#Term").html(options);
+      $("#Term").select2("val", j[0]);
+      // $("select#Term").val(j[0]);
     })
   })
-})
+});
 </script>
     
    
