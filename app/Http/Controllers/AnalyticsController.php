@@ -205,15 +205,15 @@ public function terms()
  		
          	$county = $param['county'];
          	if ($county == 'All') {
-         		$array[] = ['County'=>'All','Term'=>'Baseline'];
-         		$array[] = ['County'=>'All','Term'=>'Midterm'];
-         		$array[] = ['County'=>'All','Term'=>'Endterm'];
+         		$array[] = 'Baseline';
+         		$array[] ='Midterm';
+         		$array[] = 'Endterm';
          		
          		 }
          	else {	
-       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Baseline'];
-      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Midterm'];
-        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = ['County'=>$county,'Term'=>'Endterm'];
+       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = 'Baseline';
+      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = 'Midterm';
+        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = 'Endterm';
          	}
          	echo json_encode(collect($array));
 
