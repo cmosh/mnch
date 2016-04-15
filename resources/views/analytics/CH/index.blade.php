@@ -38,7 +38,7 @@
                 <div class="inner">
                   <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                 
-              <span><button id="facbtn" class="btn btn-block btn-warning btn-xs">View</button></span>  
+              <span><button id="fcbtn" class="btn btn-block btn-warning btn-xs">View</button></span>  
          
                 </div>
                {{--  <div class="icon">
@@ -410,6 +410,8 @@ var x = 'Selected ' + cts + ' county';
     </script>
   
   <script type="text/javascript" charset="utf-8">
+
+
 $(function(){
   $("select#County").change(function(){
 
@@ -425,6 +427,30 @@ $(function(){
     })
   })
 });
+
+
+$('.fcbtn').click(function () {
+     var county = $('#County').val();
+     var survey = 'CH';
+        var data = {
+            'county':county,  
+            'survey':survey,
+            '_token': $('input[name=_token]').val()
+          };
+ 
+        
+
+
+    $.ajax({
+      url: '{{config("app.prefix")}}/analytics/facilitylist',
+      type: "post",
+       data: data,
+      success: function(data){
+       alert(data);
+      }
+    }); 
+        
+    });
 </script>
     
    
