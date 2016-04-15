@@ -105,7 +105,7 @@ class Facilities extends Moloquent {
       $Assessments = $County ? self::where('County',$County)->select('FacilityCode','FacilityName','County') : 
                              self::select('FacilityCode','FacilityName','County') ;
 
-       $s =  $Assessments->with(['assessments'=>function($query) use ($Survey,$Term){
+       $s =  $Assessments->with(['assessments'=>function($query) use ($Survey){
                                   $query->where('Survey','like',$Survey.'%')
                                         ->where('Status','Submitted');
                             }])
