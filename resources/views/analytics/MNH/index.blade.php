@@ -375,7 +375,7 @@ $(function(){
   $("select#County").change(function(){
 
 
-    $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
+    $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val() survey: 'MNH', ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
         options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
@@ -390,7 +390,7 @@ $(function(){
 
 $('#fcbtn').click(function () {
      var county = $('#County').val();
-     var survey = 'CH';
+     var survey = 'MNH';
         var data = {
             'county':county,  
             'survey':survey,

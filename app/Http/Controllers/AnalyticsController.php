@@ -220,16 +220,17 @@ public function terms()
          	  $param = Input::all();
  		
          	$county = $param['county'];
+          $survey = $param['survey'];
          	if ($county == 'All') {
          		$array[] = 'Baseline';
          		$array[] ='Midterm';
          		$array[] = 'Endterm';
-         		
+       		
          		 }
          	else {	
-       count(Facilities::SubmittedAssessments('CH','Baseline',$county)->toArray()) < 1 ?: $array[] = 'Baseline';
-      count(Facilities::SubmittedAssessments('CH','Midterm',$county)->toArray()) < 1 ?: $array[] = 'Midterm';
-        count(Facilities::SubmittedAssessments('CH','Endterm',$county)->toArray()) < 1 ?: $array[] = 'Endterm';
+       count(Facilities::SubmittedAssessments($survey,'Baseline',$county)->toArray()) < 1 ?: $array[] = 'Baseline';
+      count(Facilities::SubmittedAssessments($survey,'Midterm',$county)->toArray()) < 1 ?: $array[] = 'Midterm';
+        count(Facilities::SubmittedAssessments($survey,'Endterm',$county)->toArray()) < 1 ?: $array[] = 'Endterm';
          	}
          	echo json_encode(collect($array));
 
