@@ -421,7 +421,12 @@ $(function(){
       $("select#Term").val(j[1].Term);
     })
   })
-})
+});
+ $('#test_button').on('click', function() {
+        console.log(autocompleteInput.select2('data'));
+        autocompleteInput.select2('data', {id:1, label:'NEW VALUE'}).trigger('change');
+        return false;
+    });
 </script>
     
    
