@@ -50,7 +50,7 @@ echo json_encode($Map);
       $county = $data['county'];
       $survey = $data['survey'];
 
-      echo($data);
+      echo(collect($data));
        Facilities::SubmittedAssessmentsList('CH',$county);
 
 
