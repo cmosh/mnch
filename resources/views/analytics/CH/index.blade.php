@@ -418,7 +418,8 @@ $(function(){
         options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
       }
       $("select#Term").html(options);
-      $("select#Term").val(j[0]);
+      $("#Term").select2("val", j[0]);
+      // $("select#Term").val(j[0]);
     })
   })
 });
