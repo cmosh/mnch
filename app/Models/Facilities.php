@@ -116,6 +116,7 @@ class Facilities extends Moloquent {
       return   $s->transform(function ($item, $key) {
      return [ 'FacilityCode' => $item->Facility_ID,
               'FacilityName' => self::where('FacilityCode', $item->Facility_ID)->first()->FacilityName,
+              'SubCounty' => self::where('FacilityCode', $item->Facility_ID)->first()->District
               ];
           });
 
