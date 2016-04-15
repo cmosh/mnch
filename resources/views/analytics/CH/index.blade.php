@@ -452,17 +452,17 @@ $('#fcbtn').click(function () {
         data2 = JSON.parse(data)
         var text= "Facility Code\t\tFacility Name";
          $.each(data2, function(key, value) {
-                 text = text + value.FacilityCode;
+                 text = text + value.FacilityCode + "\t\t\t" + value.FacilityName + "\n";
             });
-         alert (text);
+         
 
 
 
-// $("#dialog").dialog({
+$("#dialog").dialog({
 
-//   title: "Facilities",
-//   text: text
-// });
+  title: "Facilities",
+  text: text
+});
 
 
 
