@@ -114,8 +114,8 @@ class Facilities extends Moloquent {
                     ->lists('assessments')->flatten();
 
       return   $s->transform(function ($item, $key) {
-     return [ 'Facility Code' => $item->Facility_ID,
-              'Facility Name' => self::where('FacilityCode', $item->Facility_ID)->first()->FacilityName,
+     return [ 'FacilityCode' => $item->Facility_ID,
+              'FacilityName' => self::where('FacilityCode', $item->Facility_ID)->first()->FacilityName,
               ];
           });
 
