@@ -461,7 +461,7 @@ $('#fcbtn').click(function () {
          else county = county + " county";
 
           $("#dialog").dialog({
-
+             minWidth: 350
             title: "Facilities assessed in " + county,
           });
 
