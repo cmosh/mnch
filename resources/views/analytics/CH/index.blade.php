@@ -415,7 +415,7 @@ $(function(){
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
      
       // var x = JSON.parse(j);
-      alert(j);
+      alert(j[0]);
             // $("select#Term").html(options);
     })
    
