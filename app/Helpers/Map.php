@@ -47,7 +47,7 @@ class Map{
         'FacilityID' => $item->Facility_ID,
         'Survey' => substr($item->Survey,0,-2).' Survey',
         'Participant' => $item->participant->Name_of_Participant,
-        'Assessor' => !isset($item->assessor->Name) ?: $item->assessor->Name ,
+        'Assessor' => !isset($item->assessor->Name) ? "" : $item->assessor->Name ,
         'Date' => date_format(date_create($item->Date),'jS F Y'),
         'Facility' => $item->facility->FacilityName,
         'Status' => $item->Status,
