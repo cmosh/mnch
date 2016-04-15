@@ -418,15 +418,11 @@ $(function(){
         options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';
       }
       $("select#Term").html(options);
-      $("select#Term").val(j[1].Term);
+      $('select#Term').select2("data",j[1].Term);
     })
   })
 });
- $('#test_button').on('click', function() {
-        console.log(autocompleteInput.select2('data'));
-        autocompleteInput.select2('data', {id:1, label:'NEW VALUE'}).trigger('change');
-        return false;
-    });
+
 </script>
     
    
