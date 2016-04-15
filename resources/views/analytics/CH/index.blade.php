@@ -47,15 +47,13 @@
               
               </div>
 
-               <div id="my_popup">
-                  <div id="pop_content">
-                  
-                  </div>
+              <div class="messagepop pop">
+                  <div id="popcontent">x</div>
+              <a class="close" href="#">Cancel</a></p>
    
-                 <button class="my_popup_close">Close</button>
+</div>
 
-            </div>
-                       
+
                         <div  id="info-title">                     
                      <div class=" " >
                          <br>                     
@@ -455,11 +453,49 @@ $('#fcbtn').click(function () {
       type: "post",
        data: data,
       success: function(data){
-         $('#my_popup').popup();
+         
+
+
+
+
+                    function deselect(e) {
+              $('.pop').slideFadeToggle(function() {
+              
+              });    
+            }
+
+            $(function() {
+              $('#fcbtn').on('click', function() {                
+                  $('.pop').slideFadeToggle();
+                
+                return false;
+              });
+
+              $('.close').on('click', function() {
+                
+                return false;
+              });
+            });
+
+            $.fn.slideFadeToggle = function(easing, callback) {
+              return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+            };
+
+
+
+
+
+
       }
     }); 
         
     });
+
+
+
+
+
+
 </script>
     
    
