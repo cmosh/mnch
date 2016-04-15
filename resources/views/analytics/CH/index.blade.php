@@ -49,7 +49,7 @@
 
               <div class="messagepop pop">
                   <div id="popcontent">x</div>
-              <a class="close" href="#">Cancel</a></p>
+              <a id="fcclose" href="#">Cancel</a></p>
    
 </div>
 
@@ -460,19 +460,23 @@ $('#fcbtn').click(function () {
 
                     function deselect(e) {
               $('.pop').slideFadeToggle(function() {
-              
+                e.removeClass('selected');
               });    
             }
 
             $(function() {
-              $('#fcbtn').on('click', function() {                
+              $('#fcbtn').on('click', function() {
+                if($(this).hasClass('selected')) {
+                  deselect($(this));               
+                } else {
+                  $(this).addClass('selected');
                   $('.pop').slideFadeToggle();
-                
+                }
                 return false;
               });
 
-              $('.close').on('click', function() {
-                
+              $('#fcclose').on('click', function() {
+                deselect($('#fcbtn'));
                 return false;
               });
             });
