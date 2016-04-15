@@ -464,10 +464,12 @@ $('#fcbtn').click(function () {
          else county = county + " county";
 
           $("#dialog").dialog({
+             autoOpen: false,
+              modal: true,
              minWidth: 500,
             title: "Facilities assessed in " + county
           });
-
+          $("#dialog").dialog('open');
           $('.ui-widget-overlay').css('background', 'white');
 
 
