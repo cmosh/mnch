@@ -46,6 +46,15 @@
                 </div> --}}
               
               </div>
+
+               <div id="my_popup">
+                  <div id="pop_content">
+                  
+                  </div>
+   
+                 <button class="my_popup_close">Close</button>
+
+            </div>
                        
                         <div  id="info-title">                     
                      <div class=" " >
@@ -446,7 +455,7 @@ $('#fcbtn').click(function () {
       type: "post",
        data: data,
       success: function(data){
-       alert(data);
+         $('#my_popup').popup();
       }
     }); 
         
