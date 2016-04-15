@@ -114,9 +114,11 @@ class Facilities extends Moloquent {
                     ->lists('assessments')->flatten();
 
       return   $s->transform(function ($item, $key) {
+       $survey = self::where('FacilityCode', $item->Facility_ID)->first();
      return [ 'FacilityCode' => $item->Facility_ID,
-              'FacilityName' => self::where('FacilityCode', $item->Facility_ID)->first()->FacilityName,
-              'SubCounty' => self::where('FacilityCode', $item->Facility_ID)->first()->District
+              'FacilityName' => $survey->FacilityName,
+              'SubCounty' => $survey->District,
+              'County' => $survey->County
               ];
           });
 

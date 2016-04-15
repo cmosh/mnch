@@ -759,7 +759,7 @@ var table=$('#example1{{$survey->id}}').DataTable(
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
-                var select='<select id="{{$survey->id}}' + column.index()+ '"class="colms" style="width:100%"  ><option style="width:100%" value=""></option></select>';
+                var select='<select id="{{$survey->id}}' + column.index()+ '"class="colms" style="width:100%"  ><option style="width:100%" value="">All</option></select>';
 
                 var select = $(select)
                     .appendTo( $(column.header()).empty() )

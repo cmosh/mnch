@@ -35,7 +35,7 @@ class testcontroller extends Controller
 	
 
     	public function index(){
-return Facilities::SubmittedAssessmentsList('CH');
+// return Facilities::SubmittedAssessmentsList('CH');
        
         return Cache::all();
         return config('cache.prefix');

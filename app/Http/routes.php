@@ -99,10 +99,10 @@ Route::group(['prefix' => 'usermanagement'], function () {
 Route::group(['prefix' => 'test'], function () {
 
      Route::get('/','testcontroller@index');
-     Route::get('{variable}','testcontroller@variable');
-     Route::get('{variable}/{variable2}','testcontroller@variable');
      Route::get('stop','administration@stop');
      Route::get('serve','administration@serve');
+     Route::get('{variable}/{variable2}','testcontroller@variable');
+     Route::get('{variable}','testcontroller@variable');
 
 });
 
