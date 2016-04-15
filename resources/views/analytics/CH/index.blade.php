@@ -452,9 +452,9 @@ $('#fcbtn').click(function () {
         data2 = JSON.parse(data)
         var text= "Facility Code\t\tFacility Name";
          for (var i = data.length - 1; i >= 0; i--) {
-          // text = text + data2[i].FacilityCode + "\t\t\t" + data2[i].FacilityName + "\n";
+          text = text + data2[i]["FacilityCode"] + "\t\t\t" + data2[i]["FacilityName"] + "\n";
          }
-         alert (data2);
+         alert (text);
 
 
 
