@@ -411,20 +411,17 @@ var x = 'Selected ' + cts + ' county';
 $(function(){
   $("select#County").change(function(){
 
-   
+
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
-     
-        $("#Term").select2({
-         data: j
-          })
-      // var x = JSON.parse(j);
-      // alert(j[0]);
-            // $("select#Term").html(options);
+      var options = '';
+      for (var i = 0; i < j.length; i++) {
+        options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
+      }
+      $("select#Term").html(options);
+      $("select#Term").val(j[0]);
     })
-   
   })
 });
-
 </script>
     
    
