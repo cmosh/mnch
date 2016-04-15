@@ -418,6 +418,7 @@ $(function(){
         options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';
       }
       $("select#Term").html(options);
+      $("select#Term").val(j[1].Term);
     })
   })
 })
