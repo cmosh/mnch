@@ -41,9 +41,7 @@
               <span><button id="fcbtn" class="btn btn-block btn-warning btn-xs">View</button></span>  
          
                 </div>
-               {{--  <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div> --}}
+              
               
               </div>
 

@@ -34,8 +34,12 @@
                   <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
+
+                  <span><button id="fcbtn" class="btn btn-block btn-warning btn-xs">View</button></span>  
               
               </div>
+
+               <div id="dialog" title="Dialog Title"></div>
                        
                         <div class="box-info">                     
                      <div class="box-body">
@@ -365,6 +369,8 @@ var x = 'Selected ' + cts + ' county';
     </script>
     
     <script type="text/javascript" charset="utf-8">
+
+
 $(function(){
   $("select#County").change(function(){
 
@@ -380,6 +386,64 @@ $(function(){
     })
   })
 });
+
+
+$('#fcbtn').click(function () {
+     var county = $('#County').val();
+     var survey = 'CH';
+        var data = {
+            'county':county,  
+            'survey':survey,
+            '_token': $('input[name=_token]').val()
+          };
+ 
+        
+
+
+    $.ajax({
+      url: '{{config("app.prefix")}}/analytics/facilitylist',
+      type: "post",
+       data: data,
+      success: function(data){
+        data2 = JSON.parse(data)
+        var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>Sub County</th></tr>';
+         $.each(data2, function(key, value) {
+                 text = text + "<tr><td>"+value.FacilityCode + "&nbsp;</td><td>" + value.FacilityName + "&nbsp;</td><td>" + value.SubCounty + "&nbsp;</td></tr>";
+            });      
+
+         text = text + "</table>";
+
+
+         $("#dialog").html(text);
+
+         if (county=="All") county = "all counties";
+         else county = county + " county";
+
+          $("#dialog").dialog({
+             autoOpen: false,
+              modal: true,
+             minWidth: 500,
+            title: "Facilities assessed in " + county
+          });
+          $("#dialog").dialog('open');
+          $('.ui-widget-overlay').css('background', 'white');
+
+
+
+
+
+
+
+      }
+    }); 
+        
+    });
+
+
+
+
+
+
 </script>
     
    
