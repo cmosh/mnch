@@ -50,8 +50,12 @@ echo json_encode($Map);
       $county = $data['county'];
       $survey = $data['survey'];
 
-      echo(collect($data));
-       Facilities::SubmittedAssessmentsList('CH',$county);
+
+      if($county=="All"){
+       Facilities::SubmittedAssessmentsList($survey);
+      }else{
+       Facilities::SubmittedAssessmentsList($survey,$county);
+      }
 
 
     }
