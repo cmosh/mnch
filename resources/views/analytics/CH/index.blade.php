@@ -411,15 +411,14 @@ var x = 'Selected ' + cts + ' county';
 $(function(){
   $("select#County").change(function(){
 
-
+    var x;
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
-      var options = '';
-      for (var i = 0; i < j.length-1; i++) {
-        options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';
+     x = j;
       }
-       options += '<option selected value="' + j[i].Term + '">' + j[i].Term + '</option>';
+      
+alert(j);
 
-      $("select#Term").html(options);
+      // $("select#Term").html(options);
     })
   })
 });
