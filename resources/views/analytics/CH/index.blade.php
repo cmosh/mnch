@@ -47,11 +47,7 @@
               
               </div>
 
-              <div class="messagepop pop">
-                  <div id="popcontent">x</div>
-              <a id="fcclose" href="#">Cancel</a></p>
-   
-</div>
+              <div id="dialog" title="Dialog Title">x</div>
 
 
                         <div  id="info-title">                     
@@ -456,34 +452,8 @@ $('#fcbtn').click(function () {
          
 
 
+$("#dialog").dialog();
 
-
-                    function deselect(e) {
-              $('.pop').slideFadeToggle(function() {
-                e.removeClass('selected');
-              });    
-            }
-
-            $(function() {
-              $('#fcbtn').on('click', function() {
-                if($(this).hasClass('selected')) {
-                  deselect($(this));               
-                } else {
-                  $(this).addClass('selected');
-                  $('.pop').slideFadeToggle();
-                }
-                return false;
-              });
-
-              $('#fcclose').on('click', function() {
-                deselect($('#fcbtn'));
-                return false;
-              });
-            });
-
-            $.fn.slideFadeToggle = function(easing, callback) {
-              return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
-            };
 
 
 
