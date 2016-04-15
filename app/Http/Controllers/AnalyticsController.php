@@ -52,12 +52,12 @@ echo json_encode($Map);
 
 
       if($county=="All"){
-       Facilities::SubmittedAssessmentsList($survey);
+      $x = Facilities::SubmittedAssessmentsList($survey);
       }else{
-       Facilities::SubmittedAssessmentsList($survey,$county);
+       $x = Facilities::SubmittedAssessmentsList($survey,$county);
       }
 
-
+      echo($x);
     }
 
   }
