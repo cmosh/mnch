@@ -47,7 +47,7 @@
               
               </div>
 
-              <div id="dialog" title="Dialog Title">x</div>
+              <div id="dialog" title="Dialog Title"></div>
 
 
                         <div  id="info-title">                     
@@ -453,16 +453,14 @@ $('#fcbtn').click(function () {
         var text= "Facility Code\t\tFacility Name";
          $.each(data2, function(key, value) {
                  text = text + value.FacilityCode + "\t\t\t" + value.FacilityName + "\n";
-            });
-         
+            });      
 
+         $("#dialog").innerHTML(text);
 
+          $("#dialog").dialog({
 
-$("#dialog").dialog({
-
-  title: "Facilities",
-  text: text
-});
+            title: "Facilities assessed in" + county,
+          });
 
 
 
