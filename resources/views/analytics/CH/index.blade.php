@@ -414,11 +414,12 @@ $(function(){
 
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
       var options = '';
-      for (var i = 0; i < j.length; i++) {
+      for (var i = 0; i < j.length-1; i++) {
         options += '<option value="' + j[i].Term + '">' + j[i].Term + '</option>';
       }
+       options += '<option selected value="' + j[i].Term + '">' + j[i].Term + '</option>';
+
       $("select#Term").html(options);
-      $('select#Term').select2("data",j[1].Term);
     })
   })
 });
