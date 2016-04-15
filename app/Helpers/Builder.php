@@ -906,7 +906,7 @@ class Builder {
                                             foreach ($fieldValueList as $fieldd) {
                                             self::objectify($fieldd); 
                                         
-                                              $HtmlLines.= $fieldd->Label;
+                                             if ( $fieldd->Label !== 'Enter Findings') $HtmlLines.= $fieldd->Label;
                                           }
                                         
                                     } 
@@ -989,6 +989,12 @@ class Builder {
                                       
                                             
                                           $HtmlLines.=  $datass[$ColumnSetIDName];
+
+                                               foreach ($fieldValueList as $fieldd) {
+                                            self::objectify($fieldd); 
+                                        
+                                             if ( $fieldd->Label !== 'Enter Findings') $HtmlLines.= $fieldd->Label;
+                                          }
                                         
                                     } 
 
