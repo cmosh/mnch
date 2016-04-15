@@ -452,7 +452,7 @@ $('#fcbtn').click(function () {
         data2 = JSON.parse(data)
         var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>Sub County</th></tr>';
          $.each(data2, function(key, value) {
-                 text = text + "<tr><td>"+value.FacilityCode + "</td><td>" + value.FacilityName + "</td><td>" + value.SubCounty + "</td></tr>";
+                 text = text + "<tr><td>"+value.FacilityCode + "&nbsp;</td><td>" + value.FacilityName + "&nbsp;</td><td>" + value.SubCounty + "&nbsp;</td></tr>";
             });      
 
          text = text + "</table>";
@@ -464,7 +464,7 @@ $('#fcbtn').click(function () {
          else county = county + " county";
 
           $("#dialog").dialog({
-             minWidth: 350,
+             minWidth: 500,
             title: "Facilities assessed in " + county
           });
 
