@@ -414,12 +414,10 @@ $(function(){
     var x;
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(), ajax: 'true'}, function(j){
      x = j;
-      }
       
-alert(j);
-
-      // $("select#Term").html(options);
+            // $("select#Term").html(options);
     })
+    alert(x);
   })
 });
 
