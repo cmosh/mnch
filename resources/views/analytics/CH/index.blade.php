@@ -468,6 +468,8 @@ $('#fcbtn').click(function () {
             title: "Facilities assessed in " + county
           });
 
+          $('.ui-widget-overlay').css('background', 'white');
+
 
 
 
