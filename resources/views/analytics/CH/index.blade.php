@@ -449,10 +449,20 @@ $('#fcbtn').click(function () {
       type: "post",
        data: data,
       success: function(data){
-         
+
+        var text;
+         for (var i = data.length - 1; i >= 0; i--) {
+           text = data[i] + "\n";
+         }
+         alert (text);
 
 
-$("#dialog").dialog();
+
+// $("#dialog").dialog({
+
+//   title: "Facilities",
+//   text: text
+// });
 
 
 
