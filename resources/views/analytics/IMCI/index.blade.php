@@ -24,7 +24,24 @@
 
    </div>
    <div class="row">
-   @include('analytics/IMCI/county')
+
+  <div class="form-group" style="display:none;" > <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
+        <option value="All" selected>All Counties</option>
+                      @foreach($SubmittedCounties as $SubmittedCounty)
+
+                       <option value ="{{$SubmittedCounty}}" id ="box{{$SubmittedCounty}}" >{{$SubmittedCounty}}</option>
+                        @endforeach
+                       </select></div>
+
+
+
+                        <div class="form-group" style="display:none;" > <select class="form-control  " style="display:none;" name="Term" id="Term"> 
+                      
+                     <option value="Baseline">Baseline</option>
+                   
+                    
+                     
+                       </select></div>
 
  <div class="col-md-8">
 

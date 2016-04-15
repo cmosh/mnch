@@ -901,7 +901,7 @@ class Builder {
                                         
                                        
                                             
-                                            $HtmlLines.=  $datass[$ColumnSetIDName];
+                                            $HtmlLines.=  $datass[$ColumnSetIDName]." ".$fieldValueList[0]['Label'];
                                         
                                     } 
                                     else {

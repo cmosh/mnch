@@ -20,23 +20,7 @@
                  <div class="box-body" >   
            
 
-<div class="form-group" > <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
-        <option value="All" selected>All Counties</option>
-                      @foreach($SubmittedCounties as $SubmittedCounty)
 
-                       <option value ="{{$SubmittedCounty}}" id ="box{{$SubmittedCounty}}" >{{$SubmittedCounty}}</option>
-                        @endforeach
-                       </select></div>
-
-
-
-                        <div class="form-group" > <select class="form-control  " style="display:none;" name="Term" id="Term"> 
-                      
-                     <option value="Baseline">Baseline</option>
-                   
-                    
-                     
-                       </select></div>
 
                        
                        @include('analytics/IMCI/popbox')  
