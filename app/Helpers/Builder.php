@@ -882,11 +882,7 @@ class Builder {
 
                                                                                          style="vertical-align:middle">';
                                     
-                                    foreach ($fieldValueList as $fieldd) {
-      self::objectify($fieldd); 
-                                        
-                                        $HtmlLines.= $fieldd->Label;
-                                    }
+                                   
                                     
                                     break;
 
@@ -901,7 +897,13 @@ class Builder {
                                         
                                        
                                             
-                                            $HtmlLines.=  $datass[$ColumnSetIDName]." ".$fieldValueList[0]['Label'];
+                                            $HtmlLines.=  $datass[$ColumnSetIDName];
+
+                                             foreach ($fieldValueList as $fieldd) {
+                                               self::objectify($fieldd); 
+                                        
+                                               $HtmlLines.= $fieldd->Label;
+                                           }
                                         
                                     } 
                                     else {
