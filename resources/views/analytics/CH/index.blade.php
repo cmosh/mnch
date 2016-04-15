@@ -450,16 +450,19 @@ $('#fcbtn').click(function () {
        data: data,
       success: function(data){
         data2 = JSON.parse(data)
-        var text= "Facility Code\t\tFacility Name";
+        var text= "Facility Code\t\tFacility Name\n";
          $.each(data2, function(key, value) {
                  text = text + value.FacilityCode + "\t\t\t" + value.FacilityName + "\n";
             });      
 
          $("#dialog").html(text);
 
+         if (county=="All") county = "all counties";
+         else county = county + " county";
+
           $("#dialog").dialog({
 
-            title: "Facilities assessed in" + county,
+            title: "Facilities assessed in " + county,
           });
 
 
