@@ -89,7 +89,15 @@ class Builder {
   <table>
   <tr >
   <td  width="100%">
+<<<<<<< Updated upstream:app/Helpers/Builder.php
   <h3>Success Review Content Before Submitting</h3>
+=======
+<<<<<<< Updated upstream:app/Tables/builder.php
+  <h3>Success!</h3>
+=======
+  <h3>Successfully saved!Review Content Before Submitting</h3>
+>>>>>>> Stashed changes:app/Helpers/Builder.php
+>>>>>>> Stashed changes:app/Tables/builder.php
   <p>Your progress has been saved.</p>
   </td  class="col-md-3">
   <td width="25%">
@@ -105,11 +113,11 @@ class Builder {
   <table>
   <tr >
   <td  width="100%">
-  <h3>Success!</h3>
+  <h3>Successful Submission!</h3>
   <p>Your submission has been made!.Please wait as we redirect you to begin the next assessment.</p>
   </td  class="col-md-3">
   <td width="25%">
-  <i class="fa fa-save fa-4x pullright"></i>
+  <i class="fa fa-spinner fa-spin fa-4x pullright"></i>
   </td>
   </tr>
     </table>   

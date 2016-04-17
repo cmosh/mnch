@@ -140,8 +140,8 @@ $(document).ready(function(){
 
       e.preventDefault();
       var btn = $(this).attr('w');
-       $('#saving').show();
-       $('#some_id2').hide();
+       $('#saving').show();//displaying the saving spinning loader
+       $('#some_id2').hide();//hiding the confirm button
 
     window.scrollTo(0, 0);
 
@@ -188,11 +188,13 @@ $(document).ready(function(){
       success: function(data){
            $('#saving').hide();
          scroll(0,0);
+         if(btn=='body') $("#saved p").html("Please crosscheck the data and proceed to submit at the bottom of the page");
+         if(btn=='head') $("#saved p").html("Please crosscheck the data");
          $('#saved').show();
           
            setTimeout(function(){
-             if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');
-   $('#saved').hide();
+             if(btn=='head') window.location = ('{{URL::asset("/status/save")}}/{{$AssID}}');//will redirect to begin new assessments
+   //$('#saved').hide();
      $('#thesubmit').show();
     
     
@@ -267,14 +269,15 @@ $("#demo-form").submit(function(e) {
 
      setTimeout(function(){
   $('#notloaded').hide(); 
-  $('thesubmit').show();
+  $('#thesubmit').show();// added missing # and 5sec instead of 1
 }, 5000);
 
     
        },
 
       success: function(data){
-        $('#loader').hide(); 
+        $('#loader').hide();
+            alert("Assessment Submitted");//pop up notifying survey completion
             $('#loaded').show();
 
            
@@ -289,7 +292,7 @@ $("#demo-form").submit(function(e) {
 
               setTimeout(function(){
    window.location = ('{{URL::asset("/status/submit")}}/{{$AssID}}');
-}, 1000);
+}, 3000);
 
              
 

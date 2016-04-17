@@ -158,11 +158,23 @@ class AssessmentController extends Controller {
 		Session::murdersession($AssID);
 
 		switch ($status) {
-		 	case 'save': 
-		 	return redirect('/home'); 
-		 	break;
-		 	case 'submit':
+		 	case 'save': //If saved redirect to begin new assessment instead of '/home'
 		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
+		 	$irect = substr($red->Survey,0,2);
+		 	return redirect('/assessment/'.$irect);
+		 	/*return redirect('/home');*/ 
+		 	break;
+<<<<<<< Updated upstream
+		 	case 'submit':
+<<<<<<< Updated upstream
+		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
+=======
+		 	$red = assessments::where('Assessment_ID','=',$AssID)->first();
+=======
+		 	case 'submit': //if submitted redirect to begin new assessments
+		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 		 	$irect = substr($red->Survey,0,2);
 		 	return redirect('/assessment/'.$irect);
 		 	break;		 	
