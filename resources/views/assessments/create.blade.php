@@ -133,8 +133,8 @@
 
                       @if($loc=='IM')
                         <th>Name</th>
-                        <th>Facility</th>
-                         <th>Facility Code</th>
+                        <th style="display:none;">Facility</th>
+                         <th style="display:none;">Facility Code</th>
                         <th>Training Site</th>
                         <th>ID Number</th>
                          <th style="display:none;"></th>
@@ -182,8 +182,8 @@
                            @foreach($All as $Participant)
                         <tr>
                         <td class="rr"> {{ $Participant['Name']}}</td>
-                        <td><span>{{ $Participant['Facility']}}</span>  </td>
-                         <td class="nr"><span>{{ $Participant['FacilityCode']}}</span>  </td>
+                        <td style="display:none;" ><span>{{ $Participant['Facility']}}</span>  </td>
+                         <td style="display:none;" class="nr"><span>{{ $Participant['FacilityCode']}}</span>  </td>
                         <td> {{ $Participant['TrainigSite']}}</td>
                         <td> {{ $Participant['IDNumber']}}</td>
                         <td style="display:none;" class="vr">{{$Participant['PartID']}}</td>
@@ -206,8 +206,8 @@
                       <tr>
                          @if($loc=='IM')
                         <th>Name</th>
-                        <th>Facility</th>
-                         <th>Facility Code</th>
+                        <th style="display:none;" >Facility</th>
+                         <th style="display:none;" >Facility Code</th>
                         <th>Training Site</th>
                          <th>ID Number</th>
                          <th style="display:none;"></th>

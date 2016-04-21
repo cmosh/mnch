@@ -25,6 +25,19 @@ class Participants extends Moloquent {
 
      }
 
+      public function scopeViewD($query,$Date)
+     {
+
+        return $query->with(['facility'=>function($query){
+                        $query->select('FacilityCode','FacilityName');
+                        }])
+                     ->with(['assessment'=>function($query) use ($Date){
+                        $query->where('Date',$Date);
+                        }])
+                     ;
+
+     }
+
 
       public static function County($County='All')
      {

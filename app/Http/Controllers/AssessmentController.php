@@ -49,7 +49,7 @@ class AssessmentController extends Controller {
 
 			
 			
-			$ParticipantsList = Participants::view()->get();
+			$ParticipantsList = Participants::viewD($date)->get();
     		$All = $this->Map->transform($ParticipantsList,'ParticipantsList');
     		
 			} 
