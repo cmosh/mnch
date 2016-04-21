@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler {
         return $this->renderHttpException($e);
     } else {
         // Custom error 500 view on production
-        if (app()->environment() == 'production') {
+        if (app()->environment() == 'production' && config('app.debug') == false ) {
             return response()->view('errors.500', [], 500);
         }
         return parent::render($request, $e);

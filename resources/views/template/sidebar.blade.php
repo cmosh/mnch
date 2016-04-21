@@ -47,14 +47,7 @@
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
                @endif
                @elseif($location == 'ass' )
-<<<<<<< Updated upstream
-             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-             <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
-=======
-<<<<<<< Updated upstream
-             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Home</span></a></li>
-             <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Dashboard</span></a></li>
-=======
+
              <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
              <li><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
              <!-- if user_role is program-user or higher -->
@@ -66,8 +59,7 @@
                   <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
                @endif
             
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
             @elseif ($location ==  'umanage' )
             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
              <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>

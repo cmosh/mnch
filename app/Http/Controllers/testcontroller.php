@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Facilities;
 use App\Models\subcounty;
-use App\Models\assessments;
+use App\Models\Assessments;
 use App\Models\Survey;
 use App\Helpers\Map;
 use App\Helpers\County;
@@ -36,7 +36,16 @@ class testcontroller extends Controller
 
     	public function index(){
 // return Facilities::SubmittedAssessmentsList('CH');
-       
+
+        // $format = 'Y-m-d';
+// $date = date_create_from_format($format, '2016-04-21');
+ // echo date_format($date, 'Y-m-d');
+// return $date;
+        $date = Carbon::createFromFormat('Y-m-d H', '2016-04-21 00');
+       return Assessments::select('Date')->where('Date','=',$date)->get();
+
+      return Assessments::all();
+
         return Cache::all();
         return config('cache.prefix');
        return Cache::tags(['Assessments']);

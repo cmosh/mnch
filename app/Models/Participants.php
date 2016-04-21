@@ -3,6 +3,7 @@
 use Moloquent;
 use Cache;
 use App\Helpers\Map;
+use Carbon\Carbon;
 
 class Participants extends Moloquent {
 
@@ -16,17 +17,21 @@ class Participants extends Moloquent {
 
    		 public function scopeView($query)
      {
+        $date = Carbon::createFromFormat('Y-m-d H', $Date.' 00');
 
      	return $query->with(['facility'=>function($query){
      				 	$query->select('FacilityCode','FacilityName');
      				 	}])
-     				 ->with('assessment')
-     				 ;
+     				 ->with(['assessment'=>function($query) use ($Date){
+                        $query->where('Date',$Date);
+                        }])
+                     ;
 
      }
 
       public function scopeViewD($query,$Date)
      {
+             $Date = Carbon::createFromFormat('Y-m-d H', $Date.' 00');
 
         return $query->with(['facility'=>function($query){
                         $query->select('FacilityCode','FacilityName');
