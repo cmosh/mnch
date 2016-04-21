@@ -164,17 +164,8 @@ class AssessmentController extends Controller {
 		 	return redirect('/assessment/'.$irect);
 		 	/*return redirect('/home');*/ 
 		 	break;
-<<<<<<< Updated upstream
-		 	case 'submit':
-<<<<<<< Updated upstream
-		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
-=======
-		 	$red = assessments::where('Assessment_ID','=',$AssID)->first();
-=======
 		 	case 'submit': //if submitted redirect to begin new assessments
 		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 		 	$irect = substr($red->Survey,0,2);
 		 	return redirect('/assessment/'.$irect);
 		 	break;		 	
