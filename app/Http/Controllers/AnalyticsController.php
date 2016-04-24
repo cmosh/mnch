@@ -215,7 +215,7 @@ public function mnhajax(){
 
        $SubmittedMNHCount = $ExtraCache[0];
     $SubmittedMNHCounties = $ExtraCache[1];
-    $terms = $terms[2];
+    $terms = $ExtraCache[2];
 	
 
 		return view('analytics.MNH.index')
