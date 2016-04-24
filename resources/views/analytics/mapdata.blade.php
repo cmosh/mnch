@@ -17,11 +17,25 @@ try {
    var BaselineSubmitt = 0;
 }
 
-var TotalSubmitt = parseInt(MidtermSubmitt) + parseInt(EndtermSubmitt) + parseInt(BaselineSubmitt); 
+var tempterm = $('#Term').val();
+var TotalSubmitt = 0;
+switch (tempterm) {
+  case "Baseline":
+    var TotalSubmitt = parseInt(BaselineSubmitt) 
+    break;
+  case "Midterm":
+    var TotalSubmitt = parseInt(MidtermSubmitt) 
+    break;
+  case "Endterm":
+     var TotalSubmitt = parseInt(EndtermSubmitt) 
+    break;
+  default:
+    var TotalSubmitt = 0 
+}
 
 
 try {
-   var TotalTotal = parseInt(x['Midterm'+county]['Total Facilities']); 
+   var TotalTotal = parseInt(x['Baseline'+county]['Total Facilities']); 
 } catch(error) {
   var TotalTotal = 0;
 }
