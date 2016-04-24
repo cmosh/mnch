@@ -16,8 +16,16 @@ try {
 } catch(error) {
    var BaselineSubmitt = 0;
 }
+
 var TotalSubmitt = parseInt(MidtermSubmitt) + parseInt(EndtermSubmitt) + parseInt(BaselineSubmitt); 
-var TotalTotal = parseInt(x['Midterm'+county]['Total Facilities']); 
+
+
+try {
+   var TotalTotal = parseInt(x['Midterm'+county]['Total Facilities']); 
+} catch(error) {
+  var TotalTotal = 0;
+}
+
   
 
 
