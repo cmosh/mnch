@@ -381,7 +381,11 @@ $(function(){
         options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
       }
       $("select#Term").html(options);
-      $("#Term").select2("val", j[0]);
+
+      var $example = $("#Term").select2();
+      $example.val(j[0]).trigger("change"); 
+
+      // $("#Term").select2("val", j[0]);
       // $("select#Term").val(j[0]);
     })
   })
