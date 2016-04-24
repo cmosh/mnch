@@ -432,7 +432,7 @@ $(function(){
 
 $('#fcbtn').click(function () {
      var county = $('#County').val();
-     var survey = 'CH';
+     var survey = 'CHV2';
         var data = {
             'county':county,  
             'survey':survey,
