@@ -90,7 +90,7 @@ class AnalyticsController extends Controller {
           $county = $param['county'];
           $survey = $param['survey'];
          	if ($county == 'All') {
-            $array = $scaffold->getterms__($survey);       		
+            $array = $scaffold->getterms($survey);       		
          		 }
          	else {	
             count(Facilities::SubmittedAssessments($survey,'Baseline',$county)->toArray()) < 1 ?: $array[] = 'Baseline';
