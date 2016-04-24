@@ -20,12 +20,12 @@ public function maprequest(){
 
 
       switch ($survey) {
-      	case 'ch':
+      	case 'chv2':
       		$Map = (Cache::remember('MapCH',config('cache.timeout'),function() {
 			return  County::Map('CHV2');
       	}));
       		break;      	
-      	case 'mnh':
+      	case 'mnhv2':
       		$Map = (Cache::remember('MapMNH',config('cache.timeout'),function() {
 			return 	 County::Map('MNHV2');
       	}));   
@@ -49,12 +49,12 @@ echo json_encode($Map);
       $data = Input::all();
       $county = $data['county'];
       $survey = $data['survey'];
-
+      $term = $data['term'];
 
       if($county=="All"){
-      $x = Facilities::SubmittedAssessmentsList($survey);
+      $x = Facilities::SubmittedAssessmentsList($term,$survey);
       }else{
-       $x = Facilities::SubmittedAssessmentsList($survey,$county);
+       $x = Facilities::SubmittedAssessmentsList($term,$survey,$county);
       }
 
       echo($x);
