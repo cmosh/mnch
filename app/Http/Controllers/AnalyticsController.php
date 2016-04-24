@@ -162,7 +162,8 @@ public function mnhajax(){
 	{
 		$ExtraCache =Cache::remember('CHV2ExtraCache',config('cache.timeout'),function() {
 
-    $CHSubSurvey = assessments::Submitted('CHV2')->get();       
+    $terms = self::getterms('CHV2');
+    $CHSubSurvey = assessments::Submitted('CHV2')->where('Assessment_Term',$terms[0])->get();       
 		$Years = Analyse::sec3Years($CHSubSurvey);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
@@ -171,9 +172,8 @@ public function mnhajax(){
 		unset($Years[1]);
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
-    $SubmittedCHCount =  assessments::Submitted('CHV2')->count();
-    $SubmittedCHCounties = County::AllSubmitted('CHV2');  
-    $terms = self::getterms('CHV2');
+    $SubmittedCHCount =  $CHSubSurvey->count();
+    $SubmittedCHCounties = County::AllSubmittedT('CHV2',$terms[0]);     
 		return [$Years,$AllYears,$YearsCount,$SubmittedCHCount,$SubmittedCHCounties,$terms];
 
 
@@ -205,9 +205,9 @@ public function mnhajax(){
 	{
 			$ExtraCache =Cache::remember('MNHV2ExtraCache',config('cache.timeout'),function() {
 
-	   	$SubmittedMNHCount =  assessments::Submitted('MNHV2')->count();
-      	$SubmittedMNHCounties = County::AllSubmitted('MNHV2');
         $terms = self::getterms('MNHV2');
+      $SubmittedMNHCount =  assessments::Submitted('MNHV2')->where('Assessment_Term',$terms[0])->count();  
+        $SubmittedMNHCounties = County::AllSubmittedT('MNHV2',$terms[0]);
           return [$SubmittedMNHCount,$SubmittedMNHCounties,$terms];
 
     

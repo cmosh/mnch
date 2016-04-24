@@ -30,6 +30,14 @@ public static function AllSubmitted($Survey){
 	return $Assessments->lists('facility_short')->lists('County')->unique();
 	}
 
+	public static function AllSubmittedT($Survey,$term){
+	$Assessments = assessments::where('Status','Submitted')->where('Survey','Like',$Survey.'%')->where('Assessment_Term',$term)->get();	
+	
+	$Assessments->load('facility_short');
+	
+	return $Assessments->lists('facility_short')->lists('County')->unique();
+	}
+
 
 public static function Map($Survey){
 
