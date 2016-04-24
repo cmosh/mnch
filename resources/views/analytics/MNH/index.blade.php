@@ -383,7 +383,7 @@ $(function(){
       $("select#Term").html(options);
 
       var $termchange = $("#Term").select2();
-      $termchange.val(j[0]).trigger("change"); 
+      // $termchange.val(j[0]).trigger("change"); 
      
     })
   })
