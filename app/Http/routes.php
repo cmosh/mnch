@@ -63,7 +63,7 @@ Route::group(['as' => 'dashboard::'], function () {
     			Route::get('{survey}','AnalyticsController@index');
 		});
     Route::group(['as'=>'comparison'],function(){
-    			Route::post('compare/{survey}','AnalyticsController@compareSurvey');
+    			Route::post('compare','AnalyticsController@compareSurvey');
 				Route::get('comparison/{survey}/{lambda}/{chart}/{yr?}','AnalyticsController@comparison');	
 		});
 });

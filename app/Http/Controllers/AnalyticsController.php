@@ -83,6 +83,7 @@ class AnalyticsController extends Controller {
   {
     return redirect()->action('AnalyticsController@index','CHV2');
   }
+
   public function terms(Analysis_Scaffold $scaffold)
   {
     if(Request::ajax()) {
@@ -103,16 +104,25 @@ class AnalyticsController extends Controller {
 	}
 
   public function comparison($survey,$lambda,$chart,$yr='not'){
-
-    if($survey=='CHV2')
-		$SubmittedCounties = County::AllSubmitted('CHV2'); 
-		elseif($survey=='MNHV2')
-		$SubmittedCounties = County::AllSubmitted('MNHV2');  
+   
+		$SubmittedCounties = County::AllSubmitted($survey);  
 
 		return view('analytics.comparison.index')->with('SubmittedCounties',$SubmittedCounties)
 										   ->with('funct',$lambda)
 										   ->with('chart',$chart)
 										   ->with('yr',$yr)
 										   ->with('sv',$survey);
-                     }
+    }
+
+    public function compareSurvey(Analysis_Data $analysis_data)
+    {
+       if(Request::ajax()){
+      $data = Input::all();
+      echo json_encode( $analysis_data->compare($data) );
+      die;
+    }
   }
+
+
+
+}

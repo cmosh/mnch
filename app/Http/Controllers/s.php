@@ -1,4 +1,0 @@
-<?php
-
-
-excel = new excel

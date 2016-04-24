@@ -6,6 +6,11 @@ use Cache;
 
 class Analysis_Data {
  		
+		public function compare($data)
+		{
+			$filtered_data = $this->filter($data);
+			return Analyse::getindividual($data['fi'],$filtered_data,$data['county'],$data['yr'],$data['term']);
+		}
 
  		public  function CHV2($data)
  		{

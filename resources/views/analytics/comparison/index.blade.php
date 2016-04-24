@@ -264,14 +264,15 @@ function perfomance(term,values,ov){
          '_token': $('input[name=_token]').val(),
          'fi': '{{$funct}}',
          'yr':'{{$yr}}',
-         'term':theterm
+         'term':theterm,
+         'survey':'{{$sv}}'
         
 
     };
   
  
    $.ajax({
-      url: "{{config('app.prefix')}}/compare/{{strtolower($sv)}}",
+      url: "{{config('app.prefix')}}/compare",
       type: "post",
        data: data,
            success: function(data){
