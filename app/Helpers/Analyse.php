@@ -100,8 +100,8 @@ class analyse extends Analysis_Constructor {
 			'Kangaroo2' => $mnh->MNHV2_Kangaroo2->__invoke($county),
 			'devpep' => $mnh->MNHV2_devpep->__invoke($county),
 			'dserviceconduct' =>$mnh->MNHV2_dserviceconduct->__invoke($county),
-			// 'skillbirth' => $mnh->MNHV2_skillbirth->__invoke($county),
-			// 'bedcapacity' => $mnh->MNHV2_bedcapacity->__invoke($county),
+			'skillbirth' => $mnh->MNHV2_skillbirth->__invoke($county),
+			'bedcapacity' => $mnh->MNHV2_bedcapacity->__invoke($county),
 			'hours24'=> $mnh->MNHV2_hours24->__invoke($county),
 			'BemoncChallenge'=>$mnh->MNHV2_BemoncChallenge->__invoke($county),
 			// 'staff_trained'=>$mnh->MNHV2_staff_trained->__invoke($county),
@@ -128,8 +128,7 @@ class analyse extends Analysis_Constructor {
 		
 		$imci = new analyse();
 
-				
-	//Json Making
+		
 
 		$JsonArray = (array(
 			 'Certification' =>$imci->IMCIV1_CERTIFICATION->__invoke($county),
@@ -154,6 +153,6 @@ class analyse extends Analysis_Constructor {
 
 		return $JsonArray;
 	}
-	//public static function 
+	
 
 	}

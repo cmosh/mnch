@@ -8,7 +8,7 @@ use App\Models\Participants;
 
 class Analysis_Helper {		
 	
-	public static function ortfunction(){
+	protected static function ortfunction(){
 		global $surveys;
 	    $countB = count($surveys);
       	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")
@@ -163,7 +163,7 @@ protected static function getLabel($trim,$col){
 
 	}
 
-	public static function imciYN($Block,$rows=array(),$Data1Col,$Data2Col,$label,$filter="string")
+	protected static function imciYN($Block,$rows=array(),$Data1Col,$Data2Col,$label,$filter="string")
 	{
 		global $surveys;
 			
@@ -556,7 +556,7 @@ if(!isset($array))$array [] = ['No data',0];
  return $array;
 }
 
-public static function staff_trained(){
+protected static function staff_trained(){
 global $surveys;
 		$Data = $surveys->lists('Data');
 
@@ -674,7 +674,7 @@ $DataN = $DataN->sum('Data');
 }
 
 
-	public static function opdgen(){
+	protected static function opdgen(){
 		global $surveys;
 
     $Data = $surveys->lists('Data')->lists('CHV2SEC1BLK2RW01COL02')->collapse()->toArray();
@@ -800,7 +800,7 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	public static function ortloc(){
+	protected static function ortloc(){
 		global $surveys;
 
 		$recset = $surveys->lists('Data');
@@ -871,56 +871,43 @@ $DataN = $DataN->sum('Data');
 			global $surveys;
 
 			$array [] = array('Bed Capacity','New Born','Maternal','Total');
-	$recset = $surveys;
+			
+			 foreach ($surveys as $survey) {
 
-				$Rec = $recset->groupby('Type');
-      	
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
+
+		 $Rec = collect($recset)->groupby('Type');
+
+		
+
+			
 
       		foreach ($Rec as $v) {
 
       			$type = $v[0]['Type'];
-
-
-
-
-	$Data = $recset->load(['y' => function($query) use ($type)
-		{
-	
-    $query->where('Type','=',$type)
-    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW06COL02');
-		}])->lists('y');
-
-	$Total = $Data->sum('Data');
-
-	$Data = $recset->load(['y' => function($query) use ($type)
-		{
-	
-    $query->where('Type','=',$type)
-    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW07COL02');
-		}])->lists('y');
-
-	$Maternity = $Data->sum('Data');
-
-	$Data = $recset->load(['y' => function($query) use ($type)
-		{
-	
-    $query->where('Type','=',$type)
-    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW08COL02');
-		}])->lists('y');
-
-	$NewBorn = $Data->sum('Data');
-
-
-
-		
-		$array[]=array($type,$NewBorn,$Maternity,$Total);
-		
-		
-	}
-
-	
-
-	return $array;
+      			$Data = $v->lists->('Data')->lists('MNHV2SEC1BLK2RW06COL02');
+      			$Total = $Data->sum('Data');
+      			$Data = $v->lists->('Data')->lists('MNHV2SEC1BLK2RW07COL02');
+      			$Maternity = $Data->sum('Data');
+      			$Data = $v->lists->('Data')->lists('MNHV2SEC1BLK2RW08COL02');
+      			$NewBorn = $Data->sum('Data');
+      			$array[]=array($type,$NewBorn,$Maternity,$Total);
+      		}
+      return $array;
 
 
 
@@ -931,10 +918,36 @@ $DataN = $DataN->sum('Data');
 		global $surveys;
 
 		$array [] = array('Skilled birth attendants','0','1-5','6-10','>10');
-	$recset = $surveys;
 
-				$Rec = $recset->groupby('Type');
-      	
+		global $surveys;
+
+		 // $array [] = $headings;
+
+		 // $recset;
+
+		  foreach ($surveys as $survey) {
+
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
+
+		 $Rec = collect($recset)->groupby('Type');
+
+		
+
+			
 
       		foreach ($Rec as $v) {
 
@@ -943,16 +956,10 @@ $DataN = $DataN->sum('Data');
 
 
 
-	$Data = $recset->load(['y' => function($query) use ($type)
-		{
-	
-    $query->where('Type','=',$type)
-    ->where('ColumnSetID', '=', 'MNHV2SEC1BLK2RW03COL02');
-		}])->lists('y');
+	 $Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW03COL02')->all();	
 
+	 $Data =  array_count_values($Data);
 	
-	$Data = $Data->groupby('Data')->all();
-
 	$keys = array_keys($Data);
 
 	$count0 = 0;
@@ -995,7 +1002,7 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	public static function FacilityTypes2Stack($col,$headings){
+	protected static function FacilityTypes2Stack($col,$headings){
 
 		global $surveys;
 
@@ -1103,7 +1110,7 @@ $DataN = $DataN->sum('Data');
 	}
 
 
-	public static function trained($county){
+	protected static function trained($county){
 
 	
 		 
@@ -1128,7 +1135,7 @@ $DataN = $DataN->sum('Data');
 
 }
 		
-	public static function sunit($surveys){
+	protected static function sunit($surveys){
 
 	// global $surveys;
 		 $recset = $surveys;

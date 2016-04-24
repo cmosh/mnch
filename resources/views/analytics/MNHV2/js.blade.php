@@ -20,3 +20,6 @@
              @include('analytics/MNHV2/scripts/ReasonBlood')
               @include('analytics/MNHV2/scripts/Reasoncs')
               @include('analytics/MNHV2/scripts/dserviceconduct')
+              @include('analytics/MNHV2/scripts/skillbirth')
+                         @include('analytics/MNHV2/scripts/bedcapacity')
+   

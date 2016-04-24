@@ -7,7 +7,7 @@ var bedcapacitydata = google.visualization.arrayToDataTable(jsonData['bedcapacit
         legend: { position: 'top', maxLines: 3 },
         bar: { groupWidth: '75%' },
         isStacked: 'percent',
-        chartArea:{left:250,top:25,width:'50%',height:'75%'}
+        chartArea:{left:80,top:25,width:'100%',height:'75%'}
       };
 
       var bedcapacity = new google.visualization.BarChart(document.getElementById('bedcapacity'));

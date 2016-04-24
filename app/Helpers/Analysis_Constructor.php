@@ -622,10 +622,10 @@ class Analysis_Constructor extends Analysis_Helper {
 		};
 		$this->MNHV2_bedcapacity = function($county){ global $term;
 		//bedcapacity
-		return $bedcapacity = Cache::remember('MNHV2_bedcapacity'.$county.$term,config('cache.timeout'),function(){
+		return $bedcapacity = /*Cache::remember('MNHV2_bedcapacity'.$county.$term,config('cache.timeout'),function(){
 
-			return self::bedcapacity();
-		});
+			return*/ self::bedcapacity();
+		// });
 		};
 
 		$this->MNHV2_hours24 = function($county){ global $term;
