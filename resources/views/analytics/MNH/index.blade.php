@@ -390,7 +390,7 @@ $(function(){
 
 $('#fcbtn').click(function () {
      var county = $('#County').val();
-     var survey = 'MNH';
+     var survey = 'MNHV2';
         var data = {
             'county':county,  
             'survey':survey,
