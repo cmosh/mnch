@@ -33,9 +33,13 @@
 
                         <div class="form-group" > <select class="form-control select2 " style="width:100%;" name="Term" id="Term"> 
                       
-                     <option value="Baseline">Baseline</option>
-                     <option value="Midterm">Midterm</option>
-                     <option value="Endterm">Endterm</option>
+                       @foreach($terms as $term)
+
+          <option value ="{{$term}}">{{$term}}</option>
+                        @endforeach
+
+                
+                  
                     
                      
                        </select></div>

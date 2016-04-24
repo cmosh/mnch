@@ -21,17 +21,17 @@ public function maprequest(){
 
       switch ($survey) {
       	case 'ch':
-      		$Map = (Cache::remember('MapCH',180,function() {
+      		$Map = (Cache::remember('MapCH',config('cache.timeout'),function() {
 			return  County::Map('CHV2');
       	}));
       		break;      	
       	case 'mnh':
-      		$Map = (Cache::remember('MapMNH',180,function() {
+      		$Map = (Cache::remember('MapMNH',config('cache.timeout'),function() {
 			return 	 County::Map('MNHV2');
       	}));   
       		break;
       	case 'imci':
-      		$Map = (Cache::remember('MapIMCI',180,function() {
+      		$Map = (Cache::remember('MapIMCI',config('cache.timeout'),function() {
 			return  County::MapIM();
       	}));   
       		break;
@@ -78,7 +78,7 @@ echo json_encode($Map);
       		      
       if ($county == 'All' ) {
       	
-      	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($Term){
+      	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,config('cache.timeout'),function() use($Term){
       					$temp = Facilities::SubmittedAssessments('CHV2', $Term)->toArray();
       					return collect($temp);
       	});
@@ -87,7 +87,7 @@ echo json_encode($Map);
       }
 
       else{
-       	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
+       	$CHSubSurvey = Cache::remember('CHV2SubSurvey'.$county.$Term,config('cache.timeout'),function() use($county,$Term){
       					$temp = Facilities::SubmittedAssessments('CHV2',$Term,$county)->toArray();
       					return collect($temp);
       	});
@@ -124,7 +124,7 @@ public function mnhajax(){
 
  		if ($county == 'All') {
       	
-      	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($Term){
+      	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,config('cache.timeout'),function() use($Term){
       					$temp = Facilities::SubmittedAssessments('MNHV2', $Term)->toArray();
       					return collect($temp);      				
       	});
@@ -132,7 +132,7 @@ public function mnhajax(){
       }
 
      else  {
-       	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,180,function() use($county,$Term){
+       	$MNHSubSurvey = Cache::remember('MNHV2SubSurvey'.$county.$Term,config('cache.timeout'),function() use($county,$Term){
       					$temp = Facilities::SubmittedAssessments('MNHV2',$Term,$county)->toArray();
       					return collect($temp);
       	});
@@ -160,14 +160,9 @@ public function mnhajax(){
 
 	public function ch()
 	{
-				
-		    $CHSubSurvey = assessments::Submitted('CHV2')->get();         			
-      	$SubmittedCHCount =  assessments::Submitted('CHV2')->count();
-      	$SubmittedCHCounties = County::AllSubmitted('CHV2');							 	
-         
+		$ExtraCache =Cache::remember('CHV2ExtraCache',config('cache.timeout'),function() {
 
-		$YearsBlock =Cache::remember('CHV2YearsAllYears',180,function() use ($CHSubSurvey){
-
+    $CHSubSurvey = assessments::Submitted('CHV2')->get();       
 		$Years = Analyse::sec3Years($CHSubSurvey);
 		$YearsCount = count($Years)-1;
 		$Years = array_reverse($Years);
@@ -176,15 +171,20 @@ public function mnhajax(){
 		unset($Years[1]);
 		$Years = array_reverse($Years, true);
 		$AllYears = array_reverse($AllYears, true);
-
-		return [$Years,$AllYears,$YearsCount];
+    $SubmittedCHCount =  assessments::Submitted('CHV2')->count();
+    $SubmittedCHCounties = County::AllSubmitted('CHV2');  
+    $terms = self::getterms('CHV2');
+		return [$Years,$AllYears,$YearsCount,$SubmittedCHCount,$SubmittedCHCounties,$terms];
 
 
 		});
 
-		$Years=$YearsBlock[0];
-		$AllYears=$YearsBlock[1];
-		$YearsCount=$YearsBlock[2];
+		$Years=$ExtraCache[0];
+		$AllYears=$ExtraCache[1];
+		$YearsCount=$ExtraCache[2];
+    $SubmittedCHCount = $ExtraCache[3];
+    $SubmittedCHCounties = $ExtraCache[4];
+    $terms = $ExtraCache[5];
 		
 		
 	
@@ -195,24 +195,45 @@ public function mnhajax(){
 			->with('Years',$Years)
 			->with('YearsCount',$YearsCount)
 			->with('AllYears',$AllYears)
-			->with('loc','Child Health Survey');
+			->with('loc','Child Health Survey')
+      ->with('terms',$terms);
 
 				
 	}
 
 	public function mnh()
 	{
-			
+			$ExtraCache =Cache::remember('MNHV2ExtraCache',config('cache.timeout'),function() {
+
 	   	$SubmittedMNHCount =  assessments::Submitted('MNHV2')->count();
       	$SubmittedMNHCounties = County::AllSubmitted('MNHV2');
+        $terms = self::getterms('MNHV2');
+          return [$SubmittedMNHCount,$SubmittedMNHCounties,$terms];
+
+    
+    });
+
+       $SubmittedMNHCount = $ExtraCache[0];
+    $SubmittedMNHCounties = $ExtraCache[1];
+    $terms = $terms[2];
 	
 
 		return view('analytics.MNH.index')
 			->with('SubmittedCount',$SubmittedMNHCount)
-			->with('SubmittedCounties',$SubmittedMNHCounties);
+			->with('SubmittedCounties',$SubmittedMNHCounties)
+      ->with('terms',$terms);
 
 	}
 
+public static function getterms($survey)
+{
+    $array;
+     count(Facilities::SubmittedAssessments($survey,'Baseline')->toArray()) < 1 ?: $array[] = 'Baseline';
+      count(Facilities::SubmittedAssessments($survey,'Midterm')->toArray()) < 1 ?: $array[] = 'Midterm';
+        count(Facilities::SubmittedAssessments($survey,'Endterm')->toArray()) < 1 ?: $array[] = 'Endterm';
+      return $array;
+
+}
 public function terms()
 {
 		
@@ -255,13 +276,13 @@ public function imciajax(){
 
 
  		if ($county == 'All') {      	
-      	$IMCISubSurvey = Cache::remember('IMCISusbssSurvey'.$county,180,function(){
+      	$IMCISubSurvey = Cache::remember('IMCISusbssSurvey'.$county,config('cache.timeout'),function(){
       					return Facilities::SubmittedIM();
       	});
       }
 
      else  {
-       	$IMCISubSurvey = Cache::remember('IMCISubSurvey'.$county,180,function() use($county){
+       	$IMCISubSurvey = Cache::remember('IMCISubSurvey'.$county,config('cache.timeout'),function() use($county){
       					return 	Facilities::SubmittedIM($county);
       	});     
        }
