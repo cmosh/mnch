@@ -11,7 +11,7 @@ function year4() {
          'Term':$('#Term').val()
              }; 
    $.ajax({
-      url: '/analytics/chajax',
+      url: '{{config("app.prefix")}}/analytics/chajax',
       type: "post",
        data: data,
            success: function(data){
