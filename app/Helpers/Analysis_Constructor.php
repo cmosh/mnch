@@ -635,6 +635,8 @@ class Analysis_Constructor extends Analysis_Helper {
 
 			return self::FacilityTypes2Stack('MNHV2SEC1BLK3RW03COL02',$hours24headings);
 		});
+
+		
 		};
 
 		$this->MNHV2_testing = function($county){ global $term;

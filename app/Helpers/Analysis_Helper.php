@@ -1001,16 +1001,29 @@ $DataN = $DataN->sum('Data');
 
 		 $array [] = $headings;
 
+		 // $recset;
 
-	$recset =  $surveys->transform(function ($item, $key) {
-   			  collect($item)->put('Type',Facilities::Type($item['Facility_ID']));
-				});
+		  foreach ($surveys as $survey) {
 
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
 
-	
-		 $Rec = $recset->groupby('Type');
+		 $Rec = collect($recset)->groupby('Type');
       	
-
+		
       		foreach ($Rec as $type => $assessment) {
 
       		
