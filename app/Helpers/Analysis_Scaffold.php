@@ -63,7 +63,7 @@ class Analysis_Scaffold {
 
  		}
 
- 		private  function getterms($survey)
+ 		public  function getterms($survey)
  		{
  		    $array;
  		    count(Facilities::SubmittedAssessments($survey,'Baseline')->toArray()) < 1 ?: $array[] = 'Baseline';
