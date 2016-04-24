@@ -332,7 +332,11 @@ function drawChart() {
        @include('analytics/CH/js/nondiarrhoea')
        @include('analytics/CH/js/orttrends') 
 
-        $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+      
+      
+        //alert( );
+
+        $('#X').html('Data from '+window[ $('#Term').val() + 'Submitt']+ ' facilities in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
 
