@@ -331,7 +331,7 @@ function drawChart() {
        @include('analytics/CH/js/annualTrends')
        @include('analytics/CH/js/nondiarrhoea')
        @include('analytics/CH/js/orttrends') 
-       
+
         $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
         if (allcheck==1) $('#X').html('Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties');
 
@@ -423,8 +423,9 @@ $(function(){
         options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
       }
       $("select#Term").html(options);
-      $("#Term").select2("val", j[0]);
-      // $("select#Term").val(j[0]);
+      var $termchange = $("#Term").select2();
+      $termchange.val(j[0]).trigger("change"); 
+
     })
   })
 });

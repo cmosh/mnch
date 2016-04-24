@@ -382,11 +382,9 @@ $(function(){
       }
       $("select#Term").html(options);
 
-      var $example = $("#Term").select2();
-      $example.val(j[0]).trigger("change"); 
-
-      // $("#Term").select2("val", j[0]);
-      // $("select#Term").val(j[0]);
+      var $termchange = $("#Term").select2();
+      $termchange.val(j[0]).trigger("change"); 
+     
     })
   })
 });
