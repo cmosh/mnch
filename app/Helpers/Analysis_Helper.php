@@ -891,27 +891,19 @@ $DataN = $DataN->sum('Data');
 		  }	 	 
 
 		 $Rec = collect($recset)->groupby('Type');
-
-		
-
-			
-
-      		foreach ($Rec as $v) {
+		 foreach ($Rec as $v) {
 
       			$type = $v[0]['Type'];
-      			$Data = $v->lists->('Data')->lists('MNHV2SEC1BLK2RW06COL02');
-      			$Total = $Data->sum('Data');
-      			$Data = $v->lists->('Data')->lists('MNHV2SEC1BLK2RW07COL02');
-      			$Maternity = $Data->sum('Data');
-      			$Data = $v->lists->('Data')->lists('MNHV2SEC1BLK2RW08COL02');
-      			$NewBorn = $Data->sum('Data');
+      			$Data = collect($v)->lists('Data')->lists('MNHV2SEC1BLK2RW06COL02');      			
+      			$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW07COL02');
+      			$Maternity = $Data->sum();
+      			$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW08COL02');
+      			$NewBorn = $Data->sum();
+      			$Total = $NewBorn + $Maternity;
       			$array[]=array($type,$NewBorn,$Maternity,$Total);
       		}
-      return $array;
-
-
-
-		}
+      		return $array;
+      	}
 
 	protected static function skillbirth(){
 
@@ -919,11 +911,7 @@ $DataN = $DataN->sum('Data');
 
 		$array [] = array('Skilled birth attendants','0','1-5','6-10','>10');
 
-		global $surveys;
-
-		 // $array [] = $headings;
-
-		 // $recset;
+		
 
 		  foreach ($surveys as $survey) {
 
@@ -944,62 +932,36 @@ $DataN = $DataN->sum('Data');
 		  }	 	 
 
 		 $Rec = collect($recset)->groupby('Type');
+		 foreach ($Rec as $v) {
+		 	$type = $v[0]['Type'];
+		 	$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW03COL02')->all();
+		 	$Data = array_count_values($Data);
+      		$keys = array_keys($Data);
+      		$count0 = 0;
+      		$count5 = 0;
+      		$countBeyond = 0;
+      		$count10 = 0;
 
-		
-
-			
-
-      		foreach ($Rec as $v) {
-
-      			$type = $v[0]['Type'];
-
-
-
-
-	 $Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW03COL02')->all();	
-
-	 $Data =  array_count_values($Data);
-	
-	$keys = array_keys($Data);
-
-	$count0 = 0;
-	$count5 = 0;
-	$countBeyond = 0;
-	$count10 = 0;
-
-	
-	foreach ($keys as $key ) {
-
-	
-
-		if ($key > 0 && $key < 6  && $key!= "") {
-			$count5 += count($Data[$key]);
+      			foreach ($keys as $key ) {
+			      				if ($key > 0 && $key < 6  && $key!= "") {
+			      					$count5 += $Data[$key];
+			      				}
+			      				elseif ($key >= 6 && $key<=10 && $key!="") {
+			      					$count10 += $Data[$key];
+			      				}
+			      				elseif($key >10 && $key!=""){
+			      					$countBeyond += $Data[$key];
+			      				}
+			      				else{
+				      				if(isset($Data[0]))
+				      					$count0 = $Data[0];
+				      				else $count0 = 0;
+				      				}
+				      			}
+				$array [] = array($type,$count0,$count5,$count10,$countBeyond);
+			}
+			return $array;
 		}
-		elseif ($key >= 6 && $key<=10 && $key!="") {
-			$count10 += count($Data[$key]);
-		}
-		elseif($key >10 && $key!=""){
-			$countBeyond += count($Data[$key]);
-		}
-
-		else{
-			if(isset($Data[0]))
-			$count0 = count($Data[0]);
-		else $count0 = 0;
-		}
-
-		}
-
-
-		$array [] = array($type,$count0,$count5,$count10,$countBeyond);
-		
-		
-	}
-
-	
-
-	return $array;
-	}
 
 
 	protected static function FacilityTypes2Stack($col,$headings){
