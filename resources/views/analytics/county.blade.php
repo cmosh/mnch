@@ -44,6 +44,9 @@
                      
                        </select></div>
 
+
+
+
                        
 
 
@@ -69,3 +72,13 @@
 
               <!-- HIDDEN / POP-UP DIV -->
    
+
+
+   <div class="col-md-9" >
+
+   <div id="facilitiesBox" class="small-box bg-blue">
+   <div class="inner">
+   <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+   <span><button id="fcbtn" class="btn btn-block btn-warning btn-xs">View</button></span>
+   </div>
+   </div>

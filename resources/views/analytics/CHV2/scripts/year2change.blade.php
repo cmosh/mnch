@@ -18,7 +18,7 @@ function year2() {
     
     var jsonData = JSON.parse(data);
 
-       @include('analytics/CH/js/annualTrends')
+       @include('analytics/CHV2/scripts/annualTrends')
       $(  "#anT"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#anT"  ).removeClass("overlay");
        var yr = $('#Year2').val();

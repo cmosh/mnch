@@ -17,15 +17,12 @@ class Participants extends Moloquent {
 
    		 public function scopeView($query)
      {
-        $date = Carbon::createFromFormat('Y-m-d H', $Date.' 00');
+       
 
      	return $query->with(['facility'=>function($query){
      				 	$query->select('FacilityCode','FacilityName');
      				 	}])
-     				 ->with(['assessment'=>function($query) use ($Date){
-                        $query->where('Date',$Date);
-                        }])
-                     ;
+     				 ->with('assessment');
 
      }
 

@@ -36,9 +36,9 @@
            
                  
               <li><a  href="{{config('app.prefix')}}/">Child Health Survey</a></li>
-             <li><a href="{{config('app.prefix')}}/mnh">Maternal and Neonatal Health Survey</a></li>
+             <li><a href="{{config('app.prefix')}}/analytics/MNHV2">Maternal and Neonatal Health Survey</a></li>
 
-             <li><a href="{{config('app.prefix')}}/imci">IMCI Survey</a></li>
+             <li><a href="{{config('app.prefix')}}/analytics/IMCIV1">IMCI Survey</a></li>
           
 
              <li><a href="{{config('app.prefix')}}/rawdata">Raw Data</a></li>

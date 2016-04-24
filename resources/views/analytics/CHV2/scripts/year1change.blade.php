@@ -16,7 +16,7 @@ function year1() {
        data: data,
            success: function(data){
     var jsonData = JSON.parse(data);
-       @include('analytics/CH/js/u5reg')
+       @include('analytics/CHV2/scripts/u5reg')
       $(  "#u5"  ).children().removeClass("fa fa-refresh fa-spin");
       $( "#u5"  ).removeClass("overlay");
       var yr = $('#Year1').val();

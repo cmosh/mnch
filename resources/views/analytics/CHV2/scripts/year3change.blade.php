@@ -1,6 +1,6 @@
-function year4() {
-    $( "#ortN" ).children().addClass("fa fa-refresh fa-spin");
-      $(  "#ortN"  ).addClass("overlay");
+function year3() {
+    $( "#u5N" ).children().addClass("fa fa-refresh fa-spin");
+      $(  "#u5N"  ).addClass("overlay");
     var data = {
           'county':$('#County').val(),
          '_token': $('input[name=_token]').val(),
@@ -17,11 +17,11 @@ function year4() {
            success: function(data){
        
     var jsonData = JSON.parse(data);
-       @include('analytics/CH/js/orttrends')
-      $(  "#ortN"  ).children().removeClass("fa fa-refresh fa-spin");
-      $( "#ortN"  ).removeClass("overlay");
-      var yr = $('#Year4').val();
-   $("#Year4Change").prop('href','{{config("app.prefix")}}/comparison/CHV2/CHV2_u5RegisterN/col/'+yr);
+       @include('analytics/CHV2/scripts/nondiarrhoea')
+      $(  "#u5N"  ).children().removeClass("fa fa-refresh fa-spin");
+      $( "#u5N"  ).removeClass("overlay");
+      var yr = $('#Year3').val();
+   $("#Year3Change").prop('href','{{config("app.prefix")}}/comparison/CHV2/CHV2_u5RegisterN/col/'+yr);
       } 
    });  
 }

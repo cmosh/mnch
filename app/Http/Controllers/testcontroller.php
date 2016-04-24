@@ -34,7 +34,10 @@ class testcontroller extends Controller
 	}
 	
 
-    	public function index(){
+    	public function index($test){
+        return $test;
+        
+        substr("IMCIV1",0,2);
 // return Facilities::SubmittedAssessmentsList('CH');
 
         // $format = 'Y-m-d';

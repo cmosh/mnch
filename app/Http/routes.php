@@ -12,8 +12,8 @@
 */
 
 
-Route::post('compare/chv2','Compare@chv2');
-Route::post('compare/mnhv2','Compare@mnhv2');
+
+
 
 Route::get('rawdata','RawExcelController@index');
 Route::get('rawdata/facility-summary','RawExcelController@FacilitySummary');
@@ -40,21 +40,34 @@ Route::get('admin/commandcenter', 'administration@commandcenter');
 Route::post('admin/docmd', 'administration@docmd');
 Route::post('admin/globcmd', 'administration@globcmd');
 
-Route::get('analytics/terms','AnalyticsController@terms');
-Route::post('analytics/comparison','AnalyticsController@compare');
-Route::get('comparison/{survey}/{lambda}/{chart}/','AnalyticsController@comparison');
-Route::get('comparison/{survey}/{lambda}/{chart}/{yr}/','AnalyticsController@comparison');
-Route::get('/','AnalyticsController@ch');
-Route::post('map','AnalyticsController@mapRequest');
-Route::post('analytics/chajax','AnalyticsController@chajax');
-Route::post('analytics/mnhajax','AnalyticsController@mnhajax');
-Route::post('analytics/imciajax','AnalyticsController@imciajax');
-Route::post('analytics/maprequest','AnalyticsController@maprequest');
-Route::post('analytics/facilitylist','AnalyticsController@facilitylist');
-Route::get('mnh','AnalyticsController@mnh');
-Route::get('imci','AnalyticsController@imci');
+
+
+
+
+
+
+
+
 
 Route::get('home', 'HomeController@index');
+
+
+Route::group(['as' => 'dashboard::'], function () {
+	Route::get('/', 'AnalyticsController@land');
+    Route::group(['prefix' => 'analytics','as'=>'helpers'],function(){
+    			Route::get('terms','AnalyticsController@terms');
+				Route::post('comparison','AnalyticsController@compare');
+				Route::post('data','AnalyticsController@data');				
+				Route::post('maprequest','AnalyticsController@maprequest');
+				Route::post('facilitylist','AnalyticsController@facilitylist');		
+    			Route::get('{survey}','AnalyticsController@index');
+		});
+    Route::group(['as'=>'comparison'],function(){
+    			Route::post('compare/{survey}','AnalyticsController@compareSurvey');
+				Route::get('comparison/{survey}/{lambda}/{chart}/{yr?}','AnalyticsController@comparison');	
+		});
+});
+
 
 Route::group(['prefix' => config('telegram.bot_token')],function(){
 		Route::post('webhook', function () {
@@ -95,10 +108,9 @@ Route::group(['prefix' => 'usermanagement'], function () {
 
 
 
-
 Route::group(['prefix' => 'test'], function () {
 
-     Route::get('/','testcontroller@index');
+     Route::get('/','testcontroller@index','blah');
      Route::get('stop','administration@stop');
      Route::get('serve','administration@serve');
      Route::get('{variable}/{variable2}','testcontroller@variable');

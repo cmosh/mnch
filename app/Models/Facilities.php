@@ -126,13 +126,13 @@ class Facilities extends Moloquent {
     }
 
 
-     public static function SubmittedIM($County=false){
+     public static function SubmittedIM($Survey,$County=false){
 
       $Assessments = $County ? self::where('County',$County)->select('FacilityCode','County') : 
                              self::select('FacilityCode','County') ;
 
-       return collect($Assessments->with(['assessments'=>function($query) {
-                                  $query->where('Survey','like','IMCI%')
+       return collect($Assessments->with(['assessments'=>function($query) use ($Survey) {
+                                  $query->where('Survey',$Survey)
                                         ->where('Status','Submitted');
                             }])
 

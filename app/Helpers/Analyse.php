@@ -7,7 +7,7 @@ class analyse extends Analysis_Constructor {
  
   
 
-	public static function chanalytics($data,$Year1,$Year2,$Year3,$Year4,$county,$tm){
+	public static function chv2analytics($data,$Year1,$Year2,$Year3,$Year4,$county,$tm){
 	//Feed in survey
 		global $surveys;
 		global $term;
@@ -72,7 +72,7 @@ class analyse extends Analysis_Constructor {
 	}
 
 
-	public static function mnhanalytics($data,$county,$tm){
+	public static function mnhv2analytics($data,$county,$tm){
 	//Feed in survey
 		global $surveys;
 		global $term;
@@ -120,7 +120,7 @@ class analyse extends Analysis_Constructor {
 		return $JsonArray;
 	}
 
-	public static function imcianalytics($data,$county){
+	public static function imciv1analytics($data,$county){
 	//Feed in survey
 		global $surveys;		
 		
