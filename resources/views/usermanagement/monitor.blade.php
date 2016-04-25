@@ -213,7 +213,7 @@
                         <td>{{ date_format(date_create($user->Date),'d F Y')}} </td>
 
                            @if($survey->id=='IMCIV1')
-                        <td >{{ $user->participant->Name_of_Participant}}  </td>
+                        <td >{{ isset($user->participant->Name_of_Participant) ? $user->participant->Name_of_Participant : "" }}  </td>
                 @else
 
                         
