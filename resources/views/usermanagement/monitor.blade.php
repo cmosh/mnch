@@ -228,7 +228,7 @@
  <td class="hideprint"><form action="{{config('app.prefix')}}/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
                @elseif($user['Status']=='Incomplete' || $user['Status']=='New')
-
+ 
        <td><form class="theresume" AssID="{{$user->Assessment_ID}}" bad="{{isset($user->assessor_short->Name)}}">
     <input class="btn btn-primary form-control" type="submit" value="RESUME"></form></td>
 
@@ -686,10 +686,7 @@
        
         <script type="text/javascript">
 
-
-
-         $(".theresume").submit(function(e) { 
-
+   $(".theresume").submit(function(e) { 
         var AssID = $(this).attr('AssID');
         var Bad = $(this).attr('Bad');
 
@@ -761,6 +758,7 @@
 
 
 });
+
        
  
  
