@@ -138,7 +138,7 @@ class Map{
        'TrainigSite' => $item->training_site,
        'IDNumber' => $item->id_Number,
        'Status' => $this->StatusCheck($item->assessment),
-       'PartID' => $item->id
+       'PartID' => $item->PartID
        ];
 
         
@@ -220,7 +220,7 @@ class Map{
        'TrainigSite' => $item->training_site,
        'IDNumber' => $item->id_Number,
        'Status' => $this->StatusCheckIM($item->assessment),
-       'PartID' => $item->id,
+       'PartID' => $item->PartID,
        'County' => Facilities::where('FacilityCode',$facilityCode)->first()->County
        ]);
 

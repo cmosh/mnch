@@ -405,9 +405,9 @@ class Analysis_Constructor extends Analysis_Helper {
 
 	$this->CHV2_staff_trained= function($county){ 
 	 global $term;
-	 return Cache::remember('CHV2_staff_trained'.$county.$term,config('cache.timeout'),function(){
+	 // return Cache::remember('CHV2_staff_trained'.$county.$term,config('cache.timeout'),function(){
 			return self::staff_trained();
-		});
+		// });
 		
 	};
 	$this->CHV2_comm_strategy= function($county){ global $term;

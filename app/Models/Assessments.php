@@ -103,7 +103,7 @@ class Assessments extends Moloquent  {
             $Surveys = $params['Survey'] ? Self::where('Survey','Like',$params['Survey'].'%')->get() : Self::all() ;
    
 
-      $Surveys->load('facility_short')->load('user')->load('asurvey')->load('assessor_short');
+      $Surveys->load('facility_short')->load('user')->load('asurvey')->load('assessor_short')->load('participant');
 
       
         return $params['County'] ? $Surveys->where('facility_short.County',$params['County']) : $Surveys;

@@ -4,35 +4,13 @@
  <title>MNCH | {{$title}}</title>
 @endsection
 @section('pageinfo')
-
- 
-         
-  @endsection
-
-
-
-
-
-
-
+@endsection
 @section('content')
-
-
- {!! Form::open() !!}     
-
-
-
-                         {!! Form::close() !!}
-
-
-
-                        
-
-  
-     <div class="box box-primary">
-                <div class="box-header">
-
-                <button style="float:right" id="print-button" >Print</button>
+{!! Form::open() !!}
+{!! Form::close() !!}
+<div class="box box-primary">
+<div class="box-header">
+<button style="float:right" id="print-button" >Print</button>
                   <h3 class="box-title">
 
                   Progress Review
@@ -145,10 +123,24 @@
                      
                         
                         <th>Version</th>
+               @if($survey->id=='IMCIV1')
+                        
+                @else
+
                         <th>Assessment Term</th>
+                @endif
                         <th>Assessor</th>
+
                          <th>Date</th>
+        @if($survey->id=='IMCIV1')
+                           <th>Participant</th>
+                @else
+
                          <th>Facility</th>
+                      
+                @endif
+
+
                          <th >County</th>
                          <th>Sub-County</th>
                          <th>Entered by</th>
@@ -166,15 +158,28 @@
 
                      
                         
-                        <th>Version</th>
+                           <th>Version</th>
+               @if($survey->id=='IMCIV1')
+                        
+                @else
+
                         <th>Assessment Term</th>
+                @endif
                         <th>Assessor</th>
+
                          <th>Date</th>
+        @if($survey->id=='IMCIV1')
+                           <th>Participant</th>
+                @else
+
                          <th>Facility</th>
+                      
+                @endif
+
+
                          <th >County</th>
                          <th>Sub-County</th>
                          <th>Entered by</th>
-                        
 
                         <th class="hideprint">Action</th>
 
@@ -194,11 +199,27 @@
                                 {{$user->asurvey->Version}} :{{$user->asurvey->Runtime}}
 
                          </td>
+
+                           @if($survey->id=='IMCIV1')
+                        
+                @else
+
+                        
                         <td > {{ $user->Assessment_Term}}</td>
+                @endif
+                
                         <td > {{ isset($user->assessor_short->Name) ? $user->assessor_short->Name : "" }}</td>
                        
                         <td>{{ date_format(date_create($user->Date),'d F Y')}} </td>
+
+                           @if($survey->id=='IMCIV1')
+                        <td >{{ $user->participant->Name_of_Participant}}  </td>
+                @else
+
+                        
+                       
                         <td >{{ $user->facility_short->FacilityName}}  </td>
+                @endif
                         <td  >{{$user->facility_short->County}}</td>
                         <td>{{$user->facility_short->District}}
 
