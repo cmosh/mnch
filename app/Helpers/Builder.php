@@ -89,15 +89,10 @@ class Builder {
   <table>
   <tr >
   <td  width="100%">
-<<<<<<< Updated upstream:app/Helpers/Builder.php
-  <h3>Success Review Content Before Submitting</h3>
-=======
-<<<<<<< Updated upstream:app/Tables/builder.php
-  <h3>Success!</h3>
-=======
+
+
   <h3>Successfully saved!Review Content Before Submitting</h3>
->>>>>>> Stashed changes:app/Helpers/Builder.php
->>>>>>> Stashed changes:app/Tables/builder.php
+
   <p>Your progress has been saved.</p>
   </td  class="col-md-3">
   <td width="25%">
@@ -208,7 +203,7 @@ class Builder {
                                 <!-- /.box -->
                                 ';
                                 //Check if survey version is MNHV1 to add/remove assessor block
-                                if($Survey!='MNHV1'){
+                                if($TheAsses->Survey!='MNHV1'){
                                 $HtmlLines.='<div class="box box-'.$color.'">
                                     
                                     <div class="box-header">
