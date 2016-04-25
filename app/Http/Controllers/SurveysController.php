@@ -105,11 +105,19 @@ class SurveysController extends Controller{
     $sva = $surveyyy->Survey;
     $location = substr($sva, 0, 2);
         
+
+      if($sva=="MNHV1"){
+         $Name = "n/a";
+      $Designation = "n/a"; 
+      $Email  = "n/a";
+      $Number = "n/a";
+      }else{
       $Name = array_shift($array);
       $Designation = array_shift($array); 
       $Email  = array_shift($array);
       $Number = array_shift($array);
-
+      }
+      
        if( !isset(Assessor::where('AssID','=',$AssID)->first()->AssID)) {
          $storeassessor = new Assessor;
          $storeassessor->Name = $Name;        
