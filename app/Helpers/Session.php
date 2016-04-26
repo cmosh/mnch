@@ -24,7 +24,7 @@ class Session {
             $expiresAt = Carbon::now()->addMinutes(5);
             $value  = $closure();
             $driver = self::driver();
-            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');    
+            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix(config('cache.prefix').'mnch_users');    
                         
             Cache::put($key, 
                                  ['Assessment'=>
@@ -44,7 +44,7 @@ class Session {
 
 	public static function areyouyoung($key){
     $driver = self::driver();
-            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');   
+            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix(config('cache.prefix').'mnch_users');   
 		return Cache::has($key);
    
 	}
@@ -52,7 +52,7 @@ class Session {
 
 	public static function murdersession($key){
     $driver = self::driver();
-            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix('mnch_users');   
+            if($driver!=="file" && $driver!=="database" )  Cache::setPrefix(config('cache.prefix').'mnch_users');   
             Cache::forget($key);
 
 }     
