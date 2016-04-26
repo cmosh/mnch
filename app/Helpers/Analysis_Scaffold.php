@@ -69,6 +69,7 @@ class Analysis_Scaffold {
  		    count(Facilities::SubmittedAssessments($survey,'Baseline')->toArray()) < 1 ?: $array[] = 'Baseline';
       		count(Facilities::SubmittedAssessments($survey,'Midterm')->toArray()) < 1 ?: $array[] = 'Midterm';
       		count(Facilities::SubmittedAssessments($survey,'Endterm')->toArray()) < 1 ?: $array[] = 'Endterm';
+      		$array != null ?: $array[] = 'Baseline';
      		return $array;
      	}
 
