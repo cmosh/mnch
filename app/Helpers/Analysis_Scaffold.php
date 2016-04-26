@@ -65,7 +65,7 @@ class Analysis_Scaffold {
 
  		public  function getterms($survey)
  		{
- 		    $array;
+ 		    $array=null;
  		    count(Facilities::SubmittedAssessments($survey,'Baseline')->toArray()) < 1 ?: $array[] = 'Baseline';
       		count(Facilities::SubmittedAssessments($survey,'Midterm')->toArray()) < 1 ?: $array[] = 'Midterm';
       		count(Facilities::SubmittedAssessments($survey,'Endterm')->toArray()) < 1 ?: $array[] = 'Endterm';
