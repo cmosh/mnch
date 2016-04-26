@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Non Diarrhoea Cases Treated with Zinc + ORS
                   <small>
-                     <a id="Year3Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a id="Year3Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                   </h3>

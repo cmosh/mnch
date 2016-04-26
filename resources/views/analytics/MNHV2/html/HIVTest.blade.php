@@ -3,7 +3,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">HIV Testing and Counselling
                   <small>
-                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_HIVTest/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_HIVTest/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     </h3>
