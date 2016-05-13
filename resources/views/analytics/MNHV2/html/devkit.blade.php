@@ -3,7 +3,7 @@
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Delivery kit components
-                  <small>
+                  <small class="cmpr">
                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_devkit/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
