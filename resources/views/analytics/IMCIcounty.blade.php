@@ -19,11 +19,11 @@
 
 
  <div class="col-md-12">
-
+<!--<div > in {{count($SubmittedCounties)}} counties</div>-->
   <!-- small box -->
                <div class="small-box bg-blue">
                 <div class="inner">
-                  <h3> <p id="X">Data from {{$SubmittedCount}} healthworkers in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
+                  <h3> <p id="X">Data from {{$SubmittedCount}} healthworkers</p><sup style="font-size: 20px"></sup></h3>
                  
                 </div>
              
