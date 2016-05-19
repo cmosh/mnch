@@ -150,7 +150,10 @@ function drawChart() {
     
     @include('analytics/'.$survey.'/js')
 
-    $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+
+ @if(substr($survey,0,4)!='IMCI')
+  
+  $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
     if (allcheck==1){
 
@@ -159,6 +162,10 @@ function drawChart() {
     $('#X').html('Data from ' + nos['Count'] + ' facilities in ' + nos['Counties'] + ' counties');
 
     } 
+   
+   @endif
+   
+    
 
     $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
     $( ".wait" ).removeClass("overlay");
