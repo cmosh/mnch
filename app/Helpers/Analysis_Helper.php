@@ -1086,8 +1086,8 @@ $DataN = $DataN->sum('Data');
 
 		 foreach ($Types as $Type => $Workers) {
 		 	$Workers= collect($Workers);
-
-		 	$Array [] = [$Type,count($Workers->where('Status','Assessed')),count($Workers->where('Status','Not Assessed'))];
+			$Array [] = [$Type,0,0];
+		 	//$Array [] = [$Type,count($Workers->where('Status','Assessed')),count($Workers->where('Status','Not Assessed'))];
 
 		 }
 
