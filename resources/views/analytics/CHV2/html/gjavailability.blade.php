@@ -3,7 +3,7 @@
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Guidelines
-                   <small>
+                   <small class="cmpr">
                      <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_Guidelines/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
