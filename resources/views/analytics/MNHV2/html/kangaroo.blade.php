@@ -2,7 +2,7 @@
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Provison of KMC
-                  <small class="cmpr">
+                  <small>
                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo1/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
@@ -22,7 +22,7 @@
                  
                   
                   
-                     <small class="cmpr">
+                     <small>
                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>

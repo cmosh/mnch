@@ -2,7 +2,7 @@
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual ORT Corner Management Trends
-                    <small class="cmpr">
+                    <small>
                    <a id="Year4Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>

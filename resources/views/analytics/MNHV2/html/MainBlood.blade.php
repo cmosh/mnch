@@ -2,7 +2,7 @@
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Main Source of Blood
-                  <small class="cmpr">
+                  <small>
                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_MainBlood/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>

@@ -2,7 +2,7 @@
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Treatment Data in Under 5 Register
-                    <small class="cmpr">
+                    <small>
                     <a id="Year1Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a> 
                     </small>
                   </h3>
