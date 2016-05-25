@@ -2,7 +2,7 @@
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">New Born Care
-                  <small>
+                  <small class="cmpr">
                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_NewBornCare/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>

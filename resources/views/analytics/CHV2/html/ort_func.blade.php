@@ -2,7 +2,7 @@
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">ORT corner functionality 
-                    <small>
+                    <small class="cmpr">
                    <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_ortf/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
