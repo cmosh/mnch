@@ -21,7 +21,7 @@
  <div class="col-md-12">
 
   <!-- small box -->
-               <div class="small-box bg-blue">
+               <div class="small-box bg-blue" style="margin-bottom:0px">
                 <div class="inner">
                   <h3> <p id="X">Data from {{$SubmittedCount}} healthworkers in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
                  
