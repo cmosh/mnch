@@ -41,10 +41,12 @@
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
            @if( Auth::user()->role == 2)
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
            @endif
            @if( Auth::user()->role >= 3)
                 <li><a href="{{config('app.prefix')}}/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                <li><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
                @elseif($location == 'ass' )
 
@@ -53,26 +55,52 @@
              <!-- if user_role is program-user or higher -->
                @if( Auth::user()->role == 2)
                   <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                   <li><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
                @if( Auth::user()->role >= 3)
                   <li><a href="{{config('app.prefix')}}/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                   <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                   <li><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
             
 
             @elseif ($location ==  'umanage' )
+
             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
              <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
-           @if( Auth::user()->role == 2)
+            @if( Auth::user()->role == 2)
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
                @if( Auth::user()->role >= 3)
                 <li class="active"><a href="{{config('app.prefix')}}/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
+     @elseif ($location ==  'tracker' )
+
+            <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+             <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
+            <li><a href="{{config('app.prefix')}}/assessment/CH"><i class="fa fa-link"></i> <span>CH Surveys</span></a></li>
+            <li><a href="{{config('app.prefix')}}/assessment/MNH" style="overflow:none"><i class="fa fa-link"></i> <span>MNH Surveys</span></a></li>
+            <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
+            @if( Auth::user()->role == 2)
+                <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li class="active"><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
+               @endif
+               @if( Auth::user()->role >= 3)
+                <li ><a href="{{config('app.prefix')}}/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
+                <li><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li  class="active"><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
+               @endif
+
+
+
+
+
                @elseif ($location ==  'preview')
                <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
              <li ><a href="{{config('app.prefix')}}/home"><i class="fa fa-link"></i> <span>My Home</span></a></li>
@@ -81,10 +109,12 @@
             <li><a href="{{config('app.prefix')}}/assessment/IMCI"><i class="fa fa-link"></i> <span>IMCI Surveys</span></a></li>
              @if( Auth::user()->role == 2)
                 <li class="active"><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li  ><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
                @if( Auth::user()->role >= 3)
                 <li ><a href="{{config('app.prefix')}}/usermanagement/viewusers"><i class="fa fa-link"></i> <span>User Management</span></a></li>
                 <li class="active"><a href="{{config('app.prefix')}}/usermanagement/monitor"><i class="fa fa-link"></i> <span>Progress Review</span></a></li>
+                 <li  ><a href="{{config('app.prefix')}}/usermanagement/track"><i class="fa fa-link"></i> <span>Progress Tracker</span></a></li>
                @endif
                 @elseif ($location ==  'pass')
             <li class=""><a href="{{config('app.prefix')}}/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>

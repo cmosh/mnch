@@ -2,6 +2,7 @@
 
 use Illuminate\Auth\Authenticatable;
 use Moloquent;
+use Carbon\Carbon;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -39,6 +40,24 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
      	return $query->where('role','<',4);
      				 
      }
+
+     public function scopeActive($query)
+     {
+
+     	return $query->where('status',1);
+     				 
+     }
+
+     public function assessments() {
+        return $this->hasMany('App\Models\Assessments','UserId','id')
+        			->where('Status','Submitted');
+    }
+
+    public function assessmentsT(){
+    	return $this->hasMany('App\Models\Assessments','UserId','id')
+    				->where('Status','Submitted')
+    				->where('updated_at', '>=', Carbon::today());
+    }
 
 
 	 public static function createOrUpdate($data, $keys) {

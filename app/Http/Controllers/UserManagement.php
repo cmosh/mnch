@@ -45,6 +45,16 @@ class UserManagement extends Controller {
 										  ->with('title','User Management');
 	}
 
+	public function track()
+	{
+		$users=User::Active()->with('assessments')->with('assessmentsT')->get();		
+			// return $users;
+		$this->role->__invoke(3);
+		return view('usermanagement.track')->with('users',$users)
+										  ->with('location','tracker')
+										  ->with('title','User Management');
+	}
+
 	public function test()
 	{
 		return view('usermanagement.test')->with('location','umanage')
