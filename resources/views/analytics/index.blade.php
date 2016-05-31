@@ -41,7 +41,11 @@
 
   
 
- 
+ <style type="text/css">
+   .ui-dialog{
+     position: fixed; padding: .2em; width: 300px; overflow: auto; 
+}
+ </style>
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
  <script type="text/javascript">
 
