@@ -283,7 +283,8 @@ $('#fcbtn').click(function () {
           $("#dialog").dialog({
              autoOpen: false,
               modal: true,
-             minWidth: 500,
+             minWidth: 950,
+             maxHeight: 600,
             title: "Facilities assessed in " + county
           });
           $("#dialog").dialog('open');

@@ -42,7 +42,7 @@
              <li><a href="{{config('app.prefix')}}/analytics/IMCIV1">IMCI Survey</a></li>
           
 
-             <li><a href="{{config('app.prefix')}}/rawdata">Raw Data</a></li>
+             <!-- <li><a href="{{config('app.prefix')}}/rawdata">Raw Data</a></li> -->
           
               @if (config('app.env')=='test'||config('app.mak'))
            <li> <a href="{{config('app.prefix')}}/test/serve/"  role="button">
