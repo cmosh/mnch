@@ -209,7 +209,7 @@ return [
 		'View'      => Illuminate\Support\Facades\View::class,
 		'Gate' 		=> Illuminate\Support\Facades\Gate::class,
 		'Form'		=> Collective\Html\FormFacade::class,
-    	'Html'		=> Collective\Html\HtmlFacade::class,
+    	'HTML'		=> Collective\Html\HtmlFacade::class,
 		'Asset' 	=> Efficiently\Larasset\Facades\Asset::class,
 		'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
 		'SSH' 		=> Collective\Remote\RemoteFacade::class,

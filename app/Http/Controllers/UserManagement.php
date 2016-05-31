@@ -45,6 +45,16 @@ class UserManagement extends Controller {
 										  ->with('title','User Management');
 	}
 
+	public function track()
+	{
+		$users=User::Active()->with('assessments')->with('assessmentsT')->get();		
+			// return $users;
+		$this->role->__invoke(3);
+		return view('usermanagement.track')->with('users',$users)
+										  ->with('location','tracker')
+										  ->with('title','User Management');
+	}
+
 	public function test()
 	{
 		return view('usermanagement.test')->with('location','umanage')
@@ -475,7 +485,7 @@ public function export($loc,$type1,$type2,$type3)
 		     						 	$user_m->facility_short->County,
 		     						 	$user_m->facility_short->District,
 		     						 	$user_m->user->name,
-		     						 	$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status	
+		     						 	$user_m->Status = $user_m->Status == 'New' ? 'Incomplete' : $user_m->Status	
 		     						 	]					
 						);
 					}
@@ -498,7 +508,7 @@ public function export($loc,$type1,$type2,$type3)
 
 	    				$counter2++;
 	    				$role = $this->roles[$user_m->user->role];
-	    				$sheet->row($counter2+1,[$user_m->asurvey->Description,$user_m->asurvey->Runtime,$user_m->Assessment_Term."(V".$user_m->asurvey->Version.")", isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",$user_m->Date,$user_m->facility_short->FacilityName,$user_m->facility_short->FacilityCode,$user_m->facility_short->County,$user_m->facility_short->District,$user_m->user->name,$role,$user_m->Status = 'New' ? 'Incomplete' : $user_m->Status]);				
+	    				$sheet->row($counter2+1,[$user_m->asurvey->Description,$user_m->asurvey->Runtime,$user_m->Assessment_Term."(V".$user_m->asurvey->Version.")", isset($user_m->assessor_short->Name) ? $user_m->assessor_short->Name : "",$user_m->Date,$user_m->facility_short->FacilityName,$user_m->facility_short->FacilityCode,$user_m->facility_short->County,$user_m->facility_short->District,$user_m->user->name,$role,$user_m->Status = $user_m->Status == 'New' ? 'Incomplete' : $user_m->Status]);				
 				}
 			});
 			})->download('xls');
