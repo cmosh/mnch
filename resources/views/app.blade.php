@@ -88,20 +88,7 @@
     <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;">
    <div  class="dropdon">
   <button class="dropbn">Select Version</button>
-   <div class="dropdown-contet">
-   @if (substr($survey,0,4)=='IMCI')
-    <a href="{{config('app.prefix')}}/analytics/IMCIV1">Version 1</a>
-@elseif (substr($survey,0,2)=='CH')
-    <a class="cmpr" href="{{config('app.prefix')}}/analytics/CHV1">Version 1</a>
-    <a href="{{config('app.prefix')}}/">Version 2</a>
-    <a class="cmpr" href="#">All</a>
-@else
-    <a class="cmpr" href="{{config('app.prefix')}}/analytics/MNHV1">Version 1</a>
-    <a href="{{config('app.prefix')}}/analytics/MNHV2">Version 2</a>
-    <a class="cmpr" href="#">All</a>
-@endif
-    
-   </div>
+  
   </div>
  </div>
       </header>
