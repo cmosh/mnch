@@ -43,7 +43,7 @@
 
  <style type="text/css">
    .ui-dialog{
-     position: fixed; padding: .2em; width: 300px; overflow: auto; 
+     position: fixed; padding: .2em; width: 300px; overflow: hidden; 
 }
  </style>
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
