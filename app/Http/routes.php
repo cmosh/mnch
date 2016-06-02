@@ -30,9 +30,9 @@ Route::get('rawdata/supplies-availability','RawExcelController@SuppliesAvailabil
 Route::get('rawdata/resource-availability','RawExcelController@ResourceAvailability');
 Route::get('rawdata/community-strategy','RawExcelController@CommunityStrategy');
 
-Route::get('admin/surveys','FormController@index');
-Route::post('admin/surveys/fields/','FormController@fields');
-Route::get('admin/surveys/{SurveyID}','FormController@edit');
+// Route::get('admin/surveys','FormController@index');
+// Route::post('admin/surveys/fields/','FormController@fields');
+// Route::get('admin/surveys/{SurveyID}','FormController@edit');
 Route::get('admin/global', 'administration@globe');
 Route::get('admin/redmin', 'administration@localredis');
 Route::get('admin/memcached', 'administration@localmem');
