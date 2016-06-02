@@ -4,9 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-
     # Redirect Trailing Slashes...
-    RewriteCond %{REQUEST_URI} !^/redis
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
     # Handle Front Controller...
