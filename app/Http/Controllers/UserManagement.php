@@ -168,7 +168,7 @@ class UserManagement extends Controller {
 
 	public function show()
 	{	
-		$this->role->__invoke(2);
+		// $this->role->__invoke(2);
 		$surveys=Survey::orderBy('order')->get();
 		$counties=Counties::all();
 
