@@ -166,7 +166,7 @@ class UserManagement extends Controller {
 
 	}
 
-	public function show()
+	public function review()
 	{	
 		// $this->role->__invoke(2);
 		$surveys=Survey::orderBy('order')->get();
