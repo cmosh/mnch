@@ -86,20 +86,20 @@
           <h2 align="middle">@yield('header')</h2>
           </div>
     <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;">
-   <div  class="dropdon">
-  <button class="dropbn">Select Version</button>
-   <div class="dropdown-contet">
-   @if (substr($survey,0,4)=='IMCI')
+   <div  class="dropdown">
+  <button class="dropbtn">Select Version</button>
+   <div class="dropdown-content">
+   
     <a href="{{config('app.prefix')}}/analytics/IMCIV1">Version 1</a>
-@elseif (substr($survey,0,2)=='CH')
+
     <a class="cmpr" href="{{config('app.prefix')}}/analytics/CHV1">Version 1</a>
     <a href="{{config('app.prefix')}}/">Version 2</a>
     <a class="cmpr" href="#">All</a>
-@else
+
     <a class="cmpr" href="{{config('app.prefix')}}/analytics/MNHV1">Version 1</a>
     <a href="{{config('app.prefix')}}/analytics/MNHV2">Version 2</a>
     <a class="cmpr" href="#">All</a>
-@endif
+
     
    </div>
   </div>
@@ -220,15 +220,7 @@
   margin: 8px 0;
   padding-bottom: 8px;
 }
-.ui-dialog-titlebar{
-  background-color: #0073B7;
-  color:#0073B7;
-}
 
-.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable.ui-resizable {
-    top: 100px !important;
-    overflow: auto;
-}
   
 </style>
   </body>

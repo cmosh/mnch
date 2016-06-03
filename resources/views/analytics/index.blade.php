@@ -51,7 +51,7 @@
  $(document).ready(function(){
 
     $(".cmpr").attr("hidden","true");
-    $(".dropdon").attr("hidden","true");
+    
  }
 
   );
