@@ -87,20 +87,10 @@
           </div>
     <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;">
    <div  class="dropdown">
-  <button class="dropbtn">Select Version</button>
-   <div class="dropdown-content">
-   
-    <a href="{{config('app.prefix')}}/analytics/IMCIV1">Version 1</a>
+  <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
+   <div id="verLinks" class="dropdown-content">
 
-    <a class="cmpr" href="{{config('app.prefix')}}/analytics/CHV1">Version 1</a>
-    <a href="{{config('app.prefix')}}/">Version 2</a>
-    <a class="cmpr" href="#">All</a>
-
-    <a class="cmpr" href="{{config('app.prefix')}}/analytics/MNHV1">Version 1</a>
-    <a href="{{config('app.prefix')}}/analytics/MNHV2">Version 2</a>
-    <a class="cmpr" href="#">All</a>
-
-    
+    <!-- version links here -->
    </div>
   </div>
  </div>
