@@ -64,22 +64,23 @@
   var pathPart = "",  a_versions="";
     for (i = 0; i < pathArray.length; i++) {
       pathPart= pathArray[i];
-      console.log("pathPart: " + pathPart + " index: " + i);
+      console.log("pathPart: " + pathPart + " index: " + i + " seclast : " + pathArray[seclast] );
+   
 
-      if(i==last && seclast=="analytics"){
+      if(i==last && pathArray[seclast]=="analytics"){
 
       switch (pathPart) {
       case "CHV1":
       case "CHV2":
-        a_versions= "<a class='cmpr' href='{{config('app.prefix')}}/analytics/CHV1'>Version 1 : 2012-2013 </a>
-    <a href='{{config('app.prefix')}}/'>Version 2 : 2014 - Present</a>
-    <a class='cmpr' href='#''>All</a>";
+        a_versions= "<a class='cmpr' href='{{config('app.prefix')}}/analytics/CHV1'>Version 1 : 2012-2013 </a>";
+    a_versions+="<a href='{{config('app.prefix')}}/'>Version 2 : 2014 - Present</a>";
+    a_versions+="<a class='cmpr' href='#'>All</a>";
         break; 
       case "MNHV1":
       case "MNHV2":
-         a_versions="<a class='cmpr' href='{{config('app.prefix')}}/analytics/MNHV1'>Version 1 : 2012 - 2013</a>
-    <a href='{{config('app.prefix')}}/analytics/MNHV2'>Version 2 : 2014 - Present</a>
-    <a class='cmpr' href='#''>All</a>";
+         a_versions="<a class='cmpr' href='{{config('app.prefix')}}/analytics/MNHV1'>Version 1 : 2012 - 2013</a>";
+         a_versions+="<a href='{{config('app.prefix')}}/analytics/MNHV2'>Version 2 : 2014 - Present</a>";
+         a_versions+="<a class='cmpr' href='#'>All</a>";
 
           break; 
       case "IMCIV1":
@@ -90,6 +91,8 @@
 }
 
   $("#verLinks").html(a_versions);
+  //console.log(a_versions);
+
     
      }
 
