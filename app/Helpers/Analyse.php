@@ -15,29 +15,51 @@ class analyse extends Analysis_Constructor {
 		$surveys = $data;
 		$ch = new analyse();
 		//Json Making
-		$JsonArray = (array(
-			'CHV2_Guidelines' => $ch->CHV2_Guidelines->__invoke($county),
-			'CHV2_Tools' => $ch->CHV2_Tools->__invoke($county),
-			'CHV2_DTreatmentCommodities'  => $ch->CHV2_DTreatmentCommodities->__invoke($county),
-			'CHV2_Antibiotics' =>  $ch->CHV2_Antibiotics->__invoke($county),
-			'CHV2_Malaria'=> $ch->CHV2_Malaria->__invoke($county),
-			'CHV2_ortf'=> $ch->CHV2_ortf->__invoke($county),
-			'CHV2_supplies' =>$ch->CHV2_supplies->__invoke($county),
-			'CHV2_resources'=> $ch->CHV2_resources->__invoke($county),
-			'CHV2_u5Register'=> $ch->CHV2_u5Register->__invoke($county,$Year1),
-			'CHV2_u5RegisterN'=> $ch->CHV2_u5RegisterN->__invoke($county,$Year3),
-			'CHV2_annualtrends'=> $ch->CHV2_annualtrends->__invoke($county,$Year2),
-			'CHV2_annualtrendsN'=> $ch->CHV2_annualtrendsN->__invoke($county,$Year4),
-			'CHV2_ownership' => $ch->CHV2_ownership->__invoke($county),
-			'CHV2_types' => $ch->CHV2_types->__invoke($county),
-			'CHV2_staff_trained'=> $ch->CHV2_staff_trained->__invoke($county),
-			'CHV2_DTreatmentAvailability'=> $ch->CHV2_DTreatmentAvailability->__invoke($county),
-			'CHV2_AntibioticsAvailability'=> $ch->CHV2_AntibioticsAvailability->__invoke($county),
-			'CHV2_MalariaAvaialability'=> $ch->CHV2_MalariaAvaialability->__invoke($county),
-			'CHV2_comm_strategy'=> $ch->CHV2_comm_strategy->__invoke($county),
-			'CHV2_lort'=> $ch->CHV2_lort->__invoke($county),
-			'CHV2_genopd'=> $ch->CHV2_genopd->__invoke($county)
-			));
+		set_time_limit(30);
+		$JsonArray = [];
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_Guidelines' => $ch->CHV2_Guidelines->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_Tools' => $ch->CHV2_Tools->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_DTreatmentCommodities'  => $ch->CHV2_DTreatmentCommodities->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_Antibiotics' =>  $ch->CHV2_Antibiotics->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_Malaria'=> $ch->CHV2_Malaria->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_ortf'=> $ch->CHV2_ortf->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_supplies' =>$ch->CHV2_supplies->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_resources'=> $ch->CHV2_resources->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_u5Register'=> $ch->CHV2_u5Register->__invoke($county,$Year1);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_u5RegisterN'=> $ch->CHV2_u5RegisterN->__invoke($county,$Year3);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_annualtrends'=> $ch->CHV2_annualtrends->__invoke($county,$Year2);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_annualtrendsN'=> $ch->CHV2_annualtrendsN->__invoke($county,$Year4);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_ownership' => $ch->CHV2_ownership->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_types' => $ch->CHV2_types->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_staff_trained'=> $ch->CHV2_staff_trained->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_DTreatmentAvailability'=> $ch->CHV2_DTreatmentAvailability->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_AntibioticsAvailability'=> $ch->CHV2_AntibioticsAvailability->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_MalariaAvaialability'=> $ch->CHV2_MalariaAvaialability->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_comm_strategy'=> $ch->CHV2_comm_strategy->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_lort'=> $ch->CHV2_lort->__invoke($county);
+			set_time_limit(30);
+			$JsonArray []= 'CHV2_genopd'=> $ch->CHV2_genopd->__invoke($county);
+			
 		return $JsonArray;
 	}
 

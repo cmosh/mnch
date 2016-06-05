@@ -51,7 +51,7 @@
 			],
 			'local_homestead' => [
 				'host'      => '127.0.0.1:22',
-				'username'  => 'vagrant',
+				'username'  => 'mak',
 				'password'  => '',
 				'key'       => '/key/id_rsa.ppk',
 				'keytext'   => '',

@@ -808,7 +808,7 @@ $DataN = $DataN->sum('Data');
 	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
 	 $all =count($Data);
 	
-	$x = array_count_values($Data->toArray());
+	$x = array_count_values($Data->collapse()->toArray());
 	
 	if (!(isset($x["2"]))) {$x[2]=0;}
 	$MCH = $x["2"];
