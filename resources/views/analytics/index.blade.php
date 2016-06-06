@@ -94,15 +94,22 @@
 
 }
 
-if(pathArray[last]=="rawdata"){
-  $("#verDrop").attr("hidden","true");
-}
+
 
   $("#verLinks").html(a_versions);
   //console.log(a_versions);
 
     
      }
+
+else if(pathArray[last]=="rawdata"){
+  $("#verDrop").attr("hidden","true");
+  console.log(pathArray[last]);
+  }
+
+else{
+ console.log(pathArray[last]);
+}
 
      }
 
