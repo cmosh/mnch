@@ -102,12 +102,12 @@
     
      }
 
-else if(pathArray[last]=="rawdata"){
+else if(i==last && pathArray[last]=="rawdata"){
   $("#verDrop").attr("hidden","true");
   console.log(pathArray[last]);
   }
 
-else{
+else if(i==last){
  console.log(pathArray[last]);
 }
 
