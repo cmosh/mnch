@@ -90,6 +90,10 @@
 
 }
 
+if(pathArray[last]=="rawdata"){
+  $("#verDrop").attr("hidden","true");
+}
+
   $("#verLinks").html(a_versions);
   //console.log(a_versions);
 
