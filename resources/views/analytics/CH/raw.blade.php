@@ -5,9 +5,6 @@
              Child Health Survey Raw Data
               <small>( CSV Downloads for Raw Data)</small>
             </h1>
-             Child Health Survey Raw Data
-              <small>( CSV Downloads for Raw Data)</small>
-            </h1>
             <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
 @endsection
 @section('content')
