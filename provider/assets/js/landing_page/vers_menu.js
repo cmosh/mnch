@@ -52,7 +52,7 @@ $(document).ready(function(){
     
      }
 
-else if(i==last && pathArray[last]=="rawdata"){
+else if(i==last && pathArray[last]=="rawdata" || pathArray[last]=="login" || pathArray[last]=="register"){
   $("#verDrop").attr("hidden","true");
   console.log(pathArray[last]);
   }
