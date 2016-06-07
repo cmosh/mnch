@@ -1,6 +1,7 @@
 @extends('app')
 @section('header')
-  <h1  align="middle" style="top=-10px">
+  
+  <h1 align="middle" style="top:-10px;margin: 0;">
              Child Health Survey Raw Data
               <small>( CSV Downloads for Raw Data)</small>
             </h1>
