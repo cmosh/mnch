@@ -24,7 +24,7 @@ $(document).ready(function(){
       case "CHV2":
       console.log(pathArray[last]);
         refs=[];
-      proto=window.location.protocol,hloc=window.location.host;
+      proto=window.location.protocol,hloc=window.location.host+"/MNCH";
       refs[0]=proto + "//" + hloc + "/analytics/CHV1";
       refs[1]=proto + "//" + hloc + "/analytics/CHV2";
         a_versions= "<a class='cmpr' "+" href='"+refs[0]+"'"+">Version' 1 : 2012-2013 </a>";
@@ -35,7 +35,7 @@ $(document).ready(function(){
       case "MNHV2":
         console.log(pathArray[last]);
         refs=[];
-      proto=window.location.protocol,hloc=window.location.host;
+      proto=window.location.protocol,hloc=window.location.host+"/MNCH";
       refs[0]=proto + "//" + hloc + "/analytics/MNHV1";
       refs[1]=proto + "//" + hloc + "/analytics/MNHV2";
          a_versions= "<a class='cmpr' "+" href='"+refs[0]+"'"+">Version' 1 : 2012-2013 </a>";
@@ -46,7 +46,7 @@ $(document).ready(function(){
       case "IMCIV1":
       console.log(pathArray[last]);
       
-      proto=window.location.protocol,hloc=window.location.host;
+      proto=window.location.protocol,hloc=window.location.host+"/MNCH";
       refs=proto + "//" + hloc + "/analytics/IMCIV1";
       a_versions= "<a class='cmpr' "+" href='"+refs+"'"+">Version' 1 </a>";
       default:
