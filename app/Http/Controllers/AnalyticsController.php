@@ -81,7 +81,9 @@ class AnalyticsController extends Controller {
 
   public function land()
   {
-    return redirect('analytics/CHV2');
+    
+    $prefix = config('app.prefix');
+    return redirect($prefix.'/analytics/CHV2');
   }
 
   public function terms(Analysis_Scaffold $scaffold)
