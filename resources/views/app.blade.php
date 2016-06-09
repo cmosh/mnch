@@ -82,15 +82,17 @@
           </div>
         </nav>
         <div class="title-main">
-        <div id="verDrop" class="dropdown" style="margin-top:10px;">
-        <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
-         <div id="verLinks" class="dropdown-content"><a class="cmpr" href="http://41.89.6.209/MNCH/analytics/CHV1">Version' 1 : 2012-2013 </a><a class="cmpr" href="http://41.89.6.209/MNCH/analytics/CHV2">Version 2 : 2014 - Present</a><a class="cmpr" href="#">All</a></div>
-
-        </div>
           <h2 align="middle">@yield('header')</h2>
           </div>
 
-  
+   <div  id="verDrop" class="dropdown">
+  <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
+   <div id="verLinks" class="dropdown-content">
+
+    <!-- version links here -->
+   </div>
+
+  </div>
  </div>
 
       </header>
