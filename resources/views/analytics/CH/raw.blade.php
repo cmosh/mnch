@@ -1,7 +1,13 @@
 @extends('app')
 @section('header')
+<<<<<<< HEAD
   <h1  align="middle">
              Child Health Survey
+=======
+  
+  <h1 align="middle" style="top:-10px;margin: 0;">
+             Child Health Survey Raw Data
+>>>>>>> refs/remotes/origin/master
               <small>( CSV Downloads for Raw Data)</small>
             </h1>
             <hr style="width: 100%; color: #3C8DBC; height: 1px; background-color:#3C8DBC;" />
