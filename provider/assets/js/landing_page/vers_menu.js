@@ -23,21 +23,32 @@ $(document).ready(function(){
       case "CHV1":
       case "CHV2":
       console.log(pathArray[last]);
-        a_versions= "<a class='cmpr' href='{{config('app.prefix')}}/analytics/CHV1'>Version 1 : 2012-2013 </a>";
-    a_versions+="<a href='{{config('app.prefix')}}/'>Version 2 : 2014 - Present</a>";
+        refs=[];
+      proto=window.location.protocol,hloc=window.location.host;
+      refs[0]=proto + "//" + hloc + "/analytics/CHV1";
+      refs[1]=proto + "//" + hloc + "/analytics/CHV2";
+        a_versions= "<a class='cmpr' "+" href='"+refs[0]+"'"+">Version' 1 : 2012-2013 </a>";
+    a_versions+="<a class='cmpr' "+" href='"+refs[1]+"'"+">Version 2 : 2014 - Present</a>";
     a_versions+="<a class='cmpr' href='#'>All</a>";
-        break; 
+        break;
       case "MNHV1":
       case "MNHV2":
         console.log(pathArray[last]);
-         a_versions="<a class='cmpr' href='{{config('app.prefix')}}/analytics/MNHV1'>Version 1 : 2012 - 2013</a>";
-         a_versions+="<a href='{{config('app.prefix')}}/analytics/MNHV2'>Version 2 : 2014 - Present</a>";
+        refs=[];
+      proto=window.location.protocol,hloc=window.location.host;
+      refs[0]=proto + "//" + hloc + "/analytics/MNHV1";
+      refs[1]=proto + "//" + hloc + "/analytics/MNHV2";
+         a_versions= "<a class='cmpr' "+" href='"+refs[0]+"'"+">Version' 1 : 2012-2013 </a>";
+    a_versions+="<a class='cmpr' "+" href='"+refs[1]+"'"+">Version 2 : 2014 - Present</a>";
          a_versions+="<a class='cmpr' href='#'>All</a>";
 
           break; 
       case "IMCIV1":
       console.log(pathArray[last]);
-      a_versions="<a href='{{config('app.prefix')}}/analytics/IMCIV1'> Version 1</a>";
+      
+      proto=window.location.protocol,hloc=window.location.host;
+      refs=proto + "//" + hloc + "/analytics/IMCIV1";
+      a_versions= "<a class='cmpr' "+" href='"+refs+"'"+">Version' 1 </a>";
       default:
         console.log(pathArray[last]);
          a_versions="no versions";
