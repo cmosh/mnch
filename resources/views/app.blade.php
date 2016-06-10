@@ -211,14 +211,12 @@
   margin: 8px 0;
   padding-bottom: 8px;
 }
-<<<<<<< HEAD
+
 .ui-dialog-titlebar{
   background-color: #0073B7;
   color:#0073B7;
 }
-=======
 
->>>>>>> refs/remotes/origin/master
   
 </style>
   </body>
