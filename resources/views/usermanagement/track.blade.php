@@ -29,7 +29,7 @@
             <th>Day Before Yestaerday</th>
             <th>Completed Yesterday</th>
             <th >Completed Today</th>
-            <th>Completed in General</th>            
+            <th>Completed in Total</th>            
           </tr>
         </thead>        
         <tbody>   
