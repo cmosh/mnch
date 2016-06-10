@@ -85,14 +85,12 @@
           <h2 align="middle">@yield('header')</h2>
           </div>
 
-   <div  id="verDrop" class="dropdown">
+   <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;">
+   <div id="verDrop" class="dropdown">
   <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
-   <div id="verLinks" class="dropdown-content">
-
-    <!-- version links here -->
-   </div>
-
+   <div id="verLinks" class="dropdown-content"><a class="cmpr" href="{{config(" app.prefix')}}="" analytics="" chv1'="">Version 1 : 2012-2013 </a><a href="{{config(" app.prefix')}}="" '="">Version 2 : 2014 - Present</a><a class="cmpr" href="#">All</a></div>
   </div>
+ </div>
  </div>
 
       </header>

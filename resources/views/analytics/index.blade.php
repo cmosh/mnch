@@ -2,8 +2,13 @@
 @section('header')
 
  <!--<h1  align="middle">-->
-             {{$surveyname}}
-              <small>(Analysis Results)</small>
+             @if(substr($survey,0,4)!='IMCI')
+              {{$surveyname}}
+              <small>(Analysis Results for Version 2 )</small>
+              @elseif
+              
+   
+              @endif
             <!--</h1>-->
             
 @endsection
@@ -49,7 +54,13 @@
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
  <script type="text/javascript">
 
+$(document).ready(function(){
 
+    $(".cmpr").attr("hidden","true");
+    $(".dropdon").attr("hidden","true");
+ }
+
+  );
 
   window.inside = $('#thesvg').contents();
   $(function () {
