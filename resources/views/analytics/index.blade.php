@@ -2,18 +2,10 @@
 @section('header')
 
  <!--<h1  align="middle">-->
-<<<<<<< HEAD
-             @if(substr($survey,0,4)!='IMCI')
-              {{$surveyname}}
-              <small>(Analysis Results for Version 2 )</small>
-              @elseif
-              
-   
-              @endif
-=======
+
              {{$surveyname}}
               <small>(Analysis Results) <c id="s"></c></small>
->>>>>>> 02139b899907ade37ca1e851c7afd1b9f889ea93
+
             <!--</h1>-->
             
 @endsection
