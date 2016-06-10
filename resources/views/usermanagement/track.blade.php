@@ -26,30 +26,18 @@
       <thead>
           <tr>
             <th>Name</th>
-            <th>Phone Number</th>
-            <th>Role</th>
+            <th>Day Before Yestaerday</th>
+            <th>Completed Yesterday</th>
             <th >Completed Today</th>
-            <th>Completed in General</th>            
+            <th>Completed in Total</th>            
           </tr>
         </thead>        
         <tbody>   
         @foreach($users as $user)          
           <tr>
             <td > {{ $user->name}}</td>
-            <td> {{ $user->PhoneNumber}}</td>            
-            <td>
-              @if($user->role==0)
-              County User
-              @elseif($user->role==1)
-              Data Clerk
-              @elseif($user->role==2)
-              Program User
-              @elseif($user->role>=3)
-              System User
-              @elseif($user->role=='')
-              Unknown
-              @endif
-            </td>
+            <td>{{count($user->assessmentsJ)}}</td>            
+            <td>{{count($user->assessmentsY)}}</td>     
             <td>{{count($user->assessmentsT)}}</td>
             <td>{{count($user->assessments)}}</td>
             </tr>          
@@ -57,11 +45,11 @@
         </tbody>
         <tfoot>
         <tr>
-          <th>Name</th>          
-          <th>Phone Number</th>          
-          <th>Role</th>
-          <th >Completed Today</th>
-          <th>Completed in General</th> 
+           <th>Name</th>
+            <th>Day Before Yestaerday</th>
+            <th>Completed Yesterday</th>
+            <th >Completed Today</th>
+            <th>Completed in General</th>     
         </tr>
         </tfoot>
       </table>
