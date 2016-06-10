@@ -48,6 +48,13 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
      				 
      }
 
+     public function scopeTrack($query)
+     {
+        $MarchDate = Carbon::createFromDate(2016, 3, 3, 'America/Toronto');
+        return $query->where('status',1)->where('role','<',2)->where('created_at','>=',$MarchDate);
+                     
+     }
+
      public function assessments() {
         return $this->hasMany('App\Models\Assessments','UserId','id')
         			->where('Status','Submitted');
@@ -57,6 +64,18 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
     	return $this->hasMany('App\Models\Assessments','UserId','id')
     				->where('Status','Submitted')
     				->where('updated_at', '>=', Carbon::today());
+    }
+
+     public function assessmentsY(){
+        return $this->hasMany('App\Models\Assessments','UserId','id')
+                    ->where('Status','Submitted')
+                    ->where('updated_at', '>=', Carbon::today()-1);
+    }
+
+     public function assessmentsJ(){
+        return $this->hasMany('App\Models\Assessments','UserId','id')
+                    ->where('Status','Submitted')
+                    ->where('updated_at', '>=', Carbon::today()-2);
     }
 
 

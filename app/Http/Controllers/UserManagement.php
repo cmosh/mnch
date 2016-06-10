@@ -47,8 +47,12 @@ class UserManagement extends Controller {
 
 	public function track()
 	{
-		$users=User::Active()->with('assessments')->with('assessmentsT')->get();		
-			// return $users;
+		$users=User::Track()->with('assessments')
+							->with('assessmentsT')
+							->with('assessmentsY')
+							->with('assessmentsJ')
+							->get();		
+			
 		$this->role->__invoke(3);
 		return view('usermanagement.track')->with('users',$users)
 										  ->with('location','tracker')
