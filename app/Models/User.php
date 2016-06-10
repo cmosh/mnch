@@ -67,15 +67,17 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
     }
 
      public function assessmentsY(){
+        $today = Carbon::today();       
         return $this->hasMany('App\Models\Assessments','UserId','id')
                     ->where('Status','Submitted')
-                    ->where('updated_at', '>=', Carbon::today()-1);
+                    ->where('updated_at', '>=',$today->subDay());
     }
 
      public function assessmentsJ(){
+         $today = Carbon::today();
         return $this->hasMany('App\Models\Assessments','UserId','id')
                     ->where('Status','Submitted')
-                    ->where('updated_at', '>=', Carbon::today()-2);
+                    ->where('updated_at', '>=', $today->subDays(2));
     }
 
 
