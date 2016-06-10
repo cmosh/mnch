@@ -2,7 +2,7 @@
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual Treatment Trends
-                     <small>
+                     <small class="cmpr">
                    <a id="Year2Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>

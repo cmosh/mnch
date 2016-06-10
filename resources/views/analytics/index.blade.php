@@ -2,10 +2,11 @@
 @section('header')
 
  <!--<h1  align="middle">-->
+
              {{$surveyname}}
+
               <small>(Analysis Results - <c id="s"></c>)</small>
-            <!--</h1>-->
-            
+
 @endsection
 @section('content')
 
@@ -49,7 +50,13 @@
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
  <script type="text/javascript">
 
+$(document).ready(function(){
 
+    $(".cmpr").attr("hidden","true");
+    $(".dropdon").attr("hidden","true");
+ }
+
+  );
 
   window.inside = $('#thesvg').contents();
   $(function () {
