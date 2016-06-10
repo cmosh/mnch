@@ -298,7 +298,9 @@ protected static function getLabel($trim,$col){
 
 		}
 
-
+       $array[1][1] = $array[2][1] + $array[3][1] + $array[4][1] + $array[5][1] + $array[6][1] +$array[7][1];
+		 $array[1][2] = $array[2][2] + $array[3][2] + $array[4][2] + $array[5][2] + $array[6][2] +$array[7][2];
+		 $array[1][3] = $array[2][3] + $array[3][3] + $array[4][3] + $array[5][3] + $array[6][3] +$array[7][3];
 		$array[4][0] = 'Zinc';
 		
 		return $array;
