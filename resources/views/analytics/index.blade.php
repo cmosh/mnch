@@ -3,7 +3,7 @@
 
  <!--<h1  align="middle">-->
              {{$surveyname}}
-              <small>(Analysis Results) <c id="s"></c></small>
+              <small>(Analysis Results - <c id="s"></c>)</small>
             <!--</h1>-->
             
 @endsection
