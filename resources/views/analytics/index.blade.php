@@ -3,7 +3,7 @@
 
  <!--<h1  align="middle">-->
              {{$surveyname}}
-              <small>(Analysis Results)</small>
+              <small>(Analysis Results) <c id="s"></c></small>
             <!--</h1>-->
             
 @endsection
@@ -157,7 +157,7 @@ function drawChart() {
 
 
  @if(substr($survey,0,4)!='IMCI')
-  
+  $('#s').html($('#County').val());
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
     if (allcheck==1){
