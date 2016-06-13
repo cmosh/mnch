@@ -1,6 +1,6 @@
   <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="MNHV2_ownership">CHV2_ownership</option>
-  <option selected value="MNHV2_types">CHV2_types</option>  
+  <option selected value="MNHV2_MainBlood">CHV2_ownership</option>
+  <option selected value="MNHV2_ReasonBlood">CHV2_types</option>  
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -18,7 +18,7 @@
                         <div  id="info-title">                     
                      <div class=" " >
                          <br>                     
-                        <center ><h2 id="info-title"><b>FACILITY INFORMATION</b></h2></center>
+                        <center ><h2 id="info-title"><b>BLOOD AND TRANSFUSIONS</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -29,9 +29,9 @@
            <div class="col-xs-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Facility Ownership
+                  <h3 class="box-title">Main Source of Blood
                    <small class="cmpr" id="box-toolspull-right">
-                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_ownership/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_MainBlood/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                     </h3>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="MNHV2_ownership"></div>     
+              <div id="MNHV2_MainBlood"></div>     
                 </div>
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
@@ -51,9 +51,9 @@
 
                <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Facility Types
+                  <h3 class="box-title">Reason for no transfusion
                   <small class="cmpr" id="box-toolspull-right">
-                     <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_ReasonBlood/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                   </h3>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="box-body">
 
-                <div id="MNHV2_types"></div>  
+                <div id="MNHV2_ReasonBlood"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">

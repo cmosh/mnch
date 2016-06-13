@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="MNHV2_Tools">CHV2_ownership</option>
+  <option selected value="MNHV2_hours24">CHV2_ownership</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -16,7 +16,7 @@
                         <div  id="info-title">                     
                      <div class=" " >
                          <br>                     
-                        <center ><h2 id="info-title"><b>GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY</b></h2></center>
+                        <center ><h2 id="info-title"><b>FACILITY INFORMATION</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -25,9 +25,9 @@
    <div class="col-md-12" >
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tools 
+                  <h3 class="box-title">24 hour service delivery 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_hours24/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -35,7 +35,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="MNHV2_Tools"></div>     
+              <div id="MNHV2_hours24"></div>     
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>

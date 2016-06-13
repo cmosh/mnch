@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_supplies">CHV2_ownership</option>
+  <option selected value="MNHV2_DService">CHV2_ownership</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -7,7 +7,7 @@
 </select>
 
 <select style="width:100%" multiple name="thetypes" id="thetypes" hidden>
-  <option selected value="colfullstack">year1</option>
+  <option selected value="barfullstack">year1</option>
 </select>
 
   <div id="dialog" title="Dialog Title"></div>
@@ -16,7 +16,7 @@
                         <div  id="info-title">                     
                      <div class=" " >
                          <br>                     
-                        <center ><h2 id="info-title"><b>SUPPLIES</b></h2></center>
+                        <center ><h2 id="info-title"><b>DELIVERY SERVICES</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Availability 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_supplies/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_DService/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -35,7 +35,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_supplies"></div>     
+              <div id="MNHV2_DService"></div>     
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>

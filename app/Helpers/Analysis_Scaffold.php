@@ -71,7 +71,8 @@ class Analysis_Scaffold {
       		 $SubmittedMNHCount =  Assessments::Submitted('MNHV2')->where('Assessment_Term',$terms[0])->count();  
              $SubmittedMNHCounties = County::AllSubmittedT('MNHV2',$terms[0]);
         	 $links = ['facilityinfo'=>'Facility information',
-                'delivery'=>'Delivery Services',
+                'pdelivery'=>'Provision of Delivery Services',
+                'sdelivery'=>'Delivery Services',
                 'health'=>'Health Facility Management',
                 'skilled'=>'Skilled Birth Attendants',
                 'bed'=>'Bed Capacity',

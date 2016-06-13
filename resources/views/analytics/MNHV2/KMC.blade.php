@@ -1,6 +1,6 @@
   <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_Guidelines">CHV2_Guidelines</option>
-  <option selected value="CHV2_Tools">CHV2_types</option>  
+  <option selected value="MNHV2_Kangaroo1">MNHV2_Guidelines</option>
+  <option selected value="MNHV2_Kangaroo2">MNHV2_types</option>  
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -8,8 +8,8 @@
 </select>
 
 <select style="width:100%" multiple name="thetypes" id="thetypes" hidden>
-  <option selected value="barfullstack">year1</option>
-  <option selected value="barfullstack">year2</option>  
+  <option selected value="barfullstackshort">year1</option>
+  <option selected value="barfullstackshort">year2</option>  
 </select>
 
   <div id="dialog" title="Dialog Title"></div>
@@ -18,7 +18,7 @@
                         <div  id="info-title">                     
                      <div class=" " >
                          <br>                     
-                        <center ><h2 id="info-title"><b>GUIDELINES, JOB AIDS AND TOOLS AVAILABILITY</b></h2></center>
+                        <center ><h2 id="info-title"><b>PROVISION OF KMC</b></h2></center>
                         <br>
                         </div>
                         </div>
@@ -26,9 +26,9 @@
             <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Guidelines
+                  <h3 class="box-title">Availability
                    <small class="cmpr">
-                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_Guidelines/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo1/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -36,7 +36,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_Guidelines"></div>     
+              <div id="MNHV2_Kangaroo1"></div>     
                 </div><!-- /.box-body -->
 
                  <div class="wait overlay">
@@ -49,15 +49,16 @@
                  <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tools</h3>
+                  <h3 class="box-title">Facilities with designated space
+</h3>
                   <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 
-                <div id="CHV2_Tools"></div>  
+                <div id="MNHV2_Kangaroo2"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
