@@ -28,7 +28,7 @@
    @endif
 
 
-  @include('analytics/'.$survey.'/graphs')
+  
 
             
 
@@ -49,6 +49,19 @@
  </style>
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
  <script type="text/javascript">
+
+ function runFunction(name, arguments)
+{
+    var fn = window[name];
+    if(typeof fn !== 'function')
+        return;
+
+    fn.apply(window, arguments);
+}
+
+
+
+
 
 $(document).ready(function(){
 
@@ -74,13 +87,39 @@ $(document).ready(function(){
      
 
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
-google.setOnLoadCallback(drawChart);
+google.setOnLoadCallback(makeChart);
   
+ $('#Data').change(makeChart);
 
-  $('#County').change(drawChart);
-  $('#Term').change(drawChart);
+ function makeChart() {
+  var html = '<div class="box box-warning"><div class="box-header with-border"><h3 class="box-title">Please Wait</h3></div><div class="box-body"></div><div class="wait overlay"><i class="fa fa-refresh fa-spin"></i></div></div>'
+  $('#chartmaker').html(data);
+       var data = {
+         
+         '_token': $('input[name=_token]').val(),
+          'survey': '{{$survey}}',
+          'link':$('#Data').val()
+    };
+ 
+   $.ajax({
+      url: '{{config("app.prefix")}}/analytics/datarequest',
+      type: "post",
+       data: data,
+           success: function(data){
+            $('#chartmaker').html(data);     
+            drawChart();
+      }
+ 
+   });   
 
-	
+
+
+
+ }
+  $('#County').change(makeChart);
+  $('#Term').change(makeChart);
+
+  
 function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
      x = window.mapdata;
@@ -90,10 +129,10 @@ function mapRequest (county) {
    document.getElementById("svFa").innerHTML = '<b>'+TotalSubmitt+'</b>'; 
   
 }
+
+
+
 function getmapdata() {
-
-
-
  
     var data = {
          
@@ -126,19 +165,28 @@ function getmapdata() {
 
 }
 function drawChart() {
-
-	  $( ".wait" ).children().addClass("fa fa-refresh fa-spin");
+    var graphs = $('#graphs').val();
+    if ($('#theyears').val()!= 'not'){
+     var y1 = $('#Year1').val();
+     var y2 = $('#Year2').val();
+     var years = [y1,y2];
+    }
+    else
+    {
+     var  years = ['not','not'];
+    }
+    // alert(years);
+    var dtypes = $('#thetypes').val();
+    $( ".wait" ).children().addClass("fa fa-refresh fa-spin");
       $( ".wait" ).addClass("overlay");
-	  var data = {
+    var data = {
           'county':$('#County').val(),
          '_token': $('input[name=_token]').val(),
-         'Year1': $('#Year1').val(),
-         'Year2': $('#Year2').val(),
-         'Year3': $('#Year3').val(),
-         'Year4': $('#Year4').val(),
+         'graphs': graphs,
+         'years': years,
+         'dtypes': dtypes,
          'term':$('#Term').val(),
          'survey':'{{$survey}}'
-
     };
  
    $.ajax({
@@ -147,20 +195,29 @@ function drawChart() {
        data: data,
            success: function(data){
     var Odata = JSON.parse(data);
-		var jsonData = Odata['Data'];
-    
-    var county = $('#County').val();
+    var jsonData = Odata.Data;
+
+      var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
    x = window.mapdata;
+    // alert(jsonData);
+    // var x  = typeof(jsonData);
+    // alert (x);
+    Object.keys(jsonData).forEach(function(key,index) {
+      // alert(jsonData[key]);
+      renderchart(jsonData[key],key);
+    // key: the name of the object key
+    // index: the ordinal position of the key within the object 
+});
+        $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
+    $( ".wait" ).removeClass("overlay");
 
-
-   @if(substr($survey,0,4)=='IMCI')
+     @if(substr($survey,0,4)=='IMCI')
    @include('analytics/IMCImapdata')
    @else
    @include('analytics/mapdata')
    @endif
     
-    @include('analytics/'.$survey.'/js')
 
 
  @if(substr($survey,0,4)!='IMCI')
@@ -176,19 +233,174 @@ function drawChart() {
     } 
    
    @endif
-   
+}});}
+
+   function  renderchart(dataobject,dataindex){
     
+      runFunction(dataobject.pop(),[dataindex,dataobject]);
 
-    $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
-    $( ".wait" ).removeClass("overlay");
+
   }
-});   
 
-}
+  function col(index,obj) {
+      var cdata = google.visualization.arrayToDataTable(obj);
+
+       var coptions = {
+       
+       width: '100%',
+        height: 300,
+       
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: 35 }
+
+             };
+             
+      var c = new google.visualization.ColumnChart(document.getElementById(index));
+      c.draw(cdata, coptions);
+
+       function resizec () {
+      
+       
+           staff_Trained.draw(cdata, coptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizec, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizec);
+    }
+  }
+
+  function colfullstack(index,obj) {
+     var cdata = google.visualization.arrayToDataTable(obj);
+
+       var coptions = {
+       
+       width: '100%',
+        height: 300,
+       
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: 35 },
+         isStacked: 'percent'
+
+             };
+             
+     var c = new google.visualization.ColumnChart(document.getElementById(index));
+      c.draw(cdata, coptions);
+
+       function resizec () {
+      
+       
+           staff_Trained.draw(cdata, coptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizec, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizec);
+    }
+  }
+  function barfullstack(index,obj) {
+     var cdata = google.visualization.arrayToDataTable(obj);
+
+       var coptions = {
+       colors: ['green', 'red','#C6C6C6'],
+        width: '100%',
+        height: 300,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '50%' },
+        isStacked: 'percent',
+        chartArea:{left:250,top:25,width:'50%',height:'75%'}
+      };
+
+      var c = new google.visualization.BarChart(document.getElementById(index));
+      c.draw(cdata, coptions);
+
+       function resizec () {
+      
+       
+           c.draw(cdata, coptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizec, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizec);
+    }
+  }
+  function barstack(index,obj)
+    {
+      var cdata = google.visualization.arrayToDataTable(obj);
+
+      var coptions = {
+       
+        width: '100%',
+        height: 300,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '50%' },
+        isStacked: true,
+       hAxis: {minValue: 0},
+        vAxis: {minValue:0},
+        chartArea:{left:'40%',top:25,width:'100%',height:'75%'}
+      };
+      var c = new google.visualization.BarChart(document.getElementById(index));
+      c.draw(cdata, coptions);
+
+       function resizec () {
+      
+       
+           staff_Trained.draw(cdata, coptions);
+
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizec, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizec);
+    }
+
+    }
+  function pie(index,obj)
+    {
+     
+       var cdata = new google.visualization.DataTable();
+        cdata.addColumn('string', 'Facilities');
+        cdata.addColumn('number', 'Number');
+        cdata.addRows(obj);
+
+        // Set chart options
+        var coptions = {
+                       'width':'100%',
+                       'box-sizing': 'border-box;',
+                       sliceVisibilityThreshold:0,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var c = new google.visualization.PieChart(document.getElementById(index));
+        c.draw(cdata, coptions);
+
+         function resizec () {
+      
+       
+            c.draw(cdata, coptions);
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', resizec, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', resizec);
+    }
+  }
   
-   @if($survey=='CHV2')
-   @include('analytics/'.$survey.'/js2')  
-   @endif
+  
 
    window.inside.find('.county').click(function() {
   var cts = this.getAttribute("title");
@@ -255,6 +467,7 @@ $(function(){
   })
 });
 
+ 
 
 $('#fcbtn').click(function () {
      var county = $('#County').val();

@@ -85,14 +85,14 @@
           <h2 align="middle">@yield('header')</h2>
           </div>
 
-   <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;">
+   <!-- <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;">
    <div id="verDrop" class="dropdown">
-  <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
+     <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
    <div id="verLinks" class="dropdown-content">
      
    </div>
-  </div>
- </div>
+     </div>
+    </div> -->
  </div>
 
       </header>

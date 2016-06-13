@@ -12,6 +12,28 @@ class Analysis_Data {
 			return Analyse::getindividual($data['fi'],$filtered_data,$data['county'],$data['yr'],$data['term']);
 		}
 
+		public function getdata($data)
+		{
+			$filtered_data = $this->filter($data);
+			$graphs = $data['graphs'];
+			$years = $data['years'];
+			$dtypes = $data['dtypes'];
+			$Analysed = [];
+			foreach($graphs as $key=>$graph) {
+				 
+				  $Analysed [$graph] = Analyse::getindividual(
+				  	$graph,
+				  	$filtered_data,
+				  	$data['county'],
+				  	$years[$key],
+				  	$data['term']);
+				  $Analysed [$graph][] = $dtypes[$key];
+				}
+				 
+
+			return $Analysed; 
+		}
+
  		public  function CHV2($data)
  		{
  			$filtered_data = $this->filter($data);

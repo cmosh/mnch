@@ -276,7 +276,7 @@ protected static function getLabel($trim,$col){
 	
 	protected static function u5Register($Year1){
 	
-
+		
     $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray());
     $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=2; $i < 9; $i++) {
@@ -377,7 +377,7 @@ protected static function getLabel($trim,$col){
 		  $index = sprintf('%02d',$i);
 		  $mcol = $Block.'RW'.$index.$Col;
 		  $Data = $surveys->lists($mcol);
-		  $Month [] = $Data->collapse()->sum();					
+		  $Month [] = $Data->sum();					
 				}
 
 		return ($Month);

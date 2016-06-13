@@ -57,7 +57,10 @@ class AnalyticsController extends Controller {
   public function data(Analysis_Data $analysis_data){
     if(Request::ajax()){
       $data = Input::all();
-      echo json_encode(["Data"=>$analysis_data->{$data['survey']}($data),"Numbers"=>$analysis_data->numbers($data)]);
+      echo json_encode([
+        "Data"=>$analysis_data->getdata($data),
+        "Numbers"=>$analysis_data->numbers($data)
+        ]);
       die;
     }
   }
@@ -77,7 +80,26 @@ class AnalyticsController extends Controller {
 
   }
 
-  
+  public function datarequest()
+{
+   if(Request::ajax()) {
+      $param = Input::all();
+          $link = $param['link'];
+          $survey = $param['survey'];
+          if($survey == 'CHV2'){
+
+           $yr = Cache::get('CHV2YEARS');
+             return view('analytics.'.$survey.'.'.$link)
+             ->with('Years',$yr['Years'])
+           ->with('AllYears',$yr['AllYears'])
+           ->with('YearsCount',$yr['YearsCount']);
+          }
+          else{
+             return view('analytics.'.$survey.'.'.$link);
+          }
+ 
+}
+}  
 
   public function land()
   {

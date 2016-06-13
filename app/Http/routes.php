@@ -57,7 +57,8 @@ Route::group(['as' => 'dashboard::'], function () {
     Route::group(['prefix' => 'analytics','as'=>'helpers'],function(){
     			Route::get('terms','AnalyticsController@terms');
 				Route::post('comparison','AnalyticsController@compare');
-				Route::post('data','AnalyticsController@data');				
+				Route::post('data','AnalyticsController@data');	
+				Route::post('datarequest','AnalyticsController@datarequest');			
 				Route::post('maprequest','AnalyticsController@maprequest');
 				Route::post('facilitylist','AnalyticsController@facilitylist');		
     			Route::get('{survey}','AnalyticsController@index');
