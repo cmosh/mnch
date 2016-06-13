@@ -57,10 +57,18 @@ class AnalyticsController extends Controller {
   public function data(Analysis_Data $analysis_data){
     if(Request::ajax()){
       $data = Input::all();
+      $survey = $data['survey'];
+      if ($survey=="IMCIV1"){
+         echo json_encode([
+        "Data"=>$analysis_data->IMCIV1($data),
+        "Numbers"=>$analysis_data->numbers($data)
+        ]);
+      }else{
       echo json_encode([
         "Data"=>$analysis_data->getdata($data),
         "Numbers"=>$analysis_data->numbers($data)
         ]);
+    }
       die;
     }
   }

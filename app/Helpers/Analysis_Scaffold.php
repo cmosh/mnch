@@ -61,6 +61,7 @@ class Analysis_Scaffold {
 		return [
  			'Count'=>$SubmittedIMCICount,
  			'Counties'=>$SubmittedIMCICounties,
+      'links'=>'links',
  			'name'=>'Integrated Management of Childhood Illness'
  			];
  		}
@@ -116,8 +117,14 @@ class Analysis_Scaffold {
 
      	public function resolve($values,$survey)
      	{
-    
-	      return view('analytics.index')
+        if ($survey == 'IMCIV1') {
+          $view = 'analytics.IMCIindex';
+        }else{
+          $view = 'analytics.index';
+        }
+     
+      
+	      return view($view)
         ->with('links',$values['links'])
 	      ->with('survey',$survey)
 	      ->with('SubmittedCount',$values['Count'])
