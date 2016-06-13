@@ -90,8 +90,8 @@ class Analysis_Scaffold {
                 'Guidelines'=>'Guidelines Availability',
                 'Tools'=>'Tools Availability',
                 'Jobaids'=>'Job Aids Availability',
-                'Equipment'=>'Supplies Availability',
-                'Testing'=>'Resource Availability',
+                'Equipment'=>'Equipment Availability',
+                'Testing'=>'Testing Supplies',
                 'Delivery'=>'Delivery Kit Components'];
 
         	 return [
