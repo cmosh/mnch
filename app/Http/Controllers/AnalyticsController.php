@@ -57,7 +57,18 @@ class AnalyticsController extends Controller {
   public function data(Analysis_Data $analysis_data){
     if(Request::ajax()){
       $data = Input::all();
-      echo json_encode(["Data"=>$analysis_data->{$data['survey']}($data),"Numbers"=>$analysis_data->numbers($data)]);
+      $survey = $data['survey'];
+      if ($survey=="IMCIV1"){
+         echo json_encode([
+        "Data"=>$analysis_data->IMCIV1($data),
+        "Numbers"=>$analysis_data->numbers($data)
+        ]);
+      }else{
+      echo json_encode([
+        "Data"=>$analysis_data->getdata($data),
+        "Numbers"=>$analysis_data->numbers($data)
+        ]);
+    }
       die;
     }
   }
@@ -77,11 +88,32 @@ class AnalyticsController extends Controller {
 
   }
 
-  
+  public function datarequest()
+{
+   if(Request::ajax()) {
+      $param = Input::all();
+          $link = $param['link'];
+          $survey = $param['survey'];
+          if($survey == 'CHV2'){
+
+           $yr = Cache::get('CHV2YEARS');
+             return view('analytics.'.$survey.'.'.$link)
+             ->with('Years',$yr['Years'])
+           ->with('AllYears',$yr['AllYears'])
+           ->with('YearsCount',$yr['YearsCount']);
+          }
+          else{
+             return view('analytics.'.$survey.'.'.$link);
+          }
+ 
+}
+}  
 
   public function land()
   {
-    return redirect()->action('AnalyticsController@index','CHV2');
+    
+    $prefix = config('app.prefix');
+    return redirect('/analytics/CHV2');
   }
 
   public function terms(Analysis_Scaffold $scaffold)

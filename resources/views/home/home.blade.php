@@ -37,7 +37,7 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="/assessment/CH" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{config('app.prefix')}}/assessment/CH" class="small-box-footer" style="font-size:18pt">Choose <i class="fa fa-arrow-circle-right"></i></a>
               </div>
               </div>
 

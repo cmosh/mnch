@@ -43,16 +43,17 @@ class administration extends Controller {
 		$env = config('app.env');
 		$mak = config('app.mak');
 		$folder = config('app.folder');
+		$port = config('app.laport');
 
 			$this->role->__invoke(3);
 			if($env!='test'){
 
-			if($mak) $command = 'cd ~/'.$folder.'/mnch && screen -d -m php artisan larasset:serve --port 5000';
+		if($mak) $command = 'cd ~/'.$folder.'/mnch && screen -d -m php artisan larasset:serve --host 0.0.0.0 --port '.$port.';wall "'.$port.'fi"';
 			else abort(403);
 			
 
 			}
-			else { $command = 'cd ~/mnch_bak && screen -d -m php artisan larasset:serve --port 5000';}
+			else { $command = 'cd ~/mnch_test && screen -d -m php artisan larasset:serve --port '.$port;}
 
 
 		 SSH::into($this->ssh_connection)->run($command, function($line)
@@ -60,9 +61,8 @@ class administration extends Controller {
       	  		echo $line.PHP_EOL;
       	  	});
 		
-		return redirect()->action('AnalyticsController@ch');
+    return redirect()->action('AnalyticsController@index','CHV2');
 	}
-
 
 
 
@@ -71,17 +71,18 @@ class administration extends Controller {
 
 		$env = config('app.env');
 		$mak = config('app.mak');
+		$port = config('app.laport');
 		
 			$this->role->__invoke(3);
 			if($env!='test' && !$mak)abort(403);
 
-		$command = 'pid=$(lsof -i:4000 -t); kill -TERM $pid || kill -KILL $pid';
+		$command = 'pid=$(lsof -i:'.$port.' -t); kill -TERM $pid || kill -KILL $pid';
 		 SSH::into($this->ssh_connection)->run($command, function($line)
       	  	{
       	  		echo $line.PHP_EOL;
       	  	});
 
-		return redirect()->action('AnalyticsController@ch');
+    return redirect()->action('AnalyticsController@index','CHV2');
 	}
 	/**
 	 * Show the form for creating a new resource.

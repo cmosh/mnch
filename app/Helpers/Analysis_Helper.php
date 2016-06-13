@@ -276,7 +276,7 @@ protected static function getLabel($trim,$col){
 	
 	protected static function u5Register($Year1){
 	
-
+		
     $Years =  array_reverse(Block::where('blockID','Like','CHV2SEC3BLK%D')->lists('name')->toArray());
     $array [] = array('Diarrhoea Cases',$Years[$Year1],$Years[$Year1-1],$Years[$Year1-2]);
 		for ($i=2; $i < 9; $i++) {
@@ -298,7 +298,9 @@ protected static function getLabel($trim,$col){
 
 		}
 
-
+       $array[1][1] = $array[2][1] + $array[3][1] + $array[4][1] + $array[5][1] + $array[6][1] +$array[7][1];
+		 $array[1][2] = $array[2][2] + $array[3][2] + $array[4][2] + $array[5][2] + $array[6][2] +$array[7][2];
+		 $array[1][3] = $array[2][3] + $array[3][3] + $array[4][3] + $array[5][3] + $array[6][3] +$array[7][3];
 		$array[4][0] = 'Zinc';
 		
 		return $array;
@@ -805,19 +807,19 @@ $DataN = $DataN->sum('Data');
 
 		$recset = $surveys->lists('Data');
 
-	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02')->collapse();
+	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
 	 $all =count($Data);
 	
-	$x = array_count_values($Data->toArray());
+	$x = array_count_values($Data->collapse()->toArray());
 	
-	if (!(isset($x[2]))) {$x[2]=0;}
-	$MCH = $x[2];
-	if (!(isset($x[3]))) {$x[3]=0;}
-	$U5_Clinic = $x[3];
-	if (!(isset($x[1]))) {$x[1]=0;}
-	$OPD = $x[1];
-	if (!(isset($x[4]))) {$x[4]=0;}
-	$Ward = $x[4];
+	if (!(isset($x["2"]))) {$x[2]=0;}
+	$MCH = $x["2"];
+	if (!(isset($x["3"]))) {$x[3]=0;}
+	$U5_Clinic = $x["3"];
+	if (!(isset($x["1"]))) {$x[1]=0;}
+	$OPD = $x["1"];
+	if (!(isset($x["4"]))) {$x[4]=0;}
+	$Ward = $x["4"];
 	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
 
 	$Array [] = array('MCH',$MCH);
@@ -1086,8 +1088,8 @@ $DataN = $DataN->sum('Data');
 
 		 foreach ($Types as $Type => $Workers) {
 		 	$Workers= collect($Workers);
-
-		 	$Array [] = [$Type,count($Workers->where('Status','Assessed')),count($Workers->where('Status','Not Assessed'))];
+			$Array [] = [$Type,0,0];
+		 	//$Array [] = [$Type,count($Workers->where('Status','Assessed')),count($Workers->where('Status','Not Assessed'))];
 
 		 }
 

@@ -3,6 +3,7 @@
 return [
 	
 	'folder' => env('APP_FOLDER'),
+	'laport' => env('LASSET_PORT',5000),
 	'mak' => env('MAK',false),
 	'env' => env('APP_ENV', 'production'),
 	'prefix' => env('APP_PREFIX','/') == '/' ? '': '/'.env('APP_PREFIX'),
@@ -30,7 +31,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost/MNCH_test',
+	'url' => 'http://localhost',
 
 	/*
 	|--------------------------------------------------------------------------

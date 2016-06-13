@@ -7,3 +7,5 @@ public/phpredmin/config.php
 public/cache/Config/Memcache.php
 *.db
 *.htaccess
+access.log
+*.log

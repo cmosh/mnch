@@ -30,9 +30,9 @@ Route::get('rawdata/supplies-availability','RawExcelController@SuppliesAvailabil
 Route::get('rawdata/resource-availability','RawExcelController@ResourceAvailability');
 Route::get('rawdata/community-strategy','RawExcelController@CommunityStrategy');
 
-Route::get('admin/surveys','FormController@index');
-Route::post('admin/surveys/fields/','FormController@fields');
-Route::get('admin/surveys/{SurveyID}','FormController@edit');
+// Route::get('admin/surveys','FormController@index');
+// Route::post('admin/surveys/fields/','FormController@fields');
+// Route::get('admin/surveys/{SurveyID}','FormController@edit');
 Route::get('admin/global', 'administration@globe');
 Route::get('admin/redmin', 'administration@localredis');
 Route::get('admin/memcached', 'administration@localmem');
@@ -57,7 +57,8 @@ Route::group(['as' => 'dashboard::'], function () {
     Route::group(['prefix' => 'analytics','as'=>'helpers'],function(){
     			Route::get('terms','AnalyticsController@terms');
 				Route::post('comparison','AnalyticsController@compare');
-				Route::post('data','AnalyticsController@data');				
+				Route::post('data','AnalyticsController@data');	
+				Route::post('datarequest','AnalyticsController@datarequest');			
 				Route::post('maprequest','AnalyticsController@maprequest');
 				Route::post('facilitylist','AnalyticsController@facilitylist');		
     			Route::get('{survey}','AnalyticsController@index');
@@ -84,7 +85,7 @@ Route::group(['prefix' => 'usermanagement'], function () {
 		Route::get('/','UserManagement@index');
 		Route::get('test','UserManagement@test');
 		Route::get('mail','UserManagement@mail');		
-		Route::get('monitor','UserManagement@show');
+		Route::get('monitor','UserManagement@review');
 		Route::get('track','UserManagement@track');
 		Route::get('viewusers','UserManagement@index');
 		Route::get('addusers','UserManagement@create');
