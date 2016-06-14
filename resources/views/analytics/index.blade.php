@@ -67,6 +67,23 @@ $(document).ready(function(){
 
     $(".cmpr").attr("hidden","true");
     $(".dropdon").attr("hidden","true");
+       $("#Data1").jqxListBox({ theme: "arctic",width: '100%', height: 200 });
+       $("#Data1").jqxListBox('loadFromSelect', 'Data');
+
+       $("#Data1").bind('select', function (event) {
+        if (event.args) {
+             var args = event.args;
+             // select the item in the 'select' tag.
+             var index = args.item.index;
+             console.log(args.item.value);
+             $('#Data')
+    .val(args.item.value)
+    .trigger('change');
+           
+        }
+ });
+
+
  }
 
   );
