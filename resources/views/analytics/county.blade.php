@@ -44,15 +44,15 @@
                      
                        </select></div>
 
-  <div class="form-group" > <select class="form-control select2 " style="width: 100%;" name="Data" id="Data"> 
-        <option value="{{array_keys($links)[0]}}" selected>{{array_shift($links)}}</option>
+  <div class="form-group" > <select class="form-control" style="width: 100%;" name="Data" id="Data" hidden> 
+     
                       @foreach($links as $key => $link)
 
           <option value ="{{$key}}" id ="box{{$key}}" >{{$link}}</option>
                         @endforeach
                        </select></div>
 
-
+<div id="Data1"></div>
 
                      
 
