@@ -965,6 +965,56 @@ $DataN = $DataN->sum('Data');
 			return $array;
 		}
 
+		protected static function kangaroo2($col,$headings){
+
+		global $surveys;
+
+		 $array [] = $headings;
+
+		 // $recset;
+
+		  foreach ($surveys as $survey) {
+
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
+
+		 $Rec = collect($recset)->groupby('Type');
+      	
+		
+      		foreach ($Rec as $type => $assessment) {
+
+      		
+
+		 $Data = $assessment->lists('Data')->where('MNHV2SEC2BLK6RW03COL02','1');
+		 $Data = $Data->groupby($col);
+		
+		 isset($Data["1"]) ?: $Data["1"] = [];
+		  isset($Data["2"]) ?: $Data["2"] = [];
+		   isset($Data["-51"]) ?: $Data["-51"] = [];
+	
+		 $array [] = array($type,count($Data["1"]),count($Data["2"]),count($Data["-51"]));
+
+	}
+
+
+	return $array;
+
+
+
+	}
 
 	protected static function FacilityTypes2Stack($col,$headings){
 

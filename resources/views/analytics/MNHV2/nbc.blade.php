@@ -25,7 +25,7 @@
    <div class="col-md-12" >
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">New Born Care 
+                  <h3 class="box-title">Provision of New Born Care 
                     <small class="cmpr">
                    <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_NewBornCare/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>

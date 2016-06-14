@@ -599,9 +599,9 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV2_Kangaroo2 = function($county){ global $term;
 		//Kangaroo1
 		$Kangaroo2Headings = array('Kangaroo Corner','Yes','No','No information provided');
-		return $Kangaroo2 = Cache::remember('MNHV2_Kangaroo2'.$county.$term,config('cache.timeout'),function() use ($Kangaroo2Headings){
+		return $Kangaroo2 = Cache::remember('MNHV2_Kadsdsangaroo2'.$county.$term,config('cache.timeout'),function() use ($Kangaroo2Headings){
 
-			return self::FacilityTypes2Stack('MNHV2SEC2BLK6RW04COL02',$Kangaroo2Headings);
+			return self::kangaroo2('MNHV2SEC2BLK6RW04COL02',$Kangaroo2Headings);
 		});
 		};
 
@@ -665,7 +665,8 @@ class Analysis_Constructor extends Analysis_Helper {
 };
 		$this->MNHV2_MainBlood = function($county){ global $term;
 		//MainBlood
-		$MainBloodSLices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other','No information provided');
+			/*TODO Transfusion Done But No Blood Bank*/
+		$MainBloodSLices = array('Blood Bank Available ','No Blood Bank Available','Other','No information provided');
 		return $MainBlood  = Cache::remember('MNHV2_MainBlood'.$county.$term,config('cache.timeout'),function() use ($MainBloodSLices){
 			return self::MNHPies($MainBloodSLices,'MNHV2SEC2BLK3RW04COL02');
 		});
