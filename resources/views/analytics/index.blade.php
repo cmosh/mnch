@@ -67,7 +67,7 @@ $(document).ready(function(){
 
     $(".cmpr").attr("hidden","true");
     $(".dropdon").attr("hidden","true");
-       $("#Data1").jqxListBox({ theme: "arctic",width: '100%', height: 200 });
+       $("#Data1").jqxListBox({width: '100%', height: 200 });
        $("#Data1").jqxListBox('loadFromSelect', 'Data');
 
        $("#Data1").bind('select', function (event) {
