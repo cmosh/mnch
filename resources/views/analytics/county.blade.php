@@ -44,7 +44,7 @@
                      
                        </select></div>
 
-  <div class="form-group" > <select class="form-control" style="width: 100%;" name="Data" id="Data" hidden> 
+  <div class="form-group" hidden> <select class="form-control" style="width: 100%;" name="Data" id="Data"> 
      
                       @foreach($links as $key => $link)
 
