@@ -23,12 +23,12 @@
                         </div>
                         </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Non Diarrhoea Cases Treated with Zinc + ORS
                   <small class="cmpr">
-                     <a id="Year3Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a id="Year3Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                   </h3>
@@ -51,7 +51,7 @@
               </div><!-- /.box -->
             </div><!-- /.col (LEFT) -->       
 
-     <div class="col-md-6">
+     <!-- <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual ORT Corner Management Trends
@@ -65,17 +65,17 @@
                 <div class="box-body">
                   <select class="" style="width: 100%;" name="Year2" id="Year2"> 
                        @foreach($AllYears as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}</option>
+                       <option value ="{{$YearsCount}}">{{$Year}}</option>
                         @endforeach
                        </select>
-
-
+     
+     
                 <div id="CHV2_annualtrendsN"></div>  
-
-                </div><!-- /.box-body -->
+     
+                </div>/.box-body
                   <div id="ortN" class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->        
+              </div>/.box
+            </div> --><!-- /.col (LEFT) -->        
             </div

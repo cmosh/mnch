@@ -23,12 +23,12 @@
                         </div>
                         </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Treatment Data in Under 5 Register
                     <small class="cmpr">
-                    <a id="Year1Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a> 
+                    <a id="Year1Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a> 
                     </small>
                   </h3>
                   
@@ -53,7 +53,7 @@
             </div><!-- /.col (LEFT) -->       
 
 
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual Treatment Trends
@@ -62,24 +62,24 @@
                     </small>
                   </h3>
                  
-                    <!-- <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
+                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
-
+              
                    <select class="" style="width: 100%;" name="Year2" id="Year2"> 
                        @foreach($AllYears as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}</option>
+                       <option value ="{{$YearsCount}}">{{$Year}}</option>
                         @endforeach
                        </select>
-
+              
                 <div id="CHV2_annualtrends"></div>  
-
-                </div><!-- /.box-body -->
+              
+                </div>/.box-body
                   <div id ="anT" class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->        
+              </div>/.box
+                          </div> --><!-- /.col (LEFT) -->        
 
 
             </div>
