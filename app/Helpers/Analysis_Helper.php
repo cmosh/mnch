@@ -10,7 +10,8 @@ class Analysis_Helper {
 	
 	protected static function ortfunction(){
 		global $surveys;
-	    $countB = count($surveys);
+	    $countB = count($surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1"));
+
       	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")
 										->where('CHV2SEC5BLK1RW06COL02',"1")
 										->where('CHV2SEC5BLK1RW07COL02',"1");
