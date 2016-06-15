@@ -180,8 +180,24 @@ protected static function getLabel($trim,$col){
 
 			$array [] = $headings;
 
+
+			$o = self::count_YN($Block.sprintf('%02d',$i).$DataCol);
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
+			
+			$array [] = array (
+			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
+
+			i++;
+
+
 		for ($i=$b; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
+
 			$o = self::Mcount_YN($Block.sprintf('%02d',$i).$DataCol);
 			if(!(isset($o["1"]))) $o["1"]=0;
 			if(!(isset($o["2"]))) $o["2"]=0;
@@ -196,6 +212,7 @@ protected static function getLabel($trim,$col){
 
 		}
 		if($extrarow!==null)$array[]=$extrarow;
+
 		return $array;
 
 	}
