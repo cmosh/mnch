@@ -192,7 +192,7 @@ protected static function getLabel($trim,$col){
 			 	$o["2"],
 			 	$o["-51"]);
 
-			i++;
+			$i++;
 
 
 		for ($i=$b; $i < $t; $i++) { 
