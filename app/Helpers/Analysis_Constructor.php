@@ -352,7 +352,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		$ortfH = array('Ort Functionality', 'Yes', 'No','No information provided' );
 
 		return $CHV2_ortf = Cache::remember('CHV2_ortf'.$county.$term,config('cache.timeout'),function() use($ortfExclude,$ortfH){
-      					$temp = 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,3,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
+      					$temp = 	 self::MtwoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,3,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
       						
       					$temp[1][0] = 'Does the facility have an ORT corner?';
       					$temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
