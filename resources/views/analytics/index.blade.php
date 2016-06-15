@@ -238,7 +238,12 @@ function drawChart() {
 
 
  @if(substr($survey,0,4)!='IMCI')
-  $('#s').html($('#County').val() + ", "+ $('#Term').val());
+   if (allcheck==1){
+  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val());
+}else
+{
+   $('#s').html($('#County').val() + " County, "+ $('#Term').val());
+}
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
     if (allcheck==1){
@@ -250,6 +255,7 @@ function drawChart() {
     } 
    
    @endif
+}
 }});}
 
    function  renderchart(dataobject,dataindex){

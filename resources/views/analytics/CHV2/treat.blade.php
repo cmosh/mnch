@@ -53,7 +53,7 @@
             </div><!-- /.col (LEFT) -->       
 
 
-              <!-- <div class="col-md-6">
+              <div class="col-md-6" hidden="">
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual Treatment Trends
@@ -79,7 +79,7 @@
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div>/.box
-                          </div> --><!-- /.col (LEFT) -->        
+                          </div> --><!-- /.col (LEFT)        
 
 
             </div>
