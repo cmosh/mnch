@@ -30,6 +30,17 @@ class Analysis_Helper {
 
 	}
 
+	protected  static function Mcount_YN($cl){
+	global $surveys;
+ 
+ 	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")->lists($cl)->toArray();
+    $Data = array_filter($Data);
+    $big0 = array_count_values($Data);
+    return $big0;
+
+
+	}
+
 	protected static function array_sum_identical_keys() {
     $arrays = func_get_args();
     $keys = array_keys(array_reduce($arrays, function ($keys, $arr) { return $keys + $arr; }, array()));
@@ -164,6 +175,30 @@ protected static function getLabel($trim,$col){
 
 	}
 
+	protected static function MtwoOptionsFullStack($Block,$headings,$trim,$b,$t,$LabelCol,$DataCol,$extratrim,$exclude=array(),$extrarow=null)
+	{
+
+			$array [] = $headings;
+
+		for ($i=$b; $i < $t; $i++) { 
+			if(!(in_array($i,$exclude))){
+			$o = self::Mcount_YN($Block.sprintf('%02d',$i).$DataCol);
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
+			
+			$array [] = array (
+			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
+		}
+
+		}
+		if($extrarow!==null)$array[]=$extrarow;
+		return $array;
+
+	}
 	protected static function imciYN($Block,$rows=array(),$Data1Col,$Data2Col,$label,$filter="string")
 	{
 		global $surveys;
