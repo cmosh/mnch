@@ -238,7 +238,7 @@ function drawChart() {
 
 
  @if(substr($survey,0,4)!='IMCI')
-  $('#s').html($('#County').val());
+  $('#s').html($('#County').val() + ", "+ $('#Term').val());
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
     if (allcheck==1){
@@ -536,7 +536,7 @@ $('#fcbtn').click(function () {
        data: data,
       success: function(data){
         data2 = JSON.parse(data)
-        var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>County</th><th>Sub County</th></tr>';
+        var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>Sub County</th><th> County</th></tr>';
          $.each(data2, function(key, value) {
                  text = text + "<tr><td>"+value.FacilityCode + "&nbsp;</td><td>" + value.FacilityName + "&nbsp;</td><td>" + value.SubCounty + "&nbsp;</td><td>"+value.County+"&nbsp;</td></tr>";
             });      
