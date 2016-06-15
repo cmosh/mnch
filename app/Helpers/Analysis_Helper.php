@@ -192,10 +192,10 @@ protected static function getLabel($trim,$col){
 			 	$o["2"],
 			 	$o["-51"]);
 
-			$i++;
 
 
-		for ($i=$b; $i < $t; $i++) { 
+
+		for ($i=$b+1; $i < $t; $i++) { 
 			if(!(in_array($i,$exclude))){
 
 			$o = self::Mcount_YN($Block.sprintf('%02d',$i).$DataCol);
