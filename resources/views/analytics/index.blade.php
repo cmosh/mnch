@@ -542,32 +542,20 @@ $('#fcbtn').click(function () {
        data: data,
       success: function(data){
         data2 = JSON.parse(data)
-        var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>Sub County</th><th> County</th></tr>';
-         $.each(data2, function(key, value) {
-                 text = text + "<tr><td>"+value.FacilityCode + "&nbsp;</td><td>" + value.FacilityName + "&nbsp;</td><td>" + value.SubCounty + "&nbsp;</td><td>"+value.County+"&nbsp;</td></tr>";
-            });      
 
-         text = text + "</table>";
+        var csv = JSON2CSV(data2);
 
+         var downloadLink = document.createElement("a");
+    var blob = new Blob(["\ufeff", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    downloadLink.download = "data.csv";
 
-         $("#dialog").html(text);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 
-         if (county=="All") county = "all counties";
-         else county = county + " county";
-
-          $("#dialog").dialog({
-             autoOpen: false,
-              modal: true,
-             minWidth: 950,
-             maxHeight: 600,
-            title: "Facilities assessed in " + county
-          });
-          $("#dialog").dialog('open');
-          $('.ui-widget-overlay').css('background', 'white');
-
-
-
-
+  
 
 
 
@@ -577,6 +565,53 @@ $('#fcbtn').click(function () {
     });
 
 
+  
+  function JSON2CSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+    var str = '';
+    var line = '';
+
+    if ($("#labels").is(':checked')) {
+        var head = array[0];
+        if ($("#quote").is(':checked')) {
+            for (var index in array[0]) {
+                var value = index + "";
+                line += '"' + value.replace(/"/g, '""') + '",';
+            }
+        } else {
+            for (var index in array[0]) {
+                line += index + ',';
+            }
+        }
+
+        line = line.slice(0, -1);
+        str += line + '\r\n';
+    }
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+
+        if ($("#quote").is(':checked')) {
+            for (var index in array[i]) {
+                var value = array[i][index] + "";
+                line += '"' + value.replace(/"/g, '""') + '",';
+            }
+        } else {
+            for (var index in array[i]) {
+                line += array[i][index] + ',';
+            }
+        }
+
+        line = line.slice(0, -1);
+        str += line + '\r\n';
+    }
+    return str;
+    
+}
+        
+
+    
 
 
 

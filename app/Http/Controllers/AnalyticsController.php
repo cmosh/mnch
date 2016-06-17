@@ -45,10 +45,11 @@ class AnalyticsController extends Controller {
 
       if($county=="All"){
       $x = Facilities::SubmittedAssessmentsList($term,$survey);
+
       }else{
        $x = Facilities::SubmittedAssessmentsList($term,$survey,$county);
       }
-
+       $x->prepend(["Facility Code", "Name","Sub County","County"]);
       echo($x);
     }
 
