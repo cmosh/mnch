@@ -86,7 +86,7 @@ class Analysis_Scaffold {
                 'cs'=>'Reason for not conducting CS',
                 'KMC'=>'Provision of KMC',
                 'devpep'=>'Preparedness for Delivery',
-                'nbc'=>'New Born Care',
+                'nbc'=>'Provison of New Born Care',
                 'Guidelines'=>'Guidelines Availability',
                 'Tools'=>'Tools Availability',
                 'Jobaids'=>'Job Aids Availability',
