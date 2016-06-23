@@ -1,4 +1,13 @@
+ <div class="box-info">                     
+                     <div class="box-body">
+                         <br>                     
+                        <center><h2><b>NO DATA AVAILABLE</b></h2></center>
+                        <br>
+                        </div>
+                        </div>
 
+<div hidden="">
+    
                         
                         <div class="box-info">                     
                      <div class="box-body">
@@ -85,3 +94,4 @@
   @include('analytics/IMCIV1/html/Outcome')
   @include('analytics/IMCIV1/html/ExitInterview')
  @include('analytics/IMCIV1/html/Certification')
+</div>
