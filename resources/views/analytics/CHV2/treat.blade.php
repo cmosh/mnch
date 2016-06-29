@@ -79,10 +79,8 @@
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div>/.box
-                          </div> --><!-- /.col (LEFT)        
-
-
-            </div>
+                          </div> 
+                          <!-- </div> -->
 
 
         
