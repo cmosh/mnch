@@ -23,7 +23,7 @@
                         </div>
                         </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Non Diarrhoea Cases Treated with Zinc + ORS
@@ -36,7 +36,7 @@
                     <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
-                    <select class="" style="width: 100%;" name="Year1" id="Year1"> 
+                    <select class="year1" style="width: 100%;" classname="Year1" id="Year1"> 
                        @foreach($Years as $Year)
                        <option value ="{{$YearsCount--}}">{{$Year}}-{{$Year-2}}</option>
                         @endforeach
@@ -45,13 +45,13 @@
 
               <div id="CHV2_u5RegisterN"></div>     
                 </div><!-- /.box-body -->
-                  <div id="u5N" class="wait overlay">
+                  <div id="u5N" class="y1 wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div><!-- /.box -->
             </div><!-- /.col (LEFT) -->       
 
-     <div class="col-md-6" hidden="">
+     <div class="col-md-6">
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual ORT Corner Management Trends
@@ -73,7 +73,7 @@
                 <div id="CHV2_annualtrendsN"></div>  
 
                 </div><!-- /.box-body -->
-                  <div id="ortN" class="wait overlay">
+                  <div id="ortN" class="y2 wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div><!-- /.box -->

@@ -23,7 +23,7 @@
                         </div>
                         </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Treatment Data in Under 5 Register
@@ -46,19 +46,19 @@
 
 
                 </div><!-- /.box-body -->
-                  <div id="u5" class="wait overlay">
+                  <div id="u5" class="y1 wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div><!-- /.box -->
             </div><!-- /.col (LEFT) -->       
 
 
-              <div class="col-md-6" hidden="">
+              <div class="col-md-6" >
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual Treatment Trends
                      <small class="cmpr">
-                   <a id="Year2Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a id="Year2Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                  
@@ -74,11 +74,11 @@
               
                 <div id="CHV2_annualtrends"></div>  
               
-                </div>/.box-body
-                  <div id ="anT" class="wait overlay">
+                </div>
+                  <div id ="anT" class="y2 wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </div>/.box
+              </div>
                           </div> 
                           <!-- </div> -->
 

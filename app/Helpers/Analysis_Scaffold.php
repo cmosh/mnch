@@ -36,6 +36,7 @@ class Analysis_Scaffold {
                 'antibiotics'=>'Treatment Commodities: Antibiotics',
                 'malaria'=>'Treatment Commodities: Malaria',
                 'ort'=>'Oral Rehydration Therapy',
+                'lort'=>'Location of ORT Corner',
                 'supplies'=>'Supplies Availability',
                 'resource'=>'Resource Availability',
                 'comm'=>'Community Strategy'];

@@ -135,7 +135,6 @@ google.setOnLoadCallback(makeChart);
  }
   $('#County').change(makeChart);
   $('#Term').change(makeChart);
-
   
 function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
@@ -181,6 +180,95 @@ function getmapdata() {
 
 
 }
+
+$(document).on('change', '#Year1', function() {
+  var year = $('#Year1').val();
+  var graph = [$('#graphs').val()[0]];
+   $( ".wait.y1" ).children().addClass("fa fa-refresh fa-spin");
+      $( ".wait.y1" ).addClass("overlay");
+ drawSmallChart(graph,year);
+});
+
+$(document).on('change', '#Year2', function() {
+  var year = $('#Year2').val();
+  var graph = [$('#graphs').val()[0]];
+   $( ".wait.y2" ).children().addClass("fa fa-refresh fa-spin");
+      $( ".wait.y2" ).addClass("overlay");
+ drawSmallChart(graph,year);
+});
+
+
+function drawSmallChart(graph,year) {
+    var graphs = graph;
+   
+     var years = [year];   
+    
+    var dtypes = $('#thetypes').val();
+   
+    var data = {
+          'county':$('#County').val(),
+         '_token': $('input[name=_token]').val(),
+         'graphs': graphs,
+         'years': years,
+         'dtypes': dtypes,
+         'term':$('#Term').val(),
+         'survey':'{{$survey}}'
+    };
+ 
+   $.ajax({
+      url: '{{config("app.prefix")}}/analytics/data',
+      type: "post",
+       data: data,
+           success: function(data){
+    var Odata = JSON.parse(data);
+    var jsonData = Odata.Data;
+
+      var county = $('#County').val();
+    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
+   x = window.mapdata;
+    // alert(jsonData);
+    // var x  = typeof(jsonData);
+    // alert (x);
+    Object.keys(jsonData).forEach(function(key,index) {
+      // alert(jsonData[key]);
+      renderchart(jsonData[key],key);
+    // key: the name of the object key
+    // index: the ordinal position of the key within the object 
+});
+        $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
+    $( ".wait" ).removeClass("overlay");
+
+     @if(substr($survey,0,4)=='IMCI')
+   @include('analytics/IMCImapdata')
+   @else
+   @include('analytics/mapdata')
+   @endif
+    
+
+
+ @if(substr($survey,0,4)!='IMCI')
+   if (allcheck==1){
+  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val());
+}else
+{
+   $('#s').html($('#County').val() + " County, "+ $('#Term').val());
+}
+  $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+    
+    if (allcheck==1){
+
+    var nos = Odata['Numbers'];
+
+    $('#X').html('Data from ' + nos['Count'] + ' facilities in ' + nos['Counties'] + ' counties');
+
+    } 
+   
+   @endif
+}
+});}
+
+
+
 function drawChart() {
     var graphs = $('#graphs').val();
     if ($('#theyears').val()!= 'not'){
