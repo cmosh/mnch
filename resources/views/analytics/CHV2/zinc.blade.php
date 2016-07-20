@@ -56,7 +56,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual ORT Corner Management Trends
                     <small class="cmpr">
-                   <a id="Year4Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a id="Year4Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     </h3>
@@ -65,7 +65,7 @@
                 <div class="box-body">
                   <select class="" style="width: 100%;" name="Year2" id="Year2"> 
                        @foreach($AllYears as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}</option>
+                       <option value ="1">{{$Year}}</option>
                         @endforeach
                        </select>
 
