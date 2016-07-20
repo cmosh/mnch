@@ -60,7 +60,7 @@
                     
                     </small>
                     </h3>
-                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  
                 </div>
                 <div class="box-body">
                   <select class="" style="width: 100%;" name="Year2" id="Year2"> 

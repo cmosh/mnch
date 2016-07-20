@@ -32,7 +32,7 @@
                     </small>
                   </h3>
                   
-                    <!-- <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
+                   
                 </div>
                 <div class="box-body">
 
