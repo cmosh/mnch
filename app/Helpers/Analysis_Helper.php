@@ -864,7 +864,10 @@ $DataN = $DataN->sum('Data');
 	  $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
 	 
 	 $all =count($Data);
-	
+		
+		$arrayData = $Data->collapse()->toArray();
+
+		return $arrayData;
 	$x = array_count_values($Data->collapse()->toArray());
 		return $x;
 	if (!(isset($x["2"]))) {$x[2]=0;}
