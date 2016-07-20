@@ -861,12 +861,12 @@ $DataN = $DataN->sum('Data');
 
 		$recset = $surveys->lists('Data');
 
-	 return $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
+	  $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
 	 
 	 $all =count($Data);
 	
 	$x = array_count_values($Data->collapse()->toArray());
-	
+		return $x;
 	if (!(isset($x["2"]))) {$x[2]=0;}
 	$MCH = $x["2"];
 	if (!(isset($x["3"]))) {$x[3]=0;}
