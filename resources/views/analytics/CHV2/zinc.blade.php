@@ -9,7 +9,7 @@
 
 <select style="width:100%" multiple name="thetypes" id="thetypes" hidden>
   <option selected value="col">year1</option>
-  <option selected value="colfullstack">year2</option>  
+  <option selected value="col">year2</option>  
 </select>
 
   <div id="dialog" title="Dialog Title"></div>
