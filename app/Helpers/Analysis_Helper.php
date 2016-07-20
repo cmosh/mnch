@@ -430,8 +430,8 @@ protected static function getLabel($trim,$col){
 				{ 
 		  $index = sprintf('%02d',$i);
 		  $mcol = $Block.'RW'.$index.$Col;
-		  $Data = $surveys->lists($mcol);
-		  $Month [] = $mcol;					
+		  $Data = $surveys->lists('Data')->lists($mcol);
+		  $Month [] = $Data;					
 				}
 
 		return ($Month);
