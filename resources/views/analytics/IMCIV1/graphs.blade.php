@@ -1,4 +1,4 @@
- <div class="box-info">                     
+ <div class="box-info" hidden="">                     
                      <div class="box-body">
                          <br>                     
                         <center><h2><b>NO DATA AVAILABLE</b></h2></center>
@@ -6,7 +6,7 @@
                         </div>
                         </div>
 
-<div hidden="">
+<div>
 <div >
     <div>
                         
