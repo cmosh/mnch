@@ -402,7 +402,6 @@ protected static function getLabel($trim,$col){
 		for ($i=2; $i <14 ; $i++) { 
 		$index = sprintf('%02d',$i);
 		$Data= self::annualtrendsM($Block,'COL'.$index);
-		// $Array [] = [$Block,'COL'.$index];
 		$Array [] = array(
 			(self::getLabel(0,'CHV2SEC3BLK96DRW01COL'.$index)),
 			$Data[0],
@@ -416,6 +415,7 @@ protected static function getLabel($trim,$col){
 		
 	}
 
+	
 	return($Array);
 
 
@@ -431,7 +431,7 @@ protected static function getLabel($trim,$col){
 		  $index = sprintf('%02d',$i);
 		  $mcol = $Block.'RW'.$index.$Col;
 		  $Data = $surveys->lists('Data')->lists($mcol);
-		  $Month [] = $Data;					
+		  $Month [] = $Data->sum();					
 				}
 
 		return ($Month);
