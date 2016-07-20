@@ -866,9 +866,7 @@ $DataN = $DataN->sum('Data');
 	 $all =count($Data);
 		
 		$arrayData = array_filter($Data->toArray());
-
-		return $arrayData;
-	$x = array_count_values($Data->collapse()->toArray());
+		$x = array_count_values($arrayData);
 		return $x;
 	if (!(isset($x["2"]))) {$x[2]=0;}
 	$MCH = $x["2"];
