@@ -184,26 +184,28 @@ function getmapdata() {
 $(document).on('change', '#Year1', function() {
   var year = $('#Year1').val();
   var graph = [$('#graphs').val()[0]];
+  var type = [$('#thetypes').val()[0]];
    $( ".wait.y1" ).children().addClass("fa fa-refresh fa-spin");
       $( ".wait.y1" ).addClass("overlay");
- drawSmallChart(graph,year);
+ drawSmallChart(graph,year,type);
 });
 
 $(document).on('change', '#Year2', function() {
   var year = $('#Year2').val();
   var graph = [$('#graphs').val()[1]];
+   var type = [$('#thetypes').val()[1]];
    $( ".wait.y2" ).children().addClass("fa fa-refresh fa-spin");
       $( ".wait.y2" ).addClass("overlay");
- drawSmallChart(graph,year);
+ drawSmallChart(graph,year,type);
 });
 
 
-function drawSmallChart(graph,year) {
+function drawSmallChart(graph,year,type) {
     var graphs = graph;
    
      var years = [year];   
     
-    var dtypes = $('#thetypes').val();
+    var dtypes = type;
    
     var data = {
           'county':$('#County').val(),
