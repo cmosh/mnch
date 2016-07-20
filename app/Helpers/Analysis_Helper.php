@@ -865,7 +865,7 @@ $DataN = $DataN->sum('Data');
 	 
 	 $all =count($Data);
 		
-		$arrayData = $Data->collapse()->toArray();
+		$arrayData = $Data->toArray();
 
 		return $arrayData;
 	$x = array_count_values($Data->collapse()->toArray());
