@@ -26,7 +26,7 @@
             <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Non Diarrhoea Cases Treated with Zinc + ORS
+                  <h3 class="box-title">Cases Treated with Zinc + ORS
                   <small class="cmpr">
                      <a id="Year3Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount1}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
