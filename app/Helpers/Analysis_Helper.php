@@ -861,7 +861,8 @@ $DataN = $DataN->sum('Data');
 
 		$recset = $surveys->lists('Data');
 
-	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
+	 return $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
+	 
 	 $all =count($Data);
 	
 	$x = array_count_values($Data->collapse()->toArray());
