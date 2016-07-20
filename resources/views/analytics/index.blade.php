@@ -191,7 +191,7 @@ $(document).on('change', '#Year1', function() {
 
 $(document).on('change', '#Year2', function() {
   var year = $('#Year2').val();
-  var graph = [$('#graphs').val()[0]];
+  var graph = [$('#graphs').val()[1]];
    $( ".wait.y2" ).children().addClass("fa fa-refresh fa-spin");
       $( ".wait.y2" ).addClass("overlay");
  drawSmallChart(graph,year);
