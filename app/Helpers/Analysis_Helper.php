@@ -529,7 +529,7 @@ protected static function getLabel($trim,$col){
 		  $index = 13;
 		  $mcol = $Block.'RW'.$index.$Col;
 		  $Data = $surveys->lists('Data')->lists($mcol);
-		  $Month [] = $Data->sum();					
+		  $Month = $Data->sum();					
 				
 
 		return ($Month);
