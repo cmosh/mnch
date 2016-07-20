@@ -38,7 +38,7 @@
 
                <select class="" style="width: 100%;" name="Year1" id="Year1"> 
                        @foreach($Years as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}-{{$Year-2}}</option>
+                       <option value ="{{$YearsCount1--}}">{{$Year}}-{{$Year-2}}</option>
                         @endforeach
                        </select>
 
@@ -68,7 +68,7 @@
               
                    <select class="" style="width: 100%;" name="Year2" id="Year2"> 
                        @foreach($AllYears as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}</option>
+                       <option value ="{{$YearsCount2--}}">{{$Year}}</option>
                         @endforeach
                        </select>
               
