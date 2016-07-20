@@ -71,7 +71,8 @@
                 <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>  
                 </div>
                 <div class="box-body">
-<object  width="50%" class="center"  id="sthesvg" data= '{!!config("larasset.host").config("larasset.prefix")."/map.svg"!!}' >
+                <object  width="50%" class="center"  id="thesvg" data= '{!!asset_path("map.svg")!!}' >
+<!-- <object  width="50%" class="center"  id="thesvg" data= '{!!config("larasset.host").config("larasset.prefix")."/map.svg"!!}' > -->
                  </object>
                   @include('analytics/popbox') 
                 </div><!-- /.box-body -->
