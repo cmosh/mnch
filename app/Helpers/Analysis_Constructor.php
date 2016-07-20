@@ -419,10 +419,10 @@ class Analysis_Constructor extends Analysis_Helper {
 
 	//lort_20
 	$this->CHV2_lort= function($county){ global $term;
-		// return $CHV2_lort = Cache::remember('CHV2_lort'.$county.$term,config('cache.timeout'),function(){
-		// 	return self::ortloc();
-		// });
-		return self::ortloc();
+		return $CHV2_lort = Cache::remember('CHV2_lort'.$county.$term,config('cache.timeout'),function(){
+			return self::ortloc();
+		});
+		// return self::ortloc();
 
 	};
 	//genopd_21
