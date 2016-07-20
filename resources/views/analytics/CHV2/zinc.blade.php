@@ -28,7 +28,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Non Diarrhoea Cases Treated with Zinc + ORS
                   <small class="cmpr">
-                     <a id="Year3Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a id="Year3Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5RegisterN/col/{{$YearsCount1}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                   </h3>
@@ -56,7 +56,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual ORT Corner Management Trends
                     <small class="cmpr">
-                   <a id="Year4Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a id="Year4Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrendsN/col/{{$YearsCount2}}" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     </h3>

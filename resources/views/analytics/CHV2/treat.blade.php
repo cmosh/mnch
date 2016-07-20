@@ -28,7 +28,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Treatment Data in Under 5 Register
                     <small class="cmpr">
-                    <a id="Year1Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a> 
+                    <a id="Year1Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount1}}" class="btn-primary btn-xs">Launch Comparison</a> 
                     </small>
                   </h3>
                   
@@ -58,7 +58,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual Treatment Trends
                      <small class="cmpr">
-                   <a id="Year2Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a id="Year2Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount2}}" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                  
