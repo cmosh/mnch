@@ -63,6 +63,9 @@ class Facilities extends Moloquent {
      public function subassessment() {
         return $this->hasOne('App\Models\Assessments','Facility_ID','FacilityCode')->where('Status','Submitted');
     }
+     public function subassessments() {
+        return $this->hasMany('App\Models\Assessments','Facility_ID','FacilityCode')->where('Status','Submitted');
+    }
 
     public function assessment() {
         return $this->hasOne('App\Models\Assessments','Facility_ID','FacilityCode');
