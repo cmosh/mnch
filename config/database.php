@@ -127,7 +127,7 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => '127.0.0.1',
+			'host'     => env('APP_REDISHOST','127.0.0.1'),
 			'port'     => env('APP_REDISPORT',6379),
 			'database' => 0,
 		],
