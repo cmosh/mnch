@@ -67,7 +67,7 @@ $(document).ready(function(){
 
     $(".cmpr").attr("hidden","true");
     $(".dropdon").attr("hidden","true");
-       $("#Data1").jqxListBox({ theme: "arctic",width: '100%', height: 200 });
+       $("#Data1").jqxListBox({width: '100%', height: 200 });
        $("#Data1").jqxListBox('loadFromSelect', 'Data');
 
        $("#Data1").bind('select', function (event) {
@@ -96,7 +96,7 @@ $(document).ready(function(){
         $(".select2").select2();
 
           @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#E5E5FF');   
+        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#6666ff');   
         @endforeach
          
       });
@@ -135,7 +135,6 @@ google.setOnLoadCallback(makeChart);
  }
   $('#County').change(makeChart);
   $('#Term').change(makeChart);
-
   
 function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
@@ -181,6 +180,97 @@ function getmapdata() {
 
 
 }
+
+$(document).on('change', '#Year1', function() {
+  var year = $('#Year1').val();
+  var graph = [$('#graphs').val()[0]];
+  var type = [$('#thetypes').val()[0]];
+   $( ".wait.y1" ).children().addClass("fa fa-refresh fa-spin");
+      $( ".wait.y1" ).addClass("overlay");
+ drawSmallChart(graph,year,type);
+});
+
+$(document).on('change', '#Year2', function() {
+  var year = $('#Year2').val();
+  var graph = [$('#graphs').val()[1]];
+   var type = [$('#thetypes').val()[1]];
+   $( ".wait.y2" ).children().addClass("fa fa-refresh fa-spin");
+      $( ".wait.y2" ).addClass("overlay");
+ drawSmallChart(graph,year,type);
+});
+
+
+function drawSmallChart(graph,year,type) {
+    var graphs = graph;
+   
+     var years = [year];   
+    
+    var dtypes = type;
+   
+    var data = {
+          'county':$('#County').val(),
+         '_token': $('input[name=_token]').val(),
+         'graphs': graphs,
+         'years': years,
+         'dtypes': dtypes,
+         'term':$('#Term').val(),
+         'survey':'{{$survey}}'
+    };
+ 
+   $.ajax({
+      url: '{{config("app.prefix")}}/analytics/data',
+      type: "post",
+       data: data,
+           success: function(data){
+    var Odata = JSON.parse(data);
+    var jsonData = Odata.Data;
+
+      var county = $('#County').val();
+    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
+   x = window.mapdata;
+    // alert(jsonData);
+    // var x  = typeof(jsonData);
+    // alert (x);
+    Object.keys(jsonData).forEach(function(key,index) {
+      // alert(jsonData[key]);
+      renderchart(jsonData[key],key);
+    // key: the name of the object key
+    // index: the ordinal position of the key within the object 
+});
+        $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
+    $( ".wait" ).removeClass("overlay");
+
+     @if(substr($survey,0,4)=='IMCI')
+   @include('analytics/IMCImapdata')
+   @else
+   @include('analytics/mapdata')
+   @endif
+    
+
+
+ @if(substr($survey,0,4)!='IMCI')
+   if (allcheck==1){
+  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val());
+}else
+{
+   $('#s').html($('#County').val() + " County, "+ $('#Term').val());
+}
+  $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
+    
+    if (allcheck==1){
+
+    var nos = Odata['Numbers'];
+
+    $('#X').html('Data from ' + nos['Count'] + ' facilities in ' + nos['Counties'] + ' counties');
+
+    } 
+   
+   @endif
+}
+});}
+
+
+
 function drawChart() {
     var graphs = $('#graphs').val();
     if ($('#theyears').val()!= 'not'){
@@ -238,7 +328,12 @@ function drawChart() {
 
 
  @if(substr($survey,0,4)!='IMCI')
-  $('#s').html($('#County').val());
+   if (allcheck==1){
+  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val());
+}else
+{
+   $('#s').html($('#County').val() + " County, "+ $('#Term').val());
+}
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
     if (allcheck==1){
@@ -250,7 +345,8 @@ function drawChart() {
     } 
    
    @endif
-}});}
+}
+});}
 
    function  renderchart(dataobject,dataindex){
     
@@ -536,32 +632,20 @@ $('#fcbtn').click(function () {
        data: data,
       success: function(data){
         data2 = JSON.parse(data)
-        var text= '<table style="width:100%"><tr><th>Code</th><th>Name</th><th>County</th><th>Sub County</th></tr>';
-         $.each(data2, function(key, value) {
-                 text = text + "<tr><td>"+value.FacilityCode + "&nbsp;</td><td>" + value.FacilityName + "&nbsp;</td><td>" + value.SubCounty + "&nbsp;</td><td>"+value.County+"&nbsp;</td></tr>";
-            });      
 
-         text = text + "</table>";
+        var csv = JSON2CSV(data2);
 
+         var downloadLink = document.createElement("a");
+    var blob = new Blob(["\ufeff", csv]);
+    var url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    downloadLink.download = "data.csv";
 
-         $("#dialog").html(text);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 
-         if (county=="All") county = "all counties";
-         else county = county + " county";
-
-          $("#dialog").dialog({
-             autoOpen: false,
-              modal: true,
-             minWidth: 950,
-             maxHeight: 600,
-            title: "Facilities assessed in " + county
-          });
-          $("#dialog").dialog('open');
-          $('.ui-widget-overlay').css('background', 'white');
-
-
-
-
+  
 
 
 
@@ -571,6 +655,53 @@ $('#fcbtn').click(function () {
     });
 
 
+  
+  function JSON2CSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+    var str = '';
+    var line = '';
+
+    if ($("#labels").is(':checked')) {
+        var head = array[0];
+        if ($("#quote").is(':checked')) {
+            for (var index in array[0]) {
+                var value = index + "";
+                line += '"' + value.replace(/"/g, '""') + '",';
+            }
+        } else {
+            for (var index in array[0]) {
+                line += index + ',';
+            }
+        }
+
+        line = line.slice(0, -1);
+        str += line + '\r\n';
+    }
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+
+        if ($("#quote").is(':checked')) {
+            for (var index in array[i]) {
+                var value = array[i][index] + "";
+                line += '"' + value.replace(/"/g, '""') + '",';
+            }
+        } else {
+            for (var index in array[i]) {
+                line += array[i][index] + ',';
+            }
+        }
+
+        line = line.slice(0, -1);
+        str += line + '\r\n';
+    }
+    return str;
+    
+}
+        
+
+    
 
 
 

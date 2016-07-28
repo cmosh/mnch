@@ -37,7 +37,7 @@
         
         .county:hover {
             
-            fill: #D2F4FF;
+            fill: #6666ff;
         
         }
 
