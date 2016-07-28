@@ -45,10 +45,11 @@ class AnalyticsController extends Controller {
 
       if($county=="All"){
       $x = Facilities::SubmittedAssessmentsList($term,$survey);
+
       }else{
        $x = Facilities::SubmittedAssessmentsList($term,$survey,$county);
       }
-
+       $x->prepend(["Facility Code", "Name","Sub County","County"]);
       echo($x);
     }
 
@@ -100,7 +101,8 @@ class AnalyticsController extends Controller {
              return view('analytics.'.$survey.'.'.$link)
              ->with('Years',$yr['Years'])
            ->with('AllYears',$yr['AllYears'])
-           ->with('YearsCount',$yr['YearsCount']);
+           ->with('YearsCount1',$yr['YearsCount'])
+           ->with('YearsCount2',$yr['YearsCount']);
           }
           else{
              return view('analytics.'.$survey.'.'.$link);

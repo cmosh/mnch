@@ -352,7 +352,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		$ortfH = array('Ort Functionality', 'Yes', 'No','No information provided' );
 
 		return $CHV2_ortf = Cache::remember('CHV2_ortf'.$county.$term,config('cache.timeout'),function() use($ortfExclude,$ortfH){
-      					$temp = 	 self::twoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,3,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
+      					$temp = 	 self::MtwoOptionsFullStack( 'CHV2SEC5BLK1RW',$ortfH,0,3,8,'COL01','COL02','/^(A)(B)/',$ortfExclude);
       						
       					$temp[1][0] = 'Does the facility have an ORT corner?';
       					$temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
@@ -422,6 +422,8 @@ class Analysis_Constructor extends Analysis_Helper {
 		return $CHV2_lort = Cache::remember('CHV2_lort'.$county.$term,config('cache.timeout'),function(){
 			return self::ortloc();
 		});
+		// return self::ortloc();
+
 	};
 	//genopd_21
 	$this->CHV2_genopd= function($county){ global $term;
@@ -599,9 +601,9 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV2_Kangaroo2 = function($county){ global $term;
 		//Kangaroo1
 		$Kangaroo2Headings = array('Kangaroo Corner','Yes','No','No information provided');
-		return $Kangaroo2 = Cache::remember('MNHV2_Kangaroo2'.$county.$term,config('cache.timeout'),function() use ($Kangaroo2Headings){
+		return $Kangaroo2 = Cache::remember('MNHV2_Kadsdsangaroo2'.$county.$term,config('cache.timeout'),function() use ($Kangaroo2Headings){
 
-			return self::FacilityTypes2Stack('MNHV2SEC2BLK6RW04COL02',$Kangaroo2Headings);
+			return self::kangaroo2('MNHV2SEC2BLK6RW04COL02',$Kangaroo2Headings);
 		});
 		};
 
@@ -665,7 +667,8 @@ class Analysis_Constructor extends Analysis_Helper {
 };
 		$this->MNHV2_MainBlood = function($county){ global $term;
 		//MainBlood
-		$MainBloodSLices = array('Blood Bank Available ','Transfusion Done But No Blood Bank','Other','No information provided');
+			/*TODO Transfusion Done But No Blood Bank*/
+		$MainBloodSLices = array('Blood Bank Available ','No Blood Bank Available','Other','No information provided');
 		return $MainBlood  = Cache::remember('MNHV2_MainBlood'.$county.$term,config('cache.timeout'),function() use ($MainBloodSLices){
 			return self::MNHPies($MainBloodSLices,'MNHV2SEC2BLK3RW04COL02');
 		});

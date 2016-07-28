@@ -10,7 +10,8 @@ class Analysis_Helper {
 	
 	protected static function ortfunction(){
 		global $surveys;
-	    $countB = count($surveys);
+	    $countB = count($surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1"));
+
       	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")
 										->where('CHV2SEC5BLK1RW06COL02',"1")
 										->where('CHV2SEC5BLK1RW07COL02',"1");
@@ -22,6 +23,17 @@ class Analysis_Helper {
 	global $surveys;
  
  	$Data = $surveys->lists('Data')->lists($cl)->toArray();
+    $Data = array_filter($Data);
+    $big0 = array_count_values($Data);
+    return $big0;
+
+
+	}
+
+	protected  static function Mcount_YN($cl){
+	global $surveys;
+ 
+ 	$Data = $surveys->lists('Data')->where('CHV2SEC5BLK1RW03COL02',"1")->lists($cl)->toArray();
     $Data = array_filter($Data);
     $big0 = array_count_values($Data);
     return $big0;
@@ -163,6 +175,47 @@ protected static function getLabel($trim,$col){
 
 	}
 
+	protected static function MtwoOptionsFullStack($Block,$headings,$trim,$b,$t,$LabelCol,$DataCol,$extratrim,$exclude=array(),$extrarow=null)
+	{
+
+			$array [] = $headings;
+
+
+			$o = self::count_YN($Block.sprintf('%02d',$b).$DataCol);
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
+			
+			$array [] = array (
+			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$b).$LabelCol),$extratrim)), 
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
+
+
+
+
+		for ($i=$b+1; $i < $t; $i++) { 
+			if(!(in_array($i,$exclude))){
+
+			$o = self::Mcount_YN($Block.sprintf('%02d',$i).$DataCol);
+			if(!(isset($o["1"]))) $o["1"]=0;
+			if(!(isset($o["2"]))) $o["2"]=0;
+			if(!(isset($o["-51"]))) $o["-51"]=0;
+			
+			$array [] = array (
+			 ( trim(self::getLabel($trim,$Block.sprintf('%02d',$i).$LabelCol),$extratrim)), 
+			 	$o["1"],
+			 	$o["2"],
+			 	$o["-51"]);
+		}
+
+		}
+		if($extrarow!==null)$array[]=$extrarow;
+
+		return $array;
+
+	}
 	protected static function imciYN($Block,$rows=array(),$Data1Col,$Data2Col,$label,$filter="string")
 	{
 		global $surveys;
@@ -361,7 +414,8 @@ protected static function getLabel($trim,$col){
 		
 		
 	}
-		
+
+	
 	return($Array);
 
 
@@ -376,7 +430,7 @@ protected static function getLabel($trim,$col){
 				{ 
 		  $index = sprintf('%02d',$i);
 		  $mcol = $Block.'RW'.$index.$Col;
-		  $Data = $surveys->lists($mcol);
+		  $Data = $surveys->lists('Data')->lists($mcol);
 		  $Month [] = $Data->sum();					
 				}
 
@@ -474,8 +528,8 @@ protected static function getLabel($trim,$col){
 	
 		  $index = 13;
 		  $mcol = $Block.'RW'.$index.$Col;
-		  $Data = $surveys->lists($mcol);
-		  $Month [] = $Data->sum();					
+		  $Data = $surveys->lists('Data')->lists($mcol);
+		  $Month = $Data->sum();					
 				
 
 		return ($Month);
@@ -807,11 +861,14 @@ $DataN = $DataN->sum('Data');
 
 		$recset = $surveys->lists('Data');
 
-	 $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
-	 $all =count($Data);
+	  $Data = $recset->lists('CHV2SEC5BLK1RW04COL02');
+	 
 	
-	$x = array_count_values($Data->collapse()->toArray());
-	
+		
+		$arrayData = array_filter($Data->toArray());
+		 $all =count($arrayData);
+		$x = array_count_values($arrayData);
+		
 	if (!(isset($x["2"]))) {$x[2]=0;}
 	$MCH = $x["2"];
 	if (!(isset($x["3"]))) {$x[3]=0;}
@@ -965,6 +1022,56 @@ $DataN = $DataN->sum('Data');
 			return $array;
 		}
 
+		protected static function kangaroo2($col,$headings){
+
+		global $surveys;
+
+		 $array [] = $headings;
+
+		 // $recset;
+
+		  foreach ($surveys as $survey) {
+
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
+
+		 $Rec = collect($recset)->groupby('Type');
+      	
+		
+      		foreach ($Rec as $type => $assessment) {
+
+      		
+
+		 $Data = $assessment->lists('Data')->where('MNHV2SEC2BLK6RW03COL02','1');
+		 $Data = $Data->groupby($col);
+		
+		 isset($Data["1"]) ?: $Data["1"] = [];
+		  isset($Data["2"]) ?: $Data["2"] = [];
+		   isset($Data["-51"]) ?: $Data["-51"] = [];
+	
+		 $array [] = array($type,count($Data["1"]),count($Data["2"]),count($Data["-51"]));
+
+	}
+
+
+	return $array;
+
+
+
+	}
 
 	protected static function FacilityTypes2Stack($col,$headings){
 
@@ -1088,8 +1195,8 @@ $DataN = $DataN->sum('Data');
 
 		 foreach ($Types as $Type => $Workers) {
 		 	$Workers= collect($Workers);
-			$Array [] = [$Type,0,0];
-		 	//$Array [] = [$Type,count($Workers->where('Status','Assessed')),count($Workers->where('Status','Not Assessed'))];
+			// $Array [] = [$Type,0,0];
+		 	$Array [] = [$Type,count($Workers->where('Status','Assessed')),count($Workers->where('Status','Not Assessed'))];
 
 		 }
 

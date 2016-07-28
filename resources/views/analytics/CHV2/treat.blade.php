@@ -28,17 +28,17 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Treatment Data in Under 5 Register
                     <small class="cmpr">
-                    <a id="Year1Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a> 
+                    <a id="Year1Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_u5Register/col/{{$YearsCount1}}" class="btn-primary btn-xs">Launch Comparison</a> 
                     </small>
                   </h3>
                   
-                    <!-- <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
+                   
                 </div>
                 <div class="box-body">
 
                <select class="" style="width: 100%;" name="Year1" id="Year1"> 
                        @foreach($Years as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}-{{$Year-2}}</option>
+                       <option value ="{{$YearsCount1--}}">{{$Year}}-{{$Year-2}}</option>
                         @endforeach
                        </select>
 
@@ -46,43 +46,41 @@
 
 
                 </div><!-- /.box-body -->
-                  <div id="u5" class="wait overlay">
+                  <div id="u5" class="y1 wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
               </div><!-- /.box -->
             </div><!-- /.col (LEFT) -->       
 
 
-              <div class="col-md-6">
+              <div class="col-md-6" >
                <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">Annual Treatment Trends
                      <small class="cmpr">
-                   <a id="Year2Change" href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount}}" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a id="Year2Change" href="{{config('app.prefix')}}/comparison/CHV2/CHV2_annualtrends/colfullstack/{{$YearsCount2}}" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                  
-                    <!-- <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
+                  
                 </div>
                 <div class="box-body">
-
+              
                    <select class="" style="width: 100%;" name="Year2" id="Year2"> 
                        @foreach($AllYears as $Year)
-                       <option value ="{{$YearsCount--}}">{{$Year}}</option>
+                       <option value ="{{$YearsCount2--}}">{{$Year}}</option>
                         @endforeach
                        </select>
-
+              
                 <div id="CHV2_annualtrends"></div>  
-
-                </div><!-- /.box-body -->
-                  <div id ="anT" class="wait overlay">
+              
+                </div>
+                  <div id ="anT" class="y2 wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </div><!-- /.box -->
-            </div><!-- /.col (LEFT) -->        
-
-
-            </div>
+              </div>
+                          </div> 
+                          <!-- </div> -->
 
 
         

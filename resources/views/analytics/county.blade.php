@@ -71,7 +71,8 @@
                 <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>  
                 </div>
                 <div class="box-body">
-<object  width="50%" class="center"  id="thesvg" data= '{!!asset_path("map.svg")!!}' >
+                <object  width="50%" class="center"  id="thesvg" data= '{!!asset_path("map.svg")!!}' >
+<!-- <object  width="50%" class="center"  id="thesvg" data= '{!!config("larasset.host").config("larasset.prefix")."/map.svg"!!}' > -->
                  </object>
                   @include('analytics/popbox') 
                 </div><!-- /.box-body -->
@@ -90,7 +91,7 @@
    <div id="facilitiesBox" class="small-box bg-blue">
    <div class="inner">
    <h3> <p id="X">Data from {{$SubmittedCount}} facilities in {{count($SubmittedCounties)}} counties</p><sup style="font-size: 20px"></sup></h3>
-   <span><button id="fcbtn" class="btn btn-block btn-warning btn-xs">View</button></span>
+   <span><button id="fcbtn" class="btn btn-block btn-warning btn-xs">Download</button></span>
    </div>
    </div>
 
