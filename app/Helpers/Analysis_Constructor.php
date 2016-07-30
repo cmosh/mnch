@@ -410,6 +410,16 @@ class Analysis_Constructor extends Analysis_Helper {
 		});
 		
 	};
+
+
+	$this->CHV1_staff_trained= function($county){ 
+	 global $term;
+	 return Cache::remember('CHV1_staff_trained'.$county.$term,config('cache.timeout'),function(){
+			return self::staff_trained_v1();
+		});
+		
+	};
+
 	$this->CHV2_comm_strategy= function($county){ global $term;
 	//comm_strategy_19
 		return $CHV2_comm_strategy = Cache::remember('CHV2_comm_strategybn'.$county.$term,config('cache.timeout'),function(){

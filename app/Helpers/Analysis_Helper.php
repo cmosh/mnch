@@ -635,6 +635,94 @@ return($Array);
 }			
 
 
+protected static function staff_trained_v1(){
+global $surveys;
+		$Data = $surveys->lists('Data');
+
+ 		$Array [] = ['Staff Trained',
+ 					'Doctors',
+ 					'Nurses',
+ 					'R.C.O.s',
+ 					'Pharmaceutical Staff',
+ 					'Lab Staff'];
+
+		$Array []= ['IMCI (Before 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL04'),
+		$Data->sum('CHV1SEC1BLK1RW04COL04'),
+		$Data->sum('CHV1SEC1BLK1RW05COL04'),
+		$Data->sum('CHV1SEC1BLK1RW06COL04'),
+		$Data->sum('CHV1SEC1BLK1RW07COL04')
+		];
+
+		$Array []= ['IMCI (After 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL05'),
+		$Data->sum('CHV1SEC1BLK1RW04COL05'),
+		$Data->sum('CHV1SEC1BLK1RW05COL05'),
+		$Data->sum('CHV1SEC1BLK1RW06COL05'),
+		$Data->sum('CHV1SEC1BLK1RW07COL05')
+		];
+
+		$Array []=['ICCM (Before 2013)',
+		$Data->sum('CHV1SEC1BLK1RW03COL06'),
+		$Data->sum('CHV1SEC1BLK1RW04COL06'),
+		$Data->sum('CHV1SEC1BLK1RW05COL06'),
+		$Data->sum('CHV1SEC1BLK1RW06COL06'),
+		$Data->sum('CHV1SEC1BLK1RW07COL06')];
+
+		$Array []=['ICCM (After 2013)',
+		$Data->sum('CHV1SEC1BLK1RW03COL07'),
+		$Data->sum('CHV1SEC1BLK1RW04COL07'),
+		$Data->sum('CHV1SEC1BLK1RW05COL07'),
+		$Data->sum('CHV1SEC1BLK1RW06COL07'),
+		$Data->sum('CHV1SEC1BLK1RW07COL07')];
+
+		$Array []=['Enhanced Diarrhoea Management (Before 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL08'),
+		$Data->sum('CHV1SEC1BLK1RW04COL08'),
+		$Data->sum('CHV1SEC1BLK1RW05COL08'),
+		$Data->sum('CHV1SEC1BLK1RW06COL08'),
+		$Data->sum('CHV1SEC1BLK1RW07COL08')];
+
+		$Array []=['Enhanced Diarrhoea Management (After 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL09'),
+		$Data->sum('CHV1SEC1BLK1RW04COL09'),
+		$Data->sum('CHV1SEC1BLK1RW05COL09'),
+		$Data->sum('CHV1SEC1BLK1RW06COL09'),
+		$Data->sum('CHV1SEC1BLK1RW07COL09')];
+
+		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (Before 2014)',
+		$Data->sum('CHV1SEC1BLK1RW03COL10'),
+		$Data->sum('CHV1SEC1BLK1RW04COL10'),
+		$Data->sum('CHV1SEC1BLK1RW05COL10'),
+		$Data->sum('CHV1SEC1BLK1RW06COL10'),
+		$Data->sum('CHV1SEC1BLK1RW07COL10')];
+
+		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (After 2014)',
+		$Data->sum('CHV1SEC1BLK1RW03COL11'),
+		$Data->sum('CHV1SEC1BLK1RW04COL11'),
+		$Data->sum('CHV1SEC1BLK1RW05COL11'),
+		$Data->sum('CHV1SEC1BLK1RW06COL11'),
+		$Data->sum('CHV1SEC1BLK1RW07COL11')];
+
+		$Array []=['Staff Still Working in Child Health Unit',
+		$Data->sum('CHV1SEC1BLK1RW03COL12'),
+		$Data->sum('CHV1SEC1BLK1RW04COL12'),
+		$Data->sum('CHV1SEC1BLK1RW05COL12'),
+		$Data->sum('CHV1SEC1BLK1RW06COL12'),
+		$Data->sum('CHV1SEC1BLK1RW07COL12')];
+
+
+
+	return($Array);
+
+		
+	
+	
+
+}			
+
+
+
 protected static function staff_trained_MNH(){
 
 	$Array [] = array('No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s');
