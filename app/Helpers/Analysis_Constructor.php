@@ -273,6 +273,21 @@ class Analysis_Constructor extends Analysis_Helper {
 
       	});
 	};
+
+
+
+	 		$this->CHV1_Tools = function($county){ global $term;
+	 	//Tools Availability_2
+
+		$ToolsHeading = array('Tools Availability', 'Yes', 'No','No information provided' );
+		return $CHV1_Tools = Cache::remember('CHV1_Tools'.$county.$term,config('cache.timeout'),function() use($ToolsHeading){
+      					$temp =	  self::twoOptionsFullStack( 'CHV1SEC2BLK2RW',$ToolsHeading,0,2,9,'COL01','COL02','/^/');
+      						// $temp[2][0] = 'EID Register';
+      						// $temp[2][0] = 'Under 5 Register';
+      						return $temp;
+
+      	});
+	};
 	 	
 	 	$this->CHV2_Guidelines = function($county){ global $term;
 
@@ -280,6 +295,18 @@ class Analysis_Constructor extends Analysis_Helper {
 			return $CHV2_Guidelines = Cache::remember('CHV2_Guidelines'.$county.$term,config('cache.timeout'),function() use($GuidelinesHeading){
       					$temp =	 self::twoOptionsFullStack( 'CHV2SEC2BLK1RW',$GuidelinesHeading,33,2,10,'COL01','COL02','/^ated/ ?');
       				$temp[8][0] = 'EID Algorithim 2009/2012/2014';
+      				return $temp;
+      	});		
+
+	 	};
+
+
+	 		$this->CHV1_Guidelines = function($county){ global $term;
+
+	 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No','No information provided' );
+			return $CHV1_Guidelines = Cache::remember('CHV1_Guidelines'.$county.$term,config('cache.timeout'),function() use($GuidelinesHeading){
+      					$temp =	 self::twoOptionsFullStack( 'CHV1SEC2BLK1RW',$GuidelinesHeading,27,2,11,'COL01','COL02','/^ated/ ?');
+      				// $temp[8][0] = 'EID Algorithim 2009/2012/2014';
       				return $temp;
       	});		
 

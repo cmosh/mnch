@@ -1,6 +1,6 @@
   <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_Guidelines">CHV2_Guidelines</option>
-  <option selected value="CHV2_Tools">CHV2_types</option>  
+  <option selected value="CHV1_Guidelines">CHV1_Guidelines</option>
+  <option selected value="CHV1_Tools">CHV1_types</option>  
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -28,7 +28,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Guidelines
                    <small class="cmpr">
-                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_Guidelines/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV1/CHV1_Guidelines/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -36,7 +36,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_Guidelines"></div>     
+              <div id="CHV1_Guidelines"></div>     
                 </div><!-- /.box-body -->
 
                  <div class="wait overlay">
@@ -51,13 +51,13 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Tools</h3>
                   <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV1/CHV1_Tools/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 
-                <div id="CHV2_Tools"></div>  
+                <div id="CHV1_Tools"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
