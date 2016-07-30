@@ -1,6 +1,6 @@
      <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_DTreatmentCommodities">CHV2_Guidelines</option>
-  <option selected value="CHV2_DTreatmentAvailability">CHV2_types</option>  
+  <option selected value="CHV1_DTreatmentCommodities">CHV1_Guidelines</option>
+  <option selected value="CHV1_DTreatmentAvailability">CHV1_types</option>  
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -28,7 +28,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Commodities
                    <small class="cmpr">
-                      <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_DTreatmentCommodities/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                      <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV1/CHV1_DTreatmentCommodities/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                   </h3>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_DTreatmentCommodities"></div>     
+              <div id="CHV1_DTreatmentCommodities"></div>     
                 </div><!-- /.box-body -->
 
                  <div class="wait overlay">
@@ -52,14 +52,14 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Availability</h3>
                   <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_DTreatmentAvailability/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV1/CHV1_DTreatmentAvailability/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 
-                <div id="CHV2_DTreatmentAvailability"></div>  
+                <div id="CHV1_DTreatmentAvailability"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">

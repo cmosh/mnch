@@ -324,6 +324,18 @@ class Analysis_Constructor extends Analysis_Helper {
 	});	
 	};
 
+	$this->CHV1_DTreatmentCommodities= function($county){ global $term;
+		//DTreatmentCommodities_3
+		$DTreatmentCommoditiesExclude = array(6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,
+24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42);
+		$DTreatmentCommoditiesH = array('Diarhoea Treatment Availability', 'Available', 'Not Available','No information provided' );
+		
+		return $CHV1_DTreatmentCommodities = Cache::remember('CHV1_DTreatmentCommodities'.$county.$term,config('cache.timeout'),function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
+      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$DTreatmentCommoditiesH,0,3,43,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
+	});	
+	};
+
+
 	$this->CHV2_DTreatmentAvailability= function($county){ global $term;
 	//DTreatmentAvailability_4
 		$DTreatmentAvailabilityExclude = array(11,12);
@@ -331,6 +343,18 @@ class Analysis_Constructor extends Analysis_Helper {
 		
 		return $CHV2_DTreatmentAvailability = Cache::remember('CHV2_DTreatmentAvailability'.$county.$term,config('cache.timeout'),function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentAvailabilityH,0,9,17,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
+	});		
+	};	
+
+
+	$this->CHV1_DTreatmentAvailability= function($county){ global $term;
+	//DTreatmentAvailability_4
+		$DTreatmentAvailabilityExclude = array(6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,
+24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42);
+		$DTreatmentAvailabilityH = array('Diarhoea Treatment Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
+		
+		return $CHV1_DTreatmentAvailability = Cache::remember('CHV1_DTreatmentAvailability'.$county.$term,config('cache.timeout'),function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
+      					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentAvailabilityH,0,3,43,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
 	});		
 	};	
 		
