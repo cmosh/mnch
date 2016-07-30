@@ -510,6 +510,17 @@ class Analysis_Constructor extends Analysis_Helper {
       	});
 	};
 
+	$this->CHV1_resources= function($county){ global $term;
+		$resourcesH = array('Resource Availability', 'Available', 'Not Available','No information provided' );
+
+
+		return $CHV1_resources = Cache::remember('CHV1_resources'.$county.$term,config('cache.timeout'),function() use($resourcesH){
+      					return 	self::twoOptionsFullStack( 'CHV1SEC8BLK2RW',$resourcesH,0,2,6,'COL01','COL02','/^/');
+	
+      	});
+	};
+
+
 		$this->CHV2_ownership= function($county){ global $term;
 	  //ownership_16
 		return $CHV2_ownership = Cache::remember('CHV2_ownership'.$county.$term,config('cache.timeout'),function() {
