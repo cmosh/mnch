@@ -463,14 +463,14 @@ class Analysis_Constructor extends Analysis_Helper {
 		$ortfExclude = array(3);
 		$ortfH = array('Ort Functionality', 'Yes', 'No','No information provided' );
 
-		return $CHV1_ortf = Cache::remember('CHV1_ortf'.$county.$term,config('cache.timeout'),function() use($ortfExclude,$ortfH){
+		return $CHV1_ortf = Cache::remember('CHV1_sortf'.$county.$term,config('cache.timeout'),function() use($ortfExclude,$ortfH){
       					$temp = 	 self::MtwoOptionsFullStack( 'CHV1SEC5BLK2RW',$ortfH,0,2,6,'COL01','COL02','/^(A)(B)/',$ortfExclude);
       						
       					$temp[1][0] = 'Does the facility have an ORT corner?';
-      					$temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
-      					$temp[3][0] = 'Is the ORT register upto date (Including zero-reporting)?';
-      					$temp[]=self::ortfunction_v1();
-      					$temp[4][0] = 'ORT Corner Functionality';
+      					// $temp[2][0] = 'Are there drugsavailable in the ORTCorner?';
+      					// $temp[3][0] = 'Is the ORT register upto date (Including zero-reporting)?';
+      					// $temp[]=self::ortfunction_v1();
+      					// $temp[4][0] = 'ORT Corner Functionality';
 
       					return $temp;
 
