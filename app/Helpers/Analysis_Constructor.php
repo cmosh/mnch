@@ -551,7 +551,7 @@ class Analysis_Constructor extends Analysis_Helper {
 
 	$this->CHV1_lort= function($county){ global $term;
 		return $CHV1_lort = Cache::remember('CHV1_lort'.$county.$term,config('cache.timeout'),function(){
-			return self::ortloc_vl();
+			return self::ortloc_v1();
 		});
 		// return self::ortloc();
 
