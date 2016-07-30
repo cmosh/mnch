@@ -962,6 +962,67 @@ $DataN = $DataN->sum('Data');
 	
 	}
 
+
+	protected static function commstrategy_v1(){
+		global $surveys;
+
+	$recset = $surveys->lists('Data');
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW02COL02');
+	$TCU = count($Data);
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW03COL02')->toArray();	
+		
+	$Data = array_count_values($Data);
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
+	 
+	$TCUnt =$count1 + $count2 + $count3 +$count4;
+	$TCUt = $TCU-$TCUnt;
+
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW10COL02');
+
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
+	 
+	$CHEWSnt =$count1 + $count2 + $count3 +$count4;
+	
+		$CHEWSt = $TCU-$CHEWSnt;
+	
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW12COL02');
+
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
+	 
+	$CHVnt =$count1 + $count2 + $count3 +$count4;
+
+	$CHVt = $TCU-$CHVnt;
+
+		$Array [] = array ('Community Strategy','Trained (>0)','Not Trained (0)');
+		$Array [] = array ('Community Units',$TCUt,$TCUnt);
+		$Array [] = array ('CHEWS',$CHEWSt,$CHEWSnt);
+		$Array [] = array ('CHVs',$CHVt,$CHVnt);
+
+		return ( $Array);
+
+
+
+	}
+	
+
 	protected static function commstrategy(){
 		global $surveys;
 
