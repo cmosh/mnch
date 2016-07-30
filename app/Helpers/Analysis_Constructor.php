@@ -331,7 +331,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		$DTreatmentCommoditiesH = array('Diarhoea Treatment Availability', 'Available', 'Not Available','No information provided' );
 		
 		return $CHV1_DTreatmentCommodities = Cache::remember('CHV1_DTreatmentCommodities'.$county.$term,config('cache.timeout'),function() use($DTreatmentCommoditiesExclude,$DTreatmentCommoditiesH){
-      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$DTreatmentCommoditiesH,0,3,42,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
+      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$DTreatmentCommoditiesH,0,3,43,'COL01','COL03','/^/',$DTreatmentCommoditiesExclude);
 	});	
 	};
 
@@ -354,7 +354,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		$DTreatmentAvailabilityH = array('Diarhoea Treatment Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
 		
 		return $CHV1_DTreatmentAvailability = Cache::remember('CHV1_DTreatmentAvailability'.$county.$term,config('cache.timeout'),function() use($DTreatmentAvailabilityExclude,$DTreatmentAvailabilityH){
-      					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$DTreatmentAvailabilityH,0,3,42,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
+      					return 	  self::fourOptionsFullStack( 'CHV1SEC4BLK2RW',$DTreatmentAvailabilityH,0,3,43,'COL01','COL04','/^/',$DTreatmentAvailabilityExclude);
 	});		
 	};	
 		
