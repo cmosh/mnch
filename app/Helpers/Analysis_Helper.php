@@ -19,6 +19,17 @@ class Analysis_Helper {
       	return array('Functionality',$countF,$countB-$countF,0);
 	}
 
+	protected static function ortfunction_v1(){
+		global $surveys;
+	    $countB = count($surveys->lists('Data')->where('CHV1SEC5BLK2RW02COL02',"1"));
+
+      	$Data = $surveys->lists('Data')->where('CHV1SEC5BLK2RW02COL02',"1")
+										->where('CHV1SEC5BLK2RW04COL02',"1")
+										->where('CHV1SEC5BLK2RW05COL02',"1");
+      	$countF = count($Data);
+      	return array('Functionality',$countF,$countB-$countF,0);
+	}
+
 	protected  static function count_YN($cl){
 	global $surveys;
  

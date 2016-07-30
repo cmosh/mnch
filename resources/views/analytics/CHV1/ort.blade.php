@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_ortf">CHV2_ownership</option>
+  <option selected value="CHV1_ortf">CHV1_ownership</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">ORT corner functionality 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_ortf/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_ortf/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -35,7 +35,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_ortf"></div>     
+              <div id="CHV1_ortf"></div>     
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
