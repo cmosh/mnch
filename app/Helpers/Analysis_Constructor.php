@@ -361,12 +361,24 @@ class Analysis_Constructor extends Analysis_Helper {
 	//Antibiotics_5
 
 	$this->CHV2_Antibiotics= function($county){ global $term;
+		
+
 		$AntibioticsH = array('Antibiotics  Availability', 'Available', 'Not Available','No information provided' );
 		
 		return $CHV2_Antibiotics = Cache::remember('CHV2_Antibiotics'.$county.$term,config('cache.timeout'),function() use($AntibioticsH){
       					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsH,0,5,9,'COL01','COL03','/^/');
       	});	
 	};
+
+	$this->CHV1_Antibiotics= function($county){ global $term;
+			$AntibioticsAvailabilityExclude = array(9,10,11,12,15);
+		$AntibioticsH = array('Antibiotics  Availability', 'Available', 'Not Available','No information provided' );
+		
+		return $CHV1_Antibiotics = Cache::remember('CHV1_Antibiotics'.$county.$term,config('cache.timeout'),function() use($AntibioticsH){
+      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$AntibioticsH,0,8,17,'COL01','COL03','/^/',$AntibioticsAvailabilityExclude);
+      	});	
+	};
+
     //AntibioticsAvailability_6
 
 	$this->CHV2_AntibioticsAvailability= function($county){ global $term;
@@ -374,6 +386,16 @@ class Analysis_Constructor extends Analysis_Helper {
 		
 		return $CHV2_AntibioticsAvailability = Cache::remember('CHV2_AntibioticsAvailability'.$county.$term,config('cache.timeout'),function() use($AntibioticsAvailabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$AntibioticsAvailabilityH,0,5,9,'COL01','COL04','/^/');
+      	});	
+
+      	};	
+
+      $this->CHV1_AntibioticsAvailability= function($county){ global $term;
+		$AntibioticsAvailabilityH = array('Antibiotics  Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
+		$AntibioticsAvailabilityExclude = array(9,10,11,12,15);
+		
+		return $CHV1_AntibioticsAvailability = Cache::remember('CHV1_AntibioticsAvailability'.$county.$term,config('cache.timeout'),function() use($AntibioticsAvailabilityH){
+      					return 	  self::fourOptionsFullStack( 'CHV1SEC4BLK2RW',$AntibioticsAvailabilityH,0,8,17,'COL01','COL04','/^/',$AntibioticsAvailabilityExclude);
       	});	
 
       	};	
