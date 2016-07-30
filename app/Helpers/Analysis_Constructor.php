@@ -374,7 +374,7 @@ class Analysis_Constructor extends Analysis_Helper {
 			$AntibioticsAvailabilityExclude = array(9,10,11,12,15);
 		$AntibioticsH = array('Antibiotics  Availability', 'Available', 'Not Available','No information provided' );
 		
-		return $CHV1_Antibiotics = Cache::remember('CHV1_Antibiotics'.$county.$term,config('cache.timeout'),function() use($AntibioticsH){
+		return $CHV1_Antibiotics = Cache::remember('CHV1_Antibiotics'.$county.$term,config('cache.timeout'),function() use($AntibioticsH,$AntibioticsAvailabilityExclude){
       					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$AntibioticsH,0,8,17,'COL01','COL03','/^/',$AntibioticsAvailabilityExclude);
       	});	
 	};
@@ -394,7 +394,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		$AntibioticsAvailabilityH = array('Antibiotics  Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
 		$AntibioticsAvailabilityExclude = array(9,10,11,12,15);
 		
-		return $CHV1_AntibioticsAvailability = Cache::remember('CHV1_AntibioticsAvailability'.$county.$term,config('cache.timeout'),function() use($AntibioticsAvailabilityH){
+		return $CHV1_AntibioticsAvailability = Cache::remember('CHV1_AntibioticsAvailability'.$county.$term,config('cache.timeout'),function() use($AntibioticsAvailabilityH,$AntibioticsAvailabilityExclude){
       					return 	  self::fourOptionsFullStack( 'CHV1SEC4BLK2RW',$AntibioticsAvailabilityH,0,8,17,'COL01','COL04','/^/',$AntibioticsAvailabilityExclude);
       	});	
 
