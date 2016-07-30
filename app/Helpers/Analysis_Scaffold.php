@@ -53,6 +53,49 @@ class Analysis_Scaffold {
  			
  		}
 
+    public  function CHV1()
+    { 
+      $terms = $this->getterms('CHV1');
+      $data = Assessments::Submitted('CHV1')->where('Assessment_Term',$terms[0])->get();
+      // $yr = Cache::remember('CHV1YEARS',config('cache.timeout'),function() use ($data){
+      //         $Years = Analyse::sec3Years($data);
+      //         $YearsCount = count($Years)-1;
+      //         $Years = array_reverse($Years);
+      //         $AllYears = $Years;
+      //         unset($Years[0]);
+      //         unset($Years[1]);
+      //         $Years = array_reverse($Years, true);
+      //         $AllYears = array_reverse($AllYears, true);
+      //        return['Years'=> $Years,'AllYears'=> $AllYears,'YearsCount'=>$YearsCount];
+      //   });
+      
+      $SubmittedCHCount =  $data->count();
+      $SubmittedCHCounties = County::AllSubmittedT('CHV1',$terms[0]);     
+      $links = ['facilityinfo'=>'Facility information',
+                'staff'=>'Staff training',
+                'health'=>'Health Services',
+                'guidelines'=>'Guidelines and Job Aids',
+                'diarrhoea'=>'Treatment Commodities: Diarrhoea',                
+                'antibiotics'=>'Treatment Commodities: Antibiotics',
+                'malaria'=>'Treatment Commodities: Malaria',
+                'ort'=>'Oral Rehydration Therapy',
+                'lort'=>'Location of ORT Corner',
+                'supplies'=>'Supplies Availability',
+                'resource'=>'Resource Availability',
+                'comm'=>'Community Strategy'];
+      return [
+      'terms'=> $terms,
+      'links'=> $links,
+      'Years'=> $yr['Years'],
+      'AllYears'=> $yr['AllYears'],
+      'YearsCount'=>$yr['YearsCount'],
+      'Count'=>$SubmittedCHCount,
+      'Counties'=>$SubmittedCHCounties,
+      'name'=>'Child Health Survey'
+      ];
+      
+    }
+
  		public function IMCIV1()
  		{
  			         
