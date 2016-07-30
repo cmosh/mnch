@@ -86,9 +86,6 @@ class Analysis_Scaffold {
       return [
       'terms'=> $terms,
       'links'=> $links,
-      'Years'=> $yr['Years'],
-      'AllYears'=> $yr['AllYears'],
-      'YearsCount'=>$yr['YearsCount'],
       'Count'=>$SubmittedCHCount,
       'Counties'=>$SubmittedCHCounties,
       'name'=>'Child Health Survey'
