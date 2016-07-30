@@ -442,6 +442,12 @@ class Analysis_Constructor extends Analysis_Helper {
 		});
 	};
 
+	$this->CHV1_genopd= function($county){ global $term;
+		return $CHV1_genopd = Cache::remember('CHV1_genopd'.$county.$term,config('cache.timeout'),function(){
+			return self::opdgen_v1();
+		});
+	};
+
 	//u5Register_12Year1
 		$this->CHV2_u5Register= function($county,$Year){ global $term;
 		return $CHV2_u5Register = Cache::remember('CHV2_u5Register'.$county.$Year.$term,config('cache.timeout'),function() use($Year){

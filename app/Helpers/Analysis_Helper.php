@@ -884,6 +884,73 @@ $DataN = $DataN->sum('Data');
 	
 	}
 
+
+	protected static function opdgen_v1(){
+		global $surveys;
+
+    $Data = $surveys->lists('Data')->lists('CHV1SEC1BLK2RW01COL02')->collapse()->toArray();
+	$x = array_count_values($Data);
+
+	$ones = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'1') !== false) {
+    $ones += $value;
+			}
+		
+	}
+
+
+
+	$twos = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'2') !== false) {
+    $twos += $value;
+			}
+		
+	}
+
+	
+
+	$threes = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'3') !== false) {
+    $threes += $value;
+			}
+		
+	}
+
+	
+
+	$others = 0;
+	foreach ($x as $key => $value) {
+
+		if ( (trim($key,'123,')) !== ''   )   {
+
+			$others+=$value;
+		}
+		
+	}
+
+	
+
+
+
+	$Array [] = array('General OPD',$ones);
+	$Array [] = array('Paediatric OPD',$twos);
+	$Array [] = array('MCH',$threes);
+	$Array [] = array('Other',$others);
+
+	return ($Array);
+
+
+
+
+	
+	}
+
 	protected static function commstrategy(){
 		global $surveys;
 
