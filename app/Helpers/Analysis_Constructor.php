@@ -415,8 +415,8 @@ class Analysis_Constructor extends Analysis_Helper {
 	 			$MalariaExclude = array(21,22);
 		$MalariaH = array('Malaria  Availability', 'Available', 'Not Available','No information provided' );
 
-		return $CHV1_Malaria = Cache::remember('CHV1_Malaria'.$county.$term,config('cache.timeout'),function() use($MalariaH,$MalariaExclude){
-      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$MalariaH,0,20,24,'COL01','COL03','/^/',$MalariaExclude);
+		return $CHV1_Malaria = Cache::remember('CHV1_Malari'.$county.$term,config('cache.timeout'),function() use($MalariaH,$MalariaExclude){
+      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$MalariaH,0,20,25,'COL01','COL03','/^/',$MalariaExclude);
       	});
 	};
 
@@ -434,8 +434,8 @@ class Analysis_Constructor extends Analysis_Helper {
 			$MalariaExclude = array(21,22);
 		$MalariaAvaialabilityH = array('Malaria  Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
 
-		return $CHV1_MalariaAvaialability = Cache::remember('CHV1_MalariaAvaialability'.$county.$term,config('cache.timeout'),function() use($MalariaAvaialabilityH,$MalariaExclude){
-      					return 	  self::fourOptionsFullStack('CHV1SEC4BLK2RW',$MalariaAvaialabilityH,0,20,24,'COL01','COL04','/^/',$MalariaExclude);
+		return $CHV1_MalariaAvaialability = Cache::remember('CHV1_MalariaAvaialabilit'.$county.$term,config('cache.timeout'),function() use($MalariaAvaialabilityH,$MalariaExclude){
+      					return 	  self::fourOptionsFullStack('CHV1SEC4BLK2RW',$MalariaAvaialabilityH,0,20,25,'COL01','COL04','/^/',$MalariaExclude);
       	});
 	};
 		
