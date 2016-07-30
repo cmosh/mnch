@@ -120,7 +120,7 @@
 
     <script type="text/javascript">
       $(document).ready(function () {
-    if(window.location.href.indexOf("CH") > -1) {
+    if(window.location.href.indexOf("CHV") > -1) {
       $('#hovme').show();
     }
 });
