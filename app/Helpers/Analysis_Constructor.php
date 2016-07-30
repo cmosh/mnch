@@ -402,10 +402,21 @@ class Analysis_Constructor extends Analysis_Helper {
 
       	$this->CHV2_Malaria= function($county){ global $term;
 	//Malaria_7
+      
 		$MalariaH = array('Malaria  Availability', 'Available', 'Not Available','No information provided' );
 
 		return $CHV2_Malaria = Cache::remember('CHV2_Malaria'.$county.$term,config('cache.timeout'),function() use($MalariaH){
-      					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/');
+      					return 	  self::twoOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaH,0,2,5,'COL01','COL03','/^/',$MalariaExclude);
+      	});
+	};
+
+	 	$this->CHV1_Malaria= function($county){ global $term;
+	//Malaria_7
+	 			$MalariaExclude = array(21,22);
+		$MalariaH = array('Malaria  Availability', 'Available', 'Not Available','No information provided' );
+
+		return $CHV1_Malaria = Cache::remember('CHV1_Malaria'.$county.$term,config('cache.timeout'),function() use($MalariaH,$MalariaExclude){
+      					return 	  self::twoOptionsFullStack( 'CHV1SEC4BLK2RW',$MalariaH,0,20,24,'COL01','COL03','/^/',$MalariaExclude);
       	});
 	};
 
@@ -415,6 +426,16 @@ class Analysis_Constructor extends Analysis_Helper {
 
 		return $CHV2_MalariaAvaialability = Cache::remember('CHV2_MalariaAvaialability'.$county.$term,config('cache.timeout'),function() use($MalariaAvaialabilityH){
       					return 	  self::fourOptionsFullStack( 'CHV2SEC4BLK2RW',$MalariaAvaialabilityH,0,2,5,'COL01','COL04','/^/');
+      	});
+	};
+		
+		$this->CHV1_MalariaAvaialability= function($county){ global $term;
+     //MalariaAvaialability_8
+			$MalariaExclude = array(21,22);
+		$MalariaAvaialabilityH = array('Malaria  Availability', 'Not ordered', 'Ordered but not yet received','Expired','No information provided' );
+
+		return $CHV1_MalariaAvaialability = Cache::remember('CHV1_MalariaAvaialability'.$county.$term,config('cache.timeout'),function() use($MalariaAvaialabilityH,$MalariaExclude){
+      					return 	  self::fourOptionsFullStack('CHV1SEC4BLK2RW',$MalariaAvaialabilityH,0,20,24,'COL01','COL04','/^/',$MalariaExclude);
       	});
 	};
 		

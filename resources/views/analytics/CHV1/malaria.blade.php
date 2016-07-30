@@ -1,6 +1,6 @@
      <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_Malaria">CHV2_Guidelines</option>
-  <option selected value="CHV2_MalariaAvaialability">CHV2_types</option>  
+  <option selected value="CHV1_Malaria">CHV1_Guidelines</option>
+  <option selected value="CHV1_MalariaAvaialability">CHV1_types</option>  
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -28,7 +28,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Commodities
                    <small class="cmpr">
-                      <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_Malaria/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                      <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_Malaria/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                   </h3>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_Malaria"></div>     
+              <div id="CHV1_Malaria"></div>     
                 </div><!-- /.box-body -->
 
                  <div class="wait overlay">
@@ -52,14 +52,14 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Availability</h3>
                   <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/CHV2/CHV2_MalariaAvaialability/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_MalariaAvaialability/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     
                     </small>
                     <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 
-                <div id="CHV2_MalariaAvaialability"></div>  
+                <div id="CHV1_MalariaAvaialability"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
