@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_lort">CHV2_lort</option>
+  <option selected value="CHV1_lort">CHV1_lort</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Location
                    <small class="cmpr">
-                     <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_lort/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_lort/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> 
                   </h3>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="box-body">
 
-                <div id="CHV2_lort"></div>  
+                <div id="CHV1_lort"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">

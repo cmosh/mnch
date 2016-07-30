@@ -1055,11 +1055,38 @@ $DataN = $DataN->sum('Data');
 	
 	}
 
+protected static function ortloc_v1(){
+		global $surveys;
 
+		$recset = $surveys->lists('Data');
 
+	  $Data = $recset->lists('CHV1SEC5BLK2RW07COL02');
+	 
+	
+		
+		$arrayData = array_filter($Data->toArray());
+		 $all =count($arrayData);
+		$x = array_count_values($arrayData);
+		
+	if (!(isset($x["2"]))) {$x[2]=0;}
+	$MCH = $x["2"];
+	if (!(isset($x["3"]))) {$x[3]=0;}
+	$U5_Clinic = $x["3"];
+	if (!(isset($x["1"]))) {$x[1]=0;}
+	$OPD = $x["1"];
+	if (!(isset($x["4"]))) {$x[4]=0;}
+	$Ward = $x["4"];
+	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
 
+	$Array [] = array('MCH',$MCH);
+	$Array [] = array('U5 Clinic',$U5_Clinic);
+	$Array [] = array('OPD',$OPD);
+	$Array [] = array('Ward',$Ward);
+	$Array [] = array('Other',$Other);
 
-
+	return ($Array);
+	
+	}
 
 
 		protected static function dserviceconduct()

@@ -540,6 +540,7 @@ class Analysis_Constructor extends Analysis_Helper {
 	};
 
 	//lort_20
+
 	$this->CHV2_lort= function($county){ global $term;
 		return $CHV2_lort = Cache::remember('CHV2_lort'.$county.$term,config('cache.timeout'),function(){
 			return self::ortloc();
@@ -547,6 +548,15 @@ class Analysis_Constructor extends Analysis_Helper {
 		// return self::ortloc();
 
 	};
+
+	$this->CHV1_lort= function($county){ global $term;
+		return $CHV1_lort = Cache::remember('CHV1_lort'.$county.$term,config('cache.timeout'),function(){
+			return self::ortloc_vl();
+		});
+		// return self::ortloc();
+
+	};
+
 	//genopd_21
 	$this->CHV2_genopd= function($county){ global $term;
 		return $CHV2_genopd = Cache::remember('CHV2_genopd'.$county.$term,config('cache.timeout'),function(){
