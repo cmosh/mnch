@@ -106,7 +106,8 @@ class Analysis_Scaffold {
  			'Count'=>$SubmittedIMCICount,
  			'Counties'=>$SubmittedIMCICounties,
       'links'=>'links',
- 			'name'=>'Integrated Management of Childhood Illness'
+ 			'name'=>'Integrated Management of Childhood Illness',
+      'sver'=>'IMCIV1'
  			];
  		}
 
