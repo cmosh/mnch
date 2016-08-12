@@ -305,8 +305,8 @@ class Analysis_Constructor extends Analysis_Helper {
 
 	 		$GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No','No information provided' );
 			return $CHV1_Guidelines = Cache::remember('CHV1_Guidelines'.$county.$term,config('cache.timeout'),function() use($GuidelinesHeading){
-      					$temp =	 self::twoOptionsFullStack( 'CHV1SEC2BLK1RW',$GuidelinesHeading,27,2,11,'COL01','COL02','/^ated/ ?');
-      				// $temp[8][0] = 'EID Algorithim 2009/2012/2014';
+      					$temp =	 self::twoOptionsFullStack( 'CHV1SEC2BLK1RW',$GuidelinesHeading,27,2,11,'COL01','COL02','/^updated/ ?');
+      				$temp[1][0] = 'EID Algorithim 2009/2012/2014';
       				return $temp;
       	});		
 

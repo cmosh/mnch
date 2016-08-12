@@ -673,14 +673,14 @@ global $surveys;
 		$Data->sum('CHV1SEC1BLK1RW07COL05')
 		];
 
-		$Array []=['ICCM (Before 2013)',
+		$Array []=['ICCM (Before 2010)',
 		$Data->sum('CHV1SEC1BLK1RW03COL06'),
 		$Data->sum('CHV1SEC1BLK1RW04COL06'),
 		$Data->sum('CHV1SEC1BLK1RW05COL06'),
 		$Data->sum('CHV1SEC1BLK1RW06COL06'),
 		$Data->sum('CHV1SEC1BLK1RW07COL06')];
 
-		$Array []=['ICCM (After 2013)',
+		$Array []=['ICCM (After 2010)',
 		$Data->sum('CHV1SEC1BLK1RW03COL07'),
 		$Data->sum('CHV1SEC1BLK1RW04COL07'),
 		$Data->sum('CHV1SEC1BLK1RW05COL07'),
@@ -701,14 +701,14 @@ global $surveys;
 		$Data->sum('CHV1SEC1BLK1RW06COL09'),
 		$Data->sum('CHV1SEC1BLK1RW07COL09')];
 
-		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (Before 2014)',
+		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (Before 2010)',
 		$Data->sum('CHV1SEC1BLK1RW03COL10'),
 		$Data->sum('CHV1SEC1BLK1RW04COL10'),
 		$Data->sum('CHV1SEC1BLK1RW05COL10'),
 		$Data->sum('CHV1SEC1BLK1RW06COL10'),
 		$Data->sum('CHV1SEC1BLK1RW07COL10')];
 
-		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (After 2014)',
+		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (After 2010)',
 		$Data->sum('CHV1SEC1BLK1RW03COL11'),
 		$Data->sum('CHV1SEC1BLK1RW04COL11'),
 		$Data->sum('CHV1SEC1BLK1RW05COL11'),

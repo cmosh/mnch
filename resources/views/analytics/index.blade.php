@@ -261,10 +261,10 @@ function drawSmallChart(graph,year,type) {
 
  @if(substr($survey,0,4)!='IMCI')
    if (allcheck==1){
-$('#s').html($('#County').val() + " Counties, "+ $('#Term').val() +" "+ $("#vers option:selected").text());
+$('#s').html($('#County').val() + " Counties, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }else
 {
-$('#s').html($('#County').val() + " County, "+ $('#Term').val() +" "+ $("#vers option:selected").text());
+$('#s').html($('#County').val() + " County, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
@@ -340,10 +340,10 @@ function drawChart() {
 
  @if(substr($survey,0,4)!='IMCI')
    if (allcheck==1){
-  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val() +" "+ $("#vers option:selected").text());
+  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }else
 {
-   $('#s').html($('#County').val() + " County, "+ $('#Term').val() +" "+ $("#vers option:selected").text());
+   $('#s').html($('#County').val() + " County, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
