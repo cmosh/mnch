@@ -20,6 +20,7 @@
 
                  <div class="box-body" >   
            
+@include('/analytics/'.$sver.'/version') 
 
 <div class="form-group" > <select class="form-control select2 " style="width: 100%;" name="County" id="County"> 
         <option value="All" selected>All Counties</option>

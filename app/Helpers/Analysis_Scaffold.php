@@ -48,7 +48,8 @@ class Analysis_Scaffold {
  			'YearsCount'=>$yr['YearsCount'],
  			'Count'=>$SubmittedCHCount,
  			'Counties'=>$SubmittedCHCounties,
- 			'name'=>'Child Health Survey'
+ 			'name'=>'Child Health Survey',
+      'sver'=>'CHV2'
  			];
  			
  		}
@@ -88,7 +89,9 @@ class Analysis_Scaffold {
       'links'=> $links,
       'Count'=>$SubmittedCHCount,
       'Counties'=>$SubmittedCHCounties,
-      'name'=>'Child Health Survey'
+      'name'=>'Child Health Survey',
+      'sver'=>'CHV1'
+
       ];
       
     }
@@ -140,11 +143,55 @@ class Analysis_Scaffold {
  			'terms'=> $terms,
  			'Count'=>$SubmittedMNHCount,
  			'Counties'=>$SubmittedMNHCounties,
- 			'name'=>'Maternal and Neonatal Health Survey'
+ 			'name'=>'Maternal and Neonatal Health Survey',
+      'sver'=>'MNHV2'
  			];
  			
 
  		}
+
+
+
+    public function MNHV1()
+    {
+       $terms = self::getterms('MNHV1');
+           $SubmittedMNHCount =  Assessments::Submitted('MNHV1')->where('Assessment_Term',$terms[0])->count();  
+             $SubmittedMNHCounties = County::AllSubmittedT('MNHV1',$terms[0]);
+           $links = ['facilityinfo'=>'Facility information',
+                'pdelivery'=>'Provision of Delivery Services',
+                'sdelivery'=>'Delivery Services',
+                'health'=>'Health Facility Management',
+                'skilled'=>'Skilled Birth Attendants',
+                'bed'=>'Bed Capacity',
+                'servicedev'=>'24 hour service delivery',
+                'bemonc'=>'Provision OF BEmONC Signal Functions',   
+              'bemoncCh'=>'Challenges Experienced in BEmONC Service Provison', 
+               'cemonc'=>'Provision OF CEmONC Signal Functions',   
+              'HIV'=>'HIV Testing and Counselling',            
+                'blood'=>'Blood and Transfusions',
+                'cs'=>'Reason for not conducting CS',
+                'KMC'=>'Provision of KMC',
+                'devpep'=>'Preparedness for Delivery',
+                'nbc'=>'Provison of New Born Care',
+                'Guidelines'=>'Guidelines Availability',
+                'Tools'=>'Tools Availability',
+                'Jobaids'=>'Job Aids Availability',
+                'Equipment'=>'Equipment Availability',
+                'Testing'=>'Testing Supplies',
+                'Delivery'=>'Delivery Kit Components'];
+
+           return [
+      'links'=> $links,
+      'terms'=> $terms,
+      'Count'=>$SubmittedMNHCount,
+      'Counties'=>$SubmittedMNHCounties,
+      'name'=>'Maternal and Neonatal Health Survey',
+      'sver'=>'MNHV1'
+      ];
+      
+
+    }
+
 
  		public  function getterms($survey)
  		{

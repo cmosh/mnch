@@ -135,6 +135,17 @@ google.setOnLoadCallback(makeChart);
  }
   $('#County').change(makeChart);
   $('#Term').change(makeChart);
+  $('#vers').change(verschange);
+
+  function verschange() {
+
+    var ver = $('#vers').val();
+    var url = '{{config("app.prefix")}}/analytics/'+ ver
+
+    window.location.href = url;
+
+    
+  }
   
 function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
