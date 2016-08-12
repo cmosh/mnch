@@ -222,6 +222,7 @@ class Analysis_Scaffold {
 	      ->with('AllYears', isset($values['AllYears']) ? $values['AllYears'] : '')
 	      ->with('terms', isset($values['terms']) ? $values['terms'] : '')
 	      ->with('surveyname',$values['name']);
+        ->with('sver',$values['sver']);
 	   }
  	
 	}
