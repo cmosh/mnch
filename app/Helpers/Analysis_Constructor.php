@@ -1112,7 +1112,7 @@ class Analysis_Constructor extends Analysis_Helper {
 			});
 
 		};
-	}
+	
 
 		$this->MNHV1_Reasoncs = function($county){ global $term;
 		//Reasoncs

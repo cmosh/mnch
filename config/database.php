@@ -48,13 +48,13 @@ return [
 
 		'mongodb' => [
    			 'driver'   => 'mongodb',
-    		 'host'     => env('DB_HOST', 'localhost'),
+    		 'host'     => env('DB_HOST', 'mongo'),
    			 'port'     => env('DB_PORT', 27017),
- 			 'database' => env('DB_DATABASE', ''),
-  			 'username' => env('DB_USERNAME', ''),
-  			 'password' => env('DB_PASSWORD', ''),
+ 			 'database' => env('DB_DATABASE', 'mnch'),
+  			 'username' => env('DB_USERNAME', 'mnch'),
+  			 'password' => env('DB_PASSWORD', 'mnch'),
   			 'options' => [
-     		 'db' => 'admin' // sets the authentication database required by mongo 3
+     		 'db' => 'mnch' // sets the authentication database required by mongo 3
   			  ]
 		],
 
@@ -127,7 +127,7 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => '127.0.0.1',
+			'host'     => env('APP_REDISHOST','redis'),
 			'port'     => env('APP_REDISPORT',6379),
 			'database' => 0,
 		],
