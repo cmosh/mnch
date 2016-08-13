@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="MNHV2_Reasoncs">CHV2_ownership</option>
+  <option selected value="MNHV1_Reasoncs">CHV2_ownership</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Reason for not conducting CS
                    <small class="cmpr">
-                     <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Reasoncs/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}/comparison/MNHV1/MNHV1_Reasoncs/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                  
                   </h3>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="box-body">
 
-                <div id="MNHV2_Reasoncs"></div>  
+                <div id="MNHV1_Reasoncs"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">

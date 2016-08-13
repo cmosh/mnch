@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="MNHV2_Bemonc">CHV2_ownership</option>
+  <option selected value="MNHV1_Bemonc">CHV2_ownership</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Provision OF BEmONC Signal Functions 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Bemonc/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/MNHV1/MNHV1_Bemonc/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -35,7 +35,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="MNHV2_Bemonc"></div>     
+              <div id="MNHV1_Bemonc"></div>     
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>

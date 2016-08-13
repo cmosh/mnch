@@ -1,5 +1,5 @@
 <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="MNHV2_DService">CHV2_ownership</option>
+  <option selected value="MNHV1_DService">CHV2_ownership</option>
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Availability 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_DService/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/MNHV1/MNHV1_DService/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   
@@ -35,7 +35,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="MNHV2_DService"></div>     
+              <div id="MNHV1_DService"></div>     
                 </div><!-- /.box-body -->
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>

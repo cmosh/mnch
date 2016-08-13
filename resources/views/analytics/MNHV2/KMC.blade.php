@@ -52,7 +52,7 @@
                   <h3 class="box-title">Facilities with designated space
 </h3>
                   <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
