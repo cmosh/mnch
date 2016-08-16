@@ -1,0 +1,87 @@
+version: '2'
+
+services:
+
+### Workspace Utilities Container ###########################
+
+    workspace:
+        build:
+            context: ./workspace
+            args:
+                - INSTALL_MONGO=false
+                - INSTALL_PHPREDIS=false
+                - INSTALL_XDEBUG=false
+                - INSTALL_NODE=false
+                - COMPOSER_GLOBAL_INSTALL=false
+                - PUID=1000
+                - PGID=1000
+        volumes_from:
+            - volumes_source
+        tty: true
+
+### PHP-FPM Container #######################################
+
+    php-fpm:
+        build:
+            context: ./php-fpm
+            args:
+                - INSTALL_MONGO=true
+                - INSTALL_PHPREDIS=true
+                - INSTALL_XDEBUG=false
+            dockerfile: Dockerfile-70
+        volumes_from:
+            - volumes_source
+        links:
+            - workspace
+            - mongo
+            - redis
+
+### MongoDB Container #######################################
+
+    mongo:
+        build: ./mongo
+        ports:
+            - "27017:27017"
+        volumes_from:
+            - volumes_data
+
+### Redis Container #########################################
+
+    redis:
+        build: ./redis
+        volumes_from:
+            - volumes_data
+        ports:
+            - "6379:6379"
+
+### Caddy Server Container ##################################
+
+    caddy:
+        build: ./caddy
+        volumes_from:
+            - volumes_source
+        ports:
+            - "8000:80"
+            - "8443:443"
+            - "2015:2015"
+        volumes:
+            - ./caddy/Caddyfile:/etc/Caddyfile
+        links:
+            - php-fpm
+
+### Laravel Application Code Container ######################
+
+    volumes_source:
+        build: ./volumes/application
+        volumes:
+            - ../:/var/www/laravel
+
+### Databases Data Container ################################
+
+    volumes_data:
+        build: ./volumes/data
+        volumes:
+            - ./data/redis:/data
+            - ./data/mongo:/data/mnch
+
+### Add more Containers below ###############################

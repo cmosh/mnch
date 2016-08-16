@@ -14,22 +14,6 @@
 
 
 
-
-Route::get('rawdata','RawExcelController@index');
-Route::get('rawdata/facility-summary','RawExcelController@FacilitySummary');
-Route::get('rawdata/staff-training','RawExcelController@StaffTraining');
-Route::get('rawdata/health-services','RawExcelController@HealthServices');
-Route::get('rawdata/guidelines','RawExcelController@Guidelines');
-Route::get('rawdata/tools','RawExcelController@Tools');
-Route::get('rawdata/diarrhoea','RawExcelController@Diarrhoea');
-Route::get('rawdata/antibiotics','RawExcelController@Antibiotics');
-Route::get('rawdata/malaria','RawExcelController@Malaria');
-Route::get('rawdata/ort-functionality','RawExcelController@OrtFunctionality');
-Route::get('rawdata/ort-location','RawExcelController@OrtLocation');
-Route::get('rawdata/supplies-availability','RawExcelController@SuppliesAvailability');
-Route::get('rawdata/resource-availability','RawExcelController@ResourceAvailability');
-Route::get('rawdata/community-strategy','RawExcelController@CommunityStrategy');
-
 // Route::get('admin/surveys','FormController@index');
 // Route::post('admin/surveys/fields/','FormController@fields');
 // Route::get('admin/surveys/{SurveyID}','FormController@edit');
@@ -43,7 +27,16 @@ Route::post('admin/globcmd', 'administration@globcmd');
 
 
 
+  Route::group(['prefix' => 'raw','as'=>'rawdata'],function(){
 
+    			Route::get('/','RawController@index');
+		});
+
+   Route::group(['prefix' => 'node','as'=>'node'],function(){
+    			Route::get('start','NodeController@startnode');
+    			Route::get('stop','NodeController@stopnode');
+    			Route::get('restart','NodeController@restartnode');
+		});
 
 
 

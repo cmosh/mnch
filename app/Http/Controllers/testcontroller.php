@@ -23,20 +23,23 @@ use Carbon\Carbon;
 use Cache;
 use Request;
 use Telegram;
+use Storage;
 
 class testcontroller extends Controller
 {
 
 		public function __construct()
 	{
-		$this->middleware('auth');
-		$this->Map = new Map;
+		// $this->middleware('auth');
+		// $this->Map = new Map;
 	}
 	
 
     	public function index(){
+            Storage::disk('gcs')->put('test.png', file_get_contents(storage_path('/app/test.png')));
 
-      return Assessments::Monitor(['Survey'=>'IMCI']);  
+          return  config('node.entrypoint');
+      // return Assessments::Monitor(['Survey'=>'IMCI']);  
     	}
 
 

@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'cloud' => 's3',
+	'cloud' => 'gcs',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,6 +63,14 @@ return [
 			'container' => 'your-container',
 			'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
 			'region'    => 'IAD',
+		],
+
+		'gcs' => [
+		    'driver'                               => 'gcs',
+		    'service_account'                      => 'bucket@testprojectmnch.iam.gserviceaccount.com',
+		    'service_account_certificate'          => storage_path() . '/credentials.p12', 
+		    'service_account_certificate_password' => 'notasecret',
+		    'bucket'                               => 'cloud-storage-bucket',
 		],
 
 	],

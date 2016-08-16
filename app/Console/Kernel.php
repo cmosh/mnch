@@ -12,6 +12,11 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\Inspire',
+		Commands\DockerCompose::class,
+		Commands\DockerDown::class,
+		Commands\Npm::class,
+		Commands\NpmR::class,
+		Commands\FirebaseCmd::class
 	];
 
 	/**
