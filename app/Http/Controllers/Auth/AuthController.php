@@ -18,7 +18,7 @@ class AuthController extends Controller {
 	*/
 
 	use AuthenticatesAndRegistersUsers;
-	protected $redirectAfterLogout = 'analytics/CHV2';
+	protected $redirectAfterLogout = config('app.prefix').'/analytics/CHV2';
 
 	/**
 	 * Create a new authentication controller instance.
