@@ -5,7 +5,9 @@ services:
 ### Workspace Utilities Container ###########################
 
     workspace:
-        env_file: ../.env
+        env_file:
+            - ../.env
+            - ../.env.example
         build:
             context: ./workspace
             args:
@@ -48,7 +50,12 @@ services:
 
 ### Redis Container #########################################
 
-    redis:        
+    redis:
+        ulimits:
+              nproc: 65535
+              nofile:
+                soft: 20000
+                hard: 40000        
         build: ./redis
         volumes_from:
             - volumes_data
@@ -57,7 +64,12 @@ services:
 
 ### Caddy Server Container ##################################
 
-    caddy:       
+    caddy:
+        ulimits:
+          nproc: 65535
+          nofile:
+            soft: 20000
+            hard: 40000       
         build: ./caddy
         volumes_from:
             - volumes_source
