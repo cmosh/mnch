@@ -1,10 +1,11 @@
 version: '2'
 
 services:
-
+    
 ### Workspace Utilities Container ###########################
 
     workspace:
+        env_file: ../.env
         build:
             context: ./workspace
             args:
@@ -41,33 +42,34 @@ services:
     mongo:
         build: ./mongo
         ports:
-            - "27018:27017"
+            - "${DOCKER_APP_HOST}:${DOCKER_MONGO_PORT}:27017"
         volumes_from:
             - volumes_data
 
 ### Redis Container #########################################
 
-    redis:
+    redis:        
         build: ./redis
         volumes_from:
             - volumes_data
         ports:
-            - "6380:6379"
+            - "${DOCKER_APP_HOST}:${DOCKER_REDIS_PORT}:6379"
 
 ### Caddy Server Container ##################################
 
-    caddy:
+    caddy:       
         build: ./caddy
         volumes_from:
             - volumes_source
         ports:
-            - "8000:80"
-            - "8443:443"
-            - "2015:2015"
+            - "${DOCKER_APP_HOST}:${CADDY_HTTP_PORT}:80"
+            - "${DOCKER_APP_HOST}:${CADDY_SSL_PORT}:443"
+            - "${DOCKER_APP_HOST}:${CADDY_CONFIG_PORT}:2015"
         volumes:
             - ./caddy/Caddyfile:/etc/Caddyfile
         links:
             - php-fpm
+
 
 ### Laravel Application Code Container ######################
 
