@@ -17,6 +17,8 @@
 // Route::get('admin/surveys','FormController@index');
 // Route::post('admin/surveys/fields/','FormController@fields');
 // Route::get('admin/surveys/{SurveyID}','FormController@edit');
+Route::group(['prefix'=>config('app.prefix')],function(){
+
 Route::get('admin/global', 'administration@globe');
 Route::get('admin/redmin', 'administration@localredis');
 Route::get('admin/memcached', 'administration@localmem');
@@ -164,5 +166,6 @@ Route::get('status/{status}/{AssID}','AssessmentController@status');
 Route::post('survey/session','SurveysController@session');
 Route::post('survey/save','SurveysController@saveajax');
 
+});
 
 
