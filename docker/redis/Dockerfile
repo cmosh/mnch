@@ -7,5 +7,5 @@ MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 VOLUME /data
 
 EXPOSE 6379
-
+CMD ["sysctl -w net.core.somaxconn=65535"]
 CMD ["redis-server"]
