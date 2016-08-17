@@ -41,7 +41,7 @@ services:
     mongo:
         build: ./mongo
         ports:
-            - "27017:27017"
+            - "27018:27017"
         volumes_from:
             - volumes_data
 
@@ -52,7 +52,7 @@ services:
         volumes_from:
             - volumes_data
         ports:
-            - "6379:6379"
+            - "6380:6379"
 
 ### Caddy Server Container ##################################
 
