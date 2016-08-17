@@ -18,7 +18,7 @@ class AuthController extends Controller {
 	*/
 
 	use AuthenticatesAndRegistersUsers;
-	protected $redirectAfterLogout = config('app.prefix').'/analytics/CHV2';
+	protected $redirectAfterLogout = '/analytics/CHV2';
 
 	/**
 	 * Create a new authentication controller instance.
@@ -29,6 +29,7 @@ class AuthController extends Controller {
 	 */
 	public function __construct()
 	{
+		$this->redirectAfterLogout = config('app.prefix').$this->redirectAfterLogout;
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
