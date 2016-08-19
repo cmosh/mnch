@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "efd84276c8fd895bacaf78bc59c5568e",
-    "content-hash": "38d9148b7d5f5e9fab00cc08891e3ea3",
+    "hash": "fc3d6591f067cbdb17aac5378c9ab6d3",
+    "content-hash": "94a5e2258af2de439a672c91a328be41",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -400,49 +400,6 @@
                 "session fallback"
             ],
             "time": "2016-02-29 01:49:55"
-        },
-        {
-            "name": "google/apiclient",
-            "version": "v1.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/google/google-api-php-client.git",
-                "reference": "85309a3520bb5f53368d43e35fd24f43c9556323"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client/zipball/85309a3520bb5f53368d43e35fd24f43c9556323",
-                "reference": "85309a3520bb5f53368d43e35fd24f43c9556323",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-v1-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Google/autoload.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Client library for Google APIs",
-            "homepage": "http://developers.google.com/api-client-library/php",
-            "keywords": [
-                "google"
-            ],
-            "time": "2016-06-06 21:22:48"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -882,6 +839,48 @@
                 "tokenizer"
             ],
             "time": "2015-12-05 17:17:57"
+        },
+        {
+            "name": "ktamas77/firebase-php",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ktamas77/firebase-php.git",
+                "reference": "915fcac8a3e4e1ba457ab0cd0801255ce41445c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ktamas77/firebase-php/zipball/915fcac8a3e4e1ba457ab0cd0801255ce41445c5",
+                "reference": "915fcac8a3e4e1ba457ab0cd0801255ce41445c5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tamas Kalman",
+                    "email": "ktamas77@gmail.com"
+                }
+            ],
+            "description": "Firebase PHP Client",
+            "homepage": "https://github.com/ktamas77/firebase-php",
+            "keywords": [
+                "firebase",
+                "rest",
+                "wrapper"
+            ],
+            "time": "2016-06-14 20:11:14"
         },
         {
             "name": "laravel/framework",
@@ -1456,6 +1455,55 @@
             "time": "2016-01-05 14:00:57"
         },
         {
+            "name": "mpociot/laravel-firebase-sync",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpociot/laravel-firebase-sync.git",
+                "reference": "c7b172b1827bdeb4bb3c22f64d19ef12519b5a32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpociot/laravel-firebase-sync/zipball/c7b172b1827bdeb4bb3c22f64d19ef12519b5a32",
+                "reference": "c7b172b1827bdeb4bb3c22f64d19ef12519b5a32",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "ktamas77/firebase-php": "^2.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~4.7 || ~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mpociot\\Firebase": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "m.pociot@gmail.com"
+                }
+            ],
+            "description": "Synchronize your Eloquent models with a Firebase realtime database.",
+            "homepage": "http://github.com/mpociot/laravel-firebase-sync",
+            "keywords": [
+                "eloquent",
+                "firebase",
+                "laravel"
+            ],
+            "time": "2016-06-20 21:04:04"
+        },
+        {
             "name": "mtdowling/cron-expression",
             "version": "v1.1.0",
             "source": {
@@ -1753,16 +1801,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "3d265f7c079f5b37d33475f996d7a383c5fc8aeb"
+                "reference": "41f85e9c2582b3f6d1b7d20395fb40c687ad5370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/3d265f7c079f5b37d33475f996d7a383c5fc8aeb",
-                "reference": "3d265f7c079f5b37d33475f996d7a383c5fc8aeb",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/41f85e9c2582b3f6d1b7d20395fb40c687ad5370",
+                "reference": "41f85e9c2582b3f6d1b7d20395fb40c687ad5370",
                 "shasum": ""
             },
             "require": {
@@ -1841,7 +1889,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2016-05-13 01:15:21"
+            "time": "2016-08-18 18:49:14"
         },
         {
             "name": "psr/http-message",
@@ -2002,53 +2050,6 @@
                 "shell"
             ],
             "time": "2016-03-09 05:03:14"
-        },
-        {
-            "name": "superbalist/flysystem-google-storage",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Superbalist/flysystem-google-storage.git",
-                "reference": "8ae35803a102ed6ce58aa87bf7534d4396513765"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Superbalist/flysystem-google-storage/zipball/8ae35803a102ed6ce58aa87bf7534d4396513765",
-                "reference": "8ae35803a102ed6ce58aa87bf7534d4396513765",
-                "shasum": ""
-            },
-            "require": {
-                "google/apiclient": "~1.1",
-                "league/flysystem": "~1.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Superbalist\\Flysystem\\GoogleStorage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Superbalist.com a division of Takealot Online (Pty) Ltd",
-                    "email": "info@superbalist.com"
-                }
-            ],
-            "description": "Flysystem adapter for Google Cloud Storage",
-            "time": "2016-05-19 14:33:03"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3125,49 +3126,6 @@
                 "UUID RFC4122"
             ],
             "time": "2016-05-09 09:22:18"
-        },
-        {
-            "name": "websight/l5-google-cloud-storage",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/websightgmbh/l5-google-cloud-storage.git",
-                "reference": "c1cac9985dfce60010234c9dca127f3543d2d594"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/websightgmbh/l5-google-cloud-storage/zipball/c1cac9985dfce60010234c9dca127f3543d2d594",
-                "reference": "c1cac9985dfce60010234c9dca127f3543d2d594",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.0.17|5.1.*|5.2.*",
-                "superbalist/flysystem-google-storage": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Websight\\GcsProvider\\": "src/Websight/GcsProvider/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cedric Ziel",
-                    "email": "ziel@websight.de"
-                }
-            ],
-            "description": "Laravel 5 Flysystem Google Cloud Storage  Service Provider",
-            "homepage": "https://github.com/websightgmbh/l5-google-cloud-storage",
-            "keywords": [
-                "Flysystem",
-                "laravel",
-                "laravel5"
-            ],
-            "time": "2016-03-04 11:57:00"
         }
     ],
     "packages-dev": [
@@ -4034,23 +3992,23 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.3.7",
+            "version": "1.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716"
+                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/4e8f0da10ac5802913afc151413bc8c53b6c2716",
-                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/be2c607e43ce4c89ecd60e75c6a85c126e754aea",
+                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.4"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "type": "library",
             "extra": {
@@ -4080,7 +4038,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2016-05-17 03:18:57"
+            "time": "2016-08-18 05:49:44"
         },
         {
             "name": "sebastian/exporter",
