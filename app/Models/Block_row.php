@@ -1,8 +1,11 @@
 <?php namespace App\Models;
 
 use Moloquent;
+use Mpociot\Firebase\SyncsWithFirebase;
 
 class Block_row extends Moloquent {
+use SyncsWithFirebase;
+
 
 	// each Block_row has many column_sets
     public function column_sets() {

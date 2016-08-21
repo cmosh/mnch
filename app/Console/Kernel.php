@@ -19,8 +19,8 @@ class Kernel extends ConsoleKernel {
 		Commands\DockerBuild::Class,
 		Commands\DockerStatus::Class,
 		Commands\DockerStart::Class,
-		Commands\DockerDebug::Class
-
+		Commands\DockerDebug::Class,
+		Commands\FirebaseCmd::Class
 	];
 
 	/**

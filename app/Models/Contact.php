@@ -1,8 +1,10 @@
 <?php namespace App\Models;
 
 use Moloquent;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class Contact extends Moloquent {
+use SyncsWithFirebase;
+
 
 
 	 public static function createOrUpdate($data, $keys) {

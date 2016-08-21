@@ -11,14 +11,14 @@ class FirebaseCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'firebase {cmd}';
+    protected $signature = 'firebase:backup {model}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run firebase commands(mnch uses firebase for database backups-- :) cheat codes)';
+    protected $description = 'Manually run firebase backup.';
 
     /**
      * Create a new command instance.
@@ -37,8 +37,44 @@ class FirebaseCmd extends Command
      */
     public function handle()
     {   
-          $cmd = $this->argument('cmd');
-          $firebase = config('firebase.bin');
-          system("$firebase $cmd");
+        $mdl = $this->argument('model');
+       
+         $this->call('docker:start', [
+        'service' => ['mongo'], '--d' => 'default'
+         ]);
+
+
+        config(['database.connections.mongodb'=> [
+             'driver'   => 'mongodb',
+             'host'     => env('DOCKER_APP_HOST'),
+             'port'     => env('DOCKER_MONGO_PORT'),
+             'database' => env('DB_DATABASE', 'mnch'),
+             'username' => env('DB_USERNAME', 'mnch'),
+             'password' => env('DB_PASSWORD', 'mnch'),
+             'options' => [
+             'db' => 'mnch' 
+              ]
+        ]]);
+
+
+        $modelname = "\\App\\Models\\".$mdl;
+        $model = new $modelname;
+      
+        $rowcount = $model->count();
+        $this->info("Backing up $rowcount records.");   
+        $model->where('backed_up', '!=', '1')->chunk(50, function($models) use ($rowcount) {
+            $i = 1;
+            $y = 0;
+            foreach ($models as $m) {
+            $m->backed_up = 1;
+            $m->save();
+            $this->info("Backed up $i/$rowcount.");
+            $i++;
+            }
+            $y+=50;
+            $this->info("Backed up $i/$rowcount.");
+         });
+
+        $this->info("Finished, backed up $rowcount/$rowcount records.");
     }
 }

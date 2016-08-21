@@ -1,8 +1,11 @@
 <?php namespace App\Models;
 
 use Moloquent;
+use Mpociot\Firebase\SyncsWithFirebase;
 
 class Column_set extends Moloquent {
+use SyncsWithFirebase;
+
 
 	public function block_row() {
         return $this->belongsTo('App\Models\Block_row','block_rowID','block_rowID');

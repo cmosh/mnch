@@ -14,6 +14,14 @@ return [
 	|
 	*/
 
+	'firebase' => [
+		'api_key' => env('FIREBASE_APIKEY'), // Only used for JS integration
+		'auth_domain' => env('FIREBASE_AUTHDOMAIN'), // Only used for JS integration
+		'database_url' => env('FIREBASE_DATABASEURL'),
+		'secret' => env('FIREBASE_DATABASESECRET'),
+		'storage_bucket' => env('FIREBASE_STORAGEBUCKET'), // Only used for JS integration
+	],
+
 	'mailgun' => [
 		'domain' => '',
 		'secret' => '',

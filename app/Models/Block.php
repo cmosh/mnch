@@ -1,8 +1,12 @@
 <?php namespace App\Models;
 
 use Moloquent;
+use Mpociot\Firebase\SyncsWithFirebase;
 
 class Block extends Moloquent {
+
+use SyncsWithFirebase;
+
 
 	// each Block has many block_rows
     public function block_rows() {

@@ -57,6 +57,7 @@ return [
      		 'db' => 'mnch' // sets the authentication database required by mongo 3
   			  ]
 		],
+		
 	],
 
 	/*

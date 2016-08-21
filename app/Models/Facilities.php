@@ -3,7 +3,9 @@
 use Moloquent;
 use Cache;
 use Carbon\Carbon;
+use Mpociot\Firebase\SyncsWithFirebase;
 class Facilities extends Moloquent {
+use SyncsWithFirebase;
 
 	protected $collection = 'Facilities';
 

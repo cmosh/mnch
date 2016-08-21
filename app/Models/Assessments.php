@@ -2,8 +2,11 @@
 
 use Moloquent;
 use Carbon\Carbon;
-class Assessments extends Moloquent  {
+use Mpociot\Firebase\SyncsWithFirebase;
 
+class Assessments extends Moloquent  {
+    
+use SyncsWithFirebase;
 	//
 	protected $collection ='assessments';
 	protected $dates = ['Date'];

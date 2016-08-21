@@ -4,8 +4,9 @@ use Moloquent;
 use Cache;
 use App\Helpers\Map;
 use Carbon\Carbon;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class Participants extends Moloquent {
+use SyncsWithFirebase;
 
 	protected $collection = 'Participants';
 

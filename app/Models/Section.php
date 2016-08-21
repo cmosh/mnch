@@ -2,8 +2,9 @@
 
 // use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Moloquent;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class Section extends Moloquent {
+use SyncsWithFirebase;
 
 	// each Section has many blocks
     public function blocks() {

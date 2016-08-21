@@ -1,8 +1,9 @@
 <?php namespace App\Models;
 
 use Moloquent;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class Field extends Moloquent {
+use SyncsWithFirebase;
 
 	//
 		public function field_set() {
