@@ -151,7 +151,6 @@ return [
         Fingo\LaravelCacheFallback\CacheFallbackServiceProvider::class,
         Fingo\LaravelSessionFallback\SessionFallbackServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
-        Websight\GcsProvider\CloudStorageServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */
