@@ -32,7 +32,6 @@
                     </small>
                   </h3>
                   
-                  <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 
@@ -54,7 +53,6 @@
                   <small class="cmpr">
                    <a href="{{config('app.prefix')}}/comparison/MNHV1/MNHV1_Kangaroo2/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
-                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="box-body">
 

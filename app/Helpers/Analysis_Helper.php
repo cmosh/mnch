@@ -1180,7 +1180,37 @@ protected static function ortloc_v1(){
 				return $Array;
 		}
 
-		protected static function bedcapacity(){
+		protected static function dserviceconduct_v1()
+		{
+			global $surveys;
+			$recset = $surveys->lists('Data');
+			$Data = $recset->lists('MNHV1SEC1BLK1RW03COL02')->collapse()->toArray();	
+
+			$x = array_count_values(array_filter($Data));
+
+			$others = 0;
+			foreach ($x as $key => $value) {
+				if($key !== "1" && $key !== "2" && $key !== "3" && $key !== "4" && $key !== "5")
+					$others += $value;
+
+			}
+				isset($x["1"]) ?: $x["1"]=0;
+				isset($x["2"]) ?: $x["2"]=0;
+				isset($x["3"]) ?: $x["3"]=0;
+				isset($x["4"]) ?: $x["4"]=0;
+				isset($x["5"]) ?: $x["5"]=0;
+
+				$Array [] = array('Inadequate skill',$x["1"]);
+				$Array [] = array('Inadequate staff',$x["2"]);
+				$Array [] = array('Inadequate infrastructure',$x["3"]);
+				$Array [] = array('Inadequate Equipment',$x["4"]);
+				$Array [] = array('Inadequate Commodities and Suppliers',$x["5"]);
+				$Array [] = array('Others',$others);
+
+				return $Array;
+		}
+
+		protected static function bedcapacity($ver){
 			global $surveys;
 
 			$array [] = array('Bed Capacity','New Born','Maternal','Total');
@@ -1207,10 +1237,10 @@ protected static function ortloc_v1(){
 		 foreach ($Rec as $v) {
 
       			$type = $v[0]['Type'];
-      			$Data = collect($v)->lists('Data')->lists('MNHV2SEC1BLK2RW06COL02');      			
-      			$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW07COL02');
+      			$Data = collect($v)->lists('Data')->lists('MNH'.$ver.'SEC1BLK2RW06COL02');      			
+      			$Data = $v->lists('Data')->lists('MNH'.$ver.'SEC1BLK2RW07COL02');
       			$Maternity = $Data->sum();
-      			$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW08COL02');
+      			$Data = $v->lists('Data')->lists('MNH'.$ver.'SEC1BLK2RW08COL02');
       			$NewBorn = $Data->sum();
       			$Total = $NewBorn + $Maternity;
       			$array[]=array($type,$NewBorn,$Maternity,$Total);
@@ -1218,7 +1248,9 @@ protected static function ortloc_v1(){
       		return $array;
       	}
 
-	protected static function skillbirth(){
+	protected static function skillbirth($ver){
+
+		$q = 'MNH'.$ver.'SEC1BLK2RW03COL02';
 
 		global $surveys;
 
@@ -1247,7 +1279,7 @@ protected static function ortloc_v1(){
 		 $Rec = collect($recset)->groupby('Type');
 		 foreach ($Rec as $v) {
 		 	$type = $v[0]['Type'];
-		 	$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW03COL02')->all();
+		 	$Data = $v->lists('Data')->lists($q)->all();
 		 	$Data = array_count_values($Data);
       		$keys = array_keys($Data);
       		$count0 = 0;
@@ -1275,6 +1307,58 @@ protected static function ortloc_v1(){
 			}
 			return $array;
 		}
+
+		protected static function kangaroo2_v1($col,$headings){
+
+		global $surveys;
+
+		 $array [] = $headings;
+
+		 // $recset;
+
+		  foreach ($surveys as $survey) {
+
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
+
+		 $Rec = collect($recset)->groupby('Type');
+      	
+		
+      		foreach ($Rec as $type => $assessment) {
+
+      		set_time_limit(30);
+
+		 $Data = $assessment->lists('Data')->where('MNHV1SEC2BLK6RW03COL02','1');
+		 $Data = $Data->groupby($col);
+		
+		 isset($Data["1"]) ?: $Data["1"] = [];
+		  isset($Data["2"]) ?: $Data["2"] = [];
+		   isset($Data["-51"]) ?: $Data["-51"] = [];
+	
+		 $array [] = array($type,count($Data["1"]),count($Data["2"]),count($Data["-51"]));
+
+	}
+
+
+	return $array;
+
+
+
+	}
+
 
 		protected static function kangaroo2($col,$headings){
 
@@ -1307,7 +1391,7 @@ protected static function ortloc_v1(){
 		
       		foreach ($Rec as $type => $assessment) {
 
-      		
+      		set_time_limit(30);
 
 		 $Data = $assessment->lists('Data')->where('MNHV2SEC2BLK6RW03COL02','1');
 		 $Data = $Data->groupby($col);
@@ -1326,6 +1410,8 @@ protected static function ortloc_v1(){
 
 
 	}
+
+
 
 	protected static function FacilityTypes2Stack($col,$headings){
 

@@ -639,7 +639,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		//Guidelines Availability
 		 $GuidelinesHeading = array('Guidelines Availability', 'Yes', 'No','No information provided' );
 			return $Guidelines = Cache::remember('MNHV1_GuidelinesMNH'.$county.$term,config('cache.timeout'),function() use($GuidelinesHeading){
-      					return 	 self::twoOptionsFullStack( 'REPLACE',$GuidelinesHeading,33,3,9,'COL01','COL02','/^ated/ ?');
+      					return 	 self::twoOptionsFullStack( 'MNHV1SEC3BLK1RW',$GuidelinesHeading,33,3,9,'COL01','COL02','/^ated/ ?');
       	});	
 
       	};
@@ -659,7 +659,7 @@ class Analysis_Constructor extends Analysis_Helper {
 	//Tools Availability
 		 $ToolsHeading = array('Tools Availability', 'Yes', 'No','No information provided' );
 		return $Tools = Cache::remember('MNHV1_ToolsMNH'.$county.$term,config('cache.timeout'),function() use($ToolsHeading){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$ToolsHeading,0,3,13,'COL01','COL02','/^/');
+      					return 	  self::twoOptionsFullStack( 'MNHV1SEC3BLK3RW',$ToolsHeading,4,3,13,'COL01','COL02','/^/',[5,6]);
       	});	
 
 	};
@@ -678,7 +678,7 @@ class Analysis_Constructor extends Analysis_Helper {
       	//DService
 		$DSheading = array('Provsion of Delivery Services', 'Yes', 'No','No information provided' );
 		return $DService = Cache::remember('MNHV1_DService'.$county.$term,config('cache.timeout'),function() use($DSheading){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$DSheading,0,2,3,'COL01','COL02','/^/');
+      					return 	  self::twoOptionsFullStack( 'MNHV1SEC1BLK1RW',$DSheading,0,2,3,'COL01','COL02','/^/');
       	});				
 			};
 
@@ -695,8 +695,8 @@ class Analysis_Constructor extends Analysis_Helper {
 			$this->MNHV1_EquipAvail = function($county){ global $term;
 		//EquipAvail
 		$EquipAvailheading = array('Equipment Availability', 'Available', 'Not Available','No information provided' );
-		return $EquipAvail = Cache::remember('MNHV1_EquipAvail'.$county.$term,config('cache.timeout'),function() use($EquipAvailheading){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$EquipAvailheading,0,3,20,'COL01','COL02','/^/');
+		return $EquipAvail = Cache::remember('MNHV1_EquipAvail_v1'.$county.$term,config('cache.timeout'),function() use($EquipAvailheading){
+      					return 	  self::twoOptionsFullStack( 'MNHV1SEC7BLK1RW',$EquipAvailheading,0,3,20,'COL01','COL02','/^/');
       	});	
       	};	
 
@@ -714,8 +714,17 @@ class Analysis_Constructor extends Analysis_Helper {
       	$this->MNHV1_jjavailability = function($county){ global $term;
 		//Job aids Availability
 		$jheading = array('Job Aids Availability', 'Yes', 'No','No information provided' );
-		return $jjavailability = Cache::remember('MNHV1_JaidsMNH'.$county.$term,config('cache.timeout'),function() use($jheading){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$jheading,21,3,11,'COL01','COL02','/^have/');
+		return $jjavailability = Cache::remember('MNHV1_JaidsMNHsv1'.$county.$term,config('cache.timeout'),function() use($jheading){
+      					$temp =  self::twoOptionsFullStack( 'MNHV1SEC3BLK2RW',$jheading,21,3,11,'COL01','COL02','/^have an updated/');
+						$temp[1][0] = "PPH (AMSTL)";
+						$temp[2][0] = "Breastfeeding";
+						$temp[3][0] = "Neonatal Resuscitation";
+						$temp[4][0] = "MgS04";
+						$temp[5][0] = "HBB Action Plan (Asphyxia)";
+						$temp[6][0] = "Guidelines of Blood Transfusion in Pregnancy";
+						$temp[7][0] = "Methods of Oxygen Administration";
+						$temp[8][0] = "KMC ";
+						return $temp;
       	});			
       	};	
 
@@ -733,7 +742,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		// Health Facilitty Management
 		$HManH = array('Health Facilitty Management', 'Yes', 'No','No information provided' );
 		return $HMan = Cache::remember('MNHV1_HMan'.$county.$term,config('cache.timeout'),function() use($HManH){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$HManH,28,3,9,'COL01','COL02','/^a/');
+      					return 	  self::twoOptionsFullStack( 'MNHV1SEC1BLK4RW',$HManH,28,3,9,'COL01','COL02','/^a/');
       	});		
       	};
 
@@ -751,7 +760,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		// 	Bemonc
 		$BemoncH = array('BEmONC SIGNAL FUNCTIONS', 'Yes', 'No','No information provided' );
 		return $Bemonc = Cache::remember('MNHV1_Bemonc'.$county.$term,config('cache.timeout'),function() use($BemoncH){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$BemoncH,0,3,11,'COL01','COL02','/^/');
+      					return 	  self::twoOptionsFullStack( 'MNHV1SEC2BLK2RW',$BemoncH,0,3,11,'COL01','COL02','/^/');
       	});		
       	};
 
@@ -771,7 +780,7 @@ class Analysis_Constructor extends Analysis_Helper {
 
 		$BemoncChallengeH = array('BEmONC Signal Functions Challenges', 'Inadequate Drugs', 'Inadequate Skills','Inadequate Supplies','No Job Aids','Inadequate Equipment','Case Never Present','No Challenged Experienced','No information provided' );
 		return $BemoncChallenge = Cache::remember('MNHV1_BemoncChallenge'.$county.$term,config('cache.timeout'),function() use($BemoncChallengeH){
-      					return 	  self::SevenOptionsFullStack( 'REPLACE',$BemoncChallengeH,0,3,11,'COL01','COL03','/^/');
+      					return 	  self::SevenOptionsFullStack( 'MNHV1SEC2BLK2RW',$BemoncChallengeH,0,3,11,'COL01','COL03','/^/');
       	});		
 		};
 
@@ -796,7 +805,7 @@ class Analysis_Constructor extends Analysis_Helper {
 
 		$CemoncH = array('CEmONC SIGNAL FUNCTIONS', 'Yes', 'No','No information provided' );
 		return $Cemonc = Cache::remember('MNHV1_CemonC'.$county.$term,config('cache.timeout'),function() use($CemoncH,$CemoncExclude){
-      					return 	  self::twoOptionsFullStack( 'REPLACE',$CemoncH,0,3,9,'COL01','COL02','/^(1)(2)(3)(4)Does this facility/',$CemoncExclude);
+      					return 	  self::twoOptionsFullStack( 'MNHV1SEC2BLK3RW',$CemoncH,0,3,9,'COL01','COL02','/^(1)(2)(3)(4)Does this facility/',$CemoncExclude);
       	});		
 
 		};
@@ -805,7 +814,7 @@ class Analysis_Constructor extends Analysis_Helper {
 
 		$this->MNHV2_HIVTest = function($county){ global $term;
 			//HIVTest
-		$HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No information provided' );
+		$HIVTestheadings = array('Provision of HIV & Testing', 'Yes', 'No','No information provided' );
 		return $HIVTest = Cache::remember('MNHV2_HIVTest'.$county.$term,config('cache.timeout'),function() use($HIVTestheadings){
       					$temp =  self::twoOptionsFullStack( 'MNHV2SEC2BLK4RW',$HIVTestheadings,4,3,12,'COL01','COL02','/^/');
       					$temp[2][0] = 'A'.$temp[2][0];
@@ -816,9 +825,9 @@ class Analysis_Constructor extends Analysis_Helper {
 
       	$this->MNHV1_HIVTest = function($county){ global $term;
 			//HIVTest
-		$HIVTestheadings = array('Provision og HIV & Testing', 'Yes', 'No','No information provided' );
+		$HIVTestheadings = array('Provision of HIV & Testing', 'Yes', 'No','No information provided' );
 		return $HIVTest = Cache::remember('MNHV1_HIVTest'.$county.$term,config('cache.timeout'),function() use($HIVTestheadings){
-      					$temp =  self::twoOptionsFullStack( 'REPLACE',$HIVTestheadings,4,3,12,'COL01','COL02','/^/');
+      					$temp =  self::twoOptionsFullStack( 'MNHV1SEC2BLK4RW',$HIVTestheadings,4,3,12,'COL01','COL02','/^/');
       					$temp[2][0] = 'A'.$temp[2][0];
       					return $temp;
       	});		
@@ -870,9 +879,9 @@ class Analysis_Constructor extends Analysis_Helper {
 
 			$this->MNHV1_dserviceconduct = function($county){ global $term;
 	//dserviceconduct
-		return $dserviceconduct = Cache::remember('MNHV1_dserviceconduct'.$county.$term,config('cache.timeout'),function() {
+		return $dserviceconduct = Cache::remember('MNHV1_dserviceconduct_v1'.$county.$term,config('cache.timeout'),function() {
 			//REPLACE
-			return self::dserviceconduct();
+			return self::dserviceconduct_v1();
 		});
 		};
 	
@@ -888,9 +897,9 @@ class Analysis_Constructor extends Analysis_Helper {
 			$this->MNHV1_NewBornCare = function($county){ global $term;
 	//NewBornCare
 		$NewBornCareHeadings = array('New Born Care','Yes','No','No information provided');
-		return $NewBornCare = Cache::remember('MNHV1_NewBornCare'.$county.$term,config('cache.timeout'),function() use ($NewBornCareHeadings){
+		return $NewBornCare = Cache::remember('MNHV1_NewBornCares'.$county.$term,config('cache.timeout'),function() use ($NewBornCareHeadings){
 
-			return self::FacilityTypes2Stack('REPLACE',$NewBornCareHeadings);
+			return self::FacilityTypes2Stack('MNHV1SEC2BLK5RW03COL02',$NewBornCareHeadings);
 		});
 		};
 
@@ -906,9 +915,9 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV1_Kangaroo1 = function($county){ global $term;
 //Kangaroo1
 		$Kangaroo1Headings = array('Kangaroo Awarness','Yes','No','No information provided');
-		return $Kangaroo1 = Cache::remember('MNHV1_Kangaroo1'.$county.$term,config('cache.timeout'),function() use ($Kangaroo1Headings){
+		return $Kangaroo1 = Cache::remember('MNHV1_Kangaroo1v1'.$county.$term,config('cache.timeout'),function() use ($Kangaroo1Headings){
 
-			return self::FacilityTypes2Stack('REPLACE',$Kangaroo1Headings);
+			return self::FacilityTypes2Stack('MNHV1SEC2BLK6RW03COL02',$Kangaroo1Headings);
 		});
 		};
 
@@ -924,9 +933,9 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV1_Kangaroo2 = function($county){ global $term;
 		//Kangaroo1
 		$Kangaroo2Headings = array('Kangaroo Corner','Yes','No','No information provided');
-		return $Kangaroo2 = Cache::remember('MNHV1_Kadsdsangaroo2'.$county.$term,config('cache.timeout'),function() use ($Kangaroo2Headings){
+		return $Kangaroo2 = Cache::remember('MNHV1_Kadsdsangaroov1'.$county.$term,config('cache.timeout'),function() use ($Kangaroo2Headings){
 
-			return self::kangaroo2('REPLACE',$Kangaroo2Headings);
+			return self::kangaroo2_v1('MNHV1SEC2BLK6RW04COL02',$Kangaroo2Headings);
 		});
 		};
 
@@ -942,16 +951,16 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV1_devpep = function($county){ global $term;
 		//devpep
 		$devpepHeadings = array('Preparedness for Delivery','Yes','No','No information provided');
-		return $devpep = Cache::remember('MNHV1_devpep'.$county.$term,config('cache.timeout'),function() use ($devpepHeadings){
+		return $devpep = Cache::remember('MNHV1_devpeps'.$county.$term,config('cache.timeout'),function() use ($devpepHeadings){
 
-			return self::FacilityTypes2Stack('REPLACE',$devpepHeadings);
+			return self::FacilityTypes2Stack('MNHV1SEC2BLK7RW04COL02',$devpepHeadings);
 		});
 		};
 
 		$this->MNHV2_skillbirth = function($county){ global $term;
 		//skillbirth
 		return $skillbirth = Cache::remember('MNHV2_skillbirth'.$county.$term,config('cache.timeout'),function(){
-			return self::skillbirth();
+			return self::skillbirth('V2');
 		});
 		};
 
@@ -960,7 +969,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		return $skillbirth = Cache::remember('MNHV1_skillbirth'.$county.$term,config('cache.timeout'),function(){
 
 			//REPLACE
-			return self::skillbirth();
+			return self::skillbirth('V1');
 		});
 		};
 
@@ -969,7 +978,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		//bedcapacity
 		return $bedcapacity = Cache::remember('MNHV2_bedcapacity'.$county.$term,config('cache.timeout'),function(){
 
-			return self::bedcapacity();
+			return self::bedcapacity('V2');
 		});
 		};
 
@@ -977,7 +986,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		//bedcapacity
 		return $bedcapacity = Cache::remember('MNHV1_bedcapacity'.$county.$term,config('cache.timeout'),function(){
 			//REPLACE
-			return self::bedcapacity();
+			return self::bedcapacity('V1');
 		});
 		};
 
@@ -999,7 +1008,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		$hours24headings = array('24 hour service delivery', 'Yes', 'No','No information provided' );
 		return $hours24 = Cache::remember('MNHV1_hours24'.$county.$term,config('cache.timeout'),function()use($hours24headings){
 
-			return self::FacilityTypes2Stack('REPLACE',$hours24headings);
+			return self::FacilityTypes2Stack('MNHV1SEC1BLK3RW03COL02',$hours24headings);
 		});
 
 		
@@ -1017,9 +1026,9 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV1_testing = function($county){ global $term;
 		//testing
 		$testingheadings = array('Testing Supplies', 'Available', 'Not Available','No information provided' );
-		return $testing = Cache::remember('MNHV1_testing'.$county.$term,config('cache.timeout'),function()use($testingheadings){
+		return $testing = Cache::remember('MNHV1_testings'.$county.$term,config('cache.timeout'),function()use($testingheadings){
 
-			return self::FacilityTypes2Stack('REPLACE',$testingheadings);
+			return self::FacilityTypes2Stack('MNHV1SEC7BLK2RW02COL02',$testingheadings);
 		});
 		};
 
@@ -1037,9 +1046,9 @@ class Analysis_Constructor extends Analysis_Helper {
 		$this->MNHV1_devkit = function($county){ global $term;
 		//devkit
 		$devkitheadings = array('Delivery kit components', 'Available', 'Not Available','No information provided' );
-		return $devkit = Cache::remember('MNHV1_devkit'.$county.$term,config('cache.timeout'),function()use($devkitheadings){
+		return $devkit = Cache::remember('MNHV1_devkits'.$county.$term,config('cache.timeout'),function()use($devkitheadings){
 
-			return self::FacilityTypes2Stack('REPLACE',$devkitheadings);
+			return self::FacilityTypes2Stack('MNHV1SEC7BLK3RW03COL02',$devkitheadings);
 		});
 };
 
@@ -1078,7 +1087,7 @@ class Analysis_Constructor extends Analysis_Helper {
 			/*TODO Transfusion Done But No Blood Bank*/
 		$MainBloodSLices = array('Blood Bank Available ','No Blood Bank Available','Other','No information provided');
 		return $MainBlood  = Cache::remember('MNHV1_MainBlood'.$county.$term,config('cache.timeout'),function() use ($MainBloodSLices){
-			return self::MNHPies($MainBloodSLices,'REPLACE');
+			return self::MNHPies($MainBloodSLices,'MNHV1SEC2BLK3RW04COL02');
 		});
 };
 
@@ -1096,8 +1105,8 @@ class Analysis_Constructor extends Analysis_Helper {
 	$this->MNHV1_ReasonBlood = function($county){ global $term;
 		//ReasonBlood
 		$ReasonBloodSLices = array('Blood Bank Not Available ','Supplies and equipment not available','Other','No information provided');
-		return $ReasonBlood  = Cache::remember('MNHV1_ReasonBlood'.$county.$term,config('cache.timeout'),function() use ($ReasonBloodSLices){
-			return self::MNHPies($ReasonBloodSLices,'REPLACE');
+		return $ReasonBlood  = Cache::remember('MNHV1_ReasonBloods'.$county.$term,config('cache.timeout'),function() use ($ReasonBloodSLices){
+			return self::MNHPies($ReasonBloodSLices,'MNHV1SEC2BLK3RW05COL02');
 		});
 
 		};
@@ -1118,7 +1127,7 @@ class Analysis_Constructor extends Analysis_Helper {
 		//Reasoncs
 		$ReasoncsSLices = array('Supplies and equipment not available','Theatre Space Not Available','Human Resource','Other','No information provided');
 		return $Reasoncs  = Cache::remember('MNHV1_Reasoncs'.$county.$term,config('cache.timeout'),function() use ($ReasoncsSLices){
-			return self::MNHPies($ReasoncsSLices,'REPLACE');
+			return self::MNHPies($ReasoncsSLices,'MNHV1SEC2BLK3RW09COL02');
 		});
 
 	};

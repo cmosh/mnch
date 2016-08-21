@@ -14,9 +14,13 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\Inspire',
 		Commands\DockerCompose::class,
 		Commands\DockerDown::class,
-		Commands\Npm::class,
-		Commands\NpmR::class,
-		Commands\FirebaseCmd::class
+		Commands\DockerStop::class,
+		Commands\DockerRestart::Class,
+		Commands\DockerBuild::Class,
+		Commands\DockerStatus::Class,
+		Commands\DockerStart::Class,
+		Commands\DockerDebug::Class
+
 	];
 
 	/**
