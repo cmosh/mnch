@@ -65,15 +65,6 @@ Route::group(['as' => 'dashboard::'], function () {
 });
 
 
-Route::group(['prefix' => config('telegram.bot_token')],function(){
-		Route::post('webhook', function () {
-		    $updates = Telegram::getWebhookUpdates();
-		    Cache::put('aaaaaaaaaaaaaaaaaaaaaaa','c',60);
-		    return 'ok';
-		});
-});
-
-
 
 Route::group(['prefix' => 'usermanagement'], function () {
 
