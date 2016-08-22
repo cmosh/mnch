@@ -108,7 +108,7 @@ class AssessmentController extends Controller {
 		$assessments->PartID=intval($x[6]);
 
 	$assessments->save();
-	$ur = config("app.prefix").'/assessments/start/'.$x[0];
+	$ur = 'assessments/start/'.$x[0];
 	return redirect($ur);
 
 	}
@@ -149,7 +149,7 @@ class AssessmentController extends Controller {
 	{
 		Session::murdersession($id);
 		Assessments::where('Assessment_ID', '=', $id)->delete();
-		return redirect(config("app.prefix").'/home');
+		return redirect('/home');
 	}
 
 	
@@ -161,13 +161,13 @@ class AssessmentController extends Controller {
 		 	case 'save': //If saved redirect to begin new assessment instead of '/home'
 		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
 		 	$irect = substr($red->Survey,0,2);
-		 	return redirect(config("app.prefix").'/assessment/'.$irect);
+		 	return redirect('/assessment/'.$irect);
 		 	/*return redirect('/home');*/ 
 		 	break;
 		 	case 'submit': //if submitted redirect to begin new assessments
 		 	$red = Assessments::where('Assessment_ID','=',$AssID)->first();
 		 	$irect = substr($red->Survey,0,2);
-		 	return redirect(config("app.prefix").'/assessment/'.$irect);
+		 	return redirect('/assessment/'.$irect);
 		 	break;		 	
 		 	default:
 		 	}
