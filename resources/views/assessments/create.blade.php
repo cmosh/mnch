@@ -80,7 +80,7 @@
                 <div class="info-box-content">
                   <span class="" id="chs" ><b>(Please select below)</b></span>
                 
-                    {!! Form::open(['url' => 'assessments/'.$id]) !!}
+                    {!! Form::open(['url' => config("app.prefix").'/assessments/'.$id]) !!}
 <div class="form-group">
   {!! Form::text('Assessment_ID',null,['class' => 'form-control','Value'=> Auth::user()->id.'ASS'.$countID, 'style' => 'display:none;']) !!}
   </div>
