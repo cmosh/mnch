@@ -63,16 +63,13 @@ class FirebaseCmd extends Command
         $rowcount = $model->count();
         $this->info("Backing up $rowcount records.");   
         $i = 1;
-        $y = 0;
-        $model->where('backed_up', '!=', '1')->chunk(50, function($models) use ($rowcount,$i,$y) {            
+        $model->where('backed_up', '!=', 1)->chunk(50, function($models) use ($rowcount,$i) {            
             foreach ($models as $m) {
             $m->backed_up = 1;
             $m->save();
             $this->info("Backed up $i/$rowcount.");
             $i++;
             }
-            $y+=50;
-            $this->info("Backed up $i/$rowcount.");
          });
 
         $this->info("Finished, backed up $rowcount/$rowcount records.");
