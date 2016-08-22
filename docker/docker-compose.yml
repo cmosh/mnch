@@ -4,9 +4,7 @@ services:
     
 ### Workspace Utilities Container ###########################
 
-    workspace:
-        env_file:
-            - ../.env
+    workspace:        
         build:
             context: ./workspace
             args:
@@ -24,8 +22,7 @@ services:
 ### PHP-FPM Container #######################################
 
     php-fpm:
-        env_file:
-            - ../.env
+        
         build:
             context: ./php-fpm
             args:
@@ -43,8 +40,7 @@ services:
 ### MongoDB Container #######################################
 
     mongo:
-        env_file:
-            - ../.env
+        
         build: ./mongo
         ports:
             - "${DOCKER_APP_HOST}:${DOCKER_MONGO_PORT}:27017"
@@ -54,8 +50,7 @@ services:
 ### Redis Container #########################################
 
     redis:
-        env_file:
-            - ../.env
+        
         ulimits:
               nproc: 65535
               nofile:
@@ -70,8 +65,7 @@ services:
 ### Caddy Server Container ##################################
 
     caddy:
-        env_file:
-            - ../.env
+        
         ulimits:
           nproc: 65535
           nofile:

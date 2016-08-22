@@ -46,11 +46,11 @@ class FirebaseCmd extends Command
 
         config(['database.connections.mongodb'=> [
              'driver'   => 'mongodb',
-             'host'     => env('DOCKER_APP_HOST'),
-             'port'     => env('DOCKER_MONGO_PORT'),
-             'database' => env('DB_DATABASE', 'mnch'),
-             'username' => env('DB_USERNAME', 'mnch'),
-             'password' => env('DB_PASSWORD', 'mnch'),
+             'host'     => config('docker.host'),
+             'port'     => config('docker.mongo'),
+             'database' => config('database.connections.mongodb.database'),
+             'username' => config('database.connections.mongodb.username'),
+             'password' => config('database.connections.mongodb.password'),
              'options' => [
              'db' => 'mnch' 
               ]
