@@ -114,7 +114,7 @@ class AnalyticsController extends Controller {
   public function land()
   {
     
-    $url = config('app.prefix').'/analytics/CHV2';
+    $url = '/analytics/CHV2';
     return redirect($url);
   }
 
