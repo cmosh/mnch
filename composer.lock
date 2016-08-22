@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "317fd75aeba03b14fa1f2f648d9cf145",
-    "content-hash": "6f8dcf58963a02a45056b5a58114b209",
+    "hash": "42d7c5ef4553e727faa179a1864fe27f",
+    "content-hash": "825b2344a2d8f977762821638ce35672",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -402,33 +402,76 @@
             "time": "2016-02-29 01:49:55"
         },
         {
-            "name": "guzzlehttp/guzzle",
-            "version": "6.2.1",
+            "name": "firebase/php-jwt",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
+                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.3.1",
-                "php": ">=5.5"
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2016-07-18 04:51:16"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c6851d6e48f63b69357cbfa55bca116448140e0c",
+                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/promises": "~1.0",
+                "guzzlehttp/psr7": "~1.1",
+                "php": ">=5.5.0"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.0",
-                "psr/log": "^1.0"
+                "phpunit/phpunit": "~4.0",
+                "psr/log": "~1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.2-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -461,7 +504,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-07-15 17:22:37"
+            "time": "2015-11-23 00:47:50"
         },
         {
             "name": "guzzlehttp/promises",
@@ -633,6 +676,45 @@
                 "telegram sdk"
             ],
             "time": "2015-12-27 20:25:51"
+        },
+        {
+            "name": "j42/laravel-firebase",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j42/laravel-firebase.git",
+                "reference": "9e1229dc92792e3d1f30f8836ca06264e359f0e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j42/laravel-firebase/zipball/9e1229dc92792e3d1f30f8836ca06264e359f0e1",
+                "reference": "9e1229dc92792e3d1f30f8836ca06264e359f0e1",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "@dev",
+                "guzzlehttp/guzzle": "6.1.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/j42"
+                ],
+                "psr-0": {
+                    "J42\\LaravelFirebase": "src/j42/LaravelFirebase"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Julian Aceves",
+                    "email": "j@j42.me",
+                    "homepage": "https://j42.me"
+                }
+            ],
+            "description": "A Firebase port for Laravel (4.2+)",
+            "time": "2015-10-26 01:57:10"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -4348,7 +4430,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "j42/laravel-firebase": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

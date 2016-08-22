@@ -8,6 +8,10 @@ use SyncsWithFirebase;
 	
 	protected $collection='Terms';
 
+	public function collection()
+        {
+             return $this->collection;
+        }
 	
 
 }

@@ -48,8 +48,8 @@ return [
 
 		'mongodb' => [
    			 'driver'   => 'mongodb',
-    		 'host'     => env('DB_HOST', 'mongo'),
-   			 'port'     => env('DB_PORT', 27017),
+    		 'host'     => env('DOCKER_APP_HOST', 'mongo'),
+   			 'port'     => env('DOCKER_MONGO_PORT', 27017),
  			 'database' => env('DB_DATABASE', 'mnch'),
   			 'username' => env('DB_USERNAME', 'mnch'),
   			 'password' => env('DB_PASSWORD', 'mnch'),
@@ -59,6 +59,15 @@ return [
 		],
 		
 	],
+
+	'firebase' => array(
+    'host'      => 'https://torchtest-dad3a.firebaseio.com/',
+    'token'     => 'iDjWXSuZk95zDVdIdR1SNrg8t3D6da0dQSi8NxTC',
+    'timeout'   => 10,
+    'sync'      => false,           // OPTIONAL: auto-sync all Eloquent models with Firebase?
+	),
+
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -89,8 +98,8 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => env('APP_REDISHOST','redis'),
-			'port'     => env('APP_REDISPORT',6379),
+			'host'     => env('DOCKER_APP_HOST','redis'),
+			'port'     => env('DOCKER_REDIS_PORT',6379),
 			'database' => 0,
 		],
 

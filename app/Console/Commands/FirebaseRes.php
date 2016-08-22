@@ -3,15 +3,16 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Firebase;
 
-class FirebaseCmd extends Command
+class FirebaseRes extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'firebase:backup {model}';
+    protected $signature = 'firebase:restore {model}';
 
     /**
      * The console command description.
@@ -59,19 +60,22 @@ class FirebaseCmd extends Command
 
         $modelname = "\\App\\Models\\".$mdl;
         $model = new $modelname;
-      
-        $rowcount = $model->where('backed_up', '!=', 2)->count();
-        $this->info("Backing up $rowcount records.");   
-        $i = 1;
-        $model->where('backed_up', '!=', 2)->chunk(50, function($models) use ($rowcount,$i) {            
-            foreach ($models as $m) {
-            $m->backed_up = 2;
-            $m->save();
-            $this->info("Backed up $i/$rowcount.");
-            $i++;
-            }
-         });
+        // $collection = $model->collection();
+        $m = $model->first();
+        $temp = Firebase::get($model);  
+        // $model->update($temp);
+        // $rowcount = $model->where('backed_up', '!=', 1)->count();
+        // $this->info("Backing up $rowcount records.");   
+        // $i = 1;
+        // $model->where('backed_up', '!=', 1)->chunk(50, function($models) use ($rowcount,$i) {            
+        //     foreach ($models as $m) {
+        //     $m->backed_up = 1;
+        //     $m->save();
+        //     $this->info("Backed up $i/$rowcount.");
+        //     $i++;
+        //     }
+        //  });
 
-        $this->info("Finished, backed up $rowcount/$rowcount records.");
+        $this->info($temp);
     }
 }

@@ -9,5 +9,8 @@ return [
     | 
     |
     */
-    'bin' => base_path().'/node/lib/node_modules/firebase-tools/bin/firebase',
+    'host'      => env('FIREBASE_DATABASEURL'),
+    'token'     => env('FIREBASE_DATABASESECRET'),
+    'timeout'   => 10,
+    'sync'      => false,  
 ];
