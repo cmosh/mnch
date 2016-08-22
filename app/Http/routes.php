@@ -116,14 +116,6 @@ Route::group(['prefix' => 'telegram'], function () {
 });
 
 
-Route::get('user', array('before' => 'old', function()
-{
-    return 'You are over 200 years old!';
-}));
-
-
-
-
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
