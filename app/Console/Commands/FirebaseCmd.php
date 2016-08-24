@@ -90,6 +90,7 @@ class FirebaseCmd extends Command
                 $blocktotal = $i-1;
                   $this->info("Finished chunk($blocktotal/$rowtotal records backed up).");
              });
+            $i--;
             $this->info("Finished, backed up $i/$rowtotal records.");
         } 
 
