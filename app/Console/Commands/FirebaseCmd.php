@@ -38,7 +38,7 @@ class FirebaseCmd extends Command
      */
     public function handle()
     {   
-        global $i,$y;
+        global $i,$y,$rowtotal;
         
         $mdl = $this->argument('model');
 
@@ -69,11 +69,11 @@ class FirebaseCmd extends Command
             $modelname = '\\App\\Models\\'.$modelname;
             $model = new  $modelname;
             $collection = $model->collection();      
-            $rowcount = $model->where('backed_up', '!=', 1)->count();
-            $this->info("There are $rowcount records that have not been manually backed up in $collection.(Autobackups are not included in the query)");   
+            $rowtotal = $model->where('backed_up', '!=', 1)->count();
+            $this->info("There are $rowtotal records that have not been manually backed up in $collection.(Autobackups are not included in the query)");   
             $model->where('backed_up', '!=', 1)->chunk(50, function($models) {  
 
-                global $i,$y;
+                global $i,$y,$rowtotal;
 
                 $rowcount = $models->count();
                 $z = 1;
@@ -87,8 +87,9 @@ class FirebaseCmd extends Command
                 $i++;
                 }            
                 $y++;
+                  $this->info("Finished chunk up $i/$rowtotal records.");
              });
-            $this->info("Finished, backed up $i/$rowcount records.");
+            $this->info("Finished, backed up $i/$rowtotal records.");
         } 
 
         $this->info("All operations finished.");
