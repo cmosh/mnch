@@ -73,13 +73,13 @@ class FirebaseCmd extends Command
             $collection = $model->collection();      
             $rowtotal = $model->where('backed_up', '!=', 1)->count();
             $this->info("There are $rowtotal records that have not been manually backed up in $collection.(Autobackups are not included in the query)");   
-            $model->where('backed_up', '!=', 1)->orWhere('chunkfactor',$chunkfactor)->chunk(50, function($models) use ($chunkfactor){  
+            $model->where('backed_up', '!=', 1)->orWhere('chunkfactor',$chunkfactor)->chunk(50, function($models) use ($chunkfactor,$collection){  
 
                 global $i,$y,$rowtotal;
 
                 $rowcount = $models->count();
                 $z = 1;
-                $this->info("Backing up $y(st/nd/rd/th) chunk with $rowcount records.");
+                $this->info("Backing up $y(st/nd/rd/th) chunk in $collection with $rowcount records.");
 
                 foreach ($models as $m) {
                 $m->backed_up = 1;
