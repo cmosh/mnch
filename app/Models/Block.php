@@ -7,6 +7,7 @@ class Block extends Moloquent {
 
 use SyncsWithFirebase;
 
+protected $collection ="blocks";
 
 	// each Block has many block_rows
     public function block_rows() {

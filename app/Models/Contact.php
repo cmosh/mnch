@@ -6,6 +6,7 @@ class Contact extends Moloquent {
 use SyncsWithFirebase;
 
 
+protected $collection ="contacts";
 
 	 public static function createOrUpdate($data, $keys) {
     $record = self::where($keys)->first();

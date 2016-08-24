@@ -6,6 +6,7 @@ use Mpociot\Firebase\SyncsWithFirebase;
 class Column_set extends Moloquent {
 use SyncsWithFirebase;
 
+protected $collection ="column_sets";
 
 	public function block_row() {
         return $this->belongsTo('App\Models\Block_row','block_rowID','block_rowID');

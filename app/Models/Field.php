@@ -4,6 +4,7 @@ use Moloquent;
 use Mpociot\Firebase\SyncsWithFirebase;
 class Field extends Moloquent {
 use SyncsWithFirebase;
+protected $collection ="fields";
 
 	//
 		public function field_set() {

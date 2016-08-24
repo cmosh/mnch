@@ -5,7 +5,7 @@ use Mpociot\Firebase\SyncsWithFirebase;
 class Field_set extends Moloquent {
 use SyncsWithFirebase;
 
-	//
+	protected $collection ="field_sets";
 
 	// each Field_set has many fields
     public function fields() {

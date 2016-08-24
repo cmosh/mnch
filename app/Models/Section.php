@@ -6,6 +6,8 @@ use Mpociot\Firebase\SyncsWithFirebase;
 class Section extends Moloquent {
 use SyncsWithFirebase;
 
+protected $collection ="sections";
+
 	// each Section has many blocks
     public function blocks() {
         return $this->hasMany('App\Models\Block','sectionID','sectionID');
