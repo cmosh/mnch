@@ -40,7 +40,7 @@ class Authenticate {
 			}
 			else
 			{
-				$url = config('app.prefix').'/auth/login';
+				$url = '/auth/login';
 				return redirect()->guest($url);
 			}
 		}
