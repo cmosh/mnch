@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Helpers\Builder;
+use Uuid;
 
 class FirebaseCmd extends Command
 {
@@ -66,12 +67,13 @@ class FirebaseCmd extends Command
         foreach ($models as $modelname) {
             $y = 1;
             $i = 1;
+            $chunkfactor = Uuid::generate(1);
             $modelname = '\\App\\Models\\'.$modelname;
             $model = new  $modelname;
             $collection = $model->collection();      
             $rowtotal = $model->where('backed_up', '!=', 1)->count();
             $this->info("There are $rowtotal records that have not been manually backed up in $collection.(Autobackups are not included in the query)");   
-            $model->where('backed_up', '!=', 1)->chunk(50, function($models) {  
+            $model->where('backed_up', '!=', 1)->orWhere('chunkfactor',$chunkfactor)->chunk(50, function($models) use ($chunkfactor){  
 
                 global $i,$y,$rowtotal;
 
@@ -81,6 +83,7 @@ class FirebaseCmd extends Command
 
                 foreach ($models as $m) {
                 $m->backed_up = 1;
+                $m->chunkfactor = $chunkfactor;
                 $m->save();
                 $this->info("Backed up $z/$rowcount.");
                 $z++;
