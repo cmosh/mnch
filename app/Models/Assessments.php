@@ -19,6 +19,12 @@ use SyncsWithFirebase;
     }
 }
 
+
+public function collection()
+        {
+             return $this->collection;
+        }
+        
 	 public function scopeAssessedFacilities($query,$params)
      {
 

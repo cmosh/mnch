@@ -16,4 +16,9 @@ use SyncsWithFirebase;
     }
 }
 
+public function collection()
+        {
+             return $this->collection;
+        }
+
 }

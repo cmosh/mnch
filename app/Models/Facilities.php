@@ -15,7 +15,11 @@ use SyncsWithFirebase;
     {
         return $this->hasOne('App\Models\MNHSubSurvey','Facility_ID','FacilityCode');
     }
-
+    
+public function collection()
+        {
+             return $this->collection;
+        }
 
      public function scopeSubCounties($query,$params)
     {

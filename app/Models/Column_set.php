@@ -13,5 +13,10 @@ use SyncsWithFirebase;
     public function field_set() {
         return $this->belongsTo('App\Models\Field_set','field_setID','field_setID');
     }
+
+    public function collection()
+        {
+             return $this->collection;
+        }
    
 }

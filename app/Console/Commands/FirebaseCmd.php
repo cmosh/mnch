@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Helpers\Builder;
 
 class FirebaseCmd extends Command
 {
@@ -11,7 +12,7 @@ class FirebaseCmd extends Command
      *
      * @var string
      */
-    protected $signature = 'firebase:backup {model}';
+    protected $signature = 'firebase:backup {model?*}';
 
     /**
      * The console command description.
@@ -37,7 +38,10 @@ class FirebaseCmd extends Command
      */
     public function handle()
     {   
+        global $i,$y;
+        
         $mdl = $this->argument('model');
+
        
          $this->call('docker:start', [
         'service' => ['mongo'], '--d' => 'default'
@@ -57,21 +61,39 @@ class FirebaseCmd extends Command
         ]]);
 
 
-        $modelname = "\\App\\Models\\".$mdl;
-        $model = new $modelname;
-      
-        $rowcount = $model->where('backed_up', '!=', 1)->count();
-        $this->info("Backing up $rowcount records.");   
-        $i = 1;
-        $model->where('backed_up', '!=', 1)->chunk(50, function($models) use ($rowcount,$i) {            
-            foreach ($models as $m) {
-            $m->backed_up = 1;
-            $m->save();
-            $this->info("Backed up $i/$rowcount.");
-            $i++;
-            }
-         });
+        $models = empty($mdl) ? Builder::getModels() : $mdl;
+        
+        foreach ($models as $modelname) {
+            $y = 1;
+            $i = 1;
+            $modelname = '\\App\\Models\\'.$modelname;
+            $model = new  $modelname;
+            $collection = $model->collection();      
+            $rowcount = $model->where('backed_up', '!=', 1)->count();
+            $this->info("There are $rowcount records that have not been manually backed up in $collection.(Autobackups are not included in the query)");   
+            $model->where('backed_up', '!=', 1)->chunk(50, function($models) {  
 
-        $this->info("Finished, backed up $rowcount/$rowcount records.");
+                global $i,$y;
+
+                $rowcount = $models->count();
+                $z = 1;
+                $this->info("Backing up $y(st/nd/rd/th) chunk with $rowcount records.");
+
+                foreach ($models as $m) {
+                $m->backed_up = 1;
+                $m->save();
+                $this->info("Backed up $z/$rowcount.");
+                $z++;
+                $i++;
+                }            
+                $y++;
+             });
+            $this->info("Finished, backed up $i/$rowcount records.");
+        } 
+
+        $this->info("All operations finished.");
     }
+
+  
+
 }

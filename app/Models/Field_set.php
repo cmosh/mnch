@@ -21,4 +21,8 @@ use SyncsWithFirebase;
         return $this->hasMany('App\Models\Block','field_setID','field_setID');
     }
 
+public function collection()
+        {
+             return $this->collection;
+        }
 }

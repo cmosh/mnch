@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Firebase;
+use MongoDB\BSON\ObjectID;
+use App\Helpers\Builder;
 
 class FirebaseRes extends Command
 {
@@ -12,7 +14,7 @@ class FirebaseRes extends Command
      *
      * @var string
      */
-    protected $signature = 'firebase:restore {model}';
+    protected $signature = 'firebase:restore {model?*}';
 
     /**
      * The console command description.
@@ -57,25 +59,27 @@ class FirebaseRes extends Command
               ]
         ]]);
 
+        $models = empty($mdl) ? Builder::getModels() : $mdl;
 
-        $modelname = "\\App\\Models\\".$mdl;
-        $model = new $modelname;
-        // $collection = $model->collection();
-        $m = $model->first();
-        $temp = Firebase::get($model);  
-        // $model->update($temp);
-        // $rowcount = $model->where('backed_up', '!=', 1)->count();
-        // $this->info("Backing up $rowcount records.");   
-        // $i = 1;
-        // $model->where('backed_up', '!=', 1)->chunk(50, function($models) use ($rowcount,$i) {            
-        //     foreach ($models as $m) {
-        //     $m->backed_up = 1;
-        //     $m->save();
-        //     $this->info("Backed up $i/$rowcount.");
-        //     $i++;
-        //     }
-        //  });
+        foreach ($models as $modelname) {
 
-        $this->info($temp);
+            $modelname = "\\App\\Models\\".$modelname;
+            $model = new $modelname;
+            $collection = $model->collection();
+            $this->info("Restoring $collection");
+            $temp = Firebase::get($collection);
+
+            $data = array_values(json_decode($temp,true));       
+
+             $array = array_map(function($array){
+                       $array["_id"]= new ObjectID($array['_id']);
+                       return $array;
+                   },$data);
+
+            // print_r($data);
+            $model->insert($array);
+            $this->info("Restore Complete");
+        }
     }
+    
 }

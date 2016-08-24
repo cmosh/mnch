@@ -17,5 +17,8 @@ use SyncsWithFirebase;
         return self::where($keys)->update($data);
     }
 }
-
+public function collection()
+        {
+             return $this->collection;
+        }
 }

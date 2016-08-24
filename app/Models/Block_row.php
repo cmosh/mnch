@@ -16,4 +16,8 @@ use SyncsWithFirebase;
         return $this->belongsTo('App\Models\Block','blockID','blockID');
     }
 
+    public function collection()
+        {
+             return $this->collection;
+        }
 }

@@ -11,5 +11,8 @@ use SyncsWithFirebase;
     {
         return $this->hasMany('App\Models\Facilities','Type','FacilityType');
     }
-	
+	public function collection()
+        {
+             return $this->collection;
+        }
 }

@@ -6,7 +6,10 @@ class FacilityOwner extends Moloquent {
 use SyncsWithFirebase;
 
 	protected $collection = 'FacilityOwners';
-
+public function collection()
+        {
+             return $this->collection;
+        }
 	
 	
 }

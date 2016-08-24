@@ -15,4 +15,9 @@ use SyncsWithFirebase;
         return $this->belongsTo('App\Models\Survey','_id','surveyID');
     }
 
+    public function collection()
+        {
+             return $this->collection;
+        }
+
 }

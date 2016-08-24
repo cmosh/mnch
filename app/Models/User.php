@@ -10,7 +10,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Mpociot\Firebase\SyncsWithFirebase;
 class User extends Moloquent implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
-use SyncsWithFirebase;
+    use SyncsWithFirebase;
+
 
 	use Authenticatable, Authorizable, CanResetPassword;
 
@@ -35,6 +36,11 @@ use SyncsWithFirebase;
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function collection()
+        {
+             return $this->collection;
+        }
+        
 	public function scopeNonAdmins($query)
      {
 

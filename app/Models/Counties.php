@@ -13,4 +13,8 @@ use SyncsWithFirebase;
         return $this->hasMany('App\Models\Facilities','Name','County')->select('FacilityCode');
     }
 
+    public function collection()
+        {
+             return $this->collection;
+        }
 }

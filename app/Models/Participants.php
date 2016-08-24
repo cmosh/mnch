@@ -16,6 +16,11 @@ use SyncsWithFirebase;
         return $this->belongsTo('App\Models\Facilities','mfl_code','FacilityCode');
     }
 
+public function collection()
+        {
+             return $this->collection;
+        }
+        
    		 public function scopeView($query)
      {
        

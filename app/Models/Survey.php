@@ -9,5 +9,8 @@ use SyncsWithFirebase;
     public function sections() {
         return $this->hasMany('App\Models\Section','surveyID','id');
     }
-
+    public function collection()
+        {
+             return $this->collection;
+        }
 }
