@@ -67,7 +67,7 @@ class FirebaseCmd extends Command
         foreach ($models as $modelname) {
             $y = 1;
             $i = 1;
-            $chunkfactor = Uuid::generate(1);
+            $chunkfactor = Uuid::generate(4);
             $modelname = '\\App\\Models\\'.$modelname;
             $model = new  $modelname;
             $collection = $model->collection();      
