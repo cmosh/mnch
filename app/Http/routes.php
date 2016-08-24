@@ -14,25 +14,11 @@
 
 
 
-
-Route::get('rawdata','RawExcelController@index');
-Route::get('rawdata/facility-summary','RawExcelController@FacilitySummary');
-Route::get('rawdata/staff-training','RawExcelController@StaffTraining');
-Route::get('rawdata/health-services','RawExcelController@HealthServices');
-Route::get('rawdata/guidelines','RawExcelController@Guidelines');
-Route::get('rawdata/tools','RawExcelController@Tools');
-Route::get('rawdata/diarrhoea','RawExcelController@Diarrhoea');
-Route::get('rawdata/antibiotics','RawExcelController@Antibiotics');
-Route::get('rawdata/malaria','RawExcelController@Malaria');
-Route::get('rawdata/ort-functionality','RawExcelController@OrtFunctionality');
-Route::get('rawdata/ort-location','RawExcelController@OrtLocation');
-Route::get('rawdata/supplies-availability','RawExcelController@SuppliesAvailability');
-Route::get('rawdata/resource-availability','RawExcelController@ResourceAvailability');
-Route::get('rawdata/community-strategy','RawExcelController@CommunityStrategy');
-
 // Route::get('admin/surveys','FormController@index');
 // Route::post('admin/surveys/fields/','FormController@fields');
 // Route::get('admin/surveys/{SurveyID}','FormController@edit');
+// Route::group(['prefix'=>config('app.prefix')],function(){
+
 Route::get('admin/global', 'administration@globe');
 Route::get('admin/redmin', 'administration@localredis');
 Route::get('admin/memcached', 'administration@localmem');
@@ -43,7 +29,16 @@ Route::post('admin/globcmd', 'administration@globcmd');
 
 
 
+  Route::group(['prefix' => 'raw','as'=>'rawdata'],function(){
 
+    			Route::get('/','RawController@index');
+		});
+
+   Route::group(['prefix' => 'node','as'=>'node'],function(){
+    			Route::get('start','NodeController@startnode');
+    			Route::get('stop','NodeController@stopnode');
+    			Route::get('restart','NodeController@restartnode');
+		});
 
 
 
@@ -66,15 +61,6 @@ Route::group(['as' => 'dashboard::'], function () {
     Route::group(['as'=>'comparison'],function(){
     			Route::post('compare','AnalyticsController@compareSurvey');
 				Route::get('comparison/{survey}/{lambda}/{chart}/{yr?}','AnalyticsController@comparison');	
-		});
-});
-
-
-Route::group(['prefix' => config('telegram.bot_token')],function(){
-		Route::post('webhook', function () {
-		    $updates = Telegram::getWebhookUpdates();
-		    Cache::put('aaaaaaaaaaaaaaaaaaaaaaa','c',60);
-		    return 'ok';
 		});
 });
 
@@ -130,14 +116,6 @@ Route::group(['prefix' => 'telegram'], function () {
 });
 
 
-Route::get('user', array('before' => 'old', function()
-{
-    return 'You are over 200 years old!';
-}));
-
-
-
-
 Route::controllers([
 	'auth' => 'Auth\AuthController', 
 	'password' => 'Auth\PasswordController',
@@ -171,5 +149,6 @@ Route::get('status/{status}/{AssID}','AssessmentController@status');
 Route::post('survey/session','SurveysController@session');
 Route::post('survey/save','SurveysController@saveajax');
 
+// });
 
 

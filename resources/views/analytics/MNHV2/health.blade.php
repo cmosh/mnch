@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Health Facility Management 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}{{config('app.prefix')}}/comparison/MNHV2/MNHV2_HMan/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_HMan/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   

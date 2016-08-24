@@ -1,10 +1,11 @@
 <?php namespace App\Models;
 
 use Moloquent;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class Field_set extends Moloquent {
+use SyncsWithFirebase;
 
-	//
+	protected $collection ="field_sets";
 
 	// each Field_set has many fields
     public function fields() {
@@ -20,4 +21,8 @@ class Field_set extends Moloquent {
         return $this->hasMany('App\Models\Block','field_setID','field_setID');
     }
 
+public function collection()
+        {
+             return $this->collection;
+        }
 }

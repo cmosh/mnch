@@ -151,6 +151,7 @@ return [
         Fingo\LaravelCacheFallback\CacheFallbackServiceProvider::class,
         Fingo\LaravelSessionFallback\SessionFallbackServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        J42\LaravelFirebase\LaravelFirebaseServiceProvider::class,
 		/*
 		 * Application Service Providers...
 		 */
@@ -216,8 +217,8 @@ return [
 		'SSH' 		=> Collective\Remote\RemoteFacade::class,
 		'Uuid' 		=> Webpatser\Uuid\Uuid::class,
 		'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
-		'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
-
+		'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+		'Firebase'  => J42\LaravelFirebase\LaravelFirebaseFacade::class
 	],
 
 ];

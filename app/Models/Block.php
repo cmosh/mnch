@@ -1,8 +1,13 @@
 <?php namespace App\Models;
 
 use Moloquent;
+use Mpociot\Firebase\SyncsWithFirebase;
 
 class Block extends Moloquent {
+
+use SyncsWithFirebase;
+
+protected $collection ="blocks";
 
 	// each Block has many block_rows
     public function block_rows() {
@@ -12,5 +17,10 @@ class Block extends Moloquent {
      public function section() {
         return $this->belongsTo('App\Models\Section','sectionID','sectionID');
     }
+
+    public function collection()
+        {
+             return $this->collection;
+        }
 
 }

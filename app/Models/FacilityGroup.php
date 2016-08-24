@@ -1,8 +1,9 @@
 <?php namespace App\Models;
 
 use Moloquent;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class FacilityGroup extends Moloquent {
+use SyncsWithFirebase;
 
 	protected $collection = 'FacilityGroups';
 
@@ -10,5 +11,8 @@ class FacilityGroup extends Moloquent {
     {
         return $this->hasMany('App\Models\Facilities','Type','FacilityType');
     }
-	
+	public function collection()
+        {
+             return $this->collection;
+        }
 }

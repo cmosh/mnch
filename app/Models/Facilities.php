@@ -3,7 +3,9 @@
 use Moloquent;
 use Cache;
 use Carbon\Carbon;
+use Mpociot\Firebase\SyncsWithFirebase;
 class Facilities extends Moloquent {
+use SyncsWithFirebase;
 
 	protected $collection = 'Facilities';
 
@@ -13,7 +15,11 @@ class Facilities extends Moloquent {
     {
         return $this->hasOne('App\Models\MNHSubSurvey','Facility_ID','FacilityCode');
     }
-
+    
+public function collection()
+        {
+             return $this->collection;
+        }
 
      public function scopeSubCounties($query,$params)
     {

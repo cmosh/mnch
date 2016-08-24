@@ -135,6 +135,17 @@ google.setOnLoadCallback(makeChart);
  }
   $('#County').change(makeChart);
   $('#Term').change(makeChart);
+  $('#vers').change(verschange);
+
+  function verschange() {
+
+    var ver = $('#vers').val();
+    var url = '{{config("app.prefix")}}/analytics/'+ ver
+
+    window.location.href = url;
+
+    
+  }
   
 function mapRequest (county) {
    document.getElementById("countyname").innerHTML = '<strong>'+county+'</strong>';
@@ -250,10 +261,10 @@ function drawSmallChart(graph,year,type) {
 
  @if(substr($survey,0,4)!='IMCI')
    if (allcheck==1){
-  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val());
+$('#s').html($('#County').val() + " Counties, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }else
 {
-   $('#s').html($('#County').val() + " County, "+ $('#Term').val());
+$('#s').html($('#County').val() + " County, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     
@@ -329,10 +340,10 @@ function drawChart() {
 
  @if(substr($survey,0,4)!='IMCI')
    if (allcheck==1){
-  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val());
+  $('#s').html($('#County').val() + " Counties, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }else
 {
-   $('#s').html($('#County').val() + " County, "+ $('#Term').val());
+   $('#s').html($('#County').val() + " County, "+ $('#Term').val() +"-"+ $("#vers option:selected").text());
 }
   $('#X').html('Data from '+TotalSubmitt+ ' facilities in '+$('#County').val());
     

@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class User extends Moloquent implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
+    use SyncsWithFirebase;
+
 
 	use Authenticatable, Authorizable, CanResetPassword;
 
@@ -34,6 +36,11 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function collection()
+        {
+             return $this->collection;
+        }
+        
 	public function scopeNonAdmins($query)
      {
 
@@ -70,6 +77,7 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
         $today = Carbon::today();       
         return $this->hasMany('App\Models\Assessments','UserId','id')
                     ->where('Status','Submitted')
+                    ->where('updated_at','<',$today)
                     ->where('updated_at', '>=',$today->subDay());
     }
 
@@ -77,6 +85,7 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
          $today = Carbon::today();
         return $this->hasMany('App\Models\Assessments','UserId','id')
                     ->where('Status','Submitted')
+                    ->where('updated_at','<',$today->subDay())
                     ->where('updated_at', '>=', $today->subDays(2));
     }
 

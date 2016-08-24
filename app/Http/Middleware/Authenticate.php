@@ -40,7 +40,8 @@ class Authenticate {
 			}
 			else
 			{
-				return redirect()->guest('auth/login');
+				$url = '/auth/login';
+				return redirect()->guest($url);
 			}
 		}
 		else{

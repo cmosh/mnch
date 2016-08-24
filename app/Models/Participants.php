@@ -4,8 +4,9 @@ use Moloquent;
 use Cache;
 use App\Helpers\Map;
 use Carbon\Carbon;
-
+use Mpociot\Firebase\SyncsWithFirebase;
 class Participants extends Moloquent {
+use SyncsWithFirebase;
 
 	protected $collection = 'Participants';
 
@@ -15,6 +16,11 @@ class Participants extends Moloquent {
         return $this->belongsTo('App\Models\Facilities','mfl_code','FacilityCode');
     }
 
+public function collection()
+        {
+             return $this->collection;
+        }
+        
    		 public function scopeView($query)
      {
        

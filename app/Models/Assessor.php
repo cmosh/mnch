@@ -1,8 +1,12 @@
 <?php namespace App\Models;
 
 use Moloquent;
+use Mpociot\Firebase\SyncsWithFirebase;
 
 class Assessor extends Moloquent {
+
+use SyncsWithFirebase;
+
 
 	protected $collection = 'assessors';
 	 public static function createOrUpdate($data, $keys) {
@@ -13,5 +17,8 @@ class Assessor extends Moloquent {
         return self::where($keys)->update($data);
     }
 }
-
+public function collection()
+        {
+             return $this->collection;
+        }
 }

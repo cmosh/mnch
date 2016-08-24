@@ -19,6 +19,17 @@ class Analysis_Helper {
       	return array('Functionality',$countF,$countB-$countF,0);
 	}
 
+	protected static function ortfunction_v1(){
+		global $surveys;
+	    $countB = count($surveys->lists('Data')->where('CHV1SEC5BLK2RW02COL02',"1"));
+
+      	$Data = $surveys->lists('Data')->where('CHV1SEC5BLK2RW02COL02',"1")
+										->where('CHV1SEC5BLK2RW04COL02',"1")
+										->where('CHV1SEC5BLK2RW05COL02',"1");
+      	$countF = count($Data);
+      	return array('Functionality',$countF,$countB-$countF,0);
+	}
+
 	protected  static function count_YN($cl){
 	global $surveys;
  
@@ -635,6 +646,94 @@ return($Array);
 }			
 
 
+protected static function staff_trained_v1(){
+global $surveys;
+		$Data = $surveys->lists('Data');
+
+ 		$Array [] = ['Staff Trained',
+ 					'Doctors',
+ 					'Nurses',
+ 					'R.C.O.s',
+ 					'Pharmaceutical Staff',
+ 					'Lab Staff'];
+
+		$Array []= ['IMCI (Before 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL04'),
+		$Data->sum('CHV1SEC1BLK1RW04COL04'),
+		$Data->sum('CHV1SEC1BLK1RW05COL04'),
+		$Data->sum('CHV1SEC1BLK1RW06COL04'),
+		$Data->sum('CHV1SEC1BLK1RW07COL04')
+		];
+
+		$Array []= ['IMCI (After 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL05'),
+		$Data->sum('CHV1SEC1BLK1RW04COL05'),
+		$Data->sum('CHV1SEC1BLK1RW05COL05'),
+		$Data->sum('CHV1SEC1BLK1RW06COL05'),
+		$Data->sum('CHV1SEC1BLK1RW07COL05')
+		];
+
+		$Array []=['ICCM (Before 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL06'),
+		$Data->sum('CHV1SEC1BLK1RW04COL06'),
+		$Data->sum('CHV1SEC1BLK1RW05COL06'),
+		$Data->sum('CHV1SEC1BLK1RW06COL06'),
+		$Data->sum('CHV1SEC1BLK1RW07COL06')];
+
+		$Array []=['ICCM (After 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL07'),
+		$Data->sum('CHV1SEC1BLK1RW04COL07'),
+		$Data->sum('CHV1SEC1BLK1RW05COL07'),
+		$Data->sum('CHV1SEC1BLK1RW06COL07'),
+		$Data->sum('CHV1SEC1BLK1RW07COL07')];
+
+		$Array []=['Enhanced Diarrhoea Management (Before 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL08'),
+		$Data->sum('CHV1SEC1BLK1RW04COL08'),
+		$Data->sum('CHV1SEC1BLK1RW05COL08'),
+		$Data->sum('CHV1SEC1BLK1RW06COL08'),
+		$Data->sum('CHV1SEC1BLK1RW07COL08')];
+
+		$Array []=['Enhanced Diarrhoea Management (After 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL09'),
+		$Data->sum('CHV1SEC1BLK1RW04COL09'),
+		$Data->sum('CHV1SEC1BLK1RW05COL09'),
+		$Data->sum('CHV1SEC1BLK1RW06COL09'),
+		$Data->sum('CHV1SEC1BLK1RW07COL09')];
+
+		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (Before 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL10'),
+		$Data->sum('CHV1SEC1BLK1RW04COL10'),
+		$Data->sum('CHV1SEC1BLK1RW05COL10'),
+		$Data->sum('CHV1SEC1BLK1RW06COL10'),
+		$Data->sum('CHV1SEC1BLK1RW07COL10')];
+
+		$Array []=['Diarrhoea and Pneumonia CMEs for U5s (After 2010)',
+		$Data->sum('CHV1SEC1BLK1RW03COL11'),
+		$Data->sum('CHV1SEC1BLK1RW04COL11'),
+		$Data->sum('CHV1SEC1BLK1RW05COL11'),
+		$Data->sum('CHV1SEC1BLK1RW06COL11'),
+		$Data->sum('CHV1SEC1BLK1RW07COL11')];
+
+		$Array []=['Staff Still Working in Child Health Unit',
+		$Data->sum('CHV1SEC1BLK1RW03COL12'),
+		$Data->sum('CHV1SEC1BLK1RW04COL12'),
+		$Data->sum('CHV1SEC1BLK1RW05COL12'),
+		$Data->sum('CHV1SEC1BLK1RW06COL12'),
+		$Data->sum('CHV1SEC1BLK1RW07COL12')];
+
+
+
+	return($Array);
+
+		
+	
+	
+
+}			
+
+
+
 protected static function staff_trained_MNH(){
 
 	$Array [] = array('No.of Staff Trained', 'Doctors', 'Nurses','R.C.0.s');
@@ -796,6 +895,134 @@ $DataN = $DataN->sum('Data');
 	
 	}
 
+
+	protected static function opdgen_v1(){
+		global $surveys;
+
+    $Data = $surveys->lists('Data')->lists('CHV1SEC1BLK2RW01COL02')->collapse()->toArray();
+	$x = array_count_values($Data);
+
+	$ones = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'1') !== false) {
+    $ones += $value;
+			}
+		
+	}
+
+
+
+	$twos = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'2') !== false) {
+    $twos += $value;
+			}
+		
+	}
+
+	
+
+	$threes = 0;
+	foreach ($x as $key => $value) {
+
+		if (strpos($key,'3') !== false) {
+    $threes += $value;
+			}
+		
+	}
+
+	
+
+	$others = 0;
+	foreach ($x as $key => $value) {
+
+		if ( (trim($key,'123,')) !== ''   )   {
+
+			$others+=$value;
+		}
+		
+	}
+
+	
+
+
+
+	$Array [] = array('General OPD',$ones);
+	$Array [] = array('Paediatric OPD',$twos);
+	$Array [] = array('MCH',$threes);
+	$Array [] = array('Other',$others);
+
+	return ($Array);
+
+
+
+
+	
+	}
+
+
+	protected static function commstrategy_v1(){
+		global $surveys;
+
+	$recset = $surveys->lists('Data');
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW02COL02');
+	$TCU = count($Data);
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW03COL02')->toArray();	
+		
+	$Data = array_count_values($Data);
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
+	 
+	$TCUnt =$count1 + $count2 + $count3 +$count4;
+	$TCUt = $TCU-$TCUnt;
+
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW10COL02');
+
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
+	 
+	$CHEWSnt =$count1 + $count2 + $count3 +$count4;
+	
+		$CHEWSt = $TCU-$CHEWSnt;
+	
+
+	$Data = $recset->lists('CHV1SEC9BLK1RW12COL02');
+
+	$Data = array_count_values($Data->toArray());
+
+	 if(isset($Data['0'])) $count1 = $Data['0']; else $count1 = 0; 
+	 if(isset($Data['00'])) $count2 = $Data['00']; else $count2 = 0; 
+	 if(isset($Data['000'])) $count3 = $Data['000']; else $count3 = 0; 
+	 if(isset($Data['0000'])) $count4 = $Data['0000']; else $count4 = 0; 
+	 
+	$CHVnt =$count1 + $count2 + $count3 +$count4;
+
+	$CHVt = $TCU-$CHVnt;
+
+		$Array [] = array ('Community Strategy','Trained (>0)','Not Trained (0)');
+		$Array [] = array ('Community Units',$TCUt,$TCUnt);
+		$Array [] = array ('CHEWS',$CHEWSt,$CHEWSnt);
+		$Array [] = array ('CHVs',$CHVt,$CHVnt);
+
+		return ( $Array);
+
+
+
+	}
+	
+
 	protected static function commstrategy(){
 		global $surveys;
 
@@ -889,11 +1116,38 @@ $DataN = $DataN->sum('Data');
 	
 	}
 
+protected static function ortloc_v1(){
+		global $surveys;
 
+		$recset = $surveys->lists('Data');
 
+	  $Data = $recset->lists('CHV1SEC5BLK2RW07COL02');
+	 
+	
+		
+		$arrayData = array_filter($Data->toArray());
+		 $all =count($arrayData);
+		$x = array_count_values($arrayData);
+		
+	if (!(isset($x["2"]))) {$x[2]=0;}
+	$MCH = $x["2"];
+	if (!(isset($x["3"]))) {$x[3]=0;}
+	$U5_Clinic = $x["3"];
+	if (!(isset($x["1"]))) {$x[1]=0;}
+	$OPD = $x["1"];
+	if (!(isset($x["4"]))) {$x[4]=0;}
+	$Ward = $x["4"];
+	$Other = $all - $MCH -$U5_Clinic - $OPD -$Ward;
 
+	$Array [] = array('MCH',$MCH);
+	$Array [] = array('U5 Clinic',$U5_Clinic);
+	$Array [] = array('OPD',$OPD);
+	$Array [] = array('Ward',$Ward);
+	$Array [] = array('Other',$Other);
 
-
+	return ($Array);
+	
+	}
 
 
 		protected static function dserviceconduct()
@@ -926,7 +1180,37 @@ $DataN = $DataN->sum('Data');
 				return $Array;
 		}
 
-		protected static function bedcapacity(){
+		protected static function dserviceconduct_v1()
+		{
+			global $surveys;
+			$recset = $surveys->lists('Data');
+			$Data = $recset->lists('MNHV1SEC1BLK1RW03COL02')->collapse()->toArray();	
+
+			$x = array_count_values(array_filter($Data));
+
+			$others = 0;
+			foreach ($x as $key => $value) {
+				if($key !== "1" && $key !== "2" && $key !== "3" && $key !== "4" && $key !== "5")
+					$others += $value;
+
+			}
+				isset($x["1"]) ?: $x["1"]=0;
+				isset($x["2"]) ?: $x["2"]=0;
+				isset($x["3"]) ?: $x["3"]=0;
+				isset($x["4"]) ?: $x["4"]=0;
+				isset($x["5"]) ?: $x["5"]=0;
+
+				$Array [] = array('Inadequate skill',$x["1"]);
+				$Array [] = array('Inadequate staff',$x["2"]);
+				$Array [] = array('Inadequate infrastructure',$x["3"]);
+				$Array [] = array('Inadequate Equipment',$x["4"]);
+				$Array [] = array('Inadequate Commodities and Suppliers',$x["5"]);
+				$Array [] = array('Others',$others);
+
+				return $Array;
+		}
+
+		protected static function bedcapacity($ver){
 			global $surveys;
 
 			$array [] = array('Bed Capacity','New Born','Maternal','Total');
@@ -953,10 +1237,10 @@ $DataN = $DataN->sum('Data');
 		 foreach ($Rec as $v) {
 
       			$type = $v[0]['Type'];
-      			$Data = collect($v)->lists('Data')->lists('MNHV2SEC1BLK2RW06COL02');      			
-      			$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW07COL02');
+      			$Data = collect($v)->lists('Data')->lists('MNH'.$ver.'SEC1BLK2RW06COL02');      			
+      			$Data = $v->lists('Data')->lists('MNH'.$ver.'SEC1BLK2RW07COL02');
       			$Maternity = $Data->sum();
-      			$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW08COL02');
+      			$Data = $v->lists('Data')->lists('MNH'.$ver.'SEC1BLK2RW08COL02');
       			$NewBorn = $Data->sum();
       			$Total = $NewBorn + $Maternity;
       			$array[]=array($type,$NewBorn,$Maternity,$Total);
@@ -964,7 +1248,9 @@ $DataN = $DataN->sum('Data');
       		return $array;
       	}
 
-	protected static function skillbirth(){
+	protected static function skillbirth($ver){
+
+		$q = 'MNH'.$ver.'SEC1BLK2RW03COL02';
 
 		global $surveys;
 
@@ -993,7 +1279,7 @@ $DataN = $DataN->sum('Data');
 		 $Rec = collect($recset)->groupby('Type');
 		 foreach ($Rec as $v) {
 		 	$type = $v[0]['Type'];
-		 	$Data = $v->lists('Data')->lists('MNHV2SEC1BLK2RW03COL02')->all();
+		 	$Data = $v->lists('Data')->lists($q)->all();
 		 	$Data = array_count_values($Data);
       		$keys = array_keys($Data);
       		$count0 = 0;
@@ -1021,6 +1307,58 @@ $DataN = $DataN->sum('Data');
 			}
 			return $array;
 		}
+
+		protected static function kangaroo2_v1($col,$headings){
+
+		global $surveys;
+
+		 $array [] = $headings;
+
+		 // $recset;
+
+		  foreach ($surveys as $survey) {
+
+		  	$recset [] =[
+		  	"Assessment_ID" => $survey['Assessment_ID'],
+		 	"Assessment_Term"=> $survey['Assessment_Term'],
+		 	"Data"=>$survey['Data'],
+		 	"Date"=> $survey['Date'],
+		 	"Facility_ID"=> $survey['Facility_ID'],
+		 	"PartID"=> $survey['PartID'],
+		 	"Status"=> $survey['Status'],
+		 	"Survey"=> $survey['Survey'],
+		 	"UserId"=> $survey['UserId'],
+		 	"_id"=> $survey['_id'],
+		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	];
+		  	
+		  }	 	 
+
+		 $Rec = collect($recset)->groupby('Type');
+      	
+		
+      		foreach ($Rec as $type => $assessment) {
+
+      		set_time_limit(30);
+
+		 $Data = $assessment->lists('Data')->where('MNHV1SEC2BLK6RW03COL02','1');
+		 $Data = $Data->groupby($col);
+		
+		 isset($Data["1"]) ?: $Data["1"] = [];
+		  isset($Data["2"]) ?: $Data["2"] = [];
+		   isset($Data["-51"]) ?: $Data["-51"] = [];
+	
+		 $array [] = array($type,count($Data["1"]),count($Data["2"]),count($Data["-51"]));
+
+	}
+
+
+	return $array;
+
+
+
+	}
+
 
 		protected static function kangaroo2($col,$headings){
 
@@ -1053,7 +1391,7 @@ $DataN = $DataN->sum('Data');
 		
       		foreach ($Rec as $type => $assessment) {
 
-      		
+      		set_time_limit(30);
 
 		 $Data = $assessment->lists('Data')->where('MNHV2SEC2BLK6RW03COL02','1');
 		 $Data = $Data->groupby($col);
@@ -1072,6 +1410,8 @@ $DataN = $DataN->sum('Data');
 
 
 	}
+
+
 
 	protected static function FacilityTypes2Stack($col,$headings){
 

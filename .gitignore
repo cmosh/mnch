@@ -1,10 +1,11 @@
 /vendor
 /node_modules
 .env
-.env.example
 *.ppk
 public/phpredmin/config.php
 public/cache/Config/Memcache.php
+!.gitignore
+!vendor/j42/laravel-firebase/src/j42/LaravelFirebase/Client.php
 *.db
 *.htaccess
 access.log
