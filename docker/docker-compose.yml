@@ -37,6 +37,40 @@ services:
             - mongo
             - redis
 
+### Nginx Server Container ##################################
+
+    nginx:
+        
+        build:
+            context: ./nginx
+            args:
+                - PHP_UPSTREAM=php-fpm
+        volumes_from:
+            - volumes_source
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+        ports:
+            - "${DOCKER_APP_HOST}:${NGINX_HTTP_PORT}:80"
+            - "${DOCKER_APP_HOST}:${NGINX_SSL_PORT}:443"
+        links:
+            - php-fpm
+            - node
+
+
+### Nodejs Container #########################################
+
+    node:
+        
+        build: ./node
+        ports:
+            - "${DOCKER_APP_HOST}:${DOCKER_NODE_PORT}:3000"
+        volumes_from:
+            - volumes_source
+        volumes:
+            - ../app/Rawdata/:/src
+        links:
+            - mongo
+
 ### MongoDB Container #######################################
 
     mongo:
@@ -61,27 +95,6 @@ services:
             - volumes_data
         ports:
             - "${DOCKER_APP_HOST}:${DOCKER_REDIS_PORT}:6379"
-
-### Caddy Server Container ##################################
-
-    caddy:
-        
-        ulimits:
-          nproc: 65535
-          nofile:
-            soft: 20000
-            hard: 40000       
-        build: ./caddy
-        volumes_from:
-            - volumes_source
-        ports:
-            - "${DOCKER_APP_HOST}:${CADDY_HTTP_PORT}:80"
-            - "${DOCKER_APP_HOST}:${CADDY_SSL_PORT}:443"
-            - "${DOCKER_APP_HOST}:${CADDY_CONFIG_PORT}:2015"
-        volumes:
-            - ./caddy/Caddyfile:/etc/Caddyfile
-        links:
-            - php-fpm
 
 
 ### Laravel Application Code Container ######################

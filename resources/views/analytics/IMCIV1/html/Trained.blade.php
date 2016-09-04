@@ -1,5 +1,4 @@
-
-           <div class="col-md-6">
+<div class="col-md-9 graph" id="1">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">HCWs Trained and Assessed
@@ -20,5 +19,4 @@
                   <i class="fa fa-refresh fa-spin"></i>
                 </div>
 </div>
-              </div><!-- /.box -->
-           
+           </div>

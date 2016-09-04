@@ -1,8 +1,8 @@
 module.exports= {
-	'database' : 'mongodb://localhost/lstrip',
- 	'port' : 3005,//port for server requests
+	'database' : 'mongodb://mongo/mnch',
+ 	'port' : 3000,//port for server requests
  	'mongoptions' : {
-	  'user': 'opon',
-	  'pass': 'childish95'
+	  'user': 'mnch',
+	  'pass': 'mnch'
 	} 
 };
