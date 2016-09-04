@@ -60,15 +60,7 @@ return [
 		
 	],
 
-	'firebase' => array(
-    'host'      => 'https://torchtest-dad3a.firebaseio.com/',
-    'token'     => 'iDjWXSuZk95zDVdIdR1SNrg8t3D6da0dQSi8NxTC',
-    'timeout'   => 10,
-    'sync'      => false,           // OPTIONAL: auto-sync all Eloquent models with Firebase?
-	),
-
-
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Migration Repository Table

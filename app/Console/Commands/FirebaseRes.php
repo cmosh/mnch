@@ -68,17 +68,18 @@ class FirebaseRes extends Command
             $collection = $model->collection();
             $this->info("Restoring $collection");
             $temp = Firebase::get($collection);
-
+              $this->info("$collection fetched from firebase.");
             $data = array_values(json_decode($temp,true));       
-
+              $this->info("$collection decoded.");
              $array = array_map(function($array){
                        $array["_id"]= new ObjectID($array['_id']);
                        return $array;
                    },$data);
+               $this->info("ObjectID's generated.");
 
             // print_r($data);
             $model->insert($array);
-            $this->info("Restore Complete");
+            $this->info("Restore Complete.");
         }
     }
     

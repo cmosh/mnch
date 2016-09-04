@@ -1,5 +1,5 @@
+<div class="col-md-9 graph" id="2">
 
-            <div class="col-md-6">
                <div class="box box-danger">
                 <div class="box-header with-border">
                   <h3 class="box-title">Change in Working Location
@@ -21,4 +21,4 @@
                 </div>
 
               </div><!-- /.box -->
-            </div>  
+</div>

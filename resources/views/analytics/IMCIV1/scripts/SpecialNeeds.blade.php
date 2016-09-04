@@ -17,7 +17,7 @@ var SpecialNeedsdata = new google.visualization.DataTable();
           function resizeSpecialNeeds () {
       
        
-           SpecialNeeds.draw(ort_funcdata, SpecialNeedsoptions);
+           SpecialNeeds.draw(SpecialNeedsdata, SpecialNeedsoptions);
 
     }
 

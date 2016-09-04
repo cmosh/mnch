@@ -13,7 +13,14 @@
 @section('content')
 
 
+<style type="text/css">
 
+.graph {
+   display: none;
+}
+
+
+</style>
           
            
         
@@ -22,17 +29,12 @@
   {!! Form::close() !!}
    </div>
    <div class="row">
-   @if(substr($survey,0,4)=='IMCI')
-   @include('analytics/IMCIcounty')
-   @else
-   @include('analytics/county')
    
-   @endif
+   @include('analytics/IMCIcounty') 
 
 
-  @include('analytics/'.$survey.'/graphs')
-
-            
+           
+  @include('analytics/'.$survey.'/graphs')           
 
             
 
@@ -48,6 +50,40 @@
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
  <script type="text/javascript">
 
+$(document).ready(function(){
+  $('.graphobs').fadeOut();
+     switchg();
+   $("#Data1").jqxListBox({width: '100%', height: '370' });
+       $("#Data1").jqxListBox('loadFromSelect', 'Data');
+
+       $("#Data1").bind('select', function (event) {
+        if (event.args) {
+             var args = event.args;
+             // select the item in the 'select' tag.
+             var index = args.item.index;
+             console.log(args.item.value);
+             $('#Data')
+    .val(args.item.value)
+    .trigger('change');
+           
+        }
+ });
+}
+
+  );
+
+ $('#Data').change(switchg);
+
+ function switchg() {
+    var val = $('#Data').val();
+    $('.graph').fadeOut();
+   $('#'+val).show();
+   window.dispatchEvent(new Event('resize'));
+    $('#'+val).hide();
+   $('#'+val).delay(1000).fadeIn();
+
+
+ }
 
 
   window.inside = $('#thesvg').contents();

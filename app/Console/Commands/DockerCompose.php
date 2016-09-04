@@ -38,8 +38,8 @@ class DockerCompose extends Command
      */
     public function handle()
     {
-        $this->info("Spinning up docker containers with caddy, mongodb and redis.");
+        $this->info("Spinning up docker containers with nginx, mongodb and redis.");
         $this->option('d') ? $daemon='-d':$daemon='';
-        system("cd docker && docker-compose up ".$daemon." caddy redis mongo");
+        system("cd docker && docker-compose up ".$daemon." nginx redis mongo node");
     }
 }
