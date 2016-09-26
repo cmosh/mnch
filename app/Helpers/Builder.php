@@ -842,8 +842,11 @@ class Builder {
                                     <div class="box box-'.$color.'"  id="' . $BlockIDName . '" automaticallyVisibleIfIDChecked="' . $Single_BlockCollection->dependencyID . '">
                                     <div class="box-header">
                                         <h3 class="box-title">' . $Single_BlockCollection->name . '</h3>
+                                        Sort: <a href="#" class="link-sort-table asc" tb="'.$BlockIDName.'table" >A-Z</a>
                                     </div>
-                                    <table class="table">';
+                                    <table class="table" id="'.$BlockIDName.'table">                                  
+                                    
+                                    ';
                 
                 //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
                 
