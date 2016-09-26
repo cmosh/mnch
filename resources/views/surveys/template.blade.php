@@ -368,7 +368,7 @@ $("#demo-form").submit(function(e) {
 		});
 		e.preventDefault();
 	});
-});
+
 
  
 
