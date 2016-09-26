@@ -353,7 +353,7 @@ $("#demo-form").submit(function(e) {
 		var $sort = this;
         var tableid = '#'+ $(this).attr('tb');
         var $table = $(tableid);
-		var $rows = $('tbody > tr',$table);
+		var $rows = $('tbody > tr .normalrow',$table);
 		$rows.sort(function(a, b){
 			var keyA = $('td:eq(0)',a).text();
 			var keyB = $('td:eq(0)',b).text();

@@ -858,7 +858,7 @@ class Builder {
                         $HtmlLines.= '<tr style="font-weight:bold" automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'" ';
                     } 
                     else {
-                        $HtmlLines.= '<tr automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'"';
+                        $HtmlLines.= '<tr class="normalrow" automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'"';
                     }
                     $BlockrowIDName = $Single_BlockRowCollection->block_rowID;
                     
