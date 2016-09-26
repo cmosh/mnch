@@ -358,9 +358,9 @@ $("#demo-form").submit(function(e) {
 			var keyA = $('td:eq(0)',a).text();
 			var keyB = $('td:eq(0)',b).text();
 			if($($sort).hasClass('asc')){
-				return (keyA > keyB) ? 1 : 0;
+				return (keyA > keyB) ? 1 : -1;
 			} else {
-				return (keyA < keyB) ? 1 : 0;
+				return (keyA < keyB) ? 1 : -1;
 			}
 		});
 		$.each($rows, function(index, row){
