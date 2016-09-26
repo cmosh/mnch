@@ -842,7 +842,7 @@ class Builder {
                                     <div class="box box-'.$color.'"  id="' . $BlockIDName . '" automaticallyVisibleIfIDChecked="' . $Single_BlockCollection->dependencyID . '">
                                     <div class="box-header">
                                         <h3 class="box-title">' . $Single_BlockCollection->name . '</h3>
-                                        <small>Sort: <a class="link-sort-table asc" tb="'.$BlockIDName.'table" >A-Z</a></small>
+                                        <small>Sort: <a class="link-sort-table asc"  style="cursor: pointer;" tb="'.$BlockIDName.'table" >A-Z</a></small>
                                     </div>
                                     <table class="table" id="'.$BlockIDName.'table">                                  
                                     
