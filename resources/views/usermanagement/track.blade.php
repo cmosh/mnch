@@ -26,8 +26,9 @@
       <thead>
           <tr>
             <th>Name</th>
-            <th>Day Before Yestaerday</th>
-            <th>Completed Yesterday</th>
+            <th>Day Before Day before Yesterday ({{ $dates['three_days_ago_string']}})</th>
+            <th>Day Before Yesterday ({{ $dates['two_days_ago_string']}})</th>
+            <th>Completed Yesterday ({{ $dates['yesterday_string']}})</th>
             <th >Completed Today</th>
             <th>Completed in Total</th>            
           </tr>
@@ -36,6 +37,7 @@
         @foreach($users as $user)          
           <tr>
             <td > {{ $user->name}}</td>
+            <td>{{count($user->assessmentsP)}}</td>            
             <td>{{count($user->assessmentsJ)}}</td>            
             <td>{{count($user->assessmentsY)}}</td>     
             <td>{{count($user->assessmentsT)}}</td>
@@ -46,8 +48,9 @@
         <tfoot>
         <tr>
            <th>Name</th>
-            <th>Day Before Yestaerday</th>
-            <th>Completed Yesterday</th>
+            <th>Day Before Day before Yesterday ({{ $dates['three_days_ago_string']}})</th>
+            <th>Day Before Yesterday ({{ $dates['two_days_ago_string']}})</th>
+            <th>Completed Yesterday ({{ $dates['yesterday_string']}})</th>
             <th >Completed Today</th>
             <th>Completed in General</th>     
         </tr>
