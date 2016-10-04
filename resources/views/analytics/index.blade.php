@@ -607,6 +607,10 @@ var x = 'Selected ' + cts + ' county';
 
 $(function(){
   $("select#County").change(function(event){
+
+   var html = '<div class="box box-warning"><div class="box-header with-border"><h3 class="box-title">Please Wait</h3></div><div class="box-body"></div><div class="wait overlay"><i class="fa fa-refresh fa-spin"></i></div></div>'
+  $('#chartmaker').html(html);
+
   event.preventDefault();
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(),survey:'{{$survey}}', ajax: 'true'}, function(j){
       var options = '';
