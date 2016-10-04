@@ -66,7 +66,7 @@
 </div>
 
 
-               <div class="box box-danger" >
+               <div  class="box box-danger" hidden>
                 <div class="box-header with-border">
                   <h3 class="box-title">Map</h3>
                 <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button>  
