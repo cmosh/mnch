@@ -133,7 +133,7 @@ google.setOnLoadCallback(makeChart);
 
 
  }
-  $('#County').change(makeChart);
+  // $('#County').change(makeChart);
   $('#Term').change(makeChart);
   $('#vers').change(verschange);
 
@@ -606,9 +606,8 @@ var x = 'Selected ' + cts + ' county';
 
 
 $(function(){
-  $("select#County").change(function(){
-
-
+  $("select#County").change(function(event){
+  event.preventDefault();
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(),survey:'{{$survey}}', ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
@@ -617,8 +616,9 @@ $(function(){
       $("select#Term").html(options);
       var $termchange = $("#Term").select2();
       // $termchange.val(j[0]).trigger("change"); 
-
+      makeChart();
     })
+    
   })
 });
 
