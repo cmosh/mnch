@@ -51,11 +51,29 @@ class UserManagement extends Controller {
 							->with('assessmentsT')
 							->with('assessmentsY')
 							->with('assessmentsJ')
+							->with('assessmentsP')
 							->get();		
-			
+		
+		$today = Carbon::today();
+        $yesterday_morning = Carbon::today()->subDay();   
+        $two_days_ago_morning = Carbon::today()->subDay(2);          
+        $three_days_ago_morning = Carbon::today()->subDay(3);   
+
+        $today_string = $today->formatLocalized('%A');        
+        $yesterday_string = $yesterday_morning->formatLocalized('%A');        
+        $two_days_ago_string = $two_days_ago_morning->formatLocalized('%A');        
+        $three_days_ago_string = $three_days_ago_morning->formatLocalized('%A');    
+
+        $dates = array();    
+        $dates['today_string']=$today_string;
+        $dates['yesterday_string']=$yesterday_string;
+        $dates['two_days_ago_string']=$two_days_ago_string;
+        $dates['three_days_ago_string']=$three_days_ago_string;
+        
 		$this->role->__invoke(3);
 		return view('usermanagement.track')->with('users',$users)
 										  ->with('location','tracker')
+										  ->with('dates',$dates)
 										  ->with('title','User Management');
 	}
 
