@@ -57,7 +57,7 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
 
      public function scopeTrack($query)
      {
-        $MarchDate = Carbon::createFromDate(2016, 3, 3, 'America/Toronto');
+        $MarchDate = Carbon::createFromDate(2016, 3, 3, 'Africa/Nairobi');
         return $query->where('status',1)->where('role','<',2)->where('created_at','>=',$MarchDate);
                      
      }
@@ -68,25 +68,39 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
     }
 
     public function assessmentsT(){
+        $today = Carbon::today()->startOfDay();
+        $evening = Carbon::today()->endOfDay();        
     	return $this->hasMany('App\Models\Assessments','UserId','id')
     				->where('Status','Submitted')
-    				->where('updated_at', '>=', Carbon::today());
+                    ->where('updated_at', '>=', $today)
+    				->where('updated_at', '<', $evening);
     }
 
-     public function assessmentsY(){
-        $today = Carbon::today();       
+     public function assessmentsY(){        
+        $yesterday_morning = Carbon::today()->subDay()->startOfDay();          
+        $yesterday_evening = Carbon::today()->subDay()->endOfDay();          
         return $this->hasMany('App\Models\Assessments','UserId','id')
                     ->where('Status','Submitted')
-                    ->where('updated_at','<',$today)
-                    ->where('updated_at', '>=',$today->subDay());
+                    ->where('updated_at','<',$yesterday_evening)
+                    ->where('updated_at', '>=',$yesterday_morning);
     }
 
-     public function assessmentsJ(){
-         $today = Carbon::today();
+    public function assessmentsJ(){
+        $yesterday_morning = Carbon::today()->subDay();          
+        $two_days_ago_morning = Carbon::today()->subDay(2);   
         return $this->hasMany('App\Models\Assessments','UserId','id')
                     ->where('Status','Submitted')
-                    ->where('updated_at','<',$today->subDay())
-                    ->where('updated_at', '>=', $today->subDays(2));
+                    ->where('updated_at','<',$yesterday_morning)
+                    ->where('updated_at', '>=', $two_days_ago_morning);
+    }
+
+    public function assessmentsP(){
+        $two_days_ago_morning = Carbon::today()->subDay(2);          
+        $three_days_ago_morning = Carbon::today()->subDay(3);   
+        return $this->hasMany('App\Models\Assessments','UserId','id')
+                    ->where('Status','Submitted')
+                    ->where('updated_at','<',$two_days_ago_morning)
+                    ->where('updated_at', '>=', $three_days_ago_morning);
     }
 
 
