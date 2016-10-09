@@ -66,7 +66,8 @@ class Analysis_Data {
  		{
  			return [
  				"Count"=>Assessments::Submitted($data['survey'])->where('Assessment_Term',$data['term'])->count(),
- 				"Counties"=>County::AllSubmittedT($data['survey'],$data['term'])->count()
+ 				"Counties"=>County::AllSubmittedT($data['survey'],$data['term'])->count(),
+ 				"CountyNames"=>County::AllSubmittedT($data['survey'],$data['term'])
  			];
  		}
 
@@ -75,7 +76,7 @@ class Analysis_Data {
  			if (substr($data['survey'],0,4)=='IMCI')
  				{
  					return $this->imciFilter($data);
- 				}
+ 				
  			else
  				{
  					switch ($data['county']) {
