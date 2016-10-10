@@ -95,9 +95,6 @@ $(document).ready(function(){
     window.inside = $('#thesvg').contents();
         $(".select2").select2();
 
-          @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#6666ff');   
-        @endforeach
          
       });
 
@@ -313,8 +310,12 @@ function drawChart() {
        data: data,
            success: function(data){
     var Odata = JSON.parse(data);
+    var counties = Odata.Numbers.CountyName;
     var jsonData = Odata.Data;
 
+    counties.forEach(changecolor);
+
+    
       var county = $('#County').val();
     if(county == 'All') { var allcheck= 1; county = 'Samburu';}
    x = window.mapdata;
@@ -358,6 +359,16 @@ function drawChart() {
    @endif
 }
 });}
+
+
+   function changecolor(element, index, array) {
+
+
+var trans1 = element.replace("'", "");
+var trans2 = trans1.toLowerCase();
+
+      window.inside.find("#"+trans2).css('fill','#6666ff');   
+   }
 
    function  renderchart(dataobject,dataindex){
     
