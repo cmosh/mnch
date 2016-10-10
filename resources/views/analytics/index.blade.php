@@ -311,29 +311,26 @@ function drawChart() {
            success: function(data){
     var Odata = JSON.parse(data);
     var counties = Odata.Numbers.CountyName;
-    console.log(counties);
     var jsonData = Odata.Data;
-     window.inside.find(".county").css('fill','white');
+    var county = $('#County').val();
+    window.inside.find(".county").css('fill','white');
 
-      Object.keys(counties).forEach(function(key,index) {
-       changecolor(counties[key]); 
-});
-
-
-   
-
-    
-      var county = $('#County').val();
-    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
-   x = window.mapdata;
-    // alert(jsonData);
-    // var x  = typeof(jsonData);
-    // alert (x);
+    if(county == 'All') 
+      { 
+        var allcheck= 1; county = 'Samburu';
+        Object.keys(counties).forEach(function(key,index) 
+          {
+            changecolor(counties[key]);
+          });
+      }
+      else{
+     changecolor(county);
+      }
+    x = window.mapdata;    
     Object.keys(jsonData).forEach(function(key,index) {
-      // alert(jsonData[key]);
+      
       renderchart(jsonData[key],key);
-    // key: the name of the object key
-    // index: the ordinal position of the key within the object 
+    
 });
         $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
     $( ".wait" ).removeClass("overlay");
@@ -366,7 +363,7 @@ function drawChart() {
    @endif
 }
 });}
-   
+
 
    function changecolor(element) {
 
