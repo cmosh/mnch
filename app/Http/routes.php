@@ -73,6 +73,7 @@ Route::group(['prefix' => 'usermanagement'], function () {
 		Route::get('mail','UserManagement@mail');		
 		Route::get('monitor','UserManagement@review');
 		Route::get('track','UserManagement@track');
+		Route::get('gt','UserManagement@gt');
 		Route::get('viewusers','UserManagement@index');
 		Route::get('addusers','UserManagement@create');
 		Route::get('example','UserManagement@example');	
