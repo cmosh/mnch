@@ -315,10 +315,12 @@ function drawChart() {
     var jsonData = Odata.Data;
 
 
-    for (var i = 0; i < counties.length; i++) {
-    changecolor(counties[i]);
-    }
-    // counties.forEach(changecolor);
+      Object.keys(counties).forEach(function(key,index) {
+       changecolor(counties[key]); 
+});
+
+
+   
 
     
       var county = $('#County').val();
