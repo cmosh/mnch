@@ -311,6 +311,7 @@ function drawChart() {
            success: function(data){
     var Odata = JSON.parse(data);
     var counties = Odata.Numbers.CountyName;
+    console.log(counties);
     var jsonData = Odata.Data;
 
 
