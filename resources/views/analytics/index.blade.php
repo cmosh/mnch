@@ -373,7 +373,7 @@ function drawChart() {
     console.log(element);
 var trans1 = element.replace("'", "");
 var trans2 = trans1.toLowerCase();
-
+      window.inside.find(".county").css('fill','white');
       window.inside.find("#"+trans2).css('fill','#6666ff');   
    }
 
