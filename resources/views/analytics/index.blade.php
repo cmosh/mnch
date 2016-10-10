@@ -367,7 +367,7 @@ function drawChart() {
 
    function changecolor(element) {
 
-
+    console.log(element);
 var trans1 = element.replace("'", "");
 var trans2 = trans1.toLowerCase();
 
