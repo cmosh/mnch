@@ -313,7 +313,7 @@ function drawChart() {
     var counties = Odata.Numbers.CountyName;
     console.log(counties);
     var jsonData = Odata.Data;
-
+     window.inside.find(".county").css('fill','white');
 
       Object.keys(counties).forEach(function(key,index) {
        changecolor(counties[key]); 
@@ -366,14 +366,14 @@ function drawChart() {
    @endif
 }
 });}
-
+   
 
    function changecolor(element) {
 
     console.log(element);
 var trans1 = element.replace("'", "");
 var trans2 = trans1.toLowerCase();
-      window.inside.find(".county").css('fill','white');
+     
       window.inside.find("#"+trans2).css('fill','#6666ff');   
    }
 
