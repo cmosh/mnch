@@ -66,8 +66,8 @@ class Analysis_Data {
  		{
  			return [
  				"Count"=>Assessments::Submitted($data['survey'])->where('Assessment_Term',$data['term'])->count(),
- 				"Counties"=>County::AllSubmittedT($data['survey'],$data['term'])->count(),
- 				"CountyNames"=>County::AllSubmittedT($data['survey'],$data['term'])
+ 				"Counties"=>County::AllSubmittedT($data['survey'],$data['term'])->count()
+ 				// "CountyNames"=>County::AllSubmittedT($data['survey'],$data['term'])
  			];
  		}
 
