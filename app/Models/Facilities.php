@@ -109,6 +109,22 @@ public function collection()
 
     }
 
+    public static function NewSubmittedAssessments($Term,$County=false){
+
+      $Assessments = $County ? self::where('County',$County)->select('FacilityCode','County') : 
+                             self::select('FacilityCode','County') ;
+
+       return $Assessments->with(['assessments'=>function($query) use ($Term){
+                                  $query->where('Assessment_Term',$Term);
+                            }])
+
+                    ->get()
+                    ->lists('assessments')->flatten();
+
+    }
+
+
+
     public static function SubmittedAssessmentsList($Term,$Survey,$County=false){
 
       $Assessments = $County ? self::where('County',$County)->select('FacilityCode','FacilityName','County') : 

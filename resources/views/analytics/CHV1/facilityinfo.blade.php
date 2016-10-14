@@ -1,6 +1,6 @@
   <select style="width:100%" multiple name="graphs" id="graphs" hidden>
-  <option selected value="CHV2_ownership">CHV2_ownership</option>
-  <option selected value="CHV2_types">CHV2_types</option>  
+  <option selected value="CHV1_ownership">CHV1_ownership</option>
+  <option selected value="CHV1_types">CHV1_types</option>  
 </select>
 
 <select style="width:100%"  name="theyears" id="theyears" hidden>
@@ -31,7 +31,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Facility Ownership
                    <small class="cmpr" id="box-toolspull-right">
-                    <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_ownership/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_ownership/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                     </h3>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="box-body">
 
-              <div id="CHV2_ownership"></div>     
+              <div id="CHV1_ownership"></div>     
                 </div>
                   <div class="wait overlay">
                   <i class="fa fa-refresh fa-spin"></i>
@@ -53,7 +53,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Facility Types
                   <small class="cmpr" id="box-toolspull-right">
-                     <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                   </h3>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="box-body">
 
-                <div id="CHV2_types"></div>  
+                <div id="CHV1_types"></div>  
 
                 </div><!-- /.box-body -->
                   <div class="wait overlay">

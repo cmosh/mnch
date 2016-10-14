@@ -537,6 +537,22 @@ class Analysis_Constructor extends Analysis_Helper {
 		});
 	};
 
+	$this->CHV1_ownership= function($county){ global $term;
+	  //ownership_16
+		return $CHV1_ownership = Cache::remember('CHV1_ownership'.$county.$term,config('cache.timeout'),function() {
+
+			return self::ownership();
+		});
+
+	};
+		$this->CHV1_types= function($county){ global $term;
+	//types_17
+		return $CHV1_types = Cache::remember('CHV1_types'.$county.$term,config('cache.timeout'),function() {
+
+			return self::types();
+		});
+	};
+
 	$this->CHV2_staff_trained= function($county){ 
 	 global $term;
 	 return Cache::remember('CHV2_staff_trained'.$county.$term,config('cache.timeout'),function(){

@@ -25,7 +25,7 @@ class Analysis_Scaffold {
         });
  			
  			$SubmittedCHCount =  $data->count();
- 			$SubmittedCHCounties = County::AllSubmittedT('CHV2',$terms[0]);     
+ 			$SubmittedCHCounties = County::AllSubmitted('CHV2');     
       $links = ['facilityinfo'=>'Facility information',
                 'staff'=>'Staff training',
                 'health'=>'Health Services',
@@ -71,7 +71,7 @@ class Analysis_Scaffold {
       //   });
       
       $SubmittedCHCount =  $data->count();
-      $SubmittedCHCounties = County::AllSubmittedT('CHV1',$terms[0]);     
+      $SubmittedCHCounties = County::AllSubmitted('CHV1');     
       $links = ['facilityinfo'=>'Facility information',
                 'staff'=>'Staff training',
                 'health'=>'Health Services',
@@ -115,7 +115,7 @@ class Analysis_Scaffold {
  		{
  			 $terms = self::getterms('MNHV2');
       		 $SubmittedMNHCount =  Assessments::Submitted('MNHV2')->where('Assessment_Term',$terms[0])->count();  
-             $SubmittedMNHCounties = County::AllSubmittedT('MNHV2',$terms[0]);
+             $SubmittedMNHCounties = County::AllSubmitted('MNHV2');
         	 $links = ['facilityinfo'=>'Facility information',
                 'pdelivery'=>'Provision of Delivery Services',
                 'sdelivery'=>'Delivery Services',
@@ -157,7 +157,7 @@ class Analysis_Scaffold {
     {
        $terms = self::getterms('MNHV1');
            $SubmittedMNHCount =  Assessments::Submitted('MNHV1')->where('Assessment_Term',$terms[0])->count();  
-             $SubmittedMNHCounties = County::AllSubmittedT('MNHV1',$terms[0]);
+             $SubmittedMNHCounties = County::AllSubmitted('MNHV1');
            $links = ['facilityinfo'=>'Facility information',
                 'pdelivery'=>'Provision of Delivery Services',
                 'sdelivery'=>'Delivery Services',

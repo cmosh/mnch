@@ -95,9 +95,6 @@ $(document).ready(function(){
     window.inside = $('#thesvg').contents();
         $(".select2").select2();
 
-          @foreach($SubmittedCounties as $SubmittedCounty)
-        window.inside.find("#{{str_replace('\'','',str_replace(' ','-',strtolower($SubmittedCounty)))}}").css('fill','#6666ff');   
-        @endforeach
          
       });
 
@@ -133,7 +130,7 @@ google.setOnLoadCallback(makeChart);
 
 
  }
-  $('#County').change(makeChart);
+  // $('#County').change(makeChart);
   $('#Term').change(makeChart);
   $('#vers').change(verschange);
 
@@ -313,19 +310,27 @@ function drawChart() {
        data: data,
            success: function(data){
     var Odata = JSON.parse(data);
+    var counties = Odata.Numbers.CountyName;
     var jsonData = Odata.Data;
+    var county = $('#County').val();
+    window.inside.find(".county").css('fill','white');
 
-      var county = $('#County').val();
-    if(county == 'All') { var allcheck= 1; county = 'Samburu';}
-   x = window.mapdata;
-    // alert(jsonData);
-    // var x  = typeof(jsonData);
-    // alert (x);
+    if(county == 'All') 
+      { 
+        var allcheck= 1; county = 'Samburu';
+        Object.keys(counties).forEach(function(key,index) 
+          {
+            changecolor(counties[key]);
+          });
+      }
+      else{
+     changecolor(county);
+      }
+    x = window.mapdata;    
     Object.keys(jsonData).forEach(function(key,index) {
-      // alert(jsonData[key]);
+      
       renderchart(jsonData[key],key);
-    // key: the name of the object key
-    // index: the ordinal position of the key within the object 
+    
 });
         $( ".wait" ).children().removeClass("fa fa-refresh fa-spin");
     $( ".wait" ).removeClass("overlay");
@@ -358,6 +363,16 @@ function drawChart() {
    @endif
 }
 });}
+
+
+   function changecolor(element) {
+
+    console.log(element);
+var trans1 = element.replace("'", "");
+var trans2 = trans1.toLowerCase();
+     
+      window.inside.find("#"+trans2).css('fill','#6666ff');   
+   }
 
    function  renderchart(dataobject,dataindex){
     
@@ -606,9 +621,12 @@ var x = 'Selected ' + cts + ' county';
 
 
 $(function(){
-  $("select#County").change(function(){
+  $("select#County").change(function(event){
 
+   var html = '<div class="box box-warning"><div class="box-header with-border"><h3 class="box-title">Please Wait</h3></div><div class="box-body"></div><div class="wait overlay"><i class="fa fa-refresh fa-spin"></i></div></div>'
+  $('#chartmaker').html(html);
 
+  event.preventDefault();
     $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(),survey:'{{$survey}}', ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
@@ -617,8 +635,9 @@ $(function(){
       $("select#Term").html(options);
       var $termchange = $("#Term").select2();
       // $termchange.val(j[0]).trigger("change"); 
-
+      makeChart();
     })
+    
   })
 });
 

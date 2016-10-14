@@ -67,6 +67,12 @@ class User extends Moloquent implements AuthenticatableContract, AuthorizableCon
         			->where('Status','Submitted');
     }
 
+    public function gt_kajiado() {
+        return $this->hasMany('App\Models\Assessments','UserId','id')
+                    ->where('Status','Submitted')
+                    ->where('Assessment_Term','Endterm');        
+    }
+
     public function assessmentsT(){
         $today = Carbon::today()->startOfDay();
         $evening = Carbon::today()->endOfDay();        

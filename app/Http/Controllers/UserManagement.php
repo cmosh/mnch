@@ -12,6 +12,7 @@ use App\Helpers\County;
 use App\Http\Requests;
 use App\Models\Survey;
 use App\Models\User;
+use App\Models\Facilities;
 use App\Helpers\Map;
 use Carbon\Carbon;
 use Request As Rq;
@@ -21,6 +22,7 @@ use Redirect;
 use Session;
 use Input;
 use Hash;
+use DB;
 use Mail;
 
 class UserManagement extends Controller {
@@ -70,6 +72,41 @@ class UserManagement extends Controller {
         $dates['two_days_ago_string']=$two_days_ago_string;
         $dates['three_days_ago_string']=$three_days_ago_string;
         
+		$this->role->__invoke(3);
+		return view('usermanagement.track')->with('users',$users)
+										  ->with('location','tracker')
+										  ->with('dates',$dates)
+										  ->with('title','User Management');
+	}
+
+	public function gt()
+	{	
+		$county_list  = array('Kajiado'=>'Baseline','Kakamega'=>'Baseline');
+		foreach ($county_list as $key => $value) {
+			$county = $key;
+			$term = $value;			
+			$facilities = Facilities::NewSubmittedAssessments('Endterm',$county)->toArray();
+			foreach ($facilities as $facility)
+			{			
+			    $assessment_id = $facility['Assessment_ID'];
+			    DB::table('assessments')->where('Assessment_ID', $assessment_id)->update(['Assessment_Term' => $term]);
+			      echo "$assessment_id Updated<br/>";
+			}
+		}
+		die;
+		$facilities = Facilities::NewSubmittedAssessments('Endterm','Kajiado')->toArray();
+
+		// $facilities = Facilities::NewSubmittedAssessments('Endterm')->toArray();
+   		
+		
+		foreach ($facilities as $facility)
+		{			
+		    $assessment_id = $facility['Assessment_ID'];
+		    DB::table('assessments')->where('Assessment_ID', $assessment_id)->update(['Assessment_Term' => 'Baseline']);
+		      echo "$assessment_id Updated<br/>";
+		}
+		die;
+		echo "<pre>";print_r($users);die;
 		$this->role->__invoke(3);
 		return view('usermanagement.track')->with('users',$users)
 										  ->with('location','tracker')

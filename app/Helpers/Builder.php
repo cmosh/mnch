@@ -842,8 +842,11 @@ class Builder {
                                     <div class="box box-'.$color.'"  id="' . $BlockIDName . '" automaticallyVisibleIfIDChecked="' . $Single_BlockCollection->dependencyID . '">
                                     <div class="box-header">
                                         <h3 class="box-title">' . $Single_BlockCollection->name . '</h3>
+                                        <small>Sort: <a class="link-sort-table asc"  style="cursor: pointer;" tb="'.$BlockIDName.'table" >A-Z</a></small>
                                     </div>
-                                    <table class="table">';
+                                    <table class="table" id="'.$BlockIDName.'table">                                  
+                                    
+                                    ';
                 
                 //$Array_of_BlockRowCollections = Block_row::where('blockID', '=', $Single_BlockCollection->blockID)->get();
                 
@@ -855,7 +858,7 @@ class Builder {
                         $HtmlLines.= '<tr style="font-weight:bold" automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'" ';
                     } 
                     else {
-                        $HtmlLines.= '<tr automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'"';
+                        $HtmlLines.= '<tr class="normalrow" automaticallyVisibleIfIDChecked="'.$Single_BlockRowCollection->dependencyID.'"';
                     }
                     $BlockrowIDName = $Single_BlockRowCollection->block_rowID;
                     
