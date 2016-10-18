@@ -4,7 +4,7 @@
  <!--<h1  align="middle">-->
          
               {{$surveyname}} Survey
-              <small>(Analysis Results)</small>
+              <small>(Analysis Results - Data from {{$SubmittedCount}} Healthworkers)</small>
    
            
             <!--</h1>-->

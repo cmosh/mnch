@@ -590,7 +590,7 @@ protected static function practicing(){
 					['Assessment Outcome','Yes','No'],
 					['Fully Practicing IMCI',$Data1,$count-$Data1],
 					['Practicing IMCI with gaps',$Data2,$count-$Data2],
-					['Not Practicing IMC',$Data3,$count-$Data3],
+					['Not Practicing IMCI',$Data3,$count-$Data3],
 					['No Information Provided',$Data4,$count-$Data4]
 
 					];

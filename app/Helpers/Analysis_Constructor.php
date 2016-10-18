@@ -118,10 +118,10 @@ class Analysis_Constructor extends Analysis_Helper {
 							self::imciYN('IMCIV1SEC4BLK4RW',array(5),'COL04','COL04','Correct Classification'),
 							self::imciYN('IMCIV1SEC4BLK6RW',array(13),'COL02','COL04','Eye Infection Correctly Assessed'),
 							self::imciYN('IMCIV1SEC4BLK6RW',array(14),'COL04','COL04','Eye Infection Classification Done'),
-							self::imciYN('IMCIV1SEC4BLK8RW',array(8),'COL02','COL04','Diarrhoea Correctly Assessed $ Classified'),
+							self::imciYN('IMCIV1SEC4BLK8RW',array(8),'COL02','COL04','Diarrhoea Correctly Assessed & Classified'),
 							self::imciYN('IMCIV1SEC4BLK8RW',array(9),'COL04','COL04','Diarrhoea Correct Classification'),
 							self::imciYN('IMCIV1SEC4BLK10RW',array(11),'COL02','COL04','Breast Feeding Correct Classification'),
-							self::imciYN('IMCIV1SEC4BLK10RW',array(12),'COL04','COL04','Feeding Correctly Assessed $ Classified'),
+							self::imciYN('IMCIV1SEC4BLK10RW',array(12),'COL04','COL04','Feeding Correctly Assessed & Classified'),
 							self::imciYN('IMCIV1SEC4BLK11RW',array(4),'COL04','COL04','Feeding Correct Classification')
 							);
       						return $temp;

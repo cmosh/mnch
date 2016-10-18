@@ -81,12 +81,19 @@ class UserManagement extends Controller {
 
 	public function gt()
 	{	
-		$county_list  = array('Kajiado'=>'Baseline','Kakamega'=>'Baseline');
+		$county_list  = array('Kajiado'=>'Baseline','Kakamega'=>'Baseline','Kiambu'=>'Midterm','Kilifi'=>'Midterm','Taita Taveta'=>'Midterm','Tana River'=>'Midterm','Nakuru'=>'Baseline');
 		foreach ($county_list as $key => $value) {
 			$county = $key;
 			$term = $value;			
 			$facilities = Facilities::NewSubmittedAssessments('Endterm',$county)->toArray();
+			$facilities1 = Facilities::NewSubmittedAssessments('Midterm',$county)->toArray();
 			foreach ($facilities as $facility)
+			{			
+			    $assessment_id = $facility['Assessment_ID'];
+			    DB::table('assessments')->where('Assessment_ID', $assessment_id)->update(['Assessment_Term' => $term]);
+			      echo "$assessment_id Updated<br/>";
+			}
+			foreach ($facilities1 as $facility)
 			{			
 			    $assessment_id = $facility['Assessment_ID'];
 			    DB::table('assessments')->where('Assessment_ID', $assessment_id)->update(['Assessment_Term' => $term]);
