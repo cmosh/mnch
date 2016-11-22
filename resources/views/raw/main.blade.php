@@ -20,31 +20,22 @@
         <nav class="navbar navbar-default navbar-static-top">
           <div class="container-fluid">
             <div class="navbar-header">
-             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" style="margin-right:0px;">
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{config('app.prefix')}}/home" style="color:white">MNCH</a></div>
-
-       
-              <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" style="margin-right:0px;">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{{config('app.prefix')}}/home" style="color:white">MNCH</a>
+            </div>
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
-               
-           
-                 
               <li><a  href="{{config('app.prefix')}}/">Child Health Survey</a></li>
-             <li><a href="{{config('app.prefix')}}/analytics/MNHV2">Maternal and Neonatal Health Survey</a></li>
-
-             <li><a href="{{config('app.prefix')}}/analytics/IMCIV1">IMCI Survey</a></li>
-          
-
-             <li><a href="{{config('app.prefix')}}/gt_raw">Raw Data</a></li>
-          
+              <li><a href="{{config('app.prefix')}}/analytics/MNHV2">Maternal and Neonatal Health Survey</a></li>
+              <li><a href="{{config('app.prefix')}}/analytics/IMCIV1">IMCI Survey</a></li>
+              <li><a href="{{config('app.prefix')}}/gt_raw">Raw Data</a></li
               @if (config('app.env')=='test'||config('app.mak'))
-           <li> <a href="{{config('app.prefix')}}/test/serve/"  role="button">
+              <li> <a href="{{config('app.prefix')}}/test/serve/"  role="button">
               <span><button  class="btn btn-block btn-success btn-xs">serve assets</button></span>  
           </a> </li>
           <li> <a href="{{config('app.prefix')}}/test/stop/"   role="button">
@@ -82,17 +73,11 @@
           </div>
         </nav>
         <div class="title-main">
-          <h2 align="middle">@yield('header')</h2>
+          <h2 align="middle"><?php echo $location;?></h2>          
           </div>
 
-  <!--  <div id="hovme" class="btn-sm danger" align="left" style="position: fixed;left: 30px;top: 60px;width: 300px;" hidden>
-   <div id="verDrop" class="dropdown">
-     <button class="dropbtn">Select Version <i class="fa fa-caret-down"></i></button>
-   <div id="verLinks" class="dropdown-content">
-     
-   </div>
-     </div>
-    </div> -->
+
+  
  </div>
 
       </header>
@@ -102,8 +87,41 @@
         <div class="container-fluid">
         
           <section class="content">
-          <div class="row"><div class="title-trans"></div></div>
-           @yield('content')
+            <div class="row"><div class="title-trans"></div></div>
+
+            <div class="row">
+              <div style="width: 100%;border: 1px solid #cccccc;height: 60px;background-color: #ffffff;padding: 1%">
+                <label class="custom-control custom-radio col-md-3">
+                  <input id="mnhv1" name="version" type="radio" class="custom-control-input" checked="checked">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">MNH V1</span>
+                </label>
+                <label class="custom-control custom-radio col-md-3">
+                  <input id="mnhv2" name="version" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">MNH V2</span>
+                </label>
+                <label class="custom-control custom-radio col-md-3">
+                  <input id="chv1" name="version" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">CH V1</span>
+                </label>
+                <label class="custom-control custom-radio col-md-3">
+                  <input id="chv2" name="version" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">CH V2</span>
+                </label>
+              </div>          
+
+            </div>        
+             <div class="row">
+              <div id="mnh_div1" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
+              <div id="mnh_div2" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
+              <div id="ch_div1" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
+              <div id="ch_div2" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
+
+            </div>    
+
           </section>
         </div>
       </div>
@@ -120,10 +138,18 @@
 
     <script type="text/javascript">
       $(document).ready(function () {
-    if(window.location.href.indexOf("CHV") > -1) {
-      $('#hovme').show();
-    }
-});
+        if(window.location.href.indexOf("CHV") > -1) {
+          $('#hovme').show();
+        }
+
+        $('#mnh_div2').hide();
+        $('#ch_div1').hide();
+        $('#ch_div2').hide();
+        $('input[name=version]').change(function(){            
+            var selected =$("input[name='version']:checked").val();
+            
+        });
+    });
     </script>
 <style type="text/css">
   

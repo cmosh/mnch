@@ -177,6 +177,19 @@ public function collection()
       return $Facilities->where('FacilityCode',$FacilityCode)->first()['ftypes']['FacilityGroup'];
     }
 
+    public static function Details($FacilityCode){
+
+      $Facilities = Cache::rememberForever('FacilityDetails1', function() {
+          $temp = self::select('FacilityCode','FacilityName','County','District')->groupBy('FacilityCode') ->offset(10)
+                ->limit(5)->get()->toArray();
+          // $temp = self::select('FacilityCode','FacilityName','County','District')->where('FacilityCode','=',$FacilityCode)->groupBy('FacilityCode')->get()->toArray();
+          // $temp = self::select('FacilityCode','Type')->with('ftypes')->get()->toArray();
+          return collect($temp);
+      });     
+
+      return $Facilities->where('FacilityCode',$FacilityCode);
+    }
+
      public static function Owner($FacilityCode){
 
       $Facilities = Cache::rememberForever('FacilityOwners', function() {

@@ -42,7 +42,7 @@
               </div>
 
               <div class="col-md-12">
- <div class="small-box bg-yellow">
+              <div class="small-box bg-yellow">
                 <div class="inner">
                   <h2>Maternal and Neonatal Healthcare</h2>
                   <p>(MNH Surveys)<br></p>
@@ -55,8 +55,8 @@
              </div>
 
              
-                <div class="col-md-12">
-  <div class="small-box bg-red">
+              <div class="col-md-12">
+                <div class="small-box bg-red">
                 <div class="inner">
                   <h2>Integrated Management of Childhood Illness</h2>
                   <p>(IMCI Surveys)<br></p>

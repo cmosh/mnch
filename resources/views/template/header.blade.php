@@ -1,5 +1,6 @@
  <header class="main-header header-cont" style="position:fixed" >
         <a href="{{config('app.prefix')}}" class="logo">
+        
         @if((!isset($location))) <?php $location = 'Home' ?>
         @endif
         @if ($location == 'Home'  ) 
@@ -29,7 +30,9 @@
            @endif
           <div class="navbar-custom-menu">            
             <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{config('app.prefix')}}/raw_data">Raw Data</a></li>
           @if (Auth::guest())
+
             <li><a href="{{config('app.prefix')}}/auth/login">Login</a></li>
             <li><a href="{{config('app.prefix')}}/auth/register">Register</a></li>
           @else

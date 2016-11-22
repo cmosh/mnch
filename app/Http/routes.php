@@ -46,6 +46,13 @@ Route::post('admin/globcmd', 'administration@globcmd');
 
 Route::get('home', 'HomeController@index');
 
+Route::get('gt_raw', 'GtRawController@index');
+Route::get('gt_raw/mnhv2_types', 'GtRawController@mnhv2_types');
+Route::get('gt_raw/raw_types/{version}', ['uses' =>'GtRawController@raw_types']);
+// Route::get('gt_raw/raw_types/{version}', function ($version) {
+//     return 'GtRawController@raw_types/'.$version;
+// });
+
 
 Route::group(['as' => 'dashboard::'], function () {
 	Route::get('/', 'AnalyticsController@land');
