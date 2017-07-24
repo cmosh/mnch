@@ -2,7 +2,7 @@
 
 return [
 	
-	'folder' => env('APP_FOLDER'),
+	'folder' => env('APP_FOLDER','localhost'),
 	'laport' => env('LASSET_PORT',5000),
 	'mak' => env('MAK',false),
 	'env' => env('APP_ENV', 'production'),
