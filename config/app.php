@@ -132,7 +132,6 @@ return [
 		Illuminate\Pagination\PaginationServiceProvider::class,
 		Illuminate\Pipeline\PipelineServiceProvider::class,
 		Illuminate\Queue\QueueServiceProvider::class,
-		TillKruss\LaravelPHPRedis\RedisServiceProvider::class,
 		Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
 		// Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
 		Illuminate\Session\SessionServiceProvider::class,
@@ -150,6 +149,7 @@ return [
         Fingo\LaravelCacheFallback\CacheFallbackServiceProvider::class,
         Fingo\LaravelSessionFallback\SessionFallbackServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+TillKruss\LaravelPhpRedis\RedisServiceProvider::class,
         Cmosh\LaravelFirebase\LaravelFirebaseServiceProvider::class,
 		/*
 		 * Application Service Providers...
@@ -198,7 +198,6 @@ return [
 		'Password'  => Illuminate\Support\Facades\Password::class,
 		'Queue'     => Illuminate\Support\Facades\Queue::class,
 		'Redirect'  => Illuminate\Support\Facades\Redirect::class,
-		'LRedis'  	=> Illuminate\Support\Facades\Redis::class,
 		'Request'   => Illuminate\Support\Facades\Request::class,
 		'Response'  => Illuminate\Support\Facades\Response::class,
 		'Route'     => Illuminate\Support\Facades\Route::class,
@@ -209,6 +208,8 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View'      => Illuminate\Support\Facades\View::class,
 		'Gate' 		=> Illuminate\Support\Facades\Gate::class,
+		'LRedis'  	=> Illuminate\Support\Facades\Redis::class,
+
 		'Form'		=> Collective\Html\FormFacade::class,
     	'HTML'		=> Collective\Html\HtmlFacade::class,
 		'Asset' 	=> Efficiently\Larasset\Facades\Asset::class,

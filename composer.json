@@ -20,7 +20,8 @@
         "fingo/laravel-session-fallback": "^1.0",
         "irazasyed/telegram-bot-sdk": "^2.0",
         "mpociot/laravel-firebase-sync": "~1.0",
-        "cmosh/laravel-firebase": "dev-master"
+        "cmosh/laravel-firebase": "dev-master",
+        "tillkruss/laravel-phpredis": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
