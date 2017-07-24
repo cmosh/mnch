@@ -48,8 +48,8 @@ return [
 
 		'mongodb' => [
    			 'driver'   => 'mongodb',
-    		 'host'     => env('DOCKER_APP_HOST', 'mongo'),
-   			 'port'     => env('DOCKER_MONGO_PORT', 27017),
+    		 'host'     => env('DB_HOST', 'mongo'),
+   			 'port'     => env('DB_PORT', 27017),
  			 'database' => env('DB_DATABASE', 'mnch'),
   			 'username' => env('DB_USERNAME', 'mnch'),
   			 'password' => env('DB_PASSWORD', 'mnch'),
@@ -90,8 +90,8 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => env('DOCKER_APP_HOST','redis'),
-			'port'     => env('DOCKER_REDIS_PORT',6379),
+			'host'     => env('REDIS_HOST','redis'),
+			'port'     => env('REDIS_PORT',6379),
 			'database' => 0,
 		],
 

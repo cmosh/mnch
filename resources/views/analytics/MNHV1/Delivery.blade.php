@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Delivery kit components 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}/comparison/MNHV1/MNHV1_devkit/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="/comparison/MNHV1/MNHV1_devkit/barfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   

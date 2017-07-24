@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Trained in ICCM 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}/comparison/CHV2/CHV2_comm_strategy/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="/comparison/CHV2/CHV2_comm_strategy/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   

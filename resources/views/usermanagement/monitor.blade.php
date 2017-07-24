@@ -225,7 +225,7 @@
 
                         <td >{{ $user->user->name}} </td>
                         @if($user->Status=='Submitted')
- <td class="hideprint"><form action="{{config('app.prefix')}}/assessments/show/{{$user->Assessment_ID}}">
+ <td class="hideprint"><form action="/assessments/show/{{$user->Assessment_ID}}">
     <input class="btn btn-primary form-control" type="submit" value="VIEW"></form></td>   
                @elseif($user['Status']=='Incomplete' || $user['Status']=='New')
  
@@ -425,7 +425,7 @@
         
                     
 
-<td class="hideprint"><form action="{{config('app.prefix')}}/usermanagement/export/{{$location}}/todayentry/{{$county}}/{{$survey->id}}">
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/todayentry/{{$county}}/{{$survey->id}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
@@ -599,7 +599,7 @@
         
                     
 
-<td class="hideprint"><form action="{{config('app.prefix')}}/usermanagement/export/{{$location}}/totalentry/{{$county}}/{{$survey->id}}">
+<td class="hideprint"><form action="/usermanagement/export/{{$location}}/totalentry/{{$county}}/{{$survey->id}}">
     <input class="btn btn-primary form-control" type="submit" value="DOWNLOAD"></form></td>   
 
                        
@@ -710,7 +710,7 @@
      $.ajax({
 
     
-      url: '{{config("app.prefix")}}/survey/session',
+      url: '/survey/session',
       type: "post",
        data: data,
        error: function(){
@@ -848,7 +848,7 @@ var table=$('#example1{{$survey->id}}').DataTable(
 {
     
 
-   window.open('{{config("app.prefix")}}/usermanagement/export/preview/general/{{$survey->id}}/download');
+   window.open('/usermanagement/export/preview/general/{{$survey->id}}/download');
            
   });
 
@@ -869,7 +869,7 @@ function ajax2() {
     };
 
    $.ajax({
-       url: '{{config("app.prefix")}}/usermanagement/ajax',
+       url: '/usermanagement/ajax',
       type: "post",
        data: data,
            success: function(data){
@@ -937,7 +937,7 @@ function ajax() {
     };
 
    $.ajax({
-       url: '{{config("app.prefix")}}/usermanagement/ajax',
+       url: '/usermanagement/ajax',
       type: "post",
        data: data,
            success: function(data){

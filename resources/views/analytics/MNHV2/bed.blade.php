@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Bed Capacity 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}/comparison/MNHV2/MNHV2_bedcapacity/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="/comparison/MNHV2/MNHV2_bedcapacity/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   

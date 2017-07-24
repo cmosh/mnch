@@ -12,7 +12,7 @@
 
 <div class="box box-primary">
   <div class="box-header">
-    <!--  <a style="float:right" href="{{config('app.prefix')}}/usermanagement/export/{{$location}}/users/all/all">Download excel</a> -->
+    <!--  <a style="float:right" href="/usermanagement/export/{{$location}}/users/all/all">Download excel</a> -->
     <br>
     <a style="float:right" id="copy-button" data-clipboard-text="{{$users}}">Copy to Clipboard</a>
     <br>

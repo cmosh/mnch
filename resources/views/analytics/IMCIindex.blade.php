@@ -130,7 +130,7 @@ function getmapdata() {
     };
  
    $.ajax({
-      url: '{{config("app.prefix")}}/analytics/maprequest',
+      url: '/analytics/maprequest',
       type: "post",
        data: data,
            success: function(data){
@@ -170,7 +170,7 @@ function drawChart() {
     };
  
    $.ajax({
-      url: '{{config("app.prefix")}}/analytics/data',
+      url: '/analytics/data',
       type: "post",
        data: data,
            success: function(data){
@@ -263,7 +263,7 @@ $(function(){
   $("select#County").change(function(){
 
 
-    $.getJSON("{{config('app.prefix')}}/analytics/terms",{county: $(this).val(),survey:'{{$survey}}', ajax: 'true'}, function(j){
+    $.getJSON("/analytics/terms",{county: $(this).val(),survey:'{{$survey}}', ajax: 'true'}, function(j){
       var options = '';
       for (var i = 0; i < j.length; i++) {
         options += '<option value="' + j[i]+ '">' + j[i]+ '</option>';
@@ -291,7 +291,7 @@ $('#fcbtn').click(function () {
 
 
     $.ajax({
-      url: '{{config("app.prefix")}}/analytics/facilitylist',
+      url: '/analytics/facilitylist',
       type: "post",
        data: data,
       success: function(data){

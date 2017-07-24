@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">HIV Testing and Counselling 
                     <small class="cmpr">
-                   <a href="{{config('app.prefix')}}/comparison/MNHV1/MNHV1_HIVTest/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
+                   <a href="/comparison/MNHV1/MNHV1_HIVTest/colfullstack/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                   </h3>
                   

@@ -74,7 +74,7 @@ function sonline() {
 
     };
   $.ajax({
-      url: '{{config("app.prefix")}}/survey/session',
+      url: '/survey/session',
       type: "post",
        data: data,
      
@@ -119,7 +119,7 @@ $('.asave').change(function () {
 
 
     $.ajax({
-      url: '{{config("app.prefix")}}/survey/save',
+      url: '/survey/save',
       type: "post",
        data: data,
        error:function(){
@@ -169,7 +169,7 @@ $(document).ready(function(){
         $.extend( data, data2 );
 
     $.ajax({
-      url: '{{config("app.prefix")}}/survey/save',
+      url: '/survey/save',
       type: "post",
        data: data,
        error:function(){
@@ -258,7 +258,7 @@ $("#demo-form").submit(function(e) {
     $.ajax({
 
     
-      url: '{{config("app.prefix")}}/survey/save',
+      url: '/survey/save',
       type: "post",
        data: data,
         error:function(){
@@ -324,7 +324,7 @@ $("#demo-form").submit(function(e) {
           $("#cancLink").attr("href", "waiting");
           var canconf= confirm('Are you sure you want to cancel the survey? All progress will be lost?');
           if(event.target==this && canconf==true){     
-          $("#cancLink").attr("href", "{{config('app.prefix')}}/assessments/cancel/{{$AssID}}");
+          $("#cancLink").attr("href", "/assessments/cancel/{{$AssID}}");
           alert( "Cancel Successful");
              }
           else{

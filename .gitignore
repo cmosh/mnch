@@ -8,3 +8,4 @@ public/cache/Config/Memcache.php
 *.htaccess
 access.log
 *.log
+/.vscode

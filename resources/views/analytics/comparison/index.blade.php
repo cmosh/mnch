@@ -272,7 +272,7 @@ function perfomance(term,values,ov){
   
  
    $.ajax({
-      url: "{{config('app.prefix')}}/compare",
+      url: "/compare",
       type: "post",
        data: data,
            success: function(data){

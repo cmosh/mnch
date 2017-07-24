@@ -31,7 +31,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Facility Ownership
                    <small class="cmpr" id="box-toolspull-right">
-                    <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_ownership/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                    <a href="/comparison/CHV1/CHV1_ownership/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                     </h3>
@@ -53,7 +53,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Facility Types
                   <small class="cmpr" id="box-toolspull-right">
-                     <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="/comparison/CHV1/CHV1_types/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                     
                   </h3>

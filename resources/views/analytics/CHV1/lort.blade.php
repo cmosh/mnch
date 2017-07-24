@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">Location
                    <small class="cmpr">
-                     <a href="{{config('app.prefix')}}/comparison/CHV1/CHV1_lort/pie/" class="btn-primary btn-xs">Launch Comparison</a>
+                     <a href="/comparison/CHV1/CHV1_lort/pie/" class="btn-primary btn-xs">Launch Comparison</a>
                     </small>
                    <button class="btn btn-box-tool pull-right" data-widget="collapse"><i class="fa fa-minus"></i></button> 
                   </h3>
