@@ -149,7 +149,7 @@ return [
         Fingo\LaravelCacheFallback\CacheFallbackServiceProvider::class,
         Fingo\LaravelSessionFallback\SessionFallbackServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
-TillKruss\LaravelPhpRedis\RedisServiceProvider::class,
+        TillKruss\LaravelPhpRedis\RedisServiceProvider::class,
         Cmosh\LaravelFirebase\LaravelFirebaseServiceProvider::class,
 		/*
 		 * Application Service Providers...
@@ -209,7 +209,6 @@ TillKruss\LaravelPhpRedis\RedisServiceProvider::class,
 		'View'      => Illuminate\Support\Facades\View::class,
 		'Gate' 		=> Illuminate\Support\Facades\Gate::class,
 		'LRedis'  	=> Illuminate\Support\Facades\Redis::class,
-
 		'Form'		=> Collective\Html\FormFacade::class,
     	'HTML'		=> Collective\Html\HtmlFacade::class,
 		'Asset' 	=> Efficiently\Larasset\Facades\Asset::class,
