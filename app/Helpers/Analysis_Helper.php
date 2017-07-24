@@ -625,6 +625,7 @@ if(!isset($array))$array [] = ['No data',0];
 
 protected static function staff_trained(){
 global $surveys;
+
 		$Data = $surveys->lists('Data');
 
 		$Array [] = ['Staff Trained','Doctors','Nurses','R.C.O.s'];

@@ -85,6 +85,15 @@ public function collection()
         return $this->belongsTo('App\Models\FacilityGroup','Type','FacilityType');
     }
 
+     public function fownername() {
+        return $this->hasOne('App\Models\FacilityOwner','Owner','Owner');
+    }
+
+      public function ftype() {
+        return $this->hasOne('App\Models\FacilityGroup','Type','FacilityType');
+    }
+
+
      public function assessments_short() {
         return $this->hasMany('App\Models\Assessments','Facility_ID','FacilityCode')->select('Facility_ID','Survey','Status','Assessment_Term');
     }

@@ -90,7 +90,7 @@
             <div class="row"><div class="title-trans"></div></div>
 
             <div class="row">
-              <div style="width: 100%;border: 1px solid #cccccc;height: 60px;background-color: #ffffff;padding: 1%">
+              <div style="width: 50%;border: 1px solid #cccccc;height: 60px;background-color: #ffffff;padding: 1%;float: left;">
                 <label class="custom-control custom-radio col-md-3">
                   <input id="mnhv1" name="version" type="radio" class="custom-control-input" checked="checked">
                   <span class="custom-control-indicator"></span>
@@ -101,13 +101,16 @@
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">MNH V2</span>
                 </label>
+                
+              </div>          
+              <div style="width: 50%;border: 1px solid #cccccc;height: 60px;background-color: #ffffff;padding: 1%;float: left;">                
                 <label class="custom-control custom-radio col-md-3">
-                  <input id="chv1" name="version" type="radio" class="custom-control-input">
+                  <input id="chv1" value="CHV1" name="version_ch" type="radio" class="custom-control-input" checked="checked">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">CH V1</span>
                 </label>
                 <label class="custom-control custom-radio col-md-3">
-                  <input id="chv2" name="version" type="radio" class="custom-control-input">
+                  <input id="chv2" value="CHV2" name="version_ch" type="radio" class="custom-control-input">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">CH V2</span>
                 </label>
@@ -115,40 +118,169 @@
 
             </div>        
              <div class="row">
-              <div id="mnh_div1" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
-              <div id="mnh_div2" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
-              <div id="ch_div1" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
-              <div id="ch_div2" style="width: 100%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%"></div>         
+              <div id="mnh_div1" style="width: 50%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%;float: left;">
+                <div class="panel panel-default">
+                  <div class="panel-heading">MNCH Section One</div>
+                  <!-- <div class="panel-body">
+                    <ul class="list-group">
+                      <li class="list-group-item list-group-item"><a href="gt_raw/generate_ownership_types_excels/MNHV1" target="_blank">Download Ownership and Type Data</a></li>
+                      <li class="list-group-item list-group-item"><a href="gt_raw/generate_training_excels/MNHV1" target="_blank">Download Training Data</a></li>
+                      <li class="list-group-item list-group-item"><a href="" >Download Health Services Data</a></li>
+                    </ul>                   
+                    
+                  </div> -->
+                </div>
+              </div>  
+              <div id="mnh_div1" style="width: 50%;border: 1px solid #cccccc;height: 1000px;background-color: #ffffff;padding: 1%;float: left;">
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section One</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="ownership_ch" class="ownership_ch" href="#">Download Ownership and Type Data</a></li>
+                      <li class="list-group-item list-group-item"><a id="staff_training_ch" class="staff_training_ch" href="#">Download Staff Training Data</a></li>
+                      <li class="list-group-item list-group-item"><a id="health_services_ch" class="health_services_ch" href="#">Download Health Services Data</a></li>
+                    </ul>                                       
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Two</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="guidelines_job_aids_ch" class="guidelines_job_aids_ch" href="#">Download Guidelines and Job Aids Availabilty Data</a></li>
+                      <li class="list-group-item list-group-item"><a id="tools_availability_ch" class="tools_availability_ch" href="#">Download Tools Availability Data</a></li>                      
+                    </ul>   
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Three</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="u5_treatment_register_ch" class="guidelines_job_aids_ch" href="#">Download Treatment Data in U5 Register Data</a></li>
+                      <li class="list-group-item list-group-item"><a id="annual_trends_year_ch" class="tools_availability_ch" href="#">Download Annual Trends for Year {{date('Y')}} Data</a></li>                      
+                      <li class="list-group-item list-group-item"><a id="diarrhoea_zinc_ors_ch" class="tools_availability_ch" href="#">Download Diarrhoea cases treated with Zinc + ORS Data</a></li>                      
+                      <li class="list-group-item list-group-item"><a id="ort_management_trends_ch" class="tools_availability_ch" href="#">Download Annual ORT corner management trends for Year {{date('Y')}}</a></li>                      
+                    </ul>   
+                  </div>
+                </div>
 
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Four</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="diarrhoea_treatment_ch" class="guidelines_job_aids_ch" href="#">Download Diarrhoea Treatment Commodities Data</a></li>
+                      <li class="list-group-item list-group-item"><a id="antibiotics_data_ch" class="tools_availability_ch" href="#">Download Antibiotics Data</a></li> 
+                      <li class="list-group-item list-group-item"><a id="malaria_data_ch" class="tools_availability_ch" href="#">Download Malaria Data</a></li>                      
+                    </ul>   
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Five</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="ort_functionality_ch" class="ort_functionality_ch" href="#">Download ORT Corner Functionality Data</a></li>
+                      <li class="list-group-item list-group-item"><a id="ort_loaction_ch" class="ort_loaction_ch" href="#">Download Location of ORT Corner Data</a></li>                      
+                    </ul>   
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Six</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="supplies_availability_ch" class="supplies_availability_ch" href="#">Download Supplies Availability Data</a></li>
+                    </ul>   
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Seven</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="resource_availability_ch" class="resource_availability_ch" href="#">Download Resource Availability Data</a></li>
+                    </ul>   
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">CH Section Eight</div>
+                  <div class="panel-body">
+                    <ul class="list-group">                      
+                      <li class="list-group-item list-group-item"><a id="community_strategy_ch" class="community_strategy_ch" href="#">Download Community Strategy Data</a></li>
+                    </ul>   
+                  </div>
+                </div>
+                
+
+              </div>   
             </div>    
-
           </section>
         </div>
       </div>
       @include('template/footer')
     </div>
-
-   
-
-
    {!!javascript_include_tag('landing')!!}
- 
-
-    @yield('js')
-
+     @yield('js')
     <script type="text/javascript">
       $(document).ready(function () {
         if(window.location.href.indexOf("CHV") > -1) {
           $('#hovme').show();
         }
-
         $('#mnh_div2').hide();
         $('#ch_div1').hide();
         $('#ch_div2').hide();
-        $('input[name=version]').change(function(){            
-            var selected =$("input[name='version']:checked").val();
-            
+        //CH Section One
+        //Get the ownership
+        $('#ownership_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/generate_ownership_types_excels/'+report_type;
+          window.location.href = url;
+        });    
+
+        //Get the ownership
+        $('#staff_training_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/generate_training_excels/'+report_type;
+          window.location.href = url;
+        });        
+        //Get the ownership
+        $('#health_services_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/generate_health_services_excels/'+report_type;
+          window.location.href = url;
         });
+
+        //CH Section Two
+        $('#guidelines_job_aids_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/guidelines_job_aids_excels/'+report_type;
+          window.location.href = url;
+        });
+        $('#tools_availability_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/tools_availability_excels/'+report_type;
+          window.location.href = url;
+        });
+
+        $('#supplies_availability_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/supplies_availability_excels/'+report_type;
+          window.location.href = url;
+        });
+        $('#resource_availability_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/resource_availability_excels/'+report_type;
+          window.location.href = url;
+        });
+
+        $('#community_strategy_ch').on('click',function(){
+          var report_type = $('input[name=version_ch]:checked').val();
+          var url = 'gt_raw/community_strategy_excels/'+report_type;
+          window.location.href = url;
+        });
+
+
+        
     });
     </script>
 <style type="text/css">

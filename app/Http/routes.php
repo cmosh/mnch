@@ -47,8 +47,16 @@ Route::post('admin/globcmd', 'administration@globcmd');
 Route::get('home', 'HomeController@index');
 
 Route::get('gt_raw', 'GtRawController@index');
-Route::get('gt_raw/mnhv2_types', 'GtRawController@mnhv2_types');
-Route::get('gt_raw/raw_types/{version}', ['uses' =>'GtRawController@raw_types']);
+Route::get('gt_raw/generate_ownership_types_excels', 'GtRawController@generate_ownership_types_excels');
+Route::get('gt_raw/generate_training_excels', 'GtRawController@generate_training_excels');
+Route::get('gt_raw/generate_ownership_types_excels/{version}', ['uses' =>'GtRawController@generate_ownership_types_excels']);
+Route::get('gt_raw/generate_training_excels/{version}', ['uses' =>'GtRawController@generate_training_excels']);
+Route::get('gt_raw/generate_health_services_excels/{version}', ['uses' =>'GtRawController@generate_health_services_excels']);
+Route::get('gt_raw/guidelines_job_aids_excels/{version}', ['uses' =>'GtRawController@guidelines_job_aids_excels']);
+Route::get('gt_raw/tools_availability_excels/{version}', ['uses' =>'GtRawController@tools_availability_excels']);
+Route::get('gt_raw/supplies_availability_excels/{version}', ['uses' =>'GtRawController@supplies_availability_excels']);
+Route::get('gt_raw/resource_availability_excels/{version}', ['uses' =>'GtRawController@resource_availability_excels']);
+Route::get('gt_raw/community_strategy_excels/{version}', ['uses' =>'GtRawController@community_strategy_excels']);
 // Route::get('gt_raw/raw_types/{version}', function ($version) {
 //     return 'GtRawController@raw_types/'.$version;
 // });

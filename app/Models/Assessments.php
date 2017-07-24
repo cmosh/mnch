@@ -83,7 +83,7 @@ public function collection()
         return $this->belongsTo('App\Models\Facilities','Facility_ID','FacilityCode');
     }
     public function facility_short() {
-        return $this->belongsTo('App\Models\Facilities','Facility_ID','FacilityCode')->select('FacilityCode','District','FacilityName','County');
+        return $this->belongsTo('App\Models\Facilities','Facility_ID','FacilityCode')->select('FacilityCode','District','FacilityName','County','Type','Owner');
     }
 
     public function user(){
