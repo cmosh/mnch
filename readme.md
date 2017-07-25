@@ -1,23 +1,29 @@
-## Laravel PHP Framework
+# MNCH Surveys [![](https://images.microbadger.com/badges/image/cmosh/mnch.svg)](https://microbadger.com/images/cmosh/mnch "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/cmosh/mnch.svg)](https://microbadger.com/images/cmosh/mnch "Get your own version badge on microbadger.com")
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+ Maternal Neonatal and Child Health Surveys data collection and analysis tool.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Architecture
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- Laravel (PHP7), Mongodb 3.2, Redis 3.*
+- efficiently/larasset used to minify assets
+- Also packaged as a singular docker container
 
-## Official Documentation
+## Custom Commands
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+- Custom php artisan commands used for management and deploymet
 
-## Contributing
+### Docker compose
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    docker:build        Build the specific docker service or all services.
+    docker:debug        Open a privileged shell to debug a specific service
+    docker:down         Stops all docker container instances. Use --v to delete all volume data.
+    docker:restart      Restart the specific docker service or all services.
+    docker:run          Runs mnch with pre-defined docker images. Use the --d option to daemonise in production).
+    docker:start        Start the specific docker service or all services.
+    docker:status       Check running containers
+    docker:stop         Stops all docker container instances or specific service instance. Use --t to specify time in seconds for shutdown.
 
-### License
+### Firebase backups
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+  firebase:backup     Manually run firebase backup.(Backups usually run automatically)
+  firebase:restore    Restore firebase backups.
