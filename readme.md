@@ -27,3 +27,7 @@
 
     firebase:backup     Manually run firebase backup.(Backups usually run automatically)
     firebase:restore    Restore firebase backups.
+
+## Configuration
+
+- Look at the .env.template
