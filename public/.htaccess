@@ -1,3 +1,16 @@
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType text/css "access 1 year"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+</IfModule>
+## EXPIRES CACHING ##
+## LARAVEL REWRITES ##
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
@@ -12,3 +25,4 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+## LARAVEL REWRITES ##
