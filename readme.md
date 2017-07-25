@@ -25,5 +25,5 @@
 
 ### Firebase backups
 
-  firebase:backup     Manually run firebase backup.(Backups usually run automatically)
-  firebase:restore    Restore firebase backups.
+    firebase:backup     Manually run firebase backup.(Backups usually run automatically)
+    firebase:restore    Restore firebase backups.
