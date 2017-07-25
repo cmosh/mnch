@@ -1229,7 +1229,7 @@ protected static function ortloc_v1(){
 		 	"Survey"=> $survey['Survey'],
 		 	"UserId"=> $survey['UserId'],
 		 	"_id"=> $survey['_id'],
-		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	"Type"=> Facilities::TheType($survey['Facility_ID'])
 		 	];
 		  	
 		  }	 	 
@@ -1272,7 +1272,7 @@ protected static function ortloc_v1(){
 		 	"Survey"=> $survey['Survey'],
 		 	"UserId"=> $survey['UserId'],
 		 	"_id"=> $survey['_id'],
-		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	"Type"=> Facilities::TheType($survey['Facility_ID'])
 		 	];
 		  	
 		  }	 	 
@@ -1330,7 +1330,7 @@ protected static function ortloc_v1(){
 		 	"Survey"=> $survey['Survey'],
 		 	"UserId"=> $survey['UserId'],
 		 	"_id"=> $survey['_id'],
-		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	"Type"=> Facilities::TheType($survey['Facility_ID'])
 		 	];
 		  	
 		  }	 	 
@@ -1382,7 +1382,7 @@ protected static function ortloc_v1(){
 		 	"Survey"=> $survey['Survey'],
 		 	"UserId"=> $survey['UserId'],
 		 	"_id"=> $survey['_id'],
-		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	"Type"=> Facilities::TheType($survey['Facility_ID'])
 		 	];
 		  	
 		  }	 	 
@@ -1435,7 +1435,7 @@ protected static function ortloc_v1(){
 		 	"Survey"=> $survey['Survey'],
 		 	"UserId"=> $survey['UserId'],
 		 	"_id"=> $survey['_id'],
-		 	"Type"=> Facilities::Type($survey['Facility_ID'])
+		 	"Type"=> Facilities::TheType($survey['Facility_ID'])
 		 	];
 		  	
 		  }	 	 
