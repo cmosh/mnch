@@ -1,1 +1,1 @@
-FROM cmosh/alpine-php
+FROM cmosh/alpine-php:mongo
