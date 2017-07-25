@@ -35,7 +35,7 @@ return [
          * assets, or when you want to work around the concurrency constraints builtin in browsers
          * using different domain aliases.
          */
-        'host' => env('URL',null),
+        'host' => null,
 
         /**
          * The port to serve the asset files on.
