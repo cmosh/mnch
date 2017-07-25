@@ -176,7 +176,7 @@ public function collection()
     }
 
 
-    public static function Type($FacilityCode){
+    public static function TheType($FacilityCode){
 
       $Facilities = Cache::rememberForever('FacilityTypes', function() {
           $temp = self::select('FacilityCode','Type')->with('ftypes')->get()->toArray();
@@ -199,15 +199,15 @@ public function collection()
       return $Facilities->where('FacilityCode',$FacilityCode);
     }
 
-     public static function Owner($FacilityCode){
+    //  public static function Owner($FacilityCode){
 
-      $Facilities = Cache::rememberForever('FacilityOwners', function() {
-          $temp = self::select('FacilityCode','Owner')->with('fowner')->get()->toArray();
-          return collect($temp);
-      });     
+    //   $Facilities = Cache::rememberForever('FacilityOwners', function() {
+    //       $temp = self::select('FacilityCode','Owner')->with('fowner')->get()->toArray();
+    //       return collect($temp);
+    //   });     
 
-      return $Facilities->where('FacilityCode',$FacilityCode)->first()['fowner']['Group'];
-    }
+    //   return $Facilities->where('FacilityCode',$FacilityCode)->first()['fowner']['Group'];
+    // }
 
 
     public static function CountyAssessments($params){
