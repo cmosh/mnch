@@ -6,6 +6,7 @@ return [
 	'laport' => env('LASSET_PORT',5000),
 	'mak' => env('MAK',false),
 	'env' => env('APP_ENV', 'production'),
+	'ssl' => env('SSL',false),
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
