@@ -54,7 +54,7 @@ return [
   			 'username' => env('DB_USERNAME', 'mnch'),
   			 'password' => env('DB_PASSWORD', 'mnch'),
   			 'options' => [
-     		 'db' => 'mnch' // sets the authentication database required by mongo 3
+     		 'database' => 'mnch' // sets the authentication database required by mongo 3
   			  ]
 		],
 		

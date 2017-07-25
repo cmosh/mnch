@@ -56,7 +56,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'kenyamnch@gmail.com', 'name' => 'MNCH_noreply'],
+	'from' => ['address' =>  env('MAIL_ADDRESS'), 'name' => 'MNCH_noreply'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
 	|
 	*/
 
-	'username' => 'kenyamnch@gmail.com',
+	'username' =>  env('MAIL_ADDRESS'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
 	|
 	*/
 
-	'password' => 'mnchchai',
+	'password' => env('MAIL_PASSWORD'),
 
 	/*
 	|--------------------------------------------------------------------------
