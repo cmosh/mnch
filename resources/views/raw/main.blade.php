@@ -33,7 +33,7 @@
               <li><a  href="/">Child Health Survey</a></li>
               <li><a href="/analytics/MNHV2">Maternal and Neonatal Health Survey</a></li>
               <li><a href="/analytics/IMCIV1">IMCI Survey</a></li>
-              <li><a href="/gt_raw">Raw Data</a></li
+              <!--<li><a href="/gt_raw">Raw Data</a></li-->
               @if (config('app.env')=='test'||config('app.mak'))
               <li> <a href="/test/serve/"  role="button">
               <span><button  class="btn btn-block btn-success btn-xs">serve assets</button></span>  
